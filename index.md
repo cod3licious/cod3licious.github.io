@@ -2,7 +2,7 @@
 layout: default
 ---
 
-I'm a data scientist & python developer and I'm currently working on my PhD in machine learning at the TU Berlin. Have a look at my [CV]({{ site.url }}/assets/franziska_horn.pdf) and feel free to contact me about freelance projects!
+I'm a data scientist & python developer and I'm currently working on my PhD in machine learning at the TU Berlin. Have a look at my [CV]({{ site.url }}/assets/franziska_horn.pdf) and feel free to contact me about freelance opportunities!
 
 ## projects & code
 

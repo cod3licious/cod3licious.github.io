@@ -9,6 +9,9 @@ I'm a data scientist & python developer and I'm currently working on my PhD in m
 #### PubVis
 [PubVis](https://github.com/cod3licious/pubvis) is a WebApp meant to help scientists with their literature research. Instead of having to search for a specific topic, the landscape of published research can be explored visually and papers similar in content to an article of interest are just a click away.  A demo of the app is running [here](https://pubvis.herokuapp.com/) (with PubMed articles about different cancer types) and [here](https://arxvis.herokuapp.com/) (with arXiv articles about machine learning). Further details on the implementation can be found in the corresponding [paper](http://arxiv.org/abs/1706.08094).
 
+#### Classify Me! Why?
+To make machine learning algorithm decisions more transparent, we can use _Layer-wise Relevance Propagation_ (LRP) to visualize the features that influenced a classification decision. The [Classify Me! Why? WebApp](https://classifymewhy.herokuapp.com/) gives an interactive example of how this can look like for a text classification task. The code is based on scikit-learn and the nlputils and textcatvis libraries described below.
+
 #### nlputils
 [nlputils](https://github.com/cod3licious/nlputils) is a Python library for analyzing text documents by transforming texts into tf-idf features, using various similarity measures to compare documents, classify them with a k-nearest-neighbors classifier, and visualize them with t-SNE. Check out the [iPython notebook with examples](https://github.com/cod3licious/nlputils/blob/master/examples/examples.ipynb)!
 

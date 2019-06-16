@@ -8,13 +8,14 @@ Have a look at my [CV]({{ site.url }}/assets/franziska_horn.pdf) and feel free t
 
 
 ## consulting
-something about consulting stuff i do
+- discuss potential solutions with people familiar with the data at your firm
+- prototypical implementation of the solution
+- supervision of deployment in your firm
 
 ## data science workshops
+To prepare the data scientist in your firm for the various tasks ahead of them, I offer a 3 day on-site data science workshop to introduce the basics of machine learning, various supervised and unsupervised learning algorithms and practical tips. This includes theory as well as practical examples in Python. In a case study on the third day, everything they learned is applied to a real world problem.
 
 ![]({{ site.url }}/assets/data_science_workflow.gif)
-
-something about data science workshops
 
 
 ## open source projects

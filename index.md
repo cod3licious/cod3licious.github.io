@@ -2,9 +2,19 @@
 layout: default
 ---
 
-I'm a data scientist & python developer and I'm currently working on my PhD in machine learning at the TU Berlin in Klaus-Robert Müller's lab. Have a look at my [CV]({{ site.url }}/assets/franziska_horn.pdf) and feel free to contact me about freelance opportunities!
+I'm a **freelance data scientist & python developer** and I'm currently finishing my **PhD in machine learning** at the TU Berlin in Klaus-Robert Müller's lab. Have a look at my [CV]({{ site.url }}/assets/franziska_horn.pdf) and feel free to <a href="mailto:franzi@datasc.xyz?Subject=Freelance%20opportunity" target="_top">contact me</a> about freelance opportunities!
 
-## projects & code
+
+## consulting
+something about consulting stuff i do
+
+## data science workshops
+something about data science workshops
+
+
+## open source projects
+
+I'm passionate about writing clean and efficient code and like to give back to the community via open source libraries.
 
 #### PubVis
 [PubVis](https://github.com/cod3licious/pubvis) is a WebApp meant to help scientists with their literature research. Instead of having to search for a specific topic, the landscape of published research can be explored visually and papers similar in content to an article of interest are just a click away.  A demo of the app is running [here](https://pubvis.herokuapp.com/) (with PubMed articles about different cancer types) and [here](https://arxvis.herokuapp.com/) (with arXiv articles about machine learning). Further details on the implementation can be found in the corresponding [paper](http://arxiv.org/abs/1706.08094).

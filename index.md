@@ -2,13 +2,17 @@
 layout: default
 ---
 
-I'm a **freelance data scientist & python developer** and I'm currently finishing my **PhD in machine learning** at the TU Berlin in Klaus-Robert Müller's lab. Have a look at my [CV]({{ site.url }}/assets/franziska_horn.pdf) and feel free to <a href="mailto:franzi@datasc.xyz?Subject=Freelance%20opportunity" target="_top">contact me</a> about freelance opportunities!
+I'm a **freelance data scientist & python developer**, currently finishing my **PhD in machine learning** at the TU Berlin in Klaus-Robert Müller's lab.
+<br>
+Have a look at my [CV]({{ site.url }}/assets/franziska_horn.pdf) and feel free to <a href="mailto:franzi@datasc.xyz?Subject=Freelance%20opportunity" target="_top">contact me</a> about freelance opportunities!
 
 
 ## consulting
 something about consulting stuff i do
 
 ## data science workshops
+
+![]({{ site.url }}/assets/data_science_workflow.gif)
 something about data science workshops
 
 

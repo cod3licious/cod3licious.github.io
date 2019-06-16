@@ -12,7 +12,7 @@ something about consulting stuff i do
 
 ## data science workshops
 
-<div>![]({{ site.url }}/assets/data_science_workflow.gif)</div>
+![]({{ site.url }}/assets/data_science_workflow.gif)
 
 something about data science workshops
 

@@ -8,6 +8,9 @@
     <meta name="description" content="{{ site.title | default: site.github.repository_name }} : {{ site.description | default: site.github.project_tagline }}">
 
     <link rel="stylesheet" type="text/css" media="screen" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    <link rel="stylesheet" type="text/css" href="{{ site.url }}/assets/navbar.css">
+    <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <title>{{ site.title | default: site.github.repository_name }}</title>
   </head>
@@ -19,12 +22,15 @@
         <header class="inner">
           <h1 id="project_title">{{ site.title | default: site.github.repository_name }}</h1>
           <h2 id="project_tagline">{{ site.description | default: site.github.project_tagline }}</h2>
-          <nav>
+          <div class="topnav" id="myTopnav">
           <a href="/">home</a>
           <a href="#consulting">consulting</a>
           <a href="#data-science-workshops">data science workshops</a>
           <a href="#open-source-projects">open source projects</a>
-          </nav>
+          <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+          </a>
+          </div>
         </header>
     </div>
 
@@ -41,11 +47,11 @@
         {% if site.github.is_project_page %}
         <p class="copyright">{{ site.title | default: site.github.repository_name }} maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></p>
         {% endif %}
-        <p>Find me on <a href="https://github.com/cod3licious/">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/">LinkedIn</a></p>
-        <p><a href="mailto:franzi@datasc.xyz?Subject=Freelance%20opportunity" target="_top">Contact</a></p>
-        <p>Impressum</p>
+        <p>Find me on <a href="https://github.com/cod3licious/">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/">LinkedIn</a><br>
+          <a href="mailto:franzi@datasc.xyz?Subject=Freelance%20opportunity" target="_top">Contact</a><br>Impressum</p>
       </footer>
     </div>
 
+    <script src="{{ site.url }}/assets/navbar..js"></script>
   </body>
 </html>

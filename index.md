@@ -8,18 +8,46 @@ Have a look at my [CV]({{ site.url }}/assets/franziska_horn.pdf) and feel free t
 
 
 ## consulting
-- discuss potential solutions with people familiar with the data at your firm
-- prototypical implementation of the solution
-- supervision of deployment in your firm
+Machine learning specialists often possess a certain arrogance, believing that the intimate knowledge of complex algorithms automatically enables them to successfully work with any kind of data. In practice, however, real insights can only be generated with a deep understanding of the data at hand, as otherwise the results obtained by some fancy method may not generalize to the novel settings encountered in day to day operations. Therefore, for me it is very important to closely work together with the data owners in your team when developing a data science solution tailored to your needs.
+
+I'm happy to support you at all stages of the data science workflow:
+![]({{ site.url }}/assets/data_science_workflow.gif)
+- defining the scope of your problem and deciding whether machine learning and AI are useful tools in your case (I know, right now everyone wants some AI powered product, but sometimes traditional approaches are just as good while being faster to implement!)
+- advising on and discussing potential solutions with the data scientists in your team
+- analyzing your data and implementing algorithms in close collaboration with the data owners in your team
+- supporting your team in deploying a production-ready machine learning solution
+
+
+## recruiting
+A through understanding of the data is often more important than knowing the ins and outs of every single machine learning algorithm. Therefore, if you decide that your firm might benefit from some data science expertise, I strongly suggest you build your own data science team. While external consultants (like me ;-)) may be able to help you when it comes to deciding which advanced algorithms might be worth considering for your use case, they can never have the same deep understanding of your data and problem as someone working at your firm.
+
+But finding the right people can of course be tricky. Data scientist are in high demand right now, which means they can be picky when it comes to applying to jobs. Furthermore, a lot of people who simply took some online course on machine learning like to call themselves "data scientist" nowadays, while it takes a much deeper understanding and practical knowledge to really be able to provide some meaningful contribution to your team.
+
+I can help you build your data science team by:
+- writing compelling job postings, asking for meaningful qualifications instead of random buzzwords
+- screening applicants with a personalized hiring challenge including programming and theoretical questions, depending on your requirements
+- holding technical interviews
+
 
 ## data science workshops
-To prepare the data scientist in your firm for the various tasks ahead of them, I offer a 3 day on-site data science workshop to introduce the basics of machine learning, various supervised and unsupervised learning algorithms and practical tips. This includes theory as well as practical examples in Python. In a case study on the third day, everything they learned is applied to a real world problem.
+To help your team to better understand the challenges and potential of machine learning methods, I offer a 3 day on-site data science workshop, where you will learn the basics of machine learning, including various supervised and unsupervised learning algorithms and get many practical tips. Besides the necessary theory, the workshop also includes many practical examples in Python. In a hands-on case study on the third day, you can apply everything that you've learned to a real world problem.
 
-![]({{ site.url }}/assets/data_science_workflow.gif)
+The workshop covers:
+- introduction to machine learning (ML) and its application areas
+- introduction to Python and ML libraries
+- exploratory data analysis & interactive visualizations
+- unsupervised learning algorithms for
+    -- dimensionality reduction
+    -- outlier/anomaly detection
+    -- clustering
+- supervised learning theory:
+    -- linear and non-linear classification & regression models like decision trees, kernel methods, ensemble models, and neural networks
+    -- evaluation and model selection techniques like cross-validation
+    -- dealing with over- and underfitting
+- practical exercises, including natural language processing and computer vision examples
 
 
 ## open source projects
-
 I'm passionate about writing clean and efficient code and like to give back to the community via open source libraries.
 
 #### PubVis

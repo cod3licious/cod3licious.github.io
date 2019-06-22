@@ -19,31 +19,31 @@ I'm happy to support you at all stages of the data science workflow:
 
 
 ## recruiting
-A thorough understanding of the data is often more important than knowing the ins and outs of every single machine learning algorithm. Therefore, if you decide that your firm might benefit from some data science expertise, I strongly suggest you build your own data science team. While external consultants (like me ;-)) may be able to help you when it comes to deciding which advanced algorithms might be worth considering for your use case, they can never have the same deep understanding of your data and problem setting as someone working at your firm.
+A thorough understanding of the data is often more important than knowing the ins and outs of every single machine learning algorithm. Therefore, if you decide that your firm might benefit from some data science expertise, I strongly suggest you build your own data science team. While external consultants may be able to help you when it comes to deciding which advanced algorithms might be worth considering for your use case, they can never have the same deep understanding of your data and problem setting as someone working at your firm.
 
 But finding the right people can of course be tricky. Data scientist are in high demand right now, which means they can be picky when it comes to applying to jobs. Furthermore, a lot of people who simply took some online course on machine learning like to call themselves "data scientist" nowadays, while it takes a much deeper understanding and practical knowledge to provide a meaningful contribution to your team.
 
 I can help you build your data science team by:
 * writing compelling job postings, asking for meaningful qualifications instead of random buzzwords
-* screening applicants with a personalized hiring challenge including programming and theoretical questions, tailored to your requirements
+* screening applicants with a personalized hiring challenge, including programming and theoretical questions, tailored to your requirements
 * conducting technical interviews
 
 
 ## data science workshops
-To help your team to better understand the challenges and potential of machine learning methods, I offer a 3 day on-site data science workshop, where you will learn the basics of machine learning, including various supervised and unsupervised learning algorithms and get many practical tips. Besides the necessary theory, the workshop also includes a lot of practical examples in Python. In a hands-on case study on the third day, you can apply everything that you've learned to a real world problem.
+To help your team to better understand the challenges and potential of machine learning methods, I offer a 3 day on-site data science workshop, where you will learn the basics of machine learning, including various supervised and unsupervised learning algorithms, and get many practical tips. Besides the necessary theory, the workshop also includes a lot of practical examples in Python. In a hands-on case study on the third day, you can apply everything that you've learned to a real world problem.
 
 The workshop covers:
 * introduction to machine learning (ML) and its application areas
 * introduction to Python and ML libraries
 * exploratory data analysis & interactive visualizations
 * unsupervised learning algorithms for
-    - dimensionality reduction
-    - outlier/anomaly detection
-    - clustering
+    * dimensionality reduction
+    * outlier/anomaly detection
+    * clustering
 * supervised learning theory:
-    - linear and non-linear classification & regression models like decision trees, kernel methods, ensemble models, and neural networks
-    - evaluation and model selection techniques like cross-validation
-    - dealing with over- and underfitting
+    * linear and non-linear classification & regression models like decision trees, kernel methods, ensemble models, and neural networks
+    * evaluation and model selection techniques like cross-validation
+    * dealing with over- and underfitting
 * practical exercises, including natural language processing and computer vision examples
 
 

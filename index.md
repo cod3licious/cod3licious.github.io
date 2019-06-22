@@ -19,7 +19,7 @@ I'm happy to support you at all stages of the data science workflow:
 
 
 ## recruiting
-A through understanding of the data is often more important than knowing the ins and outs of every single machine learning algorithm. Therefore, if you decide that your firm might benefit from some data science expertise, I strongly suggest you build your own data science team. While external consultants (like me ;-)) may be able to help you when it comes to deciding which advanced algorithms might be worth considering for your use case, they can never have the same deep understanding of your data and problem setting as someone working at your firm.
+A thorough understanding of the data is often more important than knowing the ins and outs of every single machine learning algorithm. Therefore, if you decide that your firm might benefit from some data science expertise, I strongly suggest you build your own data science team. While external consultants (like me ;-)) may be able to help you when it comes to deciding which advanced algorithms might be worth considering for your use case, they can never have the same deep understanding of your data and problem setting as someone working at your firm.
 
 But finding the right people can of course be tricky. Data scientist are in high demand right now, which means they can be picky when it comes to applying to jobs. Furthermore, a lot of people who simply took some online course on machine learning like to call themselves "data scientist" nowadays, while it takes a much deeper understanding and practical knowledge to provide a meaningful contribution to your team.
 

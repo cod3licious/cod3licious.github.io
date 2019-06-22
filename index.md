@@ -33,25 +33,17 @@ I can help you build your data science team by:
 To help your team to better understand the challenges and potential of machine learning methods, I offer a 3 day on-site data science workshop, where you will learn the basics of machine learning, including various supervised and unsupervised learning algorithms, and get many practical tips. Besides the necessary theory, the workshop also includes a lot of practical examples in Python. In a hands-on case study on the third day, you can apply everything that you've learned to a real world problem.
 
 The workshop covers:
-
 * introduction to machine learning (ML) and its application areas
-
 * introduction to Python and ML libraries
-
 * exploratory data analysis & interactive visualizations
-
 * unsupervised learning algorithms for
-
     + dimensionality reduction
     + outlier/anomaly detection
     + clustering
-
 * supervised learning theory:
-
     + linear and non-linear classification & regression models like decision trees, kernel methods, ensemble models, and neural networks
     + evaluation and model selection techniques like cross-validation
     + dealing with over- and underfitting
-
 * practical exercises, including natural language processing and computer vision examples
 
 

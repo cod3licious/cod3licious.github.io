@@ -42,15 +42,15 @@ The workshop covers:
 
 * unsupervised learning algorithms for
 
-    * dimensionality reduction
-    * outlier/anomaly detection
-    * clustering
+    + dimensionality reduction
+    + outlier/anomaly detection
+    + clustering
 
 * supervised learning theory:
 
-    * linear and non-linear classification & regression models like decision trees, kernel methods, ensemble models, and neural networks
-    * evaluation and model selection techniques like cross-validation
-    * dealing with over- and underfitting
+    + linear and non-linear classification & regression models like decision trees, kernel methods, ensemble models, and neural networks
+    + evaluation and model selection techniques like cross-validation
+    + dealing with over- and underfitting
 
 * practical exercises, including natural language processing and computer vision examples
 

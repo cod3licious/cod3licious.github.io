@@ -34,7 +34,7 @@ To help your team to better understand the challenges and potential of machine l
 
 The workshop covers:
 * introduction to machine learning (ML) and its application areas
-* introduction to Python and ML libraries
+* introduction to Python data science libraries (e.g. numpy, pandas, sklearn, keras)
 * exploratory data analysis & interactive visualizations
 * unsupervised learning algorithms for
     + dimensionality reduction

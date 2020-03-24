@@ -12,7 +12,7 @@ Data Science Consulting
 04275 Leipzig
 
 ### Kontakt
-E-Mail: franziska.horn@datasc.xyz
+E-Mail: franziska.horn[at]datasc.xyz
 
 ### EU-Streitschlichtung
 Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:

@@ -47,7 +47,7 @@ The workshop covers:
 * practical exercises, including natural language processing and computer vision examples
 
 
-## open source projects
+## projects & open source
 I'm passionate about writing clean and efficient code and like to give back to the community via open source libraries.
 
 #### PubVis

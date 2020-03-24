@@ -4,14 +4,14 @@ layout: default
 
 I'm a **freelance data scientist & python developer**, currently finishing my **PhD in machine learning** at the TU Berlin in Klaus-Robert Müller's lab.
 <br>
-Have a look at my [CV]({{ site.url }}/assets/franziska_horn.pdf) and feel free to <a href="mailto:franzi@datasc.xyz?Subject=Freelance%20opportunity" target="_top">contact me</a> about freelance opportunities!
+Have a look at my [CV](/assets/franziska_horn.pdf) and feel free to <a href="mailto:franzi@datasc.xyz?Subject=Freelance%20opportunity" target="_top">contact me</a> about freelance opportunities!
 
 
 ## consulting
 Machine learning specialists often possess a certain arrogance, believing that the intimate knowledge of complex algorithms automatically enables them to successfully work with any kind of data. In practice, however, real insights can only be generated with a deep understanding of the data at hand, as otherwise the results obtained by some fancy method may not generalize to the novel settings encountered in day to day operations. Therefore, for me it is very important to closely work together with the data owners in your team when developing a data science solution tailored to your needs.
 
 I'm happy to support you at all stages of the data science workflow:
-![]({{ site.url }}/assets/data_science_workflow.gif)
+![](/assets/data_science_workflow.gif)
 - defining the scope of your problem and deciding whether machine learning and AI are useful tools in your case (I know, right now everyone wants some AI powered product, but sometimes traditional approaches are just as good while being faster to implement!)
 - advising on and discussing potential solutions with the data scientists in your team
 - analyzing your data and implementing algorithms in close collaboration with the data owners in your team

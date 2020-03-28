@@ -18,17 +18,6 @@ I'm happy to support you at all stages of the data science workflow:
 - supporting your team in deploying a production-ready machine learning solution
 
 
-## recruiting
-A thorough understanding of the data is often more important than knowing the ins and outs of every single machine learning algorithm. Therefore, if you decide that your firm might benefit from some data science expertise, I strongly suggest you build your own data science team. While external consultants may be able to help you when it comes to deciding which advanced algorithms might be worth considering for your use case, they can never have the same deep understanding of your data and problem setting as someone working at your firm.
-
-But finding the right people can of course be tricky. Data scientist are in high demand right now, which means they can be picky when it comes to applying to jobs. Furthermore, a lot of people who simply took some online course on machine learning like to call themselves "data scientist" nowadays, while it takes a much deeper understanding and practical knowledge to provide a meaningful contribution to your team.
-
-I can help you build your data science team by:
-* writing compelling job postings, asking for meaningful qualifications instead of random buzzwords
-* screening applicants with a personalized hiring challenge, including programming and theoretical questions, tailored to your requirements
-* conducting technical interviews
-
-
 ## data science workshops
 To help your team to better understand the challenges and potential of machine learning methods, I offer a 3 day on-site data science workshop, where you will learn the basics of machine learning, including various supervised and unsupervised learning algorithms, and get many practical tips. Besides the necessary theory, the workshop also includes a lot of practical examples in Python. In a hands-on case study on the third day, you can apply everything that you've learned to a real world problem.
 
@@ -45,6 +34,17 @@ The workshop covers:
     + evaluation and model selection techniques like cross-validation
     + dealing with over- and underfitting
 * practical exercises, including natural language processing and computer vision examples
+
+
+## recruiting
+A thorough understanding of the data is often more important than knowing the ins and outs of every single machine learning algorithm. Therefore, if you decide that your firm might benefit from some data science expertise, I strongly suggest you build your own data science team. While external consultants may be able to help you when it comes to deciding which advanced algorithms might be worth considering for your use case, they can never have the same deep understanding of your data and problem setting as someone working at your firm.
+
+But finding the right people can of course be tricky. Data scientist are in high demand right now, which means they can be picky when it comes to applying to jobs. Furthermore, a lot of people who simply took some online course on machine learning like to call themselves "data scientist" nowadays, while it takes a much deeper understanding and practical knowledge to provide a meaningful contribution to your team.
+
+I can help you build your data science team by:
+* writing compelling job postings, asking for meaningful qualifications instead of random buzzwords
+* screening applicants with a personalized hiring challenge, including programming and theoretical questions, tailored to your requirements
+* conducting technical interviews
 
 
 ## personal projects & open source
@@ -65,7 +65,7 @@ To make machine learning algorithm decisions more transparent, we can use _Layer
 #### textcatvis
 [textcatvis](https://github.com/cod3licious/textcatvis) is a Python library with some tools for the exploratory analysis of text datasets. It can help you better understand a collection of texts by identifying the relevant words of the documents in some classes or clusters and visualizing them in word clouds. Some examples can be found in the corresponding paper ([short](http://arxiv.org/abs/1707.06100) and [long](http://arxiv.org/abs/1707.05261)).
 
-#### Similarity Encoders (SimEc) and Context Encoders (ConEc)
-[SimEc](https://github.com/cod3licious/simec) is a neural network framework for learning low dimensional representations of data points by projecting high dimensional input data into an embedding space where some given pairwise similarities between the data points are approximated linearly. For further details and examples have a look at the corresponding [paper](http://www.czasopisma.pan.pl/Content/109871/PDF/07_821-830_00901_Bpast.No.66-6_31.12.18_K2.pdf?handler=pdf) or [iPython notebook](https://github.com/cod3licious/simec/blob/master/basic_examples_compact.ipynb).
+#### Similarity Encoder (SimEc) and Context Encoder (ConEc)
+[SimEc](https://github.com/cod3licious/simec) is a neural network architecture for learning low dimensional representations of data points by projecting high dimensional input data into an embedding space where some given pairwise similarities between the data points are approximated linearly. For further details and examples have a look at the corresponding [paper](http://www.czasopisma.pan.pl/Content/109871/PDF/07_821-830_00901_Bpast.No.66-6_31.12.18_K2.pdf?handler=pdf) or [iPython notebook](https://github.com/cod3licious/simec/blob/master/basic_examples_compact.ipynb).
 
 [ConEc](https://github.com/cod3licious/conec) is a variant of SimEc for learning word embeddings. It is a simple but powerful extension of the continuous bag-of-words word2vec model trained with negative sampling and can be used to easily generate embeddings for out-of-vocabulary words and better representations for words with multiple meanings. Further details are described in the corresponding [paper](https://arxiv.org/abs/1706.02496).

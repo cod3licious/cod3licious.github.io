@@ -2,7 +2,7 @@
 layout: default
 ---
 
-I'm a **freelance data scientist & python developer** with a [**PhD in machine learning**](http://dx.doi.org/10.14279/depositonce-9956) from the TU Berlin.
+I'm a **freelance data scientist & python developer** with a **PhD in machine learning** from the TU Berlin.
 <br>
 Have a look at my [CV](/assets/franziska_horn.pdf) and feel free to <a href="mailto:franzi@datasc.xyz?Subject=Freelance%20opportunity" target="_top">contact me</a> about freelance opportunities!
 
@@ -21,11 +21,11 @@ I'm happy to support you at all stages of the data science workflow:
 - advise on and discuss potential solutions with the data scientists in your team
 - support you in deploying a production-ready machine learning solution
 
-I prefer to work in an agile manner with short iterations and in close collaboration with the data owners in your team to ensure that the machine learning solution generalizes well even to potentially novel settings encountered in day to day operations.
+I prefer to work in an agile manner with short iterations and in close collaboration with the data owners in your team to ensure that the machine learning solution generalizes well even to potentially novel settings encountered in your day to day operations.
 
 
 ## data science workshops
-To help you and your team to better understand the potential and challenges of different machine learning methods, I offer a 3 day on-site or remote data science workshop, where you will learn the basics of machine learning, including various supervised and unsupervised learning algorithms, and get many practical tips. Besides the necessary theory, the workshop also includes a lot of practical examples in Python. In a hands-on case study on the third day, you can apply everything that you've learned to a real world problem.
+To help you and your team better understand the potential and challenges of different machine learning methods, I offer a 3 day on-site or remote data science workshop, where you will learn the basics of machine learning, including various supervised and unsupervised learning algorithms, and get many practical tips. Besides the necessary theory, the workshop also includes a lot of practical examples in Python. In a hands-on case study on the third day, you can apply everything that you've learned to a real world problem.
 
 The workshop covers:
 * introduction to machine learning (ML) and its application areas
@@ -49,7 +49,7 @@ But finding the right people is often tricky. Data scientist are in high demand 
 
 I can help you build your data science team by:
 * writing compelling job postings, asking for meaningful qualifications instead of random buzzwords
-* screening applicants with a personalized hiring challenge, including programming and theoretical questions, tailored to your requirements
+* screening applicants with a personalized hiring challenge (like [this one](https://github.com/cod3licious/spectrm-challenge)), including programming and theoretical questions, tailored to your requirements
 * conducting technical interviews
 
 

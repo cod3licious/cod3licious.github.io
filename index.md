@@ -45,7 +45,7 @@ The workshop covers:
 ## recruiting
 For a data science endeavor to be successful, a thorough understanding of the problem setting and data is at least as important as knowing the ins and outs of the different machine learning algorithms. Therefore, if you decide that your firm might benefit from some long-term data science expertise, I strongly suggest you build your own data science team. While external consultants may have a broader knowledge of the different tools and can advise you on which advanced algorithms are worth considering for your use case, they can never have the same deep understanding of your data as someone working at your firm.
 
-But finding the right people is often tricky. Data scientist are in high demand right now, which means they can be picky when it comes to applying to jobs. Furthermore, a lot of people who simply took an online course on machine learning like to call themselves "data scientist" nowadays, while it takes a much deeper understanding and practical knowledge to provide a meaningful contribution to your team.
+But finding the right people is often tricky. Data scientist are in high demand right now, which means they can be picky when it comes to applying for jobs. Furthermore, a lot of people who simply took an online course on machine learning like to call themselves "data scientist" nowadays, while it takes a much deeper understanding and practical knowledge to provide a meaningful contribution to your team.
 
 I can help you build your data science team by:
 * writing compelling job postings, asking for meaningful qualifications instead of random buzzwords

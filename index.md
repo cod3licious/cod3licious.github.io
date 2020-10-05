@@ -21,11 +21,11 @@ I'm happy to support you at all stages of the data science workflow:
 - advise on and discuss potential solutions with the data scientists in your team
 - support you in deploying a production-ready machine learning solution
 
-I prefer to work in an agile manner with short iterations and in close collaboration with the data owners in your team to ensure that the machine learning solution generalizes well even to potentially novel settings encountered in your day to day operations.
+I prefer to work in an agile manner with short iterations and in close collaboration with the data owners in your team to ensure that the machine learning solution fits all your needs and generalizes well even to potentially novel settings encountered in your day to day operations.
 
 
 ## data science workshops
-To help you and your team better understand the potential and challenges of different machine learning methods, I offer a 3 day on-site or remote data science workshop, where you will learn the basics of machine learning, including various supervised and unsupervised learning algorithms, and get many practical tips. Besides the necessary theory, the workshop also includes a lot of practical examples in Python. In a hands-on case study on the third day, you can apply everything that you've learned to a real world problem.
+To help you and your team better understand the potential and challenges of different machine learning methods, I offer a 4 day on-site or remote data science workshop, where you will learn the basics of machine learning, including various supervised and unsupervised learning algorithms, and get many practical tips. Besides the necessary theory, the workshop also includes a lot of practical examples in Python. In a hands-on case study on the last day, you can apply everything that you've learned to a real world problem.
 
 The workshop covers:
 * introduction to machine learning (ML) and its application areas
@@ -40,6 +40,8 @@ The workshop covers:
     + evaluation and model selection techniques like cross-validation
     + spotting over- and underfitting to ensure your prediction model generalizes to new data
 * practical exercises, including natural language processing and computer vision examples
+
+In addition to this in-depth workshop targeted at (about-to-be) data scientists, I also offer a less technical 1.5 day introduction to machine learning for those in your firm that want to understand where & how data science can add value, but who will not be applying the algorithms themselves.
 
 
 ## recruiting

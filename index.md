@@ -12,7 +12,7 @@ I'd love to support you in your data science projects, teach your team how to su
 ## consulting
 Your data - may that be information about your customers, sensor measurements from the machines on your assembly line, images, or text documents - is like a rough diamond: treated with the right tools, it will be invaluable!
 
-To successfully utilize this data to, for example, gain new insights about customer churn, monitor your machines with a predictive maintenance approach, or automate boring and error-prone processes, requires two things: a deep understanding of the problem and data at hand, as well as the intimate knowledge of a wide array of machine learning algorithms, ranging from basic data analysis tools to natural language processing, computer vision, and deep learning methods. Luckily, the first part is already taken care of, as you are an expert in your domain. And I am here to help you choose, apply, and evaluate the right machine learning models to transform your data into value.
+Successfully utilizing this data, for example, to gain new insights about customer churn, monitor your machines with a predictive maintenance approach, or automate boring and error-prone processes, requires two things: a deep understanding of the problem and data at hand, as well as the intimate knowledge of a wide array of machine learning algorithms, ranging from basic data analysis tools to natural language processing, computer vision, and deep learning methods. Luckily, the first part is already taken care of, as you are an expert in your domain. And I am here to help you choose, apply, and evaluate the right machine learning models to transform your data into value.
 
 I'm happy to support you at all stages of the data science workflow:
 ![](/assets/data_science_workflow.gif)
@@ -25,11 +25,11 @@ I prefer to work in an agile manner with short iterations and in close collabora
 
 
 ## data science workshops
-To help you and your team better understand the potential and challenges of different machine learning methods, I offer a 4 day on-site or remote data science workshop, where you will learn the basics of machine learning, including various supervised and unsupervised learning algorithms, and get many practical tips. Besides the necessary theory, the workshop also includes a lot of practical examples in Python. In a hands-on case study on the last day, you can apply everything that you've learned to a real world problem.
+To help you and your team better understand the potential and challenges of different machine learning methods, I offer a 4 day remote data science workshop, where you will learn the basics of machine learning, including various supervised and unsupervised learning algorithms, and get many practical tips. Besides the necessary theory, the workshop also includes a lot of practical examples in Python. In a hands-on case study on the last day, you can apply everything that you've learned to a real world problem.
 
 The workshop covers:
 * introduction to machine learning (ML) and its application areas
-* introduction to Python data science libraries (e.g. numpy, pandas, sklearn, keras)
+* introduction to Python data science libraries (e.g. numpy, pandas, sklearn, torch)
 * exploratory data analysis & interactive visualizations
 * unsupervised learning algorithms for
     + dimensionality reduction
@@ -38,10 +38,17 @@ The workshop covers:
 * supervised learning theory:
     + linear and non-linear classification & regression models like decision trees, kernel methods, ensemble models, and neural networks
     + evaluation and model selection techniques like cross-validation
-    + spotting over- and underfitting to ensure your prediction model generalizes to new data
+    + spotting and resolving over- and underfitting to ensure your prediction model generalizes to new data
+* advanced topics such as:
+    + time series data
+    + recommender systems
+    + biased data and domain shifts
+    + explainability & interpretable ML
+    + reinforcement learning
 * practical exercises, including natural language processing and computer vision examples
+* predictive maintenance case study using a real world dataset
 
-In addition to this in-depth workshop targeted at (about-to-be) data scientists, I also offer a less technical 1.5 day introduction to machine learning for those in your firm that want to understand where & how data science can add value, but who will not be applying the algorithms themselves.
+In addition to this in-depth workshop targeted at (about-to-be) data scientists, I also offer a less technical 1.5 day introduction to machine learning for those in your firm that want to understand where & how data science can add value, but who will not be applying the algorithms themselves, as well as a 4-hour executive summary.
 
 
 ## recruiting

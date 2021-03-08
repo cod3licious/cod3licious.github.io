@@ -32,19 +32,19 @@ To help you and your team better understand the potential and challenges of diff
 * introduction to Python data science libraries (e.g. numpy, pandas, sklearn, torch)
 * exploratory data analysis & interactive visualizations
 * unsupervised learning algorithms for
-    + dimensionality reduction
-    + outlier/anomaly detection
-    + clustering
+    - dimensionality reduction
+    - outlier/anomaly detection
+    - clustering
 * supervised learning theory:
-    + linear and non-linear classification & regression models like decision trees, kernel methods, ensemble models, and neural networks
-    + evaluation and model selection techniques like cross-validation
-    + spotting and resolving over- and underfitting to ensure your prediction model generalizes to new data
+    - linear and non-linear classification & regression models like decision trees, kernel methods, ensemble models, and neural networks
+    - evaluation and model selection techniques like cross-validation
+    - spotting and resolving over- and underfitting to ensure your prediction model generalizes to new data
 * advanced topics such as:
-    + time series data
-    + recommender systems
-    + biased data and domain shifts
-    + explainability & interpretable ML
-    + reinforcement learning
+    - time series data
+    - recommender systems
+    - biased data and domain shifts
+    - explainability & interpretable ML
+    - reinforcement learning
 * practical exercises, including natural language processing and computer vision examples
 * predictive maintenance case study using a real world dataset
 

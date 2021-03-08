@@ -27,7 +27,7 @@ I prefer to work in an agile manner with short iterations and in close collabora
 ## data science workshops
 To help you and your team better understand the potential and challenges of different machine learning methods, I offer a 4 day remote data science workshop, where you will learn the basics of machine learning, including various supervised and unsupervised learning algorithms, and get many practical tips. Besides the necessary theory, the workshop also includes a lot of practical examples in Python. In a hands-on case study on the last day, you can apply everything that you've learned to a real world problem.
 
-**The workshop covers:**
+**Workshop Agenda:**
 * introduction to machine learning (ML) and its application areas
 * introduction to Python data science libraries (e.g. numpy, pandas, sklearn, torch)
 * exploratory data analysis & interactive visualizations

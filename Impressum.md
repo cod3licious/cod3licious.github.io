@@ -5,14 +5,11 @@ layout: default
 ## Impressum
 
 ### Angaben gemäß § 5 TMG
-Franziska Horn
 
-Data Science Consulting
-
-04275 Leipzig
+![](/assets/addr.png)
 
 ### Kontakt
-E-Mail: franziska.horn[at]datasc.xyz
+E-Mail: ![](/assets/email.png)
 
 ### EU-Streitschlichtung
 Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:

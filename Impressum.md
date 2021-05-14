@@ -6,11 +6,11 @@ layout: default
 
 ### Angaben gemäß § 5 TMG
 
-<img src="https://raw.githubusercontent.com/cod3licious/cod3licious.github.io/master/assets/addr.png" width="200">
+<img src="https://raw.githubusercontent.com/cod3licious/cod3licious.github.io/master/assets/addr.png" width="200px">
 
 ### Kontakt
 E-Mail:
-<img src="https://raw.githubusercontent.com/cod3licious/cod3licious.github.io/master/assets/email.png" width="200">
+<img src="https://raw.githubusercontent.com/cod3licious/cod3licious.github.io/master/assets/email.png" width="200px">
 
 ### EU-Streitschlichtung
 Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:

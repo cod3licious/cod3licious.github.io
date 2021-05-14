@@ -24,10 +24,10 @@ I'm happy to support you at all stages of the data science workflow:
 I prefer to work in an agile manner with short iterations and in close collaboration with the data owners in your team to ensure that the machine learning solution fits all your needs and generalizes well even to potentially novel settings encountered in your day to day operations.
 
 
-## data science workshops
-To help you and your team better understand the potential and challenges of different machine learning methods, I offer a 4-day remote data science workshop, where you will learn the basics of machine learning, including various supervised and unsupervised learning algorithms, and get many practical tips. Besides the necessary theory, the workshop also includes a lot of practical examples in Python. In a hands-on case study on the last day, you can apply everything that you've learned to a real world problem.
+## data science coaching
+To help you and your team better understand the potential and challenges of different machine learning methods, I offer individual remote data science coaching sessions, to ensure your team is up to speed with the basics of machine learning, including various supervised and unsupervised learning algorithms, and their case specific application. Besides the necessary theory, the sessions also includes a lot of practical examples in Python. In a hands-on case study, you can apply everything that you've learned to a real world problem.
 
-**Workshop Agenda:**
+**Topics:**
 * introduction to machine learning (ML) and its application areas
 * introduction to Python data science libraries (e.g. numpy, pandas, sklearn, torch)
 * exploratory data analysis & interactive visualizations
@@ -48,7 +48,7 @@ To help you and your team better understand the potential and challenges of diff
 * practical exercises, including natural language processing and computer vision examples
 * predictive maintenance case study using a real world dataset
 
-In addition to this in-depth workshop targeted at (about-to-be) data scientists, I also offer a less technical 1.5 day introduction to machine learning for those in your firm that want to understand where & how data science can add value, but who will not be applying the algorithms themselves, as well as a 4-hour executive summary.
+In addition to these in-depth sessions targeted at (about-to-be) data scientists, I also offer a less technical introduction to machine learning for those in your firm that want to understand where & how data science can add value, but who will not be applying the algorithms themselves, as well as a short executive summary.
 
 
 ## recruiting

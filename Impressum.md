@@ -6,10 +6,10 @@ layout: default
 
 ### Angaben gemäß § 5 TMG
 
-![](/assets/addr.png){:width="200px"}
+![](/assets/addr.png){:width="100px"}
 
 ### Kontakt
-E-Mail: ![](/assets/email.png){:width="200px"}
+E-Mail: ![](/assets/email.png){:width="100px"}
 
 ### EU-Streitschlichtung
 Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:

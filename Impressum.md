@@ -6,10 +6,11 @@ layout: default
 
 ### Angaben gemäß § 5 TMG
 
+![](/assets/addr.png)
 <img src="https://raw.githubusercontent.com/cod3licious/cod3licious.github.io/master/assets/addr.png" width="200px">
 
 ### Kontakt
-E-Mail:
+E-Mail: ![](/assets/email.png)
 <img src="https://raw.githubusercontent.com/cod3licious/cod3licious.github.io/master/assets/email.png" width="200px">
 
 ### EU-Streitschlichtung

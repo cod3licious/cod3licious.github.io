@@ -4,7 +4,7 @@ layout: default
 
 I'm a **freelance data scientist & python developer** with a **PhD in machine learning** from the TU Berlin.
 <br>
-Have a look at my [CV](/assets/franziska_horn.pdf) and feel free to <a href="mailto:franzi@datasc.xyz?Subject=Freelance%20opportunity" target="_top">contact me</a> about freelance opportunities!
+Have a look at my [CV](/assets/franziska_horn.pdf) and feel free to <a href="mailto:hey@franziskahorn.de?Subject=Freelance%20opportunity" target="_top">contact me</a> about freelance opportunities!
 
 I'd love to support you in your data science projects, show your team how to successfully apply machine learning algorithms, or help you recruit capable data scientists for permanent positions.
 

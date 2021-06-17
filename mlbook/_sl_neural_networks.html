@@ -928,7 +928,7 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <div class="ulist">
 <ul>
 <li>
-<p>can take a long time to train (use GPUs!!!)</p>
+<p>can take a long time to train (use a GPU!!! (or <a href="https://en.wikipedia.org/wiki/Tensor_Processing_Unit">TPU</a>))</p>
 </li>
 <li>
 <p>need a lot of data (depending on NN architecture)</p>
@@ -1116,6 +1116,29 @@ Even when not copying weights though, you can still transfer an architecture in 
 <div class="sect3">
 <h4 id="_neural_networks_in_python">Neural Networks in Python</h4>
 <div class="paragraph">
+<p>[Recommended:] <a href="https://pytorch.org/"><code>torch</code> library</a>
+(to simplify model training, combine with <a href="https://skorch.readthedocs.io/en/stable/"><code>skorch</code> library</a>!)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">class</span> <span class="class">MyNeuralNet</span>(nn.Module):
+    <span class="keyword">def</span> <span class="function">__init__</span>(<span class="predefined-constant">self</span>, n_in, n_hl1, n_hl2, n_out=<span class="integer">10</span>):
+        <span class="predefined">super</span>(MyNeuralNet, <span class="predefined-constant">self</span>).__init__()
+        <span class="comment"># initialize layers</span>
+        <span class="predefined-constant">self</span>.l1 = nn.Linear(n_in, n_hl1)
+        <span class="predefined-constant">self</span>.l2 = nn.Linear(n_hl1, n_hl2)
+        <span class="predefined-constant">self</span>.lout = nn.Linear(n_hl2, n_out)
+    <span class="keyword">def</span> <span class="function">forward</span>(<span class="predefined-constant">self</span>, x):
+        <span class="comment"># apply layers in correct order</span>
+        h = F.relu(<span class="predefined-constant">self</span>.l1(x))       <span class="comment"># 784 -&gt; 512 [relu]</span>
+        h = F.relu(<span class="predefined-constant">self</span>.l2(h))       <span class="comment"># 512 -&gt; 256 [relu]</span>
+        y = F.softmax(<span class="predefined-constant">self</span>.lout(h))  <span class="comment"># 256 -&gt; 10 [softmax]</span>
+        <span class="keyword">return</span> y
+
+my_nn = MyNeuralNet(<span class="integer">784</span>, <span class="integer">512</span>, <span class="integer">256</span>)</code></pre>
+</div>
+</div>
+<div class="paragraph">
 <p><a href="https://keras.io/"><code>keras</code> library</a> (basically a wrapper for <a href="https://www.tensorflow.org/">TensorFlow</a>)</p>
 </div>
 <div class="listingblock">
@@ -1138,29 +1161,6 @@ model.fit(X, y)
 y_pred = np.argmax(model.predict(X_test), axis=<span class="integer">1</span>)
 print(<span class="string"><span class="delimiter">&quot;</span><span class="content">The model is this good:</span><span class="delimiter">&quot;</span></span>, model.evaluate(X_test, y_test)[<span class="integer">1</span>])
 print(<span class="string"><span class="delimiter">&quot;</span><span class="content">Equivalently:</span><span class="delimiter">&quot;</span></span>, accuracy_score(y_test, y_pred))</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>[Recommended:] <a href="https://pytorch.org/"><code>torch</code> library</a>
-(to simplify model training, combine with <a href="https://skorch.readthedocs.io/en/stable/"><code>skorch</code> library</a>!)</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">class</span> <span class="class">MyNeuralNet</span>(nn.Module):
-    <span class="keyword">def</span> <span class="function">__init__</span>(<span class="predefined-constant">self</span>, n_in, n_hl1, n_hl2, n_out=<span class="integer">10</span>):
-        <span class="predefined">super</span>(MyNeuralNet, <span class="predefined-constant">self</span>).__init__()
-        <span class="comment"># initialize layers</span>
-        <span class="predefined-constant">self</span>.l1 = nn.Linear(n_in, n_hl1)
-        <span class="predefined-constant">self</span>.l2 = nn.Linear(n_hl1, n_hl2)
-        <span class="predefined-constant">self</span>.lout = nn.Linear(n_hl2, n_out)
-    <span class="keyword">def</span> <span class="function">forward</span>(<span class="predefined-constant">self</span>, x):
-        <span class="comment"># apply layers in correct order</span>
-        h = F.relu(<span class="predefined-constant">self</span>.l1(x))       <span class="comment"># 784 -&gt; 512 [relu]</span>
-        h = F.relu(<span class="predefined-constant">self</span>.l2(h))       <span class="comment"># 512 -&gt; 256 [relu]</span>
-        y = F.softmax(<span class="predefined-constant">self</span>.lout(h))  <span class="comment"># 256 -&gt; 10 [softmax]</span>
-        <span class="keyword">return</span> y
-
-my_nn = MyNeuralNet(<span class="integer">784</span>, <span class="integer">512</span>, <span class="integer">256</span>)</code></pre>
 </div>
 </div>
 <div class="dlist">

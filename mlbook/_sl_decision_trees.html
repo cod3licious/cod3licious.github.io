@@ -728,7 +728,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </style>
 
 </head>
-<body id="_ul_outlier_anomaly_detection" class="article toc2 toc-left">
+<body id="_sl_decision_trees" class="article toc2 toc-left">
 <div id="header">
 <h1>A Practitioner&#8217;s Guide to Machine Learning</h1>
 <div class="details">
@@ -750,15 +750,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <ul class="sectlevel2">
 <li><a href="_ul_dimensionality_reduction.html">UL: Dimensionality Reduction</a>
 </li>
-<li><a href="_ul_outlier_anomaly_detection.html"><span class="toc-current">UL: Outlier / Anomaly Detection</span></a>
-<ul class="sectlevel3">
-<li><a href="_ul_outlier_anomaly_detection.html#_gamma_index">\(\gamma\)-index</a>
-</li>
-<li><a href="_ul_outlier_anomaly_detection.html#_isolation_forest">Isolation Forest</a>
-</li>
-<li><a href="_ul_outlier_anomaly_detection.html#_one_class_svm">One Class SVM</a>
-</li>
-</ul>
+<li><a href="_ul_outlier_anomaly_detection.html">UL: Outlier / Anomaly Detection</a>
 </li>
 <li><a href="_ul_clustering.html">UL: Clustering</a>
 </li>
@@ -766,7 +758,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </li>
 <li><a href="_sl_linear_models.html">SL: Linear Models</a>
 </li>
-<li><a href="_sl_decision_trees.html">SL: Decision Trees</a>
+<li><a href="_sl_decision_trees.html"><span class="toc-current">SL: Decision Trees</span></a>
 </li>
 <li><a href="_sl_ensemble_methods.html">SL: Ensemble Methods</a>
 </li>
@@ -795,73 +787,53 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </div>
 <div id="content">
 <div class="sect2">
-<h3 id="_ul_outlier_anomaly_detection">UL: Outlier / Anomaly Detection</h3>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01c_ml_overview/ml_algorithms_outliers.png" alt="image" width="740">
-</div>
-</div>
+<h3 id="_sl_decision_trees">SL: Decision Trees</h3>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Useful for</dt>
+<dt class="hdlist1">Example</dt>
 <dd>
-<p>removing outliers can improve the performance of other algorithms;<br>
-detecting anomalies in the data, e.g., for monitoring purposes</p>
+<p><em>Iris Dataset</em> – classify flowers based on their petal length and width</p>
 </dd>
 </dl>
 </div>
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-caution" title="Caution"></i>
-</td>
-<td class="content">
-Know your data – are missing values marked as NaNs?
-</td>
-</tr>
-</table>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/05_supervised_other/iris_dataset.png" alt="image" width="640">
 </div>
-<div class="sect3">
-<h4 id="_gamma_index">\(\gamma\)-index</h4>
-<div class="paragraph">
-<p><span class="small">Harmeling, Stefan, et al. &#8220;From outliers to prototypes: ordering data.&#8221; <em>Neurocomputing</em> 69.13-15 (2006): 1608-1618.</span></p>
 </div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Main idea</dt>
 <dd>
-<p>compute the average distance of a point to its <em>k</em> nearest neighbors;<br>
-points with a large average distance are likely to be outliers</p>
+<p>iteratively set a threshold on a variable such that the remaining samples are split into two &#8220;cleaner&#8221; groups</p>
 </dd>
 </dl>
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="../images/03_unsupervised/outliers.png" alt="image" width="640">
+<img src="../images/05_supervised_other/decision_tree_iris2.png" alt="image" width="840">
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">import</span> <span class="include">numpy</span> <span class="keyword">as</span> np
-<span class="keyword">from</span> <span class="include">scipy.spatial.distance</span> <span class="keyword">import</span> <span class="include">pdist</span>, <span class="include">squareform</span>
-
-<span class="keyword">def</span> <span class="function">gammaidx</span>(X, k):
-    <span class="docstring"><span class="delimiter">&quot;&quot;&quot;</span><span class="content">
-</span><span class="content">    Inputs:</span><span class="content">
-</span><span class="content">        - X [np.array]: n samples x d features input matrix</span><span class="content">
-</span><span class="content">        - k [int]: number of nearest neighbors to consider</span><span class="content">
-</span><span class="content">    Returns:</span><span class="content">
-</span><span class="content">        - gamma_index [np.array]: vector of length n with gamma index for each sample</span><span class="content">
-</span><span class="content">    </span><span class="delimiter">&quot;&quot;&quot;</span></span>
-    <span class="comment"># compute n x n Euclidean distance matrix</span>
-    D = squareform(pdist(X, <span class="string"><span class="delimiter">'</span><span class="content">euclidean</span><span class="delimiter">'</span></span>))
-    <span class="comment"># sort the entries of each row, such that the 1st column is 0 (distance of point to itself),</span>
-    <span class="comment"># the following columns are distances to the closest nearest neighbors (i.e. smallest values first)</span>
-    Ds = np.sort(D, axis=<span class="integer">1</span>)
-    <span class="comment"># compute mean distance to the k nearest neighbors of every point</span>
-    gamma_index = np.mean(Ds[:, <span class="integer">1</span>:(k+<span class="integer">1</span>)], axis=<span class="integer">1</span>)
-    <span class="keyword">return</span> gamma_index</code></pre>
+<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.tree</span> <span class="keyword">import</span> <span class="include">DecisionTreeClassifier</span>, <span class="include">DecisionTreeRegressor</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><span class="underline">Important Parameters:</span></p>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>&#8594; <code>max_depth</code>: max number of decisions to make about a sample</p>
+</li>
+<li>
+<p>&#8594; <code>min_samples_leaf</code>: prevent overly specific leaves with only few samples</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="dlist">
@@ -871,7 +843,10 @@ points with a large average distance are likely to be outliers</p>
 <div class="ulist">
 <ul>
 <li>
-<p>conceptually very simple and easy to interpret (especially when removing outliers you should always be able to explain <em>why</em> you are excluding samples from your dataset)</p>
+<p>easy to interpret</p>
+</li>
+<li>
+<p>good for heterogeneous data; no normalization necessary</p>
 </li>
 </ul>
 </div>
@@ -881,13 +856,11 @@ points with a large average distance are likely to be outliers</p>
 <div class="ulist">
 <ul>
 <li>
-<p>computationally expensive for large datasets (distance matrix: \(\mathcal{O}(n^2)\)) &#8594; can also compute distances to a random subsample of the dataset</p>
+<p>risk of overfitting (building very specific trees)</p>
 </li>
 <li>
-<p>normalize heterogeneous datasets before computing distances!</p>
-</li>
-<li>
-<p>know your data: does the dataset contain larger clusters of outliers, e.g., in time series data when a sensor was having problems for several hours? &#8594; <em>k</em> needs to be large enough such that a tight cluster of outliers is not mistaken as prototypical data points</p>
+<p>unstable: small variations in the data can lead to very different
+trees</p>
 </li>
 </ul>
 </div>
@@ -895,21 +868,8 @@ points with a large average distance are likely to be outliers</p>
 </dl>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_isolation_forest">Isolation Forest</h4>
-<div class="paragraph">
-<p>TODO</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_one_class_svm">One Class SVM</h4>
-<div class="paragraph">
-<p>TODO</p>
-</div>
-</div>
-</div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_ul_dimensionality_reduction.html">UL: Dimensionality Reduction</a> | ↑ Up: <a href="_ml_algorithms_unsupervised_supervised_learning.html">ML Algorithms: Unsupervised &amp; Supervised Learning</a> | ⌂ Home: <a href="ml4industry_guide.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_ul_clustering.html">UL: Clustering</a> →</p>
+<p>← Previous: <a href="_sl_linear_models.html">SL: Linear Models</a> | ↑ Up: <a href="_ml_algorithms_unsupervised_supervised_learning.html">ML Algorithms: Unsupervised &amp; Supervised Learning</a> | ⌂ Home: <a href="ml4industry_guide.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_sl_ensemble_methods.html">SL: Ensemble Methods</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

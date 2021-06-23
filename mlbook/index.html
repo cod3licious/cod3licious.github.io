@@ -639,7 +639,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
-<body id="_garbage_in_garbage_out" class="article toc2 toc-left">
+<body id="index" class="article toc2 toc-left">
 <div id="header">
 <h1>A Practitioner&#8217;s Guide to Machine Learning</h1>
 <div class="details">
@@ -650,24 +650,12 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
-<p><span class="toc-root"><a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a></span></p><ul class="sectlevel1">
+<p><span class="toc-root toc-current"><a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a></span></p><ul class="sectlevel1">
 <li><a href="_introduction_solving_problems_with_ml.html">Introduction: Solving Problems with ML</a>
 </li>
 <li><a href="_ml_with_python.html">ML with Python</a>
 </li>
 <li><a href="_data_preprocessing.html">Data &amp; Preprocessing</a>
-<ul class="sectlevel2">
-<li><a href="_what_constitutes_1_data_point.html">What constitutes 1 data point?</a>
-</li>
-<li><a href="_feature_extraction.html">Feature Extraction</a>
-</li>
-<li><a href="_feature_engineering_transformations.html">Feature Engineering &amp; Transformations</a>
-</li>
-<li><a href="_computing_similarities.html">Computing similarities</a>
-</li>
-<li><a href="_garbage_in_garbage_out.html"><span class="toc-current">Garbage in, garbage out!</span></a>
-</li>
-</ul>
 </li>
 <li><a href="_ml_algorithms_unsupervised_supervised_learning.html">ML Algorithms: Unsupervised &amp; Supervised Learning</a>
 </li>
@@ -681,92 +669,85 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 </div>
 <div id="content">
-<div class="sect2">
-<h3 id="_garbage_in_garbage_out">Garbage in, garbage out!</h3>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p>Risks associated with data that can make it complicated or even impossible to apply ML:</p>
+<p><strong>Why read this book?</strong></p>
 </div>
-<div class="sidebarblock">
-<div class="content">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Raw data can be very messy: </dt>
-<dd>
+<div class="paragraph">
+<p>There are many machine learning (ML) resources out there, many of them either targeted at students or researchers and therefore rather heavy on the mathematical theory, or others in the form of tutorials, focusing on the concrete implementation and application of some ML algorithm to a specific problem. This book tries to find a middle ground between both the theoretical background (which I have studied in depth while completing my PhD in machine learning at the TU Berlin, Germany) and the practical applications, i.e., how to use these algorithms to actually solve different problems (as I have been doing in the last few years as an independent data science consultant for various firms). This book originated from my experience holding dozens of machine learning seminars and workshops in front of audiences with varying levels of technical and mathematical background.</p>
+</div>
+<div class="paragraph">
+<p><strong>Questions this book aims to answer:</strong></p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>Relevant data might be spread across multiple databases / excel sheets that need to be joined. <em>Worst case:</em> data points don&#8217;t have a single ID based on which the different entries can be linked, but instead one has to fall back on some error prone strategy like matching data based on time stamps.</p>
+<p>Which problems can machine learning (ML) solve?</p>
 </li>
 <li>
-<p>Manually entered values can contain errors, e.g., misplaced decimal points.</p>
+<p>How does ML solve these problems, i.e., how do the algorithms work (in theory)?</p>
 </li>
 <li>
-<p>It might not be possible to correct missing values. <em>Worst case:</em> missing values are systematic, e.g., rich people more often decline to answer questions regarding their income than poor or middle class people; sensors might fail right before something goes wrong during the production process.</p>
-</li>
-<li>
-<p>Dataset might consist of different data types (structured and/or unstructured) with different scales.</p>
-</li>
-<li>
-<p>The process might have changed over time (e.g. due to some external conditions like replacing a sensor or some other maintenance event), which means the collected data from different time periods is incompatible. <em>Worst case:</em> these external changes were not recorded anywhere and you only notice at the end of the analysis that the data you had been working with violated your assumptions.</p>
+<p>How do you actually get this to work in practice and avoid common pitfalls?</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>This book does <strong>not</strong> explain the latest fancy neural network model that achieves state-of-the-art performance on some specific task. Rather it is meant to provide a general intuition for the ideas behind different machine learning algorithms to establish a solid framework that helps you better understand and integrate what you read about these specific approaches into a bigger picture.</p>
+</div>
+<div class="paragraph">
+<p>The Introduction and Conclusion chapters are written for all audiences, i.e., readers generally interested in ML, who want to understand what is behind the hype and where ML can or should not be used. The chapters in between are mainly targeted towards ML practitioners and assume the reader is familiar with elementary concepts of linear algebra (see also <a href="https://github.com/cod3licious/python_tutorial/blob/master/math_basics.pdf">this overview on the mathematical notation</a> used in the book).</p>
+</div>
+<div class="paragraph">
+<p>While the book focuses on the general principles behind the different models, there are also references included to specific Python libraries (mostly scikit-learn) where the respective algorithms are implemented and tips for how to use them. To get an even deeper understanding of how to apply the different algorithms, I recommend that you try solving some <a href="https://github.com/cod3licious/ml_exercises">exercises</a> covering different ML use cases.</p>
+</div>
+<div class="paragraph">
+<p><em><strong>This is still a draft version!</strong></em> Please write me an email or <a href="https://github.com/cod3licious/ml_exercises/issues">open an issue on GitHub</a> if you have any suggestions for how this book could be improved!</p>
+</div>
+<div class="paragraph">
+<p>If you have any questions or want to discuss your solutions to the exercises (or anything else data science related), feel free to book an <a href="https://franziskahorn.de/consulting.html">individual coaching session</a> with me!</p>
+</div>
+<div class="paragraph">
+<p>Enjoy! :-)</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Acknowledgments</dt>
+<dd>
+<p>I would like to thank <a href="https://www.linkedin.com/in/antje-relitz-3680a9107/">Antje Relitz</a> for her feedback &amp; contributions to the original workshop materials and Karin Zink for her help with some of the graphics.</p>
 </dd>
 </dl>
 </div>
-<div class="paragraph">
-<p>&#8594; Pre-processing takes a very long time<br>
-&#8594; Resulting dataset (after cleaning) might be a lot smaller than expected&#8201;&#8212;&#8201;possibly too small to do any meaningful analysis</p>
-</div>
-<div class="paragraph">
-<p>&#8658; Before wanting to do ML, first think about if your data collection pipeline &amp; infrastructure could be improved!</p>
 </div>
 </div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Not enough / not the right data to do ML: </dt>
-<dd>
 <div class="ulist">
 <ul>
 <li>
-<p>Small dataset with too little variation (e.g. only produce very few broken products; most of the time process runs in a steady state, i.e., there is little or no variation in the inputs)<br>
-&#8594; Effect of different input variables on the target can&#8217;t be estimated reliably from only very few observations<br>
-&#8658; Do some experiments where you systematically vary different inputs and collect a more diverse dataset</p>
+<p><a href="_introduction_solving_problems_with_ml.html">Introduction: Solving Problems with ML</a></p>
 </li>
 <li>
-<p>Data is inconsistent / incomplete (e.g. same inputs with different output)</p>
-<div class="ulist">
-<ul>
-<li>
-<p>either the labels are very noisy, e.g. because the human annotators didn&#8217;t follow the same set of clear rules / some examples were ambiguous<br>
-&#8658; clean up the data by relabeling (which can take some time but will pay off! - see also this <a href="https://youtu.be/06-AZXmwHjo">MLOps / data-centric AI talk by Andrew Ng</a> on how a small high-quality dataset can be more valuable than a larger noisy dataset)</p>
+<p><a href="_ml_with_python.html">ML with Python</a></p>
 </li>
 <li>
-<p>or because some relevant inputs are missing (while it is relatively easy for humans to assess if all the relevant information is present in unstructured data (e.g. images: either you see a cat or you don&#8217;t), structured data often has too many different variables and complex interactions to know right away if all the relevant features were included)<br>
-&#8658; talk to a domain expert about which additional input features might be helpful and should be included in the dataset. <em>Worst case:</em> need to install a new sensor in the machine and collect this data, i.e., all the data collected in the past is useless. BUT: using the right sensor can simplify the problem immensely and installing it will be worth it!<br>
-<span class="small">In many applications, our first instinct is to use a camera to generate the input data, since we humans rely primarily on our visual system to solve many tasks. However, even though image recognition algorithms have come a long way, using such a setup instead of a more specialized sensor can make the solution more error prone.<br>
-Trying to detect mushy strawberries? Use a near infrared (NIR) sensor instead of a camera like <a href="https://www.aboutamazon.co.uk/innovation/machine-learning-using-algorithms-to-sort-fruit">Amazon fresh</a> did. It still uses machine learning to analyze the resulting data, but in the NIR images the rotting parts of fruits are more easily visible than in normal photos.<br>
-Trying to detect if a door is closed? With a simple <a href="https://www.deeplearning.ai/the-batch/issue-92/">magnet</a> and detector this task can easily be solved without any complex analysis and no need to collect any training data! (You know the famous saying: &#8220;When you have a hammer, everything looks like a nail&#8221;. Try to think outside the box! ;-)</span></p>
+<p><a href="_data_preprocessing.html">Data &amp; Preprocessing</a></p>
+</li>
+<li>
+<p><a href="_ml_algorithms_unsupervised_supervised_learning.html">ML Algorithms: Unsupervised &amp; Supervised Learning</a></p>
+</li>
+<li>
+<p><a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a></p>
+</li>
+<li>
+<p><a href="_ml_algorithms_reinforcement_learning.html">ML Algorithms: Reinforcement Learning</a></p>
+</li>
+<li>
+<p><a href="_conclusion_using_ml_in_practice.html">Conclusion: Using ML in Practice</a></p>
 </li>
 </ul>
-</div>
-</li>
-</ul>
-</div>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>&#8594; Unless the dataset is amended accordingly, any ML model will have a poor performance!</p>
-</div>
-</div>
-</div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_computing_similarities.html">Computing similarities</a> | ↑ Up: <a href="_data_preprocessing.html">Data &amp; Preprocessing</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_ml_algorithms_unsupervised_supervised_learning.html">ML Algorithms: Unsupervised &amp; Supervised Learning</a> →</p>
+<p>Next: <a href="_introduction_solving_problems_with_ml.html">Introduction: Solving Problems with ML</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

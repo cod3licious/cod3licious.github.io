@@ -754,10 +754,6 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <ul class="sectlevel3">
 <li><a href="_ul_outlier_anomaly_detection.html#_gamma_index">\(\gamma\)-index</a>
 </li>
-<li><a href="_ul_outlier_anomaly_detection.html#_isolation_forest">Isolation Forest</a>
-</li>
-<li><a href="_ul_outlier_anomaly_detection.html#_one_class_svm">One Class SVM</a>
-</li>
 </ul>
 </li>
 <li><a href="_ul_clustering.html">UL: Clustering</a>
@@ -805,8 +801,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <dl>
 <dt class="hdlist1">Useful for</dt>
 <dd>
-<p>removing outliers can improve the performance of other algorithms;<br>
-detecting anomalies in the data, e.g., for monitoring purposes</p>
+<p>&#8594; removing outliers can improve the performance of other algorithms<br>
+&#8594; detecting anomalies in the data, e.g., for monitoring purposes</p>
 </dd>
 </dl>
 </div>
@@ -821,6 +817,91 @@ Know your data – are missing values marked as NaNs?
 </td>
 </tr>
 </table>
+</div>
+<div class="paragraph">
+<p>When trying to remove outliers or detecting anomalies there are many things that need to be considered:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Does the dataset consist of <strong>independent data points or time series data</strong> with dependencies?</p>
+</li>
+<li>
+<p>Are you looking for <strong>outliers in individual dimensions</strong> (e.g. in time series data you might not see a failure in all sensors simultaneously, but only one sensor might act up spontaneously (i.e. show a value very different from the previous time point), which would be enough to rule this time point an anomaly irrespective of the values of the other sensors) or is it necessary to consider <strong>multidimensional outlier patterns</strong> (e.g. for independent data points individual feature values might not seem anomalous by themselves, only when considered in combination with the data point&#8217;s other feature values (e.g. a \(35 m^2\) apartment could be a nice studio, but if additionally it is stated that this apartment has 5 bedrooms something is definitely off))?</p>
+</li>
+<li>
+<p>Are you expecting a few <strong>individual outliers or clusters</strong> of outliers (the latter is especially common in time series data, where, e.g., a machine might experience an issue for several minutes or even hours before the signals look normal again)? Clusters of outliers are more tricky to detect, especially if the data also contains other &#8216;legitimate&#8217; clusters of normal points. Domain expertise is key here!</p>
+</li>
+<li>
+<p>Do you have any <strong>labels</strong> available? E.g., while you might not know what the different kinds of (future) anomalies might look like, maybe you <em>do</em> know what normal data points look like, which is important information that you can make use of by checking how far new points deviate from these normal points.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+While removing outlier points from a dataset is often a necessary cleaning step, e.g. to obtain better prediction models, you should always be able to explain <em>why</em> you removed these points and be aware of the fact that some of the data points that will be encountered in the future might be outliers as well, i.e., before applying the prediction model to new test points, these should be screened for outliers as well, as the predictions for these points would not be accurate. If possible, you should always remove as many outliers as possible with manually crafted rules (e.g. &#8220;when this sensor is 0, the machine is off and the points can be disregarded&#8221;), especially for clusters of outliers, which are also more difficult to detect with the automatic methods.
+</td>
+</tr>
+</table>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Different methods for outlier/anomaly detection</dt>
+<dd>
+<p>There is no one-size-fits-all solution, but depending on the characteristics of your dataset you might want to experiment with some of these approaches:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Detecting multidimensional outlier patterns in datasets with independent data points (see also <a href="https://scikit-learn.org/stable/modules/outlier_detection.html">sklearn user guide</a>):</p>
+<div class="ulist">
+<ul>
+<li>
+<p>\(\gamma\)-index (see below)</p>
+</li>
+<li>
+<p>Local Outlier Factor (from <code>sklearn</code>; similar to the \(\gamma\)-index)</p>
+</li>
+<li>
+<p>Isolation Forest (from <code>sklearn</code>; read about decision trees and random forests first)</p>
+</li>
+<li>
+<p>One-class SVM (from <code>sklearn</code>; read about kernel methods and normal SVM first)</p>
+</li>
+<li>
+<p>DBSCAN (a clustering algorithm described in the next section that allows for noise, which would be considered outliers)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Comparing actual data points to denoised samples or predicted values:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Use (kernel) PCA or an auto-encoder neural network architecture to first compress a sample and then reconstruct it in order to remove noise. If the denoised data point deviates a lot from the original sample, it is probably an anomaly.</p>
+</li>
+<li>
+<p>For time series data: model the expected course of an individual time series, e.g. using a moving window average or an ARIMA model (see section on time series data for more details), and then compare how much a time point deviates from this predicted value.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Get creative: you know your data best&#8201;&#8212;&#8201;define rules and custom anomaly KPIs based on your domain knowledge (e.g. set thresholds for what would be considered unrealistic feature values etc.)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_gamma_index">\(\gamma\)-index</h4>
@@ -881,7 +962,7 @@ points with a large average distance are likely to be outliers</p>
 <div class="ulist">
 <ul>
 <li>
-<p>computationally expensive for large datasets (distance matrix: \(\mathcal{O}(n^2)\)) &#8594; can also compute distances to a random subsample of the dataset</p>
+<p>computationally expensive for large datasets (distance matrix: \(\mathcal{O}(n^2)\)) &#8594; can also compute distances to a random subsample of the dataset or to a small set of known non-anomalous points</p>
 </li>
 <li>
 <p>normalize heterogeneous datasets before computing distances!</p>
@@ -894,17 +975,17 @@ points with a large average distance are likely to be outliers</p>
 </dd>
 </dl>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_isolation_forest">Isolation Forest</h4>
-<div class="paragraph">
-<p>TODO</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_one_class_svm">One Class SVM</h4>
-<div class="paragraph">
-<p>TODO</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Extension for time series data: don&#8217;t identify the <em>k</em> nearest neighbors based on the distance of the data points in the feature space, but instead take the neighboring time points.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>

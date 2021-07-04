@@ -697,6 +697,23 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <img src="../images/08_rl/rl_trajectory2.png" alt="image" width="720">
 </div>
 </div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Reinforcement Learning vs. &#8216;normal&#8217; Optimization</dt>
+<dd>
+<p>In regular mathematical optimization, you generally have some function \(f(\mathbf{x})\) and try to find the inputs \(\mathbf{x}\) that maximize (or minimize) the return value of the function \(f\). If \(f\) is differentiable, the solution can be found analytically by setting the first derivative of \(f\) to zero to obtain the local extrema or saddle points of \(f\), which can then be examined further to arrive at the global maximum or minimum. If \(f\) is not differentiable (or very complicated), there exist other methods to find optimal values (for example, the backpropagation procedure used to tune the weights of neural networks is one way of arriving at a (local) optimum without calculating the derivative of the network&#8217;s error function directly; a grid search where you just try many different input combinations and then select the values with the best outcome is another (rather naive) approach).<br>
+In RL terms, \(f\) would be the environment that returns a reward and \(\mathbf{x}\) would be the action and/or the state (e.g. if some inputs are fixed and others can vary and should be optimized, then the set of fixed inputs would be the state and the set of inputs that can vary would be the action that needs to be selected optimally given the state).<br>
+However, unlike in RL, there is no next state and the rewards are not accumulated over time. You could simply query the function \(f\) (= environment) with different inputs \(\mathbf{x}\) (= state/actions) until you have found some input combination that yields an optimal output \(f(\mathbf{x})\) (= reward) and you&#8217;re done. Each evaluation of an input would be independent of the others.<br></p>
+<div class="paragraph">
+<p>In RL, on the other hand, the task is to find an optimal <em>sequence of actions</em>, where the states can vary at each step. Additionally, you are not necessarily interested in obtaining the best possible value for a single action, i.e., maximize the current reward, but instead the cumulative reward (also called return) over the whole episode should be maximized.</p>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Immediate rewards vs. long-term value of states</dt>

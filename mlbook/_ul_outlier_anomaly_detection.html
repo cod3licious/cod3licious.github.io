@@ -806,18 +806,6 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </dd>
 </dl>
 </div>
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-caution" title="Caution"></i>
-</td>
-<td class="content">
-Know your data – are missing values marked as NaNs?
-</td>
-</tr>
-</table>
-</div>
 <div class="paragraph">
 <p>When trying to remove outliers or detecting anomalies there are many things that need to be considered:</p>
 </div>
@@ -845,6 +833,18 @@ Know your data – are missing values marked as NaNs?
 </td>
 <td class="content">
 While removing outlier points from a dataset is often a necessary cleaning step, e.g. to obtain better prediction models, you should always be able to explain <em>why</em> you removed these points and be aware of the fact that some of the data points that will be encountered in the future might be outliers as well, i.e., before applying the prediction model to new test points, these should be screened for outliers as well, as the predictions for these points would not be accurate. If possible, you should always remove as many outliers as possible with manually crafted rules (e.g. &#8220;when this sensor is 0, the machine is off and the points can be disregarded&#8221;), especially for clusters of outliers, which are also more difficult to detect with the automatic methods.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Know your data – are missing values marked as NaNs?
 </td>
 </tr>
 </table>
@@ -925,7 +925,7 @@ points with a large average distance are likely to be outliers</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">import</span> <span class="include">numpy</span> <span class="keyword">as</span> np
-<span class="keyword">from</span> <span class="include">scipy.spatial.distance</span> <span class="keyword">import</span> <span class="include">pdist</span>, <span class="include">squareform</span>
+<span class="keyword">from</span> <span class="include">sklearn.metrics</span> <span class="keyword">import</span> <span class="include">pairwise_distances</span>
 
 <span class="keyword">def</span> <span class="function">gammaidx</span>(X, k):
     <span class="docstring"><span class="delimiter">&quot;&quot;&quot;</span><span class="content">
@@ -936,12 +936,30 @@ points with a large average distance are likely to be outliers</p>
 </span><span class="content">        - gamma_index [np.array]: vector of length n with gamma index for each sample</span><span class="content">
 </span><span class="content">    </span><span class="delimiter">&quot;&quot;&quot;</span></span>
     <span class="comment"># compute n x n Euclidean distance matrix</span>
-    D = squareform(pdist(X, <span class="string"><span class="delimiter">'</span><span class="content">euclidean</span><span class="delimiter">'</span></span>))
+    D = pairwise_distances(X, metric=<span class="string"><span class="delimiter">'</span><span class="content">euclidean</span><span class="delimiter">'</span></span>)
     <span class="comment"># sort the entries of each row, such that the 1st column is 0 (distance of point to itself),</span>
     <span class="comment"># the following columns are distances to the closest nearest neighbors (i.e. smallest values first)</span>
     Ds = np.sort(D, axis=<span class="integer">1</span>)
     <span class="comment"># compute mean distance to the k nearest neighbors of every point</span>
     gamma_index = np.mean(Ds[:, <span class="integer">1</span>:(k+<span class="integer">1</span>)], axis=<span class="integer">1</span>)
+    <span class="keyword">return</span> gamma_index
+
+<span class="comment"># or more efficiantly with the NearestNeighbors class</span>
+<span class="keyword">from</span> <span class="include">sklearn.neighbors</span> <span class="keyword">import</span> <span class="include">NearestNeighbors</span>
+
+<span class="keyword">def</span> <span class="function">gammaidx_fast</span>(X, k):
+    <span class="docstring"><span class="delimiter">&quot;&quot;&quot;</span><span class="content">
+</span><span class="content">    Inputs:</span><span class="content">
+</span><span class="content">        - X [np.array]: n samples x d features input matrix</span><span class="content">
+</span><span class="content">        - k [int]: number of nearest neighbors to consider</span><span class="content">
+</span><span class="content">    Returns:</span><span class="content">
+</span><span class="content">        - gamma_index [np.array]: vector of length n with gamma index for each sample</span><span class="content">
+</span><span class="content">    </span><span class="delimiter">&quot;&quot;&quot;</span></span>
+    <span class="comment"># initialize and fit nearest neighbors search</span>
+    nn = NearestNeighbors(n_neighbors=k).fit(X)
+    <span class="comment"># compute mean distance to the k nearest neighbors of every point (ignoring the point itself)</span>
+    <span class="comment"># (nn.kneighbors returns a tuple of distances and indices of nearest neighbors)</span>
+    gamma_index = np.mean(nn.kneighbors()[<span class="integer">0</span>], axis=<span class="integer">1</span>)  <span class="comment"># for new points: nn.kneighbors(X_test)</span>
     <span class="keyword">return</span> gamma_index</code></pre>
 </div>
 </div>
@@ -952,7 +970,7 @@ points with a large average distance are likely to be outliers</p>
 <div class="ulist">
 <ul>
 <li>
-<p>conceptually very simple and easy to interpret (especially when removing outliers you should always be able to explain <em>why</em> you are excluding samples from your dataset)</p>
+<p>conceptually very simple and easy to interpret</p>
 </li>
 </ul>
 </div>
@@ -982,7 +1000,7 @@ points with a large average distance are likely to be outliers</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Extension for time series data: don&#8217;t identify the <em>k</em> nearest neighbors based on the distance of the data points in the feature space, but instead take the neighboring time points.
+Extension for time series data: don&#8217;t identify the <em>k</em> nearest neighbors based on the distance of the data points in the feature space, but take the neighboring time points instead.
 </td>
 </tr>
 </table>

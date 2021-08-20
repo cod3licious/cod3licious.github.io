@@ -734,8 +734,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 0.1,</span>
-<span id="revdate">2021-06-19</span>
+<span id="revnumber">version 1.0,</span>
+<span id="revdate">2021-08-20</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -768,7 +768,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </li>
 <li><a href="_sl_ensemble_methods.html">SL: Ensemble Methods</a>
 </li>
-<li><a href="_sl_k_nearest_neighbors_knn.html">SL: k-nearest neighbors (kNN)</a>
+<li><a href="_sl_k_nearest_neighbors_knn.html">SL: k-Nearest Neighbors (kNN)</a>
 </li>
 <li><a href="_sl_kernel_methods.html">SL: Kernel Methods</a>
 </li>
@@ -794,6 +794,9 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div id="content">
 <div class="sect2">
 <h3 id="_ul_clustering">UL: Clustering</h3>
+<div class="paragraph">
+<p>The last category of unsupervised learning algorithms is clustering:</p>
+</div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/01c_ml_overview/ml_algorithms_clustering.png" alt="image" width="740">
@@ -803,12 +806,12 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <dl>
 <dt class="hdlist1">Useful for</dt>
 <dd>
-<p>identifying naturally occurring groups in the data</p>
+<p>identifying naturally occurring groups in the data (e.g., for customer segmentation)</p>
 </dd>
 </dl>
 </div>
 <div class="paragraph">
-<p>There exist <a href="https://scikit-learn.org/stable/modules/clustering.html">quite a lot of different clustering algorithms</a> and we&#8217;ll only present two with different ideas here. Please note that even though other clustering algorithms might seem to perform very well on fancy toy datasets, data in reality is seldom arranged in two concentric circles, and so on real-world datasets the k-means clustering algorithm is often a robust choice.</p>
+<p>There exist <a href="https://scikit-learn.org/stable/modules/clustering.html">quite a lot of different clustering algorithms</a> and we&#8217;ll only present two with different ideas here. If you look at the linked sklearn examples, please note that even though other clustering algorithms might seem to perform very well on fancy toy datasets, data in reality is seldom arranged in two concentric circles, and on real-world datasets the k-means clustering algorithm is often a robust choice.</p>
 </div>
 <div class="sect3">
 <h4 id="_k_means_clustering"><em>k</em>-means clustering</h4>
@@ -819,7 +822,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>randomly place <em>k</em> cluster centers;</p>
+<p>randomly place <em>k</em> cluster centers (where <em>k</em> is a hyperparameter set by the user);</p>
 </li>
 <li>
 <p>assign each data point to its closest cluster center;</p>
@@ -867,7 +870,10 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="ulist">
 <ul>
 <li>
-<p>fast; usually good results</p>
+<p>fast</p>
+</li>
+<li>
+<p>usually good results on real world datasets</p>
 </li>
 </ul>
 </div>
@@ -883,7 +889,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <p>assumes spherical clusters</p>
 </li>
 <li>
-<p>need to guess the number of clusters (but can be solved with heuristics)</p>
+<p>need to guess the number of clusters (but can be done with a heuristic)</p>
 </li>
 </ul>
 </div>
@@ -897,7 +903,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <dl>
 <dt class="hdlist1">Main idea</dt>
 <dd>
-<p>find &#8216;core samples&#8217; in dense areas of the data and expand clusters by iteratively including points with a distance &lt; <code>eps</code></p>
+<p>find &#8216;core samples&#8217; in dense areas of the data and then expand clusters by iteratively including points with a distance &lt; <code>eps</code></p>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/03_unsupervised/dbscan.png" alt="image" width="840">
@@ -922,7 +928,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <p>&#8594; <code>eps</code>: maximum neighborhood distance of two samples</p>
 </li>
 <li>
-<p>&#8594; <code>metric</code>: how to compute the distance in the input space</p>
+<p>&#8594; <code>metric</code>: how to compute the distance in the input feature space</p>
 </li>
 </ul>
 </div>
@@ -948,7 +954,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="ulist">
 <ul>
 <li>
-<p>very dependent on distance measure; may be tricky to get good results for heterogeneous data even after normalization (but: try on text data)</p>
+<p>very dependent on distance measure: may be tricky to get good results for heterogeneous data even after normalization (but: try on text data)</p>
 </li>
 </ul>
 </div>

@@ -734,8 +734,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 0.1,</span>
-<span id="revdate">2021-06-19</span>
+<span id="revnumber">version 1.0,</span>
+<span id="revdate">2021-08-20</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -762,7 +762,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </li>
 <li><a href="_sl_ensemble_methods.html"><span class="toc-current">SL: Ensemble Methods</span></a>
 </li>
-<li><a href="_sl_k_nearest_neighbors_knn.html">SL: k-nearest neighbors (kNN)</a>
+<li><a href="_sl_k_nearest_neighbors_knn.html">SL: k-Nearest Neighbors (kNN)</a>
 </li>
 <li><a href="_sl_kernel_methods.html">SL: Kernel Methods</a>
 </li>
@@ -788,16 +788,39 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div id="content">
 <div class="sect2">
 <h3 id="_sl_ensemble_methods">SL: Ensemble Methods</h3>
+<div class="paragraph">
+<p>What is better than one model? Multiple models!</p>
+</div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Main idea</dt>
 <dd>
-<p>train multiple models &amp; combine predictions (average; most frequent class)<br>
-&#8594; different kinds of models<br>
-&#8594; different hyperparameter choices<br>
-&#8594; models trained on different subsets of the data<br>
-&#8594; boosting: additional models focus on data points that previous models got wrong<br></p>
+<p>train multiple models &amp; combine their predictions (regression: average; classification: most frequent class)</p>
 </dd>
+</dl>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>&#8594; different types of models</p>
+</li>
+<li>
+<p>&#8594; same type of model but with different hyperparameter settings (this can also include the random seed used when initializing the model, e.g., for neural networks)</p>
+</li>
+<li>
+<p>&#8594; models trained on different subsets of the data</p>
+</li>
+<li>
+<p>&#8594; boosting: models are trained sequentially and each additional model focuses on those data points that the previous models got wrong</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="dlist">
+<dl>
 <dt class="hdlist1">Pros</dt>
 <dd>
 <div class="ulist">
@@ -821,19 +844,35 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </ul>
 </div>
 </dd>
+<dt class="hdlist1">Popular example</dt>
+<dd>
+<p><em>Random Forest</em>: multiple decision trees trained on random subsamples of the data (this exploits fact that decision trees can be sensitive to small variations in the dataset)<br></p>
+</dd>
 </dl>
-</div>
-<div class="paragraph">
-<p><strong>Example</strong>: <em>Random Forest</em> – multiple Decision Trees trained on subsamples of the data<br></p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.ensemble</span> <span class="keyword">import</span> <span class="include">RandomForestClassifier</span>, <span class="include">RandomForestRegressor</span></code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>For more advanced approaches, also check out the voting ensemble and boosting methods from <a href="https://scikit-learn.org/stable/modules/ensemble.html">sklearn</a>, with which you can also combine arbitrary models into an ensemble.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Ensemble methods like random forests and gradient boosting trees give very good results on real world structured datasets and dominate the leader boards for many competitions at <a href="https://www.kaggle.com/">Kaggle</a>, a website where companies can upload datasets for data scientists to benchmark themselves against each other and even win prize money. (Kaggle is also a great place to look for practice problems &amp; datasets!)
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_sl_decision_trees.html">SL: Decision Trees</a> | ↑ Up: <a href="_ml_algorithms_unsupervised_supervised_learning.html">ML Algorithms: Unsupervised &amp; Supervised Learning</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_sl_k_nearest_neighbors_knn.html">SL: k-nearest neighbors (kNN)</a> →</p>
+<p>← Previous: <a href="_sl_decision_trees.html">SL: Decision Trees</a> | ↑ Up: <a href="_ml_algorithms_unsupervised_supervised_learning.html">ML Algorithms: Unsupervised &amp; Supervised Learning</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_sl_k_nearest_neighbors_knn.html">SL: k-Nearest Neighbors (kNN)</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

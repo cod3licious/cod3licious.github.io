@@ -734,8 +734,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 0.1,</span>
-<span id="revdate">2021-06-19</span>
+<span id="revnumber">version 1.0,</span>
+<span id="revdate">2021-08-20</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -783,7 +783,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="sect2">
 <h3 id="_explainability_interpretable_ml">Explainability &amp; Interpretable ML</h3>
 <div class="paragraph">
-<p>Explainability is essential to trust a model&#8217;s predictions, especially in areas like medicine (e.g. diagnosis from x-ray images).</p>
+<p>Explainability is essential to trust a model&#8217;s predictions, especially in areas like medicine (e.g., diagnosis from x-ray images).</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -793,15 +793,15 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="ulist">
 <ul>
 <li>
-<p><span class="underline">Local</span> Explainability: explain individual predictions</p>
+<p><span class="underline">Local</span> Explainability: explain individual predictions (&#8594; which features from one particular sample lead the model to make a certain prediction (e.g., visualized as a heatmap like that over the image of a horse in the previous section, where the classification decision was made mostly because of the copyright notice))</p>
 </li>
 <li>
-<p><span class="underline">Global</span> Explainability: explain the model behavior in general</p>
+<p><span class="underline">Global</span> Explainability: explain the model behavior in general (&#8594; which features are most important over all)</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>&#8594; Some models are <em>intrinsically interpretable</em> (e.g. linear models, decision trees), others require <em>model-agnostic methods</em> to make them explainable.</p>
+<p>&#8594; Some models are <em>intrinsically interpretable</em> (e.g., linear models, decision trees), others require <em>model-agnostic methods</em> to make them explainable, i.e., for these models the interpretability does not come for free.</p>
 </div>
 <div class="admonitionblock caution">
 <table>
@@ -810,15 +810,19 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
-Explaining a model and its predictions helps to understand what it learned from the data and why it makes certain mistakes. But only when the model has a good predictive performance <em>and</em> there is reason to believe that the model actually captured the true causal relationship between the inputs and targets these explanations might shed light on the <a href="https://towardsdatascience.com/e68626e664b6">true root causes</a> of the underlying process as well. Always discuss the results with a domain expert!
+Explaining a model and its predictions helps to understand what it learned from the data and why it makes certain mistakes. But only when the model has a good predictive performance <em>and</em> there is reason to believe that the model actually captured the true causal relationship between the inputs and targets, then these explanations might shed light on the <a href="https://towardsdatascience.com/e68626e664b6">true root causes</a> of the underlying process as well. Always discuss the results with a domain expert!
 </td>
 </tr>
 </table>
 </div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Careful</dt>
+<dd>
 <div class="ulist">
 <ul>
 <li>
-<p>Correlated features can lead to misrepresented feature importances!</p>
+<p>Correlated features can lead to misrepresented feature importances! (For example, when using a random forest, one decision tree might use one feature in the root node, while another decision tree uses a second feature that is correlated with the first, which means that overall it seems that both features are only somewhat important, while in fact they are just interchangeable and therefore their true feature importance would be the sum of the two individual feature importances.)</p>
 </li>
 <li>
 <p>Beware of <a href="https://en.wikipedia.org/wiki/Simpson&#8217;s_paradox">Simpson&#8217;s paradox</a></p>
@@ -826,10 +830,16 @@ Explaining a model and its predictions helps to understand what it learned from 
 <li>
 <p>Possibly look at results for different subsamples of the data</p>
 </li>
+<li>
+<p>Compare feature importances obtained for different models to get a better feeling for which features truly matter for the problem (e.g., investigate why a linear model and a decision tree might base their decisions on different features)</p>
+</li>
 </ul>
 </div>
+</dd>
+</dl>
+</div>
 <div class="paragraph">
-<p>Recommended Reading: <a href="https://christophm.github.io/interpretable-ml-book/">Interpretable ML Book</a></p>
+<p><span class="underline">Recommended Reading:</span> <a href="https://christophm.github.io/interpretable-ml-book/">Interpretable ML Book</a>, which additionally covers some more advanced methods (however, please keep in mind that explainable AI is about understanding better what happens&#8201;&#8212;&#8201;if you use a complex method to explain your model (e.g., the popular SHAP values) where it is difficult to understand how the explanations were derived, then this might instead result in further uncertainty)</p>
 </div>
 </div>
 </div>
@@ -842,6 +852,7 @@ Explaining a model and its predictions helps to understand what it learned from 
 <div class="content">
 <img src="../images/07_explainability/expl_dt.png" alt="image" width="540">
 </div>
+<div class="title"><span class="small">This is an example of a decision tree plot generated with <code>sklearn</code>. The decision tree has its root at the top (where you start) and the leaves (i.e., those nodes that don&#8217;t branch off anymore) at the bottom (where you stop and make the final prediction). Each node in the tree shows in the first line the variable based on which the next split is made incl. the threshold value (except for leaf nodes), then the current Gini impurity (i.e., how homogeneous the labels of all the samples that ended up in this node are; this is what the decision tree internally optimizes, i.e., notice how the value gets smaller on at least one side after a split), then the fraction of samples that ended up in this node, and the distribution of samples into the different classes (for a classification problem), as well as the label that would be predicted for a sample at this point. So when making a prediction for a new sample with a decision tree, you start at the root node of the tree and then follow the branches down depending on the sample&#8217;s feature values until you reach a leaf node and would then know exactly based on which feature thresholds the prediction for the sample was made.</span></div>
 </div>
 <div class="paragraph">
 <p><strong>Global interpretation</strong>: attribute: <code>feature_importances_</code><br>
@@ -852,31 +863,39 @@ How much does a feature reduce the (Gini) impurity?<br>
 <div class="content">
 <img src="../images/07_explainability/expl_dt_featimp.png" alt="image" width="400">
 </div>
+<div class="title"><span class="small">This is just a bar plot of the values from the <code>feature_importances_</code> attribute of the decision tree shown above. When you&#8217;re using a random forest instead of a single decision tree, it would be impractical to plot all of the individual trees contained in the forest to explain individual predictions, but a random forest at least also has the <code>feature_importances_</code> attribute to examine the global importance of the different features.</span></div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_explaining_linear_models_neural_networks">Explaining Linear Models (&amp; Neural Networks)</h4>
 <div class="paragraph">
-<p>Best if model has sparse weights &#8594; Lasso regression (e.g. <code>linear_model.LassoLarsCV</code>)<br>
+<p>Since the formula used to make predictions with a linear model is very simple, you can easily understand what is going on. To assess the importance of individual features, either for a single sample or overall, the sum can be decomposed into its individual components:<br>
 \(\hat{y} = b + \sum_{k=1}^d w_k \cdot x_k\) &#8658; effect of feature <em>k</em> for ith data point: \(w_k \cdot x_k^{(i)}\):</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/07_explainability/expl_lm_effects.png" alt="image" width="540">
 </div>
+<div class="title"><span class="small">The feature effects for a single sample are indicated by the red crosses, i.e., these show whether each feature contributed positively or negatively (or not at all) to the final prediction for this one sample. By computing the feature effects for all samples, we can generate the box plots shown below the red crosses, which display the distribution of feature effects for all samples and therefore indicate which features are overall important for the prediction (= those with the largest absolute values). For example, in this plot you can see that the feature 'AveOccup' has an effect of around zero for all but one sample, which indicates that the model might have overfit on one outlier point and it might be best to exclude this feature altogether.</span></div>
 </div>
 <div class="paragraph">
-<p>&#8594; Generalization for neural networks: Layer-wise Relevance Propagation (LRP)<br>
-(for <code>torch</code> networks: &#8216;Input X Gradient&#8217; from <a href="https://captum.ai/"><code>captum</code> library</a>)</p>
+<p>&#8594; It is easier to understand and validate the results if only a few features are considered important, therefore you might want to use a L1-regularized model (e.g., <code>linear_model.LassoLarsCV</code>) to get sparse weights.</p>
+</div>
+<div class="paragraph">
+<p><span class="underline">Generalization for neural networks:</span> <strong>Layer-wise Relevance Propagation (LRP)</strong>: similar to how the prediction of the linear model was split up into the contributions of the individual input features, by keeping track of the gradients of the weights in a neural network, here as well the decision can be decomposed to obtain the influence of each feature on the final prediction. This is similar to what happens in the backpropagation procedure when training the network, only that with LRP not the prediction error, but the prediction itself is propagated backwards layer by layer (hence the name) until we arrive at the input layer and get the individual contributions of the features.<br>
+(For <code>torch</code> networks, this approach is implemented in the <a href="https://captum.ai/"><code>captum</code> library</a> as the &#8216;Input X Gradient&#8217; method. The library also contains many other methods for interpreting neural networks, however, I find this the most natural approach, since it is a direct extension of the intuitive feature effects approach used to interpret linear models.)</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_global_model_agnostic_permutation_feature_importance">[Global] Model-agnostic: permutation feature importance</h4>
 <div class="paragraph">
-<p>How much does the model rely on each feature?</p>
+<p>The first question when it comes to global explainability is always &#8220;Which features are important?&#8221;, i.e., how much does the model rely on each feature when making its predictions?
+You can shed light on this using the permutation importance, which, for each feature, is computed like this:<br>
+&#8216;Feature importance&#8217; = &#8216;performance of trained model on original dataset&#8217;&#8201;&#8212;&#8201;&#8216;performance when values for this feature are shuffled&#8217;.<br>
+I.e., first, a trained model is normally evaluated on the original dataset (either training or test set), then for one feature the values for all samples are permuted and the performance of the trained model on this modified dataset is computed again. If there is a big discrepancy between the performance on the original and permuted datasets, this means the model heavily relies on this feature to make correct predictions, while if there is no difference, then this feature is not relevant (e.g., a linear model that has a coefficient of zero for one feature would not change its predictions if this feature was shuffled).</p>
 </div>
 <div class="paragraph">
-<p>&#8216;Feature importance&#8217; = &#8216;performance of trained model on original dataset&#8217;&#8201;&#8212;&#8201;&#8216;performance when values for this feature are shuffled&#8217;.</p>
+<p>Since a single permutation of a feature might by chance shuffle the values in a way that is close to the original ordering, this process is performed multiple times, i.e., we get a distribution of the permutation importance scores for each feature, which can again be visualized in a box plot:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -891,13 +910,11 @@ How much does a feature reduce the (Gini) impurity?<br>
 </div>
 <div class="sect3">
 <h4 id="_global_model_agnostic_influence_of_individual_features_on_prediction">[Global] Model-agnostic: influence of individual features on prediction</h4>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Individual Conditional Expectation (ICE) &amp; Partial Dependence (PD) Plots</dt>
-<dd>
-<p>see how prediction changes when one feature is varied for individual samples (ICE) &amp; averaged (PD)</p>
-</dd>
-</dl>
+<div class="paragraph">
+<p>After you&#8217;ve identified which features are important for a model in general, you can dig deeper to see <em>how</em> each of these features influences the final prediction. A simple way to accomplish this is with <strong>Individual Conditional Expectation (ICE) &amp; Partial Dependence (PD) Plots</strong>. These are generated by taking some samples and systematically vary the feature in question (i.e., set it to many different values within the normal range of values for this feature while keeping everything else about the data points the same) and then observe by how much and in which direction the predictions for these samples change in response to the different values set for the feature.</p>
+</div>
+<div class="paragraph">
+<p>The ICE plot then shows the results for individual samples (thin lines), while the PD plot shows the averaged values (think line), where the ICE plot can be used to verify that some opposite changes in individual samples are not averaged out in the PD plot:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -911,7 +928,7 @@ How much does a feature reduce the (Gini) impurity?<br>
 <i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
-assumes features are independent &#8594; can include unrealistic feature combinations
+One big drawback of this approach is that it assumes that features are independent of each other, i.e., since the features are varied individually, this can result in unrealistic feature combinations (e.g., if one feature is the height of a person (in the range of 60-200cm) and another feature is the weight (30-120kg), then when these features are varied independently, at some point we would evaluate a data point with height: 200cm and weight: 30kg, which seems like a very unhealthy combination). However, by examining the ICE plot for possibly erratic changes for individual samples, this can usually be spotted. And in general&#8201;&#8212;&#8201;this goes for all explainability methods&#8201;&#8212;&#8201;the results should not be over-interpreted, i.e., they are good for showing rough trends, but remember that the plots might also look completely different when you use them with a different type of model trained on the same dataset, i.e., be careful before concluding anything about the root causes of a problem based on these results.
 </td>
 </tr>
 </table>
@@ -925,7 +942,7 @@ assumes features are independent &#8594; can include unrealistic feature combina
 <div class="sect3">
 <h4 id="_local_model_agnostic_local_interpretable_model_agnostic_explanations_lime">[Local] Model-agnostic: <em>Local Interpretable Model-agnostic Explanations</em> (LIME)</h4>
 <div class="paragraph">
-<p>For a sample of interest:</p>
+<p>To generate an explanation for a single sample of interest:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -933,10 +950,10 @@ assumes features are independent &#8594; can include unrealistic feature combina
 <p>generate a local neighborhood dataset through small perturbations of the sample&#8217;s feature vector</p>
 </li>
 <li>
-<p>use the original model to predict labels for these new points</p>
+<p>use the original model to predict labels for these new points (i.e., generate an artificial labeled training set for the local surrogate model)</p>
 </li>
 <li>
-<p>train an intrinsically interpretable model on the neighborhood dataset</p>
+<p>train an intrinsically interpretable model on the neighborhood dataset (e.g., a linear model, i.e., while the decision surface of the original model might be very complex, we assume that we can approximate it locally with a linear function)</p>
 </li>
 <li>
 <p>interpret the local surrogate model&#8217;s prediction for the sample</p>
@@ -970,13 +987,13 @@ explaining ML with more ML&#8230;&#8203;
 <p><strong>Prototypes</strong>: representative samples, e.g., cluster centroids</p>
 </li>
 <li>
-<p><strong>Optimal inputs</strong>: optimized samples that result in a strong prediction of the given target</p>
+<p><strong>Optimal inputs</strong>: optimized samples that result in a strong prediction of the given target (e.g., in a neural network you can also optimize the input instead of the weights. I.e., you might start with an image showing random noise and the network will tell you &#8220;I have no idea what that should be!&#8221;. Then you tell the network &#8220;No, you should have predicted 'monkey' for this input!&#8221; and then instead of adapting the weights of the network in response to the prediction error, you change the inputs itself, such that the random noise starts to look a bit more like an image of a monkey. After doing this multiple times, i.e., changing the original inputs more and more towards something where the network is confident that it recognizes a monkey in the image, you&#8217;ve created an optimal input revealing what the network thinks is characteristic for a monkey.)</p>
 </li>
 <li>
-<p><strong>Counterfactual examples</strong>: samples with minor modifications that change the prediction</p>
+<p><strong>Counterfactual examples</strong>: samples with minor modifications that change the prediction (e.g., similar to how the optimal inputs are generated you can also start with an image from a different class instead of random noise and adapt it until the network changes its prediction for it)</p>
 </li>
 <li>
-<p><strong>Adversarial examples</strong>: counterfactual examples in a way a human doesn&#8217;t notice the change</p>
+<p><strong>Adversarial examples</strong>: counterfactual examples produced in a way such that a human doesn&#8217;t notice the change</p>
 </li>
 </ul>
 </div>

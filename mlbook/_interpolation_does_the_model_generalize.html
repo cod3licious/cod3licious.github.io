@@ -734,8 +734,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 0.1,</span>
-<span id="revdate">2021-06-19</span>
+<span id="revnumber">version 1.0,</span>
+<span id="revdate">2021-08-20</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -788,24 +788,23 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="content">
 <img src="../images/06_evaluation/overunderfitting.png" alt="image" width="840">
 </div>
+<div class="title"><span class="small">If you were to only look at the test errors for the different models shown here, you might conclude that the model on the left (overfitting) and on the right (underfitting) were equally wrong. While this is true in some sense, the test error alone does not tell you <em>why</em> the models are wrong (or how you could improve their performance). As you can see, the two models make mistakes on the test set for completely different reasons: the model that overfits, memorized the training samples and is not able to generalize to new data points, while the model that underfits, is too simple to capture the relationship between the inputs and outputs in general. Since these two scenarios require vastly different approaches to improve the model&#8217;s performance, it is important to look at the error on the training set (in a addition to the error on the test/validation set) to determine whether the model&#8217;s errors on the test set are be due to over- or underfitting.</span></div>
 </div>
 <div class="paragraph">
 <p><strong>Overfitting:</strong> great training performance, horrible on test set<br>
 <strong>Underfitting:</strong> poor training AND test performance</p>
 </div>
 <div class="paragraph">
-<p>This is due to the model complexity:</p>
+<p>This is related to the model&#8217;s complexity:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/06_evaluation/modelcomplex3.png" alt="image" width="640">
 </div>
+<div class="title"><span class="small">While a simple model (e.g., a linear model) has a high bias and might therefore underfit the data, a more complex model (e.g., a deep NN) has high variance and is therefore at risk of overfitting the training set. Often, it makes sense to use a more complex model, but then reduce its variance through explicit (e.g., L2-regularization) and/or implicit regularization (e.g., data augmentation). Also, please note the <a href="https://openai.com/blog/deep-double-descent/">double descent phenomenon</a> for neural networks, which often show a good generalization performance even if they are vastly over-parametrized.</span></div>
 </div>
 <div class="paragraph">
-<p>Please note the <a href="https://openai.com/blog/deep-double-descent/">double descent phenomenon</a> for neural networks!</p>
-</div>
-<div class="paragraph">
-<p>Depending on whether the model over- or underfits, there are different things you can do to improve the performance:</p>
+<p>Depending on whether a model over- or underfits, there are different things you can do to improve its performance:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -813,10 +812,19 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </div>
 </div>
 <div class="paragraph">
-<p>Generally, first try to decrease the model&#8217;s bias, i.e., find a model that is at least in principle capable of solving the task, since the error on the training data is the lower limit for the error on the test set. Then make sure the model doesn&#8217;t overfit, i.e., generalizes to new data points (what we ultimately care about).</p>
+<p>In general, you should first try to decrease the model&#8217;s bias, i.e., find a model that is at least in principle capable of solving the task, since the error on the training data is the lower limit for the error on the test set. Then make sure the model doesn&#8217;t overfit, i.e., generalizes to new data points (what we ultimately care about). However, it is unrealistic to expect a model to have a perfect performance, as some tasks are just hard, for example, because the data is very noisy.</p>
 </div>
-<div class="paragraph">
-<p>Additionally: Always look at the data!! Is there a pattern among wrong predictions, e.g., different performance for different classes?</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Additionally: Always look at the data!! Is there a pattern among wrong predictions, e.g., is there a discrepancy between the performance for different classes? Could some additional preprocessing steps help to fix errors for some type of data points (e.g., blurry images)?
+</td>
+</tr>
+</table>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -825,7 +833,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <dt class="hdlist1">Will more data help?</dt>
 <dd>
 <p>With little data, you risk overfitting. But is it worth getting more data?<br>
-&#8594; check <em>learning curves</em>, i.e., how the performance improves with more training samples:</p>
+&#8594; check <em>learning curves</em>, i.e., how the performance improves when using more training samples:</p>
 </dd>
 </dl>
 </div>
@@ -871,6 +879,9 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="title"><span class="small">Guyon, Isabelle, and André Elisseeff. &#8220;An introduction to variable and feature selection.&#8221; <em>Journal of Machine Learning Research</em> 3.Mar (2003): 1157-1182.</span></div>
 </div>
 <div class="paragraph">
+<p>(Also, please note: if we were to reduce the dimensionality with PCA on these two datasets, for the plot on the right, the main direction of variance does not capture the class differences, i.e., while the second PC captures less variance overall, it capture the class-discriminative information that we care about.)</p>
+</div>
+<div class="paragraph">
 <p>&#8658; Better:</p>
 </div>
 <div class="dlist">
@@ -894,10 +905,10 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="ulist">
 <ul>
 <li>
-<p><span class="underline">forward selection:</span> start with no features, add best feature</p>
+<p><span class="underline">forward selection:</span> start with no features, iteratively add best feature until the performance stops improving</p>
 </li>
 <li>
-<p><span class="underline">backward elimination:</span> start with all features, eliminate worst feature</p>
+<p><span class="underline">backward elimination:</span> start with all features, iteratively eliminate worst feature until the performance starts to deteriorate</p>
 </li>
 </ul>
 </div>
@@ -910,7 +921,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </div>
 </div>
 <div class="paragraph">
-<p><span class="underline">General rule</span>: Always remove truly redundant (i.e. 100% correlated) features, but otherwise if in doubt: keep all features</p>
+<p><span class="underline">General rule</span>: Always remove truly redundant (i.e., 100% correlated) features, but otherwise if in doubt: keep all features</p>
 </div>
 <div class="admonitionblock caution">
 <table>

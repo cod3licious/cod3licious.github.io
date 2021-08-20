@@ -645,8 +645,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 0.1,</span>
-<span id="revdate">2021-06-19</span>
+<span id="revnumber">version 1.0,</span>
+<span id="revdate">2021-08-20</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -684,49 +684,49 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="sect2">
 <h3 id="_what_constitutes_1_data_point">What constitutes 1 data point?</h3>
 <div class="paragraph">
-<p>It&#8217;s always important to be really clear about what 1 data point actually is, i.e., what the inputs look like and what you want back as a result from the model for each data point. Think of this in terms of how you plan to integrate the ML model with the rest of your workflow: what is the data that is produced in the previous step and flows into the ML part, and what do you need as an output from the model for the following step?</p>
+<p>It&#8217;s always important to be really clear about what 1 data point actually is, i.e., what the inputs look like and what you want back as a result from the model for each sample / observation. Think of this in terms of how you plan to integrate the ML model with the rest of your workflow: what is the data that is produced in the previous step and flows into the ML part, and what do you need as an output from the model for the following step?</p>
 </div>
 <div class="paragraph">
 <p>Even given the same raw data, depending on what you want to do, the definition of &#8216;1 data point&#8217; might be quite different.
-For example, when dealing with time series data, the raw data might always be in the form <em>n</em> time points with measurements from <em>d</em> sensors, but depending on the type of question you are trying to answer, the actual feature matrix can look quite different:</p>
+For example, when dealing with time series data, the raw data might always be in the form &#8216;_n_ time points with measurements from <em>d</em> sensors&#8217;, but depending on the type of question you are trying to answer, the actual feature matrix can look quite different:</p>
 </div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">1 Data Point = 1 Time Point</dt>
 <dd>
-<p>e.g. anomaly detection (&#8594; determine for each time point if everything is normal or if there is something strange going on):</p>
+<p>e.g., anomaly detection (&#8594; determine for each time point if everything is normal or if there is something strange going on):</p>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/07_timeseries/timeseries1.png" alt="image" width="660">
 </div>
 </div>
 <div class="paragraph">
-<p>&#8594; \(X\): <em>n</em> time points \(\times\) <em>d</em> sensors</p>
+<p>&#8594; \(X\): <em>n</em> time points \(\times\) <em>d</em> sensors, i.e., <em>n</em> data points represented as <em>d</em>-dimensional feature vectors</p>
 </div>
 </dd>
 <dt class="hdlist1">1 Data Point = 1 Time Series</dt>
 <dd>
-<p>e.g. cluster sensors (&#8594; see if some sensors measure related things):</p>
+<p>e.g., cluster sensors (&#8594; see if some sensors measure related things):</p>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/07_timeseries/timeseries3.png" alt="image" width="660">
 </div>
 </div>
 <div class="paragraph">
-<p>&#8594; \(X\): <em>d</em> sensors \(\times\) <em>n</em> time points</p>
+<p>&#8594; \(X\): <em>d</em> sensors \(\times\) <em>n</em> time points, i.e., <em>d</em> data points represented as <em>n</em>-dimensional feature vectors</p>
 </div>
 </dd>
 <dt class="hdlist1">1 Data Point = 1 Time Interval</dt>
 <dd>
-<p>e.g. classify time segments (&#8594; products are being produced one after another, some take longer to produce than others, classify if a product produced during one time window is good enough to ship to the customer, i.e., meets the quality standards):</p>
+<p>e.g., classify time segments (&#8594; products are being produced one after another, some take longer to produce than others, and the task is to predict whether a product produced during one time window at the end meets the quality standards, i.e., we&#8217;re not interested in the process over time per se, but instead regard each produced product (and therefore each interval) as an independent data point):</p>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/07_timeseries/timeseries2.png" alt="image" width="660">
 </div>
 </div>
 <div class="paragraph">
-<p>&#8594; compute features for each time segment by aggregating the sensor measurements over the interval (e.g. min, max, mean, slope, &#8230;&#8203;)<br>
-&#8594; \(X\): <em>k</em> intervals \(\times\) <em>q</em> features (derived from the <em>d</em> sensors)</p>
+<p>&#8594; Data points always need to be represented as fixed-length feature vectors, where each dimension stands for a specific input variable. Since the intervals here have different lengths, we can&#8217;t just represent one product as the concatenation of all the sensor measurements collected during its production time interval, since these vectors would not be comparable for the different products. Instead, you could compute features for each time segment by aggregating the sensor measurements over the interval (e.g., min, max, mean, slope, &#8230;&#8203;)<br>
+&#8594; \(X\): <em>k</em> intervals \(\times\) <em>q</em> features (derived from the <em>d</em> sensors), i.e., <em>k</em> data points represented as <em>q</em>-dimensional feature vectors</p>
 </div>
 </dd>
 </dl>

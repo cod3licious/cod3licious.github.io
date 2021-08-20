@@ -645,8 +645,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 0.1,</span>
-<span id="revdate">2021-06-19</span>
+<span id="revnumber">version 1.0,</span>
+<span id="revdate">2021-08-20</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -697,7 +697,7 @@ All models are wrong, but some are useful.
 </div>
 </div>
 <div class="paragraph">
-<p>A machine learning (ML) model tries to infer the relation between some inputs and outputs from the given exemplary data points. What kind of relation will be found is largely determined by the chosen model type and its internal optimization algorithm, however, there is a lot you can (and should) do to make sure what the algorithm comes up with is not blatantly wrong.</p>
+<p>A machine learning (ML) model tries to infer the relationship between some inputs and outputs from the given exemplary data points. What kind of relation will be found is largely determined by the chosen model type and its internal optimization algorithm, however, there is a lot you can (and should) do to make sure what the algorithm comes up with is not blatantly wrong.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -708,16 +708,19 @@ All models are wrong, but some are useful.
 <div class="ulist">
 <ul>
 <li>
-<p>Select the right inputs: ask a domain experts which variables could have a causal influence on the output; possibly compute additional, more informative features from the original measurements (&#8594; feature engineering).</p>
+<p>Select the right inputs: ask a domain expert which variables could have a causal influence on the output; possibly compute additional, more informative features from the original measurements (&#8594; feature engineering).</p>
 </li>
 <li>
-<p>Sanity check: Does the dataset contain samples with the same inputs but different outputs? &#8658; Some important features might be missing or the targets are very noisy, e.g. due to inconsistent annotations&#8201;&#8212;&#8201;fix this first!</p>
+<p>Sanity check: Does the dataset contain samples with the same inputs but different outputs? &#8658; Some important features might be missing or the targets are very noisy, e.g., due to inconsistent annotations&#8201;&#8212;&#8201;fix this first!</p>
 </li>
 <li>
-<p>Think about the structure of the problem and what type of model might be appropriate to learn the presumed &#8216;input &#8594; output&#8217; relationship. For example, if the problem is clearly non-linear, the chosen model type also needs to be complex enough to at least in principle be able to pick up on this relation (i.e., such that the model does not underfit, see below). A lot of domain knowledge can also be put into the design of a neural network architecture.</p>
+<p>Think about the structure of the problem and what type of model might be appropriate to learn the presumed &#8216;input &#8594; output&#8217; relationship. For example, if the problem is clearly non-linear, the chosen model type also needs to be complex enough to at least in principle be able to pick up on this relation (i.e., such that the model does not underfit, see below). A lot of domain knowledge can also be put into the design of neural network architectures.</p>
 </li>
 <li>
 <p>Make sure the data satisfies the model&#8217;s assumptions &#8658; for pretty much all models except decision trees (and models based on decision trees, like random forests) the data should be approximately normally distributed.</p>
+</li>
+<li>
+<p>Make sure you&#8217;ve set aside a representative test set to evaluate the final model (and possibly a validation set for model selection and hyperparameter tuning).</p>
 </li>
 </ul>
 </div>
@@ -727,13 +730,16 @@ All models are wrong, but some are useful.
 <div class="ulist">
 <ul>
 <li>
-<p>Check that the model does not over- or underfit, i.e., that it generalizes to unseen data points <em>from the same distribution of the training set</em>, i.e., that the model can interpolate. Please note that this does <em>not</em> ensure that it can also extrapolate, i.e., that it has learned the true causal relation between inputs and outputs and can generate correct predictions for data points outside of the training domain!</p>
+<p>Evaluate the model with a meaningful evaluation metric (especially for datasets with unbalanced class distributions (&#8594; balanced accuracy)!).</p>
 </li>
 <li>
-<p>Verify that the model does not discriminate. Due to the large quantities of data used to train ML models, it&#8217;s not always possible to ensure that the training data does not contain any systematic biases (e.g. gender/race stereotypes) that a model might pick up on, but it is important to test the model on a well balanced and controlled test set to catch any discrimination before the model is deployed somewhere.</p>
+<p>Check that the model is capable of interpolation, i.e., that it generalizes to unseen data points <em>from the same distribution as the training set</em> and does not over- or underfit. Please note that this does <em>not</em> ensure that it can also extrapolate, i.e., that it has learned the true causal relation between inputs and outputs and can generate correct predictions for data points outside of the training domain!</p>
 </li>
 <li>
-<p>Check whether the model makes any systematic errors (e.g., performance for all classes should be approximately the same; the prediction errors / <a href="https://statisticsbyjim.com/regression/check-residual-plots-regression-analysis/">residuals</a> in regression problems should be <a href="https://www4.stat.ncsu.edu/~stefanski/NSF_Supported/Hidden_Images/Residual_Surrealism_TAS_2007.pdf">independent</a>), which would indicate that your assumptions about the data might be wrong.</p>
+<p>Check whether the model makes any systematic errors, which would indicate that your assumptions about the data might be wrong (&#8594; performance for all classes should be approximately the same; the prediction errors / <a href="https://statisticsbyjim.com/regression/check-residual-plots-regression-analysis/">residuals</a> in regression problems should be <a href="https://www4.stat.ncsu.edu/~stefanski/NSF_Supported/Hidden_Images/Residual_Surrealism_TAS_2007.pdf">independent</a>).</p>
+</li>
+<li>
+<p>Verify that the model does not discriminate. Due to the large quantities of data used to train ML models, it is not always possible to ensure that the training data does not contain any systematic biases (e.g., gender/race stereotypes) that a model might pick up on, but it is important to test the model on a well balanced and controlled test set to catch any discrimination before the model is deployed in production.</p>
 </li>
 <li>
 <p>Interpret the model and explain its predictions: Does it use the features you (or a domain expert) expected it to use or does it make the predictions based on any spurious correlations?</p>
@@ -754,7 +760,8 @@ All models are wrong, but some are useful.
 <dd>
 <p><span class="underline">One of the biggest problems in practice: Data &amp; Concept Drifts:</span></p>
 <div class="paragraph">
-<p><strong>ML fails silently!</strong> &#8594; Need constant monitoring!!</p>
+<p><strong>ML fails silently!</strong> I.e., the program doesn&#8217;t crash even if all predictions are wrong<br>
+&#8594; Need constant monitoring to detect changes that lead to a deteriorating performance!</p>
 </div>
 </dd>
 </dl>
@@ -763,14 +770,14 @@ All models are wrong, but some are useful.
 <ul class="none">
 <li>
 <p><em>Data drift:</em> input distribution changes, e.g., a new user operates the machine differently<br>
-&#8594; Statistical tests to detect changes in input distributions</p>
+&#8594; Use statistical tests to detect changes in input distributions</p>
 </li>
 <li>
 <p><em>Concept drift:</em> input/output relation changes due to:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>External factors (e.g. changes in the process structure / setup)</p>
+<p>External factors (e.g., changes in the process structure / setup)</p>
 </li>
 <li>
 <p>Internal factors (feedback loop: presence of ML model alters behavior)</p>

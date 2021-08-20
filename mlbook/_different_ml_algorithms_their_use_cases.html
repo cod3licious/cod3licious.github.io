@@ -645,8 +645,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 0.1,</span>
-<span id="revdate">2021-06-19</span>
+<span id="revnumber">version 1.0,</span>
+<span id="revdate">2021-08-20</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -686,12 +686,13 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="sect2">
 <h3 id="_different_ml_algorithms_their_use_cases">Different ML algorithms &amp; their use cases</h3>
 <div class="paragraph">
-<p>There exists a large variety of ML algorithms, some of which are also used in other disciplines:</p>
+<p>There exist many different ML algorithms&#8201;&#8212;&#8201;you can think of these as your ML toolbox:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/01b_intro_ml/ml_toolset6.png" alt="image" width="640">
 </div>
+<div class="title"><span class="small">ML itself is a subfield of AI, which is currently the more frequently used buzzword, but really all the cool stuff (e.g., the examples you&#8217;ve seen in the beginning) actually use ML (AI additionally includes some old search algorithms that were used when building the first chess computers, for example). ML itself can be subdivided into 3 main subfields, unsupervised, supervised, and reinforcement learning, and another recent buzzword, &#8220;deep learning&#8221;, which just refers to all methods using neural networks. Some of the more basic algorithms used in ML, like linear regression or PCA (very similar to factor analysis), are also used by statisticians, who, however, additionally also use other tools, like hypothesis tests, which do not learn rules or patterns from data. Finally, most data scientists will use many tools from ML and statistics, but they as well use some additional tools like A/B tests (e.g., for checking whether a red or green &#8220;buy&#8221; button on a website will generate more sales), which do not fall into any of the other categories.</span></div>
 </div>
 <div class="paragraph">
 <p>The ML algorithms can be further subdivided based on how they work, i.e., how they learn from the data. This is inspired by how humans learn:</p>
@@ -700,14 +701,16 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="content">
 <img src="../images/01b_intro_ml/ml_algorithms_short_human4.png" alt="image" width="740">
 </div>
+<div class="title"><span class="small"><strong>Unsupervised Learning:</strong> Humans are very good at picking up on statistical regularities in the world without being explicitly instructed to do so. For example, have you ever noticed that we don&#8217;t &#8230;&#8203; make &#8230;&#8203; pauses &#8230;&#8203; between &#8230;&#8203; words when we speak? Yet kids still intuitively learn which syllables belong to the same words and where a word ends and the new one begins. This works because some syllables always occur in the specific combination making up a single word, while this word can then be followed by many different words, starting with many different syllables. This means, simply by hearing lots of spoken text, we pick up on the conditional probability distributions of syllables. <strong>Supervised Learning:</strong> This type of learning occurs when you have a teacher that tells you what the right answers are and corrects you if you get something wrong. For example, when teaching a kid the meaning of a word, you would explicitly tell them what this word means, and if they mislabel something, e.g., call a small dog a cat, you would correct them. <strong>Reinforcement Learning:</strong> This is another type of learning that happens naturally, where humans learn the consequences of their actions. For example, while a camp fire might be nice and warm and pleasant to be around, if you got to close to a big fire, you would quickly notice that this is way too hot and avoid doing this in the future.</span></div>
 </div>
 <div class="paragraph">
-<p>Different ways of learning: machine</p>
+<p>Analogously, machines can also learn with these three strategies:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/01b_intro_ml/ml_algorithms_short4.png" alt="image" width="740">
 </div>
+<div class="title"><span class="small"><strong>Unsupervised Learning:</strong> Here the algorithms pick up on statistical regularities in the data, e.g., they can identify groups of similar item (like in the customer segmentation task) or find individual points that stand out (i.e., anomaly detection, for example, noticing when a machine shows some unusual behavior due to a broken part, or fraud detection like identifying suspicious credit card transactions). <strong>Supervised Learning:</strong> Here the algorithms learn from many input-output examples, e.g., images and what is shown on these images, or production conditions and whether or not the product that was produced under these conditions was faulty or okay. <strong>Reinforcement Learning:</strong> This type of learning is a bit more involved: Here the learning algorithm is also called an agent, which operates inside an environment (either, e.g., a robot moving around in the real world, or a virtual agent inside a simulation environment like a video game (which is usually much cheaper ;-)). The environment lets the agent know in which state or situation it currently is, then the agent can select how to react in this state, i.e., which (predefined) action to take, and then the environment determines the consequences of this action (e.g., kill a monster in a video game or fall off a cliff) and returns a reward depending on the outcome (e.g., extra points for defeating an enemy). Then the cycle repeats as the agent is in the next state. Based on the received reward, the agent learns over time which actions are beneficial in which situations and how to navigate the environment. The hard part here is that the reward signals often come much later after the action was executed, for example, in a video game, the agent might collect a key somewhere at the beginning of a level, but the door that can be opened with this key might only come many frames later, which means the reward will be delayed and the agent will have a hard time associating this reward with the appropriate action. Since humans have a lot of background knowledge, figuring out what works and what doesn&#8217;t in a game is much easier for us.</span></div>
 </div>
 <div class="sect3">
 <h4 id="_identifying_potential_ml_projects">Identifying potential ML projects</h4>
@@ -718,6 +721,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="content">
 <img src="../images/02_data/data_types2.png" alt="image" width="640">
 </div>
+<div class="title"><span class="small">As we&#8217;ve seen, ML algorithms solve input-output tasks. The inputs for this can come in various forms and while some input data types might require additional preprocessing steps, in principle ML algorithms can be used with all kinds of data. The main distinction that is made when characterizing the input data is between <em>structured</em> data, which is any dataset that contains individual variables that represent unique quantities, and <em>unstructured</em> data, which can not be subdivided into meaningful variables, e.g., in images &#8220;first pixel from the left&#8221; or in texts &#8220;10th word in the second paragraph&#8221; is not what you would call a variable, while &#8220;size in square meters&#8221; and &#8220;number of bedrooms&#8221; would be useful quantities to describe an apartment. Structured data is often heterogeneous, since the different variables in a dataset typically stand for very different things (e.g., when working with sensor data you normally would not have a dataset that only contains temperature measurements, but additionally it might contain, e.g., pressure and flow values, which have different units and might be on very different scales). Unstructured data, on the other hand, is homogeneous (i.e., there is no qualitative difference between the 10th and the 100th pixel in an image).</span></div>
 </div>
 <div class="paragraph">
 <p>... but your goal determines the type of algorithm you should use for the task:</p>
@@ -726,9 +730,10 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="content">
 <img src="../images/01b_intro_ml/ml_goals3.png" alt="image" width="840">
 </div>
+<div class="title"><span class="small">If your goal is to simply understand your dataset a bit better and get an overview of it, then a dimensionality reduction algorithm from the area of unsupervised learning can be used to create a visualization of the dataset. If you want to discover patterns in the data, then you would also choose an algorithm from the field of unsupervised learning, but here it depends on which kinds of patterns you want to find: anomaly detection algorithms can be used to identify individual data points that deviate a lot from the rest (e.g., a malfunctioning machine or a fraudulent credit card transaction), while clustering algorithms can be used to identify groups of similar data points (e.g., for customer segmentation). If your goal is to make specific predictions, i.e., given an input get a corresponding output (e.g., predict whether a product will be faulty if it is produced under certain conditions), then you need to use an algorithm from the area of supervised learning. Here the main distinction is made between regression and classification models: in regression tasks, the target variable that should be predicted is continuous (e.g., number of users, price, etc.), while in classification tasks the target variable is discrete, i.e., can only take on one distinct value and there is no continuum between the different values (e.g., an animal in a picture can either be a cat or a dog, but not something in between). While unsupervised and supervised learning cover most general use cases, there are also other algorithms for more specific applications, e.g., recommender systems.</span></div>
 </div>
 <div class="paragraph">
-<p>Some examples of input &#8594; output problems that can be solved with ML:</p>
+<p>Some examples of input &#8594; output problems and what type of ML algorithm can be used to solve them:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -746,7 +751,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">email</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">spam (0/1)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">spam (yes/no)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">classification</p></td>
 </tr>
 <tr>
@@ -797,12 +802,16 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <dl>
 <dt class="hdlist1">To solve complex problems, you might need multiple algorithms</dt>
 <dd>
-<p>&#8220;<em>Hey &lt;smart speaker&gt;, tell me a joke!</em>&#8221;&#8594; a random joke</p>
+<p>Example: virtual assistant (e.g., Siri or Alexa): &#8220;<em>Hey &lt;smart speaker&gt;, tell me a joke!</em>&#8221; &#8594; a random joke</p>
+</dd>
+</dl>
+</div>
 <div class="olist arabic">
+<div class="title"><span class="small">This might look like an input-output problem, but it would be very difficult and inefficient to solve it directly. Instead, the problem should be broken down into smaller subtasks:</span></div>
 <ol class="arabic">
 <li>
 <p><strong>Trigger word detection:</strong><br>
-audio &#8594; &#8220;Hey &lt;smart speaker&gt;&#8221; (0/1)?</p>
+audio &#8594; &#8220;Hey &lt;smart speaker&gt;&#8221; (yes/no)?</p>
 </li>
 <li>
 <p><strong>Speech recognition:</strong><br>
@@ -813,7 +822,7 @@ audio &#8594; text</p>
 text &#8594; (joke/timer/weather/&#8230;&#8203;)?</p>
 </li>
 <li>
-<p><strong>Command-specific program (e.g. select random joke)</strong></p>
+<p><strong>Request-specific program (e.g., select random joke)</strong></p>
 </li>
 <li>
 <p><strong>Speech generation:</strong><br>
@@ -821,11 +830,43 @@ text &#8594; audio</p>
 </li>
 </ol>
 </div>
-</dd>
+<div class="paragraph">
+<div class="title"><span class="small">First, the smart speaker needs to know whether it was spoken to. For this, specific trigger words (e.g., &#8220;Hey Siri&#8221;) are used to activate it, since you also wouldn&#8217;t want the speaker to continuously stream everything you said into the cloud. This is a simple binary classification task (trigger word: yes/no). Next, the spoken words that follow the trigger word are transcribed into text, since text is easier to handle, because, for example, variations due to different accents are removed. Then, based on this text, the intent is recognized, i.e., which of the different functionalities of the virtual assistant should be used (e.g., tell a joke, play music, set an alarm, etc.), which is a multi-class classification problem. The next step is then to actually execute the request, which is not done with ML, but instead some task-specific program is run, e.g., to select a joke from a database or set a timer, etc., based on the apps installed on the device. Finally, the output of the program needs to be converted into an audio signal again, where again a ML model can help to get smoothly spoken text (and in the near future maybe with the voice of George Clooney or some other famous person).</span></div>
+<p><br>
+&#8658; It is generally advisable to first think about how your problem could be decomposed into easier-to-solve subproblems, especially since there might already be a large dataset or pre-trained ML model available for one of these subtasks (e.g., for speech recognition you could train a model on audio books and political speeches in addition to the data collected from your smart speaker users).</p>
+</div>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Steps to identify a potential ML project</dt>
 </dl>
 </div>
-<div class="paragraph">
-<p>&#8658; It is generally advisable to first think about how your problem could be decomposed into easier to solve subproblems, especially since there might already be a large dataset or pre-trained ML model available for one of these subtasks.</p>
+<div class="openblock">
+<div class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a process map: which steps are executed in your business processes (flow of materials &amp; information) and what data is collected where? For example, in a production process where some of the produced parts are defective:</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/01b_intro_ml/automate_insights7a.png" alt="image" width="700">
+</div>
+</div>
+</li>
+<li>
+<p>Identify parts of the process that could either be automated with ML (e.g., straightforward, repetitive tasks otherwise done by humans) or otherwise improved by analyzing data (e.g., to understand root causes of a problem, improve planning with what-if simulations, or optimize the use of resources):</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/01b_intro_ml/automate_insights7b.png" alt="image" width="840">
+</div>
+<div class="title"><span class="small">While the final ML model that solves the input-output problem is just a piece of software, when a data scientist analyzes the results and interprets the model, she can generate insights that can be translated into action recommendations.</span></div>
+</div>
+</li>
+<li>
+<p>Prioritize: which project will have a high impact, but at the same time also a good chance of success, i.e., should yield a high return on investment (ROI)? For example, using ML to automate a simple task is a comparatively low risk investment, but might cause some assembly-line workers to loose their (possibly quite boring) jobs. In contrast, identifying the root causes of why a production process produces 10% scrap could save millions, but it is not clear from the start that such an analysis will actually yield useful results, since the collected data on the process conditions might not be sufficient, i.e., might not contain all the needed information.</p>
+</li>
+</ol>
 </div>
 </div>
 </div>
@@ -839,12 +880,12 @@ text &#8594; audio</p>
 <ol class="arabic">
 <li>
 <p><strong>Exploratory analysis</strong> of historic data (with results for human post-processing)<br>
-<em>Identify different groups of customers &#8658; create targeted marketing campaign</em></p>
+<em>Identify different groups of customers (&#8658; human: create targeted marketing campaign)</em></p>
 </li>
 <li>
 <p>Develop a model to <strong>automate an &#8216;input &#8594; output&#8217; task</strong><br>
 <em>Automatically recognize &amp; sort out products with scratches</em><br>
-Use the model in a &#8220;what-if&#8221; forecast to <strong>facilitate planning</strong><br>
+Use a model in a &#8220;what-if&#8221; forecast to <strong>facilitate planning</strong><br>
 <em>How quickly would this machine component deteriorate under these process conditions?</em></p>
 </li>
 <li>
@@ -862,46 +903,14 @@ Use the model in a &#8220;what-if&#8221; forecast to <strong>facilitate planning
 </div>
 </div>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Steps to identify a potential ML project</dt>
-</dl>
-</div>
-<div class="openblock">
-<div class="content">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Create a process map: which steps are executed in your business processes (flow of materials &amp; information) and what data is collected where?</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01b_intro_ml/automate_insights7a.png" alt="image" width="700">
-</div>
-</div>
-</li>
-<li>
-<p>Identify parts of the process that could either be automated with ML (e.g. straightforward, repetitive tasks otherwise done by humans) or otherwise improved by analyzing data (e.g. to understand root causes of problems, improve planning with what-if simulations, or optimize the use of resources).</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01b_intro_ml/automate_insights7b.png" alt="image" width="840">
-</div>
-</div>
-</li>
-<li>
-<p>Prioritize: which project will have a high impact, but at the same time also a good chance of success, i.e., should yield a high return on investment (ROI)? For example, using ML to automate a simple task is a comparatively low risk investment, but might cause some assembly-line workers to loose their (possibly quite boring) jobs. In contrast, identifying the root causes of why a production process produces 10% scrap could save millions, but it is not clear from the start that such an analysis will actually yield useful results, since the collected data on the process conditions might not be sufficient, i.e., might not contain all the needed information.</p>
-</li>
-</ol>
-</div>
-</div>
-</div>
 </div>
 <div class="sect3">
 <h4 id="_taxonomy_of_ml_problems_solutions">Taxonomy of ML problems &amp; solutions</h4>
 <div class="paragraph">
-<p>Machine learning algorithms can be used to solve a wide variety of problems involving different kinds of inputs data. But different problem types require different approaches and come with their own unique set of challenges. So, where could ML create value and why might it fail?</p>
+<p>Machine learning algorithms can be used to solve a wide variety of problems involving different kinds of inputs data. But different problem types require different approaches and come with their own unique set of challenges.</p>
 </div>
 <div class="paragraph">
-<p>The following is by no means an exhaustive list of all the different areas where machine learning is applied, but should cover the most important cases where ML currently adds value.</p>
+<p>The following is by no means an exhaustive list of all the different areas where machine learning is applied, but should cover the most important cases where ML currently adds value and why might it fail. (Please note, this summary contains some terms that will be explained in later chapters, so you might want to come back to this later.)</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -920,31 +929,31 @@ Use the model in a &#8220;what-if&#8221; forecast to <strong>facilitate planning
 <div class="title"><span class="underline">Examples:</span></div>
 <ul>
 <li>
-<p>text classification (e.g. identify spam / hate speech / fake news)</p>
+<p>text classification (e.g., identify spam / hate speech / fake news)</p>
 </li>
 <li>
-<p>sentiment analysis (subtask of text classification: identify if text is positive or negative, e.g. for product reviews)</p>
+<p>sentiment analysis (subtask of text classification: identify if text is positive or negative, e.g., for product reviews)</p>
 </li>
 <li>
-<p>speech recognition (e.g. transcribe dictated notes or add subtitles to videos)</p>
+<p>speech recognition (e.g., transcribe dictated notes or add subtitles to videos)</p>
 </li>
 <li>
 <p>machine translation (translate texts from one language into another)</p>
 </li>
 <li>
-<p>image classification / object recognition (e.g. identify problematic content (e.g. child pornography) or detect street signs and pedestrians in autonomous driving)</p>
+<p>image classification / object recognition (e.g., identify problematic content (like child pornography) or detect street signs and pedestrians in autonomous driving)</p>
 </li>
 <li>
 <p>image captioning (generate text that describes what&#8217;s shown in an image, e.g., to improve the online experience for the visually impaired)</p>
 </li>
 <li>
-<p>data generation (e.g. generate new photos/images of specific objects or scenes)</p>
+<p>data generation (e.g., generate new photos/images of specific objects or scenes)</p>
 </li>
 <li>
-<p>style transfer (transform a given image into another style, e.g. make photos look like van Gogh paintings)</p>
+<p>style transfer (transform a given image into another style, e.g., make photos look like van Gogh paintings)</p>
 </li>
 <li>
-<p>separate individual sources of an audio signal (e.g. unmix a song, i.e., separate vocals and instruments into individual tracks)</p>
+<p>separate individual sources of an audio signal (e.g., unmix a song, i.e., separate vocals and instruments into individual tracks)</p>
 </li>
 </ul>
 </div>
@@ -952,7 +961,7 @@ Use the model in a &#8220;what-if&#8221; forecast to <strong>facilitate planning
 <div class="title"><span class="underline">Approach:</span></div>
 <ul class="none">
 <li>
-<p>usually deep learning, i.e., task-specific neural network architecture</p>
+<p>usually deep learning, i.e., a task-specific neural network (NN) architecture</p>
 </li>
 </ul>
 </div>
@@ -997,10 +1006,10 @@ Use the model in a &#8220;what-if&#8221; forecast to <strong>facilitate planning
 <div class="title"><span class="underline">Examples:</span></div>
 <ul>
 <li>
-<p>AlphaFold: generate 3D protein structure from amino acid sequence</p>
+<p>AlphaFold: generate 3D protein structure from amino acid sequence (to facilitate drug development)</p>
 </li>
 <li>
-<p>SchNet: predict energy and other properties of molecules given their configuration of atoms</p>
+<p>SchNet: predict energy and other properties of molecules given their configuration of atoms (to speed up materials research)</p>
 </li>
 </ul>
 </div>
@@ -1008,7 +1017,7 @@ Use the model in a &#8220;what-if&#8221; forecast to <strong>facilitate planning
 <div class="title"><span class="underline">Approach:</span></div>
 <ul class="none">
 <li>
-<p>usually deep learning, i.e., task-specific neural network architecture</p>
+<p>usually deep learning, i.e., a task-specific neural network architecture</p>
 </li>
 </ul>
 </div>
@@ -1051,7 +1060,7 @@ For example, a manufacturing process may have some Key Performance Indicators (K
 <div class="title"><span class="underline">Examples:</span></div>
 <ul>
 <li>
-<p>determine the price that should be set for a new apartment listing and tell home owners what they can do to sell their house at a higher price (e.g. a freshly renovated bathroom may have a higher influence on what potential buyers are willing to pay than a new coat of paint on the outside)</p>
+<p>determine the price that should be set for a new apartment listing and tell home owners what they can do to sell their house at a higher price (e.g., a freshly renovated bathroom may have a higher influence on what potential buyers are willing to pay than a new coat of paint on the outside)</p>
 </li>
 <li>
 <p>predict in advance whether a product produced under the proposed process conditions will be of high quality or would be a waste of resources</p>
@@ -1060,7 +1069,7 @@ For example, a manufacturing process may have some Key Performance Indicators (K
 <p>identify which process conditions have the most influence on the quality of the product and which settings generally lead to the best results</p>
 </li>
 <li>
-<p>given some external conditions (e.g. outside temperature, composition of raw input materials from a new vendor), automatically determine the best process settings to produce high quality products</p>
+<p>given some external conditions (e.g., outside temperature, composition of raw input materials from a new vendor), automatically determine the best process settings to produce high quality products</p>
 </li>
 </ul>
 </div>
@@ -1104,7 +1113,7 @@ For example, a manufacturing process may have some Key Performance Indicators (K
 <div class="title"><span class="underline">Possible challenges:</span></div>
 <ul>
 <li>
-<p>appropriate definition of the output/target/KPI that should be modeled, i.e., what does it actually mean for a process to run well and how might external factors influence this definition (e.g., can you expect the same performance on an exceptionally hot summer day?; after the economic crisis in 2008 the same house was suddenly worth a lot less)</p>
+<p>appropriate definition of the output/target/KPI that should be modeled, i.e., what does it actually mean for a process to run well and how might external factors influence this definition (e.g., can you expect the same performance on an exceptionally hot summer day?)</p>
 </li>
 <li>
 <p>missing important input variables, e.g., if there exist other influencing factors that you haven&#8217;t considered or couldn&#8217;t measure, which means not all of the target variable&#8217;s variance can be explained</p>
@@ -1135,13 +1144,13 @@ For example, a manufacturing process may have some Key Performance Indicators (K
 <p>return matching documents / websites given a search query</p>
 </li>
 <li>
-<p>show similar movies given the movie a user is currently looking at (e.g. same genre, director, etc.)</p>
+<p>show similar movies given the movie a user is currently looking at (e.g., same genre, director, etc.)</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>recommender systems</strong> (on pairwise data): given a sample from one type of data (e.g. user, protein structure), identify the most relevant samples from another type of data (e.g. movie, drug composition), e.g.,</p>
+<p><strong>recommender systems</strong> (on pairwise data): given a sample from one type of data (e.g., user, protein structure), identify the most relevant samples from another type of data (e.g., movie, drug composition), e.g.,</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1164,7 +1173,7 @@ For example, a manufacturing process may have some Key Performance Indicators (K
 <div class="title"><span class="underline">Possible challenges:</span></div>
 <ul>
 <li>
-<p>little / incomplete data: different users might like the same item for different reasons and it is unclear whether e.g. a user didn&#8217;t watch a movie because he&#8217;s not interested in it or because he just didn&#8217;t notice it yet</p>
+<p>little / incomplete data: different users might like the same item for different reasons and it is unclear whether, e.g., a user didn&#8217;t watch a movie because he&#8217;s not interested in it or because he just didn&#8217;t notice it yet</p>
 </li>
 </ul>
 </div>
@@ -1179,10 +1188,10 @@ For example, a manufacturing process may have some Key Performance Indicators (K
 <div class="title"><span class="underline">Goal/Examples/Approach:</span></div>
 <ul class="none">
 <li>
-<p><strong>dimensionality reduction</strong> (e.g. with (Kernel) PCA): noise reduction / feature engineering</p>
+<p><strong>dimensionality reduction</strong> (e.g., with (Kernel) PCA): noise reduction / feature engineering</p>
 </li>
 <li>
-<p><strong>outlier detection</strong> (e.g. with \(\gamma\)-index, Isolation Forest, or One-Class SVM): clean up data, e.g. by removing samples with wrongly entered values</p>
+<p><strong>outlier detection</strong> (e.g., with \(\gamma\)-index, Isolation Forest, or One-Class SVM): clean up the data, e.g., by removing samples with wrongly entered values</p>
 </li>
 </ul>
 </div>
@@ -1190,7 +1199,7 @@ For example, a manufacturing process may have some Key Performance Indicators (K
 <div class="title"><span class="underline">Chance of success:</span></div>
 <ul class="none">
 <li>
-<p>Worth a try: whether these measures help or not depends on the dataset as well as the algorithms applied to the preprocessed data afterwards, but investing time in data cleaning is usually not wasted</p>
+<p>Worth a try: whether these measures help or not depends on the dataset as well as the algorithms applied to the preprocessed data afterwards, but investing time in data cleaning is usually well spent</p>
 </li>
 </ul>
 </div>
@@ -1216,13 +1225,13 @@ For example, a manufacturing process may have some Key Performance Indicators (K
 <div class="title"><span class="underline">Goal/Examples/Approach:</span></div>
 <ul class="none">
 <li>
-<p><strong>dimensionality reduction</strong> (e.g. with t-SNE): create a 2D visualization to explore the dataset as a whole</p>
+<p><strong>dimensionality reduction</strong> (e.g., with t-SNE): create a 2D visualization to explore the dataset as a whole, where you can often already see any clusters or outliers</p>
 </li>
 <li>
-<p><strong>clustering</strong> (e.g. with <em>k</em>-means or DBSCAN): identify groups of related data points, e.g., customer segmentation for targeted marketing campaign</p>
+<p><strong>clustering</strong> (e.g., with <em>k</em>-means or DBSCAN): identify groups of related data points, e.g., customer segmentation for targeted marketing campaign</p>
 </li>
 <li>
-<p><strong>anomaly detection</strong> (e.g. with \(\gamma\)-index, Isolation Forest, or One-Class SVM): identify fraudulent transaction in e-commerce; monitor a machine to see when something out of the ordinary happens</p>
+<p><strong>anomaly detection</strong> (e.g., with \(\gamma\)-index, Isolation Forest, or One-Class SVM): identify fraudulent transaction in e-commerce; monitor a machine to see when something out of the ordinary happens</p>
 </li>
 </ul>
 </div>
@@ -1230,7 +1239,7 @@ For example, a manufacturing process may have some Key Performance Indicators (K
 <div class="title"><span class="underline">Chance of success:</span></div>
 <ul class="none">
 <li>
-<p>Worth a try: the algorithms will always find something, but whether this is useful (i.e. what the identified patterns mean) can only be determined by a human in a post-processing step</p>
+<p>Worth a try: the algorithms will always find something, but whether this is useful (i.e., what the identified patterns mean) can only be determined by a human in a post-processing step</p>
 </li>
 </ul>
 </div>
@@ -1241,7 +1250,7 @@ For example, a manufacturing process may have some Key Performance Indicators (K
 <p>no ground truth: difficult to choose between different models and hyperparameter settings</p>
 </li>
 <li>
-<p>many of the algorithms rely on similarities or distances between data points, and it can be difficult to define an appropriate measure for this or know in advance which features should be compared (e.g. what makes two customers similar?)</p>
+<p>many of the algorithms rely on similarities or distances between data points, and it can be difficult to define an appropriate measure for this or know in advance which features should be compared (e.g., what makes two customers similar?)</p>
 </li>
 </ul>
 </div>
@@ -1257,7 +1266,7 @@ For example, a manufacturing process may have some Key Performance Indicators (K
 <ul class="none">
 <li>
 <p>Determine an optimal sequence of actions given changing environmental conditions.<br>
-Unlike in regular optimization, where the optimal inputs given a single specific external condition are determined, here an &#8220;agent&#8221; (= the RL algorithm) tries to learn an optimal <em>sequence</em> of inputs to maximize the cumulative reward received over multiple time steps, where there can be a significant time delay between the inputs and the rewards that they generate (e.g. in a video game you might need to pick up a key in the beginning of a level, but the door that can be opened with it only comes several frames later).</p>
+Unlike in regular optimization, where the optimal inputs given a single specific external condition are determined, here an &#8220;agent&#8221; (= the RL algorithm) tries to learn an optimal <em>sequence</em> of inputs to maximize the cumulative reward received over multiple time steps, where there can be a significant time delay between the inputs and the rewards that they generate (e.g., in a video game you might need to pick up a key in the beginning of a level, but the door that can be opened with it only comes several frames later).</p>
 </li>
 </ul>
 </div>
@@ -1276,7 +1285,7 @@ Unlike in regular optimization, where the optimal inputs given a single specific
 <div class="title"><span class="underline">Approach:</span></div>
 <ul class="none">
 <li>
-<p>lots of options, many nowadays based on neural networks (e.g. AlphaGo / MuZero)</p>
+<p>lots of options, many nowadays based on neural networks (e.g., AlphaGo / MuZero)</p>
 </li>
 </ul>
 </div>
@@ -1301,7 +1310,7 @@ Unlike in regular optimization, where the optimal inputs given a single specific
 <p>difficult to learn correct associations when there are long delays between critical actions and the received rewards</p>
 </li>
 <li>
-<p>agent generates its own data: if it starts off with a bad policy, it will be tricky to escape from this (e.g. in a video game, if the agent always falls down a gap instead of jumping over it, it never sees the rewards that await on the other side and therefore can&#8217;t learn that it would be beneficial to jump over the gap)</p>
+<p>agent generates its own data: if it starts off with a bad policy, it will be tricky to escape from this (e.g., in a video game, if the agent always falls down a gap instead of jumping over it, it never sees the rewards that await on the other side and therefore can&#8217;t learn that it would be beneficial to jump over the gap)</p>
 </li>
 </ul>
 </div>

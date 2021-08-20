@@ -645,8 +645,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 0.1,</span>
-<span id="revdate">2021-06-19</span>
+<span id="revnumber">version 1.0,</span>
+<span id="revdate">2021-08-20</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -685,7 +685,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <h2 id="_data_preprocessing">Data &amp; Preprocessing</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Preprocessing: going from Raw Data to &#8220;Good Data&#8221;, i.e., data in a form such that ML algorithms can be applied:</p>
+<p>Preprocessing is the act of transforming Raw Data into &#8220;Good Data&#8221;, i.e., data in a form such that ML algorithms can be applied:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -693,17 +693,19 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 </div>
 <div class="paragraph">
-<p>A typical ML problem</p>
+<p>To solve a ML problem, you first need to collect data. For example, a production process, where you want to find out under which conditions some of the produced parts are scrap, would be a typical supervised learning problem. Here, the collected data for each produced part should include the process conditions under which it was produced, as well as the outcome (i.e., product was okay or scrap):</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/02_data/toy_data3.png" alt="image" width="740">
 </div>
+<div class="title"><span class="small">The data collected for this use case is structured data in a tabular form (e.g., in an excel sheet). One data point / sample / observation is always in one row of this table.</span></div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/02_data/toy_data6.png" alt="image" width="740">
 </div>
+<div class="title"><span class="small">The columns of the table contain the different measurements / variables that were collected for each sample. Here we distinguish between <em>features</em> (in this case the production conditions) and <em>labels</em> (whether the product produced under these conditions was okay or scrap). Features, also denoted as a matrix \(X\), are typically those measurements that we get basically for free, as they are often collected during the process for other purposes anyways (e.g., when the operator of the machine sets the temperature for the production to a certain value, this is recorded as the signal is passed along to the heating unit). The corresponding labels, denoted as a vector \(\mathbf{y}\), are often more expensive to collect. (For example, in the production process, it might be necessary to run some experiments with extreme production conditions to verify that they result in broken products, which could be quite expensive (depending on the effort required to produce a single part). Another example would be when Google paid a team of specialist doctors to discuss and re-label some of the diabetic retinopathy images about which there existed conflicting opinions.) In the supervised learning setup, the features are used as the input to the model, while the labels constitute the target variable, i.e., the predicted output. Generally, features should be independent variables (e.g., settings that the operator can choose as he wishes), while the target value should be dependent on these inputs.</span></div>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -711,34 +713,35 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <dl>
 <dt class="hdlist1">Raw Data</dt>
 <dd>
-<p>sensor measurements, pixel values, text (e.g. HTML page), SAP database, &#8230;&#8203;<br>
+<p>can come in many different forms, e.g., sensor measurements, pixel values, text (e.g., HTML page), SAP database, &#8230;&#8203;<br>
 &#8594; <em>n</em> data points, stored as rows in an excel sheet, as individual files, etc.</p>
 </dd>
 <dt class="hdlist1">Preprocessing</dt>
 <dd>
+<p>transforming and enriching the raw data before applying ML, for example:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>feature extraction: transform into numerical values (e.g. text)</p>
+<p>feature extraction: transform into numerical values (e.g., unstructured data like text)</p>
 </li>
 <li>
-<p>remove / correct missing or wrongly entered data</p>
+<p>remove / correct missing or wrongly entered data (e.g., when someone misplaced the decimal point)</p>
 </li>
 <li>
-<p>exclude zero variance features and nonsensical variables (e.g. IDs)</p>
+<p>exclude zero variance features (i.e., variables with always the same value) and nonsensical variables (e.g., IDs)</p>
 </li>
 <li>
-<p>feature engineering: compute additional/better features</p>
+<p>feature engineering: compute additional/better features from the original variables</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>&#8594; feature matrix \(X \in \mathbb{R}^{n\times d}\): <em>n</em> data points; each represented as a <em>d</em>-dimensional vector</p>
+<p>&#8658; <strong><em>feature matrix</em></strong> \(X \in \mathbb{R}^{n\times d}\): <em>n</em> data points; each represented as a <em>d</em>-dimensional vector (i.e., with <em>d</em> features)</p>
 </div>
 </dd>
 <dt class="hdlist1">Prediction Targets?</dt>
 <dd>
-<p>&#8594; label vector \(\mathbf{y}\) : <em>n</em>-dimensional vector</p>
+<p>&#8594; <strong><em>label vector</em></strong> \(\mathbf{y}\) : <em>n</em>-dimensional vector with one target value per data point</p>
 </dd>
 </dl>
 </div>

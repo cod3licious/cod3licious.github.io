@@ -734,8 +734,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 0.1,</span>
-<span id="revdate">2021-06-19</span>
+<span id="revnumber">version 1.0,</span>
+<span id="revdate">2021-08-20</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -778,13 +778,16 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="ulist">
 <ul>
 <li>
-<p>Euclidean distance</p>
+<p><a href="https://en.wikipedia.org/wiki/Euclidean_distance">Euclidean distance</a></p>
 </li>
 <li>
-<p>Cosine similarity</p>
+<p><a href="https://en.wikipedia.org/wiki/Cosine_similarity">Cosine similarity</a> (e.g., when working with text data)</p>
 </li>
 <li>
-<p>Similarity coefficients (e.g. Jaccard)</p>
+<p>Similarity coefficients (e.g., <a href="https://en.wikipedia.org/wiki/Jaccard_index">Jaccard index</a>)</p>
+</li>
+<li>
+<p>&#8230;&#8203; and many more</p>
 </li>
 </ul>
 </div>
@@ -800,23 +803,20 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-Which feature should have how much influence on the similarity between points?
+Which feature should have how much influence on the similarity between points? &#8594; Domain knowledge!
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>&#8594; Domain knowledge!</p>
-</div>
 <div class="openblock">
 <div class="content">
-<div class="ulist">
-<ul>
+<div class="ulist none">
+<ul class="none">
 <li>
-<p>scale / normalize heterogeneous data</p>
+<p>&#8658; scale / normalize heterogeneous data (e.g., a pressure difference between 1.1 and 1.8 bar might be more dramatic in the process than a temperature difference between 200 and 250 degrees, but if you compute the distance using the unscaled values, the difference in temperature would completely overshadow the difference in pressure)</p>
 </li>
 <li>
-<p>exclude redundant / strongly correlated features</p>
+<p>&#8658; exclude redundant / strongly correlated features (otherwise they count twice towards the distance)</p>
 </li>
 </ul>
 </div>
@@ -826,11 +826,14 @@ Which feature should have how much influence on the similarity between points?
 <dl>
 <dt class="hdlist1">Example: Computing similarities between texts (represented as TF-IDF vectors) with the <em>cosine similarity</em></dt>
 <dd>
-<p>scalar product (<code>linear_kernel</code>) of length normalized TF-IDF vectors:</p>
+<p>scalar product (&#8594; <code>linear_kernel</code>) of length normalized TF-IDF vectors:</p>
 <div class="stemblock">
 <div class="content">
 \[sim(\mathbf{x}_i, \mathbf{x}_j) = \frac{\mathbf{x}_i^\top \mathbf{x}_j}{\|\mathbf{x}_i\| \|\mathbf{x}_j\|} \quad \in [-1, 1]\]
 </div>
+</div>
+<div class="paragraph">
+<p>i.e., the cosine of the angle between the length-normalized vectors:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -838,7 +841,7 @@ Which feature should have how much influence on the similarity between points?
 </div>
 </div>
 <div class="paragraph">
-<p>&#8594; similarity score between [0, 1] for TF-IDF vectors since all entries are positive</p>
+<p>&#8594; similarity score is between [0, 1] for TF-IDF vectors, since all entries in the vectors are positive</p>
 </div>
 </dd>
 </dl>

@@ -734,8 +734,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 0.1,</span>
-<span id="revdate">2021-06-19</span>
+<span id="revnumber">version 1.0,</span>
+<span id="revdate">2021-08-20</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -768,7 +768,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </li>
 <li><a href="_sl_ensemble_methods.html">SL: Ensemble Methods</a>
 </li>
-<li><a href="_sl_k_nearest_neighbors_knn.html">SL: k-nearest neighbors (kNN)</a>
+<li><a href="_sl_k_nearest_neighbors_knn.html">SL: k-Nearest Neighbors (kNN)</a>
 </li>
 <li><a href="_sl_kernel_methods.html">SL: Kernel Methods</a>
 </li>
@@ -794,15 +794,28 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div id="content">
 <div class="sect2">
 <h3 id="_sl_linear_models">SL: Linear Models</h3>
+<div class="openblock float-group">
+<div class="content">
+<div class="paragraph">
+<p><span class="image left"><img src="../images/04_supervised_intro/comparison_linear.png" alt="image" width="180"></span></p>
+</div>
+<div class="paragraph">
+<p>The first type of model that we&#8217;ll look at in more detail are linear models, which are a type of features-based model that are very efficient (i.e., can be used with large datasets), but, as the name suggests, are only capable of describing linear relationships between the input and target variables.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Linear models can be used for regression problems (&#8594; the typical linear regression model that you might have already heard of) as well as for classification problems (&#8594; logistic regression, which predicts a probability score between 0 and 1):</p>
+</div>
 <div class="paragraph text-center">
 <p><span class="image"><img src="../images/05_supervised_other/linreg.png" alt="image" width="340"></span>
 <span class="image"><img src="../images/05_supervised_other/logreg.png" alt="image" width="340"></span></p>
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Linear Models</dt>
+<dt class="hdlist1">Main idea</dt>
 <dd>
-<p>Prediction is a linear combination of input features (and intercept \(b\)):</p>
+<p>Prediction is a linear combination of the input features (and intercept \(b\)):</p>
 </dd>
 </dl>
 </div>
@@ -818,10 +831,10 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </div>
 <div class="paragraph">
 <p><strong>Linear Regression</strong>:<br>
-find \(\mathbf{w}\) that minimizes \(\| \mathbf{y} - \mathbf{\hat y}\|_2^2\)</p>
+find \(\mathbf{w}\) that minimizes MSE \(\| \mathbf{y} - \mathbf{\hat y}\|_2^2\) with \(\hat y\) computed as described above</p>
 </div>
 <div class="paragraph">
-<p><strong>Logistic Regression</strong> (&#8594; classification!):<br>
+<p><strong>Logistic Regression</strong> (&#8594; for classification problems!):<br>
 make predictions as</p>
 </div>
 <div class="stemblock">
@@ -829,18 +842,47 @@ make predictions as</p>
 \[\sigma\left(b + \langle\mathbf{w}, \mathbf{x}\rangle\right) = \hat y\quad\quad \text{with: } \sigma(z) = \frac{1}{1+e^{-z}} \quad \Rightarrow\; \hat y  \in [0, 1]\]
 </div>
 </div>
+<div class="paragraph">
+<p>where \(\sigma(z)\) is the so-called sigmoid (or logistic) function that squeezes the output of the linear model within the interval \([0, 1\)] (i.e., the S-curve you&#8217;ve seen in the plot at the beginning).</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Pros</dt>
+<dd>
 <div class="ulist">
 <ul>
 <li>
 <p>linear models are good for small datasets</p>
 </li>
 <li>
-<p>regularization (to keep \(\mathbf{w}\) in check) is often a good idea</p>
-</li>
-<li>
-<p>extensions for non-linear case (feature engineering (e.g. interaction terms), splines, etc.)</p>
+<p>extensions for non-linear problems exist (&#8594; feature engineering (e.g., including interaction terms), GAMs, etc.)</p>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+When a statistician tells you that he did a &#8220;polynomial regression&#8221; what he really means is that he did some feature engineering to include new variables like \(x_5^2\) and \(x_2^3x_7\) and then fitted a linear regression model on this extended set of features. I.e., the model is still linear in the parameters (i.e., the prediction is still a linear combination of the inputs), but some of the inputs are now polynomial terms of the original features.
+</td>
+</tr>
+</table>
+</div>
 </li>
 </ul>
+</div>
+</dd>
+<dt class="hdlist1">Careful</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>regularization (to keep \(\mathbf{w}\) in check) is often a good idea</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
 </div>
 <div class="sect3">
 <h4 id="_regularization">Regularization</h4>
@@ -864,26 +906,51 @@ make predictions as</p>
 </div>
 </div>
 <div class="paragraph">
-<p><strong><em>L1</em> Regularization</strong> (&#8594; Lasso Regression): sparse weights<br>
+<p>This means the optimal solution now not only achieves a low MSE between the true and predicted values (i.e., the normal linear regression error), but additionally does so with the smallest possible weights. (The regularization therefore also defines a unique solution in the face of collinearity.)</p>
+</div>
+<div class="paragraph">
+<p><strong><em>L1</em> Regularization</strong> (&#8594; Lasso Regression): sparse weights (i.e., many 0, others normal)<br>
  &#8594; good for data with possibly irrelevant features</p>
 </div>
 <div class="paragraph">
 <p><strong><em>L2</em> Regularization</strong> (&#8594; Ridge Regression): small weights<br>
- &#8594; computationally beneficial; can help for data with outliers<br></p>
+ &#8594; computationally beneficial; can help for data with outliers</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Often when you&#8217;re working with a new dataset, it might include lots of variables, many of which might not be relevant for the prediction problem. In this case, an <em>L1</em>-regularized model can be helpful to sort out irrelevant features. Then, when you are sure which input variables are relevant for the prediction problem, an <em>L2</em>-regularized model can give you a robust performance.
+</td>
+</tr>
+</table>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.linear_model</span> <span class="keyword">import</span> <span class="include">RidgeCV</span>, <span class="include">LassoLarsCV</span></code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Regularization parameters in <code>sklearn</code> (depending on the model): \(\lambda\) = <code>alpha</code> or <code>C</code>:<br>
-<code>alpha</code>: higher values &#8594; more regularization<br>
-<code>C</code>: higher values &#8594; <em>less</em> regularization</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Regularization is also used in many other <code>sklearn</code> models. Depending on the type of model (for historical reasons), what we denoted as \(\lambda\) in the formula above is a hyperparameter that is either called <code>alpha</code> or <code>C</code>, where you have to be careful, because while for <code>alpha</code> higher values mean more regularization (i.e., this acts exactly as the \(\lambda\) in the formula above), when the model instead has the hyperparameter <code>C</code>, here higher values mean <em>less</em> regularization!
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_generalized_additive_models_gams">Generalized Additive Models (GAMs)</h4>
+<div class="paragraph">
+<p>GAMs are a very powerful generalization of linear models. While in a linear regression, the target variable is modeled as a sum of linear functions of the input variables (parametrized by the respective coefficients), GAMs instead fit a smooth function \(f_k(x_k)\) to each input variable and then predict the target variable as a sum of these:</p>
+</div>
 <div class="stemblock">
 <div class="content">
 \[\hat{y} = b + \sum_{k=1}^d \; w_k \cdot x_k \quad\quad \Rightarrow \quad\quad \hat{y} = b + \sum_{k=1}^d \; f_k(x_k)\]

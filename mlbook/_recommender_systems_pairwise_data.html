@@ -645,8 +645,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 0.1,</span>
-<span id="revdate">2021-06-19</span>
+<span id="revnumber">version 1.0,</span>
+<span id="revdate">2021-08-20</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -673,7 +673,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </li>
 <li><a href="_sl_ensemble_methods.html">SL: Ensemble Methods</a>
 </li>
-<li><a href="_sl_k_nearest_neighbors_knn.html">SL: k-nearest neighbors (kNN)</a>
+<li><a href="_sl_k_nearest_neighbors_knn.html">SL: k-Nearest Neighbors (kNN)</a>
 </li>
 <li><a href="_sl_kernel_methods.html">SL: Kernel Methods</a>
 </li>
@@ -699,6 +699,14 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div id="content">
 <div class="sect2">
 <h3 id="_recommender_systems_pairwise_data">Recommender Systems (Pairwise Data)</h3>
+<div class="paragraph">
+<p>Recommender systems can be found on many websites to promote products, content, or ads that a specific user might be interested in (e.g., on Amazon, Netflix, Facebook, YouTube, etc.). They don&#8217;t fully adhere to the classical supervised learning schema, because here we&#8217;re not really dealing with single data points, but instead with pairwise data, i.e., we have samples from two groups (e.g., users and movies), where each combination of samples (e.g., each (user, movie)-tuple) is assigned a label (e.g., the rating the user gave to the movie). Typically, the training set contains only very few labels (e.g., since there are many users and many movies, but every user has only rated a handful of movies) and the task is to predict all the missing labels, based on which then, for example, a user would be recommended the movie with the highest predicted rating.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><span class="underline">Recommender Systems Overview:</span></p>
+</div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Pairwise data</dt>
@@ -728,33 +736,44 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="paragraph">
 <p><strong>Task:</strong> fill in the missing values</p>
 </div>
+</div>
+</div>
 <div class="paragraph">
-<p>&#8594; One possible Python library: <a href="http://surpriselib.com/" class="bare">http://surpriselib.com/</a></p>
+<p>There are lots of different approaches for how to accomplish this, and we&#8217;ll only look at two here, the very traditional method of collaborative filtering, and a more modern approach relying on neural networks that falls under the category of triplet learning.</p>
+</div>
+<div class="paragraph">
+<p>&#8594; One possible Python library: <a href="http://surpriselib.com/"><code>surprise</code></a></p>
 </div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Collaborative Filtering</dt>
 <dd>
-<p>Compute singular value decomposition (SVD: <code>scipy.sparse.linalg.svds</code>) of matrix to approximate missing values:</p>
+<p>Using a <a href="https://en.wikipedia.org/wiki/Singular_value_decomposition">singular value decomposition</a> (SVD; basically the big sister of the eigendecomposition, e.g., from <code>scipy.sparse.linalg.svds</code>), the matrix with the known interactions can be decomposed into two smaller matrices of shapes (number of movies \(\times\) <em>d</em>) and (<em>d</em> \(\times\) number of users) and by multiplying these matrices together, the missing values from the original matrix can be approximated:</p>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/07_recsys/rec_sys_svd3.png" alt="image" width="600">
 </div>
-</div>
-<div class="paragraph">
-<p>&#8594; <em>d</em>-dimensional latent variable representations of movies and users</p>
+<div class="title"><span class="small">The two matrices we obtain from the SVD contain <em>d</em>-dimensional latent variable representations of movies and users respectively, where <em>d</em> denotes the number of eigenvectors we decided to keep (corresponding to the <em>d</em> largest eigenvalues of the original matrix). You can think of these as feature vectors, where, for example, one of the <em>d</em> dimensions in the vector representing a movie might correspond to how much this movie could be considered a horror movie, while the same dimension in a user vector would indicate how much this user likes horror movies. If both entries for some dimension in the vectors point in the same direction (e.g., the movie is a horror movie and the user likes horror movies), then the product of the two entries will contribute positively to the overall scalar product of the vectors and therefore the approximated rating. (However, please note that just like with the new feature dimensions we got from PCA, it is very difficult to determine exactly what is actually encoded in each dimension.)</span></div>
 </div>
 </dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>One big problem with this approach is that we always need some initial ratings for each user and movie, otherwise we can&#8217;t generate any useful personalized recommendations. This is also referred to as the &#8220;cold start problem&#8221;, which can be addressed with the next method.</p>
+</div>
+<div class="dlist">
+<dl>
 <dt class="hdlist1">Triplet Learning</dt>
 <dd>
-<p>Given feature vectors for users and movies (possibly just one-hot encoding), directly predict interaction value:</p>
+<p>In triplet learning, we don&#8217;t directly work with the matrix of known interactions, but instead the training dataset consists of triplets (e.g., (user <em>i</em>, movie <em>j</em>, 4 stars), which can also be a more memory-friendly representation). Additionally, we assume that we have feature vectors available for the users and movies (e.g., the users might have filled out a short survey when they set up an account and for the movies we know the genres, directors, and plot keywords; if all fails, this could also just be a one-hot encoding). Given the two feature vectors of a user and a movie, we then try to predict interaction value directly:</p>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/07_recsys/rec_sys_triplet2.png" alt="image" width="700">
 </div>
+<div class="title"><span class="small">These are two possible neural network architectures for predicting the rating a user might give to a movie. The architecture on the left first processes the user and movie feature vectors individually (in case they require a certain type of network to be understood, e.g., the movie plot description or the movie poster), and then the representations are concatenated into a single vector, which is then passed to a FFNN to predict the rating. A different approach is shown on the right, where instead the two original feature representations for users and movies are projected into the same vector space, where then the cosine similarity of these two vectors is computed to predict the interaction between them (similar as with the <em>d</em>-dimensional latent variable representations in the collaborative filtering approach).</span></div>
 </div>
 <div class="paragraph">
-<p>&#8594; especially useful to solve &#8220;cold start problem&#8221; (e.g. make predictions for new users)</p>
+<p>&#8594; Given the feature vector of a new user, that has not rated any movies yet, we are now able to generate useful predictions.</p>
 </div>
 </dd>
 </dl>

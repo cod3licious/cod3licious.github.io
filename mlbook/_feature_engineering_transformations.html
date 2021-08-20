@@ -734,8 +734,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 0.1,</span>
-<span id="revdate">2021-06-19</span>
+<span id="revnumber">version 1.0,</span>
+<span id="revdate">2021-08-20</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -772,44 +772,58 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div id="content">
 <div class="sect2">
 <h3 id="_feature_engineering_transformations">Feature Engineering &amp; Transformations</h3>
+<div class="paragraph">
+<p>Often it is very helpful to not just use your original features as is, but to compute new, more informative features from them (what is also called feature engineering). Additionally, you should also check the distributions of the individual variables (e.g., by plotting a histogram) to see if the features are approximately <a href="https://en.wikipedia.org/wiki/Normal_distribution">normally distributed</a> (which is an assumption of most ML models).</p>
+</div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Generate additional features</dt>
+<dt class="hdlist1">Generate additional features (i.e., feature engineering)</dt>
 <dd>
 <div class="ulist">
 <ul>
 <li>
-<p>In general: e.g. product/ratio of 2 variables<br>
-&#8594; <a href="https://github.com/cod3licious/autofeat"><code>autofeat</code> library</a></p>
+<p>In general: e.g., product/ratio of 2 variables (e.g., compute a new feature that contains the ratio of the temperature inside your machine to the temperature outside in the room)<br>
+&#8594; <a href="https://github.com/cod3licious/autofeat"><code>autofeat</code> library</a> <span class="small">(<em>Disclaimer:</em> written by yours truly.)</span></p>
 </li>
 <li>
-<p>Relational data: e.g. aggregations across tables<br>
+<p>Relational data: e.g., aggregations across tables (for example, in a database you might have one table that contains all your customers and another table that contains all transactions and you want to compute a feature that shows the total volume of sales for each customer, i.e., the sum of the transactions grouped by customers)<br>
 &#8594; <a href="https://www.featuretools.com/"><code>featuretools</code> library</a></p>
 </li>
 <li>
-<p>Time series data: e.g. min/max/average over time intervals<br>
+<p>Time series data: e.g., min/max/average over time intervals<br>
 &#8594; <a href="https://tsfresh.readthedocs.io/en/latest/"><code>tsfresh</code> library</a></p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>&#8658; Domain knowledge is invaluable here&#8201;&#8212;&#8201;instead of blindly computing hundreds of additional features, ask a domain expert which derived values she thinks might be the most helpful for the problem you&#8217;re trying to solve!</p>
+</div>
 </dd>
 <dt class="hdlist1">Aim for normally/uniformly distributed features</dt>
 <dd>
-<p>especially important for heterogeneous data (e.g. different kinds of sensors with different scales)</p>
+<p>especially important for heterogeneous data (e.g., different kinds of sensors with different scales, like a temperature between 100 and 500 degrees and a pressure sensor that measures values between 1.1 and 1.8 bar &#8594; the ML model only sees the values and does not know about the different units)</p>
 <div class="openblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>subtract mean &amp; divide by standard deviation or scale between 0 and 1</p>
+<p>for each feature: subtract mean &amp; divide by standard deviation (i.e., transform arbitrary Gaussian distribution into a normal distribution)</p>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.preprocessing</span> <span class="keyword">import</span> <span class="include">StandardScaler</span>, <span class="include">MinMaxScaler</span></code></pre>
+<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.preprocessing</span> <span class="keyword">import</span> <span class="include">StandardScaler</span></code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>map to Gaussian distribution (e.g. take log/sqrt if extreme values)</p>
+<p>for each feature: scale between 0 and 1</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.preprocessing</span> <span class="keyword">import</span> <span class="include">MinMaxScaler</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>map to Gaussian distribution (e.g., take log/sqrt if the feature shows a skewed distribution with a few extremely large values)</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.preprocessing</span> <span class="keyword">import</span> <span class="include">PowerTransformer</span></code></pre>
@@ -829,10 +843,10 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <p><strong>Not using (approximately) normally distributed data is a very common mistake!</strong></p>
 </div>
 <div class="paragraph text-center">
-<p><span class="image"><img src="../images/02_data/tsne_original.png" alt="image" width="300"></span>
-<span class="image"><img src="../images/02_data/tsne_standardized.png" alt="image" width="300"></span>
-<span class="image"><img src="../images/02_data/tsne_powertrans.png" alt="image" width="300"></span><br>
-2D visualization created with t-SNE (&#8594; see section on dimensionality reduction) of the same dataset (with data points belonging to two classes), once on the original feature vectors, on standardized data, and after applying a power transformation.</p>
+<p><span class="image"><img src="../images/02_data/tsne_original.png" alt="image" width="270"></span>
+<span class="image"><img src="../images/02_data/tsne_standardized.png" alt="image" width="270"></span>
+<span class="image"><img src="../images/02_data/tsne_powertrans.png" alt="image" width="270"></span><br>
+<span class="small">2D visualization created with t-SNE (&#8594; see section on dimensionality reduction) of the same dataset (each dot is one data point where the color denotes the point&#8217;s class), first using the original feature vectors, then on standardized data, and lastly after applying a power transformation.</span></p>
 </div>
 </div>
 </div>

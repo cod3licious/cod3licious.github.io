@@ -734,8 +734,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 0.1,</span>
-<span id="revdate">2021-06-19</span>
+<span id="revnumber">version 1.0,</span>
+<span id="revdate">2021-08-20</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -761,6 +761,9 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="sect1">
 <h2 id="_ml_with_python">ML with Python</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>The <a href="https://github.com/cod3licious/ml_exercises">exercises</a> accompanying this book are using the programming language Python.</p>
+</div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Why Python?</dt>
@@ -768,13 +771,13 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="ulist">
 <ul>
 <li>
-<p>free &amp; open source</p>
+<p>free &amp; open source (unlike, e.g., MatLab)</p>
 </li>
 <li>
 <p>easy; fast prototyping</p>
 </li>
 <li>
-<p>general purpose language: easy to incorporate ML into regular applications or web apps</p>
+<p>general purpose language (unlike, e.g., R): easy to incorporate ML into regular applications or web apps</p>
 </li>
 <li>
 <p>fast: many numerical operations are backed with C libraries</p>
@@ -790,13 +793,13 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="ulist">
 <ul>
 <li>
-<p>regular scripts (<code>.py</code>), especially for function definitions</p>
+<p>regular scripts (i.e., normal text files ending in <code>.py</code>), especially useful for function definitions that you might reuse in different projects</p>
 </li>
 <li>
 <p>iPython shell: interactive console to execute code</p>
 </li>
 <li>
-<p>Jupyter Notebooks (<code>.ipynb</code>): great for experimenting &amp; sharing work with others</p>
+<p>Jupyter Notebooks (i.e., special files ending in <code>.ipynb</code>): great for experimenting &amp; sharing work with others (also works with other programming languages: Jupyter stands for Julia, Python, and R; you can even mix languages in the same notebook)</p>
 </li>
 </ul>
 </div>
@@ -804,16 +807,28 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </dl>
 </div>
 <div class="paragraph">
-<p>If you&#8217;re unfamiliar with Python, have a look at <a href="https://github.com/cod3licious/python_tutorial"><strong>this Python tutorial</strong></a> specifically written to teach you the basics needed for the examples and <a href="https://github.com/cod3licious/ml_exercises">exercises</a> in this book. This <a href="https://github.com/cod3licious/ml_exercises/blob/main/cheatsheet.pdf">cheat sheet</a> additionally provides a summary of the most important steps when developing a machine learning solution, incl. code snippets using the libraries mentioned below.</p>
+<p>If you&#8217;re unfamiliar with Python, have a look at <a href="https://github.com/cod3licious/python_tutorial"><strong>this Python tutorial</strong></a> specifically written to teach you the basics needed for the examples in this book. This <a href="https://github.com/cod3licious/ml_exercises/blob/main/cheatsheet.pdf">cheat sheet</a> additionally provides a summary of the most important steps when developing a machine learning solution, incl. code snippets using the libraries mentioned below.</p>
 </div>
 <div class="paragraph lead">
 <p><strong>Overview of Python Libraries for ML</strong></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The libraries are always imported with specific abbreviations (e.g., <code>np</code> or <code>pd</code>). It is highly recommended that you stick to these conventions and you will also see this in many code examples online (e.g., on StackOverflow).
+</td>
+</tr>
+</table>
 </div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1"><a href="https://numpy.org/"><code><strong>numpy</strong></code></a> (&amp; <a href="https://www.scipy.org/"><code><strong>scipy</strong></code></a>)</dt>
 <dd>
-<p>everything with matrices (<code>np.array([1,2])</code>), incl. random numbers, linear algebra, basic statistics, and optimization</p>
+<p>everything needed for scientific computing, incl. random numbers, linear algebra, basic statistics, and optimization. The main data structure to represent vectors and matrices is the numpy array (e.g., <code>np.array([1,2])</code>).</p>
 </dd>
 </dl>
 </div>
@@ -826,7 +841,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <dl>
 <dt class="hdlist1"><a href="https://pandas.pydata.org/"><code><strong>pandas</strong></code></a></dt>
 <dd>
-<p>higher level data manipulation with <code>DataFrame</code> similar to R: loading data, cleaning, and some exploration</p>
+<p>higher level data manipulation with data stored in a <code>DataFrame</code> table similar to R; very useful for loading data, cleaning, and some exploration with different plots</p>
 </dd>
 </dl>
 </div>
@@ -839,7 +854,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <dl>
 <dt class="hdlist1"><a href="https://matplotlib.org/"><code><strong>matplotlib</strong></code></a></dt>
 <dd>
-<p>create plots (e.g. <code>plt.plot()</code>, <code>plt.scatter()</code>, <code>plt.imshow()</code>)</p>
+<p>create plots (e.g., <code>plt.plot()</code>, <code>plt.scatter()</code>, <code>plt.imshow()</code>)</p>
 </dd>
 </dl>
 </div>
@@ -852,7 +867,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <dl>
 <dt class="hdlist1"><a href="https://plotly.com/"><code><strong>plotly</strong></code></a></dt>
 <dd>
-<p>create interactive plots (e.g. <code>px.parallel_coordinates()</code>)</p>
+<p>create interactive plots (e.g., <code>px.parallel_coordinates()</code>)</p>
 </dd>
 </dl>
 </div>
@@ -865,25 +880,28 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <dl>
 <dt class="hdlist1"><a href="https://scikit-learn.org/stable/"><code><strong>scikit-learn</strong></code></a></dt>
 <dd>
-<p>machine learning algorithms, preprocessing tools, and evaluation functions</p>
+<p>includes a lot of (non-deep learning) machine learning algorithms, preprocessing tools, and evaluation functions with a <em>unified interface</em>, i.e., all models (depending on their type) will have these <code>.fit()</code>, <code>.transform()</code>, and/or <code>.predict()</code> methods, which makes it very easy to switch out models in the code by just changing the line where the model was initialized</p>
 </dd>
 </dl>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="python">  <span class="keyword">from</span> <span class="include">sklearn.xxx</span> <span class="keyword">import</span> <span class="include">Model</span>
+<pre class="CodeRay highlight"><code data-lang="python">  <span class="comment"># import the model class from the specific submodule</span>
+  <span class="keyword">from</span> <span class="include">sklearn.xxx</span> <span class="keyword">import</span> <span class="include">Model</span>
   <span class="keyword">from</span> <span class="include">sklearn.metrics</span> <span class="keyword">import</span> <span class="include">accuracy_score</span>
 
+  <span class="comment"># initialize the model (usually you also set some parameters here)</span>
   model = Model()
 
-  <span class="comment"># preprocessing/unsupervised</span>
-  model.fit(X)
-  X_transformed = model.transform(X)
+  <span class="comment"># preprocessing/unsupervised learning methods:</span>
+  model.fit(X)  <span class="comment"># only pass feature matrix X</span>
+  X_transformed = model.transform(X)  <span class="comment"># e.g., the StandardScaler would return a scaled feature matrix</span>
 
-  <span class="comment"># supervised</span>
-  model.fit(X, y)
-  y_pred = model.predict(X_test)
-  print(<span class="string"><span class="delimiter">&quot;</span><span class="content">The model is this good:</span><span class="delimiter">&quot;</span></span>, model.score(X_test, y_test))
+  <span class="comment"># supervised learning methods:</span>
+  model.fit(X, y)  <span class="comment"># pass features and labels for training</span>
+  y_pred = model.predict(X_test)  <span class="comment"># generate predictions for new points</span>
+  <span class="comment"># evaluate the model (the internal score function uses the model's prefered evaluation metric)</span>
+  print(<span class="string"><span class="delimiter">&quot;</span><span class="content">The model is this good:</span><span class="delimiter">&quot;</span></span>, model.score(X_test, y_test))  <span class="comment"># .score() internally calls .predict()</span>
   print(<span class="string"><span class="delimiter">&quot;</span><span class="content">Equivalently:</span><span class="delimiter">&quot;</span></span>, accuracy_score(y_test, y_pred))</code></pre>
 </div>
 </div>

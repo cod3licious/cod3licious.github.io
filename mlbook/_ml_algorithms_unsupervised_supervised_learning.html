@@ -645,8 +645,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 0.1,</span>
-<span id="revdate">2021-06-19</span>
+<span id="revnumber">version 1.0,</span>
+<span id="revdate">2021-08-20</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -673,7 +673,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </li>
 <li><a href="_sl_ensemble_methods.html">SL: Ensemble Methods</a>
 </li>
-<li><a href="_sl_k_nearest_neighbors_knn.html">SL: k-nearest neighbors (kNN)</a>
+<li><a href="_sl_k_nearest_neighbors_knn.html">SL: k-Nearest Neighbors (kNN)</a>
 </li>
 <li><a href="_sl_kernel_methods.html">SL: Kernel Methods</a>
 </li>
@@ -701,7 +701,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <h2 id="_ml_algorithms_unsupervised_supervised_learning">ML Algorithms: Unsupervised &amp; Supervised Learning</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Machine Learning Models &amp; Algorithms</p>
+<p>Let&#8217;s assume that we have a wonderful dataset and can now start with the fun ML part:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -709,23 +709,27 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 </div>
 <div class="paragraph">
-<p>Unsupervised &amp; Supervised Learning</p>
+<p>For now we&#8217;ll focus on unsupervised &amp; supervised learning algorithms:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/01b_intro_ml/ml_goals_first.png" alt="image" width="740">
 </div>
 </div>
+<div class="paragraph">
+<p>By thinking about the goal you want to achieve, you can select the appropriate type of algorithm for you problem:</p>
+</div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/01c_ml_overview/ml_algorithms_12.png" alt="image" width="840">
 </div>
+<div class="title"><span class="small">When you want to apply unsupervised learning algorithms, having a feature matrix \(X\) is enough, while to learn a prediction model with supervised learning algorithms, you also need the corresponding labels \(\mathbf{y}\). Even if your ultimate goal is to predict something (i.e., do supervised learning), it can still be very helpful to first use unsupervised learning to get a better understanding of your dataset, for example, by visualizing your data with dimensionality reduction methods to see all samples and their diversity at a glance, by identifying outliers to clean the dataset, or, if you have a classification problem, by first clustering the samples to check if the given class labels match the naturally occurring groups in the data (e.g., maybe it might be helpful to combine two very similar classes to simplify the problem).</span></div>
 </div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Same dataset, different use cases</dt>
-</dl>
-</div>
+<dd>
+<p>As we said in the introduction, the input data can come in various forms, but the goal of your analysis defines which algorithm you should use. To illustrate this, we show what the output of the 5 different types of unsupervised and supervised algorithms could look like for this example dataset:</p>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -813,9 +817,15 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </tr>
 </tbody>
 </table>
+</dd>
+</dl>
+</div>
+<div class="paragraph text-center">
+<p><span class="small">This is a small toy example dataset with structured data about different apartments, which someone might have gathered from a real estate website, i.e., the size of the apartment in square meters, the number of bedrooms, the number of bathrooms, the year it was last renovated, and finally the price of the listing as well as whether it was sold for this price (1) or not (0).</span></p>
+</div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Example: Dimensionality Reduction</dt>
+<dt class="hdlist1">Example Unsupervised Learning: Dimensionality Reduction</dt>
 <dd>
 <p><strong>Goal:</strong> Visualize the dataset</p>
 </dd>
@@ -825,10 +835,11 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="content">
 <img src="../images/01b_housing_example/dimred.png" alt="image" width="840">
 </div>
+<div class="title"><span class="small">The first step when working with a new dataset is usually to visualize it, to get a better overview of all the samples and their diversity. This can be done with a dimensionality reduction algorithm, which takes the original high dimensional data as input (i.e., where each column in the table would be one dimension) and outputs a lower dimensional representation of the samples, i.e., a new matrix with fewer columns (generally 2 for a visualization). These two new features, in our case here called \(z_1\) and \(z_2\), can now be used to create a scatter plot of the dataset (i.e., where each sample / row (in this case each apartment) is represented as one point using this new 2D coordinate system). You can think of this plot as a map of your dataset, that enables you to view all data points at a glance and where you can often see interesting patterns, for example, groups of similar points, which would be arranged close to each other in this 2D map. Please note that for most dimensionality reduction methods, it is not possible to describe what is behind this new coordinate system, specifically, these are not just the two most informative original features, but really completely new dimensions that summarize the information of the original inputs. To better interpret these plots, it is often helpful to color the dots afterwards by some variable, which can then reveal the driving factors behind the most salient patterns in the dataset (e.g., in this example we could have used the price of each apartment to color the respective dot in the map, which might then reveal that similarly priced apartments are arranged next to each other).</span></div>
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Example: Anomaly Detection</dt>
+<dt class="hdlist1">Example Unsupervised Learning: Anomaly Detection</dt>
 <dd>
 <p><strong>Goal:</strong> Find outliers in the dataset</p>
 </dd>
@@ -838,10 +849,11 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="content">
 <img src="../images/01b_housing_example/anomaly.png" alt="image" width="840">
 </div>
+<div class="title"><span class="small">In the next step, you would usually check your dataset for outliers (to then subsequently correct or remove these samples). An outlier detection algorithm outputs for each sample an anomaly score, which indicates whether this data point deviates from the norm. You can also use these scores then to colorize the 2D map of your dataset you generated in the previous step to see the anomalies in context. One drawback is that an anomaly detection algorithm does not tell you <em>why</em> it considers an individual point an outlier, i.e., you as a data scientist then need to examine the points identified as outlier to see, e.g., if these should be removed due to flawed measurements or if they constitute some interesting edge cases. In this toy example, the sample identified as an anomaly is an apartment that supposedly has a size of only \(35 m^2\), but at the same time 5 bedrooms, i.e., here most likely the person that originally entered the data made a mistake and the size of the listing should actually be 135.</span></div>
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Example: Clustering</dt>
+<dt class="hdlist1">Example Unsupervised Learning: Clustering</dt>
 <dd>
 <p><strong>Goal:</strong> Find naturally occurring groups the dataset</p>
 </dd>
@@ -851,10 +863,11 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="content">
 <img src="../images/01b_housing_example/clustering.png" alt="image" width="840">
 </div>
+<div class="title"><span class="small">Additionally, you might also want to check if the dataset contains naturally occurring groups. This can be accomplished with a clustering algorithm, which returns a cluster index for each sample, where points with the same index are in the same cluster. Please note that these cluster indices are not ordered and when running the algorithm again, the samples might be assigned different numbers, however, the groups of samples that were assigned the same number should still be in a cluster together, i.e., this cluster might now just be called &#8216;5&#8217; instead of &#8216;3&#8217;. Again you can use these cluster indices to colorize the 2D map of your dataset that you got from applying a dimensionality reduction method to see the clusters in context. While a clustering algorithm groups similar points together, it again does not tell you <em>why</em> the points were assigned to a cluster and what this cluster means, i.e., again you as a data scientist now need to examine the results to try to describe the different clusters (e.g., in our toy example, the clusters might be &#8220;cheap studio apartments&#8221;, &#8220;large family apartments&#8221;, and &#8220;luxurious penthouses&#8221;).</span></div>
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Example: Classification</dt>
+<dt class="hdlist1">Example Supervised Learning: Classification</dt>
 <dd>
 <p><strong>Goal:</strong> Predict a discrete value for each data point</p>
 </dd>
@@ -864,10 +877,11 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="content">
 <img src="../images/01b_housing_example/classification.png" alt="image" width="840">
 </div>
+<div class="title"><span class="small">Next, you might decide that you want to predict whether an apartment will be sold for the listed price. Since the variable &#8220;sold&#8221; can only take on discrete values (i.e., yes (1) or no (0)), this is a classification problem. A classification model would then use the attributes of an apartment together with the listing&#8217;s price as an input and predict whether the apartment will be sold for this price. Since we also have the true labels available (at least for the initial dataset that we had collected), we can evaluate how well the model performed by computing how many wrong predictions it generated (this is the nice thing about supervised learning: we can always determine how good the solution is and benchmark different models against each other, while in unsupervised learning the data scientist needs to manually examine the results in detail to try to make sense of them).</span></div>
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Example: Regression</dt>
+<dt class="hdlist1">Example Supervised Learning: Regression</dt>
 <dd>
 <p><strong>Goal:</strong> Predict a continuous value for each data point</p>
 </dd>
@@ -877,6 +891,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="content">
 <img src="../images/01b_housing_example/regression.png" alt="image" width="760">
 </div>
+<div class="title"><span class="small">Finally, you might want to predict a reasonable price that should be used when listing an apartment. Since prices are continuous values, this would be a regression problem, where the model would use as input the attributes of the apartments and then predict a suitable price. Again, since for the collected data we have the true prices available at which the apartments were originally listed, we can compute how far off the regression model was with its estimates from the original price set by a real estate agent.</span></div>
 </div>
 <div class="ulist">
 <ul>
@@ -902,7 +917,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <p><a href="_sl_ensemble_methods.html">SL: Ensemble Methods</a></p>
 </li>
 <li>
-<p><a href="_sl_k_nearest_neighbors_knn.html">SL: k-nearest neighbors (kNN)</a></p>
+<p><a href="_sl_k_nearest_neighbors_knn.html">SL: k-Nearest Neighbors (kNN)</a></p>
 </li>
 <li>
 <p><a href="_sl_kernel_methods.html">SL: Kernel Methods</a></p>

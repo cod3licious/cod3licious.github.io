@@ -734,8 +734,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 0.1,</span>
-<span id="revdate">2021-06-19</span>
+<span id="revnumber">version 1.0,</span>
+<span id="revdate">2021-08-20</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -762,7 +762,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </li>
 <li><a href="_sl_ensemble_methods.html">SL: Ensemble Methods</a>
 </li>
-<li><a href="_sl_k_nearest_neighbors_knn.html">SL: k-nearest neighbors (kNN)</a>
+<li><a href="_sl_k_nearest_neighbors_knn.html">SL: k-Nearest Neighbors (kNN)</a>
 </li>
 <li><a href="_sl_kernel_methods.html"><span class="toc-current">SL: Kernel Methods</span></a>
 </li>
@@ -788,6 +788,16 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div id="content">
 <div class="sect2">
 <h3 id="_sl_kernel_methods">SL: Kernel Methods</h3>
+<div class="openblock float-group">
+<div class="content">
+<div class="paragraph">
+<p><span class="image left"><img src="../images/04_supervised_intro/comparison_kernel.png" alt="image" width="180"></span></p>
+</div>
+<div class="paragraph">
+<p>Kernel methods are more sophisticated similarity-based models and were the hot stuff in the late 90s, when datasets were still of moderate size and computers weren&#8217;t fast enough to train large neural networks. They have some elegant math behind them, but please don&#8217;t be discouraged, if you don&#8217;t fully understand it the first time you read it&#8201;&#8212;&#8201;this is completely normal 😉.</p>
+</div>
+</div>
+</div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Main idea / &#8220;Kernel Trick&#8221;</dt>
@@ -798,20 +808,21 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </div>
 <div class="paragraph">
 <p>Assume there exists some function \(\phi(\mathbf{x})\) (also called a &#8216;feature map&#8217;) with which the input data can be transformed in such a way that the problem can be solved with a linear method (basically the ideal outcome of feature engineering).<br>
-For example, in the simple example shown below, the two classes become linearly separable when projecting the original input features into the space of their second order monomials:</p>
+For example, in the simple toy dataset shown below, the two classes become linearly separable when projecting the original input features into the space of their second order monomials:</p>
 </div>
 <div class="paragraph text-center">
 <p><span class="image"><img src="../images/05_supervised_other/kernels_xspace.png" alt="image" width="340"></span> &#8594; \(\phi(\mathbf{x})\) &#8594;
-<span class="image"><img src="../images/05_supervised_other/kernels_zspace.png" alt="image" width="340"></span></p>
+<span class="image"><img src="../images/05_supervised_other/kernels_zspace.png" alt="image" width="340"></span><br>
+<span class="small">While in the original 2D representation on the left you would need a circle (i.e., a non-linear function) to separate the blue from the red points, in the 3D plot on the right, the data points are arranged in a cone shape, where you could cut off the red points at the tip of the cone with a hyperplane.</span></p>
 </div>
 <div class="paragraph">
-<p>Of course, coming up with such a feature map \(\phi(\mathbf{x})\), especially for more complex problems, isn&#8217;t exactly easy. But as it turns out, we don&#8217;t actually need to know what this function looks like!</p>
+<p>Of course, coming up with such a feature map \(\phi(\mathbf{x})\), especially for more complex problems, isn&#8217;t exactly easy. But as you will see, we don&#8217;t actually need to know what this transformation looks like!</p>
 </div>
 <div class="paragraph">
 <p><span class="underline"><strong>Example:</strong> (Kernel) Ridge Regression</span></p>
 </div>
 <div class="paragraph">
-<p>Remember: In a linear regression model, the prediction for a new data point \(\mathbf{x}'\) is computed as the scalar product of the features with the weight vector \(\mathbf{w}\):</p>
+<p>Remember: In a linear regression model, the prediction for a new data point \(\mathbf{x}'\) is computed as the scalar product of the feature vector with the weight vector \(\mathbf{w}\):</p>
 </div>
 <div class="stemblock">
 <div class="content">
@@ -830,7 +841,7 @@ For example, in the simple example shown below, the two classes become linearly 
 </div>
 </div>
 <div class="paragraph">
-<p>with respect to \(\mathbf{w}\), setting it to 0, and solving for \(\mathbf{w}\) (i.e. to find the optimum). This gives the following solution:</p>
+<p>with respect to \(\mathbf{w}\), setting it to 0, and solving for \(\mathbf{w}\) (i.e. to find the minimum). This gives the following solution:</p>
 </div>
 <div class="stemblock">
 <div class="content">
@@ -838,7 +849,10 @@ For example, in the simple example shown below, the two classes become linearly 
 </div>
 </div>
 <div class="paragraph">
-<p>Now replace every occurrence of the original input features \(\mathbf{x}\) in the formulas with the respective feature map \(\phi(\mathbf{x})\) and do some linear algebra:</p>
+<p>where \(\mathbf{X} \in \mathbb{R}^{n \times d}\) is the feature matrix of the training data and \(\mathbf{y} \in \mathbb{R}^n\) are the corresponding target values.</p>
+</div>
+<div class="paragraph">
+<p>Now we replace every occurrence of the original input features \(\mathbf{x}\) in the formulas with the respective feature map \(\phi(\mathbf{x})\) and do some linear algebra:</p>
 </div>
 <div class="stemblock">
 <div class="content">
@@ -852,7 +866,10 @@ For example, in the simple example shown below, the two classes become linearly 
 </div>
 </div>
 <div class="paragraph">
-<p>After the reformulation, every \(\phi(\mathbf{x})\) only occurs in scalar products with other \(\phi(\mathbf{x})\), and all these scalar products were replaced with a so-called <em>kernel function</em> \(k(\mathbf{x}', \mathbf{x})\), where \(k(\mathbf{X}, \mathbf{X}) = \mathbf{K} \in \mathbb{R}^{n \times n}\) is the <em>kernel matrix</em>, i.e., the similarity of all training points to themselves, and \(k(\mathbf{x}', \mathbf{X}) = \mathbf{k}' \in \mathbb{R}^{1 \times n}\) is the <em>kernel map</em>, i.e., the similarities of the new data point to all training points.</p>
+<p>After the reformulation, every \(\phi(\mathbf{x})\) only occurs in scalar products with other \(\phi(\mathbf{x})\), and all these scalar products were replaced with a so-called <em>kernel function</em> \(k(\mathbf{x}', \mathbf{x})\), where \(k(\mathbf{X}, \mathbf{X}) = \mathbf{K} \in \mathbb{R}^{n \times n}\) is the <em>kernel matrix</em>, i.e., the similarity of all training points to themselves, and \(k(\mathbf{x}', \mathbf{X}) = \mathbf{k}' \in \mathbb{R}^{n}\) is the <em>kernel map</em>, i.e., the similarities of the new data point to all training points.</p>
+</div>
+<div class="paragraph">
+<p>Now the prediction \(\hat{y}'\) is computed as a weighted sum of the similarities in the kernel map, i.e., where in the normal linear regression model the sum goes over the number of input features <em>d</em> and the weight vector is denoted as \(\mathbf{w}\), here the sum goes over the number of data points <em>n</em> and the weight vector is called \(\mathbf{\alpha}\).</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -872,7 +889,10 @@ A kernel function is basically a similarity function, but with the special requi
 </table>
 </div>
 <div class="paragraph">
-<p>There exist different kinds of kernel functions. Think back to the initial example, where the data was projected into the space of second order monomials. When we compute the scalar product between the feature maps of two vectors \(\mathbf{a}\) and \(\mathbf{b}\), we arrive at a polynomial kernel of second degree:</p>
+<p>There exist different kinds of kernel functions and depending on how they are computed, they induce a different kind of kernel feature space \(\phi(\mathbf{x})\), where computing the kernel function for two points would be the same as computing the scalar product of their vectors in this kernel feature space.</p>
+</div>
+<div class="paragraph">
+<p>Think back to the initial example, where the data was projected into the space of second order monomials. When we compute the scalar product between the feature maps of two vectors \(\mathbf{a}\) and \(\mathbf{b}\), we arrive at a polynomial kernel of second degree:</p>
 </div>
 <div class="stemblock">
 <div class="content">
@@ -880,6 +900,27 @@ A kernel function is basically a similarity function, but with the special requi
 = \langle\mathbf{a}, \mathbf{b}\rangle^2
 =: k(\mathbf{a}, \mathbf{b})\]
 </div>
+</div>
+<div class="paragraph">
+<p>i.e, computing the kernel function \(k(\mathbf{a}, \mathbf{b})\) between the two points is the same as computing the scalar product of the two feature maps \(\langle\phi(\mathbf{a}), \phi(\mathbf{b})\rangle\). While for the polynomial kernel of second degree, \(\langle\mathbf{a}, \mathbf{b}\rangle^2\), we could easily figure out that the feature map consisted of the second order monomials, for other kernel functions, the corresponding feature map is not that easy to identify and the kernel feature space might even be infinite dimensional. However, since all the feature map terms \(\phi(\mathbf{x})\) in the kernel ridge regression formulas only occurred in scalar products, we could replace them by a kernel function (which we can compute using the original input feature vectors), therefore, we don&#8217;t actually need to know what the respective feature map looks like for other kernel functions!</p>
+</div>
+<div class="paragraph">
+<p>So while kernel methods are internally working in this really awesome kernel feature space \(\phi(\mathbf{x})\), induced by the respective kernel function, where all our problems are linear, all we need to know is how to compute the kernel function using the original feature vectors.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you are curious what the kernel feature space looks like for some kernel function, you can use Kernel PCA to get an approximation of \(\phi(\mathbf{x})\). Kernel PCA computes the eigendecomposition of a given kernel matrix, thereby generating a new representation of the data such that the scalar product of these new vectors approximates the kernel matrix. This means, the new kernel PCA feature vector you computed for some data point \(i\) approximates \(\phi(\mathbf{x}_i)\)&#8201;&#8212;&#8201;however, this still doesn&#8217;t tell you what the function \(\phi\) itself looks like (i.e., how to get from \(\mathbf{x}\) to \(\phi(\mathbf{x})\)), you only get (an approximation of) the final result \(\phi(\mathbf{x})\).
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>In the example above you were already introduced to the polynomial kernel of second degree; the generalization, i.e., the polynomial kernel of degree <em>k</em>, is computed as \(\langle\mathbf{x}', \mathbf{x}_i\rangle^k\).</p>
 </div>
 <div class="paragraph">
 <p>The most popular kernel function that works well in many use cases is the <strong>Radial Basis Function (RBF) / Gaussian kernel</strong>:</p>
@@ -893,18 +934,16 @@ A kernel function is basically a similarity function, but with the special requi
 <div class="content">
 <img src="../images/05_supervised_other/rbf2.png" alt="image" width="540">
 </div>
+<div class="title"><span class="small">With the RBF kernel function, the similarity of a new point \(\mathbf{x}'\) to the training sample \(\mathbf{x}_i\) is computed by centering a Gaussian function (with a width inversely proportional to \(\gamma\)) over the \(i^{th}\) training sample and then checking where the new point falls on this curve. Depending on the choice of \(\gamma\), either many samples will later contribute to the prediction (if the Gaussian function is very wide and therefore the similarity to multiple training points will be large) or only the closest points will be considered (if the curve is very narrow and therefore the similarity to most training examples would be close to 0).</span></div>
 </div>
 </div>
-</div>
-<div class="paragraph">
-<p>In the kernel ridge regression model above, the prediction \(\hat{y}'\) is computed as a weighted sum of the similarities in the kernel map, i.e., just like in the normal linear regression model only that here the sum goes over the number of data points <em>n</em> instead of the number of input features <em>d</em> and the weight vector is denoted as \(\mathbf{\alpha}\) instead of \(\mathbf{w}\).</p>
 </div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Support Vector Machine (SVM)</dt>
 <dd>
 <p>A more efficient method, especially when the training set is large.<br>
-<span class="underline">Key idea:</span> only compute similarity to &#8216;critical&#8217; training points (= support vectors)</p>
+<span class="underline">Key idea:</span> only compute similarity to &#8216;critical&#8217; training points (= support vectors):</p>
 </dd>
 </dl>
 </div>
@@ -918,10 +957,13 @@ A kernel function is basically a similarity function, but with the special requi
 \[\sum_{i=1}^n k(\mathbf{x}', \mathbf{x}_i) \alpha_i  \quad \Rightarrow \quad  \sum_{i \in \{\text{SV}\}} k(\mathbf{x}', \mathbf{x}_i) \alpha_i\]
 </div>
 </div>
+<div class="paragraph">
+<p>This reduces the memory requirements and makes the prediction for new data points much faster, since it is only necessary to store the support vectors and compute the similarity to them instead of the whole training set.</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.decomposition</span> <span class="keyword">import</span> <span class="include">KernelPCA</span>     <span class="comment"># Kernel variant of PCA</span>
-<span class="keyword">from</span> <span class="include">sklearn.kernel_ridge</span> <span class="keyword">import</span> <span class="include">KernelRidge</span>    <span class="comment"># Kernel variant of ridge regression</span>
+<span class="keyword">from</span> <span class="include">sklearn.kernel_ridge</span> <span class="keyword">import</span> <span class="include">KernelRidge</span>    <span class="comment"># Kernel variant of ridge regression (-&gt; use SVR instead)</span>
 <span class="keyword">from</span> <span class="include">sklearn.svm</span> <span class="keyword">import</span> <span class="include">SVC</span>, <span class="include">SVR</span>                <span class="comment"># SVM for classification (C) and regression (R)</span></code></pre>
 </div>
 </div>
@@ -933,10 +975,10 @@ A kernel function is basically a similarity function, but with the special requi
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>&#8594; <code>kernel</code>: similarity function (&#8594; <code>sklearn.metrics.pairwise</code>)</p>
+<p>&#8594; <code>kernel</code>: the kernel function used to compute the similarities between the points (&#8594; see <code>sklearn.metrics.pairwise</code>; usually <code>'rbf'</code>)</p>
 </li>
 <li>
-<p>&#8594; additionally: kernel parameters, e.g. <code>gamma</code> for <code>'rbf'</code> kernel</p>
+<p>&#8594; additionally: kernel parameters, e.g., <code>gamma</code> for <code>'rbf'</code> kernel</p>
 </li>
 </ul>
 </div>
@@ -952,7 +994,7 @@ A kernel function is basically a similarity function, but with the special requi
 <p>non-linear predictions with global optimum</p>
 </li>
 <li>
-<p>fast to train (on medium size datasets; compared to e.g. neural networks)</p>
+<p>fast to train (on medium size datasets; compared to, e.g., neural networks)</p>
 </li>
 </ul>
 </div>
@@ -965,7 +1007,7 @@ A kernel function is basically a similarity function, but with the special requi
 <p>computationally expensive for large datasets (kernel matrix: \(\mathcal{O}(n^2)\))</p>
 </li>
 <li>
-<p>choosing the kernel function (for heterogeneous data)</p>
+<p>kernel functions, just like other similarity functions, benefit if heterogeneous data is scaled</p>
 </li>
 </ul>
 </div>
@@ -974,7 +1016,7 @@ A kernel function is basically a similarity function, but with the special requi
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_sl_k_nearest_neighbors_knn.html">SL: k-nearest neighbors (kNN)</a> | ↑ Up: <a href="_ml_algorithms_unsupervised_supervised_learning.html">ML Algorithms: Unsupervised &amp; Supervised Learning</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_information_retrieval_similarity_search.html">Information Retrieval (Similarity Search)</a> →</p>
+<p>← Previous: <a href="_sl_k_nearest_neighbors_knn.html">SL: k-Nearest Neighbors (kNN)</a> | ↑ Up: <a href="_ml_algorithms_unsupervised_supervised_learning.html">ML Algorithms: Unsupervised &amp; Supervised Learning</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_information_retrieval_similarity_search.html">Information Retrieval (Similarity Search)</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

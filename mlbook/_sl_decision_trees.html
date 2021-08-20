@@ -734,8 +734,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 0.1,</span>
-<span id="revdate">2021-06-19</span>
+<span id="revnumber">version 1.0,</span>
+<span id="revdate">2021-08-20</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -762,7 +762,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </li>
 <li><a href="_sl_ensemble_methods.html">SL: Ensemble Methods</a>
 </li>
-<li><a href="_sl_k_nearest_neighbors_knn.html">SL: k-nearest neighbors (kNN)</a>
+<li><a href="_sl_k_nearest_neighbors_knn.html">SL: k-Nearest Neighbors (kNN)</a>
 </li>
 <li><a href="_sl_kernel_methods.html">SL: Kernel Methods</a>
 </li>
@@ -788,11 +788,24 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div id="content">
 <div class="sect2">
 <h3 id="_sl_decision_trees">SL: Decision Trees</h3>
+<div class="openblock float-group">
+<div class="content">
+<div class="paragraph">
+<p><span class="image left"><img src="../images/04_supervised_intro/comparison_dt.png" alt="image" width="180"></span></p>
+</div>
+<div class="paragraph">
+<p>Next, we&#8217;ll look at decision trees, another type of features-based model that is very efficient as well, but can also capture more complex relationships between inputs and output.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>We&#8217;ll describe the decision tree algorithm with the help of an example dataset:</p>
+</div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Example</dt>
+<dt class="hdlist1">Example: Iris Dataset</dt>
 <dd>
-<p><em>Iris Dataset</em> – classify flowers based on their petal length and width</p>
+<p>The famous Iris dataset was initially studied by the influential statistician R. Fisher. It includes samples from 3 different types of Iris flowers, each described by 4 measurements. The task is to classify to which type of Iris flower a sample belongs:</p>
 </dd>
 </dl>
 </div>
@@ -805,7 +818,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <dl>
 <dt class="hdlist1">Main idea</dt>
 <dd>
-<p>iteratively set a threshold on a variable such that the remaining samples are split into two &#8220;cleaner&#8221; groups</p>
+<p>iteratively set a threshold on one of the features such that the remaining samples are split into two &#8220;cleaner&#8221; groups (where &#8220;clean&#8221; means that all samples in a group have a similar label, e.g., belong to the same class if you&#8217;re dealing with a classification problem):</p>
 </dd>
 </dl>
 </div>
@@ -813,6 +826,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="content">
 <img src="../images/05_supervised_other/decision_tree_iris2.png" alt="image" width="840">
 </div>
+<div class="title"><span class="small"><em>Left:</em> Scatter plot of the data, which shows how the splits of the decision tree translate into a decision surface in the feature space, which also shows the characteristic cuts orthogonal to the respective axis (&#8594; new points are classified according to the color of the shaded areas). <em>Right:</em> Illustration of the learned decision tree: starting left at the root of the tree, the first decision is made to split the data at the &#8216;petal width&#8217; feature, where all samples with a value smaller than 0.8 are classified as setosa Irises (&#8658; perfectly clean group at this leaf) and the other samples advance to a followup decision. (To come up with this decision, the decision tree algorithm basically looked at the histograms of all features to figure out for which of the features the distributions for the different classes were separated the most and then set a threshold there to split the samples.) Next, in the lower branch of the tree, the remaining samples are now split again according to their petal width and then again at their petal length (although it is a coincidence that the same variable is used in both branches at this level to make the cut). Eventually, at each leaf (i.e., terminal node of the tree), the samples that ended up there are mostly from one single class, i.e., the decision tree succeeded in splitting the dataset into cleaner groups. To classify a new sample (i.e., if you went for a walk and found an Iris flower and decided to measure it), you could now compare the flower&#8217;s measurements to the thresholds in the tree (starting at the root) and depending on the leaf you end up in you got a prediction for the Iris type as the most frequent class of the training samples that ended up in this leaf. For regression problems, the tree is built in the same way, but the final prediction is given as the mean of the target variable of the training samples in a leaf. (Please note that decision trees are normally drawn from top to bottom and, unlike real trees, their root is at the top and their branches and leaves grow towards the bottom&#8201;&#8212;&#8201;the computer scientist who came up with binary trees probably spent too much time indoors&#8230;&#8203;).</span></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -827,10 +841,10 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>&#8594; <code>max_depth</code>: max number of decisions to make about a sample</p>
+<p>&#8594; <code>max_depth</code>: maximum number of decisions to make about a sample</p>
 </li>
 <li>
-<p>&#8594; <code>min_samples_leaf</code>: prevent overly specific leaves with only few samples</p>
+<p>&#8594; <code>min_samples_leaf</code>: how many samples have to end up in each leaf (at least), to prevent overly specific leaves with only few samples</p>
 </li>
 </ul>
 </div>
@@ -843,10 +857,10 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="ulist">
 <ul>
 <li>
-<p>easy to interpret</p>
+<p>easy to interpret (i.e., you know exactly what decisions were made to arrive at the prediction)</p>
 </li>
 <li>
-<p>good for heterogeneous data; no normalization necessary</p>
+<p>good for heterogeneous data: no normalization necessary since all features are considered individually</p>
 </li>
 </ul>
 </div>
@@ -856,11 +870,10 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="ulist">
 <ul>
 <li>
-<p>risk of overfitting (building very specific trees)</p>
+<p>if the hyperparameters (e.g., <code>min_samples_leaf</code>) aren&#8217;t set appropriately, it can happen that the tree becomes very specific and memorizes individual samples, which means it probably wont generalize well to new data points (also called &#8220;overfitting&#8221;, e.g., in the example above, one of the leaves contains only 3 samples, which might not have been a very useful split)</p>
 </li>
 <li>
-<p>unstable: small variations in the data can lead to very different
-trees</p>
+<p>unstable: small variations in the data can lead to very different trees</p>
 </li>
 </ul>
 </div>

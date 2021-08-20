@@ -734,8 +734,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 0.1,</span>
-<span id="revdate">2021-06-19</span>
+<span id="revnumber">version 1.0,</span>
+<span id="revdate">2021-08-20</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -762,7 +762,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </li>
 <li><a href="_sl_ensemble_methods.html">SL: Ensemble Methods</a>
 </li>
-<li><a href="_sl_k_nearest_neighbors_knn.html">SL: k-nearest neighbors (kNN)</a>
+<li><a href="_sl_k_nearest_neighbors_knn.html">SL: k-Nearest Neighbors (kNN)</a>
 </li>
 <li><a href="_sl_kernel_methods.html">SL: Kernel Methods</a>
 </li>
@@ -789,12 +789,16 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="sect2">
 <h3 id="_information_retrieval_similarity_search">Information Retrieval (Similarity Search)</h3>
 <div class="paragraph">
-<p>Sometimes you just need to find similar items&#8230;&#8203;</p>
+<p>Not a supervised learning method, but related to the k-nearest neighbors algorithm is information retrieval. Here the task is to identify similar items given some query:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/05_supervised_other/inforetr.png" alt="image" width="640">
 </div>
+<div class="title"><span class="small">Just like in the reverse Google image search, we here use as input a query image and get as a result the <em>k</em> images that are most similar to it.</span></div>
+</div>
+<div class="paragraph">
+<p>This can be accomplished by building a nearest neighbors search tree (i.e., just like for kNN, only that here we return the neighbors directly instead of using them to predict the label for the new data point).</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -802,7 +806,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </div>
 </div>
 <div class="paragraph">
-<p>&#8594; Requires a meaningful similarity measure!!</p>
+<p>But of course, the success of this approach is again highly dependent on being able to compute meaningful similarities between the data points. For text datasets, information retrieval often works quite well by using simple TF-IDF feature vectors together with a cosine similarity, however, for images, for example, out-of-the-box similarity measures that operate directly on the original input features (i.e., pixel values) are only able to identify images with similar colors, not necessarily similar content (e.g., an image showing a black cat would be more similar to an image showing a black dog than a white cat). To get around this problem, we could use neural networks to obtain a more informative feature representation, with which it is then easier to compute meaningful semantic similarities.</p>
 </div>
 </div>
 <div class="paragraph nav-footer">

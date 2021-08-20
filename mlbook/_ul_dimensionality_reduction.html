@@ -734,8 +734,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 0.1,</span>
-<span id="revdate">2021-06-19</span>
+<span id="revnumber">version 1.0,</span>
+<span id="revdate">2021-08-20</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -768,7 +768,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </li>
 <li><a href="_sl_ensemble_methods.html">SL: Ensemble Methods</a>
 </li>
-<li><a href="_sl_k_nearest_neighbors_knn.html">SL: k-nearest neighbors (kNN)</a>
+<li><a href="_sl_k_nearest_neighbors_knn.html">SL: k-Nearest Neighbors (kNN)</a>
 </li>
 <li><a href="_sl_kernel_methods.html">SL: Kernel Methods</a>
 </li>
@@ -794,6 +794,9 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div id="content">
 <div class="sect2">
 <h3 id="_ul_dimensionality_reduction">UL: Dimensionality Reduction</h3>
+<div class="paragraph">
+<p>We now get into more detail on the different types of algorithms and describe some sample methods for each. We start with dimensionality reduction:</p>
+</div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/01c_ml_overview/ml_algorithms_dimred.png" alt="image" width="740">
@@ -807,19 +810,33 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </dd>
 <dt class="hdlist1">Advantages</dt>
 <dd>
-<p>need less memory, noise reduction, visualization</p>
+<div class="ulist">
+<ul>
+<li>
+<p>reduced data needs less memory (usually not that important anymore today)</p>
+</li>
+<li>
+<p>noise reduction (by focusing on the most relevant signals)</p>
+</li>
+<li>
+<p>create a visualization of the dataset (what we will mostly be using these algorithms for)</p>
+</li>
+</ul>
+</div>
 </dd>
-<dt class="hdlist1">Example: Embed images of hand written digits in 2D</dt>
+<dt class="hdlist1">Example: Embed images of hand written digits in 2 dimensions</dt>
 </dl>
 </div>
 <div class="openblock text-center">
 <div class="content">
 <div class="paragraph">
-<p><span class="image"><img src="../images/03_unsupervised/dimred_problem.png" alt="image" width="470"></span></p>
+<p><span class="image"><img src="../images/03_unsupervised/dimred_problem.png" alt="image" width="470"></span><br>
+<span class="small">Our dataset in this small example consists of a set of 8 x 8 pixel images showing handwritten digits (i.e., each data point can be represented as a 64-dimensional input feature vector containing the gray-scale pixel values). Usually, this dataset is used for classification, i.e., where a model should predict which number is shown on the image. We instead only want to get a better overview of the dataset, i.e., our goal is to reduce the dimensionality of this dataset to 2 coordinates, which we can then use to visualize all samples in a 2D overview map. Please note that the algorithms only use the original image pixel values as input to compute the 2D coordinates, but afterwards we additionally use the labels of the images (i.e., the digit shown in the image) to give the dots in the plot some color to better interpret the results.</span></p>
 </div>
 <div class="paragraph">
 <p><span class="image"><img src="../images/03_unsupervised/dimred_pca.png" alt="image" width="420"></span>
-<span class="image"><img src="../images/03_unsupervised/dimred_tsne.png" alt="image" width="420"></span></p>
+<span class="image"><img src="../images/03_unsupervised/dimred_tsne.png" alt="image" width="420"></span><br>
+<span class="small">The two plots show the results, i.e., the 2-dimensional representation of the dataset, created with two different dimensionality reduction algorithms, PCA and t-SNE. Each point or thumbnail in the plot represents one data point (i.e., one image), where the colors, numbers, and example images were added in the graphic afterward to make it easier to interpret what is shown here. There is no right or wrong way to represent the data in 2D (it&#8217;s an unsupervised learning problem, which by definition has no ground truth answer), but the algorithms arrive at two very different solutions, since they follow different strategies and have a different definition of what it means to preserve the relevant information. While PCA created a plot that preserves the global relationship between the samples, t-SNE arranged the samples in localized clusters. The remarkable thing here is that these methods did not know about the fact that the images displayed different, distinct digits (i.e., they did not use the label information), yet t-SNE grouped images showing the same number closer together. From such a plot we can already see that if we were to solve the classification problem here (i.e., predict which digit is shown in an image), this task should be fairly easy, since even an unsupervised learning algorithm that did not use the label information showed that images displaying the same number are very similar to each other and can easily be distinguished from images showing different numbers (or conversely, if our classification model performed very poorly on this task, we would know that we have a bug somewhere, since apparently the relevant information is present in the features to solve this task). <em>Please note that even though t-SNE seems to create clusters here, this is not a clustering algorithm. As a dimensionality reduction algorithm, t-SNE produces a set of new 2D coordinates for our samples and when plotting the samples at these coordinates, they happen to be arranged in clusters. However, a clustering algorithm instead outputs cluster indices, that state which samples were assigned to the same group (which could then be used to color the points in the 2D coordinate plot).</em></span></p>
 </div>
 </div>
 </div>
@@ -829,18 +846,19 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <dl>
 <dt class="hdlist1">Useful for</dt>
 <dd>
-<p>general dimensionality reduction; noise reduction</p>
+<p>general dimensionality reduction &amp; noise reduction (&#8594; the transformed data is then sometimes used as input to other algorithms instead of the original features)</p>
 </dd>
 <dt class="hdlist1">Main idea</dt>
 <dd>
-<p>compute eigendecomposition of covariance matrix</p>
-</dd>
-</dl>
-</div>
+<p>compute the eigendecomposition of the dataset&#8217;s covariance matrix (a symmetric matrix of size \(d \times d\) (with <em>d</em> = number of original input features), which states how strongly any two features co-vary, i.e., how related they are, similar to the linear correlation between two features). By computing the eigenvalues and -vectors of this matrix, the main directions of variance are identified as the new principle components (which can be expressed as linear combinations of the original features) and we can now reorient the data along these new axis (have a look at <a href="https://www.youtube.com/watch?v=5HNr_j6LmPc">this video</a> for a more detailed explanation):</p>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/03_unsupervised/pca.png" alt="image" width="740">
 </div>
+<div class="title"><span class="small">Here the original data only has two features anyways, so a dimensionality reduction does not make much sense, but it nicely illustrates how the algorithm works: the main direction of variance is selected as the first new dimension, while the direction with the next strongest variation (orthogonal to the first) is the second new dimension, also called principle components. The data can then be rotated accordingly, such that the amount of captured variation in the data (i.e., the information content and also the eigenvalue associated with this principle component) decreases from the first to the last of these new dimensions.</span></div>
+</div>
+</dd>
+</dl>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -855,7 +873,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>&#8594; <code>n_components</code>: new dimensionality of data</p>
+<p>&#8594; <code>n_components</code>: new dimensionality of data (this can be as many as the original features (or the rank of the feature matrix))</p>
 </li>
 </ul>
 </div>
@@ -868,11 +886,13 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="ulist">
 <ul>
 <li>
-<p>linear algebra based: global optima</p>
+<p>linear algebra based: global optima (i.e., when you compute PCA multiple times on the same dataset you&#8217;ll always get the same solution)</p>
 </li>
 <li>
-<p>know how much information is retained (<code>explained_variance_ratio_</code>):<br>
-for <em>k</em> components with eigenvalues \(\lambda_i: \frac{\sum_{i=1}^k \lambda_i}{\sum_{i=1}^d \lambda_i}\)</p>
+<p>know how much information is retained (check the attributes <code>explained_variance_ratio_</code> or <code>lambda_</code>):<br>
+the principle components are always ordered by the magnitude of their corresponding eigenvalues (largest first);<br>
+for <em>k</em> components with eigenvalues \(\lambda_i\), the amount of variation that is preserved is: \(\frac{\sum_{i=1}^k \lambda_i}{\sum_{i=1}^d \lambda_i}\)<br>
+(if the intrinsic dimensionality of the dataset is lower than the original number features, e.g., because some features were strongly correlated, then the last few eigenvalues will be zeros; you can also plot the <a href="https://en.wikipedia.org/wiki/Scree_plot">eigenvalue spectrum</a>, i.e., the eigenvalues ordered by their magnitude, to see how many dimensions you might want to keep, i.e., when this curve starts to flatten out)</p>
 </li>
 </ul>
 </div>
@@ -883,10 +903,10 @@ for <em>k</em> components with eigenvalues \(\lambda_i: \frac{\sum_{i=1}^k \lamb
 <ul>
 <li>
 <p>computationally expensive for many (&gt; 10k) features<br>
-&#8594; if you have less data points than features, consider using Kernel PCA instead</p>
+&#8594; if you have less data points than features, consider using Kernel PCA instead (this computes the eigendecomposition of a similarity matrix, which is \(n \times n\) (with <em>n</em> = number of data points), i.e., when <em>n</em> &lt; <em>d</em> this matrix will be smaller than the covariance matrix and therefore computing its eigendecomposition will be faster)</p>
 </li>
 <li>
-<p>outliers can heavily skew the results</p>
+<p>outliers can heavily skew the results (because a few points away from the center can introduce a large variance in that direction)</p>
 </li>
 </ul>
 </div>
@@ -900,12 +920,11 @@ for <em>k</em> components with eigenvalues \(\lambda_i: \frac{\sum_{i=1}^k \lamb
 <dl>
 <dt class="hdlist1">Useful for</dt>
 <dd>
-<p>visualizing data in 2D</p>
+<p>visualizing data in 2D (but please do not use the transformed data as input for other algorithms)</p>
 </dd>
 <dt class="hdlist1">Main idea</dt>
 <dd>
-<p>randomly initialize points in 2D and move around until their distances match the original distances in the high dimensional input space<br>
-&#8594; <a href="https://distill.pub/2016/misread-tsne/">t-SNE in action</a></p>
+<p>randomly initialize the points in 2D and move them around until their distances in 2D match the original distances in the high dimensional input space, i.e., until the points that were similar to each other in the original high dimensional space are located close together in the new 2D map of the dataset (&#8594; have a look at the animations in this great blog article to see <a href="https://distill.pub/2016/misread-tsne/">t-SNE in action</a>)</p>
 </dd>
 </dl>
 </div>
@@ -922,10 +941,10 @@ for <em>k</em> components with eigenvalues \(\lambda_i: \frac{\sum_{i=1}^k \lamb
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>&#8594; <code>perplexity</code>: roughly: how many nearest neighbors a point is expected to have</p>
+<p>&#8594; <code>perplexity</code>: roughly: how many nearest neighbors a point is expected to have (see also the corresponding section in the blog article linked above for an example; what an appropriate value for this parameters is depends on the size and diversity of your dataset, e.g., if you have a dataset of 1000 images with 10 classes, then a perplexity of 5 might be a reasonable choice, while in a dataset with 1 million samples, 500 could be a good value <span class="small">(the original paper says values up to 50 work well, but in 2003 &#8220;big data&#8221; also wasn&#8217;t a buzzword yet ;-)</span>)</p>
 </li>
 <li>
-<p>&#8594; <code>metric</code>: how to compute distances in the original input space</p>
+<p>&#8594; <code>metric</code>: how to compute the distances in the original high dimensional input space (which tells you which points should be close together in the 2D map)</p>
 </li>
 </ul>
 </div>
@@ -948,10 +967,10 @@ for <em>k</em> components with eigenvalues \(\lambda_i: \frac{\sum_{i=1}^k \lamb
 <div class="ulist">
 <ul>
 <li>
-<p>can get stuck in a local optimum (some points trapped between clusters)</p>
+<p>can get stuck in a local optimum (e.g., some points trapped between clusters)</p>
 </li>
 <li>
-<p>selection of distance metric for heterogeneous data (normalize!)</p>
+<p>selection of distance metric for heterogeneous data (&#8594; normalize!)</p>
 </li>
 </ul>
 </div>

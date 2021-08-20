@@ -645,8 +645,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 0.1,</span>
-<span id="revdate">2021-06-19</span>
+<span id="revnumber">version 1.0,</span>
+<span id="revdate">2021-08-20</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -679,7 +679,18 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <h2 id="_conclusion_using_ml_in_practice">Conclusion: Using ML in Practice</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>ML workflow simple:</p>
+<p>Now that you&#8217;ve learned a lot about the ML theory, especially the different algorithms:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/01c_ml_overview/ml_algorithms.png" alt="image" width="840">
+</div>
+</div>
+<div class="paragraph">
+<p>&#8230;&#8203;it is time to do a bit of a reality check.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s reconsider this oversimplified ML workflow that you&#8217;ve seen in the introduction:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -687,20 +698,13 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 </div>
 <div class="paragraph">
-<p>ML workflow in reality:</p>
+<p>&#8658; ML workflow in reality:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/01c_ds_workflow/data_science_workflow_17.png" alt="image" width="840">
 </div>
-</div>
-<div class="paragraph">
-<p>ML Theory: Algorithms</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01c_ml_overview/ml_algorithms.png" alt="image" width="840">
-</div>
+<div class="title"><span class="small">What stays the same, is that you always start with some kind of question or problem that should be solved with ML. And to solve it, you need data, which you most likely will have to clean a bit before you can start working with it (e.g., merge different excel files, fix missing values, etc.). Then it&#8217;s time for an exploratory analysis to better understand what you&#8217;re dealing with. Depending on the type of data, you might also need to extract appropriate features or maybe engineer additional ones (for which domain knowledge will be very helpful). All these steps are again grouped under "preprocessing" <em>(red box)</em> and the bubbles are arranged in zigzag, because often you find yourself jumping back and forth between these steps (e.g., by visualizing the dataset, you might realize that you have some outliers that you want to remove, or after engineering new features, you go back and visualize the dataset again). Next comes the ML part <em>(green box)</em>: you&#8217;ll probably start with some simple model, evaluate it, try a more complex model, experiment with different hyperparameters, &#8230;&#8203; and at some point realize, that you&#8217;ve exhausted your ML toolbox and are still not happy with the performance. At which point you need to go back and either engineer better features or, if this also doesn&#8217;t help, even collect more and/or better data (e.g., more samples, data from additional sensors, cleaner labels, etc.). Finally, when you&#8217;re confident in the model&#8217;s predictions, there are two routes you might take: either the data science route, where you communicate your findings to the stakeholders (which will most likely result in further questions), or the ML-software route, where the final model is deployed somewhere in production (where you mustn&#8217;t forget to monitor the model&#8217;s performance and collect new data such that the model can continuously be improved, especially as the inevitable data or concept drifts occur). So as you can see, in reality working on a machine learning project is a very iterative process.</span></div>
 </div>
 <div class="paragraph">
 <p>ML in Practice</p>
@@ -722,8 +726,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <td class="tableblock halign-left valign-top"><p class="tableblock">150 manual entries in an excel sheet</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">homogeneous unstructured data (e.g. pixels, sound, text)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">measurements from different sources with different scales (e.g. temperature, flow, pressure sensors)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">homogeneous unstructured data (e.g., pixels, sound, text)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">measurements from different sources with different scales (e.g., temperature, flow, pressure sensors)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">fancy deep learning architectures</p></td>
@@ -795,6 +799,7 @@ c) combine the predictions of all models.</p>
 <div class="content">
 <img src="../images/09_ml_in_practice/data_responsibility.png" alt="image" width="540">
 </div>
+<div class="title"><span class="small">A fitness tracker startup thought it would be a cool idea to publish popular jogging routes based on the data they&#8217;ve collected from their users. However, since many US soldiers also happened to use the tracker and frequently jogged around their army bases, this startup thereby accidentally outed a secret army base in Afghanistan, which appeared as a bright spot on their interactive map in an area where they otherwise had only few users.</span></div>
 </div>
 </dd>
 </dl>

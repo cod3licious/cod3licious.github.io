@@ -645,8 +645,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 0.1,</span>
-<span id="revdate">2021-06-19</span>
+<span id="revnumber">version 1.0,</span>
+<span id="revdate">2021-08-20</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -700,12 +700,12 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <p>More specifically, <strong>machine learning</strong> is an <strong>umbrella term for algorithms that recognize patterns and learn rules from data</strong>.</p>
 </div>
 <div class="paragraph">
-<p>Simply speaking, an algorithm can be thought of as a specific strategy or recipe for solving a certain kind of problem. For example, there exist effective algorithms to find the shortest paths between two cities (e.g. what Google Maps uses when you ask for directions) or to solve scheduling problems (which task should be done first and which task after that to finish all tasks before their respective deadlines and satisfy dependencies between the tasks). Machine learning deals with the subset of algorithms that operate on data points and manipulate some input data to get a specific result.</p>
+<p>Simply speaking, an algorithm can be thought of as a specific strategy or recipe for solving a certain kind of problem. For example, there exist effective algorithms to find the shortest paths between two cities (e.g., what Google Maps uses when you ask for directions) or to solve scheduling problems (which task should be done first and which task after that to finish all tasks before their respective deadlines and satisfy dependencies between the tasks). Machine learning deals with the subset of algorithms that detect and make use of statistical regularities in a dataset to obtain specific results.</p>
 </div>
 <div class="sect3">
 <h4 id="_ml_algorithms_tools_to_generate_value_from_data">ML algorithms = tools to generate value from data</h4>
 <div class="paragraph">
-<p>You can think of ML algorithms as tools to generate value from data:</p>
+<p>Analogous to the tools used in a traditional production process to build something, you can think of ML algorithms as tools to generate value from data:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -721,13 +721,13 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <p>What could be valuable?</p>
 </li>
 <li>
-<p>What raw inputs are needed to create it? (For example, just like you can&#8217;t create a wooden chair using only fabric and metal, depending on what you want to achieve with ML, you also need the right data to apply the algorithms in the first place.)</p>
+<p>What raw inputs are needed to create it? (For example, just like you can&#8217;t create a wooden chair using only fabric and metal or a few twigs you found in the forest, depending on what you want to achieve with ML, you also need the right data (quality &amp; quantity) to apply the algorithms in the first place.)</p>
 </li>
 <li>
-<p>What kind of ML algorithm do I need to transform the raw input into something valuable? (More on the different kinds of ML algorithms in the next section.)</p>
+<p>What type of ML algorithms can transform the raw input into the kind of valuable thing I want? (More on the different kinds of ML algorithms in the next section.)</p>
 </li>
 <li>
-<p>Do I (or my employees) possess the necessary skills and have enough compute power available to actually accomplish this in practice?</p>
+<p>Do I (or my employees) possess the necessary skills and have enough compute power available to actually accomplish this in practice? (If not, keep on reading and rent some hours on a cloud compute cluster like those provided by Amazon Web Services.)</p>
 </li>
 </ul>
 </div>
@@ -740,12 +740,13 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="content">
 <img src="../images/01b_intro_ml/input_output5.png" alt="image" width="500">
 </div>
+<div class="title"><span class="small">Example ML problems: recognizing objects in images; translating text from one language to another; determining a good next move given the current state of a Go board; identifying groups of users/customers based on some information about them like questionnaire answers (in marketing this is also called customer segmentation and, for example, used to target different groups of customers with specific advertisement campaigns, which can nowadays easily be done on social media). Despite their different nature, what all these tasks have in common is that a ML model operates on some input and should produce a corresponding useful output.</span></div>
 </div>
 <div class="paragraph">
-<p>In the above examples, while a human (expert) typically could easily produce the correct output given the input (e.g. even a small child can recognize the cat in the first image), they have a hard time describing <em>how</em> they arrived at the correct output (e.g. how did you know that this is a cat? because of the pointy ears? the whiskers?).</p>
+<p>In the above examples, while a human (expert) typically could easily produce the correct output given the input (e.g., even a small child can recognize the cat in the first image), they have a hard time describing <em>how</em> they arrived at the correct output (e.g., how did you know that this is a cat? because of the pointy ears? the whiskers?). ML algorithms can instead learn such rules from the given samples.</p>
 </div>
 <div class="paragraph">
-<p>While traditional software solutions are used to automate tasks that consist of a fixed, predefined sequence of actions (e.g., a gate should open when an object passes through a photoelectric barrier and 20 seconds later the gate should close again), machine learning can be used to <strong>automate &#8220;input &#8594; output&#8221; tasks</strong> for which it is difficult to otherwise formulate rules that could be hard coded into the software. For example, in a company that produces cookies, broken cookie pieces could be automatically sorted out by checking that each cookie weights around 15g, which can easily be done by using the weight measurements from a scale together with some hard coded rules (e.g. cookie weight needs to be between 14-16g). However, other defects can not be recognized this easily with a simple measurement and would either require a human watching the production line to recognize, e.g., over-baked cookies, or taking pictures of the cookies and using them as input for a machine learning model to recognize the defective cookies:</p>
+<p>While traditional software solutions are used to automate tasks that can be formulated as a fixed, predefined sequence of actions, executed according to some hard-coded rules (e.g., &#8220;a gate should open <em>if</em> an object passes through a photoelectric barrier and 20 seconds later the gate should close again&#8221;), machine learning can be used to <strong>automate &#8220;input &#8594; output&#8221; tasks</strong> for which it would otherwise be difficult to come up with such rules. For example, the quality control in a cookie factory is such an &#8220;input (cookie) &#8594; output (ok/defective)&#8221; task: While some broken cookies could be sorted out automatically by checking that each cookie weights around 15g, it would be difficult to formulate rules that catch all possible defects. This would instead either require a human watching the production line to recognize, e.g., over-baked cookies, or taking pictures of the cookies and using them as input for a machine learning model to recognize the defective cookies:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -764,7 +765,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="ulist">
 <ul>
 <li>
-<p>a manually defined set of rules or mechanistic model can solve the problem</p>
+<p>a manually defined set of rules or mechanistic model can solve the problem (e.g., in the example above, if the only quality problem in the cookie factory that ever occurred were broken cookies, then the rule &#8220;cookie weight needs to be between 14-16g&#8221; would suffice to detect defective cookies)</p>
 </li>
 </ul>
 </div>
@@ -774,13 +775,13 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="ulist">
 <ul>
 <li>
-<p>an exact simulation with a mechanistic model takes too long (but can be used to generate a high quality dataset; e.g. AlphaFold)</p>
+<p>an exact simulation with a mechanistic model takes too long (but can be used to generate a high quality dataset; e.g., AlphaFold)</p>
 </li>
 <li>
-<p>solving a &#8220;simple&#8221; but hard to explain task (that takes a human ~1 second)<br>
-&#8594; automate repetitive tasks &amp; make expert knowledge available to everyone<br>
-<span class="underline">But:</span> success depends on data quality &amp; quantity!<br>
-&#8594; humans are much better at generalizing from a few examples</p>
+<p>solving a &#8220;simple&#8221; but hard to explain task (that takes a human ~1 second, like recognizing something in an image)<br>
+&#8658; use ML to automate repetitive tasks &amp; make expert knowledge available to everyone (like Google&#8217;s diabetic retinopathy diagnostic model)<br>
+<span class="underline">But:</span> success depends on data quality &amp; quantity!<br>
+&#8594; humans are much better at generalizing from a few examples (e.g., a doctor can still easily recognize the disease even if the pictures were taken with a slightly different setup that might result, for example, in noisier images, while the ML model needs to be specifically trained for these cases, which means that in the worst case you might need to collect a lot of additional data for this new setup)</p>
 </li>
 </ul>
 </div>
@@ -790,7 +791,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="ulist">
 <ul>
 <li>
-<p>humans are overwhelmed by very complex, high dimensional data</p>
+<p>humans are overwhelmed by very complex, high dimensional data (e.g., given an excel spreadsheet with hundreds of columns, a human can&#8217;t easily recognize any patterns in this sea of numbers. In the worst case, there actually aren&#8217;t any relationships in the data that could be discovered (maybe you didn&#8217;t record data from all the relevant sensors), but if there are, ML will most likely find them.)</p>
 </li>
 </ul>
 </div>
@@ -812,7 +813,22 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 </div>
 <div class="paragraph">
-<p>The first (and arguably most important) step is to <strong>identify where machine learning can (and should) be used</strong> in the first place. Once a suitable problem as been identified, <strong>historic data needs to be gathered and the right ML algorithm needs to be selected and applied</strong> to obtain a working solution. This is what the next chapters are all about. Once a prototypical solution has been implemented and meets the required performance level, this solution then has to be <strong>integrated into the general workflow and infrastructure</strong> so that it can actually be used to improve the respective process in practice. There are generally two strategies for how to do this:</p>
+<p>The first (and arguably most important) step is to <strong>identify where machine learning can (and should) be used</strong> in the first place. Once a suitable &#8220;input &#8594; output&#8221; problem as been identified, <strong>historic data needs to be gathered and the right ML algorithm needs to be selected and applied</strong> to obtain a working solution. This is what the next chapters are all about.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+In most of the book, the terms &#8220;ML algorithm&#8221; and &#8220;ML model&#8221; will be used interchangeably. To be more precise, however, in general the algorithm processes the data and learns some parameter values and these parameter settings then define the final model. (For example, a linear regression <em>model</em> is defined by its coefficients (i.e., the model&#8217;s parameters), which are found by doing some stuff with the data (i.e., executing the steps outlined in the linear regression <em>algorithm</em>, which includes solving an optimization problem).)
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Once a prototypical solution has been implemented and meets the required performance level, this solution then has to be deployed, i.e., <strong>integrated into the general workflow and infrastructure</strong> so that it can actually be used to improve the respective process in practice. There are generally two strategies for how to do this:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -820,33 +836,34 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <p>The ML model runs on the &#8220;edge&#8221;, i.e., on each individual machine where the respective data is collected and the output of the model is used in subsequent process steps. This is often the best strategy when the results need to be computed in real time and / or a continuous Internet connection can not be guaranteed, e.g., in self-driving cars. However, the downside of this is that, depending on the type of ML model, comparatively expensive computing equipment needs to be installed in each machine, e.g., GPUs for neural network models.</p>
 </li>
 <li>
-<p>The ML model runs in the &#8220;cloud&#8221;, i.e., on a central server, e.g. in the form of a web application that receives the data from the individual machines, processes it, and sends back the results. This is often the more efficient solution if a response in near real time is sufficient for the respective use case, but can bring with it privacy concerns if user data is processed. One of the major benefits of this solution is that it is easier to update the ML model as more historic data becomes available or if the process changes and the model now has to deal with slightly different inputs, for example (we&#8217;ll discuss this further in the section on messy data).</p>
+<p>The ML model runs in the &#8220;cloud&#8221;, i.e., on a central server, e.g., in the form of a web application that receives the data from the individual machines, processes it, and sends back the results. This is often the more efficient solution if a response in near real time is sufficient for the respective use case, but can bring with it privacy concerns if user data is processed. One of the major benefits of this solution is that it is easier to update the ML model as more historic data becomes available or if the process changes and the model now has to deal with slightly different inputs, for example (we&#8217;ll discuss this further in the section on messy data).</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>As these decisions heavily depend on your specific use case, they go beyond the scope of this book. Search online for &#8220;MLOps&#8221; to find out more about these topics and hire a machine learning or data engineer to set up the required infrastructure in your firm.</p>
+<p>As these decisions heavily depend on your specific use case, they go beyond the scope of this book. Search online for &#8220;MLOps&#8221; to find out more about these topics and hire a machine learning or data engineer to set up the required infrastructure in your company.</p>
 </div>
 <div class="sect4">
 <h5 id="_machine_learning_workflow">Machine Learning Workflow</h5>
 <div class="paragraph">
-<p>To solve a problem with ML, you will generally follow these broad steps:</p>
+<p>To solve a problem with ML, you will generally follow these broad steps (this is just a rough overview, in the last chapter of the book we&#8217;ll get into more of the details):</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/01c_ds_workflow/ml_problem_solution_all.png" alt="image" width="740">
 </div>
+<div class="title"><span class="small">To arrive at a working ML solution, you first need to collect lots of data, which can be in different formats (e.g., excel sheets, images, text documents (like web pages), databases, etc.). This data then needs to put in the right format such that you can apply ML (this step is called preprocessing, which we&#8217;ll discuss in a later chapter in more detail; the result after preprocessing is labeled &#8220;Good Data&#8221; here, however, please be aware that this only means that the data is in the correct format to apply ML, it doesn&#8217;t mean that the data actually has the right quality and quantity such that ML will produce good results). Then you can apply your ML algorithm to arrive at a solution for your problem. In this book, we&#8217;ll mostly focus on the last part of this workflow, while your specific domain knowledge can be very helpful for identifying a suitable problem, collecting the right data, and knowing what information to extract from the raw data.</span></div>
 </div>
 <div class="paragraph">
-<p>(This is just a rough overview, in the last chapter of the book we&#8217;ll get into more of the details.)</p>
-</div>
-<div class="paragraph">
-<p>Unfortunately, due to a lack of standardized data infrastructure in most companies, the sad truth is that about 90% of the time is spent collecting, cleaning, and otherwise preprocessing the data to get it into a format where the ML algorithms can be applied:</p>
+<p>Unfortunately, due to a lack of standardized data infrastructure in most companies, the sad truth is that usually (at least) about 90% of a Data Scientist&#8217;s time will be spent collecting, cleaning, and otherwise preprocessing the data to get it into a format where the ML algorithms can be applied:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/01c_ds_workflow/ml_problem_solution10.png" alt="image" width="740">
 </div>
+</div>
+<div class="paragraph">
+<p>While sometimes frustrating, the time spent cleaning and preprocessing your data is never wasted, as only with a solid data foundation the ML algorithms can achieve decent results.</p>
 </div>
 </div>
 </div>

@@ -734,8 +734,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 0.1,</span>
-<span id="revdate">2021-06-19</span>
+<span id="revnumber">version 1.0,</span>
+<span id="revdate">2021-08-20</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -762,7 +762,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </li>
 <li><a href="_sl_ensemble_methods.html">SL: Ensemble Methods</a>
 </li>
-<li><a href="_sl_k_nearest_neighbors_knn.html"><span class="toc-current">SL: k-nearest neighbors (kNN)</span></a>
+<li><a href="_sl_k_nearest_neighbors_knn.html"><span class="toc-current">SL: k-Nearest Neighbors (kNN)</span></a>
 </li>
 <li><a href="_sl_kernel_methods.html">SL: Kernel Methods</a>
 </li>
@@ -787,22 +787,81 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </div>
 <div id="content">
 <div class="sect2">
-<h3 id="_sl_k_nearest_neighbors_knn">SL: k-nearest neighbors (kNN)</h3>
+<h3 id="_sl_k_nearest_neighbors_knn">SL: k-Nearest Neighbors (kNN)</h3>
+<div class="openblock float-group">
+<div class="content">
 <div class="paragraph">
-<p>For a new data point, identify <em>k</em> similar samples and assign most frequent class / average:</p>
+<p><span class="image left"><img src="../images/04_supervised_intro/comparison_knn.png" alt="image" width="180"></span></p>
 </div>
+<div class="paragraph">
+<p>The first similarity-based model we&#8217;ll look at is <em>k</em>-nearest neighbors (kNN), which follows a rather naive and straightforward approach, but nevertheless often achieves a good performance on complex problems.</p>
+</div>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Main idea</dt>
+<dd>
+<p>For a new sample, identify the <em>k</em> most similar training data points and predict the average of their target values / their most frequent class:</p>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/05_supervised_other/knn.png" alt="image" width="640">
 </div>
 </div>
+</dd>
+</dl>
+</div>
 <div class="paragraph">
-<p>&#8594; <em>Lazy Learning:</em> no training, only compute similarity to training samples at test time</p>
+<p>This kind of approach is also called <em>Lazy Learning</em>, since the model doesn&#8217;t actually learn any kind of internal parameters, but all the real computation only happens when you make a prediction for a new data point (&#8594; when calling the fit-method on the sklearn model, only a search tree is built, with which the nearest neighbors for a new data point can be identified efficiently).</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.neighbors</span> <span class="keyword">import</span> <span class="include">KNeighborsRegressor</span>, <span class="include">KNeighborsClassifier</span></code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p><span class="underline">Important Parameters:</span></p>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>&#8594; <code>n_neighbors</code>: how many nearest neighbors to consider when making a prediction</p>
+</li>
+<li>
+<p>&#8594; <code>metric</code>: how to compute the similarity between the samples (default: Euclidean distance)</p>
+</li>
+<li>
+<p>&#8594; <code>weights</code>: by setting this to <code>'distance'</code> instead of the default <code>'uniform'</code>, the labels of the nearest neighbors contribute to the prediction proportionally to their distance to the new data point</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Pros</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>intuitive approach</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Careful</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>results completely depend on the similarity measure</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
 </div>
 </div>
 <div class="paragraph nav-footer">

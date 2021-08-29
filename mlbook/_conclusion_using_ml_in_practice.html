@@ -14,6 +14,8 @@
 <title>A Practitioner&#8217;s Guide to Machine Learning</title>
 <style>
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+@import url(https://fonts.googleapis.com/css?family=Inconsolata);
 /* normalize.css v2.1.1 | MIT License | git.io/normalize */
 /* ========================================================================== HTML5 display definitions ========================================================================== */
 /** Correct `block` display not defined in IE 8/9. */
@@ -62,7 +64,7 @@ hr { -moz-box-sizing: content-box; box-sizing: content-box; height: 0; }
 mark { background: #ff0; color: #000; }
 
 /** Correct font family set oddly in Safari 5 and Chrome. */
-code, kbd, pre, samp { font-family: monospace, serif; font-size: 1em; }
+code, kbd, pre, samp { font-family: "Inconsolata", monospace, serif; font-size: 1em; }
 
 /** Improve readability of pre-formatted text in all browsers. */
 pre { white-space: pre-wrap; }
@@ -213,7 +215,7 @@ strong, b { font-weight: bold; line-height: inherit; }
 
 small { font-size: 60%; line-height: inherit; }
 
-code { font-family: Consolas, "Liberation Mono", Courier, monospace; font-weight: bold; color: #7f0a0c; }
+code { font-family: "Inconsolata", Consolas, "Liberation Mono", Courier, monospace; font-weight: bold; color: #7f0a0c; }
 
 /* Lists */
 ul, ol, dl { font-size: 1em; line-height: 1.6; margin-bottom: 1.25em; list-style-position: outside; font-family: inherit; }
@@ -294,7 +296,7 @@ table thead tr th, table tfoot tr th, table tbody tr td, table tr td, table tfoo
 
 *:not(pre) > code { font-size: inherit; padding: 0; white-space: nowrap; background-color: inherit; border: 0 solid #dddddd; -webkit-border-radius: 0; border-radius: 0; text-shadow: none; }
 
-pre, pre > code { line-height: 1.4; color: black; font-family: monospace, serif; font-weight: normal; }
+pre, pre > code { line-height: 1.4; color: black; font-family: "Inconsolata", monospace, serif; font-weight: normal; }
 
 kbd.keyseq { color: #555555; }
 
@@ -646,7 +648,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
 <span id="revnumber">version 1.0,</span>
-<span id="revdate">2021-08-20</span>
+<span id="revdate">2021-08-29</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -704,10 +706,13 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="content">
 <img src="../images/01c_ds_workflow/data_science_workflow_17.png" alt="image" width="840">
 </div>
-<div class="title"><span class="small">What stays the same, is that you always start with some kind of question or problem that should be solved with ML. And to solve it, you need data, which you most likely will have to clean a bit before you can start working with it (e.g., merge different excel files, fix missing values, etc.). Then it&#8217;s time for an exploratory analysis to better understand what you&#8217;re dealing with. Depending on the type of data, you might also need to extract appropriate features or maybe engineer additional ones (for which domain knowledge will be very helpful). All these steps are again grouped under "preprocessing" <em>(red box)</em> and the bubbles are arranged in zigzag, because often you find yourself jumping back and forth between these steps (e.g., by visualizing the dataset, you might realize that you have some outliers that you want to remove, or after engineering new features, you go back and visualize the dataset again). Next comes the ML part <em>(green box)</em>: you&#8217;ll probably start with some simple model, evaluate it, try a more complex model, experiment with different hyperparameters, &#8230;&#8203; and at some point realize, that you&#8217;ve exhausted your ML toolbox and are still not happy with the performance. At which point you need to go back and either engineer better features or, if this also doesn&#8217;t help, even collect more and/or better data (e.g., more samples, data from additional sensors, cleaner labels, etc.). Finally, when you&#8217;re confident in the model&#8217;s predictions, there are two routes you might take: either the data science route, where you communicate your findings to the stakeholders (which will most likely result in further questions), or the ML-software route, where the final model is deployed somewhere in production (where you mustn&#8217;t forget to monitor the model&#8217;s performance and collect new data such that the model can continuously be improved, especially as the inevitable data or concept drifts occur). So as you can see, in reality working on a machine learning project is a very iterative process.</span></div>
+<div class="title"><span class="small">What stays the same, is that you always start with some kind of question or problem that should be solved with ML. And to solve it, you need data, which you most likely will have to clean a bit before you can start working with it (e.g., merge different excel files, fix missing values, etc.). Then it&#8217;s time for an exploratory analysis to better understand what you&#8217;re dealing with. Depending on the type of data, you might also need to extract appropriate features or maybe engineer additional ones (for which domain knowledge will be very helpful). All these steps are again grouped under "preprocessing" <em>(red box)</em> and the bubbles are arranged in zigzag, because often you find yourself jumping back and forth between these steps (e.g., by visualizing the dataset, you might realize that you have some outliers that you want to remove, or after engineering new features, you go back and visualize the dataset again). Next comes the ML part <em>(green box)</em>: you&#8217;ll probably start with some simple model, evaluate it, try a more complex model, experiment with different hyperparameters, &#8230;&#8203; and at some point realize, that you&#8217;ve exhausted your ML toolbox and are still not happy with the performance. This means you need to go back and either engineer better features or, if this also doesn&#8217;t help, even collect more and/or better data (e.g., more samples, data from additional sensors, cleaner labels, etc.). Finally, when you&#8217;re confident in the model&#8217;s predictions, there are two routes you might take: either the data science route, where you communicate your findings to the stakeholders (which will most likely result in further questions), or the ML-software route, where the final model is deployed somewhere in production (where you mustn&#8217;t forget to monitor the model&#8217;s performance and collect new data such that the model can continuously be improved, especially as the inevitable data or concept drifts occur). So as you can see, in reality working on a machine learning project is a very iterative process.</span></div>
 </div>
 <div class="paragraph">
-<p>ML in Practice</p>
+<p><strong>Hype vs. Reality</strong></p>
+</div>
+<div class="paragraph">
+<p>In the introduction, you&#8217;ve seen a lot of examples that contribute to the ML hype. However, especially when applying ML in the manufacturing industry, the reality often looks quite different and not every idea might work out as hoped:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -754,74 +759,55 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <ol class="arabic">
 <li>
 <p>Do you <em>really</em> have Big Data?<br>
-sensor measurements per second for 1 year:<br>
+measurements from 100 sensors every second for 1 year:<br>
 ❌ \(100\times 365 \times 24 \times 60 \times 60 \times 64 \text{ bits} \approx 25\text{ gb}\)<br>
 Process changes slowly &#8594; take hourly averages:<br>
 ✅ \(100\times 365 \times 24 \times 64 \text{ bits} \approx 7\text{ mb}\)</p>
 </li>
 <li>
-<p>Get more RAM!</p>
+<p>Get more RAM! (E.g., through a cloud service like AWS)</p>
 </li>
 <li>
 <p>Use an ensemble method, i.e.,<br>
 a) split your data in equal (RAM-sized) chunks,<br>
 b) train a model on each chunk,<br>
 c) combine the predictions of all models.</p>
+<div class="paragraph">
+<p>(This is also what the &#8216;big data&#8217; libraries do internally, e.g., MapReduce; especially useful when the data doesn&#8217;t fit onto a single hard drive anymore.)</p>
+</div>
 </li>
 </ol>
 </div>
 </div>
 </div>
-<div class="paragraph">
-<p>Domain knowledge is key!</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01b_intro_ml/venn3.png" alt="image" width="680">
-</div>
-</div>
-<div class="paragraph">
-<p>Machine Learning is just the tip of the iceberg</p>
-</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Machine Learning is just the tip of the iceberg</dt>
+<dd>
+<p>You were already warned that in their day-to-day operations, data scientists usually spend only about 10% of their time doing the fun machine learning stuff, while the bulk of their work consists of gathering and cleaning data. While this is true for an individual ML project, if your goal is to become a data-driven enterprise that uses AI in production for a wide range of applications, there are some additional challenges that should to be addressed (but which would typically not be the responsibility of a data scientist (alone)):</p>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/09_ml_in_practice/iceberg.png" alt="image" width="640">
 </div>
 <div class="title"><span class="small">See also: Sculley, David, et al. &#8220;Hidden technical debt in machine learning systems.&#8221; Advances in Neural Information Processing Systems. 2015.</span></div>
 </div>
-<div class="sidebarblock">
-<div class="content">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">With (big) data comes great responsibility!</dt>
+<div class="paragraph">
+<p>(However, the nice thing here is that many of these processes and infrastructure only need to be set up once and then all future ML projects will benefit from this (e.g., a centralized data infrastructure and clear governance process.)</p>
+</div>
+</dd>
+<dt class="hdlist1">Domain knowledge is key!</dt>
 <dd>
+<p>In the introduction, you&#8217;ve seen the Venn diagram showing that ML lies at the intersection of math and computer science. However, this is actually not the complete picture. In the previous chapters, you&#8217;ve hopefully picked up on the fact that in order to build trustworthy models that use meaningful features to arrive at robust conclusions, it is necessary to combine ML with some domain knowledge &amp; understanding of the business problems, what is then often referred to as Data Science:</p>
 <div class="imageblock text-center">
 <div class="content">
-<img src="../images/09_ml_in_practice/data_responsibility.png" alt="image" width="540">
+<img src="../images/01b_intro_ml/venn3.png" alt="image" width="680">
 </div>
-<div class="title"><span class="small">A fitness tracker startup thought it would be a cool idea to publish popular jogging routes based on the data they&#8217;ve collected from their users. However, since many US soldiers also happened to use the tracker and frequently jogged around their army bases, this startup thereby accidentally outed a secret army base in Afghanistan, which appeared as a bright spot on their interactive map in an area where they otherwise had only few users.</span></div>
+</div>
+<div class="paragraph">
+<p>(However, as we will argue the next section, it is unrealistic to expect an individual data scientist to be an expert in all three areas, and we therefore instead propose three data-related roles to divide responsibilities in an organization.)</p>
 </div>
 </dd>
 </dl>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Other examples of what not to do: <a href="https://incidentdatabase.ai/">AI Incidence Database</a> and</p>
-</div>
-<div class="openblock float-group">
-<div class="content">
-<div class="paragraph">
-<p><span class="image left"><img src="../images/09_ml_in_practice/book_weapons_2016.jpg" alt="image" width="140"></span></p>
-</div>
-<div class="paragraph">
-<p>Book recommendation:<br>
-<strong>Weapons of Math Destruction</strong> by Cathy O’Neil (2016)</p>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p><br></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -845,7 +831,7 @@ c) combine the predictions of all models.</p>
 <p>Data Quality &amp; Quantity: Garbage in, garbage out!</p>
 </li>
 <li>
-<p>Adversarial Attacks &amp; Causality</p>
+<p>Causality &amp; Adversarial Attacks &#8658; Explainability!!!</p>
 </li>
 </ul>
 </div>
@@ -858,7 +844,7 @@ c) combine the predictions of all models.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Don’t expect it to work right away!</p>
+<p>Don’t expect ML to work right away!</p>
 </li>
 <li>
 <p>Monitor &amp; update after initial release</p>
@@ -872,7 +858,7 @@ c) combine the predictions of all models.</p>
 </dl>
 </div>
 <div class="paragraph">
-<p>Also:</p>
+<p><span class="underline">Also:</span></p>
 </div>
 <div class="ulist">
 <ul>

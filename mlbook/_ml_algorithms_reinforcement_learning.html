@@ -14,6 +14,8 @@
 <title>A Practitioner&#8217;s Guide to Machine Learning</title>
 <style>
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+@import url(https://fonts.googleapis.com/css?family=Inconsolata);
 /* normalize.css v2.1.1 | MIT License | git.io/normalize */
 /* ========================================================================== HTML5 display definitions ========================================================================== */
 /** Correct `block` display not defined in IE 8/9. */
@@ -62,7 +64,7 @@ hr { -moz-box-sizing: content-box; box-sizing: content-box; height: 0; }
 mark { background: #ff0; color: #000; }
 
 /** Correct font family set oddly in Safari 5 and Chrome. */
-code, kbd, pre, samp { font-family: monospace, serif; font-size: 1em; }
+code, kbd, pre, samp { font-family: "Inconsolata", monospace, serif; font-size: 1em; }
 
 /** Improve readability of pre-formatted text in all browsers. */
 pre { white-space: pre-wrap; }
@@ -213,7 +215,7 @@ strong, b { font-weight: bold; line-height: inherit; }
 
 small { font-size: 60%; line-height: inherit; }
 
-code { font-family: Consolas, "Liberation Mono", Courier, monospace; font-weight: bold; color: #7f0a0c; }
+code { font-family: "Inconsolata", Consolas, "Liberation Mono", Courier, monospace; font-weight: bold; color: #7f0a0c; }
 
 /* Lists */
 ul, ol, dl { font-size: 1em; line-height: 1.6; margin-bottom: 1.25em; list-style-position: outside; font-family: inherit; }
@@ -294,7 +296,7 @@ table thead tr th, table tfoot tr th, table tbody tr td, table tr td, table tfoo
 
 *:not(pre) > code { font-size: inherit; padding: 0; white-space: nowrap; background-color: inherit; border: 0 solid #dddddd; -webkit-border-radius: 0; border-radius: 0; text-shadow: none; }
 
-pre, pre > code { line-height: 1.4; color: black; font-family: monospace, serif; font-weight: normal; }
+pre, pre > code { line-height: 1.4; color: black; font-family: "Inconsolata", monospace, serif; font-weight: normal; }
 
 kbd.keyseq { color: #555555; }
 
@@ -735,7 +737,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
 <span id="revnumber">version 1.0,</span>
-<span id="revdate">2021-08-20</span>
+<span id="revdate">2021-08-29</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -779,7 +781,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="title"><span class="small">The environment lets the agent know in which state it currently is. Then the agent selects some action, i.e., how it responds to this state, according to its internal policy function \(\pi\) (the main thing that is learned in RL). The environment evaluates the consequences of this action and returns an immediate reward (e.g., "game over" or "collected a coin"), as well as the next state, at which point the cycle repeats.</span></div>
 </div>
 <div class="paragraph">
-<p><span class="underline">Goal:</span> maximize <em>cumulative</em> reward (also called <em>return</em>), i.e., the sum of the immediate rewards received from the environment.<br>
+<p><span class="underline">Goal:</span> maximize <em>cumulative</em> reward (also called <em>return</em>), i.e., the sum of the immediate rewards received from the environment over all time steps.<br>
 The difficult thing here is that sometimes an action might not result in a big immediate reward, but is still crucial for the agent&#8217;s long-term success (e.g., finding a key at the beginning of a level and the door for which you need the key comes much later). This means the agent needs to learn to perform an optimal <em>sequence of actions</em> from <em>delayed labels</em>.</p>
 </div>
 <div class="paragraph">

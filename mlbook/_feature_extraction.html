@@ -14,6 +14,8 @@
 <title>A Practitioner&#8217;s Guide to Machine Learning</title>
 <style>
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+@import url(https://fonts.googleapis.com/css?family=Inconsolata);
 /* normalize.css v2.1.1 | MIT License | git.io/normalize */
 /* ========================================================================== HTML5 display definitions ========================================================================== */
 /** Correct `block` display not defined in IE 8/9. */
@@ -62,7 +64,7 @@ hr { -moz-box-sizing: content-box; box-sizing: content-box; height: 0; }
 mark { background: #ff0; color: #000; }
 
 /** Correct font family set oddly in Safari 5 and Chrome. */
-code, kbd, pre, samp { font-family: monospace, serif; font-size: 1em; }
+code, kbd, pre, samp { font-family: "Inconsolata", monospace, serif; font-size: 1em; }
 
 /** Improve readability of pre-formatted text in all browsers. */
 pre { white-space: pre-wrap; }
@@ -213,7 +215,7 @@ strong, b { font-weight: bold; line-height: inherit; }
 
 small { font-size: 60%; line-height: inherit; }
 
-code { font-family: Consolas, "Liberation Mono", Courier, monospace; font-weight: bold; color: #7f0a0c; }
+code { font-family: "Inconsolata", Consolas, "Liberation Mono", Courier, monospace; font-weight: bold; color: #7f0a0c; }
 
 /* Lists */
 ul, ol, dl { font-size: 1em; line-height: 1.6; margin-bottom: 1.25em; list-style-position: outside; font-family: inherit; }
@@ -294,7 +296,7 @@ table thead tr th, table tfoot tr th, table tbody tr td, table tr td, table tfoo
 
 *:not(pre) > code { font-size: inherit; padding: 0; white-space: nowrap; background-color: inherit; border: 0 solid #dddddd; -webkit-border-radius: 0; border-radius: 0; text-shadow: none; }
 
-pre, pre > code { line-height: 1.4; color: black; font-family: monospace, serif; font-weight: normal; }
+pre, pre > code { line-height: 1.4; color: black; font-family: "Inconsolata", monospace, serif; font-weight: normal; }
 
 kbd.keyseq { color: #555555; }
 
@@ -735,7 +737,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
 <span id="revnumber">version 1.0,</span>
-<span id="revdate">2021-08-20</span>
+<span id="revdate">2021-08-29</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -781,8 +783,9 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="ulist">
 <ul>
 <li>
-<p>1-hot encoding for categorical features (= creating dummy variables that enable the model to introduce a mean shift for the different categories)<br>
-<code>product category: 2</code> (out of 5) &#8658; <code>[0, 1, 0, 0, 0]</code> (value of 1 at the index of the original category, 0 everywhere else)<br></p>
+<p><span class="underline">categorical features:</span>  <strong>1-hot encoding</strong> (= creating dummy variables that enable the model to introduce a different offset for each category)<br>
+For example, we might have 4 product categories <code>circle</code>, <code>triangle</code>, <code>square</code>, and <code>pentagon</code>, where each data point (representing a product) falls into exactly one of these categories. This means, we could create four features, <code>is_circle</code>, <code>is_triangle</code>, <code>is_square</code>, and <code>is_pentagon</code>, and indicate a data point&#8217;s product category using a binary flag, i.e., a value of 1 at the index of the true category and 0 everywhere else:<br>
+e.g., product category: <code>triangle</code> &#8658; <code>[0, 1, 0, 0]</code><br></p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.preprocessing</span> <span class="keyword">import</span> <span class="include">OneHotEncoder</span></code></pre>
@@ -790,31 +793,22 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </div>
 </li>
 <li>
-<p>text documents:</p>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Bag-of-Words (BOW) TF-IDF features: </dt>
-<dd>
+<p><span class="underline">text documents:</span> <strong>Bag-of-Words (BOW) TF-IDF features:</strong><br>
+Represent a document as the weighted counts of the words occurring in the text:<br></p>
 <div class="ulist">
 <ul>
 <li>
-<p><em>Term Frequency</em> (TF): how often does the word occur in the current text document</p>
+<p><em>Term Frequency</em> (TF): how often does this word occur in the current text document</p>
 </li>
 <li>
-<p><em>Inverse Document Frequency</em> (IDF): a weight for each word depending on the number of documents the word occurs in compared to the total number of documents in the dataset. This reduces the overall influence of words that occur in almost all documents (e.g., so-called stopwords like &#8216;and&#8217;, &#8216;the&#8217;, &#8216;a&#8217;, &#8230;&#8203;)</p>
+<p><em>Inverse Document Frequency</em> (IDF): a weight to capture how significant this word is. This is computed by comparing the total number of documents in the dataset to the number of documents in which the word occurs. The IDF weight thereby reduces the overall influence of words that occur in almost all documents (e.g., so-called stopwords like &#8216;and&#8217;, &#8216;the&#8217;, &#8216;a&#8217;, &#8230;&#8203;)</p>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/07_nlp/tfidf6.png" alt="image" width="500">
 </div>
 </div>
-</li>
-</ul>
-</div>
 <div class="paragraph">
 <p>&#8594; First, the whole <em>corpus</em> (= a dataset consisting of text documents) is processed once to determine the overall vocabulary (i.e., the unique words occurring in all documents that then make up the dimensionality of the BOW feature vector) and to compute the IDF weights for all words. Then each individual document is processed to compute the final TF-IDF vector. (Please note that in the picture above, the feature vector is shown as a column vector, but later each document will be one data point, i.e., one row in the feature matrix \(X\), while the TF-IDF values for the individual words are the features in the columns.)<br></p>
-</div>
-</dd>
-</dl>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -824,9 +818,9 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Disadvantages of TF-IDF vectors</dt>
-<dd>
-<div class="ulist">
-<ul>
+</dl>
+</div>
+</li>
 <li>
 <p>similarity between individual words (e.g., synonyms) is not captured, since each word has its own distinct dimension in the feature vector and is therefore equally far away from all other words</p>
 </li>
@@ -834,9 +828,6 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <p>word order is ignored (this is also where the name &#8220;bag of words&#8221; comes from, i.e., imagine all the words from a document are thrown into a bag and shook and then you just check how often each word occurred in the text)</p>
 </li>
 </ul>
-</div>
-</dd>
-</dl>
 </div>
 </li>
 </ul>

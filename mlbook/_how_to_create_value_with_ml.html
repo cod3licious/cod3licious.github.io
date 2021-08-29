@@ -14,6 +14,8 @@
 <title>A Practitioner&#8217;s Guide to Machine Learning</title>
 <style>
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+@import url(https://fonts.googleapis.com/css?family=Inconsolata);
 /* normalize.css v2.1.1 | MIT License | git.io/normalize */
 /* ========================================================================== HTML5 display definitions ========================================================================== */
 /** Correct `block` display not defined in IE 8/9. */
@@ -62,7 +64,7 @@ hr { -moz-box-sizing: content-box; box-sizing: content-box; height: 0; }
 mark { background: #ff0; color: #000; }
 
 /** Correct font family set oddly in Safari 5 and Chrome. */
-code, kbd, pre, samp { font-family: monospace, serif; font-size: 1em; }
+code, kbd, pre, samp { font-family: "Inconsolata", monospace, serif; font-size: 1em; }
 
 /** Improve readability of pre-formatted text in all browsers. */
 pre { white-space: pre-wrap; }
@@ -213,7 +215,7 @@ strong, b { font-weight: bold; line-height: inherit; }
 
 small { font-size: 60%; line-height: inherit; }
 
-code { font-family: Consolas, "Liberation Mono", Courier, monospace; font-weight: bold; color: #7f0a0c; }
+code { font-family: "Inconsolata", Consolas, "Liberation Mono", Courier, monospace; font-weight: bold; color: #7f0a0c; }
 
 /* Lists */
 ul, ol, dl { font-size: 1em; line-height: 1.6; margin-bottom: 1.25em; list-style-position: outside; font-family: inherit; }
@@ -294,7 +296,7 @@ table thead tr th, table tfoot tr th, table tbody tr td, table tr td, table tfoo
 
 *:not(pre) > code { font-size: inherit; padding: 0; white-space: nowrap; background-color: inherit; border: 0 solid #dddddd; -webkit-border-radius: 0; border-radius: 0; text-shadow: none; }
 
-pre, pre > code { line-height: 1.4; color: black; font-family: monospace, serif; font-weight: normal; }
+pre, pre > code { line-height: 1.4; color: black; font-family: "Inconsolata", monospace, serif; font-weight: normal; }
 
 kbd.keyseq { color: #555555; }
 
@@ -646,7 +648,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
 <span id="revnumber">version 1.0,</span>
-<span id="revdate">2021-08-20</span>
+<span id="revdate">2021-08-29</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -718,7 +720,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="ulist">
 <ul>
 <li>
-<p>What could be valuable?</p>
+<p>What could be valuable? (For example, this could be insights that you generate by analyzing the data or a software module, such as a face recognition algorithm, that adds a new feature to your product.)</p>
 </li>
 <li>
 <p>What raw inputs are needed to create it? (For example, just like you can&#8217;t create a wooden chair using only fabric and metal or a few twigs you found in the forest, depending on what you want to achieve with ML, you also need the right data (quality &amp; quantity) to apply the algorithms in the first place.)</p>
@@ -836,7 +838,7 @@ In most of the book, the terms &#8220;ML algorithm&#8221; and &#8220;ML model&#8
 <p>The ML model runs on the &#8220;edge&#8221;, i.e., on each individual machine where the respective data is collected and the output of the model is used in subsequent process steps. This is often the best strategy when the results need to be computed in real time and / or a continuous Internet connection can not be guaranteed, e.g., in self-driving cars. However, the downside of this is that, depending on the type of ML model, comparatively expensive computing equipment needs to be installed in each machine, e.g., GPUs for neural network models.</p>
 </li>
 <li>
-<p>The ML model runs in the &#8220;cloud&#8221;, i.e., on a central server, e.g., in the form of a web application that receives the data from the individual machines, processes it, and sends back the results. This is often the more efficient solution if a response in near real time is sufficient for the respective use case, but can bring with it privacy concerns if user data is processed. One of the major benefits of this solution is that it is easier to update the ML model as more historic data becomes available or if the process changes and the model now has to deal with slightly different inputs, for example (we&#8217;ll discuss this further in the section on messy data).</p>
+<p>The ML model runs in the &#8220;cloud&#8221;, i.e., on a central server, e.g., in the form of a web application that receives the data from the individual machines, processes it, and sends back the results. This is often the more efficient solution if a response in near real time is sufficient for the respective use case, but can bring with it privacy concerns if user data is processed. One of the major benefits of this solution is that it is easier to update the ML model, for example, when more historic data becomes available or if the process changes and the model now has to deal with slightly different inputs (we&#8217;ll discuss this further in the section on messy data).</p>
 </li>
 </ol>
 </div>
@@ -846,7 +848,7 @@ In most of the book, the terms &#8220;ML algorithm&#8221; and &#8220;ML model&#8
 <div class="sect4">
 <h5 id="_machine_learning_workflow">Machine Learning Workflow</h5>
 <div class="paragraph">
-<p>To solve a problem with ML, you will generally follow these broad steps (this is just a rough overview, in the last chapter of the book we&#8217;ll get into more of the details):</p>
+<p>Let&#8217;s look at the second main step, &#8220;devise a working solution&#8221;, in more detail. To solve a concrete problem using ML, you will generally follow this workflow (this is just a rough overview, in the last chapter of the book we&#8217;ll get into more of the details):</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">

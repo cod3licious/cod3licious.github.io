@@ -14,6 +14,8 @@
 <title>A Practitioner&#8217;s Guide to Machine Learning</title>
 <style>
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+@import url(https://fonts.googleapis.com/css?family=Inconsolata);
 /* normalize.css v2.1.1 | MIT License | git.io/normalize */
 /* ========================================================================== HTML5 display definitions ========================================================================== */
 /** Correct `block` display not defined in IE 8/9. */
@@ -62,7 +64,7 @@ hr { -moz-box-sizing: content-box; box-sizing: content-box; height: 0; }
 mark { background: #ff0; color: #000; }
 
 /** Correct font family set oddly in Safari 5 and Chrome. */
-code, kbd, pre, samp { font-family: monospace, serif; font-size: 1em; }
+code, kbd, pre, samp { font-family: "Inconsolata", monospace, serif; font-size: 1em; }
 
 /** Improve readability of pre-formatted text in all browsers. */
 pre { white-space: pre-wrap; }
@@ -213,7 +215,7 @@ strong, b { font-weight: bold; line-height: inherit; }
 
 small { font-size: 60%; line-height: inherit; }
 
-code { font-family: Consolas, "Liberation Mono", Courier, monospace; font-weight: bold; color: #7f0a0c; }
+code { font-family: "Inconsolata", Consolas, "Liberation Mono", Courier, monospace; font-weight: bold; color: #7f0a0c; }
 
 /* Lists */
 ul, ol, dl { font-size: 1em; line-height: 1.6; margin-bottom: 1.25em; list-style-position: outside; font-family: inherit; }
@@ -294,7 +296,7 @@ table thead tr th, table tfoot tr th, table tbody tr td, table tr td, table tfoo
 
 *:not(pre) > code { font-size: inherit; padding: 0; white-space: nowrap; background-color: inherit; border: 0 solid #dddddd; -webkit-border-radius: 0; border-radius: 0; text-shadow: none; }
 
-pre, pre > code { line-height: 1.4; color: black; font-family: monospace, serif; font-weight: normal; }
+pre, pre > code { line-height: 1.4; color: black; font-family: "Inconsolata", monospace, serif; font-weight: normal; }
 
 kbd.keyseq { color: #555555; }
 
@@ -735,7 +737,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
 <span id="revnumber">version 1.0,</span>
-<span id="revdate">2021-08-20</span>
+<span id="revdate">2021-08-29</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -1050,7 +1052,7 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <div class="content">
 <img src="../images/05_supervised_nn/rnn_unrolled2.png" alt="image" width="540">
 </div>
-<div class="title"><span class="small">At the beginning of a new sequence, the hidden state \(\mathbf{x}'_0\) is initialized with zeros. Then for each new sample \(\mathbf{x}_t\) in the sequence, the hidden state is updated based on this new input (after multiplying \(\mathbf{x}_t\) with \(W_1\)), as well as the previous hidden state at \(t-1\) (by multiplying  \(\mathbf{x}'_{t-1}\) with \(W_h\)). From this new hidden state \(\mathbf{x}'_t\), the output for this time step can then be predicted (by multiplying \(\mathbf{x}'_t\) with \(W_2\)). While this network only includes a single recurrent layer, a more complex architecture could also contain multiple such layers.</span></div>
+<div class="title"><span class="small">At the beginning of a new sequence, the hidden state \(\mathbf{x}'_0\) is initialized with zeros. Then for each new sample \(\mathbf{x}_t\) (with \(t \in \{1, ..., T\}\)) in the sequence, the hidden state is updated based on this new input (after multiplying \(\mathbf{x}_t\) with \(W_1\)), as well as the previous hidden state at \(t-1\) (by multiplying  \(\mathbf{x}'_{t-1}\) with \(W_h\)). From this new hidden state \(\mathbf{x}'_t\), the output for this time step can then be predicted (by multiplying \(\mathbf{x}'_t\) with \(W_2\)). While this network only includes a single recurrent layer, a more complex architecture could also contain multiple such layers.</span></div>
 </div>
 <div class="paragraph">
 <p>The original RNN layer uses a very simple update rule for the hidden state, but there also exist more advanced types of RNNs, like the Long Short Term Memory (LSTM) network or Gated Recurrent Units (GRU), which define more complex rules for how to combine the new input with the existing hidden state, i.e., they learn in more detail what to remember and which parts to forget, which can be beneficial when the data consists of longer sequences.</p>
@@ -1088,7 +1090,7 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <div class="content">
 <img src="../images/05_supervised_nn/cnn.png" alt="image" width="840">
 </div>
-<div class="title"><span class="small">Convolutional neural networks are very well suited for processing visual information, because they can operate on the 2D images directly and do not need the input to be flattened into a vector. Furthermore, they utilize the fact that images are composed of a lot of local information (e.g., eyes, nose, and mouth are all localized components of a face). CNNs utilize two important operations, convolutions and pooling layers, to generate meaningful feature representations: A <a href="https://en.m.wikipedia.org/wiki/Convolution">convolution</a> is computed by taking a small filter patch (e.g., a \(5 \times 5\) matrix) and moving it over the image pixel by pixel and row by row, at each position multiplying the filter with the image. This results in a feature map of the same size as the original image, where a high value at some position indicates that the respective feature in the filter (e.g., an edge with a specific orientation) was detected at this position in the original image. Since this is done for multiple filters, the output after a convolutional layer consists of as many new feature maps as the layer had filters. The filter patches (i.e., multiple small matrices) are the learned weights of the CNN, and after training they can look something like the small tiles shown below the network architecture. Compared to the dense / fully-connected layers in FFNNs, which consist of one huge matrix mapping from one layer to the next, the filters used in convolutional layers are very small, i.e., there are less parameters that need to be learned. Furthermore, the fact that the filters are applied at every position in the image has a regularizing effect, since the filters need to be general enough capture relevant information in multiple areas of the images. The pooling layers then perform a subsampling of the individual feature maps by taking the max (or sometimes mean) value of multiple pixels in a small area. This reduces the dimensionality of the hidden layer representation, thereby improving the computational efficiency. Additionally, the pooling introduces some positional invariance, since it is not important anymore where exactly in some area a detected feature was, e.g., a face can be recognized even if the eyes of one person are further apart than usual or they have a longer nose, etc. Usually, the convolutional and pooling layers are interleaved, however, there is no strict rule saying that a pooling layer always has to follow a convolutional layer. With more layers, more and more complex features can be detected as a composition of the features identified in the lower layers (notice how the filters first detect edges, then individual components of a face, then full faces), i.e., by making the network deeper, we can solve more complex tasks. Finally, after multiple convolution and pooling layers, the feature representation is flattened into a vector and fed to a FFNN to perform the classification. (By the way, the edge filters learned in the first layer of a CNN nicely match the Gabor filters used in early computer vision feature engineering attempts. Combined with the subsequent pooling operation, they compute something similar as the <a href="http://fourier.eng.hmc.edu/e180/lectures/v1/node7.html">simple and complex cells</a> in the human primary visual cortex.)</span></div>
+<div class="title"><span class="small">Convolutional neural networks are very well suited for processing visual information, because they can operate on the 2D images directly and do not need the input to be flattened into a vector. Furthermore, they utilize the fact that images are composed of a lot of local information (e.g., eyes, nose, and mouth are all localized components of a face). CNNs utilize two important operations, convolutions and pooling layers, to generate meaningful feature representations: A <a href="https://en.m.wikipedia.org/wiki/Convolution">convolution</a> is computed by taking a small filter patch (e.g., a \(5 \times 5\) matrix) and moving it over the image pixel by pixel and row by row, at each position multiplying the filter with the image (see also <a href="https://youtu.be/Oqm9vsf_hvU?t=275">this animation</a>). This results in a feature map of the same size as the original image, where a high value at some position indicates that the respective feature in the filter (e.g., an edge with a specific orientation) was detected at this position in the original image. Since this is done for multiple filters, the output after a convolutional layer consists of as many new feature maps as the layer had filters. The filter patches (i.e., multiple small matrices) are the learned weights of the CNN, and after training they can look something like the small tiles shown below the network architecture. Compared to the dense / fully-connected layers in FFNNs, which consist of one huge matrix mapping from one layer to the next, the filters used in convolutional layers are very small, i.e., there are less parameters that need to be learned. Furthermore, the fact that the filters are applied at every position in the image has a regularizing effect, since the filters need to be general enough capture relevant information in multiple areas of the images. The pooling layers then perform a subsampling of the individual feature maps by taking the max (or sometimes mean) value of multiple pixels in a small area. This reduces the dimensionality of the hidden layer representation, thereby improving the computational efficiency. Additionally, the pooling introduces some positional invariance, since it is not important anymore where exactly in some area a detected feature was, e.g., a face can be recognized even if the eyes of one person are further apart than usual or they have a longer nose, etc. Usually, the convolutional and pooling layers are interleaved, however, there is no strict rule saying that a pooling layer always has to follow a convolutional layer. With more layers, more and more complex features can be detected as a composition of the features identified in the lower layers (notice how the filters first detect edges, then individual components of a face, then full faces), i.e., by making the network deeper, we can solve more complex tasks. Finally, after multiple convolution and pooling layers, the feature representation is flattened into a vector and fed to a FFNN to perform the classification. (By the way, the edge filters learned in the first layer of a CNN nicely match the Gabor filters used in early computer vision feature engineering attempts. Combined with the subsequent pooling operation, they compute something similar as the <a href="http://fourier.eng.hmc.edu/e180/lectures/v1/node7.html">simple and complex cells</a> in the human primary visual cortex.)</span></div>
 </div>
 </div>
 <div class="sect4">
@@ -1170,7 +1172,7 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 When using transfer learning, one question is whether to &#8220;freeze&#8221; the weights that were copied from the source network, i.e., to use the pretrained part of the network as a fixed feature extractor and only train the later layers that generate the final prediction. This is basically the same as first transforming the whole dataset once by pushing it through the first layers of a network trained on a similar task and then using these new feature representations to train a different model. While you often get good results when training a traditional model (e.g., a SVM) on these new feature representations, it is generally not recommended for neural networks. In some cases, you might want to keep the pretrained weights fixed for the first few epochs, but in most cases the performance will be best if all weights are eventually fine-tuned on the target task.</p>
 </div>
 <div class="paragraph">
-<p>In cases where transfer learning is not an option because the source and target tasks are too different, it can nevertheless be helpful to copy the network architecture in general (i.e., number and shape of the hidden layers). Using an appropriate architecture is often more crucial than initializing the weights themselves.</p>
+<p>In cases where transfer learning is not beneficial, because it turns out that the source and target tasks are too different after all, it can nevertheless be helpful to copy the network architecture in general (i.e., number and shape of the hidden layers). Using an appropriate architecture is often more crucial than initializing the weights themselves.</p>
 </div>
 </div>
 <div class="sect4">
@@ -1184,7 +1186,7 @@ When using transfer learning, one question is whether to &#8220;freeze&#8221; th
 <p>use sample weights for classification problems with unequal class distributions</p>
 </li>
 <li>
-<p>NN are trained with gradient descent, which requires a good learning rate (not too small, otherwise nothing is learned, not too big, otherwise it spirals out of control):</p>
+<p>NN are trained with gradient descent, which requires a good learning rate (i.e., step size for each training iteration &#8594; not too small, otherwise nothing is learned, not too big, otherwise it spirals out of control):</p>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/05_supervised_nn/nn_learning_rate4.png" alt="image" width="540">

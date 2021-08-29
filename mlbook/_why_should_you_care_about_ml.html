@@ -14,6 +14,8 @@
 <title>A Practitioner&#8217;s Guide to Machine Learning</title>
 <style>
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+@import url(https://fonts.googleapis.com/css?family=Inconsolata);
 /* normalize.css v2.1.1 | MIT License | git.io/normalize */
 /* ========================================================================== HTML5 display definitions ========================================================================== */
 /** Correct `block` display not defined in IE 8/9. */
@@ -62,7 +64,7 @@ hr { -moz-box-sizing: content-box; box-sizing: content-box; height: 0; }
 mark { background: #ff0; color: #000; }
 
 /** Correct font family set oddly in Safari 5 and Chrome. */
-code, kbd, pre, samp { font-family: monospace, serif; font-size: 1em; }
+code, kbd, pre, samp { font-family: "Inconsolata", monospace, serif; font-size: 1em; }
 
 /** Improve readability of pre-formatted text in all browsers. */
 pre { white-space: pre-wrap; }
@@ -213,7 +215,7 @@ strong, b { font-weight: bold; line-height: inherit; }
 
 small { font-size: 60%; line-height: inherit; }
 
-code { font-family: Consolas, "Liberation Mono", Courier, monospace; font-weight: bold; color: #7f0a0c; }
+code { font-family: "Inconsolata", Consolas, "Liberation Mono", Courier, monospace; font-weight: bold; color: #7f0a0c; }
 
 /* Lists */
 ul, ol, dl { font-size: 1em; line-height: 1.6; margin-bottom: 1.25em; list-style-position: outside; font-family: inherit; }
@@ -294,7 +296,7 @@ table thead tr th, table tfoot tr th, table tbody tr td, table tr td, table tfoo
 
 *:not(pre) > code { font-size: inherit; padding: 0; white-space: nowrap; background-color: inherit; border: 0 solid #dddddd; -webkit-border-radius: 0; border-radius: 0; text-shadow: none; }
 
-pre, pre > code { line-height: 1.4; color: black; font-family: monospace, serif; font-weight: normal; }
+pre, pre > code { line-height: 1.4; color: black; font-family: "Inconsolata", monospace, serif; font-weight: normal; }
 
 kbd.keyseq { color: #555555; }
 
@@ -646,7 +648,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
 <span id="revnumber">version 1.0,</span>
-<span id="revdate">2021-08-20</span>
+<span id="revdate">2021-08-29</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -748,7 +750,7 @@ While the algorithms implemented in a camera application are fairly simple and o
 <p><strong>Conversational agents (i.e. speech recognition&#8230;&#8203;)</strong></p>
 </div>
 <div class="paragraph">
-<p>Leaving the field of computer vision, now an example from the area of natural language processing (NLP): Conversational agents, like Siri or Alexa, are waiting for commands in many people&#8217;s homes. While the answers they give are mostly still scripted by humans (as in the screenshot below), the real challenge is to understand what the person had actually said in the first place. Speech recognition, i.e., automatically transcribing spoken language into text, is a rather difficult problem, since people speak with different accents and there can be additional background noises, for example.</p>
+<p>Leaving the field of computer vision, now an example from the area of natural language processing (NLP): Conversational agents, like Siri or Alexa, are waiting for commands in many people&#8217;s homes. While the answers they give are mostly still scripted by humans (as in the screenshot below), the real challenge is to understand what the person had actually said in the first place. Speech recognition, i.e., automatically transcribing spoken language into text, is a rather difficult problem, for example, since people speak with different accents and there can be additional background noises.</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -798,6 +800,21 @@ While the algorithms implemented in a camera application are fairly simple and o
 <div class="sidebarblock">
 <div class="content">
 <div class="paragraph">
+<p><strong>Neural networks getting creative</strong></p>
+</div>
+<div class="paragraph">
+<p>Lots of fun applications use neural networks to create new content, i.e., perform creative tasks that were previously thought exclusive to humans. For example, an AI has written a slightly confusing yet hilarious <a href="https://arstechnica.com/gaming/2021/05/an-ai-wrote-this-movie-and-its-strangely-moving/">script for a movie</a> (which was then actually produced!). And you&#8217;ve probably also seen some examples of <a href="https://pytorch.org/tutorials/advanced/neural_style_tutorial.html">&#8220;Neural Style Transfer&#8221;</a> before, a technique that can, for example, be used to make your social media profile picture look like a van Gogh painting. Finally, neural networks are also used to create beautiful videos that combine and transform images to accompany music, like in the video shown below:</p>
+</div>
+<div class="videoblock text-center">
+<div class="content">
+<iframe width="640" height="500" src="https://www.youtube.com/embed/85l961MmY8Y?rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
 <p><strong>Better than humans: Alpha Go</strong></p>
 </div>
 <div class="paragraph">
@@ -814,7 +831,7 @@ While the algorithms implemented in a camera application are fairly simple and o
 <div class="sidebarblock">
 <div class="content">
 <div class="paragraph">
-<p><strong>Protein folding – solving a 50-year-old challenge</strong></p>
+<p><strong>Protein folding - solving a 50-year-old challenge</strong></p>
 </div>
 <div class="paragraph">
 <p>Another major success story from DeepMind came in 2020, when they presented their AlphaFold model, which is now as accurate as traditional simulation models in estimating the 3D structure of proteins from their raw amino acid sequence. Knowing this 3D structure is important for drug development to determine which drug molecules can bind to a certain protein and therefore identify target structures that should be investigated further to find cures for diseases where the specific protein plays a key role. While exact simulation models existed for a long time to estimate a protein&#8217;s 3D structure, these were very slow and it often took several days to compute the folding for a single protein. With the new neural network models, the same computation can now be done in a matter of minutes or even seconds, thereby vastly accelerating drug development.</p>

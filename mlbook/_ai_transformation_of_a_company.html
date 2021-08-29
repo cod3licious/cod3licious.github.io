@@ -14,6 +14,8 @@
 <title>A Practitioner&#8217;s Guide to Machine Learning</title>
 <style>
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+@import url(https://fonts.googleapis.com/css?family=Inconsolata);
 /* normalize.css v2.1.1 | MIT License | git.io/normalize */
 /* ========================================================================== HTML5 display definitions ========================================================================== */
 /** Correct `block` display not defined in IE 8/9. */
@@ -62,7 +64,7 @@ hr { -moz-box-sizing: content-box; box-sizing: content-box; height: 0; }
 mark { background: #ff0; color: #000; }
 
 /** Correct font family set oddly in Safari 5 and Chrome. */
-code, kbd, pre, samp { font-family: monospace, serif; font-size: 1em; }
+code, kbd, pre, samp { font-family: "Inconsolata", monospace, serif; font-size: 1em; }
 
 /** Improve readability of pre-formatted text in all browsers. */
 pre { white-space: pre-wrap; }
@@ -213,7 +215,7 @@ strong, b { font-weight: bold; line-height: inherit; }
 
 small { font-size: 60%; line-height: inherit; }
 
-code { font-family: Consolas, "Liberation Mono", Courier, monospace; font-weight: bold; color: #7f0a0c; }
+code { font-family: "Inconsolata", Consolas, "Liberation Mono", Courier, monospace; font-weight: bold; color: #7f0a0c; }
 
 /* Lists */
 ul, ol, dl { font-size: 1em; line-height: 1.6; margin-bottom: 1.25em; list-style-position: outside; font-family: inherit; }
@@ -294,7 +296,7 @@ table thead tr th, table tfoot tr th, table tbody tr td, table tr td, table tfoo
 
 *:not(pre) > code { font-size: inherit; padding: 0; white-space: nowrap; background-color: inherit; border: 0 solid #dddddd; -webkit-border-radius: 0; border-radius: 0; text-shadow: none; }
 
-pre, pre > code { line-height: 1.4; color: black; font-family: monospace, serif; font-weight: normal; }
+pre, pre > code { line-height: 1.4; color: black; font-family: "Inconsolata", monospace, serif; font-weight: normal; }
 
 kbd.keyseq { color: #555555; }
 
@@ -646,7 +648,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
 <span id="revnumber">version 1.0,</span>
-<span id="revdate">2021-08-20</span>
+<span id="revdate">2021-08-29</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -677,6 +679,9 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div id="content">
 <div class="sect2">
 <h3 id="_ai_transformation_of_a_company">AI Transformation of a Company</h3>
+<div class="paragraph">
+<p>The famous ML researcher Andrew Ng has proposed a five-step process to transform your company into a data-driven enterprise capable of using AI in production to add value.</p>
+</div>
 <div class="sidebarblock">
 <div class="content">
 <div class="dlist left">
@@ -692,7 +697,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <p>Build an in-house AI team &amp; data infrastructure</p>
 </li>
 <li>
-<p>Provide broad AI training</p>
+<p>Provide broad AI training (for all employees)</p>
 </li>
 <li>
 <p>Develop an AI &amp; data strategy</p>
@@ -722,23 +727,27 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">[Step 2] The case for a centralized AI Team</dt>
+<dt class="hdlist1">[Step 1] Start with small pilot projects to understand the potential and challenges of using ML</dt>
 <dd>
-<p>We&#8217;ve already seen that it&#8217;s really about the intersection of Theory, Programming, and Domain Knowledge. However, it is unlikely that you&#8217;ll find a single person that is truly competent in all 3 areas. Instead, people will always have a certain focus - which also aligns very well with the 3 steps for executing a ML project:</p>
+<p>Machine learning projects are unlike traditional software projects, where you&#8217;re usually pretty certain that a solution at least exists and you only need to figure out an efficient way to get there. Instead, ML heavily relies on the available data and even though it might theoretically be possible to solve your problem with ML, this might not be the case with the data you have at hand.<br>
+Before implementing some big AI initiative spanning the whole company, it is therefore strongly recommended that you start with some smaller pilot projects that can actually be solved with ML (and your available data), in order to get a better feeling for what it means to rely on an AI to solve your problems.<br>
+If you do not yet have the necessary AI talent in-house to tackle such a project on your own, you can also partner with external consultants, which provide the ML expertise, while you supply the domain knowledge to ensure the pilot project is a success.</p>
+</dd>
+<dt class="hdlist1">[Step 2] Set up a centralized AI team and data infrastructure to carry out bigger projects efficiently &amp; effectively</dt>
+<dd>
+<p>We&#8217;ve already seen that in practice, it&#8217;s really about the intersection of Theory, Programming, and Domain Knowledge, i.e., Data Science. However, it is unlikely that you&#8217;ll find a single person that is truly competent in all three areas. Instead, people will always have a certain focus and we therefore propose three distinct roles, which also align very well with the three main steps for successfully executing a ML project:</p>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/01b_intro_ml/venn7.png" alt="image" width="680">
 </div>
+<div class="title"><span class="small">While Data Strategists work in their respective departments to identify suitable problems that can benefit from ML, Data Scientist can experiment and develop prototypical solutions to these problems, which Data Engineers then get ready for production.</span></div>
 </div>
 <div class="paragraph">
-<p>Ideally, Data Scientists and Engineers should be in their own separate team, like an in-house consultancy:</p>
-</div>
-</dd>
-</dl>
+<p>Ideally, data scientists and engineers should be in their own separate team (i.e., the &#8220;AI Team&#8221;) and work on projects from different departments like an in-house consultancy:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="../images/09_ml_in_practice/ai_team_mitceo.png" alt="image" width="440">
+<img src="../images/09_ml_in_practice/ai_team_mitceo.png" alt="image" width="400">
 </div>
 <div class="title"><span class="small">[Adapted from: &#8220;AI for everyone&#8221; by Andrew Ng (coursera.org)]</span></div>
 </div>
@@ -748,15 +757,77 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="ulist">
 <ul>
 <li>
-<p>Discuss solutions with other ML experts</p>
+<p>Data scientists can discuss solutions with other ML experts (&#8594; many problems will be similar from an algorithmic standpoint)</p>
 </li>
 <li>
-<p>Combine data from the whole company for holistic analysis</p>
+<p>Combine data from the whole company for a holistic analysis</p>
 </li>
 <li>
-<p>Funding independent from individual business unit (necessary for the up front investment in data infrastructure etc.)</p>
+<p>Funding independent from individual business unit (necessary for the up front investment in data infrastructure, time required to keep up with new research, etc.)</p>
 </li>
 </ul>
+</div>
+</dd>
+<dt class="hdlist1">[Step 3] Train other employees to recognize ML problems &amp; establish a data-driven culture</dt>
+<dd>
+<p>While data scientists need to be intimately familiar with the algorithms they are using, other employees (especially data strategists and department leaders) should have some basic understanding of what ML is (and is not) capable of, such that they can identify possible ML problems and refer them to the AI team.</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/09_ml_in_practice/ml_workshops.png" alt="image" width="840">
+</div>
+<div class="title"><span class="small">In addition to the hands-on Data Scientist workshop, I also offer Data Strategist and Executive trainings, which cover the broad ideas discussed in this book, but without the technical details.</span></div>
+</div>
+</dd>
+<dt class="hdlist1">[Step 4] Devise a cohesive strategy with long-term goals that result in a competitive advantage</dt>
+<dd>
+<p>Developing a strategy might be the first impulse of an executive when confronted with a new topic such as AI. However, since AI problems are so different from other kinds of projects, it really pays off to first gain some experience with this topic (i.e., start at step 1!). After you&#8217;ve successfully completed some pilot projects and set the wheels in motion to create an AI team as well as educate the other employees to get them on board (instead of them being afraid than an AI will soon take their job), here are a few things to consider w.r.t. a companywide strategy to give you an advantage over your competition:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Create strategic data assets that are hard for your competition to replicate:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Long-term planning: Which data might be valuable in the future? &#8594; Start collecting it now!</p>
+</li>
+<li>
+<p>Up-front investments: What infrastructure &amp; processes are needed to make the data accessible to the right people?</p>
+</li>
+<li>
+<p>How can you combine data from different divisions to enable the AI team to &#8220;connect the dots&#8221; and gain a unique edge over the competition?</p>
+</li>
+<li>
+<p>What options do you have in terms of strategic data acquisition, e.g., in the form of &#8216;free&#8217; products, where users pay with their data (like what Google, Facebook, etc. are doing)?</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Build AI-powered features that are a unique selling point for your products:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Don&#8217;t try to recreate some off-the-shelf service that could be easily procured from an outside vendor, but use ML together with your unique domain knowledge and data to build new features for your existing products to make them more appealing to your customers or open up new market segments.</p>
+</li>
+<li>
+<p>How can you establish a virtuous cycle, where your AI attracts more users, which in turn generate more data, which can then be used to train the AI to become even better and thereby attracts even more users?</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/09_ml_in_practice/ai_cycle.png" alt="image" width="170">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">[Step 5] Communicate your success</dt>
+<dd>
+<p>After successfully implementing AI within the company, you should of course communicate your accomplishments. In addition to (internal and external) press releases, this also includes, for example, job listings, which will attract more (qualified) candidates if they are formulated from an informed standpoint instead of using a bunch of random buzzwords.</p>
+</dd>
+</dl>
 </div>
 </div>
 <div class="paragraph nav-footer">

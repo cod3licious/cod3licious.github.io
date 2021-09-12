@@ -730,151 +730,90 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </style>
 
 </head>
-<body id="_sl_ensemble_methods" class="article toc2 toc-left">
+<body id="_model_selection" class="article toc2 toc-left">
 <div id="header">
 <h1>A Practitioner&#8217;s Guide to Machine Learning</h1>
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
 <span id="revnumber">version 1.0,</span>
-<span id="revdate">2021-08-29</span>
+<span id="revdate">2021-09-04</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <p><span class="toc-root"><a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a></span></p><ul class="sectlevel1">
-<li><a href="_introduction_solving_problems_with_ml.html">Introduction: Solving Problems with ML</a>
+<li><a href="_introduction.html">Introduction</a>
 </li>
 <li><a href="_ml_with_python.html">ML with Python</a>
 </li>
 <li><a href="_data_preprocessing.html">Data &amp; Preprocessing</a>
 </li>
-<li><a href="_ml_algorithms_unsupervised_supervised_learning.html">ML Algorithms: Unsupervised &amp; Supervised Learning</a>
+<li><a href="_ml_solutions_overview.html">ML Solutions: Overview</a>
+</li>
+<li><a href="_unsupervised_learning.html">Unsupervised Learning</a>
+</li>
+<li><a href="_supervised_learning.html">Supervised Learning</a>
 <ul class="sectlevel2">
-<li><a href="_ul_dimensionality_reduction.html">UL: Dimensionality Reduction</a>
+<li><a href="_different_types_of_models.html">Different types of models</a>
 </li>
-<li><a href="_ul_outlier_anomaly_detection.html">UL: Outlier / Anomaly Detection</a>
+<li><a href="_model_evaluation.html">Model Evaluation</a>
 </li>
-<li><a href="_ul_clustering.html">UL: Clustering</a>
+<li><a href="_model_selection.html"><span class="toc-current">Model Selection</span></a>
 </li>
-<li><a href="_supervised_learning_overview.html">Supervised Learning: Overview</a>
+<li><a href="_linear_models.html">Linear Models</a>
 </li>
-<li><a href="_sl_linear_models.html">SL: Linear Models</a>
+<li><a href="_decision_trees.html">Decision Trees</a>
 </li>
-<li><a href="_sl_decision_trees.html">SL: Decision Trees</a>
+<li><a href="_ensemble_methods.html">Ensemble Methods</a>
 </li>
-<li><a href="_sl_ensemble_methods.html"><span class="toc-current">SL: Ensemble Methods</span></a>
+<li><a href="_k_nearest_neighbors_knn.html">k-Nearest Neighbors (kNN)</a>
 </li>
-<li><a href="_sl_k_nearest_neighbors_knn.html">SL: k-Nearest Neighbors (kNN)</a>
-</li>
-<li><a href="_sl_kernel_methods.html">SL: Kernel Methods</a>
-</li>
-<li><a href="_information_retrieval_similarity_search.html">Information Retrieval (Similarity Search)</a>
-</li>
-<li><a href="_sl_neural_networks.html">SL: Neural Networks</a>
-</li>
-<li><a href="_time_series_forecasting.html">Time Series Forecasting</a>
-</li>
-<li><a href="_recommender_systems_pairwise_data.html">Recommender Systems (Pairwise Data)</a>
+<li><a href="_kernel_methods.html">Kernel Methods</a>
 </li>
 </ul>
 </li>
+<li><a href="_special_purpose_models.html">Special-Purpose Models</a>
+</li>
 <li><a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a>
 </li>
-<li><a href="_ml_algorithms_reinforcement_learning.html">ML Algorithms: Reinforcement Learning</a>
+<li><a href="_reinforcement_learning.html">Reinforcement Learning</a>
 </li>
-<li><a href="_conclusion_using_ml_in_practice.html">Conclusion: Using ML in Practice</a>
+<li><a href="_conclusion.html">Conclusion</a>
 </li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect2">
-<h3 id="_sl_ensemble_methods">SL: Ensemble Methods</h3>
+<h3 id="_model_selection">Model Selection</h3>
 <div class="paragraph">
-<p>What is better than one model? Multiple models!</p>
+<p>After you&#8217;ve identified an appropriate evaluation metric for your problem, you can use the resulting scores to automatically select the best model hyperparameters and ultimately the best model.</p>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Main idea</dt>
-<dd>
-<p>train multiple models &amp; combine their predictions (regression: average; classification: most frequent class)</p>
-</dd>
-</dl>
-</div>
-<div class="openblock">
+<div class="sidebarblock">
 <div class="content">
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>&#8594; different types of models</p>
-</li>
-<li>
-<p>&#8594; same type of model but with different hyperparameter settings (this can also include the random seed used when initializing the model, e.g., for neural networks)</p>
-</li>
-<li>
-<p>&#8594; models trained on different subsets of the data</p>
-</li>
-<li>
-<p>&#8594; boosting: models are trained sequentially and each additional model focuses on those data points that the previous models got wrong</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Pros</dt>
+<dt class="hdlist1">Systematic Model Selection with Cross-Validation &amp; Grid Search</dt>
 <dd>
-<div class="ulist">
-<ul>
-<li>
-<p>more stable prediction (tip: use individual models that on their own would overfit a bit)</p>
-</li>
-<li>
-<p>get an estimate of how certain the prediction is (how many models agree?)</p>
-</li>
-</ul>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/06_evaluation/cross_val8.png" alt="image" width="840">
 </div>
-</dd>
-<dt class="hdlist1">Careful</dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p>computationally expensive (depending on the models used)</p>
-</li>
-</ul>
+<div class="title"><span class="small">As we&#8217;ve established in the beginning, before experimenting with any models, the dataset should always be split into a training and test set. However, this is actually not the full picture: since you are typically experimenting with many different types of models and for each model type with dozens of hyperparameter settings, you should not use this test set to evaluate each of these model candidates, since it might happen that with all these things you try you end up choosing a model that performs really well on this test set, but then actually does not generalize to new data later and you would have no way of finding this out before deploying the model in production. Therefore, we introduce a new data split, the <strong>validation set</strong>, that is used to evaluate the different candidate models, while the test set remains locked away until you&#8217;re ready to evaluate your final model to get a realistic estimate of how it should actually perform on new data. If your original dataset is quite big, say, over 100k samples (depending on the diversity of your data, e.g., the number of classes), then it is usually enough to just split the data into training, validation, and test sets at the start, where the validation and test sets could contain about 10% of the data each and should be representative of the diversity of the original dataset. However, when the original dataset is smaller, it might not be possible to get such representative splits, which is when a technique called <strong>cross-validation</strong> (also abbreviated x-val) can come in very handy: in a <em>k</em>-fold cross-validation, the dataset is split into <em>k</em> parts, where each part is once the designated validation set, while the remaining <em>k-1</em> parts are used for training. This way, the model is trained and evaluated <em>k</em> times, each time on different splits. By computing the mean and standard deviation of the error metrics on all folds, we get a reliable estimate of the model&#8217;s generalization error and its variation due to the diversity of the dataset. While a cross-validation by itself is already a helpful trick to deal with small datasets, sklearn makes our lives even easier by combining it with a method for systematically selecting the best hyperparameter settings of a model, the <strong>grid search</strong>. In a grid search, you define the different values you want to test for each hyperparameter and then all combinations of these different values for all hyperparameters are automatically evaluated using a cross-validation. This is very useful, as often the different hyperparameter settings influence each other. However, with many individual settings it also comes at a computational cost, as the model is trained and evaluated \(k \times m_1 \times m_2 \times \dots \times m_i\) times, where \(k\) is the number of folds in the cross-validation and \(m_1...m_i\) are the number of values that need to be tested for each of the <em>i</em> hyperparameters of the model. For example, with two hyperparameters, the grid search results could look something like the plot on the left, where you see a heatmap of the average accuracy achieved with each hyperparameter combination of a model in the cross-validation. While sklearn&#8217;s grid search method will always directly tell you the best hyperparameter combination out of the ones it tested, it is important to actually check the complete set of results to verify that you have covered the whole range of possible hyperparameter values that could give good results (e.g., in the plot here we see a peak in the middle with the results getting worse to the sides, i.e., we know that better hyperparameter values are unlikely to lie outside of the range we&#8217;ve tested). It is generally a good idea to first start with a large range of values and then zoom in to the area that seems most promising (and of course knowledge about the different algorithms helps a lot in choosing reasonable settings as well).</span></div>
 </div>
-</dd>
-<dt class="hdlist1">Popular example</dt>
-<dd>
-<p><em>Random Forest</em>: multiple decision trees trained on random subsamples of the data (this exploits fact that decision trees can be sensitive to small variations in the dataset)<br></p>
 </dd>
 </dl>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.ensemble</span> <span class="keyword">import</span> <span class="include">RandomForestClassifier</span>, <span class="include">RandomForestRegressor</span></code></pre>
+<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.model_selection</span> <span class="keyword">import</span> <span class="include">GridSearchCV</span></code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>For more advanced approaches, also check out the voting ensemble and boosting methods from <a href="https://scikit-learn.org/stable/modules/ensemble.html">sklearn</a>, with which you can also combine arbitrary models into an ensemble.</p>
 </div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Ensemble methods like random forests and gradient boosting trees give very good results on real world structured datasets and dominate the leader boards for many competitions at <a href="https://www.kaggle.com/">Kaggle</a>, a website where companies can upload datasets for data scientists to benchmark themselves against each other and even win prize money. (Kaggle is also a great place to look for practice problems &amp; datasets!)
-</td>
-</tr>
-</table>
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_sl_decision_trees.html">SL: Decision Trees</a> | ↑ Up: <a href="_ml_algorithms_unsupervised_supervised_learning.html">ML Algorithms: Unsupervised &amp; Supervised Learning</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_sl_k_nearest_neighbors_knn.html">SL: k-Nearest Neighbors (kNN)</a> →</p>
+<p>← Previous: <a href="_model_evaluation.html">Model Evaluation</a> | ↑ Up: <a href="_supervised_learning.html">Supervised Learning</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_linear_models.html">Linear Models</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

@@ -730,7 +730,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </style>
 
 </head>
-<body id="_information_retrieval_similarity_search" class="article toc2 toc-left">
+<body id="_k_nearest_neighbors_knn" class="article toc2 toc-left">
 <div id="header">
 <h1>A Practitioner&#8217;s Guide to Machine Learning</h1>
 <div class="details">
@@ -753,18 +753,24 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="_unsupervised_learning.html">Unsupervised Learning</a>
 </li>
 <li><a href="_supervised_learning.html">Supervised Learning</a>
-</li>
-<li><a href="_special_purpose_models.html">Special-Purpose Models</a>
 <ul class="sectlevel2">
-<li><a href="_information_retrieval_similarity_search.html"><span class="toc-current">Information Retrieval (Similarity Search)</span></a>
+<li><a href="_different_types_of_models.html">Different types of models</a>
 </li>
-<li><a href="_deep_learning_neural_networks.html">Deep Learning (Neural Networks)</a>
+<li><a href="_model_evaluation.html">Model Evaluation</a>
 </li>
-<li><a href="_time_series_forecasting.html">Time Series Forecasting</a>
+<li><a href="_linear_models.html">Linear Models</a>
 </li>
-<li><a href="_recommender_systems_pairwise_data.html">Recommender Systems (Pairwise Data)</a>
+<li><a href="_decision_trees.html">Decision Trees</a>
+</li>
+<li><a href="_ensemble_methods.html">Ensemble Methods</a>
+</li>
+<li><a href="_k_nearest_neighbors_knn.html"><span class="toc-current">k-Nearest Neighbors (kNN)</span></a>
+</li>
+<li><a href="_kernel_methods.html">Kernel Methods</a>
 </li>
 </ul>
+</li>
+<li><a href="_special_purpose_models.html">Special-Purpose Models</a>
 </li>
 <li><a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a>
 </li>
@@ -777,30 +783,85 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </div>
 <div id="content">
 <div class="sect2">
-<h3 id="_information_retrieval_similarity_search">Information Retrieval (Similarity Search)</h3>
+<h3 id="_k_nearest_neighbors_knn">k-Nearest Neighbors (kNN)</h3>
+<div class="openblock float-group">
+<div class="content">
 <div class="paragraph">
-<p>The goal of information retrieval is to identify similar items given some query:</p>
+<p><span class="image left"><img src="../images/04_supervised_intro/comparison_knn.png" alt="image" width="180"></span></p>
 </div>
+<div class="paragraph">
+<p>The first similarity-based model we&#8217;ll look at is <em>k</em>-nearest neighbors (kNN), which follows a rather naive and straightforward approach, but nevertheless often achieves a good performance on complex problems.</p>
+</div>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Main idea</dt>
+<dd>
+<p>For a new sample, identify the <em>k</em> most similar training data points and predict the average of their target values / their most frequent class:</p>
 <div class="imageblock text-center">
 <div class="content">
-<img src="../images/05_supervised_other/inforetr.png" alt="image" width="640">
+<img src="../images/05_supervised_other/knn.png" alt="image" width="640">
 </div>
-<div class="title"><span class="small">Just like in the reverse Google image search, we here use as input a query image and get as a result the <em>k</em> images that are most similar to it.</span></div>
+</div>
+</dd>
+</dl>
 </div>
 <div class="paragraph">
-<p>This can be accomplished by building a nearest neighbors search tree (i.e., just like for the k-nearest neighbors algorithm, only that here we return the neighbors directly instead of using them to predict the label for the new data point).</p>
+<p>This kind of approach is also called <em>Lazy Learning</em>, since the model doesn&#8217;t actually learn any kind of internal parameters, but all the real computation only happens when you make a prediction for a new data point (&#8594; when calling the fit-method on the sklearn model, only a search tree is built, with which the nearest neighbors for a new data point can be identified efficiently).</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.neighbors</span> <span class="keyword">import</span> <span class="include">NearestNeighbors</span></code></pre>
+<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.neighbors</span> <span class="keyword">import</span> <span class="include">KNeighborsRegressor</span>, <span class="include">KNeighborsClassifier</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>But of course, the success of this approach is again highly dependent on being able to compute meaningful similarities between the data points. For text datasets, information retrieval often works quite well by using simple TF-IDF feature vectors together with a cosine similarity, however, for images, for example, out-of-the-box similarity measures that operate directly on the original input features (i.e., pixel values) are only able to identify images with similar colors, not necessarily similar content (e.g., an image showing a black cat would be more similar to an image showing a black dog than a white cat). To get around this problem, we could use neural networks to obtain a more informative feature representation, with which it is then easier to compute meaningful semantic similarities.</p>
+<p><span class="underline">Important Parameters:</span></p>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>&#8594; <code>n_neighbors</code>: how many nearest neighbors to consider when making a prediction</p>
+</li>
+<li>
+<p>&#8594; <code>metric</code>: how to compute the similarity between the samples (default: Euclidean distance)</p>
+</li>
+<li>
+<p>&#8594; <code>weights</code>: by setting this to <code>'distance'</code> instead of the default <code>'uniform'</code>, the labels of the nearest neighbors contribute to the prediction proportionally to their distance to the new data point</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Pros</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>intuitive approach</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Careful</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>results completely depend on the similarity measure</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>↑ Up: <a href="_special_purpose_models.html">Special-Purpose Models</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_deep_learning_neural_networks.html">Deep Learning (Neural Networks)</a> →</p>
+<p>← Previous: <a href="_ensemble_methods.html">Ensemble Methods</a> | ↑ Up: <a href="_supervised_learning.html">Supervised Learning</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_kernel_methods.html">Kernel Methods</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

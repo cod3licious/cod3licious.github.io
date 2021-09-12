@@ -730,568 +730,289 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </style>
 
 </head>
-<body id="_supervised_learning_overview" class="article toc2 toc-left">
+<body id="_kernel_methods" class="article toc2 toc-left">
 <div id="header">
 <h1>A Practitioner&#8217;s Guide to Machine Learning</h1>
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.0,</span>
-<span id="revdate">2021-08-29</span>
+<span id="revnumber">version 1.1,</span>
+<span id="revdate">2021-09-12</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <p><span class="toc-root"><a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a></span></p><ul class="sectlevel1">
-<li><a href="_introduction_solving_problems_with_ml.html">Introduction: Solving Problems with ML</a>
+<li><a href="_introduction.html">Introduction</a>
 </li>
 <li><a href="_ml_with_python.html">ML with Python</a>
 </li>
 <li><a href="_data_preprocessing.html">Data &amp; Preprocessing</a>
 </li>
-<li><a href="_ml_algorithms_unsupervised_supervised_learning.html">ML Algorithms: Unsupervised &amp; Supervised Learning</a>
+<li><a href="_ml_solutions_overview.html">ML Solutions: Overview</a>
+</li>
+<li><a href="_unsupervised_learning.html">Unsupervised Learning</a>
+</li>
+<li><a href="_supervised_learning.html">Supervised Learning</a>
 <ul class="sectlevel2">
-<li><a href="_ul_dimensionality_reduction.html">UL: Dimensionality Reduction</a>
+<li><a href="_different_types_of_models.html">Different types of models</a>
 </li>
-<li><a href="_ul_outlier_anomaly_detection.html">UL: Outlier / Anomaly Detection</a>
+<li><a href="_model_evaluation.html">Model Evaluation</a>
 </li>
-<li><a href="_ul_clustering.html">UL: Clustering</a>
+<li><a href="_linear_models.html">Linear Models</a>
 </li>
-<li><a href="_supervised_learning_overview.html"><span class="toc-current">Supervised Learning: Overview</span></a>
-<ul class="sectlevel3">
-<li><a href="_supervised_learning_overview.html#_different_types_of_models">Different types of models</a>
+<li><a href="_decision_trees.html">Decision Trees</a>
 </li>
-<li><a href="_supervised_learning_overview.html#_model_evaluation">Model Evaluation</a>
+<li><a href="_ensemble_methods.html">Ensemble Methods</a>
 </li>
-</ul>
+<li><a href="_k_nearest_neighbors_knn.html">k-Nearest Neighbors (kNN)</a>
 </li>
-<li><a href="_sl_linear_models.html">SL: Linear Models</a>
-</li>
-<li><a href="_sl_decision_trees.html">SL: Decision Trees</a>
-</li>
-<li><a href="_sl_ensemble_methods.html">SL: Ensemble Methods</a>
-</li>
-<li><a href="_sl_k_nearest_neighbors_knn.html">SL: k-Nearest Neighbors (kNN)</a>
-</li>
-<li><a href="_sl_kernel_methods.html">SL: Kernel Methods</a>
-</li>
-<li><a href="_information_retrieval_similarity_search.html">Information Retrieval (Similarity Search)</a>
-</li>
-<li><a href="_sl_neural_networks.html">SL: Neural Networks</a>
-</li>
-<li><a href="_time_series_forecasting.html">Time Series Forecasting</a>
-</li>
-<li><a href="_recommender_systems_pairwise_data.html">Recommender Systems (Pairwise Data)</a>
+<li><a href="_kernel_methods.html"><span class="toc-current">Kernel Methods</span></a>
 </li>
 </ul>
+</li>
+<li><a href="_special_purpose_models.html">Special-Purpose Models</a>
 </li>
 <li><a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a>
 </li>
-<li><a href="_ml_algorithms_reinforcement_learning.html">ML Algorithms: Reinforcement Learning</a>
+<li><a href="_reinforcement_learning.html">Reinforcement Learning</a>
 </li>
-<li><a href="_conclusion_using_ml_in_practice.html">Conclusion: Using ML in Practice</a>
+<li><a href="_conclusion.html">Conclusion</a>
 </li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect2">
-<h3 id="_supervised_learning_overview">Supervised Learning: Overview</h3>
-<div class="paragraph">
-<p>Finally, we move on to supervised learning:</p>
-</div>
-<div class="imageblock text-center">
+<h3 id="_kernel_methods">Kernel Methods</h3>
+<div class="openblock float-group">
 <div class="content">
-<img src="../images/01c_ml_overview/ml_algorithms_supervised.png" alt="image" width="840">
+<div class="paragraph">
+<p><span class="image left"><img src="../images/04_supervised_intro/comparison_kernel.png" alt="image" width="180"></span></p>
+</div>
+<div class="paragraph">
+<p>Kernel methods are more sophisticated similarity-based models and were the hot stuff in the late 90s, when datasets were still of moderate size and computers weren&#8217;t fast enough to train large neural networks. They have some elegant math behind them, but please don&#8217;t be discouraged, if you don&#8217;t fully understand it the first time you read it&#8201;&#8212;&#8201;this is completely normal 😉.</p>
+</div>
 </div>
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Supervised learning in a nutshell</dt>
+<dt class="hdlist1">Main idea / &#8220;Kernel Trick&#8221;</dt>
 <dd>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/04_supervised_intro/sl_steps5.png" alt="image" width="440">
-</div>
-<div class="title"><span class="small">Before you start, you need to be very clear on what you want, i.e., what should be predicted, how will predicting this variable help you achieve your overall goals and create value, and how do you measure success (i.e., what is the Key Performance Indicator (KPI) of your process)? Then, you need to collect data&#8201;&#8212;&#8201;and since we&#8217;re doing supervised learning now, this needs to be <em>labeled</em> data (with the labels corresponding to the target variable that you want to predict). Next, you can "learn" (or "train" or "fit") a model on this data and finally use it to generate predictions for new data points.</span></div>
-</div>
+<p>by working on similarities (computed with special <em>kernel functions</em>) instead of the original features, linear methods can be applied to solve non-linear problems</p>
 </dd>
 </dl>
+</div>
+<div class="paragraph">
+<p>Assume there exists some function \(\phi(\mathbf{x})\) (also called a &#8216;feature map&#8217;) with which the input data can be transformed in such a way that the problem can be solved with a linear method (basically the ideal outcome of feature engineering).<br>
+For example, in the simple toy dataset shown below, the two classes become linearly separable when projecting the original input features into the space of their second order monomials:</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="../images/05_supervised_other/kernels_xspace.png" alt="image" width="340"></span> &#8594; \(\phi(\mathbf{x})\) &#8594;
+<span class="image"><img src="../images/05_supervised_other/kernels_zspace.png" alt="image" width="340"></span><br>
+<span class="small">While in the original 2D representation on the left you would need a circle (i.e., a non-linear function) to separate the blue from the red points, in the 3D plot on the right, the data points are arranged in a cone shape, where you could cut off the red points at the tip of the cone with a hyperplane.</span></p>
+</div>
+<div class="paragraph">
+<p>Of course, coming up with such a feature map \(\phi(\mathbf{x})\), especially for more complex problems, isn&#8217;t exactly easy. But as you will see, we don&#8217;t actually need to know what this transformation looks like!</p>
+</div>
+<div class="paragraph">
+<p><span class="underline"><strong>Example:</strong> (Kernel) Ridge Regression</span></p>
+</div>
+<div class="paragraph">
+<p>Remember: In a linear regression model, the prediction for a new data point \(\mathbf{x}'\) is computed as the scalar product of the feature vector with the weight vector \(\mathbf{w}\):</p>
+</div>
+<div class="stemblock">
+<div class="content">
+\[\hat{y}' = \mathbf{x}' \mathbf{w}\]
+</div>
+</div>
+<div class="paragraph">
+<p>(for simplicity, we omit the bias term here; using a bias term is equivalent to including an additional input feature that is always 1).</p>
+</div>
+<div class="paragraph">
+<p>The parameters of a linear ridge regression model are found by taking the derivative of the objective function,</p>
+</div>
+<div class="stemblock">
+<div class="content">
+\[\| \mathbf{y} - \mathbf{Xw}\|_2^2 + \lambda \| \mathbf{w}\|_2^2\]
+</div>
+</div>
+<div class="paragraph">
+<p>with respect to \(\mathbf{w}\), setting it to 0, and solving for \(\mathbf{w}\) (i.e. to find the minimum). This gives the following solution:</p>
+</div>
+<div class="stemblock">
+<div class="content">
+\[\mathbf{w} = (\mathbf{X}^\top \mathbf{X} +\lambda I)^{-1}\mathbf{X}^\top \mathbf{y}\]
+</div>
+</div>
+<div class="paragraph">
+<p>where \(\mathbf{X} \in \mathbb{R}^{n \times d}\) is the feature matrix of the training data and \(\mathbf{y} \in \mathbb{R}^n\) are the corresponding target values.</p>
+</div>
+<div class="paragraph">
+<p>Now we replace every occurrence of the original input features \(\mathbf{x}\) in the formulas with the respective feature map \(\phi(\mathbf{x})\) and do some linear algebra:</p>
+</div>
+<div class="stemblock">
+<div class="content">
+\[\begin{aligned}
+\hat{y}' &amp;= \phi(\mathbf{x}') \mathbf{w} \quad\quad\quad\text{ with }\; \mathbf{w} = (\phi(\mathbf{X})^\top \phi(\mathbf{X}) +\lambda I)^{-1}\phi(\mathbf{X})^\top \mathbf{y}\\
+&amp;= \phi(\mathbf{x}') (\phi(\mathbf{X})^\top \phi(\mathbf{X}) +\lambda I)^{-1}\phi(\mathbf{X})^\top \mathbf{y}\\
+&amp; \quad\quad\vdots\\
+&amp;= \underbrace{\phi(\mathbf{x}')\phi(\mathbf{X})^\top}_{\mathbf{k}'= k(\mathbf{x'}, \mathbf{X})} (\underbrace{\phi(\mathbf{X}) \phi(\mathbf{X})^\top}_{\mathbf{K} = k(\mathbf{X}, \mathbf{X})} +\lambda I)^{-1} \mathbf{y}\\
+&amp;= \mathbf{k}'\underbrace{(\mathbf{K}  +\lambda I)^{-1} \mathbf{y}}_{\mathbf{\alpha}} = \sum_{i=1}^n k(\mathbf{x}', \mathbf{x}_i) \alpha_i
+\end{aligned}\]
+</div>
+</div>
+<div class="paragraph">
+<p>After the reformulation, every \(\phi(\mathbf{x})\) only occurs in scalar products with other \(\phi(\mathbf{x})\), and all these scalar products were replaced with a so-called <em>kernel function</em> \(k(\mathbf{x}', \mathbf{x})\), where \(k(\mathbf{X}, \mathbf{X}) = \mathbf{K} \in \mathbb{R}^{n \times n}\) is the <em>kernel matrix</em>, i.e., the similarity of all training points to themselves, and \(k(\mathbf{x}', \mathbf{X}) = \mathbf{k}' \in \mathbb{R}^{n}\) is the <em>kernel map</em>, i.e., the similarities of the new data point to all training points.</p>
+</div>
+<div class="paragraph">
+<p>Now the prediction \(\hat{y}'\) is computed as a weighted sum of the similarities in the kernel map, i.e., where in the normal linear regression model the sum goes over the number of input features <em>d</em> and the weight vector is denoted as \(\mathbf{w}\), here the sum goes over the number of data points <em>n</em> and the weight vector is called \(\mathbf{\alpha}\).</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="paragraph">
-<div class="title"><span class="underline">What does &#8220;learning&#8221; mean?</span></div>
-<p><span class="image left"><img src="../images/04_supervised_intro/linreg.png" alt="image" width="440"></span></p>
+<p><strong>Kernel Functions</strong></p>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Goal</dt>
-<dd>
-<p>Describe the relationship between input(s) \(x\) and output \(y\) (with a model)</p>
-</dd>
-<dt class="hdlist1">1. Select a model class</dt>
-<dd>
-<p>Assumption: relationship is linear<br>
-&#8594; linear regression model: \(y = f(x) = b + w\cdot x\)</p>
-</dd>
-<dt class="hdlist1">2. Define an objective</dt>
-<dd>
-<p>Minimize error between true &amp; predicted \(y\):<br>
-&#8594; \(\min_{b,w} \sum_i (y_i - f(x_i))^2\)</p>
-</dd>
-<dt class="hdlist1">3. Find best model parameters given the data</dt>
-<dd>
-<p>i.e., solve the optimization problem defined in step 2<br>
-&#8658; \(f(x) = -2.7 + 5.2x\)</p>
-</dd>
-</dl>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Don’t stop there! (Depth of analytics revisited):</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/04_supervised_intro/supervised_more4.png" alt="image" width="540">
-</div>
-<div class="title"><span class="small">In many use cases, it is not enough to simply predict the target for a new data point (e.g., predict whether a product produced under certain conditions will be of high quality or not). Instead, it is often necessary to additionally be able to explain <em>why</em> this prediction was made (e.g., which input feature values were the deciding factors&#8201;&#8212;&#8201;both to better understand possible root causes of a problem, but also to be assured that the model is basing its predictions on reasonable assumptions). Furthermore, a learned model can also be used within an outer optimization loop, i.e., in the simplest case one could systematically check what product quality the model predicts for different process conditions and then select the settings with the highest predicted quality to produce new products (but keep in mind that ML models are only build to interpolate, not extrapolate, i.e., make sure the settings that are tested are withing the training domain).</span></div>
-</div>
-<div class="paragraph">
-<p>Supervised learning in a nutshell – more formally, with scikit-learn:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/04_supervised_intro/supervised_learning_14.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">First, the available data needs to be split into a training and test part (please note that for them to better fit in the graphic, \(X\) and \(\mathbf{y}\) were rotated here by 90 degrees, i.e., as an exception, the features are here in the rows and the data points are in the columns), where we&#8217;re assigning the majority of the data points to the training set and the rest to the test set. Next, you need to decide on the type of model that you want to use to describe the relationship between the inputs \(X\) and the outputs \(\mathbf{y}\) and this model also comes with some hyperparameters that you need to set (which are passed as arguments when instantiating the respective sklearn class). Then you can call the <code>.fit(X_train, y_train)</code> method on the model to learn the internal model parameters by minimizing some model-specific objective function on the training data. Now the model is ready to generate predictions for new data points, i.e., by calling <code>.predict(X_test)</code>, you obtain the predicted values \(\mathbf{\hat{y}}\) for the test points. Finally, to get an estimate of how useful the model will be in practice, we evaluate it by comparing the predicted target values of the test set to the corresponding true labels.</span></div>
-</div>
-<div class="sect3">
-<h4 id="_different_types_of_models">Different types of models</h4>
-<div class="paragraph">
-<p>The most important task of a data scientist is to select an appropriate model (and its hyperparameters) for solving a problem.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<div class="title"><span class="underline">3 considerations when choosing a supervised learning model</span></div>
-<p></p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">1. Problem type</dt>
-<dd>
-<p>What kind of problem are you trying to solve: <em>regression</em> or <em>classification</em>?<br>
-&#8594; depends on the type of target variable, i.e., if it has continuous or discrete values</p>
-</dd>
-<dt class="hdlist1">2. Problem complexity</dt>
-<dd>
-<p>How complicated is the relationship between the input features and target variable: <em>linear</em> or <em>non-linear</em>?<br>
-&#8594; depends on the available data</p>
-</dd>
-<dt class="hdlist1">3. Algorithmic approach</dt>
-<dd>
-<p>Which type of model works best for this dataset size &amp; complexity: <em>features-based</em> or <em>similarity-based</em>?<br>
-&#8594; depends on the model you choose, i.e., it either learns according to the first or second strategy</p>
-</dd>
-</dl>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_problem_type_regression_vs_classification">Problem type: Regression vs. Classification</h5>
-<div class="paragraph">
-<p>The type of the target variable that you need to predict determines whether you are dealing with a regression or classification problem.</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Regression</dt>
-<dd>
-<p>prediction of continuous value(s) <em>(e.g., price, number of users, etc.)</em></p>
-</dd>
-<dt class="hdlist1">Classification</dt>
-<dd>
-<p>prediction of discrete values, either<br></p>
-<div class="ulist">
-<ul>
-<li>
-<p>binary <em>(e.g., product will be faulty: yes/no)</em> or</p>
-</li>
-<li>
-<p>multi-class <em>(e.g., picture displays cat/dog/house/car/&#8230;&#8203;)</em></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>&#8594; many classification models actually predict probabilities for the different classes (i.e., a score between 0 and 1 for each class), and the final class label is then chosen by applying a threshold on this score (typically 0.5 for binary classification problems) or by taking the outcome with the highest score (in multi-class problems)</p>
-</div>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>&#8658; Whether you are dealing with a regression or classification problem is important to know and has implications for your overall workflow, e.g., how you should define &amp; measure success. However, the actual models that you can use to solve these problems are very similar, e.g., almost all <code>sklearn</code> models exist in either a <code>Regressor</code> or <code>Classifier</code> variant to generate the appropriate output for the respective problem type.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<p>In some cases it is even entirely up to you whether to frame the task as a regression or classification problem.</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Example</dt>
-<dd>
-<p>A product is deemed faulty, if it breaks within the warranty period of 6 months (where we assume that normally the product would be used at most 300 times during these 6 months).</p>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>Depending on your use case, you might either be interested in how long a product lasts in total, or only whether this product will be a warranty case or not, i.e., you could formulate your problem as:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>a regression task: predict, <em>after how many uses</em> the product will break</p>
-</li>
-<li>
-<p>a classification task: predict, <em>if the product will break</em> before it was used 300 times</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>However, in many cases where you have a continuous target variable, you can learn a more accurate prediction model with the regression approach, since here the labels carry much more information and edge case errors are not penalized as much (e.g., in the classification case, predicting that a product is okay when it lasted 299 uses would be just as wrong as predicting &#8216;okay&#8217; for a product that lasted only 2 uses). If the workflow where your model is later embedded in requires a classification output, you can still transform the regression output of the model into a classification output later by simply setting a threshold, i.e., in this case if the regression model predicts a value lower than 300 you would output &#8216;faulty&#8217; and otherwise &#8216;okay&#8217;.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_problem_complexity_linear_or_non_linear">Problem complexity: linear or non-linear</h5>
-<div class="paragraph">
-<p>In accordance with the product warranty example described above, we now illustrate what it means for a problem to be linear or non-linear on a small toy dataset:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/04_supervised_intro/problem_types2.png" alt="image" width="340">
-</div>
-<div class="title"><span class="small">The first input feature we consider is the production temperature, which is an independent variable, since the operator in control of the production process is free to just choose some value here. The target variable that we want to predict is the lifetime of the produced product and depends on this input variable. For the different temperature settings that were tested, we have collected the respective lifetime measurements (and, as you can imagine, getting such labels can be quite expensive, since these products not only needed to be produced, but also go through some stress test to determine after how many uses they break).</span></div>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/04_supervised_intro/problem_types8.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">As you might have already guessed, the relationship between the target variable lifetime and the input feature temperature <em>(top left)</em> is a linear one, i.e., you could describe it by a straight line. Since the lifetime is a continuous variable, this is a regression problem. However, by defining some cutoff on the target variable (e.g., at 300 usages for in and out of warranty), this problem can be transformed into a classification problem, where the task here is to distinguish between faulty and good products <em>(bottom left)</em>. Again, the relationship between the target and the input variable temperature is linear, since the problem can be solved by drawing one line parallel to the y-axis, which defines some threshold on the temperature, where all data points with a temperature lower than this threshold would be classified as &#8216;ok&#8217; and those products produced at a higher temperature would be predicted as &#8216;broken&#8217;. In the center panel, we have the same situation only this time with a different input feature, pressure. In the regression case, the lifetime values now follow some quadratic curve, i.e., we could not adequately describe the relationship between our target variable and the input feature &#8216;pressure&#8217; with a single straight line, which makes this a non-linear problem. Similarly, in the classification case below, we would need to define two thresholds on the pressure values to separate the two classes, i.e., again we could not solve the problem with a single straight line. While these 4 examples were univariate problems, i.e., with a single input variable, in machine learning we usually deal with multivariate problems, often with hundreds or even thousands of input features. For the case of two input variables, this is illustrated on the right, where the data is now plotted in a scatter plot where the axis correspond to the features temperature and pressure, while the color of the dots indicates the target value (either on a continuous scale or the discrete class labels). In the multidimensional case, a problem would be considered linear if it can by solved by a single hyperplane (instead of a line) in the input feature space.</span></div>
-</div>
-<div class="paragraph">
-<p>As illustrated in the above examples, whether your problem can be solved by a simple linear model (i.e., a single straight line or hyperplane) or requires a more complex non-linear model to adequately describe the relationship between the input features and target variable entirely depends on the given data. This also means that sometimes you might just need to install an additional sensor to measure some feature that is linearly related to your target variable or do some feature engineering to then be able to get satisfactory results with a linear model, i.e., sometimes, with the right preprocessing, a non-linear problem can also be transformed into a linear one.</p>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_algorithmic_approaches_features_based_vs_similarity_based_models">Algorithmic approaches: Features-based vs. similarity-based models</h5>
-<div class="paragraph">
-<p>Finally, lets look at how the different models work and arrive at their predictions. This is what really distinguishes the various algorithms, whereas we have already established that there always exists a regression and a classification variant of each model and some models are inherently expressive enough that they can be used to describe non-linear relationships in the data, while others will only yield satisfactory results if there exists a linear relationship between the available input features and the target variable.</p>
-</div>
-<div class="paragraph">
-<p>While features-based models learn some parameters or rules that are applied directly to a new data point&#8217;s input feature vector \(\mathbf{x} \in \mathbb{R}^d\), for the similarity-based models, first a vector \(\mathbf{s} \in \mathbb{R}^n\) with the similarities of the new data point to the training data points is computed and the model then operates on this vector instead of the original input features:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/04_supervised_intro/algo_approach_handout.png" alt="image" width="640">
-</div>
-<div class="title"><span class="small"><em>Left:</em> Features-based models can be described by a parametrized function that operates on the original input features. For example, in the regression case <em>(top)</em>, the predicted target for a new data point would be the value on the line corresponding to its input features, while in the classification case <em>(bottom)</em>, the prediction would be made according to on which side of the dividing line the inputs lie. <em>Right:</em> The similarity-based models make the prediction for a new sample based on this data point&#8217;s nearest neighbors. Depending on the type of model, this could be as simple as predicting the average target value of the nearest neighbors (regression, <em>top</em>) or their most frequent class (classification, <em>bottom</em>).</span></div>
-</div>
-<div class="admonitionblock important">
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-important" title="Important"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-This distinction between algorithmic approaches is not only interesting from a theoretical point of view, but even more so from a user perspective: when using a similarity-based algorithm, you have to be very careful which features you include when computing the similarities, make sure that these features are appropriately scaled, and in general think about which similarity measure is appropriate for your data (e.g., you could capture domain knowledge by using a custom similarity function specifically tailored to your problem). When using a features-based model, on the other hand, the model itself can learn which features are most predictive by assigning individual weights to each input feature and therefore possibly ignore irrelevant features or account for variations in heterogeneous data (of course, domain knowledge is still beneficial here, as it can, for example, guide you when engineering additional, more informative input features).
+A kernel function is basically a similarity function, but with the special requirement that the similarity matrix computed using this function, also called the <em>kernel matrix</em>, is positive semi-definite, i.e., has only eigenvalues \(\geq 0\).
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Okay, now, when should you use which approach?</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Features-based models</dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p>number of features should be less than the number of samples!</p>
-</li>
-<li>
-<p>good for heterogeneous data due to individual feature weights (although scaling is usually still a good idea)</p>
-</li>
-<li>
-<p>easier to interpret (since they describe a direct relationship between input features &amp; target)</p>
-</li>
-</ul>
-</div>
-</dd>
-<dt class="hdlist1">Similarity-based models</dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p>non-linear models for small datasets</p>
-</li>
-<li>
-<p>need appropriate similarity function &#8594; domain knowledge! (especially for heterogeneous data)</p>
-</li>
-</ul>
-</div>
-</dd>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/04_supervised_intro/comparison_all4.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">This is an overview of the different features-based and similarity-based models we&#8217;ll discuss in the following chapters, as well as for which dataset size and problem complexity they are appropriate: While linear models are rather simple and&#8201;&#8212;&#8201;as the name suggests&#8201;&#8212;&#8201;only yield good results for linear problems, they are very efficient and can be applied to large datasets. Decision trees are very efficient as well, but can also capture more complex relationships between inputs and output. Similarity-based models like <em>k</em>-nearest neighbors (kNN) or their more sophisticated cousin kernel methods, on the other hand, can be used to solve very complex non-linear problems, however, as they require the computation of a similarity matrix that scales with the number of training points, they should only be applied to comparatively small datasets (~ a few thousand points). Finally, neural networks are the most sophisticated model class and can be used to solve extremely complex problems, but they are also rather data hungry (depending on the size of the network).</span></div>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_model_evaluation">Model Evaluation</h4>
-<div class="paragraph">
-<p>Since in supervised learning problems we know the ground truth, we can now objectively evaluate different models and benchmark them against each other.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<p><strong>Is this a good model for the task?</strong><br>
-i.e., does the model generate <em>reliable predictions</em> for <em>new data points</em>?</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>split the data into training and test sets to be able to get a reliable estimate of how your model will later perform when applied to new data points that it wasn&#8217;t trained on</p>
-</li>
-<li>
-<p>quantify the quality of the model’s predictions (on the test set) with a suitable evaluation metric (depending on the problem type)<br></p>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Evaluation metrics: </dt>
-<dd>
-<p><em>Regression:</em> mean absolute error, mean squared error, \(R^2\)<br>
-<em>Classification:</em> (balanced) accuracy<br>
-<em>Ranking:</em> <a href="https://en.wikipedia.org/wiki/Precision_and_recall">precision/recall</a> (&#8594; F1 score), hits@<em>k</em></p>
-</dd>
-</dl>
+<p>There exist different kinds of kernel functions and depending on how they are computed, they induce a different kind of kernel feature space \(\phi(\mathbf{x})\), where computing the kernel function for two points would be the same as computing the scalar product of their vectors in this kernel feature space.</p>
 </div>
 <div class="paragraph">
-<p>&#8658; are some mistakes worse than others? (e.g., consider false positives vs. false negatives in medical tests)<br>
-&#8658; always choose <em>a single metric/KPI</em> to optimize! (maybe: additional constraints like runtime)</p>
-</div>
-</li>
-<li>
-<p>compare your model to a stupid baseline (predict mean / most frequent class)</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_evaluation_metrics">Evaluation Metrics</h5>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Mean absolute error</dt>
-<dd>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/06_evaluation/error_mean_absolute.png" alt="image" width="480">
-</div>
-<div class="title"><span class="small">This is probably the most straightforward regression error metric and additionally easy to interpret since the error is given in the same units of measurement as the target variable (e.g., if you&#8217;re predicting a price in euros, you would know exactly by how many euros the model is off on average).</span></div>
-</div>
-</dd>
-</dl>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.metrics</span> <span class="keyword">import</span> <span class="include">mean_absolute_error</span></code></pre>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Mean squared error</dt>
-<dd>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/06_evaluation/error_mean_squared.png" alt="image" width="480">
-</div>
-<div class="title"><span class="small">Since this regression error metric is differentiable, it is often used internally when optimizing the parameters of a model (e.g., in linear regression). When reporting the final error of a model, one often takes the square root of the result, i.e., instead reports the root mean squared error (RMSE), since this is again in the same units as the original target variable.</span></div>
-</div>
-</dd>
-</dl>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.metrics</span> <span class="keyword">import</span> <span class="include">mean_squared_error</span></code></pre>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">\(R^2\)</dt>
-<dd>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/06_evaluation/error_r2.png" alt="image" width="700">
-</div>
-<div class="title"><span class="small">The \(R^2\), or coefficient of determination, essentially compares the MSE of a regression model against the MSE of the stupid baseline for the regression (i.e., predicting the mean), i.e., it normalizes the MSE by the variance of the data. In the best case, the \(R^2\) is 1, i.e., when the model explains the data perfectly, and in the worst case, it can even become negative, i.e., when the model performs worse then simply predicting the mean.</span></div>
-</div>
-</dd>
-</dl>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.metrics</span> <span class="keyword">import</span> <span class="include">r2_score</span></code></pre>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Classification errors in detail</dt>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/06_evaluation/error_class2.png" alt="image" width="560">
-</div>
-<div class="title"><span class="small">Most (binary) classification models predict the probability that a sample belongs to a certain class, i.e., a score between 0 and 1. By applying a threshold on this probability (typically at 0.5), the prediction score can be transformed into the class label, i.e., either predicting the positive or negative class for this sample. We distinguish between two types of mistakes that a classification model can make in this prediction: <em>false positives (FP)</em>, i.e., incorrectly predicting the positive class for samples belonging to the negative class, and <em>false negatives (FN)</em>, i.e., incorrectly predicting the negative class for samples from the positive class. Depending on the goal of your application, one type of error might be worse than the other, e.g., in a medical test you might rather tell someone that they should come in for a second test to confirm some problematic results than send them home with an undetected disease. By moving the classification threshold, you can control the trade-off between FP and FN.</span></div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Accuracy</dt>
-<dd>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/06_evaluation/error_class_accuracy.png" alt="image" width="440">
-</div>
-<div class="title"><span class="small">The accuracy is the most widely used classification evaluation metric, where you simply check out of all samples, how many were classified correctly (i.e., TP and TN). However, this can be misleading for unequal class distributions and you should always compare the accuracy of your model against the stupid baseline for classification, i.e., what the accuracy would be for a &#8220;model&#8221; that always predicts the most frequent class.</span></div>
-</div>
-</dd>
-</dl>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.metrics</span> <span class="keyword">import</span> <span class="include">accuracy_score</span></code></pre>
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Unbalanced class distributions: Accuracy vs. Balanced Accuracy</dt>
-<dd>
-<p>Below you see the decision boundaries of two models on a toy dataset (where the shaded background indicates whether the model would predict the blue or red class for a data point in this area). Which model do you think is more useful?</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/06_evaluation/balanced_acc4.png" alt="image" width="640">
-</div>
-<div class="title"><span class="small">With unbalanced class distributions, e.g., in this case a lot more samples from the blue compared to the red class, the accuracy of a model that simply always predicts the most frequent class can be quite large. But while an accuracy of 0.9 might sound impressive when you report the performance of your model to your project&#8217;s stakeholders, this doesn&#8217;t necessarily mean that the model is actually useful, especially since in real world problems the undersampled class is often the one we care about most (e.g., people with a rare disease or products that have a defect). Instead, the balanced accuracy is often the more informative measure when evaluating classification models and can help us to distinguish between a model that has actually learned something and the stupid baseline.</span></div>
-</div>
-</dd>
-</dl>
-</div>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Balanced Accuracy</dt>
-<dd>
-<p>To avoid pitfalls of accuracy: consider misclassification rates of both classes separately:</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/06_evaluation/error_class_balanced_accuracy.png" alt="image" width="440">
-</div>
-<div class="title"><span class="small">For the balanced accuracy, first the faction of correctly classified points is computed for each class individually and then these values are averaged.</span></div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.metrics</span> <span class="keyword">import</span> <span class="include">balanced_accuracy_score</span></code></pre>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Multi-class problems: micro vs. macro averaging</dt>
-<dd>
-<p>The accuracy and balanced accuracy scores can also be generalized for the multi-class classification case. Here we instead use the terms micro- and macro-averaging to describe the two strategies (which can also be used for other kinds of metrics like the F1-score), where micro-averaging means we compute the score by averaging over all samples, while macro-averaging means we first compute the score for each class separately and then average over the values for the different classes.</p>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>micro-averaged score (&#8594; <code>accuracy_score</code>):</p>
+<p>Think back to the initial example, where the data was projected into the space of second order monomials. When we compute the scalar product between the feature maps of two vectors \(\mathbf{a}\) and \(\mathbf{b}\), we arrive at a polynomial kernel of second degree:</p>
 </div>
 <div class="stemblock">
 <div class="content">
-\[\begin{aligned}
-    \frac{TP + TN}{TP + FN + TN + FP} = \frac{TP_\text{pos} + TP_\text{neg}}{n_\text{pos} + n_\text{neg}} &amp; \quad \Rightarrow \quad \frac{\sum_c TP_{c}}{\sum_c n_{c}} &amp;\end{aligned}\]
+\[\langle\phi(\mathbf{a}), \phi(\mathbf{b})\rangle = (a_1^2, \sqrt{2}a_1a_2, a_2^2)(b_1^2, \sqrt{2}b_1b_2, b_2^2)^\top
+= \langle\mathbf{a}, \mathbf{b}\rangle^2
+=: k(\mathbf{a}, \mathbf{b})\]
 </div>
 </div>
 <div class="paragraph">
-<p>\(n_{c}\) : number of samples belonging to class \(c\)<br>
-\(TP_{c}\) : number of correctly classified samples from class \(c\)</p>
+<p>i.e, computing the kernel function \(k(\mathbf{a}, \mathbf{b})\) between the two points is the same as computing the scalar product of the two feature maps \(\langle\phi(\mathbf{a}), \phi(\mathbf{b})\rangle\). While for the polynomial kernel of second degree, \(\langle\mathbf{a}, \mathbf{b}\rangle^2\), we could easily figure out that the feature map consisted of the second order monomials, for other kernel functions, the corresponding feature map is not that easy to identify and the kernel feature space might even be infinite dimensional. However, since all the feature map terms \(\phi(\mathbf{x})\) in the kernel ridge regression formulas only occurred in scalar products, we could replace them by a kernel function (which we can compute using the original input feature vectors), therefore, we don&#8217;t actually need to know what the respective feature map looks like for other kernel functions!</p>
 </div>
 <div class="paragraph">
-<p>macro-averaged score (&#8594; <code>balanced_accuracy_score</code>):</p>
+<p>So while kernel methods are internally working in this really awesome kernel feature space \(\phi(\mathbf{x})\), induced by the respective kernel function, where all our problems are linear, all we need to know is how to compute the kernel function using the original feature vectors.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you are curious what the kernel feature space looks like for some kernel function, you can use Kernel PCA to get an approximation of \(\phi(\mathbf{x})\). Kernel PCA computes the eigendecomposition of a given kernel matrix, thereby generating a new representation of the data such that the scalar product of these new vectors approximates the kernel matrix. This means, the new kernel PCA feature vector you computed for some data point \(i\) approximates \(\phi(\mathbf{x}_i)\)&#8201;&#8212;&#8201;however, this still doesn&#8217;t tell you what the function \(\phi\) itself looks like (i.e., how to get from \(\mathbf{x}\) to \(\phi(\mathbf{x})\)), you only get (an approximation of) the final result \(\phi(\mathbf{x})\).
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>In the example above you were already introduced to the polynomial kernel of second degree; the generalization, i.e., the polynomial kernel of degree <em>k</em>, is computed as \(\langle\mathbf{x}', \mathbf{x}_i\rangle^k\).</p>
+</div>
+<div class="paragraph">
+<p>The most popular kernel function that works well in many use cases is the <strong>Radial Basis Function (RBF) / Gaussian kernel</strong>:</p>
 </div>
 <div class="stemblock">
 <div class="content">
-\[\begin{aligned}
-    \frac{1}{2} \left(\frac{TP}{TP+FN} + \frac{TN}{TN+FP} \right) = \frac{1}{2} \left(\frac{TP_\text{pos}}{n_\text{pos}} + \frac{TP_\text{neg}}{n_\text{neg}} \right) &amp; \quad \Rightarrow \quad \frac{1}{C} \sum_{c=1}^C \frac{TP_{c}}{n_{c}}  &amp;\end{aligned}\]
+\[k(\mathbf{x}', \mathbf{x}_i) = e^{-\gamma \|\mathbf{x}_i - \mathbf{x}' \|^2}\]
+</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/05_supervised_other/rbf2.png" alt="image" width="540">
+</div>
+<div class="title"><span class="small">With the RBF kernel function, the similarity of a new point \(\mathbf{x}'\) to the training sample \(\mathbf{x}_i\) is computed by centering a Gaussian function (with a width inversely proportional to \(\gamma\)) over the \(i^{th}\) training sample and then checking where the new point falls on this curve. Depending on the choice of \(\gamma\), either many samples will later contribute to the prediction (if the Gaussian function is very wide and therefore the similarity to multiple training points will be large) or only the closest points will be considered (if the curve is very narrow and therefore the similarity to most training examples would be close to 0).</span></div>
+</div>
 </div>
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Multi-class problems: Confusion matrix</dt>
+<dt class="hdlist1">Support Vector Machine (SVM)</dt>
 <dd>
-<p>Similarly, the table with the TP/FP/TN/FN entries can be extended for the multi-class classification case:</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/06_evaluation/confusion_matrix2.png" alt="image" width="740">
-</div>
-<div class="title"><span class="small">The heatmap on the left show the (normalized) confusion matrix for a 10-class classification problem (recognizing handwritten digits), while the plot on the right shows example images for each case. Examining the confusion matrix and some individual examples can give you more faith in the predictions of your model, as you might realize that some misclassifications (highlighted in red) could also happen to a human, e.g., the 4 that was classified as a 1 or even the 4 that was classified as a 7 (which might even be a labeling error from when the dataset was originally created).</span></div>
-</div>
+<p>A more efficient method, especially when the training set is large.<br>
+<span class="underline">Key idea:</span> only compute similarity to &#8216;critical&#8217; training points (= support vectors):</p>
 </dd>
 </dl>
 </div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/05_supervised_other/svm.png" alt="image" width="440">
+</div>
+</div>
+<div class="stemblock">
+<div class="content">
+\[\sum_{i=1}^n k(\mathbf{x}', \mathbf{x}_i) \alpha_i  \quad \Rightarrow \quad  \sum_{i \in \{\text{SV}\}} k(\mathbf{x}', \mathbf{x}_i) \alpha_i\]
+</div>
+</div>
+<div class="paragraph">
+<p>This reduces the memory requirements and makes the prediction for new data points much faster, since it is only necessary to store the support vectors and compute the similarity to them instead of the whole training set.</p>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.metrics</span> <span class="keyword">import</span> <span class="include">confusion_matrix</span></code></pre>
+<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.decomposition</span> <span class="keyword">import</span> <span class="include">KernelPCA</span>     <span class="comment"># Kernel variant of PCA</span>
+<span class="keyword">from</span> <span class="include">sklearn.kernel_ridge</span> <span class="keyword">import</span> <span class="include">KernelRidge</span>    <span class="comment"># Kernel variant of ridge regression (-&gt; use SVR instead)</span>
+<span class="keyword">from</span> <span class="include">sklearn.svm</span> <span class="keyword">import</span> <span class="include">SVC</span>, <span class="include">SVR</span>                <span class="comment"># SVM for classification (C) and regression (R)</span></code></pre>
 </div>
 </div>
-<div class="sidebarblock">
+<div class="paragraph">
+<p><span class="underline">Important Parameters:</span></p>
+</div>
+<div class="openblock">
 <div class="content">
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>&#8594; <code>kernel</code>: the kernel function used to compute the similarities between the points (&#8594; see <code>sklearn.metrics.pairwise</code>; usually <code>'rbf'</code>)</p>
+</li>
+<li>
+<p>&#8594; additionally: kernel parameters, e.g., <code>gamma</code> for <code>'rbf'</code> kernel</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Systematic Model Selection with Cross-Validation &amp; Grid Search</dt>
+<dt class="hdlist1">Pros</dt>
 <dd>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/06_evaluation/cross_val8.png" alt="image" width="840">
+<div class="ulist">
+<ul>
+<li>
+<p>non-linear predictions with global optimum</p>
+</li>
+<li>
+<p>fast to train (on medium size datasets; compared to, e.g., neural networks)</p>
+</li>
+</ul>
 </div>
-<div class="title"><span class="small">As we&#8217;ve established in the beginning, before experimenting with any models, the dataset should always be split into a training and test set. However, this is actually not the full picture: since you are typically experimenting with many different types of models and for each model type with dozens of hyperparameter settings, you should not use this test set to evaluate each of these model candidates, since it might happen that with all these things you try you end up choosing a model that performs really well on this test set, but then actually does not generalize to new data later and you would have no way of finding this out before deploying the model in production. Therefore, we introduce a new data split, the <strong>validation set</strong>, that is used to evaluate the different candidate models, while the test set remains locked away until you&#8217;re ready to evaluate your final model to get a realistic estimate of how it should actually perform on new data. If your original dataset is quite big, say, over 100k samples (depending on the diversity of your data, e.g., the number of classes), then it is usually enough to just split the data into training, validation, and test sets at the start, where the validation and test sets could contain about 10% of the data each and should be representative of the diversity of the original dataset. However, when the original dataset is smaller, it might not be possible to get such representative splits, which is when a technique called <strong>cross-validation</strong> (also abbreviated x-val) can come in very handy: in a <em>k</em>-fold cross-validation, the dataset is split into <em>k</em> parts, where each part is once the designated validation set, while the remaining <em>k-1</em> parts are used for training. This way, the model is trained and evaluated <em>k</em> times, each time on different splits. By computing the mean and standard deviation of the error metrics on all folds, we get a reliable estimate of the model&#8217;s generalization error and its variation due to the diversity of the dataset. While a cross-validation by itself is already a helpful trick to deal with small datasets, sklearn makes our lives even easier by combining it with a method for systematically selecting the best hyperparameter settings of a model, the <strong>grid search</strong>. In a grid search, you define the different values you want to test for each hyperparameter and then all combinations of these different values for all hyperparameters are automatically evaluated using a cross-validation. This is very useful, as often the different hyperparameter settings influence each other. However, with many individual settings it also comes at a computational cost, as the model is trained and evaluated \(k \times m_1 \times m_2 \times \dots \times m_i\) times, where \(k\) is the number of folds in the cross-validation and \(m_1...m_i\) are the number of values that need to be tested for each of the <em>i</em> hyperparameters of the model. For example, with two hyperparameters, the grid search results could look something like the plot on the left, where you see a heatmap of the average accuracy achieved with each hyperparameter combination of a model in the cross-validation. While sklearn&#8217;s grid search method will always directly tell you the best hyperparameter combination out of the ones it tested, it is important to actually check the complete set of results to verify that you have covered the whole range of possible hyperparameter values that could give good results (e.g., in the plot here we see a peak in the middle with the results getting worse to the sides, i.e., we know that better hyperparameter values are unlikely to lie outside of the range we&#8217;ve tested). It is generally a good idea to first start with a large range of values and then zoom in to the area that seems most promising (and of course knowledge about the different algorithms helps a lot in choosing reasonable settings as well).</span></div>
+</dd>
+<dt class="hdlist1">Careful</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>computationally expensive for large datasets (kernel matrix: \(\mathcal{O}(n^2)\))</p>
+</li>
+<li>
+<p>kernel functions, just like other similarity functions, benefit if heterogeneous data is scaled</p>
+</li>
+</ul>
 </div>
 </dd>
 </dl>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.model_selection</span> <span class="keyword">import</span> <span class="include">GridSearchCV</span></code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_ul_clustering.html">UL: Clustering</a> | ↑ Up: <a href="_ml_algorithms_unsupervised_supervised_learning.html">ML Algorithms: Unsupervised &amp; Supervised Learning</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_sl_linear_models.html">SL: Linear Models</a> →</p>
+<p>← Previous: <a href="_k_nearest_neighbors_knn.html">k-Nearest Neighbors (kNN)</a> | ↑ Up: <a href="_supervised_learning.html">Supervised Learning</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_special_purpose_models.html">Special-Purpose Models</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

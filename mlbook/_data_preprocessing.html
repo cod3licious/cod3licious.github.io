@@ -647,13 +647,13 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.0,</span>
-<span id="revdate">2021-08-29</span>
+<span id="revnumber">version 1.1,</span>
+<span id="revdate">2021-09-12</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <p><span class="toc-root"><a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a></span></p><ul class="sectlevel1">
-<li><a href="_introduction_solving_problems_with_ml.html">Introduction: Solving Problems with ML</a>
+<li><a href="_introduction.html">Introduction</a>
 </li>
 <li><a href="_ml_with_python.html">ML with Python</a>
 </li>
@@ -671,13 +671,19 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </li>
 </ul>
 </li>
-<li><a href="_ml_algorithms_unsupervised_supervised_learning.html">ML Algorithms: Unsupervised &amp; Supervised Learning</a>
+<li><a href="_ml_solutions_overview.html">ML Solutions: Overview</a>
+</li>
+<li><a href="_unsupervised_learning.html">Unsupervised Learning</a>
+</li>
+<li><a href="_supervised_learning.html">Supervised Learning</a>
+</li>
+<li><a href="_special_purpose_models.html">Special-Purpose Models</a>
 </li>
 <li><a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a>
 </li>
-<li><a href="_ml_algorithms_reinforcement_learning.html">ML Algorithms: Reinforcement Learning</a>
+<li><a href="_reinforcement_learning.html">Reinforcement Learning</a>
 </li>
-<li><a href="_conclusion_using_ml_in_practice.html">Conclusion: Using ML in Practice</a>
+<li><a href="_conclusion.html">Conclusion</a>
 </li>
 </ul>
 </div>
@@ -687,15 +693,15 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <h2 id="_data_preprocessing">Data &amp; Preprocessing</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Preprocessing is the act of transforming Raw Data into &#8220;Good Data&#8221;, i.e., data in a form such that ML algorithms can be applied:</p>
+<p>As we&#8217;ve seen, ML algorithms solve input-output tasks and to solve a ML problem, you first need to collect data. Preprocessing is the act of transforming raw data in such a way that ML algorithms can be applied:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="../images/01c_ds_workflow/ml_problem_solution_prep.png" alt="image" width="740">
+<img src="../images/01c_ds_workflow/data_science_workflow_prepr.png" alt="image" width="840">
 </div>
 </div>
 <div class="paragraph">
-<p>To solve a ML problem, you first need to collect data. For example, a production process, where you want to find out under which conditions some of the produced parts are scrap, would be a typical supervised learning problem. Here, the collected data for each produced part should include the process conditions under which it was produced, as well as the outcome (i.e., product was okay or scrap):</p>
+<p>For example, a production process, where you want to predict whether a produced part will be scrap given certain production conditions, would be a typical supervised learning problem. Here, the collected data for each produced part should include the process conditions under which it was produced, as well as the outcome (i.e., product was okay or scrap):</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -708,6 +714,20 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <img src="../images/02_data/toy_data6.png" alt="image" width="740">
 </div>
 <div class="title"><span class="small">The columns of the table contain the different measurements / variables that were collected for each sample. Here we distinguish between <em>features</em> (in this case the production conditions) and <em>labels</em> (whether the product produced under these conditions was okay or scrap). Features, also denoted as a matrix \(X\), are typically those measurements that we get basically for free, as they are often collected during the process for other purposes anyways (e.g., when the operator of the machine sets the temperature for the production to a certain value, this is recorded as the signal is passed along to the heating unit). The corresponding labels, denoted as a vector \(\mathbf{y}\), are often more expensive to collect. (For example, in the production process, to collect a data point with the label <em>"scrap"</em>, we have to (intentionally) produce a broken product that we can&#8217;t sell afterwards, costing us valuable resources. Another example would be when Google paid a team of specialist doctors to discuss and re-label some of the diabetic retinopathy images about which there existed conflicting opinions.) In the supervised learning setup, the features are used as the input to the model, while the labels constitute the target variable, i.e., the predicted output. Generally, features should be independent variables (e.g., settings that the operator can choose as he wishes), while the target value should be dependent on these inputs.</span></div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Structured vs. unstructured data</dt>
+<dd>
+<p>Data can come in various forms and while some data types might require additional preprocessing steps, in principle ML algorithms can be used with all kinds of data.</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/02_data/data_types2.png" alt="image" width="640">
+</div>
+<div class="title"><span class="small">The main distinction that is made when characterizing data is between <em>structured</em> data, which is any dataset that contains individual variables that represent unique quantities, and <em>unstructured</em> data, which can not be subdivided into meaningful variables, e.g., in images &#8220;first pixel from the left&#8221; or in texts &#8220;10th word in the second paragraph&#8221; is not what you would call a variable, while &#8220;size in square meters&#8221; and &#8220;number of bedrooms&#8221; would be useful quantities to describe an apartment. Structured data is often heterogeneous, since the different variables in a dataset typically stand for very different things (e.g., when working with sensor data you normally would not have a dataset that only contains temperature measurements, but additionally it might contain, e.g., pressure and flow values, which have different units and might be on very different scales). Unstructured data, on the other hand, is homogeneous (i.e., there is no qualitative difference between the 10th and the 100th pixel in an image).</span></div>
+</div>
+</dd>
+</dl>
 </div>
 <div class="sidebarblock">
 <div class="content">

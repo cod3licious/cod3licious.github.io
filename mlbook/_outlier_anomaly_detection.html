@@ -730,183 +730,252 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </style>
 
 </head>
-<body id="_ml_algorithms_reinforcement_learning" class="article toc2 toc-left">
+<body id="_outlier_anomaly_detection" class="article toc2 toc-left">
 <div id="header">
 <h1>A Practitioner&#8217;s Guide to Machine Learning</h1>
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.0,</span>
-<span id="revdate">2021-08-29</span>
+<span id="revnumber">version 1.1,</span>
+<span id="revdate">2021-09-12</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <p><span class="toc-root"><a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a></span></p><ul class="sectlevel1">
-<li><a href="_introduction_solving_problems_with_ml.html">Introduction: Solving Problems with ML</a>
+<li><a href="_introduction.html">Introduction</a>
 </li>
 <li><a href="_ml_with_python.html">ML with Python</a>
 </li>
 <li><a href="_data_preprocessing.html">Data &amp; Preprocessing</a>
 </li>
-<li><a href="_ml_algorithms_unsupervised_supervised_learning.html">ML Algorithms: Unsupervised &amp; Supervised Learning</a>
+<li><a href="_ml_solutions_overview.html">ML Solutions: Overview</a>
+</li>
+<li><a href="_unsupervised_learning.html">Unsupervised Learning</a>
+<ul class="sectlevel2">
+<li><a href="_dimensionality_reduction.html">Dimensionality Reduction</a>
+</li>
+<li><a href="_outlier_anomaly_detection.html"><span class="toc-current">Outlier / Anomaly Detection</span></a>
+<ul class="sectlevel3">
+<li><a href="_outlier_anomaly_detection.html#_gamma_index">\(\gamma\)-index</a>
+</li>
+</ul>
+</li>
+<li><a href="_clustering.html">Clustering</a>
+</li>
+</ul>
+</li>
+<li><a href="_supervised_learning.html">Supervised Learning</a>
+</li>
+<li><a href="_special_purpose_models.html">Special-Purpose Models</a>
 </li>
 <li><a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a>
 </li>
-<li><a href="_ml_algorithms_reinforcement_learning.html"><span class="toc-current">ML Algorithms: Reinforcement Learning</span></a>
+<li><a href="_reinforcement_learning.html">Reinforcement Learning</a>
 </li>
-<li><a href="_conclusion_using_ml_in_practice.html">Conclusion: Using ML in Practice</a>
+<li><a href="_conclusion.html">Conclusion</a>
 </li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="_ml_algorithms_reinforcement_learning">ML Algorithms: Reinforcement Learning</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_outlier_anomaly_detection">Outlier / Anomaly Detection</h3>
 <div class="paragraph">
-<p>Finally, we come to the last main category of ML algorithms besides unsupervised and supervised learning: reinforcement learning.</p>
+<p>Next up on our list of ML tools is anomaly or outlier detection:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/01c_ml_overview/ml_algorithms_outliers.png" alt="image" width="740">
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Useful for</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>detecting anomalies for monitoring purposes (e.g., machine failures or fraudulent credit card transactions)<br></p>
+</li>
+<li>
+<p>removing outliers from the dataset to improve the performance of other algorithms</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>When trying to remove outliers or detect anomalies, there are many things that need to be considered:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Does the dataset consist of <strong>independent data points or time series data</strong> with dependencies?</p>
+</li>
+<li>
+<p>Are you looking for <strong>outliers in individual dimensions</strong> (e.g., in time series data you might not see a failure in all sensors simultaneously, but only one sensor might act up spontaneously (i.e., show a value very different from the previous time point), which would be enough to rule this time point an anomaly irrespective of the values of the other sensors) or is it necessary to consider <strong>multidimensional outlier patterns</strong> (e.g., for independent data points individual feature values might not seem anomalous by themselves, only when considered in combination with the data point&#8217;s other feature values (e.g., a \(35 m^2\) apartment could be a nice studio, but if this apartment is also supposed to have 5 bedrooms then something is off))?</p>
+</li>
+<li>
+<p>Are you expecting a few <strong>individual outliers or clusters</strong> of outliers (the latter is especially common in time series data, where, e.g., a machine might experience an issue for several minutes or even hours before the signals look normal again)? Clusters of outliers are more tricky to detect, especially if the data also contains other &#8216;legitimate&#8217; clusters of normal points. Domain expertise is key here!</p>
+</li>
+<li>
+<p>Do you have any <strong>labels</strong> available? E.g., while you might not know what the different kinds of (future) anomalies could look like, maybe you <em>do</em> know what normal data points look like, which is important information that you can make use of by checking how far new points deviate from these normal points (also called novelty detection).</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Know your data - are missing values marked as NaNs (= "Not a Number")?
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+While removing outlier points from a dataset is often a necessary cleaning step, e.g., to obtain better prediction models, you should always be able to explain <em>why</em> you removed these points, as they could also be interesting edge cases. If possible, you should always remove as many outliers as possible with manually crafted rules (e.g., &#8220;when this sensor is 0, the machine is off and the points can be disregarded&#8221;), especially when the dataset contains clusters of outliers, which are also more difficult to detect with data-driven methods.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Please note that some of the data points that will be encountered in the future might be outliers as well, i.e., before applying a prediction model to new test points in production, these should be screened for outliers as well, as the predictions for these points would not be accurate if the model was trained on a dataset with outliers removed.
+</td>
+</tr>
+</table>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Different methods for outlier/anomaly detection</dt>
+<dd>
+<p>There is no one-size-fits-all solution, but depending on the characteristics of your dataset you might want to experiment with some of these approaches:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Detecting multidimensional outlier patterns, especially in datasets with independent data points (see also <a href="https://scikit-learn.org/stable/modules/outlier_detection.html">sklearn user guide</a>):</p>
+<div class="ulist">
+<ul>
+<li>
+<p>\(\gamma\)-index (see below)</p>
+</li>
+<li>
+<p>Local Outlier Factor (from <code>sklearn</code>; similar to the \(\gamma\)-index)</p>
+</li>
+<li>
+<p>Isolation Forest (from <code>sklearn</code>; read about decision trees and random forests first)</p>
+</li>
+<li>
+<p>One-class SVM (from <code>sklearn</code>; read about kernel methods and normal SVMs first)</p>
+</li>
+<li>
+<p>DBSCAN (a clustering algorithm described in the next section that allows for noise, which would be considered outliers)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Comparing actual data points to denoised samples or predicted values:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Use (kernel) PCA or an auto-encoder neural network architecture to first compress a sample and then reconstruct it in order to remove noise. If the denoised data point deviates a lot from the original sample, it is probably an anomaly.</p>
+</li>
+<li>
+<p>For time series data: model the expected course of an individual time series, e.g., using a moving window average or an ARIMA model (see section on time series data for more details), and then compare how much a time point deviates from this predicted value.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Get creative: you know your data best&#8201;&#8212;&#8201;define rules and custom anomaly KPIs based on your domain knowledge (e.g., set thresholds for what would be considered unrealistic feature values etc.)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_gamma_index">\(\gamma\)-index</h4>
+<div class="paragraph">
+<p><span class="small">Harmeling, Stefan, et al. &#8220;From outliers to prototypes: ordering data.&#8221; <em>Neurocomputing</em> 69.13-15 (2006): 1608-1618.</span></p>
 </div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Main idea</dt>
 <dd>
-<p>Agent performs actions in some environment and learns their (state-specific) consequences by receiving rewards.</p>
+<p>compute the average distance of a point to its <em>k</em> nearest neighbors;<br>
+&#8594; points with a large average distance are likely to be outliers<br>
+(&#8658; set a threshold at what average distance the point is considered an outlier)</p>
 </dd>
 </dl>
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="../images/08_rl/reinforcement_learning4.png" alt="image" width="640">
+<img src="../images/03_unsupervised/outliers.png" alt="image" width="640">
 </div>
-<div class="title"><span class="small">The environment lets the agent know in which state it currently is. Then the agent selects some action, i.e., how it responds to this state, according to its internal policy function \(\pi\) (the main thing that is learned in RL). The environment evaluates the consequences of this action and returns an immediate reward (e.g., "game over" or "collected a coin"), as well as the next state, at which point the cycle repeats.</span></div>
-</div>
-<div class="paragraph">
-<p><span class="underline">Goal:</span> maximize <em>cumulative</em> reward (also called <em>return</em>), i.e., the sum of the immediate rewards received from the environment over all time steps.<br>
-The difficult thing here is that sometimes an action might not result in a big immediate reward, but is still crucial for the agent&#8217;s long-term success (e.g., finding a key at the beginning of a level and the door for which you need the key comes much later). This means the agent needs to learn to perform an optimal <em>sequence of actions</em> from <em>delayed labels</em>.</p>
-</div>
-<div class="paragraph">
-<p>The agent&#8217;s decision trajectory basically defines one path among a bunch of different possible parallel universes, which is then judged in the end by the collected return:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/08_rl/rl_trajectory2.png" alt="image" width="720">
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Reinforcement Learning vs. &#8216;normal&#8217; Optimization</dt>
-<dd>
-<p>In regular mathematical optimization, you are given some fixed function \(f: \mathbb{R}^d \to \mathbb{R}\) and try to find the inputs \(\mathbf{x} \in  \mathbb{R}^d\) that maximize (or minimize) the value of \(f(\mathbf{x})\). Since each evaluation of \(f(\mathbf{x})\) is independent of the next, you could theoretically try as many different values for \(\mathbf{x}\) as you wanted, until you&#8217;ve found some combination of inputs that results in an optimal value for \(f\).<br>
-<span class="small">If \(f\) is easily differentiable, the solution to the optimization problem can be found analytically by setting the first derivative of \(f\) to zero to obtain the local extrema or saddle points of \(f\), which can then be examined further to determine the (global) maximum or minimum. If \(f\) is not differentiable (or very complicated), there exist other methods to find optimal values (for example, the gradient descent procedure used to tune the weights of neural networks is one method for obtaining a (local) optimum without calculating the derivative of the network&#8217;s error function directly, while a naive grid search, where you just try many different input combinations and then select the values with the best outcome, or more fancy approaches such as <a href="https://en.wikipedia.org/wiki/Particle_swarm_optimization">particle swarm optimization</a>, can also be applied to functions that are non-differentiable).</span><br></p>
-<div class="paragraph">
-<p>Translated to RL terms, \(f\) would be the environment <em>in the current state</em>, \(\mathbf{x}\) would be the action, and \(f(\mathbf{x})\) would be the immediate reward as a result of taking this action in the current state. However, since the state of the environment changes with each action that is taken, this means the function \(f\) also changes in each step and an action that might have resulted in a high reward in the previous step could now mean &#8220;game over&#8221;. Furthermore, in RL we&#8217;re not actually too concerned about every single immediate reward, but instead we want to achieve long-term success, measured by the return (i.e., cumulative rewards), and an action with a low immediate reward might still pay off later.</p>
-</div>
-</dd>
-</dl>
-</div>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Immediate rewards vs. long-term value of states</dt>
-<dd>
-<p>To make decisions that are good in the long run, we&#8217;re more interested in what being in a state means w.r.t. reaching the final goal instead of receiving immediate rewards:</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/08_rl/rl_value3.png" alt="image" width="640">
-</div>
-<div class="title"><span class="small"><em>Left:</em> This is a simple "grid world", where an agent can move up, down, left, or right through the states. This small environment contains three terminal states (i.e., when the agent reaches one of them, the episode ends): Two states mean "game over" with an infinite negative reward, while reaching the state in the lower right corner means receiving a large positive immediate reward. When the agent resides in any of the other (reachable) states, it receives a small negative reward, which is meant to "motivate" the agent to go to the goal state as quickly as possible. However, knowing only the immediate reward received in each state is not very helpful to decide which action to take next, since in most states, the reward for moving to the next state or staying in place would be the same. Therefore, what the agent needs to learn in order to be able to choose an action in each state that has the potential of bringing it closer to the goal state, is the value of being in each state. <em>Right:</em> The value of a state is the expected return when starting from this state. Of course, the expected return is highly dependent on the agent&#8217;s policy \(\pi\) (i.e., the actions it takes), e.g., if the agent would always move to the left, then it would never be able to reach the goal, i.e., the expected return starting from any state (except the goal state itself) would always be negative. If we assume an optimal policy (i.e., the agent always takes the quickest way to the goal), then the value of each state would correspond to the ones shown in the graphic, i.e., for each state "100 minus the number of steps to reach the goal from here". Knowing these values, the agent can now very easily select the best next action in each state, by simply choosing that action, which brings it to the next reachable state with the highest value.</span></div>
-</div>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>The value of a state \(s\) corresponds to the expected return \(G_t\) when starting from state \(s\):</p>
-</div>
-<div class="stemblock">
-<div class="content">
-\[V^\pi(s) = \mathbb{E} [G_t | S_t = s]\]
-</div>
-</div>
-<div class="paragraph">
-<p>The most naive way to calculate \(V^\pi(s)\) would be to let the agent start from this state several times (depending on how complex the environment is usually several thousand times), note how each of the episodes play out, and then compute the average return that the agent had received in all these runs starting from state \(s\).</p>
-</div>
-<div class="paragraph">
-<p>Similarly, we can also use the expected return when executing action \(a\) in state \(s\):</p>
-</div>
-<div class="stemblock">
-<div class="content">
-\[Q^\pi(s, a) = \mathbb{E} [G_t | S_t = s, A_t = a] \quad \quad \text{with } \,a = \pi(s)\]
-</div>
-</div>
-<div class="paragraph">
-<p>I.e., here again we could let the agent start from the state \(s\) many times, but this time the first action it takes in this state is always \(a\).</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Exploration/Exploitation trade-off</dt>
-<dd>
-<p>Of course, it would be very inefficient to always just randomly try out actions in any given state and thereby risk a lot of predictable &#8220;game over&#8221;. Instead, we want to balance exploration and exploitation to keep updating our knowledge about the environment, but at the same time also maximize the rewards collected along the way. This is again inspired by human behavior:</p>
-<div class="openblock">
-<div class="content">
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>&#8594; <strong><em>Exploration:</em></strong> Learn something about the environment (e.g., try a new restaurant)</p>
-</li>
-<li>
-<p>&#8594; <strong><em>Exploitation:</em></strong> Use collected knowledge to maximize reward (e.g., eat somewhere you know you love the food)</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>A very simple strategy to accomplish this is the <span class="underline"><em>Epsilon-Greedy Policy:</em></span></p>
+<div class="title"><span class="small">This is a toy example in 2D, while normally you would compute the Euclidean distance between the points in their (high dimensional) input feature space.</span></div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="python">initialize eps = <span class="integer">1</span>
-<span class="keyword">for</span> step <span class="keyword">in</span> <span class="predefined">range</span>(max_steps):
-    <span class="keyword">if</span> random(<span class="integer">0</span>, <span class="integer">1</span>) &gt; eps:
-        pick best action (= exploitation)
-    <span class="keyword">else</span>:
-        pick random action (= exploration)
-    <span class="predefined">reduce</span> eps</code></pre>
+<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">import</span> <span class="include">numpy</span> <span class="keyword">as</span> np
+<span class="keyword">from</span> <span class="include">sklearn.metrics</span> <span class="keyword">import</span> <span class="include">pairwise_distances</span>
+
+<span class="keyword">def</span> <span class="function">gammaidx</span>(X, k):
+    <span class="docstring"><span class="delimiter">&quot;&quot;&quot;</span><span class="content">
+</span><span class="content">    Inputs:</span><span class="content">
+</span><span class="content">        - X [np.array]: n samples x d features input matrix</span><span class="content">
+</span><span class="content">        - k [int]: number of nearest neighbors to consider</span><span class="content">
+</span><span class="content">    Returns:</span><span class="content">
+</span><span class="content">        - gamma_index [np.array]: vector of length n with gamma index for each sample</span><span class="content">
+</span><span class="content">    </span><span class="delimiter">&quot;&quot;&quot;</span></span>
+    <span class="comment"># compute n x n Euclidean distance matrix</span>
+    D = pairwise_distances(X, metric=<span class="string"><span class="delimiter">'</span><span class="content">euclidean</span><span class="delimiter">'</span></span>)
+    <span class="comment"># sort the entries of each row, such that the 1st column is 0 (distance of point to itself),</span>
+    <span class="comment"># the following columns are distances to the closest nearest neighbors (i.e., smallest values first)</span>
+    Ds = np.sort(D, axis=<span class="integer">1</span>)
+    <span class="comment"># compute mean distance to the k nearest neighbors of every point</span>
+    gamma_index = np.mean(Ds[:, <span class="integer">1</span>:(k+<span class="integer">1</span>)], axis=<span class="integer">1</span>)
+    <span class="keyword">return</span> gamma_index
+
+<span class="comment"># or more efficiantly with the NearestNeighbors class</span>
+<span class="keyword">from</span> <span class="include">sklearn.neighbors</span> <span class="keyword">import</span> <span class="include">NearestNeighbors</span>
+
+<span class="keyword">def</span> <span class="function">gammaidx_fast</span>(X, k):
+    <span class="docstring"><span class="delimiter">&quot;&quot;&quot;</span><span class="content">
+</span><span class="content">    Inputs:</span><span class="content">
+</span><span class="content">        - X [np.array]: n samples x d features input matrix</span><span class="content">
+</span><span class="content">        - k [int]: number of nearest neighbors to consider</span><span class="content">
+</span><span class="content">    Returns:</span><span class="content">
+</span><span class="content">        - gamma_index [np.array]: vector of length n with gamma index for each sample</span><span class="content">
+</span><span class="content">    </span><span class="delimiter">&quot;&quot;&quot;</span></span>
+    <span class="comment"># initialize and fit nearest neighbors search</span>
+    nn = NearestNeighbors(n_neighbors=k).fit(X)
+    <span class="comment"># compute mean distance to the k nearest neighbors of every point (ignoring the point itself)</span>
+    <span class="comment"># (nn.kneighbors returns a tuple of distances and indices of nearest neighbors)</span>
+    gamma_index = np.mean(nn.kneighbors()[<span class="integer">0</span>], axis=<span class="integer">1</span>)  <span class="comment"># for new points: nn.kneighbors(X_test)</span>
+    <span class="keyword">return</span> gamma_index</code></pre>
 </div>
 </div>
-</dd>
-<dt class="hdlist1">Tabular RL: Q-Learning</dt>
-<dd>
-<p>This brings us to the simplest form of RL, tabular RL, where an agent has a finite set of actions to choose from and operates in an environment with a finite set of states (like the grid world from above). Here, one could simply compute the Q-value for each (state, action)-combination as described above, and save these values in a big table. This so-called Q-table then acts as a cheat sheet, since for each state the agent is in, it can just look up the Q-values for all of the available actions and then simply choose the action with the highest Q-value:</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/08_rl/rl_tabular3.png" alt="image" width="580">
-</div>
-</div>
-</dd>
-<dt class="hdlist1">Function Approximation: Deep Q-Learning</dt>
-<dd>
-<p>Unfortunately, almost no practical RL application operates in an environment consisting of a finite set of discrete states (and sometimes even the agent&#8217;s actions are not discrete (e.g., the steering wheel in a self-driving car), but this goes too far here). In video games, for example, each frame would be considered a new state and depending on the complexity of the game, no two frames might be exactly alike. This is where deep Q-learning comes in:<br></p>
-<div class="paragraph">
-<p>Given a state \(s\) (represented by a feature vector \(\mathbf{x}_s\)), predict the Q-value of each action \(a_1 ... a_k\) with a neural network:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/08_rl/rl_dqn.png" alt="image" width="640">
-</div>
-</div>
-<div class="paragraph">
-<p>This can be seen as a direct extension of the tabular Q-learning: If we represented our states as one-hot encoded vectors and used a linear network with a single weight matrix that consisted of the Q-table we had constructed before, by multiplying such a one-hot encoded vector with the Q-table, the network would &#8220;predict&#8221; the row containing the Q-values for all actions in this state.<br>
-By using a more complex network together with meaningful feature representations for the states, with deep Q-learning the agent is able to generalize to unseen states.</p>
-</div>
-</dd>
-</dl>
-</div>
-<div class="sidebarblock">
-<div class="content">
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Pros</dt>
@@ -914,10 +983,7 @@ By using a more complex network together with meaningful feature representations
 <div class="ulist">
 <ul>
 <li>
-<p>RL works well for games:<br>
-&#8594; environment = game = simulation (i.e., no discrepancy between &#8220;real world&#8221; and simulation model)<br>
-&#8594; well defined reward function<br>
-&#8594; utilize &#8220;self-play&#8221; for multi-player games, i.e., two RL agents playing against each other</p>
+<p>conceptually very simple and easy to interpret</p>
 </li>
 </ul>
 </div>
@@ -927,102 +993,35 @@ By using a more complex network together with meaningful feature representations
 <div class="ulist">
 <ul>
 <li>
-<p>Acting in the real world is too expensive &#8594; need accurate (simulation) model of the environment</p>
+<p>computationally expensive for large datasets (distance matrix: \(\mathcal{O}(n^2)\)) &#8594; compute distances to a random subsample of the dataset or to a smaller set of known non-anomalous points instead</p>
 </li>
 <li>
-<p>AIs love to cheat and exploit bugs in the simulation</p>
+<p>normalize heterogeneous datasets before computing distances!</p>
 </li>
 <li>
-<p>Difficult to design appropriate reward function (and RL will overfit it, resulting in unintended consequences)</p>
-</li>
-<li>
-<p>Model-free RL is very sample inefficient (i.e., needs millions of iterations, which takes too long in real-time)</p>
-</li>
-<li>
-<p>Agent is responsible for collecting its own experiences: bad policy &#8658; bad data &#8658; no improvement</p>
-</li>
-<li>
-<p>Deep RL: complex network architectures, very sensitive to hyperparameter choices<br>
-&#8658; hard to train &amp; get robust results (&#8594; requires lots of tricks)</p>
+<p>know your data: does the dataset contain larger clusters of outliers? &#8594; <em>k</em> needs to be large enough such that a tight cluster of outliers is not mistaken as prototypical data points</p>
 </li>
 </ul>
 </div>
 </dd>
 </dl>
 </div>
-<div class="paragraph">
-<p>&#8594; <em>Imitation learning</em> is often used instead of RL, which just means using supervised learning to train an agent to react similar to a human in some situation. Often, it is also easier to collect data from humans than to define a complicated reward function (e.g., humans drive around all the time, however, it is hard to define what would be considered &#8220;good driving&#8221; under lots of different circumstances).</p>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p><strong>RL further reading + videos</strong></p>
-</div>
-<div class="paragraph">
-<p><span class="underline">General theory:</span></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://medium.com/emergent-future/d195264329d0">Simple Blog Series</a></p>
-</li>
-<li>
-<p><a href="https://simoninithomas.github.io/deep-rl-course/">Free RL course incl. programming examples</a></p>
-</li>
-<li>
-<p><a href="https://www.davidsilver.uk/teaching/">Lectures by David Silver</a> (from DeepMind)</p>
-</li>
-<li>
-<p><a href="https://cs234.stanford.edu/">Stanford RL course</a> (with <a href="https://www.youtube.com/playlist?list=PLoROMvodv4rOSOPzutgyCTapiGlY2Nd8u">video lectures</a>)</p>
-</li>
-<li>
-<p><a href="http://incompleteideas.net/book/RLbook2020.pdf">Book about RL</a> (with lots of math)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><span class="underline">Words of caution (recommended for everyone):</span></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://www.alexirpan.com/2018/02/14/rl-hard.html">RL doesn&#8217;t work (yet)</a></p>
-</li>
-<li>
-<p><a href="https://deepmind.com/blog/article/Specification-gaming-the-flip-side-of-AI-ingenuity">Unintended rewards</a></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><span class="underline">RL in action:</span></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://www.youtube.com/watch?v=5GMDbStRgoc">Playing Super Mario</a></p>
-</li>
-<li>
-<p><a href="https://www.youtube.com/watch?v=rhNxt0VccsE">Learning to walk</a></p>
-</li>
-<li>
-<p><a href="https://www.youtube.com/watch?v=wL7tSgUpy8w">Learning to drive a car</a></p>
-</li>
-<li>
-<p><a href="https://www.youtube.com/watch?v=iaF43Ze1oeI">Robot arm data collection</a> (by Google)</p>
-</li>
-<li>
-<p><a href="https://youtu.be/wRCAl9m3ce8?t=1493">Playing video games</a> with Layer-wise Relevance Propagation (LRP) to show the evolution of strategy</p>
-</li>
-</ul>
-</div>
-<div class="ulist">
-<ul>
-</ul>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Extension for time series data: don&#8217;t identify the <em>k</em> nearest neighbors of a sample based on the distance of the data points in the feature space, but take the neighboring time points instead.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_explainability_interpretable_ml.html">Explainability &amp; Interpretable ML</a> | ↑ Up: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_conclusion_using_ml_in_practice.html">Conclusion: Using ML in Practice</a> →</p>
+<p>← Previous: <a href="_dimensionality_reduction.html">Dimensionality Reduction</a> | ↑ Up: <a href="_unsupervised_learning.html">Unsupervised Learning</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_clustering.html">Clustering</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

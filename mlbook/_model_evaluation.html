@@ -639,309 +639,404 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+/* Stylesheet for CodeRay to match GitHub theme | MIT License | http://foundation.zurb.com */
+pre.CodeRay{background:#f7f7f8}
+.CodeRay .line-numbers{border-right:1px solid currentColor;opacity:.35;padding:0 .5em 0 0}
+.CodeRay span.line-numbers{display:inline-block;margin-right:.75em}
+.CodeRay .line-numbers strong{color:#000}
+table.CodeRay{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.CodeRay td{vertical-align:top;line-height:inherit}
+table.CodeRay td.line-numbers{text-align:right}
+table.CodeRay td.code{padding:0 0 0 .75em}
+.CodeRay .debug{color:#fff !important;background:#000080 !important}
+.CodeRay .annotation{color:#007}
+.CodeRay .attribute-name{color:#000080}
+.CodeRay .attribute-value{color:#700}
+.CodeRay .binary{color:#509}
+.CodeRay .comment{color:#998;font-style:italic}
+.CodeRay .char{color:#04d}
+.CodeRay .char .content{color:#04d}
+.CodeRay .char .delimiter{color:#039}
+.CodeRay .class{color:#458;font-weight:bold}
+.CodeRay .complex{color:#a08}
+.CodeRay .constant,.CodeRay .predefined-constant{color:#008080}
+.CodeRay .color{color:#099}
+.CodeRay .class-variable{color:#369}
+.CodeRay .decorator{color:#b0b}
+.CodeRay .definition{color:#099}
+.CodeRay .delimiter{color:#000}
+.CodeRay .doc{color:#970}
+.CodeRay .doctype{color:#34b}
+.CodeRay .doc-string{color:#d42}
+.CodeRay .escape{color:#666}
+.CodeRay .entity{color:#800}
+.CodeRay .error{color:#808}
+.CodeRay .exception{color:inherit}
+.CodeRay .filename{color:#099}
+.CodeRay .function{color:#900;font-weight:bold}
+.CodeRay .global-variable{color:#008080}
+.CodeRay .hex{color:#058}
+.CodeRay .integer,.CodeRay .float{color:#099}
+.CodeRay .include{color:#555}
+.CodeRay .inline{color:#000}
+.CodeRay .inline .inline{background:#ccc}
+.CodeRay .inline .inline .inline{background:#bbb}
+.CodeRay .inline .inline-delimiter{color:#d14}
+.CodeRay .inline-delimiter{color:#d14}
+.CodeRay .important{color:#555;font-weight:bold}
+.CodeRay .interpreted{color:#b2b}
+.CodeRay .instance-variable{color:#008080}
+.CodeRay .label{color:#970}
+.CodeRay .local-variable{color:#963}
+.CodeRay .octal{color:#40e}
+.CodeRay .predefined{color:#369}
+.CodeRay .preprocessor{color:#579}
+.CodeRay .pseudo-class{color:#555}
+.CodeRay .directive{font-weight:bold}
+.CodeRay .type{font-weight:bold}
+.CodeRay .predefined-type{color:inherit}
+.CodeRay .reserved,.CodeRay .keyword {color:#000;font-weight:bold}
+.CodeRay .key{color:#808}
+.CodeRay .key .delimiter{color:#606}
+.CodeRay .key .char{color:#80f}
+.CodeRay .value{color:#088}
+.CodeRay .regexp .delimiter{color:#808}
+.CodeRay .regexp .content{color:#808}
+.CodeRay .regexp .modifier{color:#808}
+.CodeRay .regexp .char{color:#d14}
+.CodeRay .regexp .function{color:#404;font-weight:bold}
+.CodeRay .string{color:#d20}
+.CodeRay .string .string .string{background:#ffd0d0}
+.CodeRay .string .content{color:#d14}
+.CodeRay .string .char{color:#d14}
+.CodeRay .string .delimiter{color:#d14}
+.CodeRay .shell{color:#d14}
+.CodeRay .shell .delimiter{color:#d14}
+.CodeRay .symbol{color:#990073}
+.CodeRay .symbol .content{color:#a60}
+.CodeRay .symbol .delimiter{color:#630}
+.CodeRay .tag{color:#008080}
+.CodeRay .tag-special{color:#d70}
+.CodeRay .variable{color:#036}
+.CodeRay .insert{background:#afa}
+.CodeRay .delete{background:#faa}
+.CodeRay .change{color:#aaf;background:#007}
+.CodeRay .head{color:#f8f;background:#505}
+.CodeRay .insert .insert{color:#080}
+.CodeRay .delete .delete{color:#800}
+.CodeRay .change .change{color:#66f}
+.CodeRay .head .head{color:#f4f}
+</style>
 
 </head>
-<body id="_ml_algorithms_unsupervised_supervised_learning" class="article toc2 toc-left">
+<body id="_model_evaluation" class="article toc2 toc-left">
 <div id="header">
 <h1>A Practitioner&#8217;s Guide to Machine Learning</h1>
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.0,</span>
-<span id="revdate">2021-08-29</span>
+<span id="revnumber">version 1.1,</span>
+<span id="revdate">2021-09-12</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <p><span class="toc-root"><a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a></span></p><ul class="sectlevel1">
-<li><a href="_introduction_solving_problems_with_ml.html">Introduction: Solving Problems with ML</a>
+<li><a href="_introduction.html">Introduction</a>
 </li>
 <li><a href="_ml_with_python.html">ML with Python</a>
 </li>
 <li><a href="_data_preprocessing.html">Data &amp; Preprocessing</a>
 </li>
-<li><a href="_ml_algorithms_unsupervised_supervised_learning.html"><span class="toc-current">ML Algorithms: Unsupervised &amp; Supervised Learning</span></a>
+<li><a href="_ml_solutions_overview.html">ML Solutions: Overview</a>
+</li>
+<li><a href="_unsupervised_learning.html">Unsupervised Learning</a>
+</li>
+<li><a href="_supervised_learning.html">Supervised Learning</a>
 <ul class="sectlevel2">
-<li><a href="_ul_dimensionality_reduction.html">UL: Dimensionality Reduction</a>
+<li><a href="_different_types_of_models.html">Different types of models</a>
 </li>
-<li><a href="_ul_outlier_anomaly_detection.html">UL: Outlier / Anomaly Detection</a>
+<li><a href="_model_evaluation.html"><span class="toc-current">Model Evaluation</span></a>
+<ul class="sectlevel3">
+<li><a href="_model_evaluation.html#_evaluation_metrics">Evaluation Metrics</a>
 </li>
-<li><a href="_ul_clustering.html">UL: Clustering</a>
-</li>
-<li><a href="_supervised_learning_overview.html">Supervised Learning: Overview</a>
-</li>
-<li><a href="_sl_linear_models.html">SL: Linear Models</a>
-</li>
-<li><a href="_sl_decision_trees.html">SL: Decision Trees</a>
-</li>
-<li><a href="_sl_ensemble_methods.html">SL: Ensemble Methods</a>
-</li>
-<li><a href="_sl_k_nearest_neighbors_knn.html">SL: k-Nearest Neighbors (kNN)</a>
-</li>
-<li><a href="_sl_kernel_methods.html">SL: Kernel Methods</a>
-</li>
-<li><a href="_information_retrieval_similarity_search.html">Information Retrieval (Similarity Search)</a>
-</li>
-<li><a href="_sl_neural_networks.html">SL: Neural Networks</a>
-</li>
-<li><a href="_time_series_forecasting.html">Time Series Forecasting</a>
-</li>
-<li><a href="_recommender_systems_pairwise_data.html">Recommender Systems (Pairwise Data)</a>
+<li><a href="_model_evaluation.html#_model_selection">Model Selection</a>
 </li>
 </ul>
 </li>
+<li><a href="_linear_models.html">Linear Models</a>
+</li>
+<li><a href="_decision_trees.html">Decision Trees</a>
+</li>
+<li><a href="_ensemble_methods.html">Ensemble Methods</a>
+</li>
+<li><a href="_k_nearest_neighbors_knn.html">k-Nearest Neighbors (kNN)</a>
+</li>
+<li><a href="_kernel_methods.html">Kernel Methods</a>
+</li>
+</ul>
+</li>
+<li><a href="_special_purpose_models.html">Special-Purpose Models</a>
+</li>
 <li><a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a>
 </li>
-<li><a href="_ml_algorithms_reinforcement_learning.html">ML Algorithms: Reinforcement Learning</a>
+<li><a href="_reinforcement_learning.html">Reinforcement Learning</a>
 </li>
-<li><a href="_conclusion_using_ml_in_practice.html">Conclusion: Using ML in Practice</a>
+<li><a href="_conclusion.html">Conclusion</a>
 </li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="_ml_algorithms_unsupervised_supervised_learning">ML Algorithms: Unsupervised &amp; Supervised Learning</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_model_evaluation">Model Evaluation</h3>
 <div class="paragraph">
-<p>Now that you&#8217;ve seen how to transform raw data into &#8220;good data&#8221;, let&#8217;s move on to the fun ML part:</p>
+<p>Since in supervised learning problems we know the ground truth, we can now objectively evaluate different models and benchmark them against each other.</p>
 </div>
-<div class="imageblock text-center">
+<div class="sidebarblock">
 <div class="content">
-<img src="../images/01c_ds_workflow/ml_problem_solution_ml.png" alt="image" width="740">
-</div>
-</div>
 <div class="paragraph">
-<p>For now we&#8217;ll focus on unsupervised &amp; supervised learning algorithms:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01b_intro_ml/ml_goals_first.png" alt="image" width="740">
-</div>
-</div>
-<div class="paragraph">
-<p>By thinking about the goal you want to achieve, you can select the appropriate type of algorithm for you problem:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01c_ml_overview/ml_algorithms_12.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">When you want to apply unsupervised learning algorithms, having a feature matrix \(X\) is enough, while to learn a prediction model with supervised learning algorithms, you also need the corresponding labels \(\mathbf{y}\). Even if your ultimate goal is to predict something (i.e., do supervised learning), it can still be very helpful to first use unsupervised learning to get a better understanding of your dataset, for example, by visualizing your data with dimensionality reduction methods to see all samples and their diversity at a glance, by identifying outliers to clean the dataset, or, if you have a classification problem, by first clustering the samples to check if the given class labels match the naturally occurring groups in the data (e.g., maybe it might be helpful to combine two very similar classes to simplify the problem).</span></div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Same dataset, different use cases</dt>
-<dd>
-<p>As we said in the introduction, the input data can come in various forms, but the goal of your analysis defines which algorithm you should use. To illustrate this, we show what the output of the 5 different types of unsupervised and supervised algorithms could look like for this example dataset:</p>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2858%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-center valign-top">m<sup>2</sup></th>
-<th class="tableblock halign-center valign-top"># Bedr</th>
-<th class="tableblock halign-center valign-top"># Bath</th>
-<th class="tableblock halign-center valign-top">Renovated</th>
-<th class="tableblock halign-center valign-top">&#8230;&#8203;</th>
-<th class="tableblock halign-center valign-top">Price</th>
-<th class="tableblock halign-center valign-top">Sold</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock">125</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">4</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">2000</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">500k</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock">75</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">1990</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">350k</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock">150</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">6</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">2010</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">750k</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">0</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock">35</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">5</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">1999</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">620k</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">0</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock">65</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">3</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">2015</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">220k</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock">100</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">3</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">2003</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">450k</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">0</p></td>
-</tr>
-</tbody>
-</table>
-</dd>
-</dl>
-</div>
-<div class="paragraph text-center">
-<p><span class="small">This is a small toy example dataset with structured data about different apartments, which someone might have gathered from a real estate website, i.e., the size of the apartment in square meters, the number of bedrooms, the number of bathrooms, the year it was last renovated, and finally the price of the listing as well as whether it was sold for this price (1) or not (0).</span></p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Example Unsupervised Learning: Dimensionality Reduction</dt>
-<dd>
-<p><strong>Goal:</strong> Visualize the dataset</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01b_housing_example/dimred.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">The first step when working with a new dataset is usually to visualize it, to get a better overview of all the samples and their diversity. This can be done with a dimensionality reduction algorithm, which takes the original high dimensional data as input (i.e., where each column in the table would be one dimension) and outputs a lower dimensional representation of the samples, i.e., a new matrix with fewer columns (generally 2 for a visualization). These two new features, in our case here called \(z_1\) and \(z_2\), can now be used to create a scatter plot of the dataset (i.e., where each sample / row (in this case each apartment) is represented as one point using this new 2D coordinate system). You can think of this plot as a map of your dataset, that enables you to view all data points at a glance and where you can often see interesting patterns, for example, groups of similar points, which would be arranged close to each other in this 2D map. Please note that for most dimensionality reduction methods, it is not possible to describe what is behind this new coordinate system, specifically, these are not just the two most informative original features, but really completely new dimensions that summarize the information of the original inputs. To better interpret these plots, it is often helpful to color the dots afterwards by some variable, which can then reveal the driving factors behind the most salient patterns in the dataset (e.g., in this example we could have used the price of each apartment to color the respective dot in the map, which might then reveal that similarly priced apartments are arranged next to each other).</span></div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Example Unsupervised Learning: Anomaly Detection</dt>
-<dd>
-<p><strong>Goal:</strong> Find outliers in the dataset</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01b_housing_example/anomaly.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">In the next step, you would usually check your dataset for outliers (to then subsequently correct or remove these samples). An outlier detection algorithm outputs for each sample an anomaly score, which indicates whether this data point deviates from the norm. You can also use these scores then to colorize the 2D map of your dataset you generated in the previous step to see the anomalies in context. One drawback is that an anomaly detection algorithm does not tell you <em>why</em> it considers an individual point an outlier, i.e., you as a data scientist then need to examine the points identified as outlier to see, e.g., if these should be removed due to flawed measurements or if they constitute some interesting edge cases. In this toy example, the sample identified as an anomaly is an apartment that supposedly has a size of only \(35 m^2\), but at the same time 5 bedrooms, i.e., here most likely the person that originally entered the data made a mistake and the size of the listing should actually be 135.</span></div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Example Unsupervised Learning: Clustering</dt>
-<dd>
-<p><strong>Goal:</strong> Find naturally occurring groups the dataset</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01b_housing_example/clustering.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">Additionally, you might also want to check if the dataset contains naturally occurring groups. This can be accomplished with a clustering algorithm, which returns a cluster index for each sample, where points with the same index are in the same cluster. Please note that these cluster indices are not ordered and when running the algorithm again, the samples might be assigned different numbers, however, the groups of samples that were assigned the same number should still be in a cluster together, i.e., this cluster might now just be called &#8216;5&#8217; instead of &#8216;3&#8217;. Again you can use these cluster indices to colorize the 2D map of your dataset that you got from applying a dimensionality reduction method to see the clusters in context. While a clustering algorithm groups similar points together, it again does not tell you <em>why</em> the points were assigned to a cluster and what this cluster means, i.e., again you as a data scientist now need to examine the results to try to describe the different clusters (e.g., in our toy example, the clusters might be &#8220;cheap studio apartments&#8221;, &#8220;large family apartments&#8221;, and &#8220;luxurious penthouses&#8221;).</span></div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Example Supervised Learning: Classification</dt>
-<dd>
-<p><strong>Goal:</strong> Predict a discrete value for each data point</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01b_housing_example/classification.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">Next, you might decide that you want to predict whether an apartment will be sold for the listed price. Since the variable &#8220;sold&#8221; can only take on discrete values (i.e., yes (1) or no (0)), this is a classification problem. A classification model would then use the attributes of an apartment together with the listing&#8217;s price as an input and predict whether the apartment will be sold for this price. Since we also have the true labels available (at least for the initial dataset that we had collected), we can evaluate how well the model performed by computing how many wrong predictions it generated (this is the nice thing about supervised learning: we can always determine how good the solution is and benchmark different models against each other, while in unsupervised learning the data scientist needs to manually examine the results in detail to try to make sense of them).</span></div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Example Supervised Learning: Regression</dt>
-<dd>
-<p><strong>Goal:</strong> Predict a continuous value for each data point</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01b_housing_example/regression.png" alt="image" width="760">
-</div>
-<div class="title"><span class="small">Finally, you might want to predict a reasonable price that should be used when listing an apartment. Since prices are continuous values, this would be a regression problem, where the model would use as input the attributes of the apartments and then predict a suitable price. Again, since for the collected data we have the true prices available at which the apartments were originally listed, we can compute how far off the regression model was with its estimates from the original price set by a real estate agent.</span></div>
+<p><strong>Is this a good model for the task?</strong><br>
+i.e., does the model generate <em>reliable predictions</em> for <em>new data points</em>?</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="_ul_dimensionality_reduction.html">UL: Dimensionality Reduction</a></p>
+<p>split the data into training and test sets to be able to get a reliable estimate of how your model will later perform when applied to new data points that it wasn&#8217;t trained on</p>
 </li>
 <li>
-<p><a href="_ul_outlier_anomaly_detection.html">UL: Outlier / Anomaly Detection</a></p>
+<p>quantify the quality of the model’s predictions (on the test set) with a suitable evaluation metric (depending on the problem type)<br></p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Evaluation metrics: </dt>
+<dd>
+<p><em>Regression:</em> mean absolute error, mean squared error, \(R^2\)<br>
+<em>Classification:</em> (balanced) accuracy<br>
+<em>Ranking:</em> <a href="https://en.wikipedia.org/wiki/Precision_and_recall">precision/recall</a> (&#8594; F1 score), hits@<em>k</em></p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>&#8658; are some mistakes worse than others? (e.g., consider false positives vs. false negatives in medical tests)<br>
+&#8658; always choose <em>a single metric/KPI</em> to optimize! (maybe: additional constraints like runtime)</p>
+</div>
 </li>
 <li>
-<p><a href="_ul_clustering.html">UL: Clustering</a></p>
-</li>
-<li>
-<p><a href="_supervised_learning_overview.html">Supervised Learning: Overview</a></p>
-</li>
-<li>
-<p><a href="_sl_linear_models.html">SL: Linear Models</a></p>
-</li>
-<li>
-<p><a href="_sl_decision_trees.html">SL: Decision Trees</a></p>
-</li>
-<li>
-<p><a href="_sl_ensemble_methods.html">SL: Ensemble Methods</a></p>
-</li>
-<li>
-<p><a href="_sl_k_nearest_neighbors_knn.html">SL: k-Nearest Neighbors (kNN)</a></p>
-</li>
-<li>
-<p><a href="_sl_kernel_methods.html">SL: Kernel Methods</a></p>
-</li>
-<li>
-<p><a href="_information_retrieval_similarity_search.html">Information Retrieval (Similarity Search)</a></p>
-</li>
-<li>
-<p><a href="_sl_neural_networks.html">SL: Neural Networks</a></p>
-</li>
-<li>
-<p><a href="_time_series_forecasting.html">Time Series Forecasting</a></p>
-</li>
-<li>
-<p><a href="_recommender_systems_pairwise_data.html">Recommender Systems (Pairwise Data)</a></p>
+<p>compare your model to a stupid baseline (predict mean / most frequent class)</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_evaluation_metrics">Evaluation Metrics</h4>
+<div class="paragraph">
+<p>First 3 evaluation metrics for regression problems, the mean absolute error, mean squared error, and \(R^2\).</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Mean absolute error (MAE)</dt>
+<dd>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/06_evaluation/error_mean_absolute.png" alt="image" width="480">
+</div>
+<div class="title"><span class="small">This is probably the most straightforward regression error metric and additionally easy to interpret since the error is given in the same units of measurement as the target variable (e.g., if you&#8217;re predicting a price in euros, you would know exactly by how many euros the model is off on average).</span></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.metrics</span> <span class="keyword">import</span> <span class="include">mean_absolute_error</span></code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Mean squared error (MSE)</dt>
+<dd>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/06_evaluation/error_mean_squared.png" alt="image" width="480">
+</div>
+<div class="title"><span class="small">Since this regression error metric is differentiable, it is often used internally when optimizing the parameters of a model (e.g., in linear regression). When reporting the final error of a model, one often takes the square root of the result, i.e., instead reports the root mean squared error (RMSE), since this is again in the same units as the original target variable.</span></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.metrics</span> <span class="keyword">import</span> <span class="include">mean_squared_error</span></code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">\(R^2\)</dt>
+<dd>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/06_evaluation/error_r2.png" alt="image" width="700">
+</div>
+<div class="title"><span class="small">The \(R^2\), or coefficient of determination, essentially compares the MSE of a regression model against the MSE of the stupid baseline for the regression (i.e., predicting the mean), i.e., it normalizes the MSE by the variance of the data. In the best case, the \(R^2\) is 1, i.e., when the model explains the data perfectly, and in the worst case, it can even become negative, i.e., when the model performs worse then simply predicting the mean.</span></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.metrics</span> <span class="keyword">import</span> <span class="include">r2_score</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now lets look at evaluation metrics for classification problems.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Classification errors in detail</dt>
+</dl>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/06_evaluation/error_class2.png" alt="image" width="560">
+</div>
+<div class="title"><span class="small">Most (binary) classification models predict the probability that a sample belongs to a certain class, i.e., a score between 0 and 1. By applying a threshold on this probability (typically at 0.5), the prediction score can be transformed into the class label, i.e., either predicting the positive or negative class for this sample. We distinguish between two types of mistakes that a classification model can make in this prediction: <em>false positives (FP)</em>, i.e., incorrectly predicting the positive class for samples belonging to the negative class, and <em>false negatives (FN)</em>, i.e., incorrectly predicting the negative class for samples from the positive class. Depending on the goal of your application, one type of error might be worse than the other, e.g., in a medical test you might rather tell someone that they should come in for a second test to confirm some problematic results than send them home with an undetected disease. By moving the classification threshold, you can control the trade-off between FP and FN.</span></div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Accuracy</dt>
+<dd>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/06_evaluation/error_class_accuracy.png" alt="image" width="440">
+</div>
+<div class="title"><span class="small">The accuracy is the most widely used classification evaluation metric, where you simply check out of all samples, how many were classified correctly (i.e., TP and TN). However, this can be misleading for unequal class distributions and you should always compare the accuracy of your model against the stupid baseline for classification, i.e., what the accuracy would be for a &#8220;model&#8221; that always predicts the most frequent class.</span></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.metrics</span> <span class="keyword">import</span> <span class="include">accuracy_score</span></code></pre>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Unbalanced class distributions: Accuracy vs. Balanced Accuracy</dt>
+<dd>
+<p>Below you see the decision boundaries of two models on a toy dataset (where the shaded background indicates whether the model would predict the blue or red class for a data point in this area). Which model do you think is more useful?</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/06_evaluation/balanced_acc4.png" alt="image" width="640">
+</div>
+<div class="title"><span class="small">With unbalanced class distributions, e.g., in this case a lot more samples from the blue compared to the red class, the accuracy of a model that simply always predicts the most frequent class can be quite large. But while an accuracy of 0.9 might sound impressive when you report the performance of your model to your project&#8217;s stakeholders, this doesn&#8217;t necessarily mean that the model is actually useful, especially since in real world problems the undersampled class is often the one we care about most (e.g., people with a rare disease or products that have a defect). Instead, the balanced accuracy is often the more informative measure when evaluating classification models and can help us to distinguish between a model that has actually learned something and the stupid baseline.</span></div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Balanced Accuracy</dt>
+<dd>
+<p>To avoid pitfalls of accuracy: consider misclassification rates of both classes separately:</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/06_evaluation/error_class_balanced_accuracy.png" alt="image" width="440">
+</div>
+<div class="title"><span class="small">For the balanced accuracy, first the faction of correctly classified points is computed for each class individually and then these values are averaged.</span></div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.metrics</span> <span class="keyword">import</span> <span class="include">balanced_accuracy_score</span></code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Multi-class problems: micro vs. macro averaging</dt>
+<dd>
+<p>The accuracy and balanced accuracy scores can also be generalized for the multi-class classification case. Here we instead use the terms micro- and macro-averaging to describe the two strategies (which can also be used for other kinds of metrics like the F1-score), where micro-averaging means we compute the score by averaging over all samples, while macro-averaging means we first compute the score for each class separately and then average over the values for the different classes.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>micro-averaged score (&#8594; <code>accuracy_score</code>):</p>
+</div>
+<div class="stemblock">
+<div class="content">
+\[\begin{aligned}
+    \frac{TP + TN}{TP + FN + TN + FP} = \frac{TP_\text{pos} + TP_\text{neg}}{n_\text{pos} + n_\text{neg}} &amp; \quad \Rightarrow \quad \frac{\sum_c TP_{c}}{\sum_c n_{c}} &amp;\end{aligned}\]
+</div>
+</div>
+<div class="paragraph">
+<p>\(n_{c}\) : number of samples belonging to class \(c\)<br>
+\(TP_{c}\) : number of correctly classified samples from class \(c\)</p>
+</div>
+<div class="paragraph">
+<p>macro-averaged score (&#8594; <code>balanced_accuracy_score</code>):</p>
+</div>
+<div class="stemblock">
+<div class="content">
+\[\begin{aligned}
+    \frac{1}{2} \left(\frac{TP}{TP+FN} + \frac{TN}{TN+FP} \right) = \frac{1}{2} \left(\frac{TP_\text{pos}}{n_\text{pos}} + \frac{TP_\text{neg}}{n_\text{neg}} \right) &amp; \quad \Rightarrow \quad \frac{1}{C} \sum_{c=1}^C \frac{TP_{c}}{n_{c}}  &amp;\end{aligned}\]
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Multi-class problems: Confusion matrix</dt>
+<dd>
+<p>Similarly, the table with the TP/FP/TN/FN entries can be extended for the multi-class classification case:</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/06_evaluation/confusion_matrix2.png" alt="image" width="740">
+</div>
+<div class="title"><span class="small">The heatmap on the left show the (normalized) confusion matrix for a 10-class classification problem (recognizing handwritten digits), while the plot on the right shows example images for each case. Examining the confusion matrix and some individual examples can give you more faith in the predictions of your model, as you might realize that some misclassifications (highlighted in red) could also happen to a human, e.g., the 4 that was classified as a 1 or even the 4 that was classified as a 7 (which might even be a labeling error from when the dataset was originally created).</span></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.metrics</span> <span class="keyword">import</span> <span class="include">confusion_matrix</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_model_selection">Model Selection</h4>
+<div class="paragraph">
+<p>After you&#8217;ve chosen an appropriate evaluation metric for your problem, you can use the resulting scores to automatically select the best model hyperparameters and ultimately the best model.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Systematic Model Selection with Cross-Validation &amp; Grid Search</dt>
+<dd>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/06_evaluation/cross_val8.png" alt="image" width="840">
+</div>
+<div class="title"><span class="small">As we&#8217;ve established in the beginning, before experimenting with any models, the dataset should always be split into a training and test set. However, this is actually not the full picture: since you are typically experimenting with many different types of models and for each model type with dozens of hyperparameter settings, you should not use this test set to evaluate each of these model candidates, since it might happen that with all these things you try you end up choosing a model that performs really well on this test set, but then actually does not generalize to new data later and you would have no way of finding this out before deploying the model in production. Therefore, we introduce a new data split, the <strong>validation set</strong>, that is used to evaluate the different candidate models, while the test set remains locked away until you&#8217;re ready to evaluate your final model to get a realistic estimate of how it should actually perform on new data. If your original dataset is quite big, say, over 100k samples (depending on the diversity of your data, e.g., the number of classes), then it is usually enough to just split the data into training, validation, and test sets at the start, where the validation and test sets could contain about 10% of the data each and should be representative of the diversity of the original dataset. However, when the original dataset is smaller, it might not be possible to get such representative splits, which is when a technique called <strong>cross-validation</strong> (also abbreviated x-val) can come in very handy: in a <em>k</em>-fold cross-validation, the dataset is split into <em>k</em> parts, where each part is once the designated validation set, while the remaining <em>k-1</em> parts are used for training. This way, the model is trained and evaluated <em>k</em> times, each time on different splits. By computing the mean and standard deviation of the error metrics on all folds, we get a reliable estimate of the model&#8217;s generalization error and its variation due to the diversity of the dataset. While a cross-validation by itself is already a helpful trick to deal with small datasets, sklearn makes our lives even easier by combining it with a method for systematically selecting the best hyperparameter settings of a model, the <strong>grid search</strong>. In a grid search, you define the different values you want to test for each hyperparameter and then all combinations of these different values for all hyperparameters are automatically evaluated using a cross-validation. This is very useful, as often the different hyperparameter settings influence each other. However, with many individual settings it also comes at a computational cost, as the model is trained and evaluated \(k \times m_1 \times m_2 \times \dots \times m_i\) times, where \(k\) is the number of folds in the cross-validation and \(m_1...m_i\) are the number of values that need to be tested for each of the <em>i</em> hyperparameters of the model. For example, with two hyperparameters, the grid search results could look something like the plot on the left, where you see a heatmap of the average accuracy achieved with each hyperparameter combination of a model in the cross-validation. While sklearn&#8217;s grid search method will always directly tell you the best hyperparameter combination out of the ones it tested, it is important to actually check the complete set of results to verify that you have covered the whole range of possible hyperparameter values that could give good results (e.g., in the plot here we see a peak in the middle with the results getting worse to the sides, i.e., we know that better hyperparameter values are unlikely to lie outside of the range we&#8217;ve tested). It is generally a good idea to first start with a large range of values and then zoom in to the area that seems most promising (and of course knowledge about the different algorithms helps a lot in choosing reasonable settings as well).</span></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.model_selection</span> <span class="keyword">import</span> <span class="include">GridSearchCV</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_garbage_in_garbage_out.html">Garbage in, garbage out!</a> | ↑ Up: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_ul_dimensionality_reduction.html">UL: Dimensionality Reduction</a> →</p>
+<p>← Previous: <a href="_different_types_of_models.html">Different types of models</a> | ↑ Up: <a href="_supervised_learning.html">Supervised Learning</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_linear_models.html">Linear Models</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

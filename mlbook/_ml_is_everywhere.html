@@ -641,31 +641,31 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
-<body id="_how_to_create_value_with_ml" class="article toc2 toc-left">
+<body id="_ml_is_everywhere" class="article toc2 toc-left">
 <div id="header">
 <h1>A Practitioner&#8217;s Guide to Machine Learning</h1>
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.0,</span>
-<span id="revdate">2021-08-29</span>
+<span id="revnumber">version 1.1,</span>
+<span id="revdate">2021-09-12</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <p><span class="toc-root"><a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a></span></p><ul class="sectlevel1">
-<li><a href="_introduction_solving_problems_with_ml.html">Introduction: Solving Problems with ML</a>
+<li><a href="_introduction.html">Introduction</a>
 <ul class="sectlevel2">
-<li><a href="_why_should_you_care_about_ml.html">Why should you care about ML?</a>
+<li><a href="_ml_is_everywhere.html"><span class="toc-current">ML is everywhere!</span></a>
 </li>
-<li><a href="_how_to_create_value_with_ml.html"><span class="toc-current">How to create value with ML</span></a>
-<ul class="sectlevel3">
-<li><a href="_how_to_create_value_with_ml.html#_ml_algorithms_tools_to_generate_value_from_data">ML algorithms = tools to generate value from data</a>
+<li><a href="_ml_history_why_now.html">ML history: Why now?</a>
 </li>
-<li><a href="_how_to_create_value_with_ml.html#_steps_for_creating_value_with_ml">Steps for creating value with ML</a>
+<li><a href="_what_is_ml.html">What is ML?</a>
 </li>
-</ul>
+<li><a href="_how_do_machines_learn.html">How do machines &#8220;learn&#8221;?</a>
 </li>
-<li><a href="_different_ml_algorithms_their_use_cases.html">Different ML algorithms &amp; their use cases</a>
+<li><a href="_when_should_you_use_ml.html">When should you use ML?</a>
+</li>
+<li><a href="_solving_problems_with_ml_workflow.html">Solving problems with ML: Workflow</a>
 </li>
 </ul>
 </li>
@@ -673,205 +673,184 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </li>
 <li><a href="_data_preprocessing.html">Data &amp; Preprocessing</a>
 </li>
-<li><a href="_ml_algorithms_unsupervised_supervised_learning.html">ML Algorithms: Unsupervised &amp; Supervised Learning</a>
+<li><a href="_ml_solutions_overview.html">ML Solutions: Overview</a>
+</li>
+<li><a href="_unsupervised_learning.html">Unsupervised Learning</a>
+</li>
+<li><a href="_supervised_learning.html">Supervised Learning</a>
+</li>
+<li><a href="_special_purpose_models.html">Special-Purpose Models</a>
 </li>
 <li><a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a>
 </li>
-<li><a href="_ml_algorithms_reinforcement_learning.html">ML Algorithms: Reinforcement Learning</a>
+<li><a href="_reinforcement_learning.html">Reinforcement Learning</a>
 </li>
-<li><a href="_conclusion_using_ml_in_practice.html">Conclusion: Using ML in Practice</a>
+<li><a href="_conclusion.html">Conclusion</a>
 </li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect2">
-<h3 id="_how_to_create_value_with_ml">How to create value with ML</h3>
+<h3 id="_ml_is_everywhere">ML is everywhere!</h3>
 <div class="paragraph">
-<p>OK, so machine learning is already transforming all of our lives and you should probably know something about it. So now what exactly is ML?</p>
+<p>Machine learning is already used all around us to make our lives more convenient:</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Face recognition</strong></p>
 </div>
 <div class="paragraph">
-<p>First of all, ML is an area of research in the field of theoretical computer science, i.e., at the intersection of math/statistics and computer science:</p>
+<p>Face recognition technology is one of the earliest notable examples of machine learning and computer vision that can nowadays be found in every digital camera and smartphone.
+While the algorithms implemented in a camera application are fairly simple and only detect the presence of faces in general to make sure you look your best when the picture is taken, more sophisticated algorithms are also being used by governments and law enforcement in more and more countries to match a detected face to a known person in their biometric databases, for example, to identify criminals. So&#8230;&#8203;smile!?</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="../images/01b_intro_ml/venn1.png" alt="image" width="340">
+<img src="../images/01a_intro/01_facerec.jpg" alt="face recognition" width="540">
 </div>
+<div class="title"><span class="small">https://thesocietypages.org/socimages/2008/12/15/nikon-s60-auto-focuses-on-voyeurs-savages-ghosts/ (15.12.2008)</span></div>
 </div>
-<div class="paragraph">
-<p>More specifically, <strong>machine learning</strong> is an <strong>umbrella term for algorithms that recognize patterns and learn rules from data</strong>.</p>
-</div>
-<div class="paragraph">
-<p>Simply speaking, an algorithm can be thought of as a specific strategy or recipe for solving a certain kind of problem. For example, there exist effective algorithms to find the shortest paths between two cities (e.g., what Google Maps uses when you ask for directions) or to solve scheduling problems (which task should be done first and which task after that to finish all tasks before their respective deadlines and satisfy dependencies between the tasks). Machine learning deals with the subset of algorithms that detect and make use of statistical regularities in a dataset to obtain specific results.</p>
-</div>
-<div class="sect3">
-<h4 id="_ml_algorithms_tools_to_generate_value_from_data">ML algorithms = tools to generate value from data</h4>
-<div class="paragraph">
-<p>Analogous to the tools used in a traditional production process to build something, you can think of ML algorithms as tools to generate value from data:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01b_intro_ml/ml_carpentry_analogy2.png" alt="image" width="840">
-</div>
-</div>
-<div class="paragraph">
-<p>In order to successfully apply ML, you should ask yourself some important questions:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>What could be valuable? (For example, this could be insights that you generate by analyzing the data or a software module, such as a face recognition algorithm, that adds a new feature to your product.)</p>
-</li>
-<li>
-<p>What raw inputs are needed to create it? (For example, just like you can&#8217;t create a wooden chair using only fabric and metal or a few twigs you found in the forest, depending on what you want to achieve with ML, you also need the right data (quality &amp; quantity) to apply the algorithms in the first place.)</p>
-</li>
-<li>
-<p>What type of ML algorithms can transform the raw input into the kind of valuable thing I want? (More on the different kinds of ML algorithms in the next section.)</p>
-</li>
-<li>
-<p>Do I (or my employees) possess the necessary skills and have enough compute power available to actually accomplish this in practice? (If not, keep on reading and rent some hours on a cloud compute cluster like those provided by Amazon Web Services.)</p>
-</li>
-</ul>
-</div>
-<div class="sect4">
-<h5 id="_ml_algorithms_solve_input_output_problems">ML algorithms solve &#8220;input &#8594; output&#8221; problems</h5>
-<div class="paragraph">
-<p>What is important to remember is that ML algorithms solve &#8220;input &#8594; output&#8221; problems like these:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01b_intro_ml/input_output5.png" alt="image" width="500">
-</div>
-<div class="title"><span class="small">Example ML problems: recognizing objects in images; translating text from one language to another; determining a good next move given the current state of a Go board; identifying groups of users/customers based on some information about them like questionnaire answers (in marketing this is also called customer segmentation and, for example, used to target different groups of customers with specific advertisement campaigns, which can nowadays easily be done on social media). Despite their different nature, what all these tasks have in common is that a ML model operates on some input and should produce a corresponding useful output.</span></div>
-</div>
-<div class="paragraph">
-<p>In the above examples, while a human (expert) typically could easily produce the correct output given the input (e.g., even a small child can recognize the cat in the first image), they have a hard time describing <em>how</em> they arrived at the correct output (e.g., how did you know that this is a cat? because of the pointy ears? the whiskers?). ML algorithms can instead learn such rules from the given samples.</p>
-</div>
-<div class="paragraph">
-<p>While traditional software solutions are used to automate tasks that can be formulated as a fixed, predefined sequence of actions, executed according to some hard-coded rules (e.g., &#8220;a gate should open <em>if</em> an object passes through a photoelectric barrier and 20 seconds later the gate should close again&#8221;), machine learning can be used to <strong>automate &#8220;input &#8594; output&#8221; tasks</strong> for which it would otherwise be difficult to come up with such rules. For example, the quality control in a cookie factory is such an &#8220;input (cookie) &#8594; output (ok/defective)&#8221; task: While some broken cookies could be sorted out automatically by checking that each cookie weights around 15g, it would be difficult to formulate rules that catch all possible defects. This would instead either require a human watching the production line to recognize, e.g., over-baked cookies, or taking pictures of the cookies and using them as input for a machine learning model to recognize the defective cookies:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01b_intro_ml/input_output_solving_cookie3.png" alt="image" width="780">
 </div>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="paragraph">
-<p><span class="underline">When (not) to use ML:</span></p>
+<p><strong>Object recognition (e.g., for self-driving cars)</strong></p>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">ML is overkill if: </dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p>a manually defined set of rules or mechanistic model can solve the problem (e.g., in the example above, if the only quality problem in the cookie factory that ever occurred were broken cookies, then the rule &#8220;cookie weight needs to be between 14-16g&#8221; would suffice to detect defective cookies)</p>
-</li>
-</ul>
-</div>
-</dd>
-<dt class="hdlist1">ML has great potential when: </dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p>an exact simulation with a mechanistic model takes too long (but can be used to generate a high quality dataset; e.g., AlphaFold)</p>
-</li>
-<li>
-<p>solving a &#8220;simple&#8221; but hard to explain task (that takes a human ~1 second, like recognizing something in an image)<br>
-&#8658; use ML to automate repetitive tasks &amp; make expert knowledge available to everyone (like Google&#8217;s diabetic retinopathy diagnostic model)<br>
-<span class="underline">But:</span> success depends on data quality &amp; quantity!<br>
-&#8594; humans are much better at generalizing from a few examples (e.g., a doctor can still easily recognize the disease even if the pictures were taken with a slightly different setup that might result, for example, in noisier images, while the ML model needs to be specifically trained for these cases, which means that in the worst case you might need to collect a lot of additional data for this new setup)</p>
-</li>
-</ul>
-</div>
-</dd>
-<dt class="hdlist1">ML is your best chance when: </dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p>humans are overwhelmed by very complex, high dimensional data (e.g., given an excel spreadsheet with hundreds of columns, a human can&#8217;t easily recognize any patterns in this sea of numbers. In the worst case, there actually aren&#8217;t any relationships in the data that could be discovered (maybe you didn&#8217;t record data from all the relevant sensors), but if there are, ML will most likely find them.)</p>
-</li>
-</ul>
-</div>
-</dd>
-</dl>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_steps_for_creating_value_with_ml">Steps for creating value with ML</h4>
 <div class="paragraph">
-<p>Solving &#8220;input &#8594; output&#8221; problems with ML requires three main steps:</p>
+<p>Another example from the area of computer vision is object recognition or image segmentation in general. This is, for example, used in self-driving cars to make sure they are aware of street signs and pedestrians.</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="../images/01b_intro_ml/input_output_solving_abstract6.png" alt="image" width="680">
+<img src="../images/01a_intro/01_cars.jpg" alt="object recognition" width="640">
 </div>
+<div class="title"><span class="small">https://medium.com/intro-to-artificial-intelligence/c01eb6eaf9d (16.06.2018)</span></div>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Analysis of medical images</strong></p>
 </div>
 <div class="paragraph">
-<p>The first (and arguably most important) step is to <strong>identify where machine learning can (and should) be used</strong> in the first place. Once a suitable &#8220;input &#8594; output&#8221; problem as been identified, <strong>historic data needs to be gathered and the right ML algorithm needs to be selected and applied</strong> to obtain a working solution. This is what the next chapters are all about.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-In most of the book, the terms &#8220;ML algorithm&#8221; and &#8220;ML model&#8221; will be used interchangeably. To be more precise, however, in general the algorithm processes the data and learns some parameter values and these parameter settings then define the final model. (For example, a linear regression <em>model</em> is defined by its coefficients (i.e., the model&#8217;s parameters), which are found by doing some stuff with the data (i.e., executing the steps outlined in the linear regression <em>algorithm</em>, which includes solving an optimization problem).)
-</td>
-</tr>
-</table>
+<p>The last example on image data comes from the application area of medicine: Below you see two images of retinas, i.e., photos taken of the back of someone&#8217;s eye, based on which it is possible to diagnose a common complication of diabetes that can result in blindness if left untreated.</p>
 </div>
 <div class="paragraph">
-<p>Once a prototypical solution has been implemented and meets the required performance level, this solution then has to be deployed, i.e., <strong>integrated into the general workflow and infrastructure</strong> so that it can actually be used to improve the respective process in practice. There are generally two strategies for how to do this:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>The ML model runs on the &#8220;edge&#8221;, i.e., on each individual machine where the respective data is collected and the output of the model is used in subsequent process steps. This is often the best strategy when the results need to be computed in real time and / or a continuous Internet connection can not be guaranteed, e.g., in self-driving cars. However, the downside of this is that, depending on the type of ML model, comparatively expensive computing equipment needs to be installed in each machine, e.g., GPUs for neural network models.</p>
-</li>
-<li>
-<p>The ML model runs in the &#8220;cloud&#8221;, i.e., on a central server, e.g., in the form of a web application that receives the data from the individual machines, processes it, and sends back the results. This is often the more efficient solution if a response in near real time is sufficient for the respective use case, but can bring with it privacy concerns if user data is processed. One of the major benefits of this solution is that it is easier to update the ML model, for example, when more historic data becomes available or if the process changes and the model now has to deal with slightly different inputs (we&#8217;ll discuss this further in the section on messy data).</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>As these decisions heavily depend on your specific use case, they go beyond the scope of this book. Search online for &#8220;MLOps&#8221; to find out more about these topics and hire a machine learning or data engineer to set up the required infrastructure in your company.</p>
-</div>
-<div class="sect4">
-<h5 id="_machine_learning_workflow">Machine Learning Workflow</h5>
-<div class="paragraph">
-<p>Let&#8217;s look at the second main step, &#8220;devise a working solution&#8221;, in more detail. To solve a concrete problem using ML, you will generally follow this workflow (this is just a rough overview, in the last chapter of the book we&#8217;ll get into more of the details):</p>
+<p>The diagnostic algorithm that researchers at Google had developed to identify the markers of the disease in these images has reached the same level of accuracy as human experts in the field (Google had even assembled a team of top specialists to discuss the hardest cases again to get consistent labels for all images, which gave their model an additional performance boost). Since the equipment to take these images is fairly cheap, this means that with this ML model, expert diagnostic decisions can now be made available to those that might otherwise not have had the means to consult a top specialist.</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="../images/01c_ds_workflow/ml_problem_solution_all.png" alt="image" width="740">
+<img src="../images/01a_intro/01_medical.png" alt="medical images" width="640">
 </div>
-<div class="title"><span class="small">To arrive at a working ML solution, you first need to collect lots of data, which can be in different formats (e.g., excel sheets, images, text documents (like web pages), databases, etc.). This data then needs to put in the right format such that you can apply ML (this step is called preprocessing, which we&#8217;ll discuss in a later chapter in more detail; the result after preprocessing is labeled &#8220;Good Data&#8221; here, however, please be aware that this only means that the data is in the correct format to apply ML, it doesn&#8217;t mean that the data actually has the right quality and quantity such that ML will produce good results). Then you can apply your ML algorithm to arrive at a solution for your problem. In this book, we&#8217;ll mostly focus on the last part of this workflow, while your specific domain knowledge can be very helpful for identifying a suitable problem, collecting the right data, and knowing what information to extract from the raw data.</span></div>
+<div class="title"><span class="small">https://ai.googleblog.com/2016/11/deep-learning-for-detection-of-diabetic.html (29.11.2016)</span></div>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Conversational agents (i.e. speech recognition&#8230;&#8203;)</strong></p>
 </div>
 <div class="paragraph">
-<p>Unfortunately, due to a lack of standardized data infrastructure in most companies, the sad truth is that usually (at least) about 90% of a Data Scientist&#8217;s time will be spent collecting, cleaning, and otherwise preprocessing the data to get it into a format where the ML algorithms can be applied:</p>
+<p>Leaving the field of computer vision, now an example from the area of natural language processing (NLP): Conversational agents, like Siri or Alexa, are waiting for commands in many people&#8217;s homes. While the answers they give are mostly still scripted by humans (as in the screenshot below), the real challenge is to understand what the person had actually said in the first place. Speech recognition, i.e., automatically transcribing spoken language into text, is a rather difficult problem, for example, since people speak with different accents and there can be additional background noises.</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="../images/01c_ds_workflow/ml_problem_solution10.png" alt="image" width="740">
+<img src="../images/01a_intro/01_siri.png" alt="speech recogniton" width="640">
 </div>
+<div class="title"><span class="small">screenshot: Siri on macOS (13.12.2018)</span></div>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Machine translation</strong></p>
 </div>
 <div class="paragraph">
-<p>While sometimes frustrating, the time spent cleaning and preprocessing your data is never wasted, as only with a solid data foundation the ML algorithms can achieve decent results.</p>
+<p>Again from the field of NLP: machine translation, i.e., automatically translating text from one language into another. If you have used Google Translate (shown as an example in the screenshot below) after it was first released in 2006, you were probably often quite disappointed with the results, as the translated sentences read more like the words were just looked up one after another in a dictionary (= statistical machine translation). However, this changed when Google made the switch to a neural network model to generate the translations 10 years later in 2016: now the translated texts are actually readable and usually require only minor manual corrections, if any.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/01a_intro/01_translation.png" alt="translation" width="640">
+</div>
+<div class="title"><span class="small">screenshot https://translate.google.com/ (13.12.2018)</span></div>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Recommender systems</strong></p>
+</div>
+<div class="paragraph">
+<p>Another area where ML is used are recommender systems, e.g., on e-commerce platforms and social media, which (ideally) provide the user with helpful search results and suggestions (and thereby make money for the respective companies), like in the screenshot below from Amazon or used by Netflix, YouTube &amp; co to keep you glued to your screen. While sometimes the provided suggestions might help you find exactly what you were looking for, especially platforms with uncurated content such as YouTube have also been criticized for fostering, e.g., conspiracy theories through these personalized recommendations. Since this kind of content kept users especially engaged, it was recommended a lot and thereby drove the users further down some rabbit hole instead of also providing perspectives outside one&#8217;s own information bubble. But on the upside, the research on recommender systems has also sparked developments in other areas of science, such as methods that recommend drug molecules that fit to the proteins playing a key role in certain diseases to accelerate the search for a cure.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/01a_intro/01_recsys1.png" alt="recommender systems 1" width="640">
+</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/01a_intro/01_recsys2.png" alt="recommender systems 2" width="640">
+</div>
+<div class="title"><span class="small">screenshot https://www.amazon.com/ (12.12.2018)</span></div>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Neural networks getting creative</strong></p>
+</div>
+<div class="paragraph">
+<p>Lots of fun applications use neural networks to create new content, i.e., perform creative tasks that were previously thought exclusive to humans. For example, an AI has written a slightly confusing yet hilarious <a href="https://arstechnica.com/gaming/2021/05/an-ai-wrote-this-movie-and-its-strangely-moving/">script for a movie</a> (which was then actually produced!). And you&#8217;ve probably also seen some examples of <a href="https://pytorch.org/tutorials/advanced/neural_style_tutorial.html">&#8220;Neural Style Transfer&#8221;</a> before, a technique that can, for example, be used to make your social media profile picture look like a van Gogh painting. Finally, neural networks are also used to create beautiful videos that combine and transform images to accompany music, like in the video shown below:</p>
+</div>
+<div class="videoblock text-center">
+<div class="content">
+<iframe width="640" height="500" src="https://www.youtube.com/embed/85l961MmY8Y?rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Better than humans: Alpha Go</strong></p>
+</div>
+<div class="paragraph">
+<p>In 2016, DeepMind, a startup subsequently acquired by Google, presented AlphaGo, the first computer program to beat a human Go master. This was a huge milestone for the AI research community, as Go, with a 19 x 19 playing field, is a lot more complex than chess (8 x 8 field and more restrictive movement patterns), and even the most optimistic AI researchers had not expected that a computer could win against a Go master before 2020. The algorithms used in AlphaGo are from the subfield of reinforcement learning, which we will discuss in more detail at the end of the book.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/01a_intro/01_alphago.jpg" alt="alpha go" width="440">
+</div>
+<div class="title"><span class="small">https://www.nature.com/nature/volumes/529/issues/7587 (28.01.2016)</span></div>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Protein folding - solving a 50-year-old challenge</strong></p>
+</div>
+<div class="paragraph">
+<p>Another major success story from DeepMind came in 2020, when they presented their AlphaFold model, which is now as accurate as traditional simulation models in estimating the 3D structure of proteins from their raw amino acid sequence. Knowing this 3D structure is important for drug development to determine which drug molecules can bind to a certain protein and therefore identify target structures that should be investigated further to find cures for diseases where the specific protein plays a key role. While exact simulation models existed for a long time to estimate a protein&#8217;s 3D structure, these were very slow and it often took several days to compute the folding for a single protein. With the new neural network models, the same computation can now be done in a matter of minutes or even seconds, thereby vastly accelerating drug development.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/01a_intro/01_alphafold.png" alt="alpha fold" width="640">
+</div>
+<div class="title"><span class="small">https://deepmind.com/blog/article/AlphaFold-Using-AI-for-scientific-discovery (15.01.2020)</span></div>
 </div>
 </div>
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_why_should_you_care_about_ml.html">Why should you care about ML?</a> | ↑ Up: <a href="_introduction_solving_problems_with_ml.html">Introduction: Solving Problems with ML</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_different_ml_algorithms_their_use_cases.html">Different ML algorithms &amp; their use cases</a> →</p>
+<p>↑ Up: <a href="_introduction.html">Introduction</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_ml_history_why_now.html">ML history: Why now?</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

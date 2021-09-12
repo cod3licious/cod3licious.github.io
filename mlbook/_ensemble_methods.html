@@ -730,7 +730,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </style>
 
 </head>
-<body id="_information_retrieval_similarity_search" class="article toc2 toc-left">
+<body id="_ensemble_methods" class="article toc2 toc-left">
 <div id="header">
 <h1>A Practitioner&#8217;s Guide to Machine Learning</h1>
 <div class="details">
@@ -753,18 +753,24 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="_unsupervised_learning.html">Unsupervised Learning</a>
 </li>
 <li><a href="_supervised_learning.html">Supervised Learning</a>
-</li>
-<li><a href="_special_purpose_models.html">Special-Purpose Models</a>
 <ul class="sectlevel2">
-<li><a href="_information_retrieval_similarity_search.html"><span class="toc-current">Information Retrieval (Similarity Search)</span></a>
+<li><a href="_different_types_of_models.html">Different types of models</a>
 </li>
-<li><a href="_deep_learning_neural_networks.html">Deep Learning (Neural Networks)</a>
+<li><a href="_model_evaluation.html">Model Evaluation</a>
 </li>
-<li><a href="_time_series_forecasting.html">Time Series Forecasting</a>
+<li><a href="_linear_models.html">Linear Models</a>
 </li>
-<li><a href="_recommender_systems_pairwise_data.html">Recommender Systems (Pairwise Data)</a>
+<li><a href="_decision_trees.html">Decision Trees</a>
+</li>
+<li><a href="_ensemble_methods.html"><span class="toc-current">Ensemble Methods</span></a>
+</li>
+<li><a href="_k_nearest_neighbors_knn.html">k-Nearest Neighbors (kNN)</a>
+</li>
+<li><a href="_kernel_methods.html">Kernel Methods</a>
 </li>
 </ul>
+</li>
+<li><a href="_special_purpose_models.html">Special-Purpose Models</a>
 </li>
 <li><a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a>
 </li>
@@ -777,30 +783,92 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </div>
 <div id="content">
 <div class="sect2">
-<h3 id="_information_retrieval_similarity_search">Information Retrieval (Similarity Search)</h3>
+<h3 id="_ensemble_methods">Ensemble Methods</h3>
 <div class="paragraph">
-<p>The goal of information retrieval is to identify similar items given some query:</p>
+<p>What is better than one model? Multiple models!</p>
 </div>
-<div class="imageblock text-center">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Main idea</dt>
+<dd>
+<p>train multiple models &amp; combine their predictions (regression: average; classification: most frequent class)</p>
+</dd>
+</dl>
+</div>
+<div class="openblock">
 <div class="content">
-<img src="../images/05_supervised_other/inforetr.png" alt="image" width="640">
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>&#8594; different types of models</p>
+</li>
+<li>
+<p>&#8594; same type of model but with different hyperparameter settings (this can also include the random seed used when initializing the model, e.g., for neural networks)</p>
+</li>
+<li>
+<p>&#8594; models trained on different subsets of the data</p>
+</li>
+<li>
+<p>&#8594; boosting: models are trained sequentially and each additional model focuses on those data points that the previous models got wrong</p>
+</li>
+</ul>
 </div>
-<div class="title"><span class="small">Just like in the reverse Google image search, we here use as input a query image and get as a result the <em>k</em> images that are most similar to it.</span></div>
 </div>
-<div class="paragraph">
-<p>This can be accomplished by building a nearest neighbors search tree (i.e., just like for the k-nearest neighbors algorithm, only that here we return the neighbors directly instead of using them to predict the label for the new data point).</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Pros</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>more stable prediction (tip: use individual models that on their own would overfit a bit)</p>
+</li>
+<li>
+<p>get an estimate of how certain the prediction is (how many models agree?)</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Careful</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>computationally expensive (depending on the models used)</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Popular example</dt>
+<dd>
+<p><em>Random Forest</em>: multiple decision trees trained on random subsamples of the data (this exploits fact that decision trees can be sensitive to small variations in the dataset)<br></p>
+</dd>
+</dl>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.neighbors</span> <span class="keyword">import</span> <span class="include">NearestNeighbors</span></code></pre>
+<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.ensemble</span> <span class="keyword">import</span> <span class="include">RandomForestClassifier</span>, <span class="include">RandomForestRegressor</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>But of course, the success of this approach is again highly dependent on being able to compute meaningful similarities between the data points. For text datasets, information retrieval often works quite well by using simple TF-IDF feature vectors together with a cosine similarity, however, for images, for example, out-of-the-box similarity measures that operate directly on the original input features (i.e., pixel values) are only able to identify images with similar colors, not necessarily similar content (e.g., an image showing a black cat would be more similar to an image showing a black dog than a white cat). To get around this problem, we could use neural networks to obtain a more informative feature representation, with which it is then easier to compute meaningful semantic similarities.</p>
+<p>For more advanced approaches, also check out the voting ensemble and boosting methods from <a href="https://scikit-learn.org/stable/modules/ensemble.html">sklearn</a>, with which you can also combine arbitrary models into an ensemble.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Ensemble methods like random forests and gradient boosting trees give very good results on real world structured datasets and dominate the leader boards for many competitions at <a href="https://www.kaggle.com/">Kaggle</a>, a website where companies can upload datasets for data scientists to benchmark themselves against each other and even win prize money. (Kaggle is also a great place to look for practice problems &amp; datasets!)
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>↑ Up: <a href="_special_purpose_models.html">Special-Purpose Models</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_deep_learning_neural_networks.html">Deep Learning (Neural Networks)</a> →</p>
+<p>← Previous: <a href="_decision_trees.html">Decision Trees</a> | ↑ Up: <a href="_supervised_learning.html">Supervised Learning</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_k_nearest_neighbors_knn.html">k-Nearest Neighbors (kNN)</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

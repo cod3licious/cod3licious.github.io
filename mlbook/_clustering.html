@@ -730,7 +730,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </style>
 
 </head>
-<body id="_information_retrieval_similarity_search" class="article toc2 toc-left">
+<body id="_clustering" class="article toc2 toc-left">
 <div id="header">
 <h1>A Practitioner&#8217;s Guide to Machine Learning</h1>
 <div class="details">
@@ -751,20 +751,24 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="_ml_solutions_overview.html">ML Solutions: Overview</a>
 </li>
 <li><a href="_unsupervised_learning.html">Unsupervised Learning</a>
+<ul class="sectlevel2">
+<li><a href="_dimensionality_reduction.html">Dimensionality Reduction</a>
+</li>
+<li><a href="_outlier_anomaly_detection.html">Outlier / Anomaly Detection</a>
+</li>
+<li><a href="_clustering.html"><span class="toc-current">Clustering</span></a>
+<ul class="sectlevel3">
+<li><a href="_clustering.html#_k_means_clustering"><em>k</em>-means clustering</a>
+</li>
+<li><a href="_clustering.html#_dbscan">DBSCAN</a>
+</li>
+</ul>
+</li>
+</ul>
 </li>
 <li><a href="_supervised_learning.html">Supervised Learning</a>
 </li>
 <li><a href="_special_purpose_models.html">Special-Purpose Models</a>
-<ul class="sectlevel2">
-<li><a href="_information_retrieval_similarity_search.html"><span class="toc-current">Information Retrieval (Similarity Search)</span></a>
-</li>
-<li><a href="_deep_learning_neural_networks.html">Deep Learning (Neural Networks)</a>
-</li>
-<li><a href="_time_series_forecasting.html">Time Series Forecasting</a>
-</li>
-<li><a href="_recommender_systems_pairwise_data.html">Recommender Systems (Pairwise Data)</a>
-</li>
-</ul>
 </li>
 <li><a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a>
 </li>
@@ -777,30 +781,181 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </div>
 <div id="content">
 <div class="sect2">
-<h3 id="_information_retrieval_similarity_search">Information Retrieval (Similarity Search)</h3>
+<h3 id="_clustering">Clustering</h3>
 <div class="paragraph">
-<p>The goal of information retrieval is to identify similar items given some query:</p>
+<p>The last category of unsupervised learning algorithms is clustering:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="../images/05_supervised_other/inforetr.png" alt="image" width="640">
+<img src="../images/01c_ml_overview/ml_algorithms_clustering.png" alt="image" width="740">
 </div>
-<div class="title"><span class="small">Just like in the reverse Google image search, we here use as input a query image and get as a result the <em>k</em> images that are most similar to it.</span></div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Useful for</dt>
+<dd>
+<p>identifying naturally occurring groups in the data (e.g., for customer segmentation)</p>
+</dd>
+</dl>
 </div>
 <div class="paragraph">
-<p>This can be accomplished by building a nearest neighbors search tree (i.e., just like for the k-nearest neighbors algorithm, only that here we return the neighbors directly instead of using them to predict the label for the new data point).</p>
+<p>There exist <a href="https://scikit-learn.org/stable/modules/clustering.html">quite a lot of different clustering algorithms</a> and we&#8217;ll only present two with different ideas here. If you look at the linked sklearn examples, please note that even though other clustering algorithms might seem to perform very well on fancy toy datasets, data in reality is seldom arranged in two concentric circles, and on real-world datasets the k-means clustering algorithm is often a robust choice.</p>
+</div>
+<div class="sect3">
+<h4 id="_k_means_clustering"><em>k</em>-means clustering</h4>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Main idea</dt>
+<dd>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>randomly place <em>k</em> cluster centers (where <em>k</em> is a hyperparameter set by the user);</p>
+</li>
+<li>
+<p>assign each data point to its closest cluster center;</p>
+</li>
+<li>
+<p>update cluster centers as mean of the assigned data points;</p>
+</li>
+<li>
+<p>repeat 2-3 until convergence.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/03_unsupervised/kmeans.png" alt="image" width="840">
+</div>
+<div class="title"><span class="small">Please note that even though in these pictures the data is depicted in 2D, of course all these methods also work in high dimensional spaces!</span></div>
+</div>
+</dd>
+</dl>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.neighbors</span> <span class="keyword">import</span> <span class="include">NearestNeighbors</span></code></pre>
+<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.cluster</span> <span class="keyword">import</span> <span class="include">KMeans</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>But of course, the success of this approach is again highly dependent on being able to compute meaningful similarities between the data points. For text datasets, information retrieval often works quite well by using simple TF-IDF feature vectors together with a cosine similarity, however, for images, for example, out-of-the-box similarity measures that operate directly on the original input features (i.e., pixel values) are only able to identify images with similar colors, not necessarily similar content (e.g., an image showing a black cat would be more similar to an image showing a black dog than a white cat). To get around this problem, we could use neural networks to obtain a more informative feature representation, with which it is then easier to compute meaningful semantic similarities.</p>
+<p><span class="underline">Important Parameters:</span></p>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>&#8594; <code>n_clusters</code>: how many clusters (<em>k</em>) you want to find</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Pros</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>fast</p>
+</li>
+<li>
+<p>usually good results on real world datasets</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Careful</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>depends on random initialization (&#8594; local optimum, but usually not problematic in practice due to multiple restarts)</p>
+</li>
+<li>
+<p>assumes spherical clusters</p>
+</li>
+<li>
+<p>need to guess the number of clusters (but can be done with a heuristic)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_dbscan">DBSCAN</h4>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Main idea</dt>
+<dd>
+<p>find &#8216;core samples&#8217; in dense areas of the data and then expand clusters by iteratively including points with a distance &lt; <code>eps</code></p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/03_unsupervised/dbscan.png" alt="image" width="840">
+</div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.cluster</span> <span class="keyword">import</span> <span class="include">DBSCAN</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><span class="underline">Important Parameters:</span></p>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>&#8594; <code>eps</code>: maximum neighborhood distance of two samples</p>
+</li>
+<li>
+<p>&#8594; <code>metric</code>: how to compute the distance in the input feature space</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Pros</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>allows for noise (&#8594; can also use the algorithm to detect outliers)</p>
+</li>
+<li>
+<p>no need to guess the number of clusters</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Careful</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>very dependent on distance measure: may be tricky to get good results for heterogeneous data even after normalization (but: try on text data)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>&#8594; also check out the <a href="https://hdbscan.readthedocs.io/en/latest/"><code>hdbscan</code></a> library!</p>
+</div>
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>↑ Up: <a href="_special_purpose_models.html">Special-Purpose Models</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_deep_learning_neural_networks.html">Deep Learning (Neural Networks)</a> →</p>
+<p>← Previous: <a href="_outlier_anomaly_detection.html">Outlier / Anomaly Detection</a> | ↑ Up: <a href="_unsupervised_learning.html">Unsupervised Learning</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_supervised_learning.html">Supervised Learning</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

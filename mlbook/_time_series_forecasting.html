@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.12">
+<meta name="generator" content="Asciidoctor 2.0.16">
 <meta name="author" content="Dr. Franziska Horn">
 <title>A Practitioner&#8217;s Guide to Machine Learning</title>
 <style>
@@ -639,6 +639,21 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 .conum:after { content: attr(data-value); }
 .conum:not([data-value]):empty { display: none; }
 
+
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+}
+.video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -650,7 +665,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
 <span id="revnumber">version 1.1,</span>
-<span id="revdate">2021-10-23</span>
+<span id="revdate">2021-10-24</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -665,7 +680,9 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </li>
 <li><a href="_unsupervised_learning.html">Unsupervised Learning</a>
 </li>
-<li><a href="_supervised_learning.html">Supervised Learning</a>
+<li><a href="_supervised_learning_basics.html">Supervised Learning Basics</a>
+</li>
+<li><a href="_supervised_learning_models.html">Supervised Learning Models</a>
 </li>
 <li><a href="_deep_learning_more.html">Deep Learning &amp; more</a>
 <ul class="sectlevel2">
@@ -723,11 +740,10 @@ Bogojeski, M., et al. &#8220;Forecasting industrial aging processes with machine
 <div class="content">
 <img src="../images/07_timeseries/tsf_inout8.png" alt="image" width="800">
 </div>
+<div class="title"><span class="small">Depending on the task (i.e., what you want to forecast), you either have a <strong>univariate</strong> forecasting problem (if you only need to predict the development of a single variable) or a <strong>multivariate</strong> problem (i.e., with multiple target variables). Additionally, it is important to note for <strong>how many time steps into the future</strong> the variables need to be forecast: in the easiest case, only the next time step needs to be predicted, but it might also be necessary to predict a fixed window of \(k\) time steps into the future, and sometimes the prediction horizons might even be of varying lengths. In any case, one should always try to make use of as much (relevant) information as possible when making forecasts. In principle, <strong>all values from the past can be used as input features</strong>, especially those from the target variable(s) (&#8594; see also auto-regressive models, e.g., <a href="https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average">ARIMA</a>). What is often overlooked, however, is all the additional <strong>information about the future</strong> that can be used as inputs as well, provided that these values are independent of the targets, i.e., <strong>exogenous variables</strong> outside of the system.</span></div>
 </div>
 <div class="paragraph">
-<p>Depending on the task (i.e., what you want to forecast), you either have a <strong>univariate</strong> forecasting problem (if you only need to predict the development of a single variable) or a <strong>multivariate</strong> problem (i.e., with multiple target variables). Additionally, it is important to note for <strong>how many time steps into the future</strong> the variables need to be forecast: in the easiest case, only the next time step needs to be predicted, but it might also be necessary to predict a fixed window of \(k\) time steps into the future, and sometimes the prediction horizons might even be of varying lengths.<br>
-In any case, one should always try to make use of as much (relevant) information as possible when making forecasts. In principle, <strong>all values from the past can be used as input features</strong>, especially those from the target variable(s) (&#8594; see also auto-regressive models, e.g., <a href="https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average">ARIMA</a>). What is often overlooked, however, is all the additional <strong>information about the future</strong> that can be used as inputs as well, provided that these values are independent of the targets, i.e., <strong>exogenous variables</strong> outside of the system.<br>
-For example, let&#8217;s say you own a small cafe and want to predict how much ice cream you are likely to sell tomorrow. Certainly, the amount of ice cream you&#8217;ve sold yesterday or on the same day last week will be useful input features, but additionally, for example, the weather forecast for tomorrow or whether or not there is a holiday or some special event happening would be useful predictive information that should not be ignored and that can be used since these are independent variables.</p>
+<p>For example, let&#8217;s say you own a small cafe and want to predict how much ice cream you are likely to sell tomorrow. Certainly, the amount of ice cream you&#8217;ve sold yesterday or on the same day last week will be useful input features, but additionally, for example, the weather forecast for tomorrow or whether or not there is a holiday or some special event happening would be useful predictive information that should not be ignored and that can be used since these are independent variables.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -747,33 +763,21 @@ For example, let&#8217;s say you own a small cafe and want to predict how much i
 </div>
 </div>
 <div class="paragraph">
-<p>While in general many future process conditions (e.g., the planned amount of product that should be produced in the next weeks), can be used as input variables at \(t' &gt; t\), this does not hold for the process condition &#8216;temperature&#8217; in this example, since it is not a true exogenous variable, even though it could theoretically be set independently. In the historic data, the value of the temperature at \(t+2\) is dependent on the target variable (pressure) at \(t+1\), therefore, if you want to forecast the target for more than one time step, only the past values of temperature can be used as input features.</p>
+<p>While in general many future process conditions (e.g., the planned amount of product that should be produced in the next weeks), can be used as input variables at \(t' &gt; t\), this does not hold for the process condition &#8216;temperature&#8217; in this example, since it is not a true exogenous variable, even though it could theoretically be set independently. In the historic data, the value of the temperature at \(t+1\) is dependent on the target variable (pressure) at \(t\), therefore, if you want to forecast the target for more than one time step, only the past values of temperature can be used as input features.</p>
 </div>
 </dd>
 </dl>
 </div>
 </div>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_stateless_vs_stateful_models">Stateless vs. Stateful Models</h4>
 <div class="paragraph">
-<p>When dealing with time series data, one should always think carefully about how complex the dependencies between the past and future process values in the respective forecasting task are.<br>
-For example, when trying to predict <strong>spontaneous events</strong>, like a sudden increase in the emissions produced in the process, then the relevant time window into the past, when the process conditions might have had an influence on this target variable, would be very short, i.e., only the process values from time \(t\) need to be included in the input feature vector to predict the anomalous event at time \(t+1\).<br>
-For other prediction tasks, what happened over a <strong>longer (but uniquely determined) interval</strong> might be relevant, but can be <strong>summarized with simple features</strong>. For example, in a production process, one might want to predict the quality of the final product that is produced within a fixed time interval. In this case, the process conditions during the time interval where the respective product is produced will be important for the prediction, but the process conditions during the time where the previous product was produced are most likely not relevant. Additionally, it would be enough to compute only some summary statistics (like mean/max/min values of the process conditions during the time interval of interest) and use these as input features to capture all the relevant information.<br>
-A third case would be prediction tasks for which it is necessary to consider <strong>very long time windows</strong>, often of varying lengths, with some <strong>complex long-ranging dependencies</strong> between the process conditions at different time points. For example, in some predictive maintenance tasks, the decay of the critical process component might not happen in some linear fashion (unlike, for example, a light bulb, which might have some fixed life expectancy and one only needs to count the number of hours it was turn on up to now to estimate when it needs to be replaced), but there might be a more complex dependency, for example, the component might decay faster if it is already in a poor state, therefore, if some unfortunate combination of process conditions lead to a strain on the component early on, it might have to be replaced a lot sooner then under otherwise identical conditions without this initial mishap.</p>
-</div>
-<div class="paragraph">
-<p>Depending on how complex the dependencies between process values over time are, it will be more or less complicated to construct feature vectors that capture all the relevant information to make the prediction. In general, one should always try to come up with <strong>features that contain all the relevant information about the past</strong>, i.e., that fulfill the <a href="https://en.wikipedia.org/wiki/Markov_property">Markov assumption</a> that given this information the future is otherwise independent of the history of the process. If you are able to derive such input features, you can use a <strong>stateless model</strong> (e.g., any of the supervised learning models we&#8217;ve discussed so far except RNNs) for the prediction, i.e., treat all your data points as independent regardless of where in time they occurred. If it is not possible to construct such an informative feature vector that captures all the relevant information about the past, e.g., because of complex long-ranging dependencies that can not be adequately captured by simple summary statistics, then you have to use a <strong>stateful model</strong> (e.g., a form of Recurrent Neural Network (RNN)), which internally constructs a full memory of the history of the process (i.e., it keeps track of the current state of the process).</p>
+<p>You need a feature vector for every time point you want to make a prediction about. Think about what it is you&#8217;re trying to predict and what values could influence this target variable, i.e., what inputs are needed such that you have all the required information to make the prediction. Especially when using stateless models (see below), the feature vectors need to capture all the relevant information about the past.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="paragraph">
-<p>You need a feature vector for every time point you want to make a prediction about. Think about what it is you&#8217;re trying to predict and what values could influence this target variable, i.e., what inputs are needed such that you have all the required information to make the prediction. Especially when using stateless models, the feature vectors need to capture all the relevant information about the past.</p>
-</div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Possible Features</dt>
+<dt class="hdlist1">Possible Input Features</dt>
 <dd>
 <div class="ulist">
 <ul>
@@ -782,7 +786,7 @@ A third case would be prediction tasks for which it is necessary to consider <st
 </li>
 <li>
 <p>auto-regressive: lagged (target) variable (i.e. values at \(t' \leq t\))<br>
-❗️ don’t use the <em>predicted</em> target value for this – errors accumulate!</p>
+❗️ don’t use the <em>predicted</em> target value for this (in a multi-step forecast) – errors accumulate!</p>
 </li>
 <li>
 <p>account for cyclical (e.g., seasonal) trends (&#8594; check auto-correlation or spectral analysis)<br>
@@ -803,6 +807,19 @@ A third case would be prediction tasks for which it is necessary to consider <st
 <p>&#8594; For more ideas: <a href="https://tsfresh.readthedocs.io/en/latest/">tsfresh library</a>, <a href="https://machinelearningmastery.com/category/deep-learning-time-series/">time series analysis blog posts</a></p>
 </div>
 </div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_stateless_vs_stateful_models">Stateless vs. Stateful Models</h4>
+<div class="paragraph">
+<p>When dealing with time series data, one should always think carefully about how complex the dependencies between the past and future process values in the respective forecasting task are.<br>
+For example, when trying to predict <strong>spontaneous events</strong>, like a sudden increase in the emissions produced in the process, then the relevant time window into the past, when the process conditions might have had an influence on this target variable, would be very short, i.e., only the process values from time \(t\) need to be included in the input feature vector to predict the anomalous event at time \(t+1\).<br>
+For other prediction tasks, what happened over a <strong>longer (but uniquely determined) interval</strong> might be relevant, but can be <strong>summarized with simple features</strong>. For example, in a production process, one might want to predict the quality of the final product that is produced within a fixed time interval. In this case, the process conditions during the time interval where the respective product is produced will be important for the prediction, but the process conditions during the time where the previous product was produced are most likely not relevant. Additionally, it would be enough to compute only some summary statistics (like mean/max/min values of the process conditions during the time interval of interest) and use these as input features to capture all the relevant information.<br>
+A third case would be prediction tasks for which it is necessary to consider <strong>very long time windows</strong>, often of varying lengths, with some <strong>complex long-ranging dependencies</strong> between the process conditions at different time points. For example, in some predictive maintenance tasks, the decay of the critical process component might not happen in some linear fashion (unlike, for example, a light bulb, which might have some fixed life expectancy and one only needs to count the number of hours it was turned on up to now to estimate when it needs to be replaced), but there might be a more complex dependency, for example, the component might decay faster if it is already in a poor state, therefore, if some unfortunate combination of process conditions lead to a strain on the component early on, it might have to be replaced a lot sooner then under otherwise identical conditions without this initial mishap.</p>
+</div>
+<div class="paragraph">
+<p>Depending on how complex the dependencies between process values over time are, it will be more or less complicated to construct feature vectors that capture all the relevant information to make the prediction. In general, one should always try to come up with <strong>features that contain all the relevant information about the past</strong>, i.e., that fulfill the <a href="https://en.wikipedia.org/wiki/Markov_property">Markov assumption</a> that given this information the future is otherwise independent of the history of the process. (For example, if I knew the number of hours a light bulb was turned on up to now, I would have a complete picture about the state the light bulb is currently in; everything else that happened in the past, like how many people were in the room while the light was on, is irrelevant for the state of the light bulb. Another example would be the current position of pieces on a chess board: To plan my next move, I don&#8217;t need to know the exact order in which the pieces were moved before, but only the position of all the pieces right now.)<br>
+If you are able to derive such input features, you can use a <strong>stateless model</strong> (e.g., any of the supervised learning models we&#8217;ve discussed so far except RNNs) for the prediction, i.e., treat all your data points as independent regardless of where in time they occurred. If it is not possible to construct such an informative feature vector that captures all the relevant information about the past, e.g., because of complex long-ranging dependencies that can not be adequately captured by simple summary statistics, then you have to use a <strong>stateful model</strong> (e.g., a form of Recurrent Neural Network (RNN)), which internally constructs a full memory of the history of the process (i.e., it keeps track of the current state of the process).</p>
 </div>
 <div class="paragraph">
 <p>Whether to use a stateless or stateful model is also an important consideration when dealing with other kinds of sequential data such as text. Analogous to the three scenarios described above, we can also find similar cases for natural language processing (NLP) problems that either benefit from the use of stateful models or where a simple stateless model is enough:</p>
@@ -858,7 +875,7 @@ if <strong>any b)</strong>:<br>
 <div class="content">
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Output prediction with stateless models (e.g., linear regression, FFNN)</dt>
+<dt class="hdlist1">Output prediction with <em>stateless</em> models (e.g., linear regression, FFNN)</dt>
 <dd>
 <p>Only predict for a fixed time window of 1 or <em>k</em> steps:<br></p>
 </dd>
@@ -896,7 +913,7 @@ if <strong>any b)</strong>:<br>
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Output prediction with stateful models (e.g., RNN, LSTM, GRU, Echo State Network)</dt>
+<dt class="hdlist1">Output prediction with <em>stateful</em> models (e.g., RNN, LSTM, GRU, Echo State Network)</dt>
 <dd>
 <p>The model builds up a memory of the past by mirroring the actual process, i.e., even if you don&#8217;t need the prediction at some time step \(t-5\), you still need to feed the model the inputs from this time step such that it can build up the appropriate hidden state.</p>
 <div class="paragraph">

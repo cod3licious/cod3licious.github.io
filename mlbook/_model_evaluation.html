@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.12">
+<meta name="generator" content="Asciidoctor 2.0.16">
 <meta name="author" content="Dr. Franziska Horn">
 <title>A Practitioner&#8217;s Guide to Machine Learning</title>
 <style>
@@ -639,6 +639,21 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 .conum:after { content: attr(data-value); }
 .conum:not([data-value]):empty { display: none; }
 
+
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+}
+.video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
@@ -739,7 +754,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
 <span id="revnumber">version 1.1,</span>
-<span id="revdate">2021-10-23</span>
+<span id="revdate">2021-10-24</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -754,7 +769,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </li>
 <li><a href="_unsupervised_learning.html">Unsupervised Learning</a>
 </li>
-<li><a href="_supervised_learning.html">Supervised Learning</a>
+<li><a href="_supervised_learning_basics.html">Supervised Learning Basics</a>
 <ul class="sectlevel2">
 <li><a href="_different_types_of_models.html">Different types of models</a>
 </li>
@@ -766,17 +781,9 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </li>
 </ul>
 </li>
-<li><a href="_linear_models.html">Linear Models</a>
-</li>
-<li><a href="_decision_trees.html">Decision Trees</a>
-</li>
-<li><a href="_ensemble_methods.html">Ensemble Methods</a>
-</li>
-<li><a href="_k_nearest_neighbors_knn.html">k-Nearest Neighbors (kNN)</a>
-</li>
-<li><a href="_kernel_methods.html">Kernel Methods</a>
-</li>
 </ul>
+</li>
+<li><a href="_supervised_learning_models.html">Supervised Learning Models</a>
 </li>
 <li><a href="_deep_learning_more.html">Deep Learning &amp; more</a>
 </li>
@@ -1013,32 +1020,67 @@ i.e., does the model generate <em>reliable predictions</em> for <em>new data poi
 <div class="paragraph">
 <p>After you&#8217;ve chosen an appropriate evaluation metric for your problem, you can use the resulting scores to automatically select the best model hyperparameters and ultimately the best model.</p>
 </div>
-<div class="sidebarblock">
-<div class="content">
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Systematic Model Selection with Cross-Validation &amp; Grid Search</dt>
+<dt class="hdlist1">The case for an additional validation set</dt>
 <dd>
 <div class="imageblock text-center">
 <div class="content">
-<img src="../images/06_evaluation/cross_val8.png" alt="image" width="840">
+<img src="../images/06_evaluation/validation_set.png" alt="image" width="480">
 </div>
-<div class="title"><span class="small">As we&#8217;ve established in the beginning, before experimenting with any models, the dataset should always be split into a training and test set. However, this is actually not the full picture: since you are typically experimenting with many different types of models and for each model type with dozens of hyperparameter settings, you should not use this test set to evaluate each of these model candidates, since it might happen that with all these things you try you end up choosing a model that performs really well on this test set, but then actually does not generalize to new data later and you would have no way of finding this out before deploying the model in production. Therefore, we introduce a new data split, the <strong>validation set</strong>, that is used to evaluate the different candidate models, while the test set remains locked away until you&#8217;re ready to evaluate your final model to get a realistic estimate of how it should actually perform on new data. If your original dataset is quite big, say, over 100k samples (depending on the diversity of your data, e.g., the number of classes), then it is usually enough to just split the data into training, validation, and test sets at the start, where the validation and test sets could contain about 10% of the data each and should be representative of the diversity of the original dataset. However, when the original dataset is smaller, it might not be possible to get such representative splits, which is when a technique called <strong>cross-validation</strong> (also abbreviated x-val) can come in very handy: in a <em>k</em>-fold cross-validation, the dataset is split into <em>k</em> parts, where each part is once the designated validation set, while the remaining <em>k-1</em> parts are used for training. This way, the model is trained and evaluated <em>k</em> times, each time on different splits. By computing the mean and standard deviation of the error metrics on all folds, we get a reliable estimate of the model&#8217;s generalization error and its variation due to the diversity of the dataset. While a cross-validation by itself is already a helpful trick to deal with small datasets, sklearn makes our lives even easier by combining it with a method for systematically selecting the best hyperparameter settings of a model, the <strong>grid search</strong>. In a grid search, you define the different values you want to test for each hyperparameter and then all combinations of these different values for all hyperparameters are automatically evaluated using a cross-validation. This is very useful, as often the different hyperparameter settings influence each other. However, with many individual settings it also comes at a computational cost, as the model is trained and evaluated \(k \times m_1 \times m_2 \times \dots \times m_i\) times, where \(k\) is the number of folds in the cross-validation and \(m_1...m_i\) are the number of values that need to be tested for each of the <em>i</em> hyperparameters of the model. For example, with two hyperparameters, the grid search results could look something like the plot on the left, where you see a heatmap of the average accuracy achieved with each hyperparameter combination of a model in the cross-validation. While sklearn&#8217;s grid search method will always directly tell you the best hyperparameter combination out of the ones it tested, it is important to actually check the complete set of results to verify that you have covered the whole range of possible hyperparameter values that could give good results (e.g., in the plot here we see a peak in the middle with the results getting worse to the sides, i.e., we know that better hyperparameter values are unlikely to lie outside of the range we&#8217;ve tested). It is generally a good idea to first start with a large range of values and then zoom in to the area that seems most promising (and of course knowledge about the different algorithms helps a lot in choosing reasonable settings as well).</span></div>
+<div class="title"><span class="small">As we&#8217;ve established in the beginning, before experimenting with any models, the dataset should always be split into a training and test set. However, this is actually not the full picture: since you are typically experimenting with many different types of models and for each model type with dozens of hyperparameter settings, you should not use this test set to evaluate each of these model candidates, since it might happen that with all these things you try you end up choosing a model that performs really well on this test set, but then actually does not generalize to new data later and you would have no way of finding this out before deploying the model in production. Therefore, we introduce a new data split, the <strong>validation set</strong>, that is used to evaluate the different candidate models, while the test set remains locked away until you&#8217;re ready to evaluate your final model to get a realistic estimate of how it should actually perform on new data. If your original dataset is quite big, say, over 100k samples (depending on the diversity of your data, e.g., the number of classes), then it is usually enough to just split the data into training, validation, and test sets at the start, where the validation and test sets could contain about 10% of the data each and should be representative of the diversity of the original dataset. However, when the original dataset is smaller, it might not be possible to get such representative splits, which is when a technique called <em>cross-validation</em> (also abbreviated x-val) can come in very handy.</span></div>
 </div>
 </dd>
 </dl>
 </div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Cross-Validation</dt>
+<dd>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/06_evaluation/cross_val.png" alt="image" width="540">
+</div>
+<div class="title"><span class="small">In a <strong><em>k</em>-fold cross-validation</strong>, the dataset is split into <em>k</em> parts, where each part is once the designated validation set, while the remaining <em>k-1</em> parts are used for training. This way, the model is trained and evaluated <em>k</em> times, each time on different splits. By computing the mean and standard deviation of the error metrics on all folds, we get a reliable estimate of the model&#8217;s generalization error and its variation due to the diversity of the dataset. The extreme case of the <em>k</em>-fold cross-validation is the <em>Leave-One-Out</em> cross-validation, where the model is always evaluated on only a single sample.</span></div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Hyperparameter Tuning</dt>
+<dd>
+<p>Often it is necessary to systematically evaluate a given model with different hyperparameter settings to find the best option. One straightforward approach for doing this is a <strong>grid search</strong>. In a grid search, you define the different values you want to test for each hyperparameter and then all combinations of these different values for all hyperparameters are automatically evaluated, similar to how you would do it manually with nested for-loops. This is very useful, as often the different hyperparameter settings influence each other. Conveniently, sklearn furthermore combines this with a cross-validation. However, with many individual settings, this also comes at a computational cost, as the model is trained and evaluated \(k \times m_1 \times m_2 \times \dots \times m_i\) times, where \(k\) is the number of folds in the cross-validation and \(m_1...m_i\) are the number of values that need to be tested for each of the <em>i</em> hyperparameters of the model.<br></p>
+<div class="paragraph">
+<p>For example, with two hyperparameters, the grid search results could look something like the plot below, which shows a heatmap of the average accuracy achieved with each hyperparameter combination of a model in the cross-validation:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/06_evaluation/grid_search.png" alt="image" width="360">
+</div>
+</div>
+<div class="paragraph">
+<p>While sklearn&#8217;s grid search method will always directly tell you the best hyperparameter combination out of the ones it tested (here marked with a red star), it is important to actually check the complete set of results to verify that you have <strong>covered the whole range of possible hyperparameter values</strong> that could give good results (e.g., in the plot here we see a peak in the middle with the results getting worse to the sides, i.e., we know that better hyperparameter values are unlikely to lie outside of the range we&#8217;ve tested). It is generally a good idea to first start with a large range of values and then zoom in to the area that seems most promising (and of course knowledge about the different algorithms helps a lot in choosing reasonable settings as well).<br></p>
+</div>
+<div class="paragraph">
+<p>Besides the basic grid search, there also exist other, more advanced hyperparameter tuning routines. For example, sklearn additionally implements a randomized search, and other dedicated libraries provide even fancier approaches, such as <a href="https://machinelearningmastery.com/what-is-bayesian-optimization/">Bayesian optimization</a>.<br></p>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.model_selection</span> <span class="keyword">import</span> <span class="include">GridSearchCV</span></code></pre>
+<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.model_selection</span> <span class="keyword">import</span> <span class="include">GridSearchCV</span>, <span class="include">RandomizedSearchCV</span></code></pre>
 </div>
 </div>
-</div>
+</dd>
+</dl>
 </div>
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_different_types_of_models.html">Different types of models</a> | ↑ Up: <a href="_supervised_learning.html">Supervised Learning</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_linear_models.html">Linear Models</a> →</p>
+<p>← Previous: <a href="_different_types_of_models.html">Different types of models</a> | ↑ Up: <a href="_supervised_learning_basics.html">Supervised Learning Basics</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_supervised_learning_models.html">Supervised Learning Models</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

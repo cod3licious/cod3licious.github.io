@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.12">
+<meta name="generator" content="Asciidoctor 2.0.16">
 <meta name="author" content="Dr. Franziska Horn">
 <title>A Practitioner&#8217;s Guide to Machine Learning</title>
 <style>
@@ -639,6 +639,21 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 .conum:after { content: attr(data-value); }
 .conum:not([data-value]):empty { display: none; }
 
+
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+}
+.video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
@@ -739,7 +754,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
 <span id="revnumber">version 1.1,</span>
-<span id="revdate">2021-10-23</span>
+<span id="revdate">2021-10-24</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -754,7 +769,9 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </li>
 <li><a href="_unsupervised_learning.html">Unsupervised Learning</a>
 </li>
-<li><a href="_supervised_learning.html">Supervised Learning</a>
+<li><a href="_supervised_learning_basics.html">Supervised Learning Basics</a>
+</li>
+<li><a href="_supervised_learning_models.html">Supervised Learning Models</a>
 </li>
 <li><a href="_deep_learning_more.html">Deep Learning &amp; more</a>
 <ul class="sectlevel2">
@@ -998,7 +1015,7 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <div class="content">
 <img src="../images/05_supervised_nn/neural_network.png" alt="image" width="840">
 </div>
-<div class="title"><span class="small">The most standard form of a neural network is the feed forward neural network. The input feature vector \(\mathbf{x}\), representing one data point, is multiplied by the first weight matrix \(W_1\) to create a new vector, which, after applying the non-linear activation function (e.g., a ReLU function as we&#8217;ve seen in the initial example) results in the first hidden layer representation \(\mathbf{x}'\). This new vector is then multiplied by the second weight matrix \(W_2\) and again a non-linear activation function is applied to yield the second hidden layer representation of the sample, \(\mathbf{x}''\). Depending on how many layers the network has (i.e., how deep it is), this could be repeated multiple times now until finally the last layer computes the output \(\mathbf{\hat{y}}\). For a regression problem, the output would be a direct prediction of the target values (i.e., without applying a final non-linear activation function), while for a classification problem, the output consists of a vector with probabilities for the different classes, created by applying a softmax activation function on the output, which ensures all values are between 0 and 1 and sum up to 1. <em class="underline">Number of hidden layers and units:</em> While the size of the input and output layers are determined by the number of input features and targets respectively, the dimensionality and number of hidden layers of the network is up to you (usually, the hidden layers get smaller (i.e., have fewer units) as the data moves from the input to the output layer and when experimenting with different settings you can start with no hidden layers (which should give you the same result as with a linear model) and then progressively increase the size of the network until the performance stops improving). <em class="underline">Training:</em> At the beginning, all weight matrices are randomly initialized, so, for example, in the classification problem, the network would predict approximately equal probabilities for all classes. The network is then trained by showing it some samples, checking what the network predicts for these samples, and then telling it what it should have predicted, i.e., computing the error between the true and the predicted values using some loss function (e.g., mean squared error for regression problems or cross-entropy for classification problems). While for a linear regression model, the optimal weights could be found analytically by setting the derivative of this error to 0 and solving for the weights, in a network with multiple layers and therefore many more weights, this is not feasible. Instead, the weights are tuned iteratively using a gradient decent procedure, where the derivative w.r.t. each layer is computed step by step using the chain rule by basically pushing the error backwards through the network (i.e., from the output, where the error is computed, to the input layer), also called error backpropagation. Along the way, the weights are then adapted according to their gradient, such that the next time the same samples are passed through the network, the prediction will be closer to the true output (and the value of the error function is closer to a local minima). Typically, the weights are adapted over multiple <em>epochs</em>, where one epoch means going over the whole training set once. Since a training set usually contains lots of data points, it would be too computationally expensive to do gradient decent based on the whole dataset at once and instead one uses mini-batches, i.e., subsets of 16-128 data points, for each training step.</span></div>
+<div class="title"><span class="small">Feed Forward Neural Network (FFNN) architecture: The input feature vector \(\mathbf{x}\), representing one data point, is multiplied by the first weight matrix \(W_1\) to create a new vector, which, after applying the non-linear activation function (e.g., a ReLU function as we&#8217;ve seen in the initial example) results in the first hidden layer representation \(\mathbf{x}'\). This new vector is then multiplied by the second weight matrix \(W_2\) and again a non-linear activation function is applied to yield the second hidden layer representation of the sample, \(\mathbf{x}''\). Depending on how many layers the network has (i.e., how deep it is), this could be repeated multiple times now until finally the last layer computes the output \(\mathbf{\hat{y}}\). For a regression problem, the output would be a direct prediction of the target values (i.e., without applying a final non-linear activation function), while for a classification problem, the output consists of a vector with probabilities for the different classes, created by applying a softmax activation function on the output, which ensures all values are between 0 and 1 and sum up to 1.</span></div>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -1015,6 +1032,39 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <p>In what way could you manipulate the parameters (i.e., weight matrices) of an existing neural network without changing its predictions? (This is also a reason why there exist many equally good local optima.)</p>
 </li>
 </ul>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Number of hidden layers and units: </dt>
+<dd>
+<p>While the size of the input and output layers are determined by the number of input features and targets respectively, the dimensionality and number of hidden layers of the network is up to you (usually, the hidden layers get smaller (i.e., have fewer units) as the data moves from the input to the output layer and when experimenting with different settings you can start with no hidden layers (which should give you the same result as with a linear model) and then progressively increase the size of the network until the performance stops improving).</p>
+</dd>
+</dl>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Training Neural Networks</dt>
+<dd>
+<p>To train a neural network, one first needs to choose the loss function that should be optimized (e.g., mean squared error for regression problems or cross-entropy for classification problems).<br></p>
+<div class="paragraph">
+<p>While for a linear regression model, the optimal weights could be found analytically by setting the derivative of this loss function to 0 and solving for the weights, in a network with multiple layers and therefore many more weights, this is not feasible. Instead, the weights are tuned iteratively using a <strong>gradient descent</strong> procedure, where the derivative of the loss function w.r.t. each layer is computed step by step using the chain rule by basically pushing the error backwards through the network (i.e., from the output, where the error is computed, to the input layer), also called error <strong>backpropagation</strong>. Along the way, the weights are then adapted according to their gradient, such that the next time the same samples are passed through the network, the prediction will be closer to the true output (and the value of the error function is closer to a local minima). Since a training set usually contains lots of data points, it would be too computationally expensive to do gradient descent based on the whole dataset at once and instead one uses mini-<strong>batches</strong>, i.e., subsets of 16-128 data points, for each training step.<br></p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/05_supervised_nn/loss_surface.png" alt="image" width="460">
+</div>
+<div class="title"><span class="small">Training loss surface over the network&#8217;s parameter space (simplified, i.e., showing only two weights (\(\theta_1\) and \(\theta_2\)), while in reality, this would be a super complex non-linear function), where every possible weight configuration of a network results in a different loss on the training set. By taking a step into the direction of steepest descent of this loss function, the weights of the network get closer to a configuration where the loss is at a local minimum.</span></div>
+</div>
+<div class="paragraph">
+<p>At the beginning, all weight matrices are randomly initialized, so, for example, in the classification problem, for a given sample the network would predict approximately equal probabilities for all classes. Typically, the weights are adapted over multiple <strong>epochs</strong>, where one epoch means going over the whole training set once.
+By plotting the <a href="https://machinelearningmastery.com/learning-curves-for-diagnosing-machine-learning-model-performance/">learning curves</a>, i.e., the training and validation loss against the number of training epochs, one can check whether the training was successful (i.e., whether the weights have converged to a good solution).</p>
 </div>
 </dd>
 </dl>
@@ -1045,7 +1095,7 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <div class="title"><span class="small">At the beginning of a new sequence, the hidden state \(\mathbf{x}'_0\) is initialized with zeros. Then for each new sample \(\mathbf{x}_t\) (with \(t \in \{1, ..., T\}\)) in the sequence, the hidden state is updated based on this new input (after multiplying \(\mathbf{x}_t\) with \(W_1\)), as well as the previous hidden state at \(t-1\) (by multiplying  \(\mathbf{x}'_{t-1}\) with \(W_h\)). From this new hidden state \(\mathbf{x}'_t\), the output for this time step can then be predicted (by multiplying \(\mathbf{x}'_t\) with \(W_2\)). While this network only includes a single recurrent layer, a more complex architecture could also contain multiple such layers.</span></div>
 </div>
 <div class="paragraph">
-<p>The original RNN layer uses a very simple update rule for the hidden state, but there also exist more advanced types of RNNs, like the Long Short Term Memory (LSTM) network or Gated Recurrent Units (GRU), which define more complex rules for how to combine the new input with the existing hidden state, i.e., they learn in more detail what to remember and which parts to forget, which can be beneficial when the data consists of longer sequences.</p>
+<p>The original RNN layer uses a very simple update rule for the hidden state, but there also exist more advanced <a href="https://towardsdatascience.com/44e9eb85bf21">types of RNNs</a>, like the Long Short Term Memory (LSTM) network or Gated Recurrent Units (GRU), which define more complex rules for how to combine the new input with the existing hidden state, i.e., they learn in more detail what to remember and which parts to forget, which can be beneficial when the data consists of longer sequences.</p>
 </div>
 <div class="paragraph">
 <p>The cool thing about RNNs is that they can process input sequences of varying length (where one sequence represents one data point, e.g., a text document). Whereas all methods that we&#8217;ve discussed so far always expected the feature vectors that represent one data point to have a fixed dimensionality, for RNNs, while the input at a single time step (i.e., \(\mathbf{x}_t\) with \(t \in \{1, ..., T\}\)) is also a feature vector of a fixed dimensionality, the sequences themselves do not need to be of the same length \(T\) (e.g., text documents can consist of different numbers of words). This comes in especially handy for time series analysis, as you&#8217;ll see in the next chapter.</p>
@@ -1076,11 +1126,29 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <div class="paragraph">
 <p>Manual feature engineering for computer vision tasks is incredibly difficult. While humans recognize a multitude of objects in images without effort, it is hard to describe <em>why</em> we can identify what we see, e.g., which features allow us to distinguish a cat from a small dog. Deep learning had its first breakthrough success in this field, because neural networks, in particular CNNs, manage to learn meaningful feature representations of visual information through a hierarchy of layers.</p>
 </div>
+<div class="paragraph">
+<p>Convolutional neural networks are very well suited for processing visual information, because they can operate on the 2D images directly and do not need the input to be flattened into a vector. Furthermore, they utilize the fact that images are composed of a lot of local information (e.g., eyes, nose, and mouth are all localized components of a face).</p>
+</div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/05_supervised_nn/cnn.png" alt="image" width="840">
 </div>
-<div class="title"><span class="small">Convolutional neural networks are very well suited for processing visual information, because they can operate on the 2D images directly and do not need the input to be flattened into a vector. Furthermore, they utilize the fact that images are composed of a lot of local information (e.g., eyes, nose, and mouth are all localized components of a face). CNNs utilize two important operations, convolutions and pooling layers, to generate meaningful feature representations: A <a href="https://en.m.wikipedia.org/wiki/Convolution">convolution</a> is computed by taking a small filter patch (e.g., a \(5 \times 5\) matrix) and moving it over the image pixel by pixel and row by row, at each position multiplying the filter with the image (see also <a href="https://youtu.be/Oqm9vsf_hvU?t=275">this animation</a>). This results in a feature map of the same size as the original image, where a high value at some position indicates that the respective feature in the filter (e.g., an edge with a specific orientation) was detected at this position in the original image. Since this is done for multiple filters, the output after a convolutional layer consists of as many new feature maps as the layer had filters. The filter patches (i.e., multiple small matrices) are the learned weights of the CNN, and after training they can look something like the small tiles shown below the network architecture. Compared to the dense / fully-connected layers in FFNNs, which consist of one huge matrix mapping from one layer to the next, the filters used in convolutional layers are very small, i.e., there are less parameters that need to be learned. Furthermore, the fact that the filters are applied at every position in the image has a regularizing effect, since the filters need to be general enough capture relevant information in multiple areas of the images. The pooling layers then perform a subsampling of the individual feature maps by taking the max (or sometimes mean) value of multiple pixels in a small area. This reduces the dimensionality of the hidden layer representation, thereby improving the computational efficiency. Additionally, the pooling introduces some positional invariance, since it is not important anymore where exactly in some area a detected feature was, e.g., a face can be recognized even if the eyes of one person are further apart than usual or they have a longer nose, etc. Usually, the convolutional and pooling layers are interleaved, however, there is no strict rule saying that a pooling layer always has to follow a convolutional layer. With more layers, more and more complex features can be detected as a composition of the features identified in the lower layers (notice how the filters first detect edges, then individual components of a face, then full faces), i.e., by making the network deeper, we can solve more complex tasks. Finally, after multiple convolution and pooling layers, the feature representation is flattened into a vector and fed to a FFNN to perform the classification. (By the way, the edge filters learned in the first layer of a CNN nicely match the Gabor filters used in early computer vision feature engineering attempts. Combined with the subsequent pooling operation, they compute something similar as the <a href="https://towardsdatascience.com/45afa1046f7f">simple and complex cells</a> in the human primary visual cortex.)</span></div>
+<div class="title"><span class="small">CNNs utilize two important operations, convolutions and pooling layers, to generate meaningful feature representations: A <a href="https://en.m.wikipedia.org/wiki/Convolution">convolution</a> is computed by taking a small filter patch (e.g., a \(5 \times 5\) matrix) and moving it over the image pixel by pixel and row by row, at each position multiplying the filter with the image (see also <a href="https://youtu.be/Oqm9vsf_hvU?t=275">this animation</a>). This results in a feature map of the same size as the original image, where a high value at some position indicates that the respective feature in the filter (e.g., an edge with a specific orientation) was detected at this position in the original image. Since this is done for multiple filters, the output after a convolutional layer consists of as many new feature maps as the layer had filters. The filter patches (i.e., multiple small matrices) are the learned weights of the CNN, and after training they can look something like the small tiles shown below the network architecture. The pooling layers then perform a subsampling of the individual feature maps by taking the max (or sometimes mean) value of multiple pixels in a small area. This reduces the dimensionality of the hidden layer representation, thereby improving the computational efficiency. Additionally, the pooling introduces some positional invariance, since it is not important anymore where exactly in some area a detected feature was, e.g., a face can be recognized even if the eyes of one person are further apart than usual or they have a longer nose, etc. Usually, the convolutional and pooling layers are interleaved, however, there is no strict rule saying that a pooling layer always has to follow a convolutional layer. With more layers, more and more complex features can be detected as a composition of the features identified in the lower layers (notice how the filters first detect edges, then individual components of a face, then full faces), i.e., by making the network deeper, we can solve more complex tasks. Finally, after multiple convolution and pooling layers, the feature representation is flattened into a vector and fed to a FFNN to perform the classification.</span></div>
+</div>
+<div class="paragraph">
+<p>Compared to the dense / fully-connected layers in FFNNs, which consist of one huge matrix mapping from one layer to the next, the filter patches used in convolutional layers are very small, i.e., there are less parameters that need to be learned. Furthermore, the fact that the filters are applied at every position in the image has a regularizing effect, since the filters need to be general enough capture relevant information in multiple areas of the images.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+By the way, the edge filters typically learned in the first layer of a CNN nicely match the <a href="https://en.wikipedia.org/wiki/Gabor_filter">Gabor filters</a> used in early computer vision feature engineering attempts. Combined with the subsequent pooling operation, they compute something similar as the <a href="https://towardsdatascience.com/45afa1046f7f">simple and complex cells</a> in the human primary visual cortex.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect4">

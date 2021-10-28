@@ -11,6 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.16">
 <meta name="author" content="Dr. Franziska Horn">
+<meta name="copyright" content="Dr. Franziska Horn">
 <title>A Practitioner&#8217;s Guide to Machine Learning</title>
 <style>
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css);
@@ -746,14 +747,14 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 .CodeRay .head .head{color:#f4f}
 </style>
 </head>
-<body class="article toc2 toc-left">
+<body class="book toc2 toc-left">
 <div id="header">
 <h1>A Practitioner&#8217;s Guide to Machine Learning</h1>
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
 <span id="revnumber">version 1.1,</span>
-<span id="revdate">2021-10-24</span>
+<span id="revdate">2021-10-28</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -3975,7 +3976,8 @@ i.e., does the model generate <em>reliable predictions</em> for <em>new data poi
 <div class="stemblock">
 <div class="content">
 \[\begin{aligned}
-    \frac{TP + TN}{TP + FN + TN + FP} = \frac{TP_\text{pos} + TP_\text{neg}}{n_\text{pos} + n_\text{neg}} &amp; \quad \Rightarrow \quad \frac{\sum_c TP_{c}}{\sum_c n_{c}} &amp;\end{aligned}\]
+\frac{TP + TN}{TP + FN + TN + FP} = \frac{TP_\text{pos} + TP_\text{neg}}{n_\text{pos} + n_\text{neg}} &amp; \quad \Rightarrow \quad \frac{\sum_c TP_{c}}{\sum_c n_{c}}
+\end{aligned}\]
 </div>
 </div>
 <div class="paragraph">
@@ -3988,7 +3990,8 @@ i.e., does the model generate <em>reliable predictions</em> for <em>new data poi
 <div class="stemblock">
 <div class="content">
 \[\begin{aligned}
-    \frac{1}{2} \left(\frac{TP}{TP+FN} + \frac{TN}{TN+FP} \right) = \frac{1}{2} \left(\frac{TP_\text{pos}}{n_\text{pos}} + \frac{TP_\text{neg}}{n_\text{neg}} \right) &amp; \quad \Rightarrow \quad \frac{1}{C} \sum_{c=1}^C \frac{TP_{c}}{n_{c}}  &amp;\end{aligned}\]
+\frac{1}{2} \left(\frac{TP}{TP+FN} + \frac{TN}{TN+FP} \right) = \frac{1}{2} \left(\frac{TP_\text{pos}}{n_\text{pos}} + \frac{TP_\text{neg}}{n_\text{neg}} \right) &amp; \quad \Rightarrow \quad \frac{1}{C} \sum_{c=1}^C \frac{TP_{c}}{n_{c}}
+\end{aligned}\]
 </div>
 </div>
 <div class="dlist">
@@ -5582,14 +5585,15 @@ if <strong>any b)</strong>:<br>
 <div class="stemblock">
 <div class="content">
 \[\begin{aligned}
-...\\[0.3em]
+...\\
 t-1:\quad [\, x_1 \, | \,  x_2 \,]\; &amp;\to \; [\, y_1  \, | \, y_2 \,]\\
-\text{memory state buildup} \quad\quad\quad\quad t:\quad [\, x_1 \, | \,  x_2 \,]\; &amp;\to \; [\, y_1  \, | \, y_2 \,]\\[-0.4em]
----------------------&amp;------\\[-0.4em]
+\text{memory state buildup} \quad\quad\quad\quad t:\quad [\, x_1 \, | \,  x_2 \,]\; &amp;\to \; [\, y_1  \, | \, y_2 \,]\\
+---------------------&amp;------\\
 \text{prediction} \quad\quad\quad\quad\quad t+1:\quad [\, x_1 \, | \,  x_2 \,]\; &amp;\to \; [\, y_1  \, | \, y_2 \,]\\
-t+2:\quad [\, x_1 \, | \,  x_2 \,]\; &amp;\to \; [\, y_1  \, | \, y_2 \,]\\[0.5em]
-...\\[0.5em]
-t+k:\quad [\, x_1 \, | \,  x_2 \,]\; &amp;\to \; [\, y_1  \, | \, y_2 \,]\end{aligned}\]
+t+2:\quad [\, x_1 \, | \,  x_2 \,]\; &amp;\to \; [\, y_1  \, | \, y_2 \,]\\
+...\\
+t+k:\quad [\, x_1 \, | \,  x_2 \,]\; &amp;\to \; [\, y_1  \, | \, y_2 \,]
+\end{aligned}\]
 </div>
 </div>
 <div class="admonitionblock important">
@@ -6275,12 +6279,7 @@ R^<span class="integer">2</span> (train): <span class="float">0.958</span>; (tes
 <div class="content">
 <div class="imageblock text-center">
 <div class="content">
-<img src="images/07_data_issues/bias_gender_stereotypes_we1.png" alt="image" width="550">
-</div>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/07_data_issues/bias_gender_stereotypes_we2.jpg" alt="image" width="620">
+<img src="images/07_data_issues/bias_gender_stereotypes_we.png" alt="image" width="620">
 </div>
 <div class="title"><span class="small">You&#8217;ve already seen how neural network language models learn word embeddings through self-supervised learning. As it turns out, a lot of the texts these models are trained on include, e.g., gender stereotypes, which are then also encoded in the word embeddings. So while the analogy question "<em>man</em> is to <em>king</em> as <em>women</em> is to <em>XXX</em>" might be answered correctly with "<em>queen</em>",  "<em>man</em> is to <em>doctor</em> as <em>women</em> is to <em>XXX</em>" is more likely to be answered with "<em>nurse</em>" instead of "<em>doctor</em>", since this role allocation was typical in the past and is therefore also present in many texts used as training data for these models.</span></div>
 </div>

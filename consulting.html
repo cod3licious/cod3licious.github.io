@@ -5,7 +5,7 @@
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=device-width,maximum-scale=2">
-    <meta name="description" content="Data Science Consulting ~ Dr. Franziska Horn">
+    <meta name="description" content="Dr. Franziska Horn ~ Data Science Consulting">
 
     <!-- with https://favicon.io/favicon-generator/  : Fira Code font -->
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
@@ -18,22 +18,23 @@
     <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <title>Data Science Consulting</title>
+    <title>Dr. Franziska Horn</title>
   </head>
 
-  <body>
+  <body onload="highlightTab()">
 
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
         <header class="inner">
-          <h1 id="project_title">Data Science Consulting</h1>
-          <h2 id="project_tagline">Dr. Franziska Horn</h2>
+          <h1 id="project_title">Dr. Franziska Horn</h1>
+          <h2 id="project_tagline">Data Science Consulting</h2>
           <div class="topnav" id="myTopnav">
-          <a href="./index.html">home</a>
-          <a href="./consulting.html">consulting</a>
-          <a href="./mlbook/index.html">ML book</a>
-          <a href="./projects.html">personal projects</a>
-          <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <!-- make sure ids are the same as the urls for the js to work -->
+          <a href="./index.html" id="nav_index">home</a>
+          <a href="./consulting.html" id="nav_consulting">consulting</a>
+          <a href="./resources.html" id="nav_resources">resources</a>
+          <a href="./projects.html" id="nav_projects">personal projects</a>
+          <a href="javascript:void(0);" class="icon" onclick="showNavIcon()">
             <i class="fa fa-bars"></i>
           </a>
           </div>
@@ -46,13 +47,14 @@
 
 
 <h2 id="consulting">consulting</h2>
+
 <p>Your data - may that be information about your customers, sensor measurements from the machines on your assembly line, images, or text documents - is like a rough diamond: treated with the right tools, it will be invaluable!</p>
 
 <!-- <a href="https://www.sciencedirect.com/science/article/pii/S0098135420305494">predictive maintenance</a> -->
 <p>Successfully utilizing this data, for example, to gain new insights about customer churn, monitor your machines with a predictive maintenance approach, or automate boring and error-prone processes, requires two things: <em>a deep understanding of the problem and data</em> at hand, as well as the intimate <em>knowledge of a wide array of machine learning algorithms</em>, ranging from basic data analysis tools to natural language processing, computer vision, and deep learning methods. Luckily, the first part is already taken care of, as you are an expert in your domain. And I am here to help you choose, apply, and evaluate the right machine learning models to transform your data into value.</p>
 
 <p>I'd be happy to support you at all stages of the data science workflow:
-<img src="./assets/data_science_workflow.gif" alt="" /></p>
+<img src="./assets/data_science_workflow.gif" alt="data science workflow step by step" /></p>
 <ul>
   <li>define the scope of your problem and outline how ML and AI can help you solve it</li>
   <li>implement and evaluate different ML algorithms to analyze your data and/or</li>
@@ -62,93 +64,45 @@
 
 <p>I prefer to work in an agile manner with short iterations and in close collaboration with the data owners in your team to ensure that the machine learning solution fits all your needs and generalizes well even to potentially novel settings encountered in your day-to-day operations. Furthermore, I believe that a sustainable AI strategy for any company includes setting up its own data science team, which is why my overarching objective is to help you build this team and get it to a point where you don't need my services anymore.</p>
 
-<p>Have a look at the different consulting packages I offer - and if you had something else in mind, feel free to <a href="mailto:hey@franziskahorn.de?Subject=Freelance%20opportunity" target="_top">contact me</a> anyways!</p>
-
-<br>
-
-<h4>ML coffee break</h4>
-<h5>Get feedback on a project idea</h5>
-
-<p>You have an idea for a potential machine learning project and want to get some feedback if this is worth a try and what the first steps would be? Schedule a <b><em>free, noncommittal 30 minutes</em></b> coffee break with me, where we can discuss the details of your project and I can tell you <b><em>where to start</em></b>, as well as <b><em>what difficulties might lie ahead</em></b>. Just send me an e-mail with your project idea and some time slots where we could schedule a call.</p>
-
-<p>Have a look at the introductory chapter of my <a href="./mlbook/index.html">machine learning book</a> to get some ideas for how you can create value with ML &amp; data science and work through this <a href="https://github.com/cod3licious/ml_exercises/blob/main/other/exercise_your_ml_project.pdf">ML project worksheet</a> to get a head start.</p>
-
-
-<br>
-
-<h4>ML potential package</h4>
-<h5>Find out where you should be applying machine learning</h5>
-
-<p>Everyone keeps telling you that 'AI' is the next big thing, but you're not sure where to start?</p>
-<!-- 4h ML4executives workshop + project brainstorming -->
-<p>The ML potential package includes a workshop where I give you an <b><em>overview of how ML works and what it can do for you</em></b> and together we develop:</p>
+<h3>AI Transformation of a Company</h3>
+<p>Dr. Andrew Ng, professor for machine learning at Stanford University and co-founder of Google Brain, has proposed a <a href="https://landing.ai/ai-transformation-playbook/" target="_blank">five-step process</a> to transform a company into a data-driven enterprise capable of using AI in production to add value:</p>
+<ol>
+<li>Start with small <strong>pilot projects</strong> to understand the potential and challenges of using ML</li>
+<li>Set up a centralized <strong>AI team</strong> and data infrastructure to carry out bigger projects efficiently &amp; effectively</li>
+<li>
+<strong>Train other employees</strong> to recognize ML problems &amp; establish a data-driven culture</li>
+<li>Devise a cohesive <strong>AI &amp; data strategy</strong> with long-term goals that result in a competitive advantage</li>
+<li>
+<strong>Communicate</strong> your success</li>
+</ol>
+<p>I'd be happy to support you in this process, for example:</p>
 <ul>
-  <li>a list of <b><em>potential ML project ideas</em></b>, ranked based on their feasibility and business impact</li>
-  <li>a list of concrete <b><em>next steps</em></b> that you need to take <b><em>to get ready for your first ML project</em></b> (e.g., improvements in the data infrastructure / additional data that needs to be collected)</li>
+<li>assess project ideas for their feasibility &amp; help with their implementation to ensure your first experiments with machine learning are a success</li>
+<li>provide structured trainings and individual coaching sessions for employees that want to grow into a data scientist role (&rarr; Workshop: ML for Data Scientists)</li>
+<li>help with hiring capable data scientists (e.g., draft compelling job listings that ask for meaningful qualifications instead of random buzzwords, screen CVs, and conduct technical interviews)</li>
+<li>provide broad AI training for other employees (&rarr; Workshop: ML for Data Strategists)</li>
 </ul>
 
-<p>Additionally, I can provide you with some <b><em>research on what your competitors are doing in terms of AI</em></b>, including a reality check of possibly exaggerated press releases.</p>
+<img src="./images/09_ml_in_practice/ml_workshops.png" alt="ml workshop formats"></p>
 
-
-<br>
-
-<h4>ML project package</h4>
-<h5>Get a machine learning solution implemented</h5>
-
-<p>You already have a feasible &amp; valuable project idea, but your team lacks the machine learning know-how to realize it on their own?</p>
-
-<p>I can help you with the implementation of the ML solution, as well as its integration into your existing workflow and infrastructure. This includes:</p>
+<h3>Individual Coaching Sessions</h3>
+<p>The individual coaching sessions are targeted primarily towards scientists and engineers that are experts in their domain, but received only little (if any) formal training in software development or Python and/or are newcomers to the field of machine learning. <br> In these sessions</p>
 <ul>
-  <li>assessment of and tips for <b><em>improving your data infrastructure</em></b></li>
-  <li>implementation of a <b><em>custom ML solution</em></b> tailored to your needs and that can be used <b><em>without any reoccurring licensing fees</em></b></li>
-  <li>support for your team in setting up the necessary infrastructure to <b><em>deploy the ML solution and integrate it into your existing workflows</em></b></li>
-  <li>coaching for your team on how to <b><em>monitor &amp; maintain the ML model</em></b> to ensure you are prepared for possible data drifts and do not have to rely on me to keep the ML solution running in the future (but of course I'm always available for additional support if needed!)</li>
+<li>we discuss the problem and your goal and brainstorm possible solutions,</li>
+<li>you get tips for the implementation and feedback on your existing (Python) code,</li>
+<li>and if you want, I can even code particularly tricky functions for you (e.g., a novel neural network architecture tailored to your use case).</li>
 </ul>
+<p>The goal of these sessions is for you or your team to get regular feedback and new impulses for solving day-to-day challenges.</p>
+<p>Head over to the <a href="./resources.html">resources</a> page to get a head start, e.g., if you want to extend your methodological toolbox and learn how machine learning algorithms can be used to solve complex problems with structured or unstructured data.</p>
 
-<br>
-
-<h4>ML hiring package</h4>
-<h5>Grow your internal data science team</h5>
-
-<p>For a data science endeavor to be successful, a thorough understanding of the problem setting and data is at least as important as knowing the ins and outs of the different machine learning algorithms. Therefore, if you decide that you might benefit from some long-term data science expertise, I strongly suggest you build your own data science team. While external consultants may have a broader knowledge of the different tools and can advise you on which advanced algorithms are worth considering for your use case, they can never have the same deep understanding of your data as someone working at your company.</p>
-
-<p>But finding the right people is often tricky. Data scientists are still in high demand, which means they can be picky when it comes to applying for jobs. Furthermore, a lot of people who simply took an online course on machine learning like to call themselves "data scientist" nowadays, while it takes a much deeper understanding and practical knowledge to provide a meaningful contribution to your team.</p>
-
-<p>To help you build your data science team, this package includes:</p>
+<h3>Technical Project Management</h3>
+<p>In addition to advising your team on how to solve specific technical challenges, I'd also be happy to get more involved in the overall development of new (digital, data-driven) products, i.e.,</p>
 <ul>
-  <li>assessment of <b><em>which skills your company needs</em></b> to achieve your ML goals (Data Scientist? ML Engineer? What's the difference?)</li>
-  <li><b><em>compelling job postings</em></b>, asking for meaningful qualifications instead of random buzzwords</li>
-  <li><b><em>screening of CVs</em></b> &amp; conducting <b><em>technical interviews</em></b></li>
-  <li>[optional] implementation of a <b><em>personalized hiring challenge</em></b> (like <a href="https://github.com/cod3licious/spectrm-challenge">this one</a>), including programming and theoretical questions tailored to your requirements, to find the perfect candidate</li>
+<li>understand the goals and needs of you, your users, and other stakeholders and translate these into product requirements <!-- (&rarr; why? what? how?) --></li>
+<li>devise a conceptual product design that fulfills the requirements, with a clear structure and <strong>information architecture</strong> that is intuitive to understand, and provides a cohesive, coherent, and consistent user experience</li>
+<li>work together with designers and developers to make your vision a reality, following an agile methodology with frequent updates about milestones</li>
+<li>with more than a decade of programming experience under my belt, I make sure the product not only has a clean structure and intuitive interface, but is also implemented with a solid <strong>software architecture</strong> in an efficient and easily maintainable way to ensure that any future updates or changes can be implemented without any headaches</li>
 </ul>
-
-
-<br>
-
-<h4>ML workshops &amp; individual coaching sessions</h4>
-
-<p>I offer (remote) machine learning courses for different audiences:
-<img src="./images/09_ml_in_practice/ml_workshops.png" alt="ml workshops"></p>
-
-<h5>Take your internal data science team to the next level</h5>
-
-<p>Your company already has a data science team, but a lot of the people are in junior positions or come from other areas (i.e., "Quereinsteiger" in German) and you want to get them up to speed with ML best practices?</p>
-
-<p>After the <b><em>machine learning course</em></b> based on my <a href="./mlbook/index.html">book</a> (incl. many hands-on <a href="https://github.com/cod3licious/ml_exercises">exercises</a>), everyone will be on the same page and familiar with the most common supervised, unsupervised, and deep learning algorithms, as well as how to avoid common pitfalls in their application. The course follows a flipped classroom strategy, where the participants can work through the materials at their own speed, while I'm available for questions and to give feedback on the exercises.</p>
-
-<p>Furthermore, to help you or your team excel in current projects, I additionally offer one-on-one remote data science coaching sessions. In these <b><em>individual coaching sessions</em></b> you get:</p>
-
-<ul>
-  <li>feedback on the proposed methodology and/or</li>
-  <li>new ideas for what else you could try</li>
-  <li>feedback on your (Python) code and tips for how to improve it</li>
-  <li>diagnosis of why your existing approach &amp; models don't bring the desired performance</li>
-  <li>templates with code for reoccurring problems</li>
-  <li>development of custom, advanced models (e.g., a novel neural network architecture tailored to your use case)</li>
-  <li>... and whatever else I can help you with to make sure you reach your goals.</li>
-</ul>
-
-<p>You can think of these sessions as <b><em>machine learning office hours</em></b>, where you or your team can get feedback and new impulses for solving day-to-day challenges.</p>
 
 
       <p><br><br></p>

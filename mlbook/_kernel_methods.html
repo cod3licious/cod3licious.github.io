@@ -755,7 +755,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
 <span id="revnumber">version 1.1,</span>
-<span id="revdate">2021-10-28</span>
+<span id="revdate">2021-11-14</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -831,7 +831,7 @@ For example, in the simple toy dataset shown below, the two classes become linea
 <p>Of course, coming up with such a feature map \(\phi(\mathbf{x})\), especially for more complex problems, isn&#8217;t exactly easy. But as you will see, we don&#8217;t actually need to know what this transformation looks like!</p>
 </div>
 <div class="paragraph">
-<p><span class="underline"><strong>Example:</strong> (Kernel) Ridge Regression</span></p>
+<p><span class="underline"><strong>Example:</strong> Kernel Ridge Regression</span></p>
 </div>
 <div class="paragraph">
 <p>Remember: In a linear regression model, the prediction for a new data point \(\mathbf{x}'\) is computed as the scalar product of the feature vector with the weight vector \(\mathbf{w}\):</p>
@@ -914,7 +914,7 @@ A kernel function is basically a similarity function, but with the special requi
 </div>
 </div>
 <div class="paragraph">
-<p>i.e, computing the kernel function \(k(\mathbf{a}, \mathbf{b})\) between the two points is the same as computing the scalar product of the two feature maps \(\langle\phi(\mathbf{a}), \phi(\mathbf{b})\rangle\). While for the polynomial kernel of second degree, \(\langle\mathbf{a}, \mathbf{b}\rangle^2\), we could easily figure out that the feature map consisted of the second order monomials, for other kernel functions, the corresponding feature map is not that easy to identify and the kernel feature space might even be infinite dimensional. However, since all the feature map terms \(\phi(\mathbf{x})\) in the kernel ridge regression formulas only occurred in scalar products, we could replace them by a kernel function (which we can compute using the original input feature vectors), therefore, we don&#8217;t actually need to know what the respective feature map looks like for other kernel functions!</p>
+<p>i.e, computing the kernel function \(k(\mathbf{a}, \mathbf{b})\) between the two points is the same as computing the scalar product of the two feature maps \(\langle\phi(\mathbf{a}), \phi(\mathbf{b})\rangle\). While for the polynomial kernel of second degree, \(\langle\mathbf{a}, \mathbf{b}\rangle^2\), we could easily figure out that the feature map consisted of the second order monomials, for other kernel functions, the corresponding feature map is not that easy to identify and the kernel feature space might even be infinite dimensional. However, since all the feature map terms \(\phi(\mathbf{x})\) in the kernel ridge regression formulas only occurred in scalar products, we were able to replace them by a kernel function (which we can compute using the original input feature vectors), therefore, we don&#8217;t actually need to know what the respective feature map looks like for other kernel functions!</p>
 </div>
 <div class="paragraph">
 <p>So while kernel methods are internally working in this really awesome kernel feature space \(\phi(\mathbf{x})\), induced by the respective kernel function, where all our problems are linear, all we need to know is how to compute the kernel function using the original feature vectors.</p>
@@ -926,7 +926,7 @@ A kernel function is basically a similarity function, but with the special requi
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If you are curious what the kernel feature space looks like for some kernel function, you can use Kernel PCA to get an approximation of \(\phi(\mathbf{x})\). Kernel PCA computes the eigendecomposition of a given kernel matrix, thereby generating a new representation of the data such that the scalar product of these new vectors approximates the kernel matrix. This means, the new kernel PCA feature vector you computed for some data point \(i\) approximates \(\phi(\mathbf{x}_i)\)&#8201;&#8212;&#8201;however, this still doesn&#8217;t tell you what the function \(\phi\) itself looks like (i.e., how to get from \(\mathbf{x}\) to \(\phi(\mathbf{x})\)), you only get (an approximation of) the final result \(\phi(\mathbf{x})\).
+If you are curious what the kernel feature space looks like for some kernel function, you can use kernel PCA to get an approximation of \(\phi(\mathbf{x})\). Kernel PCA computes the eigendecomposition of a given kernel matrix, thereby generating a new representation of the data such that the scalar product of these new vectors approximates the kernel matrix. This means the new kernel PCA feature vector you computed for some data point \(i\) approximates \(\phi(\mathbf{x}_i)\)&#8201;&#8212;&#8201;however, this still doesn&#8217;t tell you what the function \(\phi\) itself looks like (i.e., how to get from \(\mathbf{x}\) to \(\phi(\mathbf{x})\)), you only get (an approximation of) the final result \(\phi(\mathbf{x})\).
 </td>
 </tr>
 </table>

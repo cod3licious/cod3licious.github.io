@@ -666,7 +666,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
 <span id="revnumber">version 1.1,</span>
-<span id="revdate">2021-10-28</span>
+<span id="revdate">2021-11-14</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -717,7 +717,7 @@ All models are wrong, but some are useful.
 </div>
 </div>
 <div class="paragraph">
-<p>The above quote is also nicely exemplified by <a href="https://xkcd.com/2048/">this xkcd comic</a>:</p>
+<p>The above quote is also nicely exemplified by <a href="https://xkcd.com/2048/" target="\_blank">this xkcd comic</a>:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -726,6 +726,35 @@ All models are wrong, but some are useful.
 </div>
 <div class="paragraph">
 <p>A machine learning (ML) model tries to infer the relationship between some inputs and outputs from the given exemplary data points. What kind of relation will be found is largely determined by the chosen model type and its internal optimization algorithm, however, there is a lot you can (and should) do to make sure what the algorithm comes up with is not blatantly wrong.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Common pitfalls include: </dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>evaluating the model with an inappropriate evaluation metric (e.g., accuracy instead of balanced accuracy for a classification problem with unbalanced class distributions)</p>
+</li>
+<li>
+<p>using a model that does not capture the &#8216;input &#8594; output&#8217; relationship and does not generate reliable predictions for new data points (due to over- or underfitting)</p>
+</li>
+<li>
+<p>using a model that abuses spurious correlations</p>
+</li>
+<li>
+<p>using a model that discriminates</p>
+</li>
+<li>
+<p>forgetting that the world keeps on changing and that models need to be retrained regularly on new data</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>We&#8217;ll cover these points in more detail in the following sections, but below you find a quick summary of what you can do to not fall into any of these traps.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -736,10 +765,10 @@ All models are wrong, but some are useful.
 <div class="ulist">
 <ul>
 <li>
-<p>Select the right inputs: ask a domain expert which variables could have a causal influence on the output; possibly compute additional, more informative features from the original measurements (&#8594; feature engineering).</p>
+<p>Select the right inputs: ask a domain expert which variables could have a causal influence on the output; possibly compute additional, more informative features from the original measurements (&#8594; <a href="_feature_engineering_transformations.html">feature engineering</a>).</p>
 </li>
 <li>
-<p>Sanity check: Does the dataset contain samples with the same inputs but different outputs? &#8658; Some important features might be missing or the targets are very noisy, e.g., due to inconsistent annotations&#8201;&#8212;&#8201;fix this first!</p>
+<p>Sanity check: Does the dataset contain samples with the same inputs but different outputs? &#8658; Some important features might be missing or the targets are very noisy, e.g., due to inconsistent annotations&#8201;&#8212;&#8201;<a href="_garbage_in_garbage_out.html">fix this first!</a></p>
 </li>
 <li>
 <p>Think about the structure of the problem and what type of model might be appropriate to learn the presumed &#8216;input &#8594; output&#8217; relationship. For example, if the problem is clearly non-linear, the chosen model type also needs to be complex enough to at least in principle be able to pick up on this relation (i.e., such that the model does not underfit, see below). A lot of domain knowledge can also be put into the design of neural network architectures.</p>
@@ -758,19 +787,19 @@ All models are wrong, but some are useful.
 <div class="ulist">
 <ul>
 <li>
-<p>Evaluate the model with a meaningful evaluation metric (especially for datasets with unbalanced class distributions (&#8594; balanced accuracy)!).</p>
+<p>Evaluate the model with a meaningful <a href="_model_evaluation.html">evaluation metric</a> (especially for datasets with unbalanced class distributions (&#8594; balanced accuracy)!).</p>
 </li>
 <li>
-<p>Check that the model is capable of interpolation, i.e., that it generalizes to unseen data points <em>from the same distribution as the training set</em> and does not over- or underfit. Please note that this does <em>not</em> ensure that it can also extrapolate, i.e., that it has learned the true causal relation between inputs and outputs and can generate correct predictions for data points outside of the training domain!</p>
+<p>Check that the model can interpolate, i.e., that it generalizes to unseen data points <em>from the same distribution as the training set</em> and does not <a href="_interpolation_does_the_model_generalize.html">over- or underfit</a>. Please note that this does <em>not</em> ensure that it can also extrapolate, i.e., that it has learned the true <a href="_extrapolation_correlation_vs_causation.html">causal relation</a> between inputs and outputs and can generate correct predictions for data points outside of the training domain!</p>
 </li>
 <li>
-<p>Check whether the model makes any systematic errors, which would indicate that your assumptions about the data might be wrong (&#8594; performance for all classes should be approximately the same; the prediction errors / <a href="https://statisticsbyjim.com/regression/check-residual-plots-regression-analysis/">residuals</a> in regression problems should be <a href="https://www4.stat.ncsu.edu/~stefanski/NSF_Supported/Hidden_Images/Residual_Surrealism_TAS_2007.pdf">independent</a>).</p>
+<p>Carefully analyze the model&#8217;s prediction errors to check for systematic errors, which would indicate that the data might violate your initial assumptions (&#8594; performance for all classes should be approximately the same; the <a href="https://statisticsbyjim.com/regression/check-residual-plots-regression-analysis/" target="\_blank">residuals</a> in a regression problem should be <a href="https://www4.stat.ncsu.edu/~stefanski/NSF_Supported/Hidden_Images/Residual_Surrealism_TAS_2007.pdf" target="\_blank">independent</a>).</p>
 </li>
 <li>
 <p>Verify that the model does not discriminate. Due to the large quantities of data used to train ML models, it is not always possible to ensure that the training data does not contain any systematic biases (e.g., gender/race stereotypes) that a model might pick up on, but it is important to test the model on a well balanced and controlled test set to catch any discrimination before the model is deployed in production.</p>
 </li>
 <li>
-<p>Interpret the model and explain its predictions: Does it use the features you (or a domain expert) expected it to use or does it make the predictions based on any spurious correlations?</p>
+<p>Interpret the model and <a href="_explainability_interpretable_ml.html">explain its predictions</a>: Does it use the features you (or a domain expert) expected it to use or does it make the predictions based on any spurious correlations?</p>
 </li>
 </ul>
 </div>
@@ -788,7 +817,7 @@ All models are wrong, but some are useful.
 <dd>
 <p><span class="underline">One of the biggest problems in practice: Data &amp; Concept Drifts:</span></p>
 <div class="paragraph">
-<p><strong>ML fails silently!</strong> I.e., the program doesn&#8217;t crash even if all predictions are wrong<br>
+<p><strong>ML fails silently!</strong> I.e., the program does not simply crash even if all predictions are wrong<br>
 &#8594; Need constant monitoring to detect changes that lead to a deteriorating performance!</p>
 </div>
 </dd>
@@ -805,17 +834,17 @@ All models are wrong, but some are useful.
 <div class="ulist">
 <ul>
 <li>
-<p>External factors (e.g., changes in the process structure / setup)</p>
+<p>External factors (e.g., changes in the process structure / setup, for example, in a new version of a machine a temperature sensor is now in a different place but still logs values under the same variable name)</p>
 </li>
 <li>
-<p>Internal factors (feedback loop: presence of ML model alters behavior)</p>
+<p>Internal factors (feedback loop: presence of ML model alters behavior, for example, spammers change their strategy to evade the spam filter)</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
 <p>&#8594; Check difference between predicted and true (training) label frequencies<br>
 &#8594; Frequently retrain models on new data (&amp; verify feature importances)<br>
-&#8594; Logging of known external events, e.g., maintenance (!!)<br></p>
+&#8594; Logging of known external events, e.g., maintenance on a machine (!!)<br></p>
 </div>
 <div class="ulist none">
 <ul class="none">
@@ -826,6 +855,30 @@ All models are wrong, but some are useful.
 </div>
 </li>
 </ul>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+The "ML fails silently" part also applies to bugs in your code: especially when you just started with ML it often happens that your results seem fine (maybe just a little too good), but you have a subtle bug somewhere that doesn&#8217;t cause your program to crash, but just calculates something slightly wrong somewhere. These issues can be very hard to notice, so always triple-check your code and if you can, write <a href="https://realpython.com/python-testing/" target="\_blank">unit tests</a> for individual functions to make sure they do what you expect them to do.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You might also want to have a look at Google&#8217;s <a href="https://developers.google.com/machine-learning/guides/rules-of-ml" target="\_blank">rules of machine learning</a> (the first one being: <em>"Don&#8217;t be afraid to launch a product without machine learning."</em>)
+</td>
+</tr>
+</table>
 </div>
 <div class="ulist">
 <ul>

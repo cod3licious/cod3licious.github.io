@@ -755,7 +755,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
 <span id="revnumber">version 1.1,</span>
-<span id="revdate">2021-10-28</span>
+<span id="revdate">2021-11-14</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -822,7 +822,7 @@ i.e., does the model generate <em>reliable predictions</em> for <em>new data poi
 <dd>
 <p><em>Regression:</em> mean absolute error, mean squared error, \(R^2\)<br>
 <em>Classification:</em> (balanced) accuracy<br>
-<em>Ranking:</em> <a href="https://en.wikipedia.org/wiki/Precision_and_recall">precision/recall</a> (&#8594; F1 score), hits@<em>k</em></p>
+<em>Ranking:</em> <a href="https://en.wikipedia.org/wiki/Precision_and_recall" target="_blank" rel="noopener">precision/recall</a> (&#8594; F1 score), hits@_k_</p>
 </dd>
 </dl>
 </div>
@@ -841,7 +841,7 @@ i.e., does the model generate <em>reliable predictions</em> for <em>new data poi
 <div class="sect3">
 <h4 id="_evaluation_metrics">Evaluation Metrics</h4>
 <div class="paragraph">
-<p>First 3 evaluation metrics for regression problems, the mean absolute error, mean squared error, and \(R^2\).</p>
+<p>We start with 3 evaluation metrics for regression problems: the mean absolute error, mean squared error, and \(R^2\).</p>
 </div>
 <div class="dlist">
 <dl>
@@ -869,7 +869,7 @@ i.e., does the model generate <em>reliable predictions</em> for <em>new data poi
 <div class="content">
 <img src="../images/06_evaluation/error_mean_squared.png" alt="image" width="480">
 </div>
-<div class="title"><span class="small">Since this regression error metric is differentiable, it is often used internally when optimizing the parameters of a model (e.g., in linear regression). When reporting the final error of a model, one often takes the square root of the result, i.e., instead reports the root mean squared error (RMSE), since this is again in the same units as the original target variable.</span></div>
+<div class="title"><span class="small">Since this regression error metric is differentiable, it is often used internally when optimizing the parameters of a model (e.g., in linear regression). When reporting the final error of a model, one often takes the square root of the result, i.e., instead reports the root mean squared error (RMSE), since this is again in the same units as the original target variable (but still less intuitive than the MAE).</span></div>
 </div>
 </dd>
 </dl>
@@ -909,7 +909,7 @@ i.e., does the model generate <em>reliable predictions</em> for <em>new data poi
 <div class="content">
 <img src="../images/06_evaluation/error_class2.png" alt="image" width="560">
 </div>
-<div class="title"><span class="small">Most (binary) classification models predict the probability that a sample belongs to a certain class, i.e., a score between 0 and 1. By applying a threshold on this probability (typically at 0.5), the prediction score can be transformed into the class label, i.e., either predicting the positive or negative class for this sample. We distinguish between two types of mistakes that a classification model can make in this prediction: <em>false positives (FP)</em>, i.e., incorrectly predicting the positive class for samples belonging to the negative class, and <em>false negatives (FN)</em>, i.e., incorrectly predicting the negative class for samples from the positive class. Depending on the goal of your application, one type of error might be worse than the other, e.g., in a medical test you might rather tell someone that they should come in for a second test to confirm some problematic results than send them home with an undetected disease. By moving the classification threshold, you can control the trade-off between FP and FN.</span></div>
+<div class="title"><span class="small">Most (binary) classification models predict the probability that a sample belongs to a certain class, i.e., a score between 0 and 1. By setting a threshold on this probability (typically at 0.5), the prediction score can be transformed into the class label, i.e., either predicting the positive or negative class for this sample. We distinguish between two types of mistakes that a classification model can make in this prediction: <em>false positives (FP)</em>, i.e., incorrectly predicting the positive class for samples belonging to the negative class, and <em>false negatives (FN)</em>, i.e., incorrectly predicting the negative class for samples from the positive class. Depending on the goal of your application, one type of error might be worse than the other, e.g., in a medical test you might rather tell someone that they should come in for a second test to confirm some problematic results than send them home with an undetected disease. By moving the classification threshold, you can control the trade-off between FP and FN.</span></div>
 </div>
 <div class="dlist">
 <dl>
@@ -938,9 +938,19 @@ i.e., does the model generate <em>reliable predictions</em> for <em>new data poi
 <p>Below you see the decision boundaries of two models on a toy dataset (where the shaded background indicates whether the model would predict the blue or red class for a data point in this area). Which model do you think is more useful?</p>
 <div class="imageblock text-center">
 <div class="content">
-<img src="../images/06_evaluation/balanced_acc4.png" alt="image" width="640">
+<img src="../images/06_evaluation/balanced_acc4a.png" alt="image" width="640">
 </div>
-<div class="title"><span class="small">With unbalanced class distributions, e.g., in this case a lot more samples from the blue compared to the red class, the accuracy of a model that simply always predicts the most frequent class can be quite large. But while an accuracy of 0.9 might sound impressive when you report the performance of your model to your project&#8217;s stakeholders, this doesn&#8217;t necessarily mean that the model is actually useful, especially since in real world problems the undersampled class is often the one we care about most (e.g., people with a rare disease or products that have a defect). Instead, the balanced accuracy is often the more informative measure when evaluating classification models and can help us to distinguish between a model that has actually learned something and the stupid baseline.</span></div>
+</div>
+<div class="paragraph">
+<p>With unbalanced class distributions, e.g., in this case a lot more samples from the blue compared to the red class, the accuracy of a model that simply always predicts the most frequent class can be quite large. But while an accuracy of 0.9 might sound impressive when you report the performance of a model to your project&#8217;s stakeholders, this doesn&#8217;t necessarily mean that the model is actually useful, especially since in real world problems the undersampled class is often the one we care about most (e.g., people with a rare disease or products that have a defect).</p>
+</div>
+<div class="paragraph">
+<p>Instead, the balanced accuracy is often the more informative measure when evaluating classification models and can help us to distinguish between a model that has actually learned something and the stupid baseline:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/06_evaluation/balanced_acc4b.png" alt="image" width="640">
+</div>
 </div>
 </dd>
 </dl>
@@ -1031,7 +1041,7 @@ i.e., does the model generate <em>reliable predictions</em> for <em>new data poi
 <div class="content">
 <img src="../images/06_evaluation/validation_set.png" alt="image" width="480">
 </div>
-<div class="title"><span class="small">As we&#8217;ve established in the beginning, before experimenting with any models, the dataset should always be split into a training and test set. However, this is actually not the full picture: since you are typically experimenting with many different types of models and for each model type with dozens of hyperparameter settings, you should not use this test set to evaluate each of these model candidates, since it might happen that with all these things you try you end up choosing a model that performs really well on this test set, but then actually does not generalize to new data later and you would have no way of finding this out before deploying the model in production. Therefore, we introduce a new data split, the <strong>validation set</strong>, that is used to evaluate the different candidate models, while the test set remains locked away until you&#8217;re ready to evaluate your final model to get a realistic estimate of how it should actually perform on new data. If your original dataset is quite big, say, over 100k samples (depending on the diversity of your data, e.g., the number of classes), then it is usually enough to just split the data into training, validation, and test sets at the start, where the validation and test sets could contain about 10% of the data each and should be representative of the diversity of the original dataset. However, when the original dataset is smaller, it might not be possible to get such representative splits, which is when a technique called <em>cross-validation</em> (also abbreviated x-val) can come in very handy.</span></div>
+<div class="title"><span class="small">As we&#8217;ve established in the beginning, before experimenting with any models, the dataset should always be split into a training and test set. However, this was actually not the complete picture: since you are typically experimenting with many different types of models and for each model type with dozens of hyperparameter settings, you should not use this test set to evaluate each of these model candidates, since it might happen that with all these things you try you end up choosing a model that performs really well on this test set, but then actually does not generalize to new data later and you would have no way of finding this out before deploying the model in production. Therefore, we introduce a new data split, the <strong>validation set</strong>, that is used to evaluate the different candidate models, while the test set remains locked away until you&#8217;re ready to evaluate your final model to get a realistic estimate of how it should actually perform on new data. If your original dataset is quite big, say, over 100k samples (depending on the diversity of your data, e.g., the number of classes), then it is usually enough to just split the data into training, validation, and test sets at the start, where the validation and test sets could contain about 10% of the data each and should be representative of the diversity of the original dataset. However, when the original dataset is smaller, it might not be possible to get such representative splits, which is when a technique called <em>cross-validation</em> (also abbreviated x-val) can come in very handy.</span></div>
 </div>
 </dd>
 </dl>
@@ -1057,7 +1067,7 @@ i.e., does the model generate <em>reliable predictions</em> for <em>new data poi
 <dl>
 <dt class="hdlist1">Hyperparameter Tuning</dt>
 <dd>
-<p>Often it is necessary to systematically evaluate a given model with different hyperparameter settings to find the best option. One straightforward approach for doing this is a <strong>grid search</strong>. In a grid search, you define the different values you want to test for each hyperparameter and then all combinations of these different values for all hyperparameters are automatically evaluated, similar to how you would do it manually with nested for-loops. This is very useful, as often the different hyperparameter settings influence each other. Conveniently, sklearn furthermore combines this with a cross-validation. However, with many individual settings, this also comes at a computational cost, as the model is trained and evaluated \(k \times m_1 \times m_2 \times \dots \times m_i\) times, where \(k\) is the number of folds in the cross-validation and \(m_1...m_i\) are the number of values that need to be tested for each of the <em>i</em> hyperparameters of the model.<br></p>
+<p>Often it is necessary to systematically evaluate a given model with different hyperparameter settings to find the best option. One straightforward approach for doing this is a <strong>grid search</strong>. In a grid search, you define the different values you want to test for each of the model&#8217;s hyperparameters and then all combinations of these different values for all hyperparameters are automatically evaluated, similar to how you would do it manually with nested for-loops. This is very useful, as often the different hyperparameter settings influence each other. Conveniently, sklearn furthermore combines this with a cross-validation. However, with many individual settings, this also comes at a computational cost, as the model is trained and evaluated \(k \times m_1 \times m_2 \times \dots \times m_i\) times, where \(k\) is the number of folds in the cross-validation and \(m_1...m_i\) are the number of values that need to be tested for each of the <em>i</em> hyperparameters of the model.<br></p>
 <div class="paragraph">
 <p>For example, with two hyperparameters, the grid search results could look something like the plot below, which shows a heatmap of the average accuracy achieved with each hyperparameter combination of a model in the cross-validation:</p>
 </div>
@@ -1070,7 +1080,7 @@ i.e., does the model generate <em>reliable predictions</em> for <em>new data poi
 <p>While sklearn&#8217;s grid search method will always directly tell you the best hyperparameter combination out of the ones it tested (here marked with a red star), it is important to actually check the complete set of results to verify that you have <strong>covered the whole range of possible hyperparameter values</strong> that could give good results (e.g., in the plot here we see a peak in the middle with the results getting worse to the sides, i.e., we know that better hyperparameter values are unlikely to lie outside of the range we&#8217;ve tested). It is generally a good idea to first start with a large range of values and then zoom in to the area that seems most promising (and of course knowledge about the different algorithms helps a lot in choosing reasonable settings as well).<br></p>
 </div>
 <div class="paragraph">
-<p>Besides the basic grid search, there also exist other, more advanced hyperparameter tuning routines. For example, sklearn additionally implements a randomized search, and other dedicated libraries provide even fancier approaches, such as <a href="https://machinelearningmastery.com/what-is-bayesian-optimization/">Bayesian optimization</a>.<br></p>
+<p>Besides the basic grid search, there also exist other, more advanced hyperparameter tuning routines. For example, sklearn additionally implements a randomized search, and other dedicated libraries provide even fancier approaches, such as <a href="https://machinelearningmastery.com/what-is-bayesian-optimization/" target="\_blank">Bayesian optimization</a>.<br></p>
 </div>
 <div class="listingblock">
 <div class="content">

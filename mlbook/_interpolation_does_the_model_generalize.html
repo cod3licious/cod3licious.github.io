@@ -755,7 +755,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
 <span id="revnumber">version 1.1,</span>
-<span id="revdate">2021-10-28</span>
+<span id="revdate">2021-11-14</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -810,26 +810,20 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="sect3">
 <h4 id="_over_underfitting">Over- &amp; Underfitting</h4>
 <div class="paragraph">
-<p>How does a model make mistakes?</p>
+<p>So, why might a model make mistakes on new data points?</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/06_evaluation/overunderfitting.png" alt="image" width="840">
 </div>
-<div class="title"><span class="small">If you were to only look at the test errors for the different models shown here, you might conclude that the model on the left (overfitting) and on the right (underfitting) were equally wrong. While this is true in some sense, the test error alone does not tell you <em>why</em> the models are wrong (or how you could improve their performance). As you can see, the two models make mistakes on the test set for completely different reasons: the model that overfits, memorized the training samples and is not able to generalize to new data points, while the model that underfits, is too simple to capture the relationship between the inputs and outputs in general. Since these two scenarios require vastly different approaches to improve the model&#8217;s performance, it is important to look at the error on the training set (in a addition to the error on the test/validation set) to determine whether the model&#8217;s errors on the test set are be due to over- or underfitting.</span></div>
+<div class="title"><span class="small">If you were to only look at the test errors for the different models shown here, you might conclude that the model on the left (overfitting) and the one on the right (underfitting) were equally wrong. While this is true in some sense, the test error alone does not tell you <em>why</em> the models are wrong (or how you could improve their performance). As you can see, the two models make mistakes on the test set for completely different reasons: the model that overfits, memorized the training samples and is not able to generalize to new data points, while the model that underfits is too simple to capture the relationship between the inputs and outputs in general. Since these two scenarios require vastly different approaches to improve the model&#8217;s performance, it is important to look at the error on the training set in addition to the error on the test/validation set to determine whether the model&#8217;s errors on the test set are due to over- or underfitting.</span></div>
+</div>
+<div class="paragraph">
+<p>Since most datasets have lots of input variables, you can&#8217;t just plot the model like we did above to see if it is over- or underfitting, but instead you should check the error that is computed (with a meaningful evaluation metric) on both the training and the test set:</p>
 </div>
 <div class="paragraph">
 <p><strong>Overfitting:</strong> great training performance, horrible on test set<br>
 <strong>Underfitting:</strong> poor training AND test performance</p>
-</div>
-<div class="paragraph">
-<p>This is related to the model&#8217;s complexity:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/06_evaluation/modelcomplex3.png" alt="image" width="640">
-</div>
-<div class="title"><span class="small">While a simple model (e.g., a linear model) has a high bias and might therefore underfit the data, a more complex model (e.g., a deep NN) has high variance and is therefore at risk of overfitting the training set. Often, it makes sense to use a more complex model, but then reduce its variance through explicit (e.g., L2-regularization) and/or implicit regularization (e.g., data augmentation). Also, please note the <a href="https://openai.com/blog/deep-double-descent/">double descent phenomenon</a> for neural networks, which often show a good generalization performance even if they are vastly over-parametrized.</span></div>
 </div>
 <div class="paragraph">
 <p>Depending on whether a model over- or underfits, there are different things you can do to improve its performance:</p>
@@ -840,7 +834,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </div>
 </div>
 <div class="paragraph">
-<p>In general, you should first try to decrease the model&#8217;s bias, i.e., find a model that is at least in principle capable of solving the task, since the error on the training data is the lower limit for the error on the test set. Then make sure the model doesn&#8217;t overfit, i.e., generalizes to new data points (what we ultimately care about). However, it is unrealistic to expect a model to have a perfect performance, as some tasks are just hard, for example, because the data is very noisy.</p>
+<p>However, it is unrealistic to expect a model to have a perfect performance, as some tasks are just hard, for example, because the data is very noisy.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -849,10 +843,22 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Additionally: Always look at the data!! Is there a pattern among wrong predictions, e.g., is there a discrepancy between the performance for different classes? Could some additional preprocessing steps help to fix errors for some type of data points (e.g., blurry images)?
+Always look at the data!! Is there a pattern among wrong predictions, e.g., is there a discrepancy between the performance for different classes? Could some additional preprocessing steps help to fix errors for some type of data points (e.g., blurry images)?
 </td>
 </tr>
 </table>
+</div>
+<div class="paragraph">
+<p>Over- or underfitting  is (partly) due to the model&#8217;s complexity:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/06_evaluation/modelcomplex3.png" alt="image" width="640">
+</div>
+<div class="title"><span class="small">While a simple model (e.g., a linear model) has a high bias and might therefore underfit the data, a more complex model (e.g., a deep neural network) has high variance and is therefore at risk of overfitting the training set. Often, it makes sense to use a more complex model, but then reduce its variance through explicit (e.g., L2-regularization) and/or implicit regularization (e.g., data augmentation). Also, please note the <a href="https://openai.com/blog/deep-double-descent/" target="\_blank">double descent phenomenon</a> for neural networks, which often show a good generalization performance even if they are vastly over-parametrized.</span></div>
+</div>
+<div class="paragraph">
+<p>In general, you should first try to decrease the model&#8217;s bias, i.e., find a model that is complex enough and at least in principle capable of solving the task, since the error on the training data is the lower limit for the error on the test set. Then make sure the model doesn&#8217;t overfit, i.e., generalizes to new data points (what we ultimately care about).</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -871,14 +877,14 @@ Additionally: Always look at the data!! Is there a pattern among wrong predictio
 </div>
 </div>
 <div class="paragraph">
-<p>Instead of <em>more</em>, it might also be helpful to get <em>cleaner</em> data! (See <a href="https://youtu.be/06-AZXmwHjo">talk by Andrew Ng</a>.)</p>
+<p>Instead of <em>more</em>, it might also be helpful to get <em>cleaner</em> data! (See <a href="https://youtu.be/06-AZXmwHjo" target="\_blank">talk by Andrew Ng</a>.)</p>
 </div>
 </div>
 </div>
 <div class="sect4">
 <h5 id="_feature_selection">Feature Selection</h5>
 <div class="paragraph">
-<p>In small datasets, some patterns can occur simply by chance (= <a href="https://www.tylervigen.com/spurious-correlations">spurious correlations</a>).<br>
+<p>In small datasets, some patterns can occur simply by chance (= <a href="https://www.tylervigen.com/spurious-correlations" target="\_blank">spurious correlations</a>).<br>
 &#8658; exclude irrelevant features to avoid overfitting on the training data</p>
 </div>
 <div class="paragraph">

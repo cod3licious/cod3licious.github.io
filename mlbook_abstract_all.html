@@ -664,8 +664,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.1,</span>
-<span id="revdate">2021-11-16</span>
+<span id="revnumber">version 1.2,</span>
+<span id="revdate">2021-11-28</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -1032,8 +1032,17 @@ While these libraries somewhat democratize the use of ML, unfortunately, this al
 <div class="paragraph">
 <p>More specifically, <strong>machine learning</strong> is an <strong>umbrella term for algorithms that recognize patterns and learn rules from data</strong>.</p>
 </div>
-<div class="paragraph">
-<p>Simply speaking, an algorithm can be thought of as a specific strategy or recipe for solving a certain kind of problem. For example, there exist effective algorithms to find the shortest paths between two cities (e.g., what Google Maps uses when you ask for directions) or to solve scheduling problems (which task should be done first and which task after that to finish all tasks before their respective deadlines and satisfy dependencies between the tasks). Machine learning deals with the subset of algorithms that detect and make use of statistical regularities in a dataset to obtain specific results.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Simply speaking, an <strong>algorithm</strong> can be thought of as a specific <strong>strategy or recipe for solving a certain kind of problem</strong>. For example, there exist effective algorithms to find the shortest paths between two cities (e.g., what Google Maps uses when you ask for directions) or to solve scheduling problems (which task should be done first and which task after that to finish all tasks before their respective deadlines and satisfy dependencies between the tasks). Machine learning deals with the subset of algorithms that detect and make use of statistical regularities in a dataset to obtain specific results.
+</td>
+</tr>
+</table>
 </div>
 <div class="dlist">
 <dl>
@@ -1088,10 +1097,13 @@ While these libraries somewhat democratize the use of ML, unfortunately, this al
 <div class="content">
 <img src="images/01b_intro_ml/input_output5.png" alt="image" width="500">
 </div>
-<div class="title"><span class="small">Example &#8220;input &#8594; output&#8221; ML problems: recognizing objects in images; translating text from one language to another; determining a good next move given the current state of a Go board; identifying groups of users/customers based on some information about them like questionnaire answers (in marketing this is also called customer segmentation and, for example, used to target different groups of customers with specific advertisement campaigns, which can nowadays easily be done on social media). Despite their different nature, what all these tasks have in common is that a ML model operates on some input and should produce a corresponding useful output.</span></div>
+<div class="title"><span class="small">Example &#8220;input &#8594; output&#8221; ML problems: recognizing objects in images; translating text from one language to another; determining a good next move given the current state of a Go board; grouping similar users/customers together based on some information about them like questionnaire answers (in marketing this is also called customer segmentation and, for example, used to target different groups of customers with specific advertisement campaigns, which can nowadays easily be done on social media).</span></div>
 </div>
 <div class="paragraph">
-<p>In the above examples, while a human (expert) could typically easily produce the correct output given the input (e.g., even a small child can recognize the cat in the first image), humans have a hard time describing <em>how</em> they arrived at the correct output (e.g., how did you know that this is a cat (and not a small dog)? because of the pointy ears? the whiskers?). ML algorithms can instead learn such rules from the given samples.</p>
+<p>What <strong>kind of output</strong> an ML algorithm generates depends on the <a href="#_ml_solutions_overview">type of algorithm</a>.</p>
+</div>
+<div class="paragraph">
+<p>In the above examples, while a human (expert) could typically easily produce the correct output given the input (e.g., even a small child can recognize the cat in the first image), humans have a hard time describing <em>how</em> they arrived at the correct output (e.g., how did you know that this is a cat (and not a small dog)? because of the pointy ears? the whiskers?). ML algorithms can instead <strong>learn such rules from the given data samples</strong>.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1103,7 +1115,7 @@ While these libraries somewhat democratize the use of ML, unfortunately, this al
 <div class="content">
 <img src="images/01b_intro_ml/ml_algorithms_short_human4.png" alt="image" width="740">
 </div>
-<div class="title"><span class="small"><strong>Unsupervised Learning:</strong> Humans are very good at picking up on statistical regularities in the world without being explicitly instructed to do so. For example, have you ever noticed that we don&#8217;t &#8230;&#8203; make &#8230;&#8203; pauses &#8230;&#8203; between &#8230;&#8203; words when we speak? Yet kids still intuitively learn which syllables belong to the same words and where a word ends and the next one begins. This works because some syllables always occur in the specific combination making up a single word, while this word can then be followed by many different words, starting with many different syllables. This means, simply by hearing lots of spoken text, we pick up on the conditional probability distributions of syllables. <strong>Supervised Learning:</strong> This type of learning occurs when you have a teacher that tells you what the right answers are and corrects you if you get something wrong. For example, when teaching a kid the meaning of a word, you would explicitly tell them what this word means, and if they mislabel something, e.g., call a small dog a cat, you would correct them. <strong>Reinforcement Learning:</strong> This is another type of learning that happens naturally, where humans learn the consequences of their actions. For example, while a camp fire might be nice and warm and pleasant to be around, if you got to close to a big fire, you would quickly notice that this is way too hot and avoid doing this in the future. What is important to note here is that the same action (hanging out near a fire) can have vastly different consequences depending on the given situation (camp fire vs. house burning down).</span></div>
+<div class="title"><span class="small"><strong>Unsupervised Learning:</strong> Humans are very good at picking up on statistical regularities in the world without being explicitly instructed to do so. For example, have you ever noticed that we don&#8217;t &#8230;&#8203; make &#8230;&#8203; pauses &#8230;&#8203; between &#8230;&#8203; words when we speak? Yet kids still intuitively learn which syllables belong to the same words and where a word ends and the next one begins. This works because some syllables always occur in the specific combination making up a single word, while this word can then be followed by many different words, starting with many different syllables. This means, simply by hearing lots of spoken text, we pick up on the conditional probability distributions of syllables. <strong>Supervised Learning:</strong> This type of learning occurs when you have a teacher that tells you what the right answers are and corrects you if you get something wrong. For example, when teaching a kid the meaning of a word, you would explicitly tell them what this word means, and if they mislabel something, e.g., call a small dog a cat, you would correct them. <strong>Reinforcement Learning:</strong> This is another type of learning that happens naturally, where humans learn from the consequences of their actions. For example, through experimentation and practice, we can figure out the complex sequence of hand movements that is necessary to elicit beautiful sounds from a violin instead of producing painful screeches. While no single hand movement by itself is inherently good or bad, only the right combination will bring music to our ears.</span></div>
 </div>
 <div class="paragraph">
 <p>Analogously, machines can also learn by following these three strategies:</p>
@@ -1112,7 +1124,83 @@ While these libraries somewhat democratize the use of ML, unfortunately, this al
 <div class="content">
 <img src="images/01b_intro_ml/ml_algorithms_short4.png" alt="image" width="740">
 </div>
-<div class="title"><span class="small"><strong>Unsupervised Learning:</strong> Here the algorithms pick up on statistical regularities in the data, e.g., they can identify groups of similar item (like in the customer segmentation task) or find individual points that stand out (i.e., anomaly detection, for example, noticing when a machine shows some unusual behavior due to a broken part, or fraud detection like identifying suspicious credit card transactions). <strong>Supervised Learning:</strong> Here the algorithms learn from many input-output examples, e.g., images and what is shown on these images, or production conditions and whether or not the product that was produced under these conditions was faulty or okay. <strong>Reinforcement Learning:</strong> This type of learning is a bit more involved: Here the learning algorithm is also called an agent, which operates inside an environment (either, e.g., a robot moving around in the real world, or a virtual agent inside a simulation environment like a video game (which is usually much cheaper ;-)). The environment lets the agent know in which state or situation it currently is, then the agent can select how to react in this state, i.e., which (predefined) action to take, and then the environment determines the consequences of this action (e.g., kill a monster in a video game or fall off a cliff) and returns a reward depending on the outcome (e.g., extra points for defeating an enemy). Then the cycle repeats as the agent is in the next state. Based on the received reward, the agent learns over time which actions are beneficial in which situations and how to navigate the environment. The hard part here is that the reward signals often come much later after the action was executed, for example, in a video game, the agent might collect a key somewhere at the beginning of a level, but the door that can be opened with this key might only come many frames later, which means the reward will be delayed and the agent will have a hard time associating this reward with the appropriate action. Since humans have a lot of background knowledge, figuring out what works and what doesn&#8217;t in a game is much easier for us.</span></div>
+<div class="title"><span class="small"><strong>Unsupervised Learning:</strong> Here the algorithms pick up on statistical regularities in the data, e.g., they can identify groups of similar item (like in the customer segmentation task) or find individual points that stand out (i.e., anomaly detection, for example, noticing when a machine shows some unusual behavior due to a broken part, or fraud detection like identifying suspicious credit card transactions). <strong>Supervised Learning:</strong> Here the algorithms learn from many input-output examples (e.g., images and what is shown on these images, or production conditions and whether or not the product that was produced under these conditions was faulty or okay), so that in the future the model can produce the right output given some new input. <strong>Reinforcement Learning:</strong> This type of learning is a bit more involved: Here the learning algorithm is also called an agent, which operates inside an environment (either, e.g., a robot moving around in the real world, or a virtual agent inside a simulation environment like a video game (which is usually much cheaper ;-)). The environment lets the agent know in which state or situation it currently is, then the agent can select how to react in this state, i.e., which (predefined) action to take, and then the environment determines the consequences of this action (e.g., kill a monster in a video game or fall off a cliff) and returns a reward depending on the outcome (e.g., extra points for defeating an enemy). Then the cycle repeats as the agent is in the next state. Based on the received reward, the agent learns over time which actions are beneficial in which situations and how to navigate the environment. The hard part here is that the reward signals often come much later after the action was executed, for example, in a video game, the agent might collect a key somewhere at the beginning of a level, but the door that can be opened with this key might only come many frames later, which means the reward will be delayed and the agent will have a hard time associating this reward with the appropriate action. Since humans have a lot of background knowledge, figuring out what works and what doesn&#8217;t in a game is much easier for us.</span></div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Requirements for learning according to these strategies: </dt>
+</dl>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p><span class="underline">Unsupervised Learning:</span> a dataset with examples</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/01b_intro_ml/requirements_learning_unsupervised.png" alt="image" width="500">
+</div>
+</div>
+</li>
+<li>
+<p><span class="underline">Supervised Learning:</span> a dataset with <strong><em>labeled</em></strong> examples</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/01b_intro_ml/requirements_learning_supervised.png" alt="image" width="500">
+</div>
+</div>
+</li>
+<li>
+<p><span class="underline">Reinforcement Learning:</span> a (simulation) environment that generates data (i.e., reward + new state) in response to the agent&#8217;s actions</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/01b_intro_ml/requirements_learning_reinforce.png" alt="image" width="460">
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>With its reliance on a data-generating environment, reinforcement learning is a bit of a special case. Furthermore, as of now it&#8217;s still really hard to get reinforcement learning algorithms to work correctly, which means they&#8217;re currently mostly used in research and not so much for practical applications. For this reason we&#8217;ll focus on unsupervised and supervised learning for now.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Unsupervised learning has no ground truth</strong></p>
+</div>
+<div class="paragraph">
+<p>It is important to keep in mind that unsupervised learning problems have no right or wrong answers. Unsupervised learning algorithms simply recognize patterns in the data, which may or may not be meaningful for us humans.</p>
+</div>
+<div class="paragraph">
+<p>For example, there exist a bunch of different unsupervised learning algorithms that group data points into clusters, each with a slightly different strategy and opinion on what it means for two samples to be similar enough that they can be put into the same cluster.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/01b_intro_ml/clustering_ambiguous3.png" alt="image" width="640">
+</div>
+<div class="title"><span class="small">The first instinct of a human would probably be to group these images of fruit according to the objects displayed on them, however, there is nothing inherently wrong with clustering the images instead based on a different characteristic, such as their background color, whether or not the fruit has a leaf attached, in which direction the stem is pointing, etc.</span></div>
+</div>
+<div class="paragraph">
+<p>It is up to the data scientist to examine the results of an unsupervised learning algorithm and make sense of them. And if they don&#8217;t match your expectation, simply try a different algorithm.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>In supervised learning, your goal is to learn a model \(f(x)\) that describes the relationship between some input(s) \(x\) and output \(y\), which can then be used to <strong>make predictions for new data points</strong>, i.e., compute \(f(x') = y\) for some new \(x'\).</p>
+</div>
+<div class="paragraph">
+<p>The available supervised learning algorithms differ in the <strong>type of \(x \to y\) relationship</strong> they can describe (e.g., linear or non-linear) and what kind of <strong>objective</strong> (also called loss function; an error computed on the training data, quantifying the mismatch between true and predicted labels) they minimize. The task of a data scientist is to select the right type of model that can optimally fit the given data. The rest is then taken care of by an <strong>optimization method, which finds the parameters of the model that minimize the model&#8217;s objective</strong> (i.e., such that the model&#8217;s prediction error on the given data is as small as possible).</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Video Recommendation: <strong>If you&#8217;re not familiar with linear regression</strong>, the most basic supervised learning algorithm, please watch Google&#8217;s Cassie Kozyrkov explanation on how linear regression works: [<a href="https://youtu.be/j8VjRnaHRBM" target="\_blank">Part 1</a>] [<a href="https://youtu.be/VqhafjGTDI8" target="\_blank">Part 2</a>] [<a href="https://youtu.be/sxZDZVN0JAg" target="\_blank">Part 3</a>]
+</td>
+</tr>
+</table>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -1161,8 +1249,60 @@ In most of the book, the terms &#8220;ML algorithm&#8221; and &#8220;ML model&#8
 </div>
 <div class="sect2">
 <h3 id="_when_should_you_use_ml">When should you use ML?</h3>
+<div class="sidebarblock">
+<div class="content">
 <div class="paragraph">
-<p>While traditional software solutions are used to automate tasks that can be formulated as a fixed, predefined sequence of actions, executed according to some hard-coded rules (e.g., &#8220;a gate should open <em>if</em> an object passes through a photoelectric barrier and 20 seconds later the gate should close again&#8221;), machine learning can be used to <strong>automate &#8220;input &#8594; output&#8221; tasks</strong> for which it would otherwise be difficult to come up with such rules. For example, the quality control in a cookie factory is such an &#8220;input (cookie) &#8594; output (ok/defective)&#8221; task: While some broken cookies could be sorted out automatically by checking that each cookie weights around 15g, it would be difficult to formulate rules that reliably catch all possible defects. So either a human could watch the production line to recognize, e.g., over-baked cookies, or one could take pictures of the cookies and using them as input for a machine learning model to recognize the defective cookies:</p>
+<p>Machine learning can create value in two ways:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Insights</strong>, generated by a one-off analysis of historic data:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Exploratory analysis</strong> of a dataset using unsupervised learning algorithms (with results for human post-processing)<br>
+<em>Identify different groups of customers (&#8658; human: create targeted marketing campaign)</em></p>
+</li>
+<li>
+<p>Interpret a learned model and explain its predictions to <strong>understand root causes</strong><br>
+<em>Given a model that predicts the quality of a product from the process conditions, identify which conditions result in lower quality products</em></p>
+</li>
+<li>
+<p>Use a model in a <strong>&#8220;what-if&#8221; forecast</strong> to explore how a system might react to different conditions (use with
+<a href="#_pitfall_3_model_abuses_spurious_correlations">caution</a>!)<br>
+<em>How quickly would this machine component deteriorate under these process conditions?</em></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Software</strong> to continuously make predictions for new data points:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>A supervised learning model to <strong>automate an &#8216;input &#8594; output&#8217; task</strong> otherwise requiring a human (expert)<br>
+<em>Automatically recognize &amp; sort out products with defects/scratches</em></p>
+</li>
+<li>
+<p>Use a learned model inside an optimization loop to systematically evaluate different inputs with the model to <strong>find optimal settings</strong><br>
+<em>Given a model that predicts the quality of a product from the process conditions, automatically determine the best production settings for a new type of raw material</em></p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>We&#8217;ll start with the software part.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>While <strong>traditional software</strong> solutions are used to automate tasks that can be formulated as a fixed, predefined sequence of actions, executed according to some <strong>hard-coded rules</strong> (e.g., &#8220;a gate should open <em>if</em> an object passes through a photoelectric barrier and 20 seconds later the gate should close again&#8221;), machine learning can be used to <strong>automate &#8220;input &#8594; output&#8221; tasks</strong> for which it would otherwise be <strong>difficult to come up with such rules</strong>.</p>
+</div>
+<div class="paragraph">
+<p>For example, the quality control in a cookie factory is such an &#8220;input (cookie) &#8594; output (ok/defective)&#8221; task: While some broken cookies could be sorted out automatically by checking that each cookie weights around 15g, it would be difficult to formulate rules that reliably catch all possible defects. So either a human could watch the production line to additionally recognize, e.g., over-baked cookies, or one could take pictures of the cookies and use them as input for a machine learning model to recognize the defective cookies:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -1170,7 +1310,7 @@ In most of the book, the terms &#8220;ML algorithm&#8221; and &#8220;ML model&#8
 </div>
 </div>
 <div class="paragraph">
-<p>To solve this problem with ML, first a large dataset needs to be compiled with photos of many good, but also all kinds of defective cookies, including the corresponding annotations, i.e., a label for each picture whether it displays a good or defective cookie. A ML algorithm can then learn to distinguish between good and defective cookies from these examples. What is important to note here is that the dataset only needs to contain the information <em>that</em> a cookie is defective, but it is not necessary to say <em>why</em> the respective cookie is defective; these rules will be learned automatically from the data.</p>
+<p>To solve this problem with ML, first a large dataset needs to be compiled with photos of many good, but also all kinds of defective cookies, including the corresponding annotations, i.e., a label for each picture whether it displays a good or defective cookie (not necessarily specifying the kind of defect). A ML algorithm can then learn to distinguish between good and defective cookies from these examples.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -1184,7 +1324,7 @@ In most of the book, the terms &#8220;ML algorithm&#8221; and &#8220;ML model&#8
 <div class="ulist">
 <ul>
 <li>
-<p>a manually defined set of rules or mechanistic model can solve the problem (e.g., in the example above, if the only quality problem in the cookie factory that ever occurred were broken cookies, then the rule &#8220;cookie weight needs to be between 14-16g&#8221; would suffice to detect defective cookies).</p>
+<p>a manually defined set of rules or mechanistic model can solve the problem (e.g., in the example above, if the only quality problem in the cookie factory that ever occurred were broken cookies, then the rule &#8220;cookie weight needs to be between 14-16g&#8221; would suffice to detect defective cookies and easier to implement as there would be no need to collect a large dataset).</p>
 </li>
 </ul>
 </div>
@@ -1252,39 +1392,6 @@ In most of the book, the terms &#8220;ML algorithm&#8221; and &#8220;ML model&#8
 </div>
 </div>
 </div>
-<div class="sidebarblock">
-<div class="content">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Creating value: depth of analytics</dt>
-<dd>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Exploratory analysis</strong> of historic data (with results for human post-processing)<br>
-<em>Identify different groups of customers (&#8658; human: create targeted marketing campaign)</em></p>
-</li>
-<li>
-<p>Develop a model to <strong>automate an &#8216;input &#8594; output&#8217; task</strong><br>
-<em>Automatically recognize &amp; sort out products with scratches</em><br>
-Use a model in a &#8220;what-if&#8221; forecast to <strong>facilitate planning</strong><br>
-<em>How quickly would this machine component deteriorate under these process conditions?</em></p>
-</li>
-<li>
-<p>Explain predictions &amp; interpret the model to <strong>understand root causes</strong><br>
-<em>Identify conditions that lead to lower quality products</em></p>
-</li>
-<li>
-<p>Systematically evaluate different inputs with the model to <strong>find optimal settings</strong><br>
-<em>Determine the best production settings for a new type of raw material</em></p>
-</li>
-</ol>
-</div>
-</dd>
-</dl>
-</div>
-</div>
-</div>
 </div>
 <div class="sect2">
 <h3 id="_solving_problems_with_ml_workflow">Solving problems with ML: Workflow</h3>
@@ -1329,13 +1436,18 @@ Use a model in a &#8220;what-if&#8221; forecast to <strong>facilitate planning</
 </dd>
 </dl>
 </div>
+<div class="paragraph">
+<p><span class="underline">Specifically:</span><br>
+&#8658; <strong>Ask an ML expert</strong> whether a similar problem has already been solved with an existing algorithm<br>
+&#8658; <strong>Ask a domain expert</strong> whether she thinks all the relevant input data is available to compute the desired output (this is usually easy to determine for unstructured data such as images (if a human can see the thing in the image, ML should too), but harder for structured data, such as a spreadsheets with hundreds of columns of sensor measurements)</p>
+</div>
 </div>
 </div>
 <div class="paragraph">
 <p>Once a suitable &#8220;input &#8594; output&#8221; problem as been identified, <strong>historic data needs to be gathered and the right ML algorithm needs to be selected and applied</strong> to obtain a working solution. This is what the next chapters are all about.</p>
 </div>
 <div class="paragraph">
-<p>When the prototypical solution has been implemented and meets the required performance level, this solution then has to be deployed, i.e., <strong>integrated into the general workflow and infrastructure</strong> so that it can actually be used to improve the respective process in practice. There are generally two strategies for how to do this:</p>
+<p>When the prototypical solution has been implemented and meets the required performance level, this solution then has to be deployed, i.e., <strong>integrated into the general workflow and infrastructure</strong> so that it can actually be used to improve the respective process in practice (as a piece of software that continuously makes predictions for new data points). There are generally two strategies for how to do this:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -1662,6 +1774,70 @@ If you can, observe how the data is being collected. As in: actually physically 
 </div>
 <div class="title"><span class="small">If your goal is to simply understand your dataset a bit better and get an overview of it, then a dimensionality reduction algorithm from the area of unsupervised learning can be used to create a visualization of the dataset. If you want to discover patterns in the data, then you would also choose an algorithm from the field of unsupervised learning, but here it depends on which kinds of patterns you want to find: anomaly detection algorithms can be used to identify individual data points that deviate a lot from the rest (e.g., a malfunctioning machine or a fraudulent credit card transaction), while clustering algorithms can be used to identify groups of similar data points (e.g., for customer segmentation). If your goal is to make specific predictions, i.e., given an input get a corresponding output (e.g., predict whether a product will be faulty if it is produced under certain conditions), then you need to use an algorithm from the area of supervised learning. Here the main distinction is made between regression and classification models: in regression tasks, the target variable that should be predicted is continuous (e.g., number of users, price, etc.), while in classification tasks the target variable is discrete, i.e., can only take on one distinct value and there is no continuum between the different values (e.g., an animal in a picture can either be a cat or a dog, but not something in between). While unsupervised and supervised learning cover most general use cases, there are also other algorithms for more specific applications, e.g., recommender systems.</span></div>
 </div>
+<div class="paragraph">
+<p>Some example input &#8594; output problems and what type of ML algorithm can be used to solve them:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Input \(X\)</th>
+<th class="tableblock halign-left valign-top">Output \(Y\)</th>
+<th class="tableblock halign-left valign-top">ML Algorithm Category</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">questionnaire answers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">customer segmentation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">clustering</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sensor measurements</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">everything normal?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">anomaly detection</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">past usage of a machine</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">remaining lifetime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">regression</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">email</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">spam (yes/no)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">classification (binary)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">image</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">which animal?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">classification (multi-class)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user’s purchases</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">products to show</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">recommender systems</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">search query</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">relevant documents</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">information retrieval</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">audio</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">speech recognition</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text in English</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text in French</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">machine translation</p></td>
+</tr>
+</tbody>
+</table>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Unsupervised &amp; Supervised Learning</dt>
@@ -1849,69 +2025,52 @@ If you can, observe how the data is being collected. As in: actually physically 
 </div>
 </div>
 <div class="paragraph">
-<p>Some other examples of input &#8594; output problems and what type of ML algorithm can be used to solve them:</p>
+<p>To summarize:</p>
 </div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Existing ML solutions &amp; corresponding output (for 1 data point): </dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p><span class="underline">Dimensionality Reduction:</span> (usually) <strong>2D coordinates</strong> (to create a visualization of the dataset)</p>
+</li>
+<li>
+<p><span class="underline">Outlier/Anomaly Detection:</span> <strong>anomaly score</strong> (usually a value between 0 and 1 indicating how likely it is that this point is an outlier)</p>
+</li>
+<li>
+<p><span class="underline">Clustering:</span> <strong>cluster index</strong> (a number between 0 and <em>k-1</em> indicating to which of the <em>k</em> clusters a data point belongs (or -1 for outliers))</p>
+</li>
+<li>
+<p><span class="underline">Regression:</span> a <strong>continuous value</strong> (any kind of numeric quantity that should be predicted)</p>
+</li>
+<li>
+<p><span class="underline">Classification:</span> a <strong>discrete value</strong> (one of several mutually exclusive categories)</p>
+</li>
+<li>
+<p><span class="underline">Recommender Systems &amp; Information Retrieval:</span> <strong>ranking of a set of items</strong> (recommender systems, for example, rank the products that a specific user might be most interested in; information retrieval systems rank other items based on their similarity to a given query item)</p>
+</li>
+<li>
+<p>other <span class="underline">Deep Learning</span> solutions: <strong>unstructured output like a text or image</strong> (e.g., speech recognition, machine translation, or neural style transfer)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock important">
+<table>
 <tr>
-<th class="tableblock halign-left valign-top">Input \(X\)</th>
-<th class="tableblock halign-left valign-top">Output \(Y\)</th>
-<th class="tableblock halign-left valign-top">ML Algorithm Category</th>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+ML algorithms are categorized by the output they generate for each input. If you want to solve an &#8216;input &#8594; output&#8217; problem that has a different output than the ones listed above, you&#8217;ll likely have to settle in for a multi-year research project (if the problem can be solved with ML at all)!
+</td>
 </tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">sensor measurements</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">everything normal?</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">anomaly detection</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">questionnaire answers</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">customer segmentation</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">clustering</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">past usage of a machine</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">remaining lifetime</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">regression</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">email</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">spam (yes/no)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">classification (binary)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">image</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">which animal?</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">classification (multi-class)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user’s purchases</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">products to show</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">recommender systems</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">search query</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">relevant documents</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">information retrieval</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">audio</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">speech recognition</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">text in English</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">text in French</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">machine translation</p></td>
-</tr>
-</tbody>
 </table>
+</div>
 <div class="sidebarblock">
 <div class="content">
 <div class="dlist">
@@ -1923,7 +2082,7 @@ If you can, observe how the data is being collected. As in: actually physically 
 </dl>
 </div>
 <div class="paragraph">
-<div class="title"><span class="small">This might look like an input-output problem, but it would be very difficult and inefficient to solve it directly. Instead, the problem should be broken down into smaller subtasks:</span></div>
+<div class="title"><span class="small">This might look like an input-output problem, but it would be very difficult and inefficient to solve it directly. Instead, we break the problem down into smaller subtasks (which can be solved with existing algorithms):</span></div>
 <p></p>
 </div>
 <div class="olist arabic">
@@ -1983,7 +2142,7 @@ text &#8594; audio</p>
 </dl>
 </div>
 <div class="paragraph">
-<p>Don’t stop there! (Depth of analytics revisited):</p>
+<p>Don’t stop there!</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -2013,7 +2172,7 @@ i.e., does the model generate <em>reliable predictions</em> for <em>new data poi
 </div>
 </li>
 <li>
-<p>compare your model to a stupid baseline (predict mean / most frequent class)</p>
+<p>compare your model to a stupid baseline (predict mean (&#8594; regression) / most frequent class (&#8594; classification))</p>
 </li>
 </ul>
 </div>
@@ -2209,6 +2368,30 @@ All models are wrong, but some are useful.
 </div>
 <div class="paragraph">
 <p>A machine learning (ML) model tries to infer the relationship between some inputs and outputs from the given exemplary data points. What kind of relation will be found is largely determined by the chosen model type and its internal optimization algorithm, however, there is a lot that can (and should) be done to make sure what the algorithm comes up with is not blatantly wrong.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">What do we want?</dt>
+<dd>
+<p>A model that &#8230;&#8203;</p>
+<div class="ulist">
+<ul>
+<li>
+<p>&#8230;&#8203; makes accurate predictions</p>
+</li>
+<li>
+<p>&#8230;&#8203; for new data points</p>
+</li>
+<li>
+<p>&#8230;&#8203; for the right reasons</p>
+</li>
+<li>
+<p>&#8230;&#8203; even when the world keeps on changing.</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
 </div>
 <div class="paragraph">
 <p>In the following, we&#8217;ll discuss several common pitfalls and how to avoid them.</p>

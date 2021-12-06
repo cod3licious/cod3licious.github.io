@@ -724,34 +724,6 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 <div class="title"><span class="small">In many use cases, it is not enough to simply predict the target for a new data point (e.g., predict whether a product produced under certain conditions will be of high quality or not). Instead, it is often necessary to additionally be able to explain <em>why</em> this prediction was made (e.g., which input feature values were the deciding factors&#8201;&#8212;&#8201;both to better understand possible root causes of a problem, but also to be assured that the model is basing its predictions on reasonable assumptions). Furthermore, a learned model can also be used within an outer optimization loop, i.e., in the simplest case one could systematically check what product quality the model predicts for different process conditions and then select the settings with the highest predicted quality to produce new products (but keep in mind that ML models are only built to interpolate, not extrapolate, i.e., make sure the settings that are tested are withing the training domain).</span></div>
 </div>
-<div class="paragraph">
-<p>Since in supervised learning problems we know the ground truth, we can now objectively evaluate different models and benchmark them against each other.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<p><strong>Is this a good model for the task?</strong><br>
-i.e., does the model generate <em>reliable predictions</em> for <em>new data points</em>?</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>split the data into training and test sets to be able to get a reliable estimate of how your model will later perform when applied to new data points that it wasn&#8217;t trained on</p>
-</li>
-<li>
-<p>quantify the quality of the model’s predictions (on the test set) with a suitable evaluation metric (depending on the problem type)<br></p>
-<div class="paragraph">
-<p>&#8658; are some mistakes worse than others? (e.g., consider false positives vs. false negatives in medical tests)<br>
-&#8658; always choose <em>a single metric/KPI</em> to optimize! (maybe: additional constraints like runtime)</p>
-</div>
-</li>
-<li>
-<p>compare your model to a stupid baseline (predict mean (&#8594; regression) / most frequent class (&#8594; classification))</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
 <div class="ulist">
 <ul>
 <li>

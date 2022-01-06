@@ -714,13 +714,13 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="sect2">
 <h3 id="_how_do_machines_learn">How do machines &#8220;learn&#8221;?</h3>
 <div class="paragraph">
-<p>The set of ML algorithms can be further subdivided based on how they work, i.e., how they learn from the data. This is inspired by how humans learn:</p>
+<p>The set of ML algorithms can be subdivided based on how they learn from the data. This is inspired by how humans learn:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/01b_intro_ml/ml_algorithms_short_human4.png" alt="image" width="740">
 </div>
-<div class="title"><span class="small"><strong>Unsupervised Learning:</strong> Humans are very good at picking up on statistical regularities in the world without being explicitly instructed to do so. For example, have you ever noticed that we don&#8217;t &#8230;&#8203; make &#8230;&#8203; pauses &#8230;&#8203; between &#8230;&#8203; words when we speak? Yet kids still intuitively learn which syllables belong to the same words and where a word ends and the next one begins. This works because some syllables always occur in the specific combination making up a single word, while this word can then be followed by many different words, starting with many different syllables. This means, simply by hearing lots of spoken text, we pick up on the conditional probability distributions of syllables. <strong>Supervised Learning:</strong> This type of learning occurs when you have a teacher that tells you what the right answers are and corrects you if you get something wrong. For example, when teaching a kid the meaning of a word, you would explicitly tell them what this word means, and if they mislabel something, e.g., call a small dog a cat, you would correct them. <strong>Reinforcement Learning:</strong> This is another type of learning that happens naturally when humans learn from the consequences of their actions. For example, through experimentation and practice, we can figure out the complex sequence of hand movements that is necessary to elicit beautiful sounds from a violin instead of producing painful screeches. While no single hand movement by itself is inherently good or bad, only the right combination will bring music to our ears.</span></div>
+<div class="title"><span class="small"><strong>Unsupervised Learning:</strong> Humans are very good at picking up on statistical regularities in the world without being explicitly instructed to do so. For example, have you ever noticed that we don&#8217;t &#8230;&#8203; make &#8230;&#8203; pauses &#8230;&#8203; between &#8230;&#8203; words when we speak? Yet kids still intuitively learn which syllables make up a word and where this word ends and the next one begins. This is possible, because the syllables in a single word always occur in this specific combination, while this word can then be followed by many different words, starting with many different syllables. This means, simply by hearing lots of spoken text, we pick up on the conditional probability distributions of syllables. <strong>Supervised Learning:</strong> This type of learning requires a teacher that tells you what the right answers are and corrects you if you get something wrong. For example, when teaching a kid the meaning of a word, you explicitly tell them what this word means, and if they mislabel something, e.g., call a small dog a cat, you correct them. <strong>Reinforcement Learning:</strong> This kind of learning-by-doing again happens naturally when humans learn from the consequences of their actions. For example, through experimentation and practice, we can figure out a complex sequence of hand movements to elicit beautiful sounds from a violin instead of producing painful screeches. While no single hand movement by itself is inherently good or bad, only the right combination will bring music to our ears.</span></div>
 </div>
 <div class="paragraph">
 <p>Analogously, machines can also learn by following these three strategies:</p>
@@ -729,7 +729,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="content">
 <img src="../images/01b_intro_ml/ml_algorithms_short4.png" alt="image" width="740">
 </div>
-<div class="title"><span class="small"><strong>Unsupervised Learning:</strong> Here the algorithms pick up on statistical regularities in the data, e.g., they can identify groups of similar items (like in the customer segmentation task) or find individual points that stand out (i.e., anomaly detection, for example, noticing when a machine shows some unusual behavior due to a broken part, or fraud detection like identifying suspicious credit card transactions). <strong>Supervised Learning:</strong> Here the algorithms learn from many input-output examples (e.g., images and what is shown on these images, or production conditions and whether or not the product that was produced under these conditions was faulty or okay), so that in the future the model can produce the right output given some new input. <strong>Reinforcement Learning:</strong> This type of learning is a bit more involved: Here the learning algorithm is also called an agent, which operates inside an environment (either, e.g., a robot moving around in the real world, or a virtual agent inside a simulation environment like a video game (which is usually much cheaper ;-)). The environment lets the agent know in which state or situation it currently is, then the agent can select how to react in this state, i.e., which (predefined) action to take, and then the environment determines the consequences of this action (e.g., kill a monster in a video game or fall off a cliff) and returns a reward depending on the outcome (e.g., extra points for defeating an enemy). Then the cycle repeats as the agent is in the next state. Based on the received reward, the agent learns over time which actions are beneficial in which situations and how to navigate the environment. The hard part here is that the reward signals often come much later after the action was executed, for example, in a video game, the agent might collect a key somewhere at the beginning of a level, but the door that can be opened with this key might only come many frames later, which means the reward will be delayed and the agent will have a hard time associating this reward with the appropriate action. Since humans have a lot of background knowledge, figuring out what works and what doesn&#8217;t in a game is much easier for us.</span></div>
+<div class="title"><span class="small"><strong>Unsupervised Learning:</strong> These algorithms pick up on statistical regularities in the data, for example, they can find groups of similar items (&#8594; customer segmentation) or identify individual points that stand out (i.e., anomaly detection), e.g., to notice unusual behavior of a machine due to a broken part or to detect fraud from suspicious credit card transactions. <strong>Supervised Learning:</strong> These algorithms learn from many input-output examples, e.g., images and what is shown on these images or production conditions and whether the product that was produced under these conditions is faulty or okay. The learned model can then be used to predict the output for some new input. <strong>Reinforcement Learning:</strong> This type of learning is a bit more involved: Here the learning algorithm is also called an agent, which operates within an environment (e.g., a robot moving around in the real world or a virtual agent inside a simulation environment like a video game (which is usually much cheaper ;-)). The environment lets the agent know in which state or situation it currently is, then the agent can select how to react in this state, i.e., which (predefined) action to take, and then the environment determines the consequences of this action (e.g., kill a monster in a video game or fall off a cliff) and returns a reward depending on the outcome (e.g., extra points for collecting coins). Then the cycle repeats as the agent is in the next state. Based on the received reward, the agent learns over time which actions are beneficial in which situations and how to navigate the environment. The hard part here is that the reward signals often come much later after the action was executed, for example, in a video game, an agent collects a key at the beginning of a level, but the door that can be opened with this key comes many frames later, which means the reward will be delayed and the agent has a hard time associating this reward with the appropriate action. Since humans have a lot of background knowledge, figuring out what works and what doesn&#8217;t in a game is much easier for us.</span></div>
 </div>
 <div class="dlist">
 <dl>
@@ -782,7 +782,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="content">
 <img src="../images/01b_intro_ml/clustering_ambiguous3.png" alt="image" width="640">
 </div>
-<div class="title"><span class="small">The first instinct of a human would probably be to group these images of fruit according to the objects displayed on them, however, there is nothing inherently wrong with clustering the images instead based on a different characteristic, such as their background color, whether or not the fruit has a leaf attached, in which direction the stem is pointing, etc.</span></div>
+<div class="title"><span class="small">The first instinct of a human is to group these images according to the fruit displayed on them, however, there is nothing inherently wrong with clustering the images based on a different characteristic, such as their background color, whether or not the fruit has a leaf attached, in which direction the stem is pointing, etc.</span></div>
 </div>
 <div class="paragraph">
 <p>It is up to the data scientist to examine the results of an unsupervised learning algorithm and make sense of them. And if they don&#8217;t match your expectation, simply try a different algorithm.</p>
@@ -790,10 +790,10 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 </div>
 <div class="paragraph">
-<p>In supervised learning, your goal is to learn a model \(f(x)\) that describes the relationship between some input(s) \(x\) and output \(y\), which can then be used to <strong>make predictions for new data points</strong>, i.e., compute \(f(x') = y\) for some new \(x'\).</p>
+<p>In supervised learning, your goal is to learn a model (= a mathematical function) \(f(x)\) that describes the relationship between some input(s) \(x\) and output \(y\). This model can then be used to <strong>make predictions for new data points</strong>, i.e., compute \(f(x') = y\) for some new \(x'\).</p>
 </div>
 <div class="paragraph">
-<p>The available supervised learning algorithms differ in the <strong>type of \(x \to y\) relationship</strong> they can describe (e.g., linear or non-linear) and what kind of <strong>objective</strong> (also called loss function; an error computed on the training data, quantifying the mismatch between true and predicted labels) they minimize. The task of a data scientist is to select the right type of model that can optimally fit the given data. The rest is then taken care of by an <strong>optimization method, which finds the parameters of the model that minimize the model&#8217;s objective</strong> (i.e., such that the model&#8217;s prediction error on the given data is as small as possible).</p>
+<p>The available supervised learning algorithms differ in the <strong>type of \(x \to y\) relationship</strong> they can describe (e.g., linear or non-linear) and what kind of <strong>objective</strong> they minimize (also called loss function; an error computed on the training data, quantifying the mismatch between true and predicted labels). The task of a data scientist is to select a type of model that can optimally fit the given data. The rest is then taken care of by an <strong>optimization method, which finds the parameters of the model that minimize the model&#8217;s objective</strong>, i.e., such that the model&#8217;s prediction error on the given data is as small as possible.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -814,7 +814,7 @@ Video Recommendation: <strong>If you&#8217;re not familiar with linear regressio
 <p></p>
 </div>
 <div class="paragraph">
-<p><strong>Goal:</strong> Describe the relationship between input(s) \(x\) and output \(y\) (with a model)</p>
+<p><strong>Goal:</strong> Describe the relationship between input(s) \(x\) and output \(y\) with a model, i.e., a mathematical function \(f(x)\)</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -824,7 +824,7 @@ Video Recommendation: <strong>If you&#8217;re not familiar with linear regressio
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><strong>Select a model class:</strong> Assumption: relationship is linear<br>
+<p><strong>Select a model class (= structure of the function):</strong> Assumption: relationship is linear<br>
 &#8594; linear regression model: \(y = f(x) = b + w\cdot x\)</p>
 </li>
 <li>
@@ -846,7 +846,7 @@ Video Recommendation: <strong>If you&#8217;re not familiar with linear regressio
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-In most of the book, the terms &#8220;ML algorithm&#8221; and &#8220;ML model&#8221; will be used interchangeably. To be more precise, however, in general the algorithm processes the data and learns some parameter values and these parameter settings then define the final model. (For example, a linear regression <em>model</em> is defined by its coefficients (i.e., the model&#8217;s parameters), which are found by doing some stuff with the data (i.e., executing the steps outlined in the linear regression <em>algorithm</em>, which includes solving an optimization problem).)
+In most of the book, the terms &#8220;ML algorithm&#8221; and &#8220;ML model&#8221; will be used interchangeably. To be more precise, however, in general the algorithm processes the data and learns some parameter values. These parameter settings define the final model. For example, a linear regression <em>model</em> is defined by its coefficients (i.e., the model&#8217;s parameters), which are found by executing the steps outlined in the linear regression <em>algorithm</em>, which includes solving an optimization problem.
 </td>
 </tr>
 </table>

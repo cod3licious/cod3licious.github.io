@@ -713,7 +713,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <h2 id="_data_preprocessing">Data &amp; Preprocessing</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>As we&#8217;ve seen, ML algorithms solve input-output tasks and to solve a ML problem, you first need to collect data. Preprocessing is the act of transforming raw data in such a way that ML algorithms can be applied:</p>
+<p>As we&#8217;ve seen, ML algorithms solve input-output tasks. And to solve an ML problem, you first need to collect data. Preprocessing is the act of transforming raw data in such a way that ML algorithms can be applied:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -721,7 +721,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 </div>
 <div class="paragraph">
-<p>For example, a production process, where you want to predict whether a produced part will be scrap given certain production conditions, would be a typical supervised learning problem. Here, the collected data for each produced part should include the process conditions under which it was produced, as well as the outcome (i.e., product was okay or scrap):</p>
+<p>For example, a production process, where you want to predict whether a produced part will be scrap given certain production conditions, would be a typical supervised learning problem. Here, the collected data for each produced part includes the process conditions under which it was produced, as well as the outcome, i.e., whether the product was okay or scrap:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -733,7 +733,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="content">
 <img src="../images/02_data/toy_data6.png" alt="image" width="740">
 </div>
-<div class="title"><span class="small">The columns of the table contain the different measurements / variables that were collected for each sample. Here we distinguish between <em>features</em> (in this case the production conditions) and <em>labels</em> (whether the product produced under these conditions was okay or scrap). Features, also denoted as a matrix \(X\), are typically those measurements that we get basically for free, as they are often collected during the process for other purposes anyways (e.g., when the operator of the machine sets the temperature for the production to a certain value, this is recorded as the signal is passed along to the heating unit). The corresponding labels, denoted as a vector \(\mathbf{y}\), are often more expensive to collect. (For example, in the production process, to collect a data point with the label <em>"scrap"</em>, we have to (intentionally) produce a broken product that we can&#8217;t sell afterwards, costing us valuable resources. Another example would be when Google paid a team of specialist doctors to discuss and re-label some of the diabetic retinopathy images about which there existed conflicting opinions.) In the supervised learning setup, the features are used as the input to the model, while the labels constitute the target variable, i.e., the predicted output. Generally, features should be independent variables (e.g., settings that the operator can choose as he wishes), while the target value should be dependent on these inputs (otherwise we can&#8217;t predict it).</span></div>
+<div class="title"><span class="small">The columns of the table contain the different measurements / variables that were collected for each sample. Here we distinguish between <em>features</em> (in this case the production conditions) and <em>labels</em> (whether the product produced under these conditions was okay or scrap). Features, also denoted as a matrix \(X\), are typically those measurements that we get basically for free, as they are often collected during the process for other purposes anyways. For example, when the operator of the machine sets the temperature for the production to a certain value, this is recorded as the signal is passed along to the heating unit. The corresponding labels, denoted as a vector \(\mathbf{y}\), are often more expensive to collect. For example, in the production process, to collect a data point with the label <em>"scrap"</em>, we have to (intentionally) produce a broken product, costing us valuable resources. Another example would be when Google paid a team of specialist doctors to discuss and re-label some of the diabetic retinopathy images about which there existed conflicting opinions. In the supervised learning setup, the features are used as the input to the model, while the labels constitute the target variable, i.e., the predicted output. Generally, features should be independent variables (e.g., settings that the operator can choose as he wishes), while the target value should be dependent on these inputs&#8201;&#8212;&#8201;otherwise we can&#8217;t predict it.</span></div>
 </div>
 <div class="dlist">
 <dl>

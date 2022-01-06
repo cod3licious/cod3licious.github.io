@@ -720,11 +720,11 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </li>
 <li>
 <p>Interpretation eines gelernten Modells und seiner Vorhersagen, um <strong>die zugrundeliegenden Ursache-Wirkung Beziehungen in einem Prozess besser zu verstehen</strong><br>
-<em>Modell sagt die Qualität eines Produkts aus den Prozessbedingungen vorher &#8594; welche Bedingungen führen zu Produkten von geringerer Qualität?</em></p>
+<em>Das Modell sagt die Qualität eines Produkts aus den Produktionsbedingungen vorher &#8594; Welche Faktoren führen zu Produkten von geringerer Qualität?</em></p>
 </li>
 <li>
 <p>Verwenden eines Modells für Was-wäre-wenn-Vorhersagen, um zu untersuchen, wie ein System auf unterschiedliche Bedingungen reagieren könnte (aber <a href="_fehler_3_modell_missbraucht_scheinkorrelationen.html">Vorsicht</a>!)<br>
-<em>Wie schnell würde diese Maschinenkomponente unter solchen Prozessbedingungen verschleißen?</em></p>
+<em>Wie schnell würde eine bestimmte Maschinenkomponente unter solchen Prozessbedingungen verschleißen?</em></p>
 </li>
 </ul>
 </div>
@@ -734,7 +734,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Automatisierung einer &#8216;Input &#8594; Output&#8217; Aufgabe</strong>, welche sonst einen (speziell geschulten) Menschen erfordern würde, mithilfe eines Supervised Learning Modells<br>
+<p><strong>Automatisierung einer &#8216;Input &#8594; Output&#8217; Aufgabe</strong> mithilfe eines Supervised Learning Modells, welche sonst einen (speziell geschulten) Menschen erfordern würde<br>
 <em>Produkte mit Mängeln/Kratzern automatisch erkennen &amp; aussortieren</em></p>
 </li>
 <li>
@@ -746,13 +746,13 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p>Wir beginnen mit dem Softwareteil.</p>
-</div>
 </div>
 </div>
 <div class="paragraph">
-<p>Während man <strong>herkömmliche Software</strong>-Lösungen dazu verwenden kann um Aufgaben zu automatisieren, bei denen eine feste, vordefinierte Abfolge von Aktionen nach einigen <strong>hart codierten Regeln</strong> ausgeführt wird (z.B. &#8220;Eine Tür soll sich öffnen, <em>wenn</em> ein Objekt eine Lichtschranke durchquert und sich 20 Sekunden später wieder schließen&#8221;), kann man mit maschinellem Lernen <strong>&#8220;Input &#8594; Output&#8221;-Aufgaben automatisieren</strong>, für die es sonst <strong>schwierig wäre, solche Regeln aufzustellen</strong>.</p>
+<p><span class="underline">ML Softwarelösungen</span></p>
+</div>
+<div class="paragraph">
+<p>Während man <strong>herkömmliche Software</strong>-Lösungen dazu verwenden kann um Aufgaben zu automatisieren, bei denen eine vordefinierte Abfolge von Aktionen nach einigen <strong>festgeschriebenen Regeln</strong> ausgeführt wird (z.B. &#8220;Eine Tür soll sich öffnen, <em>wenn</em> ein Objekt eine Lichtschranke durchquert und sich 20 Sekunden später wieder schließen&#8221;), kann man mit maschinellem Lernen <strong>&#8220;Input &#8594; Output&#8221;-Aufgaben automatisieren</strong>, für die es sonst <strong>schwierig wäre, solche Regeln aufzustellen</strong>.</p>
 </div>
 <div class="paragraph">
 <p>Die Qualitätskontrolle in einer Keks-Fabrik wäre ein Beispiel für eine solche &#8220;Input (Keks) &#8594; Output (ok/fehlerhaft)&#8221;-Aufgabe: Während z.B. zerbrochene Kekse automatisch aussortiert werden könnten, indem man überprüft, dass jeder Keks etwa 15g wiegt, ist es schwierig, Regeln zu formulieren, die alle möglichen Produktionsfehler zuverlässig abfangen. Also müsste entweder ein Mensch die Produktionslinie beobachten, um z.B. zusätzlich verbrannte Kekse zu erkennen, oder man könnte Bilder von den Keksen machen und sie als Input für ein Machine-Learning-Modell verwenden, um die fehlerhaften Kekse zu erkennen:</p>
@@ -777,7 +777,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="ulist">
 <ul>
 <li>
-<p>ein manuell definiertes Regelwerk oder ein mechanistisches (white box) Modell das Problem lösen kann (z.B. wenn in der Keks-Fabrik aus dem obigen Beispiel das einzige Qualitätsproblem immer nur zerbrochene Kekse wären, dann würde die Regel &#8220;Keks-Gewicht muss zwischen 14-16g liegen&#8221; ausreichen, um fehlerhafte Kekse zuverlässig zu erkennen und diese Regel wäre einfacher zu implementieren, da nicht erst ein großer Datensatz gesammelt werden müsste).</p>
+<p>ein manuell definiertes Regelwerk oder ein mechanistisches (white box) Modell das Problem lösen kann. Wenn beispielsweise in der Keks-Fabrik aus dem obigen Beispiel das einzige Qualitätsproblem immer nur zerbrochene Kekse wären, dann würde die Regel &#8220;Keks-Gewicht muss zwischen 14-16g liegen&#8221; ausreichen, um fehlerhafte Kekse zuverlässig zu erkennen. Eine solche Regel ist außerdem einfacher zu implementieren, da nicht erst ein großer Datensatz gesammelt werden muss.</p>
 </li>
 </ul>
 </div>
@@ -787,13 +787,13 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="ulist">
 <ul>
 <li>
-<p>eine exakte Simulation mit einem mechanistischen Modell zu lange dauert (dieses aber verwendet werden kann, um einen qualitativ hochwertigen Datensatz zu generieren). Z.B. wurde das eingangs gezeigte AlphaFold-Modell, mit dem die 3D-Struktur eines Proteins anhand seiner Aminosäuresequenz vorhergesagt werden kann, auf den Daten trainiert, die das ursprüngliche Simulationsmodell zur Lösung dieser Aufgabe zuvor generiert hat, welches aber zu langsam war, um auf eine große Anzahl von Proteinen angewendet zu werden.</p>
+<p>eine exakte Simulation mit einem mechanistischen Modell zu lange dauert (dieses aber verwendet werden kann, um einen qualitativ hochwertigen Datensatz zu generieren). Z.B. wurde das eingangs erwähnte AlphaFold-Modell, mit dem die 3D-Struktur eines Proteins anhand seiner Aminosäuresequenz vorhergesagt werden kann, auf den Daten trainiert, die das ursprüngliche Simulationsmodell zur Lösung dieser Aufgabe zuvor generiert hat, welches allerdings zu langsam ist, um auf eine große Anzahl von Proteinen angewendet zu werden.</p>
 </li>
 <li>
-<p>eine &#8220;einfache&#8221;, aber schwer zu erklärenden Aufgabe gelöst werden soll (eine, die ein (geschulter) Mensch in ~1 Sekunde lösen kann, z.B. etwas auf einem Bild erkennen)<br>
-&#8658; dadurch können repetitive Aufgaben automatisiert und Expertenwissen für alle zugänglich gemacht werden (wie beim eingangs gezeigten Diagnosemodell für diabetische Retinopathie von Google)<br>
+<p>eine &#8220;einfache&#8221;, aber schwer zu erklärenden Aufgabe gelöst werden soll, die ein (geschulter) Mensch in ~1 Sekunde lösen kann, z.B. etwas auf einem Bild erkennen<br>
+&#8658; Dadurch können repetitive Aufgaben automatisiert und Expertenwissen für alle zugänglich gemacht werden, wie z.B. beim eingangs gezeigten Diagnosemodell für diabetische Retinopathie von Google.<br>
 <span class="underline">Aber:</span> Erfolg hängt von der Datenqualität &amp; -quantität ab!<br>
-&#8594; Menschen können aus wenigen Beispielen viel besser verallgemeinern (z.B. kann ein Arzt eine Krankheit auch dann noch leicht erkennen, wenn die Bilder z.B. mit einer älteren Maschine aufgenommen wurden, während ein ML-Modell dafür evtl. neu trainiert werden muss, was bedeuten würde, dass man im schlimmsten Fall erst wieder viele zusätzliche Daten für dieses neue Setup sammeln müsste)</p>
+&#8594; Menschen können aus wenigen Beispielen viel besser verallgemeinern. Ein Arzt kann beispielsweise eine Krankheit auch dann noch leicht erkennen, wenn die Bilder z.B. mit einer älteren Maschine aufgenommen wurden. Ein ML-Modell muss für dieses geänderte Setup evtl. neu trainiert werden, mit der Folge, dass zuvor u.U. erst wieder viele zusätzliche Daten gesammelt werden müssen.</p>
 </li>
 </ul>
 </div>
@@ -803,7 +803,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="ulist">
 <ul>
 <li>
-<p>Menschen von sehr komplexen, hochdimensionalen Daten überfordert sind. Z.B. fällt es einem Menschen schwer, bei einer Excel-Tabelle mit hunderten von Spalten den Durchblick zu behalten und wir können in so einem Meer von Zahlen oft keine Muster erkennen. Im schlimmsten Fall gibt es tatsächlich keine Zusammenhänge in den Daten, die entdeckt werden könnten (vielleicht wurden nicht alle relevanten Faktoren gemessen), aber wenn doch, wird ML die Zusammenhänge höchstwahrscheinlich finden.</p>
+<p>Menschen von sehr komplexen, hochdimensionalen Daten überfordert sind. Z.B. fällt es einem Menschen schwer, bei einer Excel-Tabelle mit hunderten von Spalten den Durchblick zu behalten. Wir können in so einem Meer von Zahlen oft keine Muster erkennen. Im ungünstigsten Fall gibt es tatsächlich keine Zusammenhänge in den Daten (vielleicht wurden nicht alle relevanten Faktoren gemessen), aber wenn doch, wird ML die Zusammenhänge höchstwahrscheinlich finden.</p>
 </li>
 </ul>
 </div>
@@ -822,7 +822,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Erstelle ein Prozessdiagramm: Welche Schritte werden in deinen Geschäftsprozessen ausgeführt und welche Daten werden wo gesammelt (Material- &amp; Informationsfluss)? Zum Beispiel in einem Produktionsprozess, bei dem einige der produzierten Teile fehlerhaft sind:</p>
+<p>Erstelle ein Prozessdiagramm: Welche Schritte werden in deinen Geschäftsprozessen ausgeführt und welche Daten werden wo gesammelt (Material- &amp; Informationsfluss). Zum Beispiel in einem Produktionsprozess, bei dem einige der produzierten Teile fehlerhaft sind:</p>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/01b_intro_ml/automate_insights7a.png" alt="image" width="700">
@@ -839,7 +839,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 </li>
 <li>
-<p>Priorisieren: Welches Projekt hätte eine große Wirkung, gleichzeitig aber auch gute Erfolgsaussichten, also sollte einen hohen Return on Investment (ROI) bringen? Die Verwendung von ML zur Automatisierung einer einfachen Aufgabe ist beispielsweise eine vergleichsweise risikoarme Investition, kann jedoch dazu führen, dass einige Fließbandarbeiter ihre (möglicherweise ziemlich langweiligen) Jobs verlieren. Im Gegensatz dazu könnten durch die Ermittlung der Ursachen dafür, warum in einem Produktionsprozess 10% Ausschuss produziert werden, Millionen eingespart werden, aber es ist nicht von vorneherein klar, dass eine solche Analyse tatsächlich nützliche Ergebnisse liefert, da die gesammelten Daten zu den Prozessbedingungen möglicherweise nicht ausreichen, also nicht alle erforderlichen Informationen enthalten.</p>
+<p>Priorisieren: Welches Projekt hätte eine große Wirkung und gleichzeitig gute Erfolgsaussichten, hätte also einen hohen Return on Investment (ROI)? Als Beispiel: Die Verwendung von ML zur Automatisierung einer einfachen Aufgabe ist eine vergleichsweise risikoarme Investition, kann jedoch dazu führen, dass einige Fließbandarbeiter ihre Jobs verlieren. Andererseits könnten durch die Ermittlung der Ursachen, warum in einem Produktionsprozess 10% Ausschuss produziert werden, Millionen eingespart werden. Allerdings ist nicht vorhersehbar, ob eine solche Analyse tatsächlich nützliche Ergebnisse liefert, da die gesammelten Daten zu den Prozessbedingungen möglicherweise nicht alle erforderlichen Informationen enthalten.</p>
 </li>
 </ol>
 </div>

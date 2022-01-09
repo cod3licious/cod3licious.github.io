@@ -711,18 +711,18 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="content">
 <div class="paragraph">
 <p><strong>Is this a good model for the task?</strong><br>
-i.e., does the model generate <em>reliable predictions</em> for <em>new data points</em>?</p>
+I.e., does the model generate <em>reliable predictions</em> for <em>new data points</em>?</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>split the data into training and test sets to be able to get a reliable estimate of how your model will later perform when applied to new data points that it wasn&#8217;t trained on</p>
+<p>Split the data into training and test sets to be able to get a reliable estimate of how your model will later perform when applied to new data points that it wasn&#8217;t trained on.</p>
 </li>
 <li>
-<p>quantify the quality of the model&#8217;s predictions (on the test set) with a suitable evaluation metric (depending on the problem type)<br></p>
+<p>Quantify the quality of the model&#8217;s predictions on the test set with a suitable evaluation metric (depending on the problem type).<br></p>
 <div class="paragraph">
-<p>&#8658; are some mistakes worse than others? (e.g., consider false positives vs. false negatives in medical tests)<br>
-&#8658; always choose <em>a single metric/KPI</em> to optimize! (maybe: additional constraints like runtime)</p>
+<p>&#8658; Are some mistakes worse than others (e.g., consider false positives vs. false negatives in medical tests)?<br>
+&#8658; Always choose <em>a single metric/KPI</em> to optimize (maybe: additional constraints like runtime).</p>
 </div>
 </li>
 </ul>
@@ -730,7 +730,7 @@ i.e., does the model generate <em>reliable predictions</em> for <em>new data poi
 </div>
 </div>
 <div class="paragraph">
-<p>However, it can be quite easy to paint an overly optimistic picture here, therefore you always need to be critical and, for example, <strong>compare the performance of a model to that of a (stupid) baseline</strong> (e.g., predicting the mean (&#8594; regression) or most frequent class (&#8594; classification)).</p>
+<p>However, it can be quite easy to paint an overly optimistic picture here, therefore you always need to be critical and, for example, <strong>compare the performance of a model to that of a (stupid) baseline</strong> that predicts the mean (&#8594; regression) or most frequent class (&#8594; classification).</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -741,7 +741,7 @@ i.e., does the model generate <em>reliable predictions</em> for <em>new data poi
 <p>The accuracy is a very commonly used evaluation metric for classification problems:<br>
 <strong>Accuracy:</strong> Fraction of samples that were classified correctly.</p>
 <div class="paragraph">
-<p>Below you see the decision boundaries of two models on a toy dataset (where the shaded background indicates whether the model would predict the blue or red class for a data point in this area). Which model do you think is more useful?</p>
+<p>Below you see the decision boundaries of two models on a toy dataset, where the background color indicates whether the model predicts the blue or red class for a data point in this area. Which model do you think is more useful?</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -749,10 +749,10 @@ i.e., does the model generate <em>reliable predictions</em> for <em>new data poi
 </div>
 </div>
 <div class="paragraph">
-<p>With unbalanced class distributions, e.g., in this case a lot more samples from the blue compared to the red class, the accuracy of a model that simply always predicts the most frequent class can be quite large. But while a 90% accuracy might sound impressive when you report the performance of a model to your project&#8217;s stakeholders, this doesn&#8217;t necessarily mean that the model is actually useful, especially since in real world problems the undersampled class is often the one we care about most (e.g., people with a rare disease or products that have a defect).</p>
+<p>With unbalanced class distributions, e.g., in this case a lot more samples from the blue compared to the red class, the accuracy of a model that simply always predicts the most frequent class can be quite large. But while a 90% accuracy might sound impressive when you report the performance of a model to your project&#8217;s stakeholders, this doesn&#8217;t necessarily mean that the model is actually useful, especially since in real world problems the undersampled class is often the one we care about most, e.g., people with a rare disease or products that have a defect.</p>
 </div>
 <div class="paragraph">
-<p>Instead, the balanced accuracy is often the more informative measure when evaluating classification models and can help us to distinguish between a model that has actually learned something and the stupid baseline:<br>
+<p>Instead, the balanced accuracy is often the more informative measure when evaluating classification models and can help us to distinguish between a model that has actually learned something and the &#8216;stupid baseline&#8217;:<br>
 <strong>Balanced Accuracy:</strong> First the faction of correctly classified samples is computed for each class individually and then these values are averaged.</p>
 </div>
 <div class="imageblock text-center">

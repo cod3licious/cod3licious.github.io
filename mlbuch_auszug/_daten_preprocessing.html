@@ -695,7 +695,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <h2 id="_daten_preprocessing">Daten &amp; Preprocessing</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Wie wir gesehen haben, lösen ML-Algorithmen Input-Output-Aufgaben, und um ein ML-Problem zu lösen, müssen wir zunächst Daten sammeln. Das &#8220;Preprocessing&#8221; (Vorverarbeitung) ist der Vorgang, Rohdaten so zu transformieren, dass ML-Algorithmen angewendet werden können:</p>
+<p>Wie wir gesehen haben, lösen ML-Algorithmen Input-Output-Aufgaben. Und um ein ML-Problem zu lösen, müssen wir zunächst Daten sammeln. Das &#8220;Preprocessing&#8221; (Vorverarbeitung) ist der Vorgang, Rohdaten so zu transformieren, dass ML-Algorithmen angewendet werden können:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -703,7 +703,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 </div>
 <div class="paragraph">
-<p>Ein typisches Supervised Learning Problem wäre beispielsweise ein Produktionsprozess, bei dem wir vorhersagen möchten, ob ein unter bestimmten Produktionsbedingungen produziertes Teil Ausschuss ist. Hier wären die gesammelten Daten für jedes produzierte Teil die Prozessbedingungen, unter denen es hergestellt wurde, sowie das Ergebnis (d.h. Produkt war in Ordnung oder Ausschuss):</p>
+<p>Ein typisches Supervised Learning Problem wäre beispielsweise ein Produktionsprozess, bei dem wir vorhersagen möchten, ob ein unter bestimmten Produktionsbedingungen produziertes Teil Ausschuss ist. Hier beinhalten die gesammelten Daten für jedes produzierte Teil die Prozessbedingungen, unter denen es hergestellt wurde, und ob das resultierende Produkt in Ordnung oder Ausschuss war:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -715,18 +715,18 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="content">
 <img src="../images/02_data/toy_data6.png" alt="image" width="740">
 </div>
-<div class="title"><span class="small">Die Spalten der Tabelle enthalten die verschiedenen Messwerte/Variablen, die für jede Probe erhoben wurden. Hier unterscheiden wir zwischen <em>Features</em> (in diesem Fall die Produktionsbedingungen) und <em>Labels</em> (ob das jeweilige Produkt in Ordnung oder Ausschuss war). Features, auch als Matrix \(X\) bezeichnet, sind typischerweise diejenigen Messwerte, die wir grundsätzlich kostenlos bekommen, da sie während des Prozesses ohnehin oft für andere Zwecke gesammelt werden (z.B. wenn der Bediener der Maschine die Temperatur für die Produktion auf einen bestimmten Wert einstellt wird dies beim Weiterleiten des Signals an das Heizgerät aufgezeichnet). Die dazugehörigen Labels, bezeichnet als Vektor \(\mathbf{y}\), sind oft teurer zu sammeln. (Um beispielsweise im Produktionsprozess einen Datenpunkt mit dem Label <em>"Ausschuss"</em> zu sammeln, müssen wir (absichtlich) ein kaputtes Produkt produzieren, das wir anschließend nicht mehr verkaufen können, was uns wertvolle Ressourcen kostet. Ein anderes Beispiel wäre als Google ein Team von Fachärzten bezahlte, um einige der Bilder von diabetischer Retinopathie, zu denen es widersprüchliche Meinungen gab, zu diskutieren und neu zu bewerten.) Im Supervised Learning werden die Features als Input (Eingabe) für das Modell verwendet, während die Labels die Zielvariable, d.h. der vorhergesagte Output (Ausgabe) darstellen. Im Allgemeinen sollten Features unabhängige Variablen sein (z.B. Einstellungen, die der Bediener nach Belieben wählen kann), während der Zielwert von diesen Eingaben abhängig sein sollte (sonst können wir ihn nicht vorhersagen).</span></div>
+<div class="title"><span class="small">Die Spalten der Tabelle enthalten die unterschiedlichen Messwerte/Variablen, welche für jeden Datenpunkt erhoben wurden. Dabei unterscheiden wir zwischen <em>Features</em> (in diesem Fall die Produktionsbedingungen) und <em>Labels</em> (ob das jeweilige Produkt in Ordnung oder Ausschuss war). Features, auch als Matrix \(X\) bezeichnet, sind typischerweise diejenigen Messwerte, die wir ohne Aufwand erhalten, da sie während des Prozesses bereits für andere Zwecke gesammelt werden. Wenn beispielsweise der Bediener der Maschine die Temperatur für die Produktion auf einen bestimmten Wert einstellt wird dies aufgezeichnet während das Signals an das Heizgerät weitergeleitet wird. Das Sammeln der dazugehörigen Labels, bezeichnet als Vektor \(\mathbf{y}\), ist oft kostspieliger. Um beispielsweise im Produktionsprozess einen Datenpunkt mit dem Label <em>"Ausschuss"</em> zu sammeln, muss (vorsätzlich) ein fehlerhaftes Produkt produziert werden, was uns wertvolle Ressourcen kostet. Beispielhaft für dieses Vorgehen ist auch die Tatsache, dass Google ein Team von Fachärzten bezahlte, um mehrere Bilder von diabetischer Retinopathie, zu denen es widersprüchliche Meinungen gab, zu diskutieren und neu zu bewerten. Im Supervised Learning werden die Features als Input (Eingabe) für das Modell verwendet, während die Labels die Zielvariable, d.h. der vorhergesagte Output (Ausgabe) darstellen. Im Allgemeinen sollten Features unabhängige Variablen sein (z.B. Einstellungen, die der Bediener nach Belieben wählen kann), während der Zielwert von diesen Eingaben abhängig sein sollte, damit wir ihn vorhersagen können.</span></div>
 </div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Strukturierte vs. Unstrukturierte Daten</dt>
 <dd>
-<p>Daten können in verschiedenen Formaten vorliegen und während einige Datentypen möglicherweise zusätzliche Preprocessing Schritte erfordern, können ML-Algorithmen im Prinzip mit allen Arten von Daten verwendet werden.</p>
+<p>Daten können in verschiedenen Formaten vorliegen und während einige Datentypen möglicherweise zusätzliche Preprocessing Schritte erfordern, können ML-Algorithmen im Prinzip mit allen Arten von Daten arbeiten.</p>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/02_data/data_types2.png" alt="image" width="640">
 </div>
-<div class="title"><span class="small">Die wichtigste Unterscheidung bei der Charakterisierung von Daten ist zwischen <em>strukturierten</em> Daten, das ist jeder Datensatz, der einzelne Variablen enthält, die eindeutige Größen darstellen, und <em>unstrukturierten</em> Daten, die nicht in sinnvolle Variablen unterteilt werden können. (Z.B. in Bildern &#8220;erster Pixel von links&#8221; oder in Texten &#8220;10. Wort im 2. Absatz&#8221; würden wir nicht Variablen nennen, im Gegensatz zu &#8220;Fläche in Quadratmetern&#8221; oder &#8220;Anzahl Schlafzimmern&#8221;, womit man sinnvoll eine Wohnung beschreiben könnte.) Strukturierte Daten sind oft <em>heterogen</em>, da die verschiedenen Variablen in einem Datensatz typischerweise für sehr unterschiedliche Dinge stehen (z.B. wenn man mit Sensordaten arbeitet, hat man normalerweise keinen Datensatz, der nur Temperaturmessungen enthält, sondern zusätzlich z.B. Druck und Durchflusswerte, die unterschiedliche Einheiten haben und in sehr unterschiedlichen Skalen gemessen werden können). Unstrukturierte Daten hingegen sind <em>homogen</em> (z.B. gibt es keinen qualitativen Unterschied zwischen dem 10. und dem 100. Pixel in einem Bild).</span></div>
+<div class="title"><span class="small">Die wichtigste Unterscheidung bei der Charakterisierung von Daten liegt zwischen <em>strukturierten</em> Daten, das ist jeder Datensatz, der einzelne Variablen enthält, die eindeutige Größen darstellen, und <em>unstrukturierten</em> Daten, die nicht in sinnvolle Variablen unterteilt werden können. Z.B. in Bildern &#8220;erster Pixel von links&#8221; oder in Texten &#8220;10. Wort im 2. Absatz&#8221; würden wir nicht Variablen nennen, im Gegensatz zu &#8220;Fläche in Quadratmetern&#8221; oder &#8220;Anzahl Schlafzimmern&#8221;, womit man sinnvoll eine Wohnung beschreiben könnte. Strukturierte Daten sind oft <em>heterogen</em>, da die verschiedenen Variablen in einem Datensatz typischerweise für sehr unterschiedliche Dinge stehen. Wenn man beispielsweise mit Sensordaten arbeitet enthält ein Datensatz nicht nur Temperaturmessungen, sondern zusätzlich z.B. Druck und Durchflusswerte, die unterschiedliche Einheiten haben und in sehr unterschiedlichen Skalen gemessen werden können. Unstrukturierte Daten hingegen sind <em>homogen</em>, z.B. gibt es keinen qualitativen Unterschied zwischen dem 10. und dem 100. Pixel in einem Bild.</span></div>
 </div>
 </dd>
 </dl>
@@ -738,7 +738,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-<strong>Was ist ein Datenpunkt?</strong> Es ist immer wichtig, sich wirklich darüber im Klaren zu sein, was eigentlich ein Datenpunkt ist, d.h. wie die Inputs aussehen und was als Ergebnis aus dem Modell für jede Probe/Beobachtung zurückgegeben werden soll. Um das zu bestimmen, hilft es sich zu überlegen, wie das ML-Modell später in den Rest des Workflows integrieren werden soll: Welche Daten werden im vorherigen Schritt erzeugt und fließen in den ML-Teil ein, und was für einen Output des Modells braucht man für den nächsten Schritt?
+<strong>Was ist ein Datenpunkt?</strong> Es ist äußerst wichtig sich darüber im Klaren zu sein, was eigentlich ein Datenpunkt ist, d.h. wie die Inputs aussehen und welches Ergebnis das Modell für jede Probe/Beobachtung zurückgegeben soll. Um das zu bestimmen, hilft es sich zu überlegen, wie das ML-Modell später in den Rest des Workflows integriert werden soll: Welche Daten werden im vorherigen Schritt erzeugt und können als Input für den ML-Teil verwendet werden, und was für einen Output braucht man für den darauffolgenden Schritt?
 </td>
 </tr>
 </table>
@@ -761,7 +761,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <p>Feature Extraktion: Rohdaten in numerische Werte umwandeln (z.B. Text)</p>
 </li>
 <li>
-<p>Fehlende oder falsch eingetragene Werte entfernen / korrigieren (z.B. wenn jemand das Dezimalkomma falsch gesetzt hat)</p>
+<p>Fehlende oder falsch eingetragene Werte entfernen / korrigieren (z.B. falsch gesetztes Dezimalkomma)</p>
 </li>
 <li>
 <p>Null-Varianz-Features (d.h. Variablen mit immer gleichem Wert) und unsinnige Variablen (z.B. IDs) ausschließen</p>

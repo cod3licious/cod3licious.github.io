@@ -750,7 +750,7 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 </div>
 </div>
 <div class="paragraph">
-<p><span class="small">Ließ weiter, wenn du keine Angst vor ein bisschen Mathe hast 🤓</span></p>
+<p><span class="small">Ließ weiter, wenn du Lust auf ein bisschen Mathe hast 🤓</span></p>
 </div>
 </div>
 </div>
@@ -762,7 +762,7 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <dd>
 <p><span class="small">[Adaptiert von: &#8220;AI for everyone&#8221; von Andrew Ng (coursera.org)]</span></p>
 <div class="paragraph">
-<p>Angenommen, wir haben einen Online-Shop und versuchen vorherzusagen, wie viel von einem Produkt wir im nächsten Monat verkaufen werden. Der Preis, zu dem wir bereit sind, das Produkt anzubieten, beeinflusst offensichtlich die Nachfrage, da die Leute versuchen, ein gutes Geschäft zu machen, d.h. je niedriger der Preis, desto höher die Nachfrage; eine negative Korrelation, die durch ein lineares Modell beschrieben werden kann. Die Nachfrage wird jedoch nie unter Null liegen (d.h. wenn der Preis sehr hoch ist, werden die Kunden das Produkt nicht plötzlich zurückgeben), also müssen wir das Modell so anpassen, dass der vorhergesagte Output nie negativ ist. Dies können wir durch eine Max-Funktion (in diesem Zusammenhang auch nichtlineare Aktivierungsfunktion genannt) erreichen, die auf die Ausgabe des linearen Modells angewendet wird, sodass wir jetzt, wenn das lineare Modell einen negativen Wert zurückgeben würde, stattdessen 0 vorhersagen.</p>
+<p>Angenommen, wir haben einen Online-Shop und versuchen vorherzusagen, wie viel wir von einem Produkt im nächsten Monat verkaufen werden. Der Preis, zu dem wir bereit sind, das Produkt anzubieten, beeinflusst offensichtlich die Nachfrage, da die Leute versuchen, ein gutes Geschäft zu machen, d.h. je niedriger der Preis, desto höher die Nachfrage. Es handelt sich um eine negative Korrelation, die durch ein lineares Modell beschrieben werden kann. Die Nachfrage ist jedoch nie kleiner als Null (d.h. wenn der Preis sehr hoch ist, werden die Kunden das Produkt nicht plötzlich zurückgeben), also müssen wir das Modell so anpassen, dass der vorhergesagte Output nie negativ ist. Dies kann man durch eine Max-Funktion (in diesem Zusammenhang auch nichtlineare Aktivierungsfunktion genannt) erreichen, die auf das Ergebnis des linearen Modells angewendet wird, sodass 0 vorhergesagt wird, wenn das lineare Modell einen negativen Wert berechnet.</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -771,10 +771,10 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <div class="title"><span class="small">Ein sehr einfaches lineares Modell mit einer Input und einer Output Variablen und einer nichtlinearen Aktivierungsfunktion (der Max-Funktion).</span></div>
 </div>
 <div class="paragraph">
-<p>Zusammen kann diese funktionale Beziehung als Kreis mit einem Input <em>(Preis)</em> und einem Output <em>(Nachfrage)</em> visualisiert werden, wobei der eingehende Pfeil das Gewicht multipliziert mit dem Wert des Input Features darstellt und die S-Kurve im Kreis anzeigt, dass auf das Ergebnis eine nichtlineare Aktivierungsfunktion angewendet wird. Wir werden diese Kreise später als einzelne Einheit oder &#8220;Neuron&#8221; eines neuronalen Netzes (NN) sehen.</p>
+<p>Diese funktionale Beziehung kann auch als Kreis mit einem Input <em>(Preis)</em> und einem Output <em>(Nachfrage)</em> visualisiert werden, wobei die S-Kurve im Kreis anzeigt, dass auf das Ergebnis eine nichtlineare Aktivierungsfunktion angewendet wird. Wir werden dieses Symbol später als einzelne Einheit oder &#8220;Neuron&#8221; eines neuronalen Netzes (NN) sehen.</p>
 </div>
 <div class="paragraph">
-<p>Um die Vorhersage zu verbessern können wir das Modell erweitern und mehrere Input Features für die Vorhersage verwenden:</p>
+<p>Um die Vorhersage zu verbessern, können wir das Modell erweitern und mehrere Input Features für die Vorhersage verwenden:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -783,22 +783,22 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <div class="title"><span class="small">Ein einfaches lineares Modell mit mehreren Inputs, bei dem die Vorhersage als gewichtete Summe der Inputs berechnet wird, zusammen mit der Max-Funktion um negative Werte zu vermeiden.</span></div>
 </div>
 <div class="paragraph">
-<p>Um die Performance des Modells noch weiter zu verbessern, können wir aus den ursprünglichen Inputs manuell informativere Features generieren, indem wir sie sinnvoll kombinieren (&#8594; Feature Engineering), bevor wir den Output berechnen:</p>
+<p>Um die Performance des Modells weiter zu verbessern, können wir aus den ursprünglichen Inputs manuell informativere Features generieren, indem wir sie sinnvoll kombinieren (&#8594; Feature Engineering), bevor wir den Output berechnen:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/05_supervised_nn/neural_network_intuitive_b6.png" alt="image" width="540">
 </div>
-<div class="title"><span class="small">Um die Vorhersagegenauigkeit weiter zu verbessern, können wir uns ein paar informativere Variablen einfallen lassen und in einem Zwischenschritt aus den ursprünglichen Input Features berechnen. Zum Beispiel geht es hier um einen Online-Shop und unsere Kunden müssen Versandkosten bezahlen, d.h. die tatsächliche Erschwinglichkeit des Produkts ergibt sich aus der Summe des Produktpreises und den Versandkosten. Außerdem interessieren sich die Kunden für qualitativ hochwertige Produkte, doch die Produktwahrnehmung ergibt sich nicht nur aus der tatsächlichen Rohstoffqualität, sondern wird auch durch eine entsprechende Marketingkampagne beeinflusst und auch ein hoher Preis vermittelt, dass unser Produkt überlegen ist. Durch die Berechnung dieser zusätzlichen Zwischenfeatures kann der Preis somit in zweierlei Hinsicht zur endgültigen Vorhersage beitragen: Während einerseits ein niedrigerer Preis für die Erschwinglichkeit des Produkts von Vorteil ist, führt andererseits ein höherer Preis zu einer größeren wahrgenommenen Qualität.</span></div>
+<div class="title"><span class="small">In diesem Beispiel geht es um einen Online-Shop und die Kunden müssen Versandkosten bezahlen, d.h. die tatsächliche Erschwinglichkeit des Produkts ergibt sich aus der Summe des Produktpreises und den Versandkosten. Außerdem interessieren sich die Kunden für qualitativ hochwertige Produkte, doch die Produktwahrnehmung ergibt sich nicht nur aus der tatsächlichen Rohstoffqualität. Dass unser Produkt hochwertiger ist als andere wird auch durch eine entsprechende Marketingkampagne und einen hohen Preis vermittelt. Durch die Berechnung dieser zusätzlichen Zwischenfeatures kann der Preis somit in zweierlei Hinsicht zur endgültigen Vorhersage beitragen: Während einerseits ein niedrigerer Preis für die Erschwinglichkeit des Produkts von Vorteil ist, führt andererseits ein höherer Preis zu der Wahrnehmung einer höheren Qualität.</span></div>
 </div>
 <div class="paragraph">
-<p>Während es in diesem Anschauungsbeispiel möglich war, solche Features manuell zu konstruieren, ist das Schöne an neuronalen Netzen, dass sie genau das automatisch tun: Indem wir mehrere Zwischenschichten (Layers) verwenden, d.h. mehrere lineare Modelle (mit nichtlinearen Aktivierungsfunktionen) verbinden, werden immer komplexere Kombinationen der ursprünglichen Input Features generiert, die die Performance des Modells verbessern können. Je mehr Layer das Netzwerk verwendet (d.h. je &#8220;tiefer&#8221; es ist), desto komplexer sind die resultierenden Feature-Repräsentationen.</p>
+<p>Während es in diesem Anschauungsbeispiel möglich war, solche Features manuell zu konstruieren, ist das Vorteilhafte an neuronalen Netzen, dass sie genau das automatisch tun: Indem wir mehrere Zwischenschichten (Layers) verwenden, d.h. mehrere lineare Modelle (mit nichtlinearen Aktivierungsfunktionen) verbinden, werden immer komplexere Kombinationen der ursprünglichen Input Features generiert, die die Performance des Modells verbessern können. Je mehr Layer das Netzwerk verwendet, d.h. je &#8220;tiefer&#8221; es ist, desto komplexer sind die resultierenden Feature-Repräsentationen.</p>
 </div>
 </dd>
 </dl>
 </div>
 <div class="paragraph">
-<p>Da verschiedene Problemstellungen (und insbesondere verschiedene Arten von Input Daten) von unterschiedlichen Feature Repräsentationen profitieren, gibt es verschiedene Arten von neuronalen Netzarchitekturen, um diese aussagekräftigeren Zwischenfeatures zu berechnen, z.B.</p>
+<p>Da verschiedene Problemstellungen und insbesondere verschiedene Arten von Input Daten von unterschiedlichen Feature Repräsentationen profitieren, gibt es verschiedene Arten neuronaler Netzarchitekturen, um diese aussagekräftigeren Zwischenfeatures zu berechnen, z.B.</p>
 </div>
 <div class="openblock">
 <div class="content">
@@ -826,13 +826,13 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <div class="sect4">
 <h5 id="_feed_forward_neural_network_ffnn">Feed Forward Neural Network (FFNN)</h5>
 <div class="paragraph">
-<p>FFNN sind die ursprüngliche und einfachste neuronale Netzwerkarchitektur, die du bereits im ersten Beispiel gesehen hast, nur dass sie in der Praxis normalerweise ein paar mehr Layer und Neuronen pro Layer haben:</p>
+<p>FFNN ist die ursprüngliche und einfachste neuronale Netzwerkarchitektur, die du bereits im ersten Beispiel gesehen hast. Allerdings besitzen sie in der Praxis normalerweise mehr Layer und Neuronen pro Layer:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/05_supervised_nn/neural_network.png" alt="image" width="840">
 </div>
-<div class="title"><span class="small">Feed Forward Neural Network (FFNN) Architektur: Der Input-Feature-Vektor \(\mathbf{x}\), der einen Datenpunkt darstellt, wird mit der ersten Gewichtungsmatrix \(W_1\) multipliziert, um einen neuen Vektor zu erzeugen, der nach Anwendung der nichtlinearen Aktivierungsfunktion (z.B. der Max-Funktion wie im ersten Beispiel) zur ersten Hidden-Layer-Repräsentation \(\mathbf{x}'\) wird. Dieser neue Vektor wird dann mit der zweiten Gewichtungsmatrix \(W_2\) multipliziert und wieder wird eine nichtlineare Aktivierungsfunktion angewendet, um die zweite Hidden-Layer-Repräsentation des Datenpunkts, \(\mathbf{x}''\), zu erzeugen. Je nachdem, wie viele Schichten das Netzwerk hat (d.h. wie tief es ist), könnte man dies nun mehrmals wiederholen, bis schließlich die letzte Schicht den vorhergesagten Output \(\mathbf{\hat{y}}\) berechnet. Während das Netzwerk trainiert wird, nähern sich diese vorhergesagten Outputs immer mehr den wahren Outputs für die Trainingsdaten an.</span></div>
+<div class="title"><span class="small">Feed Forward Neural Network (FFNN) Architektur: Der Input-Feature-Vektor \(\mathbf{x}\), der einen Datenpunkt darstellt, wird mit der ersten Gewichtungsmatrix \(W_1\) multipliziert, um einen neuen Vektor zu erzeugen, der nach Anwendung der nichtlinearen Aktivierungsfunktion (z.B. der Max-Funktion wie im ersten Beispiel) zur ersten Hidden-Layer-Repräsentation \(\mathbf{x}'\) wird. Dieser neue Vektor wird dann mit der zweiten Gewichtungsmatrix \(W_2\) multipliziert und wieder wird eine nichtlineare Aktivierungsfunktion angewendet, um die zweite Hidden-Layer-Repräsentation des Datenpunkts, \(\mathbf{x}''\), zu erzeugen. Je nachdem, wie viele Schichten das Netzwerk hat (d.h. wie tief es ist), wiederholt sich dies nun mehrmals, bis schließlich die letzte Schicht den vorhergesagten Output \(\mathbf{\hat{y}}\) berechnet. Während das Netzwerk trainiert wird, nähern sich diese vorhergesagten Outputs immer mehr den wahren Outputs der Trainingsdaten an.</span></div>
 </div>
 </div>
 <div class="sect4">
@@ -841,7 +841,7 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <p>Manuelles Feature Engineering für Computer Vision-Aufgaben ist unglaublich schwierig. Während der Mensch mühelos eine Vielzahl von Objekten in Bildern erkennt, ist es schwer zu beschreiben, <em>warum</em> wir erkennen was wir sehen, z.B. anhand welcher Merkmale wir eine Katze von einem kleinen Hund unterscheiden. Das Deep Learning hatte seinen ersten bahnbrechenden Erfolg auf diesem Gebiet, da neuronale Netze, insbesondere CNNs, es durch eine Hierarchie von Layern schaffen, sinnvolle Feature Repräsentationen aus visuellen Informationen zu lernen.</p>
 </div>
 <div class="paragraph">
-<p>Convolutional Neural Networks eignen sich sehr gut für die Verarbeitung visueller Informationen, da sie direkt mit den 2D-Bildern arbeiten können und die Tatsache nutzen, dass Bilder viele lokale Informationen beinhalten (z.B. Augen, Nase und Mund sind alles lokalisierte Komponenten eines Gesichts).</p>
+<p>Convolutional Neural Networks eignen sich sehr gut für die Verarbeitung visueller Informationen, da sie direkt mit 2D-Bildern arbeiten können und die Tatsache nutzen, dass Bilder viele lokale Informationen beinhalten (z.B. sind Augen, Nase und Mund lokalisierte Komponenten eines Gesichts).</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -859,7 +859,7 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <div class="content">
 <img src="../images/05_supervised_nn/nn_architectures4.png" alt="image" width="740">
 </div>
-<div class="title"><span class="small">Wie wir oben beim CNN für Gesichtserkennung (Bildklassifizierung) gesehen haben, wird die vom CNN generierte Repräsentation irgendwann zusammengeführt und ein FFNN berechnet dann die endgültige Vorhersage für die Klassifikation. Genauso kann auch der letzte Hidden State eines RNN, der die in einem Satz enthaltenen Informationen repräsentiert, an ein FFNN übergeben werden, um die finale Klassifikation zu generieren (z.B. für eine Sentimentanalyse). Einige Probleme fallen jedoch nicht in die Kategorie einfacher Supervised Learning Aufgaben (also Regression oder Klassifikation) und erfordern eine andere Art von Output. Bei der maschinellen Übersetzung ist der Output beispielsweise ein in die andere Sprache übersetzter Satz, was durch die Kopplung zweier RNNs erreicht werden kann: das erste &#8216;versteht&#8217; den Satz in der Originalsprache und diese Repräsentation der Bedeutung des Satzes wird dann an ein zweites RNN übergeben, das daraus Wort für Wort den übersetzten Satz generiert. Ein weiteres Beispiel wäre Image Captioning (d.h. das Generieren von Text, der beschreibt, was auf einem Bild zu sehen ist, z.B. um das Online-Erlebnis für Sehbehinderte zu verbessern), wobei das Bild zuerst von einem CNN &#8216;verstanden&#8217; wird und dann diese Repräsentation des Eingabebildes an ein RNN übergeben wird, um den passenden Text zu erzeugen.</span></div>
+<div class="title"><span class="small">Wie wir oben beim CNN für Gesichtserkennung (Bildklassifizierung) gesehen haben, wird die vom CNN generierte Repräsentation irgendwann zusammengeführt und ein FFNN berechnet daraus die endgültige Vorhersage für die Klassifikation. Genauso kann auch der letzte Hidden State eines RNN, der die in einem Satz enthaltenen Informationen repräsentiert, an ein FFNN übergeben werden, um die finale Klassifikation zu generieren (z.B. für eine Sentimentanalyse). Einige Probleme fallen jedoch nicht in die Kategorie einfacher Supervised Learning Aufgaben (also Regression oder Klassifikation) und erfordern eine andere Art von Output. Bei der maschinellen Übersetzung ist der Output beispielsweise ein in eine andere Sprache übersetzter Satz. Dies kann durch die Kopplung zweier RNNs erreicht werden: Das erste &#8216;versteht&#8217; den Satz in der Originalsprache und diese Repräsentation der Bedeutung des Satzes wird an ein zweites RNN übergeben, das daraus Wort für Wort den übersetzten Satz generiert. Ein weiteres Beispiel ist Image Captioning (d.h. das Generieren einer Bildbeschreibung, z.B. um das Online-Erlebnis für Menschen mit Sehbehinderung zu verbessern), wobei das Bild zuerst von einem CNN &#8216;verstanden&#8217; wird und dann diese Repräsentation des Eingabebildes an ein RNN übergeben wird, um den passenden Text zu erzeugen.</span></div>
 </div>
 </div>
 </div>

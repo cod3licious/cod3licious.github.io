@@ -711,7 +711,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-ML-Modelle machen es sich oft leicht und schummeln! Sie nutzen häufig <a href="https://www.tylervigen.com/spurious-correlations" target="\_blank">Scheinkorrelationen</a>, statt die wahren kausalen Zusammenhänge zu lernen. Dies macht sie anfällig für Daten Drifts (die das Modell zwingen würden, zu extrapolieren statt zu interpolieren) und Adverserial Attacks.
+ML-Modelle machen es sich oft leicht und schummeln! Sie nutzen häufig <a href="https://www.tylervigen.com/spurious-correlations" target="\_blank">Scheinkorrelationen</a>, statt die wahren kausalen Zusammenhänge zu lernen. Dies macht sie anfällig für Adverserial Attacks und Daten Drifts, die das Modell zwingen, zu extrapolieren statt zu interpolieren.
 </td>
 </tr>
 </table>
@@ -722,7 +722,7 @@ ML-Modelle machen es sich oft leicht und schummeln! Sie nutzen häufig <a href="
 <p><strong>Eine richtige Vorhersage wird nicht immer aus den richtigen Gründen gemacht!</strong></p>
 </div>
 <div class="paragraph">
-<p>Die folgende Grafik stammt aus einem Paper, in dem die Autoren festgestellt haben, dass ein vergleichsweise einfaches ML-Modell, das auf einem Standard-Bildklassifizierungsdatensatz trainiert wurde, für alle 10 Klassen im Datensatz schlecht abschnitt&#8201;&#8212;&#8201;bis auf die Klasse &#8216;Pferd&#8217;! Als sie den Datensatz genauer untersuchten und analysierten, <em>warum</em> das Modell eine bestimmte Klasse vorhersagte, d.h. welche Bildmerkmale in der Vorhersage verwendet wurden (angezeigt als Heatmap auf der rechten Seite), stellten sie fest, dass die meisten Bilder von Pferden im Datensatz vom selben Fotografen stammten und alle einen charakteristischen Copyright-Vermerk in der linken unteren Ecke hatten:</p>
+<p>Die folgende Grafik stammt aus einem Paper, in dem die Autoren festgestellt haben, dass ein vergleichsweise einfaches ML-Modell, das auf einem Standard-Bildklassifizierungsdatensatz trainiert wurde, für alle 10 Klassen im Datensatz schlecht abschnitt&#8201;&#8212;&#8201;bis auf die Klasse &#8216;Pferd&#8217;! Als sie den Datensatz genauer untersuchten und analysierten, <em>warum</em> das Modell eine bestimmte Klasse vorhersagte, d.h. welche Bildmerkmale in der Vorhersage verwendet wurden (angezeigt als Heatmap auf der rechten Seite), machten sie folgende Feststellung: Die meisten Bilder von Pferden im Datensatz stammten vom selben Fotografen und enthielten alle einen charakteristischen Copyright-Vermerk in der linken unteren Ecke:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -731,12 +731,12 @@ ML-Modelle machen es sich oft leicht und schummeln! Sie nutzen häufig <a href="
 <div class="title"><span class="small">Lapuschkin, Sebastian, et al. &#8220;Analyzing classifiers: Fisher vectors and deep neural networks.&#8221; <em>IEEE Conference on Computer Vision and Pattern Recognition.</em> 2016.</span></div>
 </div>
 <div class="paragraph">
-<p>Anhand dieses Artefaktes konnte das Modell mit hoher Genauigkeit Pferdebilder in diesem Datensatz identifizieren (und zwar sowohl im Trainings- als auch im Testset, das auch Bilder desselben Fotografen enthielt). Allerdings hatte das Modell natürlich nicht gelernt, was ein Pferd eigentlich ausmacht, und es könnte nicht extrapolieren und andere Bilder von Pferden ohne diesen Copyright-Hinweis korrekt identifizieren, oder, ebenso problematisch, neue Bilder von anderen Objekten aber mit ähnlichem Copyright-Vermerk würden fälschlicherweise als Pferde klassifiziert. (Das Modell könnte also absichtlich ausgetrickst werden, indem andere Bilder mit einem solchen Copyright-Hinweis ergänzt werden; dies wäre ein Beispiel für eine &#8220;Adverserial Attack&#8221;, wie unten beschrieben.)</p>
+<p>Anhand dieses Artefaktes konnte das Modell mit hoher Genauigkeit Pferdebilder in diesem Datensatz identifizieren&#8201;&#8212;&#8201;und zwar sowohl im Trainings- als auch im Testset, das auch Bilder desselben Fotografen enthielt. Trotzdem hat das Modell natürlich nicht gelernt, was ein Pferd eigentlich ausmacht, und es kann nicht extrapolieren und andere Bilder von Pferden ohne diesen Copyright-Hinweis korrekt identifizieren. Ebenso problematisch ist die Bewertung neuer Bilder von anderen Objekten mit ähnlichem Copyright-Vermerk: Diese würde das Modell fälschlicherweise ebenfalls als Pferde klassifizieren. Man kann das Modell also absichtlich austricksen, indem man andere Bilder mit einem solchen Copyright-Hinweis ergänzt. Dies ist ein Beispiel für eine &#8220;Adverserial Attack&#8221;, wie unten beschrieben.</p>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>Dies ist bei weitem nicht das einzige Beispiel, wo ein Modell &#8220;geschummelt&#8221; hat, indem es Korrelationen in den Trainingsdaten ausnutzte, die zu einer scheinbar guten Vorhersagegenauigkeit führten, aber das Modell nicht den wahren kausalen Zusammenhang zwischen den Features und Labels erkannt hat (ein weiteres Beispiel wäre ein Datensatz mit Bildern von Hunden und Wölfen, bei dem alle Wölfe auf verschneitem Hintergrund und die Hunde auf Gras oder anderen nicht-weißen Hintergründen fotografiert wurden).</p>
+<p>Dies ist bei weitem nicht das einzige Beispiel, bei dem ein Modell &#8220;geschummelt&#8221; hat, indem es Scheinkorrelationen in den Trainingsdaten ausnutzte. Ein weiteres beliebtes Beispiel: Ein Datensatz mit Bildern von Hunden und Wölfen, bei dem alle Wölfe auf verschneitem Hintergrund und die Hunde auf Gras oder anderen nicht-weißen Hintergründen fotografiert wurden. Modelle, die auf so einem Datensatz trainiert werden, können eine gute Vorhersagegenauigkeit aufweisen, ohne dass sie die wahren kausalen Zusammenhang zwischen den Features und Labels erkannt haben.</p>
 </div>
 <div class="paragraph">
 <p>Um solche Pannen zu erkennen, ist es wichtig, <strong>das Modell zu interpretieren und seine Vorhersagen zu erklären</strong> (wie im oben genannten Paper), um zu sehen, ob es zur Vorhersage die Feature verwendet hat, die wir (oder ein Domänenexperte) erwartet hätten.</p>
@@ -747,10 +747,10 @@ ML-Modelle machen es sich oft leicht und schummeln! Sie nutzen häufig <a href="
 <p><strong>Adversarial Attacks: ML-Modelle absichtlich täuschen</strong></p>
 </div>
 <div class="paragraph">
-<p>Ein &#8216;feindlicher Angriff&#8217; auf ein ML-Modell besteht darin, dass man die Inputdaten subtil verändert, sodass der Mensch diese Änderungen nicht bemerkt und immer noch zum richtigen Ergebnis kommt, aber das Modell seine Vorhersage ändert.</p>
+<p>Bei einem &#8216;feindlicher Angriff&#8217; auf ein ML-Modell werden die Inputdaten subtil verändert, sodass der Mensch diese Änderungen nicht bemerkt und immer noch zum richtigen Ergebnis kommt, aber das Modell seine Vorhersage ändert.</p>
 </div>
 <div class="paragraph">
-<p>Während zum Beispiel ein ML-Modell das &#8216;Stop&#8217;-Schild auf dem linken Bild leicht erkennen kann, wird das Schild rechts aufgrund der strategisch platzierten, unschuldig aussehenden Aufkleber (die ein Mensch einfach ignorieren würde) mit einem Geschwindigkeitsbegrenzungsschild verwechselt:</p>
+<p>Während zum Beispiel ein ML-Modell das &#8216;Stop&#8217;-Schild auf dem linken Bild leicht erkennen kann, wird das Schild rechts aufgrund der strategisch platzierten, unscheinbar aussehenden Aufkleber (die ein Mensch einfach ignorieren würde) mit einem Geschwindigkeitsbegrenzungsschild verwechselt:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -758,15 +758,15 @@ ML-Modelle machen es sich oft leicht und schummeln! Sie nutzen häufig <a href="
 </div>
 </div>
 <div class="paragraph">
-<p>Der Grund dafür ist, dass das Modell nicht die wahren Merkmale erkannt hat, anhand denen Menschen ein Stoppschild als solches identifizieren (z.B. achteckige Form und 4 weiße Buchstaben &#8216;STOP&#8217; vor rotem Hintergrund), sondern sich stattdessen auf bedeutungslose Korrelationen verlässt um das Stoppschild von anderen Schildern zu unterscheiden.</p>
+<p>Der Grund dafür ist, dass das Modell nicht die wahren Merkmale erkannt hat, anhand derer Menschen ein Stoppschild als solches identifizieren, z.B. die achteckige Form und die vier weißen Buchstaben &#8216;STOP&#8217; vor rotem Hintergrund. Stattdessen verlässt es sich auf bedeutungslose Korrelationen, um das Stoppschild von anderen Schildern zu unterscheiden.</p>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>Da Convolutional Neural Networks (CNN), die Art von neuronalen Netzen, die typischerweise für Bildklassifizierungsaufgaben verwendet werden, sich sehr lokale Muster fokussieren, sind sie oft leicht zu <a href="https://www.sciencemag.org/news/2018/07/turtle-or-rifle-hackers-easily-fool-ais-seeing-wrong-thing" target="\_blank">täuschen</a>, indem man die globale Form von Objekten in Bildern intakt lässt (auf die Menschen schauen, wenn sie Objekte identifizieren), sie aber mit bestimmten Texturen oder andere Hochfrequenzmuster überlagert, wodurch das Modell eine andere Klasse vorhersagt.</p>
+<p>Da ein Convolutional Neural Network (CNN), die neuronale Netzarchitektur, die typischerweise für Bildklassifizierungsaufgaben verwendet wird, sich sehr auf lokale Muster fokussiert, lässt es sich leicht <a href="https://www.sciencemag.org/news/2018/07/turtle-or-rifle-hackers-easily-fool-ais-seeing-wrong-thing" target="\_blank">täuschen</a>. Dies geschieht, indem man die globale Form von Objekten, welche Menschen zur Identifikation verwenden, intakt lässt, und die Bilder mit bestimmten Texturen oder anderen Hochfrequenzmustern überlagert, wodurch das Modell eine andere Klasse vorhersagt.</p>
 </div>
 <div class="paragraph">
-<p>Wie man robuste Kausalmodelle, die den wahren &#8216;Input &#8594; Output&#8217;-Zusammenhang in den Daten erfassen, findet, wird immer noch <a href="https://bdtechtalks.com/2021/03/15/machine-learning-causality/" target="\_blank">aktiv erforscht</a> und ist viel schwieriger als ein Modell zu lernen, das &#8220;nur&#8221; verallgemeinert und gute Vorhersagen für die Testdaten generiert.</p>
+<p>Wie man robuste Kausalmodelle, die den wahren &#8216;Input &#8594; Output&#8217;-Zusammenhang in den Daten erfassen, findet, wird nach wie vor <a href="https://bdtechtalks.com/2021/03/15/machine-learning-causality/" target="\_blank">aktiv erforscht</a> und ist weitaus schwieriger als ein Modell zu finden, das &#8220;nur&#8221; verallgemeinert und gute Vorhersagen für die Testdaten generiert.</p>
 </div>
 </div>
 <div class="paragraph nav-footer">

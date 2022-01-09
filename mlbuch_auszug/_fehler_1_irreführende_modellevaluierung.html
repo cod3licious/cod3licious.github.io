@@ -702,7 +702,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="sect2">
 <h3 id="_fehler_1_irreführende_modellevaluierung">[Fehler #1] Irreführende Modellevaluierung</h3>
 <div class="paragraph">
-<p>Vorhersagemodelle müssen evaluiert werden, d.h. ihre Performance muss mit einer geeigneten Evaluierungsmetrik quantifiziert werden, um realistisch abzuschätzen, wie nützlich ein Modell in der Praxis sein wird und mit wie vielen Vorhersagefehlern wir rechnen müssen.</p>
+<p>Vorhersagemodelle müssen evaluiert werden, d.h. ihre Performance muss mit einer geeigneten Evaluierungsmetrik quantifiziert werden. Dies ist notwendig, um realistisch abzuschätzen, wie nützlich ein Modell in der Praxis sein wird und mit wie vielen Vorhersagefehlern wir rechnen müssen.</p>
 </div>
 <div class="paragraph">
 <p>Da wir bei Supervised Learning Problemen die Ground Truth, also die echten Labels, kennen, können wir verschiedene Modelle objektiv bewerten und miteinander vergleichen.</p>
@@ -711,18 +711,18 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="content">
 <div class="paragraph">
 <p><strong>Ist das Modell für die Aufgabe geeignet?</strong><br>
-d.h. generiert das Modell <em>zuverlässige Vorhersagen</em> für <em>neue Datenpunkte</em>?</p>
+D.h. generiert das Modell <em>zuverlässige Vorhersagen</em> für <em>neue Datenpunkte</em>?</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Teile die verfügbaren Daten in einen Trainings- und einen Testteil auf, um abschätzen zu können, wie gut die Vorhersagen des Modells sein werden, wenn es später auf neue Datenpunkte angewendet wird, auf denen es nicht trainiert wurde</p>
+<p>Teile die verfügbaren Daten in einen Trainings- und einen Testteil auf, um abschätzen zu können, wie gut die Vorhersagen des Modells sein werden, wenn es später auf neue Datenpunkte angewendet wird, auf denen es nicht trainiert wurde.</p>
 </li>
 <li>
-<p>quantifiziere die Güte der Modellvorhersagen (auf dem Testset) mit einer geeigneten Evaluierungsmetrik (je nach Problemtyp)<br></p>
+<p>Quantifiziere die Güte der Modellvorhersagen auf dem Testset mit einer geeigneten Evaluierungsmetrik (je nach Problemtyp).<br></p>
 <div class="paragraph">
-<p>&#8658; Sind manche Fehler schwerwiegender als andere? (z.B. bei medizinischen Tests falsch positive vs. falsch negative Ergebnisse)<br>
-&#8658; Lege dich auf <em>eine</em> Metrik/KPI fest, anhand von der du unterschiedliche Modelle vergleichst und auswählst! (evtl. unter Berücksichtigung zusätzlicher Einschränkungen wie Laufzeit)</p>
+<p>&#8658; Sind manche Fehler schwerwiegender als andere (z.B. bei medizinischen Tests falsch positive vs. falsch negative Ergebnisse)?<br>
+&#8658; Lege dich auf <em>eine</em> Metrik/KPI fest, anhand derer du unterschiedliche Modelle vergleichst und auswählst (evtl. unter Berücksichtigung zusätzlicher Einschränkungen wie Laufzeit).</p>
 </div>
 </li>
 </ul>
@@ -730,7 +730,7 @@ d.h. generiert das Modell <em>zuverlässige Vorhersagen</em> für <em>neue Daten
 </div>
 </div>
 <div class="paragraph">
-<p>Beim Evaluieren eines Modells kann man allerdings leicht ein zu optimistisches Bild zeichnen, weshalb man die Ergebnisse immer kritisch hinterfragen und z.B. <strong>die Performance eines Modells mit der einer (dummen) Baseline vergleichen</strong> sollte (z.B. den Mittelwert (&#8594; Regression) oder die häufigste Klasse (&#8594; Klassifikation) vorhersagen).</p>
+<p>Beim Evaluieren eines Modells kann man allerdings leicht ein zu optimistisches Bild zeichnen, weshalb man die Ergebnisse immer kritisch hinterfragen und gegebenenfalls <strong>die Performance eines Modells mit der einer (dummen) Baseline vergleichen</strong> sollte, die den Mittelwert (&#8594; Regression) oder die häufigste Klasse (&#8594; Klassifikation) vorhersagt.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -741,7 +741,7 @@ d.h. generiert das Modell <em>zuverlässige Vorhersagen</em> für <em>neue Daten
 <p>Die Accuracy (Genauigkeit) ist ein sehr häufig verwendetes Evaluierungsmaß für Klassifikationsprobleme:<br>
 <strong>Accuracy:</strong> Anteil der Proben, die richtig klassifiziert wurden.</p>
 <div class="paragraph">
-<p>Unten sind die Entscheidungsgrenzen von zwei Modellen in einem Beispieldatensatz eingezeichnet (wobei der schattierte Hintergrund angibt, ob das Modell die blaue oder rote Klasse für einen Datenpunkt in diesem Bereich vorhersagen würde). Welches Modell hältst du für sinnvoller?</p>
+<p>Unten sind die Entscheidungsgrenzen von zwei Modellen in einem Beispieldatensatz eingezeichnet, wobei die Farbe des Hintergrunds angibt, ob das Modell die blaue oder rote Klasse für einen Datenpunkt in diesem Bereich vorhersagt. Welches Modell hältst du für sinnvoller?</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -749,10 +749,10 @@ d.h. generiert das Modell <em>zuverlässige Vorhersagen</em> für <em>neue Daten
 </div>
 </div>
 <div class="paragraph">
-<p>Bei unausgeglichenen Klassenverteilungen, wie in diesem Fall wo es viel mehr Datenpunkte aus der blauen im Vergleich zur roten Klasse gibt, kann die Accuracy eines Modells, das einfach immer die häufigste Klasse vorhersagt, recht groß sein. Eine Accuracy von 90% mag zwar beeindruckend klingen, wenn du den Stakeholdern des Projekts von der Performance deines Modells erzählst, bedeutet jedoch nicht unbedingt, dass das Modell tatsächlich in der Praxis nützlich ist, zumal uns bei realen Problemen oft die seltenere Klasse mehr interessiert (z.B. Menschen mit einer seltenen Krankheit oder Produkte, die einen Defekt aufweisen).</p>
+<p>Bei unausgeglichenen Klassenverteilungen, wie in diesem Fall mit viel mehr Datenpunkten aus der blauen im Vergleich zur roten Klasse, kann die Accuracy eines Modells, das einfach immer die häufigste Klasse vorhersagt, recht groß sein. Eine Accuracy von 90% mag zwar beeindruckend klingen, wenn du den Stakeholdern des Projekts von der Performance deines Modells berichtest, bedeutet jedoch nicht unbedingt, dass das Modell tatsächlich in der Praxis nützlich ist, zumal uns bei realen Problemen oft die seltenere Klasse mehr interessiert, z.B. Menschen mit einer seltenen Krankheit oder Produkte, die einen Defekt aufweisen.</p>
 </div>
 <div class="paragraph">
-<p>Eine aussagekräftigere Evaluierungsmetrik für Klassifikationsmodelle ist die Balanced Accuracy, mit der wir zwischen einem Modell, das tatsächlich etwas gelernt hat, und der dummen Baseline unterscheiden können:<br>
+<p>Eine aussagekräftigere Evaluierungsmetrik für Klassifikationsmodelle ist die Balanced Accuracy, mit der wir zwischen einem Modell, das tatsächlich etwas gelernt hat, und der &#8216;dummen Baseline&#8217; unterscheiden können:<br>
 <strong>Balanced Accuracy:</strong> Zuerst wird für jede Klasse einzeln der Anteil der richtig klassifizierten Stichproben berechnet und dann der Durchschnitt dieser Werte gebildet.</p>
 </div>
 <div class="imageblock text-center">

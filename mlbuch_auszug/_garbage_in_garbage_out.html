@@ -694,10 +694,10 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="sect2">
 <h3 id="_garbage_in_garbage_out">Garbage in, Garbage out!</h3>
 <div class="paragraph">
-<p>Vergiss nie: Daten sind unser Rohstoff, wenn wir mit ML etwas Wertvolles produzieren wollen. Wenn die Qualität oder Quantität der Daten nicht ausreicht, stehen wir vor einem &#8220;Garbage in, Garbage out&#8221;-Szenario und egal welche Art von ausgefallenem ML-Algorithmus wir verwenden, wir werden kein zufriedenstellendes Ergebnis erreichen (genau genommen, je aufwändiger die Algorithmen (z.B. Deep Learning), desto mehr Daten werden benötigt).</p>
+<p>Vergiss nie: Daten sind unser Rohstoff, um mit ML etwas Wertvolles zu produzieren. Ist die Qualität oder Quantität der Daten nicht ausreichend, stehen wir vor einem &#8220;Garbage in, Garbage out&#8221;-Szenario und egal welche Art von ausgefallenem ML-Algorithmus wir verwenden, wir werden kein zufriedenstellendes Ergebnis erreichen. Im Gegenteil, je aufwändiger die Algorithmen (z.B. Deep Learning), desto mehr Daten werden benötigt.</p>
 </div>
 <div class="paragraph">
-<p>Nachfolgend findest du eine Zusammenfassung einiger allgemeiner Risiken im Zusammenhang mit Daten, die die Anwendung von ML erschweren oder sogar unmöglich machen können:</p>
+<p>Nachfolgend findest du eine Zusammenfassung einiger allgemeiner Risiken im Zusammenhang mit Daten, die die Anwendung von ML erschweren oder sogar unmöglich machen:</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -708,19 +708,19 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="ulist">
 <ul>
 <li>
-<p>Relevante Daten können auf mehrere Datenbanken/Excel-Tabellen verteilt sein, die zusammengeführt werden müssen. <em>Worst Case:</em> Datenpunkte haben keine eindeutige ID, anhand derer die verschiedenen Einträge verknüpft werden können, sondern man muss auf eine fehleranfällige Strategie zurückgreifen, wie den Datenabgleich anhand von Zeitstempeln.</p>
+<p>Relevante Daten sind auf mehrere Datenbanken/Excel-Tabellen verteilt, die zusammengeführt werden müssen. <em>Worst Case:</em> Datenpunkte haben keine eindeutige ID, anhand derer sich die verschiedenen Einträge verknüpfen lassen. Stattdessen muss man auf eine fehleranfällige Strategie zurückgreifen, wie den Datenabgleich anhand von Zeitstempeln.</p>
 </li>
 <li>
-<p>Manuell eingegebene Werte können Fehler enthalten, z.B. falsch platzierte Dezimalkommas.</p>
+<p>Manuell eingegebene Werte enthalten Fehler, z.B. falsch platzierte Dezimalkommas.</p>
 </li>
 <li>
-<p>Fehlende Werte können möglicherweise nicht korrigiert werden. <em>Worst Case:</em> fehlende Werte sind nicht zufällig. Z.B. können Sensoren immer genau dann versagen, wenn während des Produktionsprozesses etwas schief geht oder in Umfragen zum Einkommen verweigern reiche Leute im Vergleich zu armen oder mittelständischen Menschen häufiger Antwort. Dies kann zu systematischen Verzerrungen im Datensatz führen.</p>
+<p>Fehlende Werte können nicht korrigiert werden. <em>Worst Case:</em> Fehlende Werte sind nicht zufällig. Beispielsweise versagen Sensoren genau dann, wenn während des Produktionsprozesses etwas schief geht. Oder im Rahmen einer Umfrage zum Einkommen verweigern reiche Personen im Vergleich zu armen oder mittelständischen Personen häufiger die Antwort. Dies kann zu systematischen Verzerrungen im Datensatz führen.</p>
 </li>
 <li>
-<p>Der Datensatz kann aus verschiedenen Datentypen (strukturiert und/oder unstrukturiert) mit unterschiedlichen Skalierungen bestehen.</p>
+<p>Der Datensatz besteht aus verschiedenen Datentypen (strukturiert und/oder unstrukturiert) mit unterschiedlichen Skalierungen.</p>
 </li>
 <li>
-<p>Der Prozess kann sich im Laufe der Zeit geändert haben (z.B. aufgrund externer Bedingungen wie dem Austausch eines Sensors oder einem anderen Wartungsereignis), was bedeutet, dass die über verschiedene Zeiträume gesammelten Daten nicht kompatibel sind. <em>Worst Case:</em> Diese externen Veränderungen wurden nirgendwo aufgezeichnet und wir bemerken erst am Ende der Analyse, dass die Daten, mit denen wir gearbeitet haben, unsere Annahmen verletzten.</p>
+<p>Der Prozess ändert sich im Laufe der Zeit, z.B. aufgrund externer Bedingungen wie dem Austausch eines Sensors oder einem anderen Wartungsereignis, was bedeutet, dass die über verschiedene Zeiträume gesammelten Daten nicht kompatibel sind. <em>Worst Case:</em> Diese externen Veränderungen wurden nirgendwo aufgezeichnet und wir bemerken erst am Ende der Analyse, dass die verwendeten Daten unsere Annahmen verletzten.</p>
 </li>
 </ul>
 </div>
@@ -729,7 +729,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 <div class="paragraph">
 <p>&#8594; Preprocessing von Daten dauert sehr lange<br>
-&#8594; Der resultierende Datensatz (nach der Bereinigung) kann viel kleiner sein als erwartet&#8201;&#8212;&#8201;möglicherweise zu klein, um eine sinnvolle Analyse durchzuführen</p>
+&#8594; Der resultierende Datensatz (nach der Bereinigung) ist viel kleiner als erwartet&#8201;&#8212;&#8201;möglicherweise zu klein, um eine sinnvolle Analyse durchzuführen</p>
 </div>
 <div class="paragraph">
 <p>&#8658; Bevor du mit ML anfängst, überlege erst, ob du die Datenerfassungspipeline und Infrastruktur verbessern kannst!</p>
@@ -745,24 +745,24 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="ulist">
 <ul>
 <li>
-<p>Ein kleiner Datensatz und/oder zu wenig Variation (z.B. wenn nur sehr wenige defekte Produkte produziert werden oder ein Prozess die meiste Zeit im stationären Zustand läuft, d.h. es gibt nur wenig oder keine Variation bei den Inputs)<br>
+<p>Ein kleiner Datensatz und/oder zu wenig Variation, z.B. werden nur sehr wenige defekte Produkte produziert oder ein Prozess läuft die meiste Zeit im stationären Zustand, d.h. es gibt nur wenig oder keine Variation bei den Inputs<br>
 &#8594; Auswirkung verschiedener Eingangsgrößen auf die Zielvariable kann aus wenigen Beobachtungen nicht zuverlässig abgeschätzt werden<br>
 &#8658; Führe gezielt Experimente durch, bei denen verschiedene Inputs systematisch variiert werden, um einen aussagekräftigeren Datensatz zu generieren</p>
 </li>
 <li>
-<p>Daten sind inkonsistent / unvollständig (also gleiche Inputs aber unterschiedliche Labels, z.B. zwei Produkte unter den gleichen (gemessenen) Bedingungen produziert, eins ist es in Ordnung, eins kaputt)</p>
+<p>Daten sind inkonsistent / unvollständig, also es gibt Datenpunkte mit gleichen Inputs aber unterschiedlichen Labels, z.B. zwei Produkte wurden unter den gleichen (gemessenen) Bedingungen produziert, eins ist in Ordnung, eins fehlerhaft.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>entweder sind die Labels sehr verrauscht, weil die menschlichen Annotatoren beispielsweise nicht dieselben klaren Regeln befolgten oder einige Beispiele mehrdeutig waren (z.B. der eine QA-Experte sagt ein kleiner Kratzer ist noch in Ordnung, der andere sortiert das Produkt aus)<br>
-&#8658; Daten durch Neuannotation bereinigen (was einige Zeit dauern kann, sich aber auszahlt!&#8201;&#8212;&#8201;siehe auch dieser tolle <a href="https://youtu.be/06-AZXmwHjo" target="\_blank">MLOps / data-centric AI Vortrag von Andrew Ng</a> darüber, wie ein kleiner sauberer Datensatz wertvoller sein kann als ein großer verrauschter Datensatz)</p>
+<p>Die Labels sind sehr verrauscht, weil die menschlichen Annotatoren beispielsweise nicht dieselben klaren Regeln befolgten oder einige Beispiele mehrdeutig waren (z.B. ein QA-Experte sagt ein kleiner Kratzer ist noch in Ordnung, der andere sortiert das Produkt aus)<br>
+&#8658; Daten durch Neuannotation bereinigen, was einige Zeit dauern kann, sich aber auszahlt! Siehe auch dieser tolle <a href="https://youtu.be/06-AZXmwHjo" target="\_blank">MLOps / data-centric AI Vortrag von Andrew Ng</a> darüber, wie ein kleiner sauberer Datensatz wertvoller sein kann als ein großer verrauschter Datensatz.</p>
 </li>
 <li>
-<p>oder weil relevante Features fehlen (&#8594; Menschen können zwar relativ einfach beurteilen, ob alle relevanten Informationen in unstrukturierten Daten enthalten sind (z.B. Bilder: entweder sehen wir eine Katze oder nicht), strukturierte Daten haben dagegen oft zu viele verschiedene Variablen und komplexe Interaktionen, um sofort zu erkennen, ob alle relevanten Eingangsgrößen gemessen wurden)<br>
-&#8658; sprich mit einem Fachexperten darüber, welche zusätzlichen Features hilfreich sein könnten und in den Datensatz aufgenommen werden sollten. <em>Worst Case:</em> es muss ein neuer Sensor in die Maschine eingebaut werden um diese Daten zu sammeln, d.h. alle in der Vergangenheit gesammelten Daten sind im Grunde nutzlos. ABER: Der Einsatz des richtigen Sensors kann das Problem immens vereinfachen und der Einbau lohnt sich!<br>
-<span class="small">Bei vielen Anwendungen ist unser erster Instinkt oft, die Eingabedaten mithilfe einer Kamera zu generieren, da wir Menschen hauptsächlich auf unser visuelles System angewiesen sind, um viele Aufgaben zu lösen. Auch wenn Bilderkennungsalgorithmen mittlerweile sehr ausgereift sind, kann die Verwendung eines solchen Setups anstelle eines spezialisierteren Sensors die Lösung komplizierter machen.<br>
+<p>Relevante Features fehlen &#8594; Menschen können zwar relativ einfach beurteilen, ob alle relevanten Informationen in unstrukturierten Daten enthalten sind (z.B. Bilder: entweder sehen wir eine Katze oder nicht), strukturierte Daten haben dagegen oft zu viele verschiedene Variablen und komplexe Interaktionen, um sofort zu erkennen, ob alle relevanten Eingangsgrößen gemessen wurden<br>
+&#8658; Sprich mit einem Fachexperten darüber, welche zusätzlichen Features hilfreich sein könnten und nimm diese in den Datensatz mit auf. <em>Worst Case:</em> Es muss ein neuer Sensor in die Maschine eingebaut werden um diese Daten zu sammeln, d.h. alle in der Vergangenheit gesammelten Daten sind im Grunde nutzlos. ABER: Der Einsatz des richtigen Sensors kann das Problem immens vereinfachen und der Einbau lohnt sich!<br>
+<span class="small">Bei vielen Anwendungen ist unser erster Gedanke oft, die Eingabedaten mithilfe einer Kamera zu generieren, da wir Menschen hauptsächlich auf unser visuelles System angewiesen sind, um viele Aufgaben zu lösen. Auch wenn Bilderkennungsalgorithmen mittlerweile sehr ausgereift sind, kann die Verwendung eines solchen Setups anstelle eines spezialisierteren Sensors die Lösung komplizierter machen.<br>
 Willst du überreife Erdbeeren erkennen? Machs wie <a href="https://www.aboutamazon.co.uk/innovation/machine-learning-using-algorithms-to-sort-fruit" target="\_blank">Amazon Fresh</a> und verwende einen Nahinfrarotsensor (NIR) anstelle einer normalen Kamera. Dabei wird immer noch maschinelles Lernen verwendet um die resultierenden Daten zu analysieren, aber in den NIR-Bildern sind die vergammelten Teile der Früchte viel besser sichtbar als auf normalen Fotos.<br>
-Versucht du zu erkennen, ob eine Tür geschlossen ist? Mit einem einfachen <a href="https://www.deeplearning.ai/the-batch/issue-92/" target="\_blank">Magnet</a> und Detektor lässt sich diese Aufgabe ganz einfach ohne aufwändige Analyse oder Trainingsdaten lösen! (Du kennst bestimmt das berühmte Sprichwort: &#8220;Wenn du einen Hammer hast, sieht alles aus wie ein Nagel&#8221;. &#8594; Vergiss nicht, auch Lösungen außerhalb deiner ML-Toolbox in Betracht zu ziehen! ;-))</span></p>
+Versuchst du zu erkennen, ob eine Tür geschlossen ist? Mit einem einfachen <a href="https://www.deeplearning.ai/the-batch/issue-92/" target="\_blank">Magneten</a> und Detektor lässt sich diese Aufgabe ohne aufwändige Analyse oder Trainingsdaten lösen! (Du kennst bestimmt das Sprichwort: &#8220;Wenn du einen Hammer hast, sieht alles aus wie ein Nagel&#8221;. &#8594; Vergiss nicht, auch Lösungen außerhalb deiner ML-Toolbox in Betracht zu ziehen! ;-))</span></p>
 </li>
 </ul>
 </div>
@@ -784,7 +784,7 @@ Versucht du zu erkennen, ob eine Tür geschlossen ist? Mit einem einfachen <a hr
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Beobachte wenn möglich wie die Daten erfasst werden, im Sinne von: Stehe tatsächlich physisch da und beobachte, wie jemand die Werte in ein Programm eingibt oder wie die Maschine arbeitet, wenn die Sensoren etwas messen. Sicherlich werden dir einige Dinge auffallen, die man direkt bei der Datenerhebung optimieren könnte, was in Zukunft dann viel Preprocessing Arbeit erspart.
+Beobachte wenn möglich wie die Daten erfasst werden, im Sinne von: Stehe tatsächlich physisch da und beobachte, wie jemand die Werte in ein Programm eingibt oder wie die Maschine arbeitet, wenn die Sensoren etwas messen. Sicherlich werden dir einige Dinge auffallen, die man direkt bei der Datenerhebung optimieren könnte. Dies erspart in Zukunft viel Preprocessing Arbeit.
 </td>
 </tr>
 </table>
@@ -793,7 +793,7 @@ Beobachte wenn möglich wie die Daten erfasst werden, im Sinne von: Stehe tatsä
 <dl>
 <dt class="hdlist1">Best Practice: Datenkatalog</dt>
 <dd>
-<p>Für jede Variable (in strukturierten Datensätzen) sollte es Zusatzinformationen geben wie:</p>
+<p>In strukturierten Datensätzen sollte es für jede Variable Zusatzinformationen geben wie:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -809,16 +809,16 @@ Beobachte wenn möglich wie die Daten erfasst werden, im Sinne von: Stehe tatsä
 <p>Datentyp (z.B. numerische oder kategorische Werte)</p>
 </li>
 <li>
-<p>Datum, seit wann diese Variable aufgezeichnet wird</p>
+<p>Datum der ersten Messung</p>
 </li>
 <li>
-<p>Normaler/erwarteter Wertebereich (&#8594; &#8220;Wenn diese Variable unter diesem Schwellwert liegt, dann ist die Maschine ausgeschaltet und die Datenpunkte können ignoriert werden&#8221;)</p>
+<p>Normaler/erwarteter Wertebereich (&#8594; &#8220;Wenn die Variable unter diesem Schwellwert liegt, dann ist die Maschine ausgeschaltet und die Datenpunkte können ignoriert werden&#8221;)</p>
 </li>
 <li>
-<p>Wie fehlende Werte aufgezeichnet werden (d.h. werden sie tatsächlich als fehlende Werte aufgezeichnet oder stattdessen durch einen unrealistischen Wert ersetzt, was passieren kann, da einige Sensoren kein Signal für &#8220;Not a Number&#8221; (NaN) senden können oder die Datenbank es nicht zulässt, dass das Feld leer bleibt)</p>
+<p>Wie werden fehlende Werte aufgezeichnet, d.h. werden sie tatsächlich als fehlende Werte aufgezeichnet oder stattdessen durch einen unrealistischen Wert ersetzt, was passieren kann, da einige Sensoren kein Signal für &#8220;Not a Number&#8221; (NaN) senden können oder die Datenbank es nicht zulässt, dass das Feld leer bleibt.</p>
 </li>
 <li>
-<p>Hinweise zu allem anderen, was man beachten sollte, z.B. eine Fehlfunktion des Sensors während eines bestimmten Zeitraums oder ein anderer Fehler, der zu falschen Daten geführt hat (die manchmal schwer zu erkennen sind, z.B. wenn jemand stattdessen manuell Werte eingibt oder kopiert hat, die auf den ersten Blick vielleicht nicht auffällig aussehen)</p>
+<p>Anmerkungen zu sonstigen Vorfällen oder Ereignissen, z.B. eine Fehlfunktion des Sensors während eines bestimmten Zeitraums oder ein anderer Fehler, der zu falschen Daten geführt hat. Diese sind sonst oft schwer zu erkennen, z.B. wenn jemand stattdessen manuell Werte eingibt oder kopiert hat, die auf den ersten Blick normal aussehen.</p>
 </li>
 </ul>
 </div>
@@ -853,7 +853,7 @@ Beobachte wenn möglich wie die Daten erfasst werden, im Sinne von: Stehe tatsä
 <div class="content">
 <img src="../images/09_ml_in_practice/data_responsibility.png" alt="image" width="540">
 </div>
-<div class="title"><span class="small">Ein Fitness-Tracker-Startup hielt es für eine coole Idee, beliebte Joggingrouten basierend auf den von ihren Nutzern generierten Daten zu veröffentlichen. Da aber auch viele US-Soldaten den Tracker benutzten und häufig um ihre Militärstützpunkte joggten, hat dieses Startup dadurch versehentlich einen geheimen US-Armeestützpunkt in Afghanistan geoutet, der auf ihrer interaktiven Karte als heller Punkt in einem Gebiet auftauchte wo sonst nur wenige andere Nutzer joggten. Auch wenn deine Daten erst mal harmlos erscheinen, denk bitte darüber nach, was bei einer Veröffentlichung (auch in aggregierter, anonymisierter Form) schief gehen könnte!</span></div>
+<div class="title"><span class="small">Ein Fitness-Tracker-Startup hielt es für eine coole Idee, beliebte Joggingrouten basierend auf den von ihren Nutzern generierten Daten zu veröffentlichen. Da aber auch viele US-Soldaten den Tracker benutzten und häufig um ihre Militärstützpunkte joggten, hat dieses Startup dadurch versehentlich einen geheimen US-Armeestützpunkt in Afghanistan geoutet, der auf ihrer interaktiven Karte als heller Punkt in einem Gebiet auftauchte, wo sonst nur wenige andere Nutzer joggten. Auch wenn deine Daten erst mal harmlos erscheinen, denk bitte darüber nach, was bei einer Veröffentlichung (auch in aggregierter, anonymisierter Form) schief gehen könnte!</span></div>
 </div>
 </dd>
 </dl>

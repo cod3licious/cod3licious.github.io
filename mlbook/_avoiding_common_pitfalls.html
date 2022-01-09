@@ -817,7 +817,7 @@ All models are wrong, but some are useful.
 <p>Carefully analyze the model&#8217;s prediction errors to check for systematic errors, which would indicate that the data might violate your initial assumptions (&#8594; performance for all classes should be approximately the same; the <a href="https://statisticsbyjim.com/regression/check-residual-plots-regression-analysis/" target="\_blank">residuals</a> in a regression problem should be <a href="https://www4.stat.ncsu.edu/~stefanski/NSF_Supported/Hidden_Images/Residual_Surrealism_TAS_2007.pdf" target="\_blank">independent</a>).</p>
 </li>
 <li>
-<p>Verify that the model does not discriminate. Due to the large quantities of data used to train ML models, it is not always possible to ensure that the training data does not contain any systematic biases (e.g., gender/race stereotypes) that a model might pick up on, but it is important to test the model on a well balanced and controlled test set to catch any discrimination before the model is deployed in production.</p>
+<p>Verify that the model does not discriminate. Due to the large quantities of data used to train ML models, it is not always possible to ensure that the training data does not contain any systematic biases (e.g., ethnicity/gender stereotypes) that a model might pick up on, but it is important to test the model on a well balanced and controlled test set to catch any discrimination before the model is deployed in production.</p>
 </li>
 <li>
 <p>Interpret the model and <a href="_explainability_interpretable_ml.html">explain its predictions</a>: Does it use the features you (or a domain expert) expected it to use or does it make the predictions based on any spurious correlations?</p>
@@ -836,9 +836,9 @@ All models are wrong, but some are useful.
 <dl>
 <dt class="hdlist1">And after the model was deployed&#8230;&#8203;</dt>
 <dd>
-<p><span class="underline">One of the biggest problems in practice: Data &amp; Concept Drifts:</span></p>
+<p><span class="underline">One of the biggest problems in practice: Data and Concept Drifts:</span></p>
 <div class="paragraph">
-<p><strong>ML fails silently!</strong> I.e., the program does not simply crash even if all predictions are wrong<br>
+<p><strong>ML fails silently!</strong> I.e., even if all predictions are wrong, the program does not simply crash with some error message.<br>
 &#8594; Need constant monitoring to detect changes that lead to a deteriorating performance!</p>
 </div>
 </dd>
@@ -855,7 +855,7 @@ All models are wrong, but some are useful.
 <div class="ulist">
 <ul>
 <li>
-<p>External factors (e.g., changes in the process structure / setup, for example, in a new version of a machine a temperature sensor is now in a different place but still logs values under the same variable name)</p>
+<p>External factors (e.g., changes in the process structure / setup: In a new version of a machine, the temperature sensor is in a different place, but still logs values under the same variable name.)</p>
 </li>
 <li>
 <p>Internal factors (feedback loop: presence of ML model alters behavior, for example, spammers change their strategy to evade the spam filter)</p>

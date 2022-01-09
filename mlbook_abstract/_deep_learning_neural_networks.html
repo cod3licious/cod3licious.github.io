@@ -762,7 +762,7 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <dd>
 <p><span class="small">[Adapted from: &#8220;AI for everyone&#8221; by Andrew Ng (coursera.org)]</span></p>
 <div class="paragraph">
-<p>Let&#8217;s say you have an online shop and are trying to predict how much of a product you will sell in the next month. The price you are willing to sell the product for will obviously influence the demand, as people are trying to get a good deal, i.e., the lower the price, the higher the demand; a negative correlation that can be captured by a linear model. However, the demand will never be below zero (i.e., when the price is very high, people wont suddenly return the product), so we need to adapt the model such that the predicted output is never negative. This can be achieved by applying the max function, in this context also called a non-linear activation function, to the output of the linear model, so that now when the linear model would return a negative value, we instead predict 0.</p>
+<p>Let&#8217;s say we have an online shop and are trying to predict how much of a product we will sell in the next month. The price we are willing to sell the product for will obviously influence the demand, as people are trying to get a good deal, i.e., the lower the price, the higher the demand; a negative correlation that can be captured by a linear model. However, the demand will never be below zero (i.e., when the price is very high, people wont suddenly return the product), so we need to adapt the model such that the predicted output is never negative. This can be achieved by applying the max function, in this context also called a non-linear activation function, to the output of the linear model, so that now when the linear model would return a negative value, we instead predict 0.</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -771,10 +771,10 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <div class="title"><span class="small">A very simple linear model with one input and one output variable and a non-linear activation function (the max function).</span></div>
 </div>
 <div class="paragraph">
-<p>Together, this functional relationship can be visualized as a circle with one input <em>(price)</em> and one output <em>(demand)</em>, where the incoming arrow represents the weight multiplied with the input feature and the S-curve in the circle indicates that a non-linear activation function is applied to the result. We will later see these circles as a single unit or &#8220;neuron&#8221; of a neural network.</p>
+<p>This functional relationship can be visualized as a circle with one input <em>(price)</em> and one output <em>(demand)</em>, where the S-curve in the circle indicates that a non-linear activation function is applied to the result. We will later see these circles as single units or &#8220;neurons&#8221; of a neural network.</p>
 </div>
 <div class="paragraph">
-<p>To get better results, you can extend the model and use multiple input features for the prediction:</p>
+<p>To get better results, we can extend the model and use multiple input features for the prediction:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -783,22 +783,22 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <div class="title"><span class="small">A linear model with multiple inputs, where the prediction is computed as a weighted sum of the inputs, together with the max function to prevent negative values.</span></div>
 </div>
 <div class="paragraph">
-<p>To further improve the performance, you could now manually construct more informative features from the original inputs by combining them in meaningful ways (&#8594; feature engineering) before computing the output:</p>
+<p>To improve the performance even further, we could now manually construct more informative features from the original inputs by combining them in meaningful ways (&#8594; feature engineering) before computing the output:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/05_supervised_nn/neural_network_intuitive_b6.png" alt="image" width="540">
 </div>
-<div class="title"><span class="small">You can probably come up with a few more informative features, derived from the original input variables, to further improve the prediction accuracy. For example, since you&#8217;re running an online shop, the customers also have to pay shipping fees, which means to reflect the true affordability of the product, you actually need to combine the product price with the shipping costs. Next, the customers are interested in high quality products. However, not only the actual quality of the raw materials you used to make your product influences how your customers perceive the product, but you can also reinforce the impression that your product is of high quality with a marketing campaign. Furthermore, a high price also suggests that your product is superior. This means by creating these additional features, the price can actually contribute in two ways towards the final prediction: while, on the one hand, a lower price is beneficial for the affordability of the product, a higher price, on the other hand, will result in a larger perceived quality.</span></div>
+<div class="title"><span class="small">Our example is about an online shop, so the customers additionally have to pay shipping fees, which means to reflect the true affordability of the product, we need to combine the product price with the shipping costs. Next, the customers are interested in high quality products. However, not only the actual quality of the raw materials we used to make the product influences how the customers perceive the product, but we can also reinforce the impression that the product is of high quality with a marketing campaign. Furthermore, a high price also suggests that the product is superior. This means by creating these additional features, the price can actually contribute in two ways towards the final prediction: while, on the one hand, a lower price is beneficial for the affordability of the product, a higher price, on the other hand, results in a larger perceived quality.</span></div>
 </div>
 <div class="paragraph">
-<p>While in this toy example, it was possible to construct such features manually, the nice thing about neural networks is that they do exactly that automatically: By using multiple layers, i.e., stacking multiple linear models (with non-linear activation functions) on top of each other, it is possible to create more and more complex combinations of the original input features, which can improve the performance of the model. The more layers the network uses (i.e., the &#8220;deeper&#8221; it is), the more complex the resulting feature representations.</p>
+<p>While in this toy example, it was possible to construct such features manually, the nice thing about neural networks is that they do exactly that automatically: By using multiple layers, i.e., stacking multiple linear models (with non-linear activation functions) on top of each other, it is possible to create more and more complex combinations of the original input features, which can improve the performance of the model. The more layers the network uses, i.e., the &#8220;deeper&#8221; it is, the more complex the resulting feature representations.</p>
 </div>
 </dd>
 </dl>
 </div>
 <div class="paragraph">
-<p>Since different tasks (and especially different types of input data) benefit from different feature representations, there exist different types of neural network architectures to accommodate this, e.g.</p>
+<p>Since different tasks and especially different types of input data benefit from different feature representations, there exist different types of neural network architectures to accommodate this, e.g.</p>
 </div>
 <div class="openblock">
 <div class="content">
@@ -859,7 +859,7 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <div class="content">
 <img src="../images/05_supervised_nn/nn_architectures4.png" alt="image" width="740">
 </div>
-<div class="title"><span class="small">As we&#8217;ve seen in the CNN used for face recognition (image classification) above, the representation generated by the CNN is at some point flattened and a FFNN then computes the final prediction for the classification task. Similarly, the final hidden state of a RNN, representing the information contained in a sentences, can be passed to a FFNN to generate a prediction (e.g., for sentiment analysis). However, some problems do not fall into the category of simple supervised learning tasks (i.e., regression or classification), and require a different output. For example, in machine translation, the output should be the sentence translated into the other language, which can be achieved by coupling two RNNs: the first &#8216;understands&#8217; the sentence in the original language and this representation of the meaning of the sentence is then passed to a second RNN, which generates from it the translated sentence word by word. Another example would be the task of image captioning (i.e., generating text describing what can be seen on an image, e.g., to improve the online experience for the visually impaired), where first the image is &#8216;understood&#8217; by a CNN and then this representation of the input image is passed to a RNN to generate the matching text.</span></div>
+<div class="title"><span class="small">As we&#8217;ve seen in the CNN used for face recognition (image classification) above, the representation generated by the CNN is at some point flattened and a FFNN then computes the final prediction for the classification task. Similarly, the final hidden state of a RNN, representing the information contained in a sentences, can be passed to a FFNN to generate a prediction (e.g., for sentiment analysis). However, some problems do not fall into the category of simple supervised learning tasks (i.e., regression or classification), and require a different output. For example, in machine translation, the output should be the sentence translated into the other language, which can be achieved by coupling two RNNs: the first &#8216;understands&#8217; the sentence in the original language and this representation of the meaning of the sentence is then passed to a second RNN, which generates from it the translated sentence word by word. Another example would be the task of image captioning (i.e., generating text describing what can be seen on an image, e.g., to improve the online experience for people with visual impairment), where first the image is &#8216;understood&#8217; by a CNN and then this representation of the input image is passed to a RNN to generate the matching text.</span></div>
 </div>
 </div>
 </div>

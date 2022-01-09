@@ -702,7 +702,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="sect2">
 <h3 id="_pitfall_4_model_discriminates">[Pitfall #4] Model discriminates</h3>
 <div class="paragraph">
-<p>It is not only important to think about what the true causal relations between variables might be, but also if there could be some causal relationships encoded in the historic data that you <em>don&#8217;t</em> want a model to pick up on. For example, if you know that in the past there was some gender or race discrimination going on that might have leaked into your training data, e.g., white men getting systematically lower interest rates on credits that can not solely be explained by their higher incomes, you might want to take some extra measures to make sure that these relations, although they might have been true causal relationships in the past, are not present in your model now.</p>
+<p>As we ponder the true causal relations between variables in the data, we also need to consider whether there are some causal relationships encoded in the historic data that we <em>don&#8217;t</em> want a model to pick up on. For example, discrimination based on gender or ethnicity can leak into the training data, e.g., if white men got systematically lower credit interest rates that can not solely be explained by their higher incomes. If this is the case, we need to take extra measures to make sure that these relations, although they might have been true causal relationships in the past, are not present in your model now.</p>
 </div>
 <div class="dlist">
 <dl>
@@ -718,7 +718,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="content">
 <img src="../images/07_data_issues/bias_microsoft_tay.png" alt="image" width="550">
 </div>
-<div class="title"><span class="small">What started out as a research project to see how humans would interact with an AI-based chatbot, ended up as a PR-nightmare for Microsoft. The chatbot was supposed to learn from the messages written to it, but since the developers apparently thought more about their natural language models instead of human behavior on the internet, Tay quickly learned to repeat all the racist, sexists things others tweeted at her.</span></div>
+<div class="title"><span class="small">What started as a research project to see how humans would interact with an AI-based chatbot, ended as a PR-nightmare for Microsoft. The chatbot was supposed to learn from the messages written to it, but since the developers apparently thought more about their natural language models instead of human behavior on the internet, Tay mainly repeated all the racist, sexists things others tweeted.</span></div>
 </div>
 </div>
 </div>
@@ -728,7 +728,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="content">
 <img src="../images/07_data_issues/bias_twitter_imagecrop.png" alt="image" width="550">
 </div>
-<div class="title"><span class="small">Since many images posted on Twitter are larger than the available space for the preview image, Twitter decided to train a model to select "the most relevant part" of an image to be displayed as a preview. Unfortunately, as they had trained this model on a dataset with more pictures of white than black or brown people, the model became racist and, for example, given a picture with Barack Obama and some random unimportant white politician, it would always select the white politician for the preview image. Similarly, such cropping algorithms were also reported to more often select faces as preview images for men and the body (specifically, you&#8217;ve guessed it, boobs) as preview images for women.</span></div>
+<div class="title"><span class="small">Since many of the images posted on Twitter are larger than the available space for the preview image, Twitter decided to train a model to select &#8220;the most relevant part&#8221; of an image to be displayed as a preview. Unfortunately, as they had trained this model on a dataset with more pictures of white people than people of color, the model became racist and, for example, given a picture of Barack Obama and some random unimportant white politician, it always selected the white politician for the preview image. Similarly, such cropping algorithms were also reported to more often select faces as preview images for men and the body (specifically, you&#8217;ve guessed it, boobs) as preview images for women.</span></div>
 </div>
 </div>
 </div>
@@ -754,7 +754,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <p>Tay has seen much more racist and hateful comments and tweets than &#8216;normal&#8217; ones</p>
 </li>
 <li>
-<p>The image dataset Twitter trained its model on included more pictures of white compared to people of color</p>
+<p>The image dataset Twitter trained its model on included more pictures of white people compared to people of color</p>
 </li>
 <li>
 <p>Similarly, given a random collection of photos from the internet, these images will have mostly been uploaded by people from developed countries, i.e., pictures displaying the status quo in developing nations will be underrepresented</p>
@@ -778,13 +778,13 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 </div>
 <div class="paragraph">
-<p>In general, you should always be very careful when including variables in the model that encode attributes such as gender or race. For example, the performance of a model that diagnoses heart attacks will most likely be improved by including &#8216;gender&#8217; as a feature, since men and women present different symptoms when they have a heart attack. On the other hand, a model that assigns someone a credit score should probably not rely on the gender of the person for this decision, since, even though this might have been the case in the historic data because the humans that generated the data relied on their own stereotypes, women should not get a lower score just because they are female.
-However, a person&#8217;s gender or race, for example, might also be correlated with other variables such as income or neighborhood, so even features that look innocent at first might still leak problematic information to the model and require some extra steps to ensure the model does not discriminate.</p>
+<p>In general, you should always be very careful when including variables in the model that encode attributes such as gender or ethnicity. For example, the performance of a model that diagnoses heart attacks will most likely be improved by including &#8216;gender&#8217; as a feature, since men and women present different symptoms when they have a heart attack. On the other hand, a model that assigns someone a credit score should probably not rely on the gender of the person for this decision, since, even though this might have been the case in the historic data because the humans that generated the data relied on their own stereotypes, women should not get a lower score just because they are female.
+However, a person&#8217;s gender or ethnicity, for example, is often correlated with other variables such as income or neighborhood, so even inconspicuous features can still leak problematic information to the model and require some extra steps to ensure the model does not discriminate.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="paragraph">
-<p>Other examples of what not to do: <a href="https://incidentdatabase.ai/" target="\_blank">AI Incidence Database</a> and</p>
+<p>For other examples of what not to do, check out the <a href="https://incidentdatabase.ai/" target="\_blank">AI Incidence Database</a> and</p>
 </div>
 <div class="openblock float-group">
 <div class="content">

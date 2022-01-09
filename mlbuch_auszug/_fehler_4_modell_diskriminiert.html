@@ -702,11 +702,11 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="sect2">
 <h3 id="_fehler_4_modell_diskriminiert">[Fehler #4] Modell diskriminiert</h3>
 <div class="paragraph">
-<p>Es ist nicht nur wichtig, darüber nachzudenken, was die wahren kausalen Zusammenhänge zwischen Variablen sein könnten, sondern auch, ob in den historischen Daten kausale Zusammenhänge enthalten sein könnten, die ein Modell <em>nicht</em> aufgreifen soll. Wenn wir beispielsweise wissen, dass in der Vergangenheit Menschen aufgrund ihres Geschlechts oder ihrer Hautfarbe diskriminiert wurden und dies möglicherweise auch in unseren Trainingsdaten enthalten sein könnte (z.B. weiße Männer erhielten systematisch niedrigere Kreditzinsen, die nicht allein durch ihr höheres Einkommen erklärt werden können), müssen wir zusätzliche Maßnahmen ergreifen um sicherzustellen, dass diese Zusammenhänge, obwohl sie in der Vergangenheit vielleicht echte kausale Zusammenhänge waren, jetzt nicht mehr in unserem Modell weiterbestehen.</p>
+<p>Ein Modell, welches echte kausale Zusammenhänge zwischen den Variablen aufgegriffen hat, generiert zwar robustere Vorhersagen, doch es kann auch kausale Zusammenhänge in den historischen Daten geben, die ein Modell besser <em>nicht</em> lernen sollte. Wenn in der Vergangenheit Menschen aufgrund ihres Geschlechts oder ihrer Hautfarbe diskriminiert wurden, kann sich dies auch in den Trainingsdaten widerspiegeln, z.B. wenn weiße Männer systematisch niedrigere Kreditzinsen erhielten, die nicht allein durch ihr höheres Einkommen erklärt werden können. In solchen Fällen müssen wir zusätzliche Maßnahmen ergreifen, damit diese Zusammenhänge nicht in unserem Modell weiterbestehen&#8201;&#8212;&#8201;obwohl es in der Vergangenheit vielleicht echte kausale Zusammenhänge waren.</p>
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Systematisch verzerrte Daten führen zu (stark) verzerrten Modellen </dt>
+<dt class="hdlist1">Systematisch verzerrte Daten führen zu (stark) verzerrten Modellen</dt>
 <dd>
 <p>Im Folgenden sind einige Beispiele aufgeführt, bei denen Menschen mit den besten Absichten ein ML-Modell entwickelt haben, das problematische Dinge aus realen Daten gelernt hat.</p>
 </dd>
@@ -718,7 +718,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="content">
 <img src="../images/07_data_issues/bias_microsoft_tay.png" alt="image" width="550">
 </div>
-<div class="title"><span class="small">Was als Forschungsprojekt begann, um herauszufinden, wie Menschen mit einem KI-basierten Chatbot interagieren, endete für Microsoft als PR-Albtraum. Der Chatbot &#8216;Tay&#8217; sollte aus den an sie geschriebenen Nachrichten lernen, aber da die Entwickler offenbar mehr über ihre ML-Modelle als über menschliches Verhalten im Internet nachdachten, lernte Tay schnell, all die rassistischen, sexistischen Dinge zu wiederholen, die andere ihr gegenüber twitterten.</span></div>
+<div class="title"><span class="small">Was als Forschungsprojekt begann, um herauszufinden, wie Menschen mit einem KI-basierten Chatbot interagieren, endete für Microsoft als PR-Albtraum. Der Chatbot &#8216;Tay&#8217; sollte aus den an sie geschriebenen Nachrichten lernen. Aber da die Entwickler offenbar mehr über ihre ML-Modelle als über menschliches Verhalten im Internet nachdachten, wiederholte Tay vor allem rassistische und sexistische Aussagen, die andere ihr gegenüber twitterten.</span></div>
 </div>
 </div>
 </div>
@@ -728,7 +728,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="content">
 <img src="../images/07_data_issues/bias_twitter_imagecrop.png" alt="image" width="550">
 </div>
-<div class="title"><span class="small">Da viele auf Twitter gepostete Bilder größer sind als der verfügbare Platz für das Vorschaubild, hat Twitter beschlossen, ein Modell so zu trainieren, dass es &#8220;den relevantesten Teil&#8221; eines Bildes auswählt, um diesen dann als Vorschau anzuzeigen. Da sie dieses Modell leider mit einem Datensatz trainierten, der mehr Bilder von Menschen mit weißer als schwarzer Hautfarbe enthielt, wurde das Modell rassistisch und wählte beispielsweise bei einem Bild mit Barack Obama und einem zufälligen unwichtigen weißen Politiker immer den weißen Politiker für das Vorschaubild. Des weiteren viel auf, dass diese Zuschneide-Algorithmen häufiger Gesichter als Vorschaubilder für Männer und den Körper (insbesondere - wer hätte es gedacht - Brüste) als Vorschaubilder für Frauen auswählten.</span></div>
+<div class="title"><span class="small">Da viele auf Twitter gepostete Bilder größer sind als der verfügbare Platz für das Vorschaubild, wollte Twitter &#8220;den relevantesten Teil&#8221; eines Bildes für die Vorschau mit einem ML-Modell auswählen. Da sie dieses Modell leider auf einem Datensatz trainierten, der mehr Bilder von Menschen mit weißer als dunkler Hautfarbe enthielt, wurde das Modell rassistisch und wählte beispielsweise bei einem Bild von Barack Obama und einem zufälligen unwichtigen weißen Politiker immer den weißen Politiker für das Vorschaubild. Des weiteren fiel auf, dass diese Zuschneide-Algorithmen häufiger Gesichter als Vorschaubilder für Männer und den Körper (insbesondere&#8201;&#8212;&#8201;wer hätte es gedacht&#8201;&#8212;&#8201;Brüste) als Vorschaubilder für Frauen auswählten.</span></div>
 </div>
 </div>
 </div>
@@ -751,13 +751,13 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="ulist">
 <ul>
 <li>
-<p>Tay hat viel mehr rassistische und hasserfüllte Kommentare und Tweets gesehen als &#8220;normale&#8221;</p>
+<p>Tay hat viel mehr rassistische und hasserfüllte Kommentare und Tweets gesehen als neutrale oder wertschätzende Äußerungen.</p>
 </li>
 <li>
-<p>Der Bilddatensatz, auf dem Twitter sein Modell trainierte, enthielt mehr Bilder von weißen als von farbigen Personen</p>
+<p>Der Bilddatensatz, auf dem Twitter sein Modell trainierte, enthielt mehr Bilder von weißen als von nicht-weißen Personen.</p>
 </li>
 <li>
-<p>Bei einer zufälligen Stichprobe von Fotos aus dem Internet wurden diese Bilder meist von Menschen aus Industrieländern hochgeladen, d.h. Bilder, die den Status Quo in Entwicklungsländern zeigen, sind unterrepräsentiert</p>
+<p>Bei einer zufälligen Stichprobe von Fotos aus dem Internet wurden diese Bilder meist von Menschen aus Industrieländern hochgeladen, d.h. Bilder, die den Status Quo in Entwicklungsländern zeigen, sind unterrepräsentiert.</p>
 </li>
 </ul>
 </div>
@@ -765,7 +765,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <p>Der erste Schritt zur Reduzierung dieser Probleme besteht darin, uns ihrer bewusst zu werden. Daher ist es wichtig, die Performance des Modells immer für jede (bekannte) Untergruppe einzeln zu bewerten, um sicherzustellen, dass die Vorhersagefehler des Modells zufällig sind und das Modell nicht für einige Untergruppen systematisch schlechter funktioniert.</p>
 </div>
 <div class="paragraph">
-<p>Noch problematischer als eine bloße Unterrepräsentation bestimmter Untergruppen (d.h. eine verzerrte Eingabeverteilung) ist ein Muster der systematischen Diskriminierung dieser Untergruppen in historischen Daten (d.h. eine diskriminierende Verschiebung der zugewiesenen Labels).</p>
+<p>Noch problematischer als eine bloße Unterrepräsentation bestimmter Untergruppen (verzerrte Eingabeverteilung) ist ein Muster der systematischen Diskriminierung dieser Untergruppen in historischen Daten (diskriminierende Verschiebung der zugewiesenen Labels).</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -773,18 +773,18 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="content">
 <img src="../images/07_data_issues/bias_apple_card.png" alt="image" width="550">
 </div>
-<div class="title"><span class="small">In vielen Datensätzen, die zum Trainieren von Modellen für die Vergabe von Kreditscores oder zur Bestimmung von Zinssätzen für Hypotheken oder Kredite verwendet werden, ist oft eine Menge expliziter Diskriminierung kodiert. Da diese Anwendungsbereiche einen direkten und starken Einfluss auf das Leben der Menschen haben, müssen wir hier besonders vorsichtig sein und beispielsweise überprüfen, ob unser Modell für einen Mann und eine Frau den gleichen Score vorhersagt, wenn alle Merkmale außer des Geschlechts bei einem Datenpunkt übereinstimmen.</span></div>
+<div class="title"><span class="small">In vielen Datensätzen, die zum Trainieren von Modellen für die Vergabe von Kreditscores oder zur Bestimmung von Zinssätzen für Hypotheken oder Kredite verwendet werden, ist oft eine Menge expliziter Diskriminierung kodiert. Da diese Anwendungsbereiche einen direkten und starken Einfluss auf das Leben der Menschen haben, muss man hier besonders vorsichtig sein. Beispielsweise sollte man überprüfen, ob ein Modell für einen Mann und eine Frau den gleichen Score vorhersagt, wenn alle Merkmale mit Ausnahme des Geschlechts bei einem Datenpunkt übereinstimmen.</span></div>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>Im Allgemeinen sollten wir immer sehr vorsichtig sein, wenn wir Variablen in das Modell aufnehmen, die Attribute wie Geschlecht oder Rasse kodieren. Zum Beispiel wird die Performance eines Modells zur Diagnose von Herzinfarkten höchstwahrscheinlich durch die Einbeziehung von &#8216;Geschlecht&#8217; als Merkmal verbessert, da Männer und Frauen bei einem Herzinfarkt unterschiedliche Symptome zeigen. Andererseits sollte ein Modell, das jemandem eine Kreditwürdigkeit zuweist, sich bei dieser Entscheidung wahrscheinlich nicht auf das Geschlecht der Person stützen, da sonst die Stereotypen, die in den historische Daten kodiert sind, weiterleben.
-Das Geschlecht oder die Hautfarbe einer Person kann jedoch beispielsweise auch mit anderen Variablen wie Einkommen oder Wohngegend korreliert sein, sodass selbst Features, die auf den ersten Blick unschuldig erscheinen, problematische Informationen an das Modell weitergeben können und deshalb zusätzliche Schritte nötig sind, um sicherzustellen, dass das Modell nicht diskriminiert.</p>
+<p>Grundsätzlich ist immer Vorsicht geboten, wenn wir Variablen in das Modell aufnehmen, die Attribute wie Geschlecht oder Herkunft kodieren. Zum Beispiel wird die Performance eines Modells zur Diagnose von Herzinfarkten höchstwahrscheinlich durch die Einbeziehung von &#8216;Geschlecht&#8217; als Merkmal verbessert, da Männer und Frauen bei einem Herzinfarkt unterschiedliche Symptome zeigen. Andererseits sollte ein Modell, das jemandem eine Kreditwürdigkeit zuweist, bei dieser Entscheidung das Geschlecht der Person eher nicht berücksichtigen, da ansonsten die in historischen Daten kodierten Stereotypen weiterleben.
+Das Geschlecht oder die Hautfarbe einer Person kann jedoch auch mit anderen Variablen wie beispielsweise Einkommen oder Wohngegend korreliert sein, sodass selbst Features, die auf den ersten Blick harmlos erscheinen, problematische Informationen an das Modell weitergeben können. In solchen Fällen sind zusätzliche Schritte nötig, um zu vermeiden, dass das Modell diskriminiert.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="paragraph">
-<p>Andere Beispiele dafür, was man nicht tun sollte: <a href="https://incidentdatabase.ai/" target="\_blank">AI Incidence Database</a> und</p>
+<p>Weitere Negativbeispiele findest du auf der Seite <a href="https://incidentdatabase.ai/" target="\_blank">AI Incidence Database</a> und</p>
 </div>
 <div class="openblock float-group">
 <div class="content">

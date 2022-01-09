@@ -711,7 +711,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-ML models love to cheat &amp; take shortcuts! They will often pick up on <a href="https://www.tylervigen.com/spurious-correlations" target="\_blank">spurious correlations</a> instead of learning the true causal relationships. This makes them vulnerable to data/domain shifts (that would force the model to extrapolate instead of interpolate) and adversarial attacks.
+ML models love to cheat &amp; take shortcuts! They will often pick up on <a href="https://www.tylervigen.com/spurious-correlations" target="\_blank">spurious correlations</a> instead of learning the true causal relationships. This makes them vulnerable to adversarial attacks and data/domain shifts, which force the model to extrapolate instead of interpolate.
 </td>
 </tr>
 </table>
@@ -722,7 +722,7 @@ ML models love to cheat &amp; take shortcuts! They will often pick up on <a href
 <p><strong>A correct prediction is not always made for the right reasons!</strong></p>
 </div>
 <div class="paragraph">
-<p>The graphic below is taken from a paper where the authors noticed that a fairly simple ML model trained on a standard image classification dataset was performing poorly for all 10 classes in the dataset except one, horses. When they examined the dataset more closely and analyzed <em>why</em> the model predicted a certain class, i.e., which image features were used in the prediction (displayed as the heatmap on the right), they noticed that most of the pictures of horses in the dataset were taken by the same photographer and they all had a characteristic copyright notice in the lower left corner:</p>
+<p>The graphic below is taken from a paper where the authors noticed that a fairly simple ML model trained on a standard image classification dataset performed poorly for all 10 classes in the dataset except one, horses. When they examined the dataset more closely and analyzed <em>why</em> the model predicted a certain class, i.e., which image features were used in the prediction (displayed as the heatmap on the right), they noticed that most of the pictures of horses in the dataset were taken by the same photographer and they all had a characteristic copyright notice in the lower left corner:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -731,12 +731,12 @@ ML models love to cheat &amp; take shortcuts! They will often pick up on <a href
 <div class="title"><span class="small">Lapuschkin, Sebastian, et al. &#8220;Analyzing classifiers: Fisher vectors and deep neural networks.&#8221; <em>IEEE Conference on Computer Vision and Pattern Recognition.</em> 2016.</span></div>
 </div>
 <div class="paragraph">
-<p>By relying on this artifact, the model could identify what it perceived as &#8220;horses&#8221; in this dataset with high accuracy (both in the training and the test set, which also included pictures from the same photographer). However, of course the model had failed to learn what actually defines a horse and it would not be able to extrapolate and achieve the same accuracy on other images without this copyright notice or, equally problematic, might mistakenly classify new images of other objects or animals with a similar copyright notice as horses, too. (Purposefully tricking the model by augmenting other images with such a copyright notice would be an example of an adversarial attack, as discussed below.)</p>
+<p>By relying on this artifact, the model could identify what it perceives as &#8220;horses&#8221; in this dataset with high accuracy&#8201;&#8212;&#8201;both in the training and the test set, which includes pictures from the same photographer. However, of course the model failed to learn what actually defines a horse and it is not able to extrapolate and achieve the same accuracy on other images without this copyright notice. Or, equally problematic, the model would mistakenly classify new images of other objects or animals with a similar copyright notice as horses, too. Purposefully tricking the model by augmenting other images with such a copyright notice is an example of an adversarial attack, as discussed below.</p>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>This is by far not the only example where a model has &#8220;cheated&#8221; by exploiting correlations in the training set that resulted in a seemingly good predictive performance, but meant that the model did not pick up on the true causal relationship between the features and labels (e.g., another example would be a dataset with images of dogs and wolves, where all wolves were photographed on snowy backgrounds and the dogs on grass or other non-white backgrounds).</p>
+<p>This is by far not the only example where a model has &#8220;cheated&#8221; by exploiting spurious correlations in the training set. Another popular example: A dataset with images of dogs and wolves, where all wolves were photographed on snowy backgrounds and the dogs on grass or other non-white backgrounds. Models trained on such a dataset can show a good predictive performance without having learned the true causal relationship between the features and labels.</p>
 </div>
 <div class="paragraph">
 <p>To catch these kinds of mishaps, it is important to <strong>interpret the model and explain its predictions</strong> to see if it has focused on the features you (or a domain expert) would have expected (as they did in the paper above).</p>
@@ -750,7 +750,7 @@ ML models love to cheat &amp; take shortcuts! They will often pick up on <a href
 <p>An adversarial attack on an ML model is performed by asking the model to make a prediction for an input that was modified in such a way that a human is unaware of the change and would still arrive at a correct result, but the ML model changes its prediction to something else.</p>
 </div>
 <div class="paragraph">
-<p>For example, while an ML model can easily recognize the &#8216;Stop&#8217; sign from the image on the left, the sign on the right is mistaken as a speed limit sign due to the strategically placed, innocent looking stickers, which humans would just ignore:</p>
+<p>For example, while an ML model can easily recognize the &#8216;Stop&#8217; sign from the image on the left, the sign on the right is mistaken as a speed limit sign due to the strategically placed, inconspicuous stickers, which humans would just ignore:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -758,12 +758,12 @@ ML models love to cheat &amp; take shortcuts! They will often pick up on <a href
 </div>
 </div>
 <div class="paragraph">
-<p>This happened because the model didn&#8217;t pick up on the true reasons humans identify a Stop sign as such (e.g., octagonal form and 4 white letters spelling &#8216;STOP&#8217; on a red background), but instead relied on some less meaningful correlations to distinguish it from other traffic signs.</p>
+<p>This happened because the model didn&#8217;t pick up on the true reasons humans identify a Stop sign as such, e.g., the octagonal form and the four white letters spelling &#8216;STOP&#8217; on a red background. Instead it relied on less meaningful correlations to distinguish it from other traffic signs.</p>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>Since convolutional neural networks (CNN), the type of neural net typically used for image classification tasks, rely a lot on local patterns, they are often easily <a href="https://www.sciencemag.org/news/2018/07/turtle-or-rifle-hackers-easily-fool-ais-seeing-wrong-thing" target="\_blank">fooled</a> by leaving the global shape of objects in images intact (what humans rely on to identify objects) but overlaying them with specific textures or other high-frequency patterns and thereby causing them to predict a different class.</p>
+<p>Convolutional neural networks (CNN), the type of neural net typically used for image classification tasks, rely a lot on local patterns. This is why they are often easily <a href="https://www.sciencemag.org/news/2018/07/turtle-or-rifle-hackers-easily-fool-ais-seeing-wrong-thing" target="\_blank">fooled</a> by leaving the global shape of objects, which humans rely on for identification, intact and overlaying the images with specific textures or other high-frequency patterns to trick the model into predicting a different class.</p>
 </div>
 <div class="paragraph">
 <p>Finding robust causal models that capture the true &#8216;input &#8594; output&#8217; relationship in the data is still <a href="https://bdtechtalks.com/2021/03/15/machine-learning-causality/" target="\_blank">an active research area</a> and a lot harder than learning a model that &#8220;only&#8221; generalizes well to the test set.</p>

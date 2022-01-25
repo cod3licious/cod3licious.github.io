@@ -666,7 +666,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
 <span id="revnumber">version 1.2,</span>
-<span id="revdate">2022-01-02</span>
+<span id="revdate">2022-01-23</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -702,7 +702,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="sect2">
 <h3 id="_fehler_3_modell_missbraucht_scheinkorrelationen">[Fehler #3] Modell missbraucht Scheinkorrelationen</h3>
 <div class="paragraph">
-<p>Selbst wenn ein Modell in der Lage ist, richtige Vorhersagen für neue Datenpunkte aus derselben Verteilung wie der des Trainingssets zu generieren, bedeutet dies nicht, dass das Modell tatsächlich den wahren kausalen Zusammenhang zwischen den Inputs und Outputs gelernt hat!</p>
+<p>Selbst wenn ein Modell in der Lage ist, richtige Vorhersagen für neue Datenpunkte zu generieren, die den Trainingsdaten ähnlich sind, bedeutet dies nicht, dass das Modell tatsächlich den wahren kausalen Zusammenhang zwischen den Inputs und Outputs gelernt hat!</p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -722,7 +722,7 @@ ML-Modelle machen es sich oft leicht und schummeln! Sie nutzen häufig <a href="
 <p><strong>Eine richtige Vorhersage wird nicht immer aus den richtigen Gründen gemacht!</strong></p>
 </div>
 <div class="paragraph">
-<p>Die folgende Grafik stammt aus einem Paper, in dem die Autoren festgestellt haben, dass ein vergleichsweise einfaches ML-Modell, das auf einem Standard-Bildklassifizierungsdatensatz trainiert wurde, für alle 10 Klassen im Datensatz schlecht abschnitt&#8201;&#8212;&#8201;bis auf die Klasse &#8216;Pferd&#8217;! Als sie den Datensatz genauer untersuchten und analysierten, <em>warum</em> das Modell eine bestimmte Klasse vorhersagte, d.h. welche Bildmerkmale in der Vorhersage verwendet wurden (angezeigt als Heatmap auf der rechten Seite), machten sie folgende Feststellung: Die meisten Bilder von Pferden im Datensatz stammten vom selben Fotografen und enthielten alle einen charakteristischen Copyright-Vermerk in der linken unteren Ecke:</p>
+<p>Die Grafik unten stammt aus einem Paper, in dem die Autoren festgestellt haben, dass ein vergleichsweise einfaches ML-Modell, das auf einem Standard-Bildklassifizierungsdatensatz trainiert wurde, für alle 10 Klassen im Datensatz schlecht abschnitt&#8201;&#8212;&#8201;bis auf die Klasse &#8216;Pferd&#8217;! Als sie den Datensatz genauer untersuchten und analysierten, <em>warum</em> das Modell eine bestimmte Klasse vorhersagt, d.h. welche Bildmerkmale in der Vorhersage verwendet wurden (angezeigt als Heatmap auf der rechten Seite), machten sie folgende Feststellung: Die meisten Bilder von Pferden im Datensatz stammten vom selben Fotografen und enthielten alle einen charakteristischen Copyright-Vermerk in der linken unteren Ecke:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -731,7 +731,8 @@ ML-Modelle machen es sich oft leicht und schummeln! Sie nutzen häufig <a href="
 <div class="title"><span class="small">Lapuschkin, Sebastian, et al. &#8220;Analyzing classifiers: Fisher vectors and deep neural networks.&#8221; <em>IEEE Conference on Computer Vision and Pattern Recognition.</em> 2016.</span></div>
 </div>
 <div class="paragraph">
-<p>Anhand dieses Artefaktes konnte das Modell mit hoher Genauigkeit Pferdebilder in diesem Datensatz identifizieren&#8201;&#8212;&#8201;und zwar sowohl im Trainings- als auch im Testset, das auch Bilder desselben Fotografen enthielt. Trotzdem hat das Modell natürlich nicht gelernt, was ein Pferd eigentlich ausmacht, und es kann nicht extrapolieren und andere Bilder von Pferden ohne diesen Copyright-Hinweis korrekt identifizieren. Ebenso problematisch ist die Bewertung neuer Bilder von anderen Objekten mit ähnlichem Copyright-Vermerk: Diese würde das Modell fälschlicherweise ebenfalls als Pferde klassifizieren. Man kann das Modell also absichtlich austricksen, indem man andere Bilder mit einem solchen Copyright-Hinweis ergänzt. Dies ist ein Beispiel für eine &#8220;Adverserial Attack&#8221;, wie unten beschrieben.</p>
+<p>Anhand dieses Artefaktes konnte das Modell mit hoher Genauigkeit Pferdebilder in diesem Datensatz identifizieren&#8201;&#8212;&#8201;und zwar sowohl im Trainings- als auch im Testset, das auch Bilder desselben Fotografen enthielt. Trotzdem hat das Modell natürlich nicht gelernt, was ein Pferd eigentlich ausmacht, und es kann nicht extrapolieren und andere Fotos von Pferden ohne diesen Copyright-Hinweis korrekt identifizieren.
+Andersrum könnte man nun auch ein Bild von einem anderen Tier mit einem solchen Copyright-Vermerk versehen und das Modell würde darauf dann irrtümlich ein Pferd erkennen. Man kann das Modell so also absichtlich austricksen, was man auch als &#8220;Adverserial Attack&#8221; bezeichnet.</p>
 </div>
 </div>
 </div>
@@ -739,7 +740,7 @@ ML-Modelle machen es sich oft leicht und schummeln! Sie nutzen häufig <a href="
 <p>Dies ist bei weitem nicht das einzige Beispiel, bei dem ein Modell &#8220;geschummelt&#8221; hat, indem es Scheinkorrelationen in den Trainingsdaten ausnutzte. Ein weiteres beliebtes Beispiel: Ein Datensatz mit Bildern von Hunden und Wölfen, bei dem alle Wölfe auf verschneitem Hintergrund und die Hunde auf Gras oder anderen nicht-weißen Hintergründen fotografiert wurden. Modelle, die auf so einem Datensatz trainiert werden, können eine gute Vorhersagegenauigkeit aufweisen, ohne dass sie die wahren kausalen Zusammenhang zwischen den Features und Labels erkannt haben.</p>
 </div>
 <div class="paragraph">
-<p>Um solche Pannen zu erkennen, ist es wichtig, <strong>das Modell zu interpretieren und seine Vorhersagen zu erklären</strong> (wie im oben genannten Paper), um zu sehen, ob es zur Vorhersage die Feature verwendet hat, die wir (oder ein Domänenexperte) erwartet hätten.</p>
+<p>Um solche Pannen rechtzeitig zu erkennen, ist es wichtig, <strong>das Modell zu interpretieren und seine Vorhersagen zu erklären</strong> (wie im oben genannten Paper), um zu sehen, ob das Modell zur Vorhersage die Features verwendet, die wir (oder ein Domänenexperte) erwartet hätten.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -747,7 +748,7 @@ ML-Modelle machen es sich oft leicht und schummeln! Sie nutzen häufig <a href="
 <p><strong>Adversarial Attacks: ML-Modelle absichtlich täuschen</strong></p>
 </div>
 <div class="paragraph">
-<p>Bei einem &#8216;feindlicher Angriff&#8217; auf ein ML-Modell werden die Inputdaten subtil verändert, sodass der Mensch diese Änderungen nicht bemerkt und immer noch zum richtigen Ergebnis kommt, aber das Modell seine Vorhersage ändert.</p>
+<p>Bei einem &#8216;feindlichen Angriff&#8217; auf ein ML-Modell werden die Inputdaten subtil verändert, sodass ein Mensch diese Änderungen nicht bemerkt und immer noch zum richtigen Ergebnis kommt, aber das Modell seine Vorhersage ändert.</p>
 </div>
 <div class="paragraph">
 <p>Während zum Beispiel ein ML-Modell das &#8216;Stop&#8217;-Schild auf dem linken Bild leicht erkennen kann, wird das Schild rechts aufgrund der strategisch platzierten, unscheinbar aussehenden Aufkleber (die ein Mensch einfach ignorieren würde) mit einem Geschwindigkeitsbegrenzungsschild verwechselt:</p>
@@ -758,7 +759,7 @@ ML-Modelle machen es sich oft leicht und schummeln! Sie nutzen häufig <a href="
 </div>
 </div>
 <div class="paragraph">
-<p>Der Grund dafür ist, dass das Modell nicht die wahren Merkmale erkannt hat, anhand derer Menschen ein Stoppschild als solches identifizieren, z.B. die achteckige Form und die vier weißen Buchstaben &#8216;STOP&#8217; vor rotem Hintergrund. Stattdessen verlässt es sich auf bedeutungslose Korrelationen, um das Stoppschild von anderen Schildern zu unterscheiden.</p>
+<p>Der Grund dafür ist, dass das Modell nicht die wahren Merkmale gelernt hat, anhand derer Menschen ein Stoppschild als solches identifizieren, z.B. die achteckige Form und die vier weißen Buchstaben &#8216;STOP&#8217; vor rotem Hintergrund. Stattdessen verlässt sich das Modell auf bedeutungslose Korrelationen, um das Stoppschild von anderen Schildern zu unterscheiden.</p>
 </div>
 </div>
 </div>

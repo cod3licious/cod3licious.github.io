@@ -666,7 +666,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
 <span id="revnumber">version 1.2,</span>
-<span id="revdate">2022-01-02</span>
+<span id="revdate">2022-01-23</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -709,16 +709,19 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <p>Wenn ja, garantiert dies zwar noch nicht, dass das Modell tatsächlich den echten kausalen Zusammenhang zwischen Inputs und Outputs gelernt hat und über den Trainingsbereich hinaus extrapolieren kann (dazu kommen wir im nächsten Abschnitt). Zumindest generiert das Modell aber zuverlässige Vorhersagen für neue Datenpunkte, die den Trainingsdaten ähnlich sind. Ist dies nicht gegeben, ist das Modell nicht nur falsch, sondern auch nutzlos.</p>
 </div>
 <div class="paragraph">
-<p>Warum kann ein Modell bei neuen Datenpunkten Fehler machen?</p>
+<p>Aber warum macht ein Modell überhaupt Fehler? Eine schlechte Performance auf dem Testset kann zwei Gründe haben: Overfitting oder Underfitting.</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/06_evaluation/overunderfitting.png" alt="image" width="840">
 </div>
-<div class="title"><span class="small">Wenn man bei den verschiedenen Modellen hier nur den Fehler auf den Testdaten betrachtet, könnte man schlussfolgern, dass die Modelle links (overfitting) und rechts (underfitting) gleichermaßen falsch sind. Das stimmt zwar in gewisser Weise, aber der Testfehler allein sagt uns nicht, <em>warum</em> die Modelle falsch liegen oder wie wir ihre Performance verbessern können. Offensichtlich machen die beiden Modelle auf dem Testset aus völlig unterschiedlichen Gründen Fehler: Das overfittete Modell hat die Trainingsdaten quasi auswendig gelernt und kann nicht auf neue Datenpunkte verallgemeinert werden, während das underfittete Modell zu einfach ist, um den Zusammenhang zwischen den Inputs und Outputs überhaupt abzubilden. Da diese beiden Fälle sehr unterschiedliche Ansätze erfordern, um die Modellperformance zu verbessern, ist es wichtig, zusätzlich zum Fehler auf den Testdaten auch den Trainingsfehler zu betrachten. So lässt sich bestimmen, ob wir es mit Overfitting oder Underfitting zu tun haben.</span></div>
+<div class="title"><span class="small">Wenn man bei den verschiedenen Modellen hier nur den Fehler auf den Testdaten betrachtet, könnte man schlussfolgern, dass die Modelle links (overfitting) und rechts (underfitting) gleichermaßen falsch sind. Das stimmt zwar in gewisser Weise, aber der Testfehler allein sagt uns nicht, <em>warum</em> die Modelle falsch liegen oder wie wir ihre Performance verbessern können. Offensichtlich machen die beiden Modelle auf dem Testset aus völlig unterschiedlichen Gründen Fehler: Das overfittete Modell hat die Trainingsdaten quasi auswendig gelernt und kann nicht auf neue Datenpunkte verallgemeinert werden, während das underfittete Modell zu einfach ist, um den Zusammenhang zwischen den Inputs und Outputs überhaupt abzubilden.</span></div>
 </div>
 <div class="paragraph">
-<p>Da die meisten Datensätze sehr viele Inputvariablen haben, können wir das Modell in der Regel nicht einfach wie oben aufmalen, um zu sehen, ob es over- oder underfittet. Stattdessen müssen wir uns den mit einer aussagekräftigen Evaluierungsmetrik berechneten Fehler sowohl auf dem Trainings- als auch dem Testset anschauen:</p>
+<p>Diese beiden Fälle erfordern sehr unterschiedliche Ansätze, um die Modellperformance zu verbessern.</p>
+</div>
+<div class="paragraph">
+<p>Da die meisten Datensätze sehr viele Inputvariablen haben, kann man das Modell in der Regel nicht einfach wie oben aufmalen, um zu sehen, ob es over- oder underfittet. Stattdessen muss man sich den mit einer aussagekräftigen Evaluierungsmetrik berechneten Fehler sowohl auf dem Trainings- als auch dem Testset anschauen um zu bestimmen, ob man es mit Overfitting oder Underfitting zu tun hat:</p>
 </div>
 <div class="paragraph">
 <p><strong>Overfitting:</strong> super Trainingsperformance, inakzeptabel auf den Testdaten<br>
@@ -730,13 +733,13 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 </div>
 <div class="paragraph">
-<p>Je nachdem, ob ein Modell over- oder underfittet, gibt es verschiedene Möglichkeiten um die Performance zu verbessern. Jedoch ist es unrealistisch, eine perfekte Modellperformance zu erwarten, da manche Aufgaben einfach schwierig sind, zum Beispiel weil die Daten sehr verrauscht sind.</p>
+<p>Je nachdem, ob ein Modell over- oder underfittet, gibt es verschiedene Möglichkeiten die Performance zu verbessern. Eine perfekte Modellperformance ist jedoch unrealistisch, da manche Aufgaben einfach schwierig sind, zum Beispiel weil die Daten sehr verrauscht sind.</p>
 </div>
-<div class="admonitionblock note">
+<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
 Schaue dir immer die Daten an! Gibt es ein Muster unter den falschen Vorhersagen, z.B. eine Diskrepanz zwischen der Performance für verschiedene Klassen?

@@ -748,12 +748,18 @@ All models are wrong, but some are useful.
 </li>
 <li>
 <p>&#8230;&#8203; even when the world keeps on changing.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Common pitfalls include: </dt>
-</dl>
-</div>
-</li>
+<dd>
+<div class="ulist">
+<ul>
 <li>
 <p>evaluating the model with an inappropriate evaluation metric (e.g., accuracy instead of balanced accuracy for a classification problem with unbalanced class distributions), thereby not noticing the subpar performance of a model (e.g., worse than the stupid baseline)</p>
 </li>
@@ -774,6 +780,9 @@ All models are wrong, but some are useful.
 </li>
 </ul>
 </div>
+</dd>
+</dl>
+</div>
 <div class="paragraph">
 <p>We&#8217;ll cover these points in more detail in the following sections, but below you find a quick summary of what you can do to not fall into any of these traps.</p>
 </div>
@@ -792,7 +801,7 @@ All models are wrong, but some are useful.
 <p>Sanity check: Does the dataset contain samples with the same inputs but different outputs? &#8658; Some important features might be missing or the targets are very noisy, e.g., due to inconsistent annotations&#8201;&#8212;&#8201;<a href="_garbage_in_garbage_out.html">fix this first!</a></p>
 </li>
 <li>
-<p>Think about the structure of the problem and what type of model might be appropriate to learn the presumed &#8216;input &#8594; output&#8217; relationship. For example, if the problem is clearly non-linear, the chosen model type also needs to be complex enough to at least in principle be able to pick up on this relation (i.e., such that the model does not underfit, see below). A lot of domain knowledge can also be put into the design of neural network architectures.</p>
+<p>Think about the structure of the problem and what type of model might be appropriate to learn the presumed &#8216;input &#8594; output&#8217; relationship. For example, if the problem is clearly nonlinear, the chosen model type also needs to be complex enough to at least in principle be able to pick up on this relation (i.e., such that the model does not underfit, see below). A lot of domain knowledge can also be put into the design of neural network architectures.</p>
 </li>
 <li>
 <p>Make sure the data satisfies the model&#8217;s assumptions &#8658; for pretty much all models except decision trees (and models based on decision trees, like random forests) the data should be approximately normally distributed.</p>
@@ -847,11 +856,11 @@ All models are wrong, but some are useful.
 <div class="ulist none">
 <ul class="none">
 <li>
-<p><em>Data drift:</em> input distribution changes, e.g., a new user operates the machine differently<br>
+<p><em>Data drift:</em> input distribution \(X\) changes, e.g., a new user operates the machine differently<br>
 &#8594; Use statistical tests to detect changes in input distributions</p>
 </li>
 <li>
-<p><em>Concept drift:</em> input/output relation changes due to:</p>
+<p><em>Concept drift:</em> input/output relation \(X \to y\) changes due to:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -859,6 +868,18 @@ All models are wrong, but some are useful.
 </li>
 <li>
 <p>Internal factors (feedback loop: presence of ML model alters behavior, for example, spammers change their strategy to evade the spam filter)</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+These changes can either be <strong>gradual</strong> (e.g., languages change gradually as new words are coined; a camera lens gets covered with dust over time), or they can come as a <strong>sudden shock</strong> (e.g., someone cleans the camera lens; when the COVID-19 pandemic hit, suddenly a lot of people switched to online shopping, which tripped up the credit card fraud detection systems).
+</td>
+</tr>
+</table>
+</div>
 </li>
 </ul>
 </div>

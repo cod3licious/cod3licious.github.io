@@ -966,7 +966,10 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <p>The last example on image data comes from the application area of medicine: Below you see two images of retinas, i.e., photos taken of the back of someone&#8217;s eye, based on which it is possible to diagnose a common complication of diabetes that can result in blindness if left untreated.</p>
 </div>
 <div class="paragraph">
-<p>The diagnostic algorithm to identify the markers of the disease in these images was developed by researchers at Google and achieves the same level of accuracy as human experts in the field. Google had even assembled a team of top specialists to discuss the hardest cases again to get consistent labels for all images, which gave their model an additional performance boost. Since the equipment to take these images is fairly cheap, this means that with this ML model, expert diagnostic decisions can now be made available to those that might otherwise not have had the means to consult a top specialist.</p>
+<p>The diagnostic algorithm to identify the markers of the disease in these images was developed by researchers at Google and achieves the same level of accuracy as human experts in the field. Google had even assembled a team of top specialists to discuss the hardest cases again to get consistent labels for all images, which gave their model an additional performance boost.</p>
+</div>
+<div class="paragraph">
+<p>Since the equipment to take these images is fairly cheap, this means that with this ML model, expert diagnostic decisions can now be made available to those that might otherwise not have had the means to consult a top specialist.</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -1255,7 +1258,10 @@ Simply speaking, an <strong>algorithm</strong> can be thought of as a <strong>st
 <div class="sect2">
 <h3 id="_how_do_machines_learn">How do machines &#8220;learn&#8221;?</h3>
 <div class="paragraph">
-<p>The set of ML algorithms can be subdivided based on how they learn from the data. This is inspired by how humans learn:</p>
+<p>So how do ML algorithms solve these &#8220;input &#8594; output&#8221; problems, i.e., how do they recognize patterns and learn rules from data?</p>
+</div>
+<div class="paragraph">
+<p>The set of ML algorithms can be subdivided according to their learning strategy. This is inspired by how humans learn:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -1331,10 +1337,10 @@ Simply speaking, an <strong>algorithm</strong> can be thought of as a <strong>st
 </div>
 </div>
 <div class="paragraph">
-<p>In supervised learning, your goal is to learn a model (= a mathematical function) \(f(x)\) that describes the relationship between some input(s) \(x\) and output \(y\). This model can then be used to <strong>make predictions for new data points</strong>, i.e., compute \(f(x') = y\) for some new \(x'\).</p>
+<p>In supervised learning, your goal is to learn a <strong>model (= a mathematical function)</strong> \(f(x)\) that describes the relationship between some <strong>input(s)</strong> \(x\) (e.g., different process conditions like temperature, type of material, etc.) and <strong>output</strong> \(y\) (e.g., resulting product quality). This model can then be used to <strong>make predictions for new data points</strong>, i.e., compute \(f(x') = y\) for some new \(x'\) (e.g., predict for a new set of process conditions whether the produced product will be of high quality or if the process should be stopped to not waste resources).</p>
 </div>
 <div class="paragraph">
-<p>The available supervised learning algorithms differ in the <strong>type of \(x \to y\) relationship</strong> they can describe (e.g., linear or non-linear) and what kind of <strong>objective</strong> they minimize (also called loss function; an error computed on the training data, quantifying the mismatch between true and predicted labels). The task of a data scientist is to select a type of model that can optimally fit the given data. The rest is then taken care of by an <strong>optimization method, which finds the parameters of the model that minimize the model&#8217;s objective</strong>, i.e., such that the model&#8217;s prediction error on the given data is as small as possible.</p>
+<p>The available supervised learning algorithms differ in the <strong>type of \(x \to y\) relationship</strong> they can describe (e.g., linear or nonlinear) and what kind of <strong>objective</strong> they minimize (also called loss function; an error computed on the training data, quantifying the mismatch between true and predicted labels). The task of a data scientist is to select a type of model that can optimally fit the given data. The rest is then taken care of by an <strong>optimization method, which finds the parameters of the model that minimize the model&#8217;s objective</strong>, i.e., such that the model&#8217;s prediction error on the given data is as small as possible.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -1598,7 +1604,7 @@ In most of the book, the terms &#8220;ML algorithm&#8221; and &#8220;ML model&#8
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>The ML model runs on the &#8220;edge&#8221;, i.e., on each individual machine where the respective data is generated and the output of the model is used in subsequent process steps. This is often the best strategy when results need to be computed in real time and / or a continuous Internet connection can not be guaranteed, e.g., in self-driving cars. However, the downside of this is that, depending on the type of ML model, comparatively expensive computing equipment needs to be installed in each machine, e.g., GPUs for neural network models.</p>
+<p>The ML model runs on an &#8220;edge&#8221; device, i.e., on each individual machine (e.g., mobile phone) where the respective data is generated and the output of the model is used in subsequent process steps. This is often the best strategy when results need to be computed in real time and / or a continuous Internet connection can not be guaranteed, e.g., in self-driving cars. However, the downside of this is that, depending on the type of ML model, comparatively expensive computing equipment needs to be installed in each machine, e.g., GPUs for neural network models.</p>
 </li>
 <li>
 <p>The ML model runs in the &#8220;cloud&#8221;, i.e., on a central server, e.g., in the form of a web application that receives data from individual users, processes it, and sends back the results. This is often the more efficient solution if a response within a few seconds is sufficient for the use case. However, processing personal information in the cloud also raises privacy concerns. One of the major benefits of this solution is that it is easier to update the ML model, for example, when more historic data becomes available or if the process changes and the model now has to deal with slightly different inputs (we&#8217;ll discuss this further in later chapters).</p>
@@ -2345,6 +2351,18 @@ If you can, observe how the data is collected. As in: actually physically stand 
 </dd>
 </dl>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+In addition to documenting datasets as a whole, it is also really helpful to store metadata for individual samples. For example, for image data, this could include the time stamp of when the image was taken, the geolocation (or if the camera is built into a manufacturing machine then the ID of this machine), information about the camera settings, etc.. This can greatly help when analyzing model prediction errors, as it might turn out that, for example, images taken with a particular camera setting are especially difficult to classify, which in turn gives us some hints on how to improve the data collection process.
+</td>
+</tr>
+</table>
+</div>
 <div class="sidebarblock">
 <div class="content">
 <div class="dlist">
@@ -3047,7 +3065,7 @@ For example, a manufacturing process may have some Key Performance Indicators (K
 <div class="title"><span class="underline">Possible challenges:</span></div>
 <ul>
 <li>
-<p>transforming the data with (Kernel) PCA constructs new features as a (non-)linear combination of the original features, which decreases the interpretability of the analysis results</p>
+<p>transforming the data with (Kernel) PCA constructs new features as a (non)linear combination of the original features, which decreases the interpretability of the analysis results</p>
 </li>
 <li>
 <p>you should always have a good reason for throwing away data points&#8201;&#8212;&#8201;outliers are seldom random, sometimes they reveal interesting edge cases that should not be ignored</p>
@@ -3856,7 +3874,7 @@ Extension for time series data: don&#8217;t identify the <em>k</em> nearest neig
 </dd>
 <dt class="hdlist1">2. Problem complexity</dt>
 <dd>
-<p>How complicated is the relationship between the input features and target variable: <em>linear</em> or <em>non-linear</em>?<br>
+<p>How complicated is the relationship between the input features and target variable: <em>linear</em> or <em>nonlinear</em>?<br>
 &#8594; depends on the available data</p>
 </dd>
 <dt class="hdlist1">3. Algorithmic approach</dt>
@@ -3934,9 +3952,9 @@ Extension for time series data: don&#8217;t identify the <em>k</em> nearest neig
 </div>
 </div>
 <div class="sect3">
-<h4 id="_problem_complexity_linear_or_non_linear">Problem complexity: linear or non-linear</h4>
+<h4 id="_problem_complexity_linear_or_nonlinear">Problem complexity: linear or nonlinear</h4>
 <div class="paragraph">
-<p>In accordance with the product warranty example described above, we now illustrate what it means for a problem to be linear or non-linear on a small toy dataset:</p>
+<p>In accordance with the product warranty example described above, we now illustrate what it means for a problem to be linear or nonlinear on a small toy dataset:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -3948,16 +3966,16 @@ Extension for time series data: don&#8217;t identify the <em>k</em> nearest neig
 <div class="content">
 <img src="images/04_supervised_intro/problem_types8.png" alt="image" width="840">
 </div>
-<div class="title"><span class="small">As you might have already guessed, the relationship between the target variable lifetime and the input feature temperature <em>(top left)</em> is a linear one, i.e., you could describe it by a straight line. Since the lifetime is a continuous variable, this is a regression problem. However, by defining some cutoff on the target variable (e.g., at 300 usages for in and out of warranty), this problem can be transformed into a classification problem, where the task here is to distinguish between faulty and good products <em>(bottom left)</em>. Again, the relationship between the target and the input variable temperature is linear, since the problem can be solved by drawing one line parallel to the y-axis, which defines some threshold on the temperature, where all data points with a temperature lower than this threshold would be classified as &#8216;ok&#8217; and those products produced at a higher temperature would be predicted as &#8216;broken&#8217;. In the center panel, we have the same situation only this time with a different input feature, pressure. In the regression case, the lifetime values now follow some quadratic curve, i.e., we could not adequately describe the relationship between our target variable and the input feature &#8216;pressure&#8217; with a single straight line, which makes this a non-linear problem. Similarly, in the classification case below, we would need to define two thresholds on the pressure values to separate the two classes, i.e., again we could not solve the problem with a single straight line. While these 4 examples were univariate problems, i.e., with a single input variable, in machine learning we usually deal with multivariate problems, often with hundreds or even thousands of input features. For the case of two input variables, this is illustrated on the right, where the data is now plotted in a scatter plot where the axis correspond to the features temperature and pressure, while the color of the dots indicates the target value (either on a continuous scale or the discrete class labels). In the multidimensional case, a problem would be considered linear if it can by solved by a single hyperplane (instead of a line) in the input feature space.</span></div>
+<div class="title"><span class="small">As you might have already guessed, the relationship between the target variable lifetime and the input feature temperature <em>(top left)</em> is a linear one, i.e., you could describe it by a straight line. Since the lifetime is a continuous variable, this is a regression problem. However, by defining some cutoff on the target variable (e.g., at 300 usages for in and out of warranty), this problem can be transformed into a classification problem, where the task here is to distinguish between faulty and good products <em>(bottom left)</em>. Again, the relationship between the target and the input variable temperature is linear, since the problem can be solved by drawing one line parallel to the y-axis, which defines some threshold on the temperature, where all data points with a temperature lower than this threshold would be classified as &#8216;ok&#8217; and those products produced at a higher temperature would be predicted as &#8216;broken&#8217;. In the center panel, we have the same situation only this time with a different input feature, pressure. In the regression case, the lifetime values now follow some quadratic curve, i.e., we could not adequately describe the relationship between our target variable and the input feature &#8216;pressure&#8217; with a single straight line, which makes this a nonlinear problem. Similarly, in the classification case below, we would need to define two thresholds on the pressure values to separate the two classes, i.e., again we could not solve the problem with a single straight line. While these 4 examples were univariate problems, i.e., with a single input variable, in machine learning we usually deal with multivariate problems, often with hundreds or even thousands of input features. For the case of two input variables, this is illustrated on the right, where the data is now plotted in a scatter plot where the axis correspond to the features temperature and pressure, while the color of the dots indicates the target value (either on a continuous scale or the discrete class labels). In the multidimensional case, a problem would be considered linear if it can by solved by a single hyperplane (instead of a line) in the input feature space.</span></div>
 </div>
 <div class="paragraph">
-<p>As illustrated in the above examples, whether your problem can be solved by a simple linear model (i.e., a single straight line or hyperplane) or requires a more complex non-linear model to adequately describe the relationship between the input features and target variable entirely depends on the given data. This also means that sometimes you might just need to install an additional sensor to measure some feature that is linearly related to your target variable or do some feature engineering to then be able to get satisfactory results with a linear model, i.e., sometimes, with the right preprocessing, a non-linear problem can also be transformed into a linear one.</p>
+<p>As illustrated in the above examples, whether your problem can be solved by a simple linear model (i.e., a single straight line or hyperplane) or requires a more complex nonlinear model to adequately describe the relationship between the input features and target variable entirely depends on the given data. This also means that sometimes you might just need to install an additional sensor to measure some feature that is linearly related to your target variable or do some feature engineering to then be able to get satisfactory results with a linear model, i.e., sometimes, with the right preprocessing, a nonlinear problem can also be transformed into a linear one.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_algorithmic_approaches_features_based_vs_similarity_based_models">Algorithmic approaches: Features-based vs. similarity-based models</h4>
 <div class="paragraph">
-<p>Finally, lets look at how the different models work and arrive at their predictions. This is what really distinguishes the various algorithms, whereas we have already established that there always exists a regression and a classification variant of each model and some models are inherently expressive enough that they can be used to describe non-linear relationships in the data, while others will only yield satisfactory results if there exists a linear relationship between the available input features and the target variable.</p>
+<p>Finally, lets look at how the different models work and arrive at their predictions. This is what really distinguishes the various algorithms, whereas we have already established that there always exists a regression and a classification variant of each model and some models are inherently expressive enough that they can be used to describe nonlinear relationships in the data, while others will only yield satisfactory results if there exists a linear relationship between the available input features and the target variable.</p>
 </div>
 <div class="paragraph">
 <p>While features-based models learn some parameters or rules that are applied directly to a new data point&#8217;s input feature vector \(\mathbf{x} \in \mathbb{R}^d\), for the similarity-based models, first a vector \(\mathbf{s} \in \mathbb{R}^n\) with the similarities of the new data point to the training data points is computed and the model then operates on this vector instead of the original input features:</p>
@@ -4006,7 +4024,7 @@ This distinction between algorithmic approaches is not only interesting from a t
 <div class="ulist">
 <ul>
 <li>
-<p>non-linear models for small datasets</p>
+<p>nonlinear models for small datasets</p>
 </li>
 <li>
 <p>need appropriate similarity function &#8594; domain knowledge! (especially for heterogeneous data)</p>
@@ -4020,7 +4038,7 @@ This distinction between algorithmic approaches is not only interesting from a t
 <div class="content">
 <img src="images/04_supervised_intro/comparison_all4.png" alt="image" width="840">
 </div>
-<div class="title"><span class="small">This is an overview of the different features-based and similarity-based models we&#8217;ll discuss in the following chapters, as well as for which dataset size and problem complexity they are appropriate: While linear models are rather simple and&#8201;&#8212;&#8201;as the name suggests&#8201;&#8212;&#8201;only yield good results for linear problems, they are very efficient and can be applied to large datasets. Decision trees are very efficient as well, but can also capture more complex relationships between inputs and output. Similarity-based models like <em>k</em>-nearest neighbors (kNN) or their more sophisticated cousin kernel methods, on the other hand, can be used to solve very complex non-linear problems, however, as they require the computation of a similarity matrix that scales with the number of training points, they should only be applied to comparatively small datasets (~ a few thousand points). Finally, neural networks are the most sophisticated model class and can be used to solve extremely complex problems, but they are also rather data hungry (depending on the size of the network).</span></div>
+<div class="title"><span class="small">This is an overview of the different features-based and similarity-based models we&#8217;ll discuss in the following chapters, as well as for which dataset size and problem complexity they are appropriate: While linear models are rather simple and&#8201;&#8212;&#8201;as the name suggests&#8201;&#8212;&#8201;only yield good results for linear problems, they are very efficient and can be applied to large datasets. Decision trees are very efficient as well, but can also capture more complex relationships between inputs and output. Similarity-based models like <em>k</em>-nearest neighbors (kNN) or their more sophisticated cousin kernel methods, on the other hand, can be used to solve very complex nonlinear problems, however, as they require the computation of a similarity matrix that scales with the number of training points, they should only be applied to comparatively small datasets (~ a few thousand points). Finally, neural networks are the most sophisticated model class and can be used to solve extremely complex problems, but they are also rather data hungry (depending on the size of the network).</span></div>
 </div>
 </div>
 </div>
@@ -4048,7 +4066,7 @@ I.e., does the model generate <em>reliable predictions</em> for <em>new data poi
 <dd>
 <p><em>Regression:</em> mean absolute error, mean squared error, \(R^2\)<br>
 <em>Classification:</em> (balanced) accuracy<br>
-<em>Ranking:</em> <a href="https://en.wikipedia.org/wiki/Precision_and_recall" target="_blank" rel="noopener">precision/recall</a> (&#8594; F1 score), hits@_k_</p>
+<em>Ranking:</em> <a href="https://en.wikipedia.org/wiki/Precision_and_recall" target="\_blank">precision/recall</a> (&#8594; F1 score), hits@<em>k</em></p>
 </dd>
 </dl>
 </div>
@@ -4272,6 +4290,18 @@ I.e., does the model generate <em>reliable predictions</em> for <em>new data poi
 </dd>
 </dl>
 </div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Especially when working with small datasets, it is important that these splits are well balanced, i.e., that all classes are represented equally in the training, validation, and test sets. This is also called stratified sampling.
+</td>
+</tr>
+</table>
+</div>
 <div class="sidebarblock">
 <div class="content">
 <div class="dlist">
@@ -4394,7 +4424,7 @@ make predictions as</p>
 <p>linear models are good for small datasets</p>
 </li>
 <li>
-<p>extensions for non-linear problems exist (&#8594; feature engineering (e.g., including interaction terms), GAMs, etc.)</p>
+<p>extensions for nonlinear problems exist (&#8594; feature engineering (e.g., including interaction terms), GAMs, etc.)</p>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -4782,7 +4812,7 @@ Ensemble methods like random forests and gradient boosting trees give very good 
 <dl>
 <dt class="hdlist1">Main idea / &#8220;Kernel Trick&#8221;</dt>
 <dd>
-<p>by working on similarities (computed with special <em>kernel functions</em>) instead of the original features, linear methods can be applied to solve non-linear problems</p>
+<p>by working on similarities (computed with special <em>kernel functions</em>) instead of the original features, linear methods can be applied to solve nonlinear problems</p>
 </dd>
 </dl>
 </div>
@@ -4793,7 +4823,7 @@ For example, in the simple toy dataset shown below, the two classes become linea
 <div class="paragraph text-center">
 <p><span class="image"><img src="images/05_supervised_other/kernels_xspace.png" alt="image" width="340"></span> &#8594; \(\phi(\mathbf{x})\) &#8594;
 <span class="image"><img src="images/05_supervised_other/kernels_zspace.png" alt="image" width="340"></span><br>
-<span class="small">While in the original 2D representation on the left you would need a circle (i.e., a non-linear function) to separate the blue from the red points, in the 3D plot on the right, the data points are arranged in a cone shape, where you could cut off the red points at the tip of the cone with a hyperplane.</span></p>
+<span class="small">While in the original 2D representation on the left you would need a circle (i.e., a nonlinear function) to separate the blue from the red points, in the 3D plot on the right, the data points are arranged in a cone shape, where you could cut off the red points at the tip of the cone with a hyperplane.</span></p>
 </div>
 <div class="paragraph">
 <p>Of course, coming up with such a feature map \(\phi(\mathbf{x})\), especially for more complex problems, isn&#8217;t exactly easy. But as you will see, we don&#8217;t actually need to know what this transformation looks like!</p>
@@ -4971,7 +5001,7 @@ If you are curious what the kernel feature space looks like for some kernel func
 <div class="ulist">
 <ul>
 <li>
-<p>non-linear predictions with global optimum</p>
+<p>nonlinear predictions with global optimum</p>
 </li>
 <li>
 <p>fast to train (on medium size datasets; compared to, e.g., neural networks)</p>
@@ -5126,16 +5156,16 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <dd>
 <p><span class="small">[Adapted from: &#8220;AI for everyone&#8221; by Andrew Ng (coursera.org)]</span></p>
 <div class="paragraph">
-<p>Let&#8217;s say we have an online shop and are trying to predict how much of a product we will sell in the next month. The price we are willing to sell the product for will obviously influence the demand, as people are trying to get a good deal, i.e., the lower the price, the higher the demand; a negative correlation that can be captured by a linear model. However, the demand will never be below zero (i.e., when the price is very high, people wont suddenly return the product), so we need to adapt the model such that the predicted output is never negative. This can be achieved by applying the max function, in this context also called a non-linear activation function, to the output of the linear model, so that now when the linear model would return a negative value, we instead predict 0.</p>
+<p>Let&#8217;s say we have an online shop and are trying to predict how much of a product we will sell in the next month. The price we are willing to sell the product for will obviously influence the demand, as people are trying to get a good deal, i.e., the lower the price, the higher the demand; a negative correlation that can be captured by a linear model. However, the demand will never be below zero (i.e., when the price is very high, people wont suddenly return the product), so we need to adapt the model such that the predicted output is never negative. This can be achieved by applying the max function, in this context also called a nonlinear activation function, to the output of the linear model, so that now when the linear model would return a negative value, we instead predict 0.</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="images/05_supervised_nn/neural_network_intuitive_a4.png" alt="image" width="440">
 </div>
-<div class="title"><span class="small">A very simple linear model with one input and one output variable and a non-linear activation function (the max function).</span></div>
+<div class="title"><span class="small">A very simple linear model with one input and one output variable and a nonlinear activation function (the max function).</span></div>
 </div>
 <div class="paragraph">
-<p>This functional relationship can be visualized as a circle with one input <em>(price)</em> and one output <em>(demand)</em>, where the S-curve in the circle indicates that a non-linear activation function is applied to the result. We will later see these circles as single units or &#8220;neurons&#8221; of a neural network.</p>
+<p>This functional relationship can be visualized as a circle with one input <em>(price)</em> and one output <em>(demand)</em>, where the S-curve in the circle indicates that a nonlinear activation function is applied to the result. We will later see these circles as single units or &#8220;neurons&#8221; of a neural network.</p>
 </div>
 <div class="paragraph">
 <p>To get better results, we can extend the model and use multiple input features for the prediction:</p>
@@ -5156,7 +5186,7 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <div class="title"><span class="small">Our example is about an online shop, so the customers additionally have to pay shipping fees, which means to reflect the true affordability of the product, we need to combine the product price with the shipping costs. Next, the customers are interested in high quality products. However, not only the actual quality of the raw materials we used to make the product influences how the customers perceive the product, but we can also reinforce the impression that the product is of high quality with a marketing campaign. Furthermore, a high price also suggests that the product is superior. This means by creating these additional features, the price can actually contribute in two ways towards the final prediction: while, on the one hand, a lower price is beneficial for the affordability of the product, a higher price, on the other hand, results in a larger perceived quality.</span></div>
 </div>
 <div class="paragraph">
-<p>While in this toy example, it was possible to construct such features manually, the nice thing about neural networks is that they do exactly that automatically: By using multiple layers, i.e., stacking multiple linear models (with non-linear activation functions) on top of each other, it is possible to create more and more complex combinations of the original input features, which can improve the performance of the model. The more layers the network uses, i.e., the &#8220;deeper&#8221; it is, the more complex the resulting feature representations.</p>
+<p>While in this toy example, it was possible to construct such features manually, the nice thing about neural networks is that they do exactly that automatically: By using multiple layers, i.e., stacking multiple linear models (with nonlinear activation functions) on top of each other, it is possible to create more and more complex combinations of the original input features, which can improve the performance of the model. The more layers the network uses, i.e., the &#8220;deeper&#8221; it is, the more complex the resulting feature representations.</p>
 </div>
 </dd>
 </dl>
@@ -5233,7 +5263,7 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <div class="sect4">
 <h5 id="_feed_forward_neural_network_ffnn">Feed Forward Neural Network (FFNN)</h5>
 <div class="paragraph">
-<p>This is the original and most straightforward neural network architecture, which you&#8217;ve already seen in the initial example, only that in practice it usually has a few more layers and units per layer. Each layer here is basically a linear model, i.e., it consists of a weight matrix \(W_i\) and some non-linear activation function \(\sigma_i\) that is applied to the output. These layers are applied sequentially to the input features \(\mathbf{x}\), i.e., the network computes a composite function (in this case for 3 layers):</p>
+<p>This is the original and most straightforward neural network architecture, which you&#8217;ve already seen in the initial example, only that in practice it usually has a few more layers and units per layer. Each layer here is basically a linear model, i.e., it consists of a weight matrix \(W_i\) and some nonlinear activation function \(\sigma_i\) that is applied to the output. These layers are applied sequentially to the input features \(\mathbf{x}\), i.e., the network computes a composite function (in this case for 3 layers):</p>
 </div>
 <div class="stemblock">
 <div class="content">
@@ -5244,7 +5274,7 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <div class="content">
 <img src="images/05_supervised_nn/neural_network.png" alt="image" width="840">
 </div>
-<div class="title"><span class="small">Feed Forward Neural Network (FFNN) architecture: The input feature vector \(\mathbf{x}\), representing one data point, is multiplied by the first weight matrix \(W_1\) to create a new vector, which, after applying the non-linear activation function (e.g., a ReLU function as we&#8217;ve seen in the initial example) results in the first hidden layer representation \(\mathbf{x}'\). This new vector is then multiplied by the second weight matrix \(W_2\) and again a non-linear activation function is applied to yield the second hidden layer representation of the sample, \(\mathbf{x}''\). Depending on how many layers the network has (i.e., how deep it is), this could be repeated multiple times now until finally the last layer computes the predicted output \(\mathbf{\hat{y}}\). For a regression problem, the output would be a direct prediction of the target values (i.e., without applying a final non-linear activation function), while for a classification problem, the output consists of a vector with probabilities for the different classes, created by applying a softmax activation function on the output, which ensures all values are between 0 and 1 and sum up to 1.</span></div>
+<div class="title"><span class="small">Feed Forward Neural Network (FFNN) architecture: The input feature vector \(\mathbf{x}\), representing one data point, is multiplied by the first weight matrix \(W_1\) to create a new vector, which, after applying the nonlinear activation function (e.g., a ReLU function as we&#8217;ve seen in the initial example) results in the first hidden layer representation \(\mathbf{x}'\). This new vector is then multiplied by the second weight matrix \(W_2\) and again a nonlinear activation function is applied to yield the second hidden layer representation of the sample, \(\mathbf{x}''\). Depending on how many layers the network has (i.e., how deep it is), this could be repeated multiple times now until finally the last layer computes the predicted output \(\mathbf{\hat{y}}\). For a regression problem, the output would be a direct prediction of the target values (i.e., without applying a final nonlinear activation function), while for a classification problem, the output consists of a vector with probabilities for the different classes, created by applying a softmax activation function on the output, which ensures all values are between 0 and 1 and sum up to 1.</span></div>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -5255,7 +5285,7 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <div class="ulist">
 <ul>
 <li>
-<p>Why do you need the non-linear activation functions between the layers, i.e., how could you simplify a network with multiple layers, if it didn&#8217;t have any non-linear activation functions between the layers?</p>
+<p>Why do you need the nonlinear activation functions between the layers, i.e., how could you simplify a network with multiple layers, if it didn&#8217;t have any nonlinear activation functions between the layers?</p>
 </li>
 <li>
 <p>In what way could you manipulate the parameters (i.e., weight matrices) of an existing neural network without changing its predictions? (This is also a reason why there exist many equally good local optima.)</p>
@@ -5289,7 +5319,7 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <div class="content">
 <img src="images/05_supervised_nn/loss_surface.png" alt="image" width="460">
 </div>
-<div class="title"><span class="small">Training loss surface over the network&#8217;s parameter space (simplified, i.e., showing only two weights (\(\theta_1\) and \(\theta_2\)), while in reality, this would be a super complex non-linear function in a very high-dimensional space), where every possible weight configuration of a network results in a different loss on the training set. By taking a step into the direction of steepest descent of this loss function, the weights of the network get closer to a configuration where the loss is at a local minimum.</span></div>
+<div class="title"><span class="small">Training loss surface over the network&#8217;s parameter space (simplified, i.e., showing only two weights (\(\theta_1\) and \(\theta_2\)), while in reality, this would be a super complex nonlinear function in a very high-dimensional space), where every possible weight configuration of a network results in a different loss on the training set. By taking a step into the direction of steepest descent of this loss function, the weights of the network get closer to a configuration where the loss is at a local minimum.</span></div>
 </div>
 <div class="paragraph">
 <p>Typically, the weights are adapted over multiple <strong>epochs</strong>, where one epoch means going over the whole training set once.
@@ -5923,7 +5953,7 @@ When working with time series data, the train, validation, and test data splits 
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Triplet Learning</dt>
+<dt class="hdlist1">Triplet Learning / Content-based Filtering</dt>
 <dd>
 <p>In triplet learning, we don&#8217;t directly work with the full matrix of known interactions, but instead the training dataset consists of triplets for the existing labels (e.g., (user <em>i</em>, movie <em>j</em>, 4 stars), which can also be a more memory-friendly representation). Additionally, we assume that we have feature vectors available for the users and movies (e.g., the users might have filled out a short survey when they set up an account and for the movies we know the genres, directors, and plot keywords; if all fails, this could also just be a one-hot encoding). Given the two feature vectors of a user and a movie, we then try to predict the interaction value directly:</p>
 <div class="imageblock text-center">
@@ -5984,12 +6014,18 @@ All models are wrong, but some are useful.
 </li>
 <li>
 <p>&#8230;&#8203; even when the world keeps on changing.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Common pitfalls include: </dt>
-</dl>
-</div>
-</li>
+<dd>
+<div class="ulist">
+<ul>
 <li>
 <p>evaluating the model with an inappropriate evaluation metric (e.g., accuracy instead of balanced accuracy for a classification problem with unbalanced class distributions), thereby not noticing the subpar performance of a model (e.g., worse than the stupid baseline)</p>
 </li>
@@ -6010,6 +6046,9 @@ All models are wrong, but some are useful.
 </li>
 </ul>
 </div>
+</dd>
+</dl>
+</div>
 <div class="paragraph">
 <p>We&#8217;ll cover these points in more detail in the following sections, but below you find a quick summary of what you can do to not fall into any of these traps.</p>
 </div>
@@ -6028,7 +6067,7 @@ All models are wrong, but some are useful.
 <p>Sanity check: Does the dataset contain samples with the same inputs but different outputs? &#8658; Some important features might be missing or the targets are very noisy, e.g., due to inconsistent annotations&#8201;&#8212;&#8201;<a href="#_garbage_in_garbage_out">fix this first!</a></p>
 </li>
 <li>
-<p>Think about the structure of the problem and what type of model might be appropriate to learn the presumed &#8216;input &#8594; output&#8217; relationship. For example, if the problem is clearly non-linear, the chosen model type also needs to be complex enough to at least in principle be able to pick up on this relation (i.e., such that the model does not underfit, see below). A lot of domain knowledge can also be put into the design of neural network architectures.</p>
+<p>Think about the structure of the problem and what type of model might be appropriate to learn the presumed &#8216;input &#8594; output&#8217; relationship. For example, if the problem is clearly nonlinear, the chosen model type also needs to be complex enough to at least in principle be able to pick up on this relation (i.e., such that the model does not underfit, see below). A lot of domain knowledge can also be put into the design of neural network architectures.</p>
 </li>
 <li>
 <p>Make sure the data satisfies the model&#8217;s assumptions &#8658; for pretty much all models except decision trees (and models based on decision trees, like random forests) the data should be approximately normally distributed.</p>
@@ -6083,11 +6122,11 @@ All models are wrong, but some are useful.
 <div class="ulist none">
 <ul class="none">
 <li>
-<p><em>Data drift:</em> input distribution changes, e.g., a new user operates the machine differently<br>
+<p><em>Data drift:</em> input distribution \(X\) changes, e.g., a new user operates the machine differently<br>
 &#8594; Use statistical tests to detect changes in input distributions</p>
 </li>
 <li>
-<p><em>Concept drift:</em> input/output relation changes due to:</p>
+<p><em>Concept drift:</em> input/output relation \(X \to y\) changes due to:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -6095,6 +6134,18 @@ All models are wrong, but some are useful.
 </li>
 <li>
 <p>Internal factors (feedback loop: presence of ML model alters behavior, for example, spammers change their strategy to evade the spam filter)</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+These changes can either be <strong>gradual</strong> (e.g., languages change gradually as new words are coined; a camera lens gets covered with dust over time), or they can come as a <strong>sudden shock</strong> (e.g., someone cleans the camera lens; when the COVID-19 pandemic hit, suddenly a lot of people switched to online shopping, which tripped up the credit card fraud detection systems).
+</td>
+</tr>
+</table>
+</div>
 </li>
 </ul>
 </div>
@@ -6224,10 +6275,23 @@ Always look at the data!! Is there a pattern among wrong predictions, e.g., is t
 <h5 id="_feature_selection">Feature Selection</h5>
 <div class="paragraph">
 <p>In small datasets, some patterns can occur simply by chance (= <a href="https://www.tylervigen.com/spurious-correlations" target="\_blank">spurious correlations</a>).<br>
-&#8658; exclude irrelevant features to avoid overfitting on the training data</p>
+&#8658; Exclude irrelevant features to avoid overfitting on the training data. This is especially important if the number of samples in the dataset is close to the number of features.</p>
 </div>
 <div class="paragraph">
-<p><span class="underline">Feature Selection Strategies:</span></p>
+<p>Feature selection techniques are either</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>unsupervised</strong>, which means they only look at the features themselves, e.g., removing highly correlated/redundant features, or</p>
+</li>
+<li>
+<p><strong>supervised</strong>, which means they take into account the relationship between the features and target variable.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="underline">Supervised Feature Selection Strategies:</span></p>
 </div>
 <div class="dlist">
 <dl>
@@ -6351,9 +6415,21 @@ ML models love to cheat &amp; take shortcuts! They will often pick up on spuriou
 </div>
 </div>
 <div class="paragraph">
-<p>If the two features and their effect on the target are independent of each other (e.g., \(y = ax_1 + bx_2\)), this is not too dramatic, however, if these variables interact in some complicated non-linear way, this might not be modeled correctly when relevant combinations of feature values weren&#8217;t sampled.</p>
+<p>If the two features and their effect on the target are independent of each other (e.g., \(y = ax_1 + bx_2\)), this is not too dramatic, however, if these variables interact in some complicated nonlinear way, this might not be modeled correctly when relevant combinations of feature values weren&#8217;t sampled.</p>
 </div>
 </div>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+When deploying an ML system in production, this system must include not only the trained model, but also the corresponding preprocessing scripts that were used to clean the training data. For example, if you removed outliers from the initial training set, you need to apply the same rules to sort out anomalies in the production data as well, since otherwise the ML model would have to extrapolate on these kinds of samples.
+</td>
+</tr>
+</table>
 </div>
 <div class="sect3">
 <h4 id="_causality">Causality</h4>
@@ -6570,6 +6646,18 @@ R^<span class="integer">2</span> (train): <span class="float">0.958</span>; (tes
 <img src="images/07_causality/residuals_independent.png" alt="image" width="840">
 </div>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+When working with time series data, you should also check for autocorrelation between the residuals, i.e., it should not be possible to use the residual at time point <em>t</em> to predict the next residual at <em>t+1</em>.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="paragraph">
@@ -6673,7 +6761,7 @@ R^<span class="integer">2</span> (train): <span class="float">0.958</span>; (tes
 <div class="ulist">
 <ul>
 <li>
-<p>assess the model&#8217;s performance for each (known) subgroup individually to verify that the prediction errors of the model are random and the model is not systematically worse for some subgroups<br></p>
+<p>assess the model&#8217;s performance for each (known) subgroup individually by slicing the data accordingly to verify that the prediction errors of the model are random and the model is not systematically worse for some subgroups / data slices<br></p>
 </li>
 <li>
 <p>if it is not possible to obtain a well balanced training and/or test set, assign higher sample weights to data points from undersampled subgroups to make sure the algorithm pays enough attention to them during training and they are given more weight in the evaluation of the model (similar to using the balanced accuracy)</p>
@@ -6890,6 +6978,18 @@ I.e., first, a trained model is normally evaluated on the original dataset (eith
 </td>
 <td class="content">
 One big drawback of this approach is that it assumes that features are independent of each other, i.e., since the features are varied individually, this can result in unrealistic feature combinations (e.g., if one feature is the height of a person (in the range of 60-200cm) and another feature is the weight (30-120kg), then when these features are varied independently, at some point we would evaluate a data point with height: 200cm and weight: 30kg, which seems like a very unhealthy combination). However, by examining the ICE plot for possibly erratic changes for individual samples, this can usually be spotted. And in general&#8201;&#8212;&#8201;this goes for all explainability methods&#8201;&#8212;&#8201;the results should not be over-interpreted, i.e., they are good for showing rough trends, but remember that the plots might also look completely different when you use them with a different type of model trained on the same dataset, i.e., be careful before concluding anything about the root causes of a problem based on these results.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Usually, you want a model that reacts smoothly to changes in the input data. Drastic changes in the decision function as a result of minor changes to the input data suggest that a model might be vulnerable to an adversarial attack.
 </td>
 </tr>
 </table>
@@ -7272,6 +7372,18 @@ By using a more complex network together with meaningful feature representations
 </tr>
 </tbody>
 </table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+But it can be done! A good example comes from the startup alcemy, which uses ML to optimize the production of low-carbon cement. They describe how they overcame the above mentioned challenges <a href="https://www.youtube.com/watch?v=lt-ABfIWv1M" target="\_blank">this talk</a>.
+</td>
+</tr>
+</table>
+</div>
 <div class="sidebarblock">
 <div class="content">
 <div class="dlist">
@@ -7593,6 +7705,38 @@ If you do not yet have the necessary AI talent in-house to tackle such a project
 </ul>
 </div>
 </dd>
+</dl>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Using ML in Production</dt>
+<dd>
+<p>If you want to learn more about how to use ML in production, including topics like:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>deploying a learned model</p>
+</li>
+<li>
+<p>detecting data &amp; concept drift</p>
+</li>
+<li>
+<p>monitoring and retraining a model after deployment</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>then checkout the Coursera specialization <a href="https://www.coursera.org/specializations/machine-learning-engineering-for-production-mlops" target="\_blank">Machine Learning Engineering for Production (MLOps)</a>!</p>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="dlist">
+<dl>
 <dt class="hdlist1">Textbooks: theoretical background (i.e. math!)</dt>
 <dd>
 <div class="ulist">

@@ -840,7 +840,10 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <p>The last example on image data comes from the application area of medicine: Below you see two images of retinas, i.e., photos taken of the back of someone&#8217;s eye, based on which it is possible to diagnose a common complication of diabetes that can result in blindness if left untreated.</p>
 </div>
 <div class="paragraph">
-<p>The diagnostic algorithm to identify the markers of the disease in these images was developed by researchers at Google and achieves the same level of accuracy as human experts in the field. Google had even assembled a team of top specialists to discuss the hardest cases again to get consistent labels for all images, which gave their model an additional performance boost. Since the equipment to take these images is fairly cheap, this means that with this ML model, expert diagnostic decisions can now be made available to those that might otherwise not have had the means to consult a top specialist.</p>
+<p>The diagnostic algorithm to identify the markers of the disease in these images was developed by researchers at Google and achieves the same level of accuracy as human experts in the field. Google had even assembled a team of top specialists to discuss the hardest cases again to get consistent labels for all images, which gave their model an additional performance boost.</p>
+</div>
+<div class="paragraph">
+<p>Since the equipment to take these images is fairly cheap, this means that with this ML model, expert diagnostic decisions can now be made available to those that might otherwise not have had the means to consult a top specialist.</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -1129,7 +1132,10 @@ Simply speaking, an <strong>algorithm</strong> can be thought of as a <strong>st
 <div class="sect2">
 <h3 id="_how_do_machines_learn">How do machines &#8220;learn&#8221;?</h3>
 <div class="paragraph">
-<p>The set of ML algorithms can be subdivided based on how they learn from the data. This is inspired by how humans learn:</p>
+<p>So how do ML algorithms solve these &#8220;input &#8594; output&#8221; problems, i.e., how do they recognize patterns and learn rules from data?</p>
+</div>
+<div class="paragraph">
+<p>The set of ML algorithms can be subdivided according to their learning strategy. This is inspired by how humans learn:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -1205,10 +1211,10 @@ Simply speaking, an <strong>algorithm</strong> can be thought of as a <strong>st
 </div>
 </div>
 <div class="paragraph">
-<p>In supervised learning, your goal is to learn a model (= a mathematical function) \(f(x)\) that describes the relationship between some input(s) \(x\) and output \(y\). This model can then be used to <strong>make predictions for new data points</strong>, i.e., compute \(f(x') = y\) for some new \(x'\).</p>
+<p>In supervised learning, your goal is to learn a <strong>model (= a mathematical function)</strong> \(f(x)\) that describes the relationship between some <strong>input(s)</strong> \(x\) (e.g., different process conditions like temperature, type of material, etc.) and <strong>output</strong> \(y\) (e.g., resulting product quality). This model can then be used to <strong>make predictions for new data points</strong>, i.e., compute \(f(x') = y\) for some new \(x'\) (e.g., predict for a new set of process conditions whether the produced product will be of high quality or if the process should be stopped to not waste resources).</p>
 </div>
 <div class="paragraph">
-<p>The available supervised learning algorithms differ in the <strong>type of \(x \to y\) relationship</strong> they can describe (e.g., linear or non-linear) and what kind of <strong>objective</strong> they minimize (also called loss function; an error computed on the training data, quantifying the mismatch between true and predicted labels). The task of a data scientist is to select a type of model that can optimally fit the given data. The rest is then taken care of by an <strong>optimization method, which finds the parameters of the model that minimize the model&#8217;s objective</strong>, i.e., such that the model&#8217;s prediction error on the given data is as small as possible.</p>
+<p>The available supervised learning algorithms differ in the <strong>type of \(x \to y\) relationship</strong> they can describe (e.g., linear or nonlinear) and what kind of <strong>objective</strong> they minimize (also called loss function; an error computed on the training data, quantifying the mismatch between true and predicted labels). The task of a data scientist is to select a type of model that can optimally fit the given data. The rest is then taken care of by an <strong>optimization method, which finds the parameters of the model that minimize the model&#8217;s objective</strong>, i.e., such that the model&#8217;s prediction error on the given data is as small as possible.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -1472,7 +1478,7 @@ In most of the book, the terms &#8220;ML algorithm&#8221; and &#8220;ML model&#8
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>The ML model runs on the &#8220;edge&#8221;, i.e., on each individual machine where the respective data is generated and the output of the model is used in subsequent process steps. This is often the best strategy when results need to be computed in real time and / or a continuous Internet connection can not be guaranteed, e.g., in self-driving cars. However, the downside of this is that, depending on the type of ML model, comparatively expensive computing equipment needs to be installed in each machine, e.g., GPUs for neural network models.</p>
+<p>The ML model runs on an &#8220;edge&#8221; device, i.e., on each individual machine (e.g., mobile phone) where the respective data is generated and the output of the model is used in subsequent process steps. This is often the best strategy when results need to be computed in real time and / or a continuous Internet connection can not be guaranteed, e.g., in self-driving cars. However, the downside of this is that, depending on the type of ML model, comparatively expensive computing equipment needs to be installed in each machine, e.g., GPUs for neural network models.</p>
 </li>
 <li>
 <p>The ML model runs in the &#8220;cloud&#8221;, i.e., on a central server, e.g., in the form of a web application that receives data from individual users, processes it, and sends back the results. This is often the more efficient solution if a response within a few seconds is sufficient for the use case. However, processing personal information in the cloud also raises privacy concerns. One of the major benefits of this solution is that it is easier to update the ML model, for example, when more historic data becomes available or if the process changes and the model now has to deal with slightly different inputs (we&#8217;ll discuss this further in later chapters).</p>
@@ -1735,6 +1741,18 @@ If you can, observe how the data is collected. As in: actually physically stand 
 </div>
 </dd>
 </dl>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+In addition to documenting datasets as a whole, it is also really helpful to store metadata for individual samples. For example, for image data, this could include the time stamp of when the image was taken, the geolocation (or if the camera is built into a manufacturing machine then the ID of this machine), information about the camera settings, etc.. This can greatly help when analyzing model prediction errors, as it might turn out that, for example, images taken with a particular camera setting are especially difficult to classify, which in turn gives us some hints on how to improve the data collection process.
+</td>
+</tr>
+</table>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -2235,16 +2253,16 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <dd>
 <p><span class="small">[Adapted from: &#8220;AI for everyone&#8221; by Andrew Ng (coursera.org)]</span></p>
 <div class="paragraph">
-<p>Let&#8217;s say we have an online shop and are trying to predict how much of a product we will sell in the next month. The price we are willing to sell the product for will obviously influence the demand, as people are trying to get a good deal, i.e., the lower the price, the higher the demand; a negative correlation that can be captured by a linear model. However, the demand will never be below zero (i.e., when the price is very high, people wont suddenly return the product), so we need to adapt the model such that the predicted output is never negative. This can be achieved by applying the max function, in this context also called a non-linear activation function, to the output of the linear model, so that now when the linear model would return a negative value, we instead predict 0.</p>
+<p>Let&#8217;s say we have an online shop and are trying to predict how much of a product we will sell in the next month. The price we are willing to sell the product for will obviously influence the demand, as people are trying to get a good deal, i.e., the lower the price, the higher the demand; a negative correlation that can be captured by a linear model. However, the demand will never be below zero (i.e., when the price is very high, people wont suddenly return the product), so we need to adapt the model such that the predicted output is never negative. This can be achieved by applying the max function, in this context also called a nonlinear activation function, to the output of the linear model, so that now when the linear model would return a negative value, we instead predict 0.</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="images/05_supervised_nn/neural_network_intuitive_a4.png" alt="image" width="440">
 </div>
-<div class="title"><span class="small">A very simple linear model with one input and one output variable and a non-linear activation function (the max function).</span></div>
+<div class="title"><span class="small">A very simple linear model with one input and one output variable and a nonlinear activation function (the max function).</span></div>
 </div>
 <div class="paragraph">
-<p>This functional relationship can be visualized as a circle with one input <em>(price)</em> and one output <em>(demand)</em>, where the S-curve in the circle indicates that a non-linear activation function is applied to the result. We will later see these circles as single units or &#8220;neurons&#8221; of a neural network.</p>
+<p>This functional relationship can be visualized as a circle with one input <em>(price)</em> and one output <em>(demand)</em>, where the S-curve in the circle indicates that a nonlinear activation function is applied to the result. We will later see these circles as single units or &#8220;neurons&#8221; of a neural network.</p>
 </div>
 <div class="paragraph">
 <p>To get better results, we can extend the model and use multiple input features for the prediction:</p>
@@ -2265,7 +2283,7 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <div class="title"><span class="small">Our example is about an online shop, so the customers additionally have to pay shipping fees, which means to reflect the true affordability of the product, we need to combine the product price with the shipping costs. Next, the customers are interested in high quality products. However, not only the actual quality of the raw materials we used to make the product influences how the customers perceive the product, but we can also reinforce the impression that the product is of high quality with a marketing campaign. Furthermore, a high price also suggests that the product is superior. This means by creating these additional features, the price can actually contribute in two ways towards the final prediction: while, on the one hand, a lower price is beneficial for the affordability of the product, a higher price, on the other hand, results in a larger perceived quality.</span></div>
 </div>
 <div class="paragraph">
-<p>While in this toy example, it was possible to construct such features manually, the nice thing about neural networks is that they do exactly that automatically: By using multiple layers, i.e., stacking multiple linear models (with non-linear activation functions) on top of each other, it is possible to create more and more complex combinations of the original input features, which can improve the performance of the model. The more layers the network uses, i.e., the &#8220;deeper&#8221; it is, the more complex the resulting feature representations.</p>
+<p>While in this toy example, it was possible to construct such features manually, the nice thing about neural networks is that they do exactly that automatically: By using multiple layers, i.e., stacking multiple linear models (with nonlinear activation functions) on top of each other, it is possible to create more and more complex combinations of the original input features, which can improve the performance of the model. The more layers the network uses, i.e., the &#8220;deeper&#8221; it is, the more complex the resulting feature representations.</p>
 </div>
 </dd>
 </dl>
@@ -2305,7 +2323,7 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <div class="content">
 <img src="images/05_supervised_nn/neural_network.png" alt="image" width="840">
 </div>
-<div class="title"><span class="small">Feed Forward Neural Network (FFNN) architecture: The input feature vector \(\mathbf{x}\), representing one data point, is multiplied by the first weight matrix \(W_1\) to create a new vector, which, after applying the non-linear activation function (e.g., the max function as we&#8217;ve seen in the initial example) results in the first hidden layer representation \(\mathbf{x}'\). This new vector is then multiplied by the second weight matrix \(W_2\) and again a non-linear activation function is applied to yield the second hidden layer representation of the sample, \(\mathbf{x}''\). Depending on how many layers the network has (i.e., how deep it is), this could be repeated multiple times now until finally the last layer computes the predicted output \(\mathbf{\hat{y}}\). While the network is trained, these predicted outputs gets closer and closer to the true outputs for the training samples.</span></div>
+<div class="title"><span class="small">Feed Forward Neural Network (FFNN) architecture: The input feature vector \(\mathbf{x}\), representing one data point, is multiplied by the first weight matrix \(W_1\) to create a new vector, which, after applying the nonlinear activation function (e.g., the max function as we&#8217;ve seen in the initial example) results in the first hidden layer representation \(\mathbf{x}'\). This new vector is then multiplied by the second weight matrix \(W_2\) and again a nonlinear activation function is applied to yield the second hidden layer representation of the sample, \(\mathbf{x}''\). Depending on how many layers the network has (i.e., how deep it is), this could be repeated multiple times now until finally the last layer computes the predicted output \(\mathbf{\hat{y}}\). While the network is trained, these predicted outputs gets closer and closer to the true outputs for the training samples.</span></div>
 </div>
 </div>
 <div class="sect4">
@@ -2488,11 +2506,11 @@ I.e., does the model generate <em>reliable predictions</em> for <em>new data poi
 <div class="paragraph">
 <p>Depending on whether a model over- or underfits, different measures that can be taken to improve its performance. However, it is unrealistic to expect a model to have a perfect performance, as some tasks are just hard, for example, because the data is very noisy.</p>
 </div>
-<div class="admonitionblock note">
+<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
 Always look at the data! Is there a pattern among wrong predictions, e.g., is there a discrepancy between the performance for different classes?
@@ -2707,6 +2725,18 @@ However, a person&#8217;s gender or ethnicity, for example, is often correlated 
 </li>
 <li>
 <p>Internal factors (feedback loop: presence of ML model alters behavior, for example, spammers change their strategy to evade the spam filter)</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+These changes can either be <strong>gradual</strong> (e.g., languages change gradually as new words are coined; a camera lens gets covered with dust over time), or they can come as a <strong>sudden shock</strong> (e.g., someone cleans the camera lens; when the COVID-19 pandemic hit, suddenly a lot of people switched to online shopping, which tripped up the credit card fraud detection systems).
+</td>
+</tr>
+</table>
+</div>
 </li>
 </ul>
 </div>
@@ -2759,6 +2789,18 @@ However, a person&#8217;s gender or ethnicity, for example, is often correlated 
 </tr>
 </tbody>
 </table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+But it can be done! A good example comes from the startup alcemy, which uses ML to optimize the production of low-carbon cement. They describe how they overcame the above mentioned challenges <a href="https://www.youtube.com/watch?v=lt-ABfIWv1M" target="\_blank">this talk</a>.
+</td>
+</tr>
+</table>
+</div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Machine Learning is just the tip of the iceberg</dt>

@@ -666,7 +666,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
 <span id="revnumber">version 1.2,</span>
-<span id="revdate">2022-01-02</span>
+<span id="revdate">2022-01-23</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -694,7 +694,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="sect2">
 <h3 id="_garbage_in_garbage_out">Garbage in, Garbage out!</h3>
 <div class="paragraph">
-<p>Vergiss nie: Daten sind unser Rohstoff, um mit ML etwas Wertvolles zu produzieren. Ist die Qualität oder Quantität der Daten nicht ausreichend, stehen wir vor einem &#8220;Garbage in, Garbage out&#8221;-Szenario und egal welche Art von ausgefallenem ML-Algorithmus wir verwenden, wir werden kein zufriedenstellendes Ergebnis erreichen. Im Gegenteil, je aufwändiger die Algorithmen (z.B. Deep Learning), desto mehr Daten werden benötigt.</p>
+<p>Vergiss nie: Daten sind unser Rohstoff, um mit ML etwas Wertvolles zu schaffen. Ist die Qualität oder Quantität der Daten nicht ausreichend, haben wir ein &#8220;Garbage in, Garbage out&#8221;-Szenario und egal welche Art von ausgefallenem ML-Algorithmus wir verwenden, wir werden kein zufriedenstellendes Ergebnis erreichen. Im Gegenteil, je aufwändiger die Algorithmen (z.B. Deep Learning), desto mehr Daten werden benötigt.</p>
 </div>
 <div class="paragraph">
 <p>Nachfolgend findest du eine Zusammenfassung einiger allgemeiner Risiken im Zusammenhang mit Daten, die die Anwendung von ML erschweren oder sogar unmöglich machen:</p>
@@ -720,7 +720,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <p>Der Datensatz besteht aus verschiedenen Datentypen (strukturiert und/oder unstrukturiert) mit unterschiedlichen Skalierungen.</p>
 </li>
 <li>
-<p>Der Prozess ändert sich im Laufe der Zeit, z.B. aufgrund externer Bedingungen wie dem Austausch eines Sensors oder einem anderen Wartungsereignis, was bedeutet, dass die über verschiedene Zeiträume gesammelten Daten nicht kompatibel sind. <em>Worst Case:</em> Diese externen Veränderungen wurden nirgendwo aufgezeichnet und wir bemerken erst am Ende der Analyse, dass die verwendeten Daten unsere Annahmen verletzten.</p>
+<p>Der Prozess ändert sich im Laufe der Zeit, z.B. aufgrund externer Bedingungen wie dem Austausch eines Sensors oder einem anderen Wartungsereignis, was bedeutet, dass die über verschiedene Zeiträume gesammelten Daten nicht kompatibel sind. <em>Worst Case:</em> Diese externen Veränderungen wurden nirgends dokumentiert und wir bemerken erst am Ende der Analyse, dass die verwendeten Daten unsere Annahmen verletzten.</p>
 </li>
 </ul>
 </div>
@@ -754,11 +754,11 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="ulist">
 <ul>
 <li>
-<p>Die Labels sind sehr verrauscht, weil die menschlichen Annotatoren beispielsweise nicht dieselben klaren Regeln befolgten oder einige Beispiele mehrdeutig waren (z.B. ein QA-Experte sagt ein kleiner Kratzer ist noch in Ordnung, der andere sortiert das Produkt aus)<br>
-&#8658; Daten durch Neuannotation bereinigen, was einige Zeit dauern kann, sich aber auszahlt! Siehe auch dieser tolle <a href="https://youtu.be/06-AZXmwHjo" target="\_blank">MLOps / data-centric AI Vortrag von Andrew Ng</a> darüber, wie ein kleiner sauberer Datensatz wertvoller sein kann als ein großer verrauschter Datensatz.</p>
+<p>Die Labels sind sehr verrauscht, z.B. weil die menschlichen Annotatoren nicht dieselben klaren Regeln befolgten oder einige Beispiele mehrdeutig waren (z.B. ein QA-Experte sagt ein kleiner Kratzer ist noch in Ordnung, der andere sortiert das Produkt aus)<br>
+&#8658; Etablierung klarer Regeln nach welchen Kriterien Daten gelabelt werden sollen und Daten durch Neuannotation bereinigen. Dies kann einige Zeit dauern, lohnt sich aber! Siehe auch dieser tolle <a href="https://youtu.be/06-AZXmwHjo" target="\_blank">MLOps / data-centric AI Vortrag von Andrew Ng</a> darüber, wie ein kleiner sauberer Datensatz wertvoller sein kann als ein großer verrauschter Datensatz.</p>
 </li>
 <li>
-<p>Relevante Features fehlen &#8594; Menschen können zwar relativ einfach beurteilen, ob alle relevanten Informationen in unstrukturierten Daten enthalten sind (z.B. Bilder: entweder sehen wir eine Katze oder nicht), strukturierte Daten haben dagegen oft zu viele verschiedene Variablen und komplexe Interaktionen, um sofort zu erkennen, ob alle relevanten Eingangsgrößen gemessen wurden<br>
+<p>Relevante Input Features fehlen: Menschen können zwar relativ einfach beurteilen, ob alle relevanten Informationen in unstrukturierten Daten enthalten sind (z.B. Bilder: entweder sehen wir eine Katze oder nicht), strukturierte Daten haben dagegen oft zu viele verschiedene Variablen und komplexe Interaktionen, um sofort zu erkennen, ob alle relevanten Eingangsgrößen gemessen wurden.<br>
 &#8658; Sprich mit einem Fachexperten darüber, welche zusätzlichen Features hilfreich sein könnten und nimm diese in den Datensatz mit auf. <em>Worst Case:</em> Es muss ein neuer Sensor in die Maschine eingebaut werden um diese Daten zu sammeln, d.h. alle in der Vergangenheit gesammelten Daten sind im Grunde nutzlos. ABER: Der Einsatz des richtigen Sensors kann das Problem immens vereinfachen und der Einbau lohnt sich!<br>
 <span class="small">Bei vielen Anwendungen ist unser erster Gedanke oft, die Eingabedaten mithilfe einer Kamera zu generieren, da wir Menschen hauptsächlich auf unser visuelles System angewiesen sind, um viele Aufgaben zu lösen. Auch wenn Bilderkennungsalgorithmen mittlerweile sehr ausgereift sind, kann die Verwendung eines solchen Setups anstelle eines spezialisierteren Sensors die Lösung komplizierter machen.<br>
 Willst du überreife Erdbeeren erkennen? Machs wie <a href="https://www.aboutamazon.co.uk/innovation/machine-learning-using-algorithms-to-sort-fruit" target="\_blank">Amazon Fresh</a> und verwende einen Nahinfrarotsensor (NIR) anstelle einer normalen Kamera. Dabei wird immer noch maschinelles Lernen verwendet um die resultierenden Daten zu analysieren, aber in den NIR-Bildern sind die vergammelten Teile der Früchte viel besser sichtbar als auf normalen Fotos.<br>
@@ -793,7 +793,8 @@ Beobachte wenn möglich wie die Daten erfasst werden, im Sinne von: Stehe tatsä
 <dl>
 <dt class="hdlist1">Best Practice: Datenkatalog</dt>
 <dd>
-<p>In strukturierten Datensätzen sollte es für jede Variable Zusatzinformationen geben wie:</p>
+<p>Um Datensätze leichter zugänglich zu machen, sollten diese dokumentiert werden.
+Für strukturierte Datensätze sollte es für jede Variable Zusatzinformationen geben wie:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -809,7 +810,7 @@ Beobachte wenn möglich wie die Daten erfasst werden, im Sinne von: Stehe tatsä
 <p>Datentyp (z.B. numerische oder kategorische Werte)</p>
 </li>
 <li>
-<p>Datum der ersten Messung</p>
+<p>Datum der ersten Messung (z.B. falls ein Sensor erst später eingebaut wurde)</p>
 </li>
 <li>
 <p>Normaler/erwarteter Wertebereich (&#8594; &#8220;Wenn die Variable unter diesem Schwellwert liegt, dann ist die Maschine ausgeschaltet und die Datenpunkte können ignoriert werden&#8221;)</p>
@@ -824,6 +825,18 @@ Beobachte wenn möglich wie die Daten erfasst werden, im Sinne von: Stehe tatsä
 </div>
 </dd>
 </dl>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Neben der Dokumentation von Datensätzen als Ganzes ist es auch sehr hilfreich, Metadaten für einzelne Proben zu speichern. Bei Bilddaten können dies beispielsweise der Zeitstempel der Bildaufnahme, die Geolokalisierung (oder wenn die Kamera in einer Fertigungsmaschine verbaut ist, dann die ID dieser Maschine), Informationen zu den Kameraeinstellungen etc. sein. Dies kann bei der Analyse von Modellvorhersagefehlern sehr hilfreich sein, da sich beispielsweise herausstellen kann, dass Bilder, die mit einer bestimmten Kameraeinstellung aufgenommen wurden, besonders schwer zu klassifizieren sind, was uns wiederum Hinweise liefert, wie wir den Datenerfassungsprozesses verbessern könnten.
+</td>
+</tr>
+</table>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -853,7 +866,7 @@ Beobachte wenn möglich wie die Daten erfasst werden, im Sinne von: Stehe tatsä
 <div class="content">
 <img src="../images/09_ml_in_practice/data_responsibility.png" alt="image" width="540">
 </div>
-<div class="title"><span class="small">Ein Fitness-Tracker-Startup hielt es für eine coole Idee, beliebte Joggingrouten basierend auf den von ihren Nutzern generierten Daten zu veröffentlichen. Da aber auch viele US-Soldaten den Tracker benutzten und häufig um ihre Militärstützpunkte joggten, hat dieses Startup dadurch versehentlich einen geheimen US-Armeestützpunkt in Afghanistan geoutet, der auf ihrer interaktiven Karte als heller Punkt in einem Gebiet auftauchte, wo sonst nur wenige andere Nutzer joggten. Auch wenn deine Daten erst mal harmlos erscheinen, denk bitte darüber nach, was bei einer Veröffentlichung (auch in aggregierter, anonymisierter Form) schief gehen könnte!</span></div>
+<div class="title"><span class="small">Ein Fitness-Tracker-Startup hielt es für eine coole Idee, beliebte Joggingrouten basierend auf den von ihren Nutzern generierten Daten zu veröffentlichen. Da aber auch viele US-Soldaten den Tracker benutzten und häufig um ihre Militärstützpunkte joggten, hat dieses Startup dadurch versehentlich einen geheimen US-Armeestützpunkt in Afghanistan geoutet, der auf ihrer interaktiven Karte als heller Punkt in einem Gebiet auftauchte, wo sonst nur wenige andere Nutzer joggten. Auch wenn deine Daten erstmal harmlos erscheinen, denk bitte darüber nach, was bei einer Veröffentlichung (auch in aggregierter, anonymisierter Form) schief gehen könnte!</span></div>
 </div>
 </dd>
 </dl>

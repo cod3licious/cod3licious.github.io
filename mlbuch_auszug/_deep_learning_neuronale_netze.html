@@ -666,7 +666,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
 <span id="revnumber">version 1.2,</span>
-<span id="revdate">2022-01-02</span>
+<span id="revdate">2022-01-23</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -762,7 +762,7 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <dd>
 <p><span class="small">[Adaptiert von: &#8220;AI for everyone&#8221; von Andrew Ng (coursera.org)]</span></p>
 <div class="paragraph">
-<p>Angenommen, wir haben einen Online-Shop und versuchen vorherzusagen, wie viel wir von einem Produkt im nächsten Monat verkaufen werden. Der Preis, zu dem wir bereit sind, das Produkt anzubieten, beeinflusst offensichtlich die Nachfrage, da die Leute versuchen, ein gutes Geschäft zu machen, d.h. je niedriger der Preis, desto höher die Nachfrage. Es handelt sich um eine negative Korrelation, die durch ein lineares Modell beschrieben werden kann. Die Nachfrage ist jedoch nie kleiner als Null (d.h. wenn der Preis sehr hoch ist, werden die Kunden das Produkt nicht plötzlich zurückgeben), also müssen wir das Modell so anpassen, dass der vorhergesagte Output nie negativ ist. Dies kann man durch eine Max-Funktion (in diesem Zusammenhang auch nichtlineare Aktivierungsfunktion genannt) erreichen, die auf das Ergebnis des linearen Modells angewendet wird, sodass 0 vorhergesagt wird, wenn das lineare Modell einen negativen Wert berechnet.</p>
+<p>Angenommen, wir haben einen Online-Shop und versuchen vorherzusagen, wie viel wir von einem Produkt im nächsten Monat verkaufen werden. Der Preis, zu dem wir bereit sind, das Produkt anzubieten, beeinflusst offensichtlich die Nachfrage, da die Leute versuchen, ein gutes Geschäft zu machen, d.h. je niedriger der Preis, desto höher die Nachfrage. Es handelt sich um eine negative Korrelation, die durch ein lineares Modell beschrieben werden kann. Die Nachfrage ist jedoch nie kleiner als Null (d.h. wenn der Preis sehr hoch ist, werden die Kunden das Produkt nicht plötzlich zurückgeben), also müssen wir das Modell so anpassen, dass der vorhergesagte Output nie negativ ist. Dies erreichen wir durch eine Max-Funktion (in diesem Zusammenhang auch nichtlineare Aktivierungsfunktion genannt), die auf das Ergebnis des linearen Modells angewendet wird, sodass wenn das lineare Modell einen negativen Wert berechnet stattdessen 0 vorhergesagt wird.</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -783,7 +783,7 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <div class="title"><span class="small">Ein einfaches lineares Modell mit mehreren Inputs, bei dem die Vorhersage als gewichtete Summe der Inputs berechnet wird, zusammen mit der Max-Funktion um negative Werte zu vermeiden.</span></div>
 </div>
 <div class="paragraph">
-<p>Um die Performance des Modells weiter zu verbessern, können wir aus den ursprünglichen Inputs manuell informativere Features generieren, indem wir sie sinnvoll kombinieren (&#8594; Feature Engineering), bevor wir den Output berechnen:</p>
+<p>Um die Performance des Modells noch weiter zu verbessern, können wir aus den ursprünglichen Inputs manuell informativere Features generieren, indem wir sie sinnvoll kombinieren (&#8594; Feature Engineering), bevor wir den Output berechnen:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -792,7 +792,7 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <div class="title"><span class="small">In diesem Beispiel geht es um einen Online-Shop und die Kunden müssen Versandkosten bezahlen, d.h. die tatsächliche Erschwinglichkeit des Produkts ergibt sich aus der Summe des Produktpreises und den Versandkosten. Außerdem interessieren sich die Kunden für qualitativ hochwertige Produkte, doch die Produktwahrnehmung ergibt sich nicht nur aus der tatsächlichen Rohstoffqualität. Dass unser Produkt hochwertiger ist als andere wird auch durch eine entsprechende Marketingkampagne und einen hohen Preis vermittelt. Durch die Berechnung dieser zusätzlichen Zwischenfeatures kann der Preis somit in zweierlei Hinsicht zur endgültigen Vorhersage beitragen: Während einerseits ein niedrigerer Preis für die Erschwinglichkeit des Produkts von Vorteil ist, führt andererseits ein höherer Preis zu der Wahrnehmung einer höheren Qualität.</span></div>
 </div>
 <div class="paragraph">
-<p>Während es in diesem Anschauungsbeispiel möglich war, solche Features manuell zu konstruieren, ist das Vorteilhafte an neuronalen Netzen, dass sie genau das automatisch tun: Indem wir mehrere Zwischenschichten (Layers) verwenden, d.h. mehrere lineare Modelle (mit nichtlinearen Aktivierungsfunktionen) verbinden, werden immer komplexere Kombinationen der ursprünglichen Input Features generiert, die die Performance des Modells verbessern können. Je mehr Layer das Netzwerk verwendet, d.h. je &#8220;tiefer&#8221; es ist, desto komplexer sind die resultierenden Feature-Repräsentationen.</p>
+<p>Während es in diesem Anschauungsbeispiel möglich war, solche Features manuell zu konstruieren, ist das Vorteilhafte an neuronalen Netzen, dass sie genau das automatisch tun: Indem wir mehrere Zwischenschichten (Layers) verwenden, d.h. mehrere lineare Modelle (mit nichtlinearen Aktivierungsfunktionen) verbinden, werden immer komplexere Kombinationen der ursprünglichen Input Features generiert, die die Performance des Modells verbessern können. Je mehr Layers das Netzwerk verwendet, d.h. je &#8220;tiefer&#8221; es ist, desto komplexer sind die resultierenden Feature Repräsentationen.</p>
 </div>
 </dd>
 </dl>
@@ -811,7 +811,7 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <p>&#8594; Convolutional Neural Networks (CNNs) für Bilder</p>
 </li>
 <li>
-<p>&#8594; Recurrent Neural Networks (RNNs) für sequentielle Daten wie Text oder Zeitreihen</p>
+<p>&#8594; Recurrent Neural Networks (RNNs) für sequenzielle Daten wie Text oder Zeitreihen</p>
 </li>
 </ul>
 </div>
@@ -826,19 +826,19 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <div class="sect4">
 <h5 id="_feed_forward_neural_network_ffnn">Feed Forward Neural Network (FFNN)</h5>
 <div class="paragraph">
-<p>FFNN ist die ursprüngliche und einfachste neuronale Netzwerkarchitektur, die du bereits im ersten Beispiel gesehen hast. Allerdings besitzen sie in der Praxis normalerweise mehr Layer und Neuronen pro Layer:</p>
+<p>Das FFNN ist die ursprüngliche und einfachste neuronale Netzwerkarchitektur, die auch im ersten Beispiel verwendet wurde. Allerdings bestehen diese Modelle in der Praxis normalerweise aus mehr Layers und Neuronen pro Layer:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/05_supervised_nn/neural_network.png" alt="image" width="840">
 </div>
-<div class="title"><span class="small">Feed Forward Neural Network (FFNN) Architektur: Der Input-Feature-Vektor \(\mathbf{x}\), der einen Datenpunkt darstellt, wird mit der ersten Gewichtungsmatrix \(W_1\) multipliziert, um einen neuen Vektor zu erzeugen, der nach Anwendung der nichtlinearen Aktivierungsfunktion (z.B. der Max-Funktion wie im ersten Beispiel) zur ersten Hidden-Layer-Repräsentation \(\mathbf{x}'\) wird. Dieser neue Vektor wird dann mit der zweiten Gewichtungsmatrix \(W_2\) multipliziert und wieder wird eine nichtlineare Aktivierungsfunktion angewendet, um die zweite Hidden-Layer-Repräsentation des Datenpunkts, \(\mathbf{x}''\), zu erzeugen. Je nachdem, wie viele Schichten das Netzwerk hat (d.h. wie tief es ist), wiederholt sich dies nun mehrmals, bis schließlich die letzte Schicht den vorhergesagten Output \(\mathbf{\hat{y}}\) berechnet. Während das Netzwerk trainiert wird, nähern sich diese vorhergesagten Outputs immer mehr den wahren Outputs der Trainingsdaten an.</span></div>
+<div class="title"><span class="small">Feed Forward Neural Network (FFNN) Architektur: Der Input-Feature-Vektor \(\mathbf{x}\), der einen Datenpunkt darstellt, wird mit der ersten Gewichtungsmatrix \(W_1\) multipliziert, um einen neuen Vektor zu erzeugen, der nach Anwendung der nichtlinearen Aktivierungsfunktion (z.B. der Max-Funktion wie im ersten Beispiel) zur ersten Hidden-Layer-Repräsentation \(\mathbf{x}'\) wird. Dieser neue Vektor wird dann mit der zweiten Gewichtungsmatrix \(W_2\) multipliziert und wieder wird eine nichtlineare Aktivierungsfunktion angewandt, um die zweite Hidden-Layer-Repräsentation des Datenpunkts, \(\mathbf{x}''\), zu erzeugen. Je nachdem, wie viele Schichten das Netzwerk hat (d.h. wie tief es ist), wiederholt sich dies nun mehrmals, bis schließlich die letzte Schicht den vorhergesagten Output \(\mathbf{\hat{y}}\) berechnet. Während das Netzwerk trainiert wird, nähern sich diese vorhergesagten Outputs immer mehr den wahren Labels der Trainingsdaten an in dem die Gewichtsmatrizen entsprechend angepasst werden.</span></div>
 </div>
 </div>
 <div class="sect4">
 <h5 id="_convolutional_neural_network_cnn">Convolutional Neural Network (CNN)</h5>
 <div class="paragraph">
-<p>Manuelles Feature Engineering für Computer Vision-Aufgaben ist unglaublich schwierig. Während der Mensch mühelos eine Vielzahl von Objekten in Bildern erkennt, ist es schwer zu beschreiben, <em>warum</em> wir erkennen was wir sehen, z.B. anhand welcher Merkmale wir eine Katze von einem kleinen Hund unterscheiden. Das Deep Learning hatte seinen ersten bahnbrechenden Erfolg auf diesem Gebiet, da neuronale Netze, insbesondere CNNs, es durch eine Hierarchie von Layern schaffen, sinnvolle Feature Repräsentationen aus visuellen Informationen zu lernen.</p>
+<p>Manuelles Feature Engineering für Computer Vision Aufgaben ist sehr schwierig. Während der Mensch mühelos eine Vielzahl von Objekten in Bildern erkennt, ist es schwer zu beschreiben, <em>warum</em> wir erkennen was wir sehen, z.B. anhand welcher Merkmale wir eine Katze von einem kleinen Hund unterscheiden. Das Deep Learning hatte seinen ersten bahnbrechenden Erfolg auf diesem Gebiet, da neuronale Netze, insbesondere CNNs, es durch eine Hierarchie von Layern schaffen, sinnvolle Feature Repräsentationen aus visuellen Informationen zu lernen.</p>
 </div>
 <div class="paragraph">
 <p>Convolutional Neural Networks eignen sich sehr gut für die Verarbeitung visueller Informationen, da sie direkt mit 2D-Bildern arbeiten können und die Tatsache nutzen, dass Bilder viele lokale Informationen beinhalten (z.B. sind Augen, Nase und Mund lokalisierte Komponenten eines Gesichts).</p>

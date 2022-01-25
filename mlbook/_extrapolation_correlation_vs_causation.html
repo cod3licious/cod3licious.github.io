@@ -840,9 +840,21 @@ ML models love to cheat &amp; take shortcuts! They will often pick up on spuriou
 </div>
 </div>
 <div class="paragraph">
-<p>If the two features and their effect on the target are independent of each other (e.g., \(y = ax_1 + bx_2\)), this is not too dramatic, however, if these variables interact in some complicated non-linear way, this might not be modeled correctly when relevant combinations of feature values weren&#8217;t sampled.</p>
+<p>If the two features and their effect on the target are independent of each other (e.g., \(y = ax_1 + bx_2\)), this is not too dramatic, however, if these variables interact in some complicated nonlinear way, this might not be modeled correctly when relevant combinations of feature values weren&#8217;t sampled.</p>
 </div>
 </div>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+When deploying an ML system in production, this system must include not only the trained model, but also the corresponding preprocessing scripts that were used to clean the training data. For example, if you removed outliers from the initial training set, you need to apply the same rules to sort out anomalies in the production data as well, since otherwise the ML model would have to extrapolate on these kinds of samples.
+</td>
+</tr>
+</table>
 </div>
 <div class="sect3">
 <h4 id="_causality">Causality</h4>
@@ -1059,6 +1071,18 @@ R^<span class="integer">2</span> (train): <span class="float">0.958</span>; (tes
 <img src="../images/07_causality/residuals_independent.png" alt="image" width="840">
 </div>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+When working with time series data, you should also check for autocorrelation between the residuals, i.e., it should not be possible to use the residual at time point <em>t</em> to predict the next residual at <em>t+1</em>.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="paragraph">
@@ -1162,7 +1186,7 @@ R^<span class="integer">2</span> (train): <span class="float">0.958</span>; (tes
 <div class="ulist">
 <ul>
 <li>
-<p>assess the model&#8217;s performance for each (known) subgroup individually to verify that the prediction errors of the model are random and the model is not systematically worse for some subgroups<br></p>
+<p>assess the model&#8217;s performance for each (known) subgroup individually by slicing the data accordingly to verify that the prediction errors of the model are random and the model is not systematically worse for some subgroups / data slices<br></p>
 </li>
 <li>
 <p>if it is not possible to obtain a well balanced training and/or test set, assign higher sample weights to data points from undersampled subgroups to make sure the algorithm pays enough attention to them during training and they are given more weight in the evaluation of the model (similar to using the balanced accuracy)</p>

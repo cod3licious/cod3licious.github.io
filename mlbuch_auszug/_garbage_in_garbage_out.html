@@ -728,8 +728,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </dl>
 </div>
 <div class="paragraph">
-<p>&#8594; Preprocessing von Daten dauert sehr lange<br>
-&#8594; Der resultierende Datensatz (nach der Bereinigung) ist viel kleiner als erwartet&#8201;&#8212;&#8201;möglicherweise zu klein, um eine sinnvolle Analyse durchzuführen</p>
+<p>&#8594; Preprocessing von Daten dauert sehr lange.<br>
+&#8594; Der resultierende Datensatz (nach der Bereinigung) ist viel kleiner als erwartet&#8201;&#8212;&#8201;möglicherweise zu klein, um eine sinnvolle Analyse durchzuführen.</p>
 </div>
 <div class="paragraph">
 <p>&#8658; Bevor du mit ML anfängst, überlege erst, ob du die Datenerfassungspipeline und Infrastruktur verbessern kannst!</p>
@@ -745,16 +745,17 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="ulist">
 <ul>
 <li>
-<p>Ein kleiner Datensatz und/oder zu wenig Variation, z.B. werden nur sehr wenige defekte Produkte produziert oder ein Prozess läuft die meiste Zeit im stationären Zustand, d.h. es gibt nur wenig oder keine Variation bei den Inputs<br>
-&#8594; Auswirkung verschiedener Eingangsgrößen auf die Zielvariable kann aus wenigen Beobachtungen nicht zuverlässig abgeschätzt werden<br>
-&#8658; Führe gezielt Experimente durch, bei denen verschiedene Inputs systematisch variiert werden, um einen aussagekräftigeren Datensatz zu generieren</p>
+<p>Ein kleiner Datensatz und/oder zu wenig Variation, z.B. werden nur sehr wenige defekte Produkte produziert oder ein Prozess läuft die meiste Zeit im stationären Zustand, d.h. es gibt nur wenig oder keine Variation bei den Inputs.<br>
+&#8594; Auswirkung verschiedener Eingangsgrößen auf die Zielvariable kann aus wenigen Beobachtungen nicht zuverlässig abgeschätzt werden.<br>
+&#8658; Führe gezielt Experimente durch, bei denen verschiedene Inputs systematisch variiert werden, um einen aussagekräftigeren Datensatz zu generieren.</p>
 </li>
 <li>
-<p>Daten sind inkonsistent / unvollständig, also es gibt Datenpunkte mit gleichen Inputs aber unterschiedlichen Labels, z.B. zwei Produkte wurden unter den gleichen (gemessenen) Bedingungen produziert, eins ist in Ordnung, eins fehlerhaft.</p>
+<p>Daten sind inkonsistent / unvollständig, also es gibt Datenpunkte mit gleichen Inputs aber unterschiedlichen Labels, z.B. zwei Produkte wurden unter den gleichen (gemessenen) Bedingungen produziert, eins ist in Ordnung, eins fehlerhaft.<br>
+Dies kann zwei Gründe haben:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Die Labels sind sehr verrauscht, z.B. weil die menschlichen Annotatoren nicht dieselben klaren Regeln befolgten oder einige Beispiele mehrdeutig waren (z.B. ein QA-Experte sagt ein kleiner Kratzer ist noch in Ordnung, der andere sortiert das Produkt aus)<br>
+<p>Die Labels sind sehr verrauscht, z.B. weil die menschlichen Annotatoren nicht dieselben klaren Regeln befolgten oder einige Beispiele mehrdeutig waren (z.B. ein QA-Experte sagt ein kleiner Kratzer ist noch in Ordnung, der andere sortiert das Produkt aus).<br>
 &#8658; Etablierung klarer Regeln nach welchen Kriterien Daten gelabelt werden sollen und Daten durch Neuannotation bereinigen. Dies kann einige Zeit dauern, lohnt sich aber! Siehe auch dieser tolle <a href="https://youtu.be/06-AZXmwHjo" target="\_blank">MLOps / data-centric AI Vortrag von Andrew Ng</a> darüber, wie ein kleiner sauberer Datensatz wertvoller sein kann als ein großer verrauschter Datensatz.</p>
 </li>
 <li>
@@ -777,11 +778,11 @@ Versuchst du zu erkennen, ob eine Tür geschlossen ist? Mit einem einfachen <a h
 </div>
 </div>
 </div>
-<div class="admonitionblock note">
+<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
 Beobachte wenn möglich wie die Daten erfasst werden, im Sinne von: Stehe tatsächlich physisch da und beobachte, wie jemand die Werte in ein Programm eingibt oder wie die Maschine arbeitet, wenn die Sensoren etwas messen. Sicherlich werden dir einige Dinge auffallen, die man direkt bei der Datenerhebung optimieren könnte. Dies erspart in Zukunft viel Preprocessing Arbeit.
@@ -826,11 +827,11 @@ Für strukturierte Datensätze sollte es für jede Variable Zusatzinformationen 
 </dd>
 </dl>
 </div>
-<div class="admonitionblock tip">
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
 Neben der Dokumentation von Datensätzen als Ganzes ist es auch sehr hilfreich, Metadaten für einzelne Proben zu speichern. Bei Bilddaten können dies beispielsweise der Zeitstempel der Bildaufnahme, die Geolokalisierung (oder wenn die Kamera in einer Fertigungsmaschine verbaut ist, dann die ID dieser Maschine), Informationen zu den Kameraeinstellungen etc. sein. Dies kann bei der Analyse von Modellvorhersagefehlern sehr hilfreich sein, da sich beispielsweise herausstellen kann, dass Bilder, die mit einer bestimmten Kameraeinstellung aufgenommen wurden, besonders schwer zu klassifizieren sind, was uns wiederum Hinweise liefert, wie wir den Datenerfassungsprozesses verbessern könnten.
@@ -917,10 +918,10 @@ MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
 <!-- FOOTER  -->
 <div id="footer" class="outer">
   <footer class="inner">
-    <p><b>Book/Course Feedback: </b> <a href="https://forms.gle/Ccv5h5zQxwPjWtCS7" target="_blank">Full Feedback Survey</a> or <a href="https://forms.gle/qK8T5ALzgpiZaxd49" target="_blank">Short Comment</a><br>
+    <p><b>Book/Course Feedback: </b> <a href="https://forms.gle/Ccv5h5zQxwPjWtCS7" target="_blank" rel="nofollow">Full Feedback Survey</a> or <a href="https://forms.gle/qK8T5ALzgpiZaxd49" target="_blank" rel="nofollow">Short Comment</a><br>
 
-    <p>Find me on <a href="https://github.com/cod3licious/" target="_blank">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/" target="_blank">LinkedIn</a><br>
-      <a href="../index.html">Home</a> ~ <a href="mailto:hey@franziskahorn.de?Subject=ML%20book" target="_blank">Contact</a> ~ <a href="../impressum.html">Impressum</a></p>
+    <p>Find me on <a href="https://github.com/cod3licious/" target="_blank" rel="nofollow">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/" target="_blank" rel="nofollow">LinkedIn</a><br>
+      <a href="../index.html">Home</a> ~ <a href="mailto:hey@franziskahorn.de?Subject=ML%20book" target="_blank" rel="nofollow">Contact</a> ~ <a href="../impressum.html">Impressum</a></p>
   </footer>
 </div>
 </body>

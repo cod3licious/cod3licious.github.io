@@ -755,7 +755,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
 <span id="revnumber">version 1.2,</span>
-<span id="revdate">2022-01-02</span>
+<span id="revdate">2022-01-28</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -766,7 +766,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </li>
 <li><a href="_data_preprocessing.html">Data &amp; Preprocessing</a>
 <ul class="sectlevel2">
-<li><a href="_what_constitutes_1_data_point.html">What constitutes 1 data point?</a>
+<li><a href="_what_constitutes_one_data_point.html">What constitutes one data point?</a>
 </li>
 <li><a href="_feature_extraction.html"><span class="toc-current">Feature Extraction</span></a>
 </li>
@@ -801,7 +801,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="sect2">
 <h3 id="_feature_extraction">Feature Extraction</h3>
 <div class="paragraph">
-<p>Machine learning algorithms only work with numbers. If your data does not consist of numerical values (e.g., text documents) or these numerical values should not be interpreted as such (e.g., sports players have numbers on their jerseys, but these numbers don&#8217;t mean anything in a numeric sense (e.g., higher numbers don&#8217;t mean the person scored more goals), they are merely IDs), then this data needs to be transformed accordingly, i.e., numerical features need to be extracted from the original data. (Statisticians distinguish here between nominal, ordinal, interval, and ratio data, but for simplicity we lump the first two together as categorical data, while the other two are considered meaningful numerical values.)</p>
+<p>Machine learning algorithms only work with numbers. But some data does not consist of numerical values (e.g., text documents) or these numerical values should not be interpreted as such (e.g., sports players have numbers on their jerseys, but these numbers don&#8217;t mean anything in a numeric sense, i.e., higher numbers don&#8217;t mean the person scored more goals, they are merely IDs). In this case the data needs to be transformed accordingly, i.e., numerical features need to be extracted from the original data.<br>
+Statisticians distinguish here between nominal, ordinal, interval, and ratio data, but for simplicity we lump the first two together as categorical data, while the other two are considered meaningful numerical values.</p>
 </div>
 <div class="paragraph">
 <p><strong>Transforming raw data into <em>meaningful</em> numerical features:</strong></p>
@@ -809,8 +810,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="ulist">
 <ul>
 <li>
-<p><span class="underline">categorical features:</span>  <strong>1-hot encoding</strong> (= creating dummy variables that enable the model to introduce a different offset for each category)<br>
-For example, we might have 4 product categories <code>circle</code>, <code>triangle</code>, <code>square</code>, and <code>pentagon</code>, where each data point (representing a product) falls into exactly one of these categories. This means, we could create four features, <code>is_circle</code>, <code>is_triangle</code>, <code>is_square</code>, and <code>is_pentagon</code>, and indicate a data point&#8217;s product category using a binary flag, i.e., a value of 1 at the index of the true category and 0 everywhere else:<br>
+<p><span class="underline">categorical features:</span>  <strong>one-hot encoding</strong>, i.e., creating dummy variables that enable the model to introduce a different offset for each category.<br>
+For example, our dataset could include samples from four product categories <code>circle</code>, <code>triangle</code>, <code>square</code>, and <code>pentagon</code>, where each data point (representing a product) falls into exactly one of these categories. Then we create four features, <code>is_circle</code>, <code>is_triangle</code>, <code>is_square</code>, and <code>is_pentagon</code>, and indicate a data point&#8217;s product category using a binary flag, i.e., a value of 1 at the index of the true category and 0 everywhere else:<br>
 e.g., product category: <code>triangle</code> &#8658; <code>[0, 1, 0, 0]</code><br></p>
 <div class="listingblock">
 <div class="content">
@@ -824,17 +825,18 @@ Represent a document as the weighted counts of the words occurring in the text:<
 <div class="ulist">
 <ul>
 <li>
-<p><em>Term Frequency</em> (TF): how often does this word occur in the current text document</p>
+<p><em>Term Frequency</em> (TF): how often does this word occur in the current text document.</p>
 </li>
 <li>
-<p><em>Inverse Document Frequency</em> (IDF): a weight to capture how significant this word is. This is computed by comparing the total number of documents in the dataset to the number of documents in which the word occurs. The IDF weight thereby reduces the overall influence of words that occur in almost all documents (e.g., so-called stopwords like &#8216;and&#8217;, &#8216;the&#8217;, &#8216;a&#8217;, &#8230;&#8203;)</p>
+<p><em>Inverse Document Frequency</em> (IDF): a weight to capture how significant this word is. This is computed by comparing the total number of documents in the dataset to the number of documents in which the word occurs. The IDF weight thereby reduces the overall influence of words that occur in almost all documents (e.g., so-called stopwords like &#8216;and&#8217;, &#8216;the&#8217;, &#8216;a&#8217;, &#8230;&#8203;).</p>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/07_nlp/tfidf6.png" alt="image" width="500">
 </div>
+<div class="title"><span class="small">Please note that here the feature vector is shown as a column vector, but since each document is one data point, it is actually one row in the feature matrix \(X\), while the TF-IDF values for the individual words are the features in the columns.</span></div>
 </div>
 <div class="paragraph">
-<p>&#8594; First, the whole <em>corpus</em> (= a dataset consisting of text documents) is processed once to determine the overall vocabulary (i.e., the unique words occurring in all documents that then make up the dimensionality of the BOW feature vector) and to compute the IDF weights for all words. Then each individual document is processed to compute the final TF-IDF vector. (Please note that in the picture above, the feature vector is shown as a column vector, but later each document will be one data point, i.e., one row in the feature matrix \(X\), while the TF-IDF values for the individual words are the features in the columns.)<br></p>
+<p>&#8594; First, the whole <em>corpus</em> (= a dataset consisting of text documents) is processed once to determine the overall vocabulary (i.e., the unique words occurring in all documents that then make up the dimensionality of the BOW feature vector) and to compute the IDF weights for all words. Then each individual document is processed to compute the final TF-IDF vector by counting the words occurring in the document and multiplying these counts with the respective IDF weights.<br></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -848,10 +850,10 @@ Represent a document as the weighted counts of the words occurring in the text:<
 <div class="ulist">
 <ul>
 <li>
-<p>similarity between individual words (e.g., synonyms) is not captured, since each word has its own distinct dimension in the feature vector and is therefore equally far away from all other words</p>
+<p>Similarity between individual words (e.g., synonyms) is not captured, since each word has its own distinct dimension in the feature vector and is therefore equally far away from all other words.</p>
 </li>
 <li>
-<p>word order is ignored (this is also where the name &#8220;bag of words&#8221; comes from, i.e., imagine all the words from a document are thrown into a bag and shook and then you just check how often each word occurred in the text)</p>
+<p>Word order is ignored &#8594; this is also where the name &#8220;bag of words&#8221; comes from, i.e., imagine all the words from a document are thrown into a bag and shook and then we just check how often each word occurred in the text.</p>
 </li>
 </ul>
 </div>
@@ -866,7 +868,7 @@ Represent a document as the weighted counts of the words occurring in the text:<
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_what_constitutes_1_data_point.html">What constitutes 1 data point?</a> | ↑ Up: <a href="_data_preprocessing.html">Data &amp; Preprocessing</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_feature_engineering_transformations.html">Feature Engineering &amp; Transformations</a> →</p>
+<p>← Previous: <a href="_what_constitutes_one_data_point.html">What constitutes one data point?</a> | ↑ Up: <a href="_data_preprocessing.html">Data &amp; Preprocessing</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_feature_engineering_transformations.html">Feature Engineering &amp; Transformations</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">
@@ -908,10 +910,10 @@ MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
 <!-- FOOTER  -->
 <div id="footer" class="outer">
   <footer class="inner">
-    <p><b>Book/Course Feedback: </b> <a href="https://forms.gle/Ccv5h5zQxwPjWtCS7" target="_blank">Full Feedback Survey</a> or <a href="https://forms.gle/qK8T5ALzgpiZaxd49" target="_blank">Short Comment</a><br>
+    <p><b>Book/Course Feedback: </b> <a href="https://forms.gle/Ccv5h5zQxwPjWtCS7" target="_blank" rel="nofollow">Full Feedback Survey</a> or <a href="https://forms.gle/qK8T5ALzgpiZaxd49" target="_blank" rel="nofollow">Short Comment</a><br>
 
-    <p>Find me on <a href="https://github.com/cod3licious/" target="_blank">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/" target="_blank">LinkedIn</a><br>
-      <a href="../index.html">Home</a> ~ <a href="mailto:hey@franziskahorn.de?Subject=ML%20book" target="_blank">Contact</a> ~ <a href="../impressum.html">Impressum</a></p>
+    <p>Find me on <a href="https://github.com/cod3licious/" target="_blank" rel="nofollow">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/" target="_blank" rel="nofollow">LinkedIn</a><br>
+      <a href="../index.html">Home</a> ~ <a href="mailto:hey@franziskahorn.de?Subject=ML%20book" target="_blank" rel="nofollow">Contact</a> ~ <a href="../impressum.html">Impressum</a></p>
   </footer>
 </div>
 </body>

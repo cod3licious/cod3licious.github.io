@@ -697,7 +697,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <li><a href="#_fehler_2_modell_generalisiert_nicht">[Fehler #2] Modell generalisiert nicht</a></li>
 <li><a href="#_fehler_3_modell_missbraucht_scheinkorrelationen">[Fehler #3] Modell missbraucht Scheinkorrelationen</a></li>
 <li><a href="#_fehler_4_modell_diskriminiert">[Fehler #4] Modell diskriminiert</a></li>
-<li><a href="#_fehler_5_daten_konzept_drift">[Fehler #5] Daten &amp; Konzept Drift</a></li>
+<li><a href="#_fehler_5_daten_konzept_drifts">[Fehler #5] Daten &amp; Konzept Drifts</a></li>
 </ul>
 </li>
 <li><a href="#_fazit">Fazit</a>
@@ -1643,8 +1643,8 @@ In diesem Buch werden die Begriffe &#8220;ML-Algorithmus&#8221; und &#8220;ML-Mo
 </dl>
 </div>
 <div class="paragraph">
-<p>&#8594; Preprocessing von Daten dauert sehr lange<br>
-&#8594; Der resultierende Datensatz (nach der Bereinigung) ist viel kleiner als erwartet&#8201;&#8212;&#8201;möglicherweise zu klein, um eine sinnvolle Analyse durchzuführen</p>
+<p>&#8594; Preprocessing von Daten dauert sehr lange.<br>
+&#8594; Der resultierende Datensatz (nach der Bereinigung) ist viel kleiner als erwartet&#8201;&#8212;&#8201;möglicherweise zu klein, um eine sinnvolle Analyse durchzuführen.</p>
 </div>
 <div class="paragraph">
 <p>&#8658; Bevor du mit ML anfängst, überlege erst, ob du die Datenerfassungspipeline und Infrastruktur verbessern kannst!</p>
@@ -1660,16 +1660,17 @@ In diesem Buch werden die Begriffe &#8220;ML-Algorithmus&#8221; und &#8220;ML-Mo
 <div class="ulist">
 <ul>
 <li>
-<p>Ein kleiner Datensatz und/oder zu wenig Variation, z.B. werden nur sehr wenige defekte Produkte produziert oder ein Prozess läuft die meiste Zeit im stationären Zustand, d.h. es gibt nur wenig oder keine Variation bei den Inputs<br>
-&#8594; Auswirkung verschiedener Eingangsgrößen auf die Zielvariable kann aus wenigen Beobachtungen nicht zuverlässig abgeschätzt werden<br>
-&#8658; Führe gezielt Experimente durch, bei denen verschiedene Inputs systematisch variiert werden, um einen aussagekräftigeren Datensatz zu generieren</p>
+<p>Ein kleiner Datensatz und/oder zu wenig Variation, z.B. werden nur sehr wenige defekte Produkte produziert oder ein Prozess läuft die meiste Zeit im stationären Zustand, d.h. es gibt nur wenig oder keine Variation bei den Inputs.<br>
+&#8594; Auswirkung verschiedener Eingangsgrößen auf die Zielvariable kann aus wenigen Beobachtungen nicht zuverlässig abgeschätzt werden.<br>
+&#8658; Führe gezielt Experimente durch, bei denen verschiedene Inputs systematisch variiert werden, um einen aussagekräftigeren Datensatz zu generieren.</p>
 </li>
 <li>
-<p>Daten sind inkonsistent / unvollständig, also es gibt Datenpunkte mit gleichen Inputs aber unterschiedlichen Labels, z.B. zwei Produkte wurden unter den gleichen (gemessenen) Bedingungen produziert, eins ist in Ordnung, eins fehlerhaft.</p>
+<p>Daten sind inkonsistent / unvollständig, also es gibt Datenpunkte mit gleichen Inputs aber unterschiedlichen Labels, z.B. zwei Produkte wurden unter den gleichen (gemessenen) Bedingungen produziert, eins ist in Ordnung, eins fehlerhaft.<br>
+Dies kann zwei Gründe haben:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Die Labels sind sehr verrauscht, z.B. weil die menschlichen Annotatoren nicht dieselben klaren Regeln befolgten oder einige Beispiele mehrdeutig waren (z.B. ein QA-Experte sagt ein kleiner Kratzer ist noch in Ordnung, der andere sortiert das Produkt aus)<br>
+<p>Die Labels sind sehr verrauscht, z.B. weil die menschlichen Annotatoren nicht dieselben klaren Regeln befolgten oder einige Beispiele mehrdeutig waren (z.B. ein QA-Experte sagt ein kleiner Kratzer ist noch in Ordnung, der andere sortiert das Produkt aus).<br>
 &#8658; Etablierung klarer Regeln nach welchen Kriterien Daten gelabelt werden sollen und Daten durch Neuannotation bereinigen. Dies kann einige Zeit dauern, lohnt sich aber! Siehe auch dieser tolle <a href="https://youtu.be/06-AZXmwHjo" target="\_blank">MLOps / data-centric AI Vortrag von Andrew Ng</a> darüber, wie ein kleiner sauberer Datensatz wertvoller sein kann als ein großer verrauschter Datensatz.</p>
 </li>
 <li>
@@ -1692,11 +1693,11 @@ Versuchst du zu erkennen, ob eine Tür geschlossen ist? Mit einem einfachen <a h
 </div>
 </div>
 </div>
-<div class="admonitionblock note">
+<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
 Beobachte wenn möglich wie die Daten erfasst werden, im Sinne von: Stehe tatsächlich physisch da und beobachte, wie jemand die Werte in ein Programm eingibt oder wie die Maschine arbeitet, wenn die Sensoren etwas messen. Sicherlich werden dir einige Dinge auffallen, die man direkt bei der Datenerhebung optimieren könnte. Dies erspart in Zukunft viel Preprocessing Arbeit.
@@ -1741,11 +1742,11 @@ Für strukturierte Datensätze sollte es für jede Variable Zusatzinformationen 
 </dd>
 </dl>
 </div>
-<div class="admonitionblock tip">
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
 Neben der Dokumentation von Datensätzen als Ganzes ist es auch sehr hilfreich, Metadaten für einzelne Proben zu speichern. Bei Bilddaten können dies beispielsweise der Zeitstempel der Bildaufnahme, die Geolokalisierung (oder wenn die Kamera in einer Fertigungsmaschine verbaut ist, dann die ID dieser Maschine), Informationen zu den Kameraeinstellungen etc. sein. Dies kann bei der Analyse von Modellvorhersagefehlern sehr hilfreich sein, da sich beispielsweise herausstellen kann, dass Bilder, die mit einer bestimmten Kameraeinstellung aufgenommen wurden, besonders schwer zu klassifizieren sind, was uns wiederum Hinweise liefert, wie wir den Datenerfassungsprozesses verbessern könnten.
@@ -2001,7 +2002,7 @@ Neben der Dokumentation von Datensätzen als Ganzes ist es auch sehr hilfreich, 
 <div class="content">
 <img src="images/01b_housing_example/dimred.png" alt="image" width="840">
 </div>
-<div class="title"><span class="small">Der erste Schritt bei der Analyse eines neuen Datensatzes besteht normalerweise darin, diesen zu visualisieren, um einen besseren Überblick über alle Datenpunkte und ihre Vielfalt zu erhalten. Dafür eignet sich ein Dimensionsreduktionsalgorithmus, der die ursprünglichen hochdimensionalen Daten als Input nimmt, wobei jede Spalte (= Feature) in der Tabelle eine Dimension darstellt, und eine niedrigerdimensionale Darstellung der Datenpunkte ausgibt, d.h. eine neue Matrix mit weniger Spalten (normalerweise 2 für eine Visualisierung). Diese beiden neuen Features, in unserem Fall \(z_1\) und \(z_2\) genannt, können jetzt verwendet werden, um einen Scatterplot des Datensatzes zu erstellen. Dabei wird jeder Datenpunkt / Zeile (also in diesem Fall jede Wohnung) als Punkt in diesem neuen 2D-Koordinatensystems dargestellt. Wir können uns diese Darstellung als eine Landkarte unseres Datensatzes vorstellen, die es uns ermöglicht, alle Datenpunkte auf einen Blick zu sehen und evtl. schon interessante Muster zu erkennen, z.B. Gruppen ähnlicher Datenpunkte, die auf dieser 2D-Karte eng beieinander liegen. Aber bitte beachte: was sich hinter diesen neuen Koordinaten verbirgt lässt sich bei den meisten Dimensionsreduktionsmethoden nicht genau nachvollziehen. Insbesondere sind dies nicht einfach die beiden informativsten Originalfeatures, sondern völlig neue Variablen, die die Informationen der ursprünglichen Inputs zusammenfassen. Um den Scatterplot besser interpretieren zu können, ist es oft hilfreich, die Punkte nachträglich mit den Werten einer Variablen einzufärben, wodurch möglicherweise die treibenden Faktoren hinter den auffälligsten Mustern im Datensatz aufgedeckt werden können. In diesem Beispiel hätten wir die Punkte nach dem Preis der entsprechenden Wohnung einfärben können und dadurch gesehen, ob ähnlich bepreiste Wohnungen nah beieinander liegen.</span></div>
+<div class="title"><span class="small">Der erste Schritt bei der Analyse eines neuen Datensatzes besteht normalerweise darin, diesen zu visualisieren, um einen besseren Überblick über alle Datenpunkte und ihre Vielfalt zu erhalten. Dafür eignet sich ein Dimensionsreduktionsalgorithmus, der die ursprünglichen hochdimensionalen Daten als Input nimmt, wobei jede Spalte (= Feature) in der Tabelle eine Dimension darstellt, und eine niedrigerdimensionale Darstellung der Datenpunkte ausgibt, d.h. eine neue Matrix mit weniger Spalten (normalerweise zwei für eine Visualisierung). Diese beiden neuen Features, in unserem Fall \(z_1\) und \(z_2\) genannt, können jetzt verwendet werden, um einen Scatterplot des Datensatzes zu erstellen. Dabei wird jeder Datenpunkt / Zeile (also in diesem Fall jede Wohnung) als Punkt in diesem neuen 2D-Koordinatensystems dargestellt. Wir können uns diese Darstellung als eine Landkarte unseres Datensatzes vorstellen, die es uns ermöglicht, alle Datenpunkte auf einen Blick zu sehen und evtl. schon interessante Muster zu erkennen, z.B. Gruppen ähnlicher Datenpunkte, die auf dieser 2D-Karte eng beieinander liegen. Aber bitte beachte: was sich hinter diesen neuen Koordinaten verbirgt lässt sich bei den meisten Dimensionsreduktionsmethoden nicht genau nachvollziehen. Insbesondere sind dies nicht einfach die beiden informativsten Originalfeatures, sondern völlig neue Variablen, die die Informationen der ursprünglichen Inputs zusammenfassen. Um den Scatterplot besser interpretieren zu können, ist es oft hilfreich, die Punkte nachträglich mit den Werten einer Variablen einzufärben, wodurch möglicherweise die treibenden Faktoren hinter den auffälligsten Mustern im Datensatz aufgedeckt werden können. In diesem Beispiel hätten wir die Punkte nach dem Preis der entsprechenden Wohnung einfärben können und dadurch gesehen, ob ähnlich bepreiste Wohnungen nah beieinander liegen.</span></div>
 </div>
 <div class="dlist">
 <dl>
@@ -2043,7 +2044,7 @@ Neben der Dokumentation von Datensätzen als Ganzes ist es auch sehr hilfreich, 
 <div class="content">
 <img src="images/01b_housing_example/classification.png" alt="image" width="840">
 </div>
-<div class="title"><span class="small">Nun könnten wir vorhersagen, ob eine Wohnung zum angegebenen Preis verkauft wird. Da die Variable &#8220;Verkauft&#8221; nur diskrete Werte annehmen kann (also ja (1) oder nein (0)), ist dies ein (binäres) Klassifikationsproblem. Ein Klassifikationsmodell nimmt die Attribute einer Wohnung zusammen mit dem Angebotspreis als Input und berechnet dann, ob die Wohnung zu diesem Preis verkauft wird oder nicht. Da wir hier nun die wahren Labels kennen (zumindest für den ursprünglich gesammelten Datensatz), können wir die Genauigkeit des Modells bewerten, indem wir berechnen, wie viele falsche Vorhersagen es generiert. Das ist ein Vorteil beim Supervised Learning: Wir können genau bestimmen, wie gut eine Lösung ist, und somit verschiedene Modelle systematisch miteinander vergleichen, während die Data Scientistin beim Unsupervised Learning die Ergebnisse manuell im Detail untersuchen muss, um sie zu bewerten.</span></div>
+<div class="title"><span class="small">Nun könnten wir vorhersagen, ob eine Wohnung zum angegebenen Preis verkauft wird. Da die Variable &#8220;Verkauft&#8221; nur die diskreten Werte &#8216;ja&#8217; (1) oder &#8216;nein&#8217; (0) annehmen kann, ist dies ein binäres Klassifikationsproblem. Ein Klassifikationsmodell nimmt die Attribute einer Wohnung zusammen mit dem Angebotspreis als Input und berechnet dann, ob die Wohnung zu diesem Preis verkauft wird oder nicht. Da wir hier nun die wahren Labels kennen (zumindest für den ursprünglich gesammelten Datensatz), können wir die Genauigkeit des Modells bewerten, indem wir berechnen, wie viele falsche Vorhersagen es generiert. Das ist ein Vorteil beim Supervised Learning: Wir können objektiv bestimmen, wie gut eine Lösung ist, und somit verschiedene Modelle systematisch miteinander vergleichen, während die Data Scientistin beim Unsupervised Learning die Ergebnisse manuell im Detail untersuchen muss, um sie zu bewerten.</span></div>
 </div>
 <div class="dlist">
 <dl>
@@ -2542,7 +2543,7 @@ ML-Modelle machen es sich oft leicht und schummeln! Sie nutzen häufig <a href="
 <p><strong>Eine richtige Vorhersage wird nicht immer aus den richtigen Gründen gemacht!</strong></p>
 </div>
 <div class="paragraph">
-<p>Die Grafik unten stammt aus einem Paper, in dem die Autoren festgestellt haben, dass ein vergleichsweise einfaches ML-Modell, das auf einem Standard-Bildklassifizierungsdatensatz trainiert wurde, für alle 10 Klassen im Datensatz schlecht abschnitt&#8201;&#8212;&#8201;bis auf die Klasse &#8216;Pferd&#8217;! Als sie den Datensatz genauer untersuchten und analysierten, <em>warum</em> das Modell eine bestimmte Klasse vorhersagt, d.h. welche Bildmerkmale in der Vorhersage verwendet wurden (angezeigt als Heatmap auf der rechten Seite), machten sie folgende Feststellung: Die meisten Bilder von Pferden im Datensatz stammten vom selben Fotografen und enthielten alle einen charakteristischen Copyright-Vermerk in der linken unteren Ecke:</p>
+<p>Die Grafik unten stammt aus einem Paper, in dem die Autoren festgestellt haben, dass ein vergleichsweise einfaches ML-Modell, das auf einem Standard-Bildklassifizierungsdatensatz trainiert wurde, für alle zehn Klassen im Datensatz schlecht abschnitt&#8201;&#8212;&#8201;bis auf die Klasse &#8216;Pferd&#8217;! Als sie den Datensatz genauer untersuchten und analysierten, <em>warum</em> das Modell eine bestimmte Klasse vorhersagt, d.h. welche Bildmerkmale in der Vorhersage verwendet wurden (angezeigt als Heatmap auf der rechten Seite), machten sie folgende Feststellung: Die meisten Bilder von Pferden im Datensatz stammten vom selben Fotografen und enthielten alle einen charakteristischen Copyright-Vermerk in der linken unteren Ecke.</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -2593,7 +2594,7 @@ Andersrum könnte man nun auch ein Bild von einem anderen Tier mit einem solchen
 <div class="sect2">
 <h3 id="_fehler_4_modell_diskriminiert">[Fehler #4] Modell diskriminiert</h3>
 <div class="paragraph">
-<p>Ein Modell, welches echte kausale Zusammenhänge zwischen den Variablen aufgegriffen hat, generiert zwar robustere Vorhersagen, doch es kann auch kausale Zusammenhänge in den historischen Daten geben, die ein Modell besser <em>nicht</em> lernen sollte. Wenn in der Vergangenheit Menschen aufgrund ihres Geschlechts oder ihrer Hautfarbe diskriminiert wurden, kann sich dies auch in den Trainingsdaten widerspiegeln, z.B. wenn weiße Männer systematisch niedrigere Kreditzinsen zahlen mussten, die nicht allein durch ihr höheres Einkommen erklärt werden können. In solchen Fällen müssen wir zusätzliche Maßnahmen ergreifen, damit diese Zusammenhänge nicht in unserem Modell weiterbestehen&#8201;&#8212;&#8201;obwohl es in der Vergangenheit vielleicht echte kausale Zusammenhänge waren.</p>
+<p>Ein Modell, welches echte kausale Zusammenhänge zwischen den Variablen aufgegriffen hat, generiert zwar robustere Vorhersagen, doch es kann auch kausale Zusammenhänge in den historischen Daten geben, die ein Modell besser <em>nicht</em> lernen sollte. Wenn in der Vergangenheit Menschen aufgrund ihres Geschlechts oder ihrer Hautfarbe diskriminiert wurden, kann sich dies auch in den Trainingsdaten widerspiegeln, z.B. wenn weiße Männer systematisch niedrigere Kreditzinsen zahlen mussten, die nicht allein durch ihr höheres Einkommen erklärt werden können. In solchen Fällen müssen wir zusätzliche Maßnahmen ergreifen, damit diese Muster nicht in unserem Modell weiterbestehen&#8201;&#8212;&#8201;obwohl es in der Vergangenheit vielleicht echte kausale Zusammenhänge waren.</p>
 </div>
 <div class="dlist">
 <dl>
@@ -2692,15 +2693,15 @@ Das Geschlecht oder die Hautfarbe einer Person kann jedoch auch mit anderen Vari
 </div>
 </div>
 <div class="sect2">
-<h3 id="_fehler_5_daten_konzept_drift">[Fehler #5] Daten &amp; Konzept Drift</h3>
+<h3 id="_fehler_5_daten_konzept_drifts">[Fehler #5] Daten &amp; Konzept Drifts</h3>
 <div class="paragraph">
-<p>Vergiss nie, dass sich die Welt permanent verändert und Modelle regelmäßig mit neuen Daten nachtrainiert werden müssen. Nur so können sie sich an diese geänderten Umstände anpassen.</p>
+<p>Wir dürfen nie vergessen, dass sich die Welt permanent verändert und Modelle regelmäßig mit neuen Daten nachtrainiert werden müssen. Nur so können sie sich an diese geänderten Umstände anpassen.</p>
 </div>
-<div class="admonitionblock warning">
+<div class="admonitionblock caution">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
+<i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
 <strong>ML versagt leise!</strong> D.h. auch wenn alle Vorhersagen falsch sind, stürzt das Programm nicht einfach mit einer Fehlermeldung ab.<br>
@@ -2710,22 +2711,51 @@ Das Geschlecht oder die Hautfarbe einer Person kann jedoch auch mit anderen Vari
 </table>
 </div>
 <div class="paragraph">
-<p><span class="underline">Eins der größten Probleme in der Praxis: Daten und Konzept Drifts:</span></p>
+<p><span class="underline">Eins der größten Probleme in der Praxis: Daten und Konzept Drifts:</span><br>
+Die Vorhersagegenauigkeit eines Modells lässt schnell nach, wenn die Daten im Produktivbetrieb von den Trainingsdaten abweichen. Dabei unterscheiden wir zwischen:</p>
 </div>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p><em>Daten Drift:</em> Inputverteilung ändert sich, z.B. bedient ein neuer Nutzer die Maschine anders</p>
+<p><em>Daten Drift:</em> Verteilung der Inputs \(X\) ändert sich</p>
 </li>
 <li>
-<p><em>Konzept Drift:</em> Input/Output Zusammenhang ändert sich aufgrund von:</p>
+<p><em>Konzept Drift:</em> Input/Output Zusammenhang \(X \to y\) ändert sich</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="underline">Beispiel:</span> Anhand der Produktionsbedingungen inkl. der Größe des produzierten Teils (\(X\)) möchten wir vorhersagen ob das jeweilige Produkt in Ordnung oder Ausschuss ist (\(y\)):</p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p><em>Daten Drift:</em> Der Hersteller produzierte früher nur kleine Teile, nun aber auch größere Teile.</p>
+</li>
+<li>
+<p><em>Konzept Drift:</em> Während früher 10% Ausschuss produziert wurden, wird nach einer Reparatur der Maschine bei gleichen Produktionsbedingungen nur noch 5% Ausschuss produziert.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="underline">Mögliche Gründe für Daten oder Konzept Drifts:</span></p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>Externen Faktoren (z.B. Änderungen in der Prozessstruktur: Der Temperatursensor in einer neuen Version einer Maschine befindet sich jetzt an einer anderen Stelle, loggt jedoch weiterhin Werte unter dem gleichen Variablennamen.)</p>
+<p>Neue Nutzer verhalten sich anders: Beispielsweise wird das Produkt jetzt von einer jüngeren Generation verwendet oder das Unternehmen expandierte vor kurzem in ein anderes Land.</p>
 </li>
 <li>
-<p>Internen Faktoren (Feedback-Schleife: Das Vorhandensein des ML-Modells hat Auswirkungen auf das Verhalten der Nutzer, z.B. ändern Spammer ihre Strategie, um einen Spam-Filter zu umgehen)</p>
+<p>Trends und Saisonalität: Beispielsweise werden bestimmte Produkte hauptsächlich in einer bestimmten Saison gekauft (z.B. Winterkleidung) oder neue Modeerscheinungen führen dazu, dass dieselben Kunden nun andere Produkte kaufen, weil diese jetzt &#8220;in&#8221; sind.</p>
+</li>
+<li>
+<p>Die Prozessstruktur / das Setup hat sich geändert: Beispielsweise ist in einer neuen Version eines Geräts ein Sensor an eine anderen Stelle, loggt aber immer noch Werte unter demselben Variablennamen.</p>
+</li>
+<li>
+<p>Feedback-Schleife, bei der das Vorhandensein des ML-Modells das Nutzerverhalten verändert: Beispielsweise ändern Spammer ihre Strategie, um den Spamfilter zu umgehen.</p>
+</li>
+</ul>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -2733,20 +2763,15 @@ Das Geschlecht oder die Hautfarbe einer Person kann jedoch auch mit anderen Vari
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Diese Änderungen können entweder <strong>graduell</strong> sein (z.B. Sprachen ändern sich schrittweise wenn neue Wörter geprägt werden; ein Kameraobjektiv staubt mit der Zeit ein), oder sie können als <strong>plötzlicher Schock</strong> auftreten (z.B. jemand reinigt das Kameraobjektiv; als die COVID-19-Pandemie ausbrach, wechselten plötzlich viele Menschen zum Online-Shopping, wodurch Systeme zur Erkennung von Kreditkartenbetrug erstmal irrtümlich Alarm schlugen).
+Diese Veränderungen können entweder <strong>graduell</strong> sein (z.B. Sprachen ändern sich schrittweise wenn neue Wörter geprägt werden; ein Kameraobjektiv staubt mit der Zeit ein), oder sie können als <strong>plötzlicher Schock</strong> auftreten (z.B. jemand reinigt das Kameraobjektiv; als die COVID-19-Pandemie ausbrach, wechselten plötzlich viele Menschen zum Online-Shopping, wodurch Systeme zur Erkennung von Kreditkartenbetrug erstmal irrtümlich Alarm schlugen).
 </td>
 </tr>
 </table>
 </div>
-</li>
-</ul>
-</div>
 <div class="paragraph">
-<p>&#8658; Protokollierung bekannter externer Ereignisse, z.B. Wartung an einer Maschine<br>
-&#8658; Modelle häufig mit neuen Daten nachtrainieren</p>
-</div>
-</li>
-</ul>
+<p><span class="underline">Vorbeugende Maßnahmen:</span><br>
+Der beste Weg, Daten und Konzept Drifts entgegenzuwirken, besteht darin, das <strong>Modell häufig mit neuen Daten zu trainieren</strong>. Dies kann entweder nach einem fixen Zeitplan erfolgen (z.B. jedes Wochenende, je nachdem, wie schnell sich die Daten ändern) oder wenn das Monitoringsystem Alarm schlägt, weil es Drifts in den Inputs oder eine verschlechterte Modellperformance festgestellt hat.<br>
+Außerdem ist es immer sinnvoll, bekannte externe Ereignisse, wie z.B. eine Wartung an einer Maschine, zu protokollieren.</p>
 </div>
 </div>
 </div>
@@ -3083,10 +3108,10 @@ MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
 <!-- FOOTER  -->
 <div id="footer" class="outer">
   <footer class="inner">
-    <p><b>Book/Course Feedback: </b> <a href="https://forms.gle/Ccv5h5zQxwPjWtCS7" target="_blank">Full Feedback Survey</a> or <a href="https://forms.gle/qK8T5ALzgpiZaxd49" target="_blank">Short Comment</a><br>
+    <p><b>Book/Course Feedback: </b> <a href="https://forms.gle/Ccv5h5zQxwPjWtCS7" target="_blank" rel="nofollow">Full Feedback Survey</a> or <a href="https://forms.gle/qK8T5ALzgpiZaxd49" target="_blank" rel="nofollow">Short Comment</a><br>
 
-    <p>Find me on <a href="https://github.com/cod3licious/" target="_blank">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/" target="_blank">LinkedIn</a><br>
-      <a href="../index.html">Home</a> ~ <a href="mailto:hey@franziskahorn.de?Subject=ML%20book" target="_blank">Contact</a> ~ <a href="../impressum.html">Impressum</a></p>
+    <p>Find me on <a href="https://github.com/cod3licious/" target="_blank" rel="nofollow">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/" target="_blank" rel="nofollow">LinkedIn</a><br>
+      <a href="../index.html">Home</a> ~ <a href="mailto:hey@franziskahorn.de?Subject=ML%20book" target="_blank" rel="nofollow">Contact</a> ~ <a href="../impressum.html">Impressum</a></p>
   </footer>
 </div>
 </body>

@@ -659,14 +659,14 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
-<body id="_what_constitutes_1_data_point" class="book toc2 toc-left">
+<body id="_model_discriminates" class="book toc2 toc-left">
 <div id="header">
 <h1>A Practitioner&#8217;s Guide to Machine Learning</h1>
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
 <span id="revnumber">version 1.2,</span>
-<span id="revdate">2022-01-02</span>
+<span id="revdate">2022-01-28</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -676,18 +676,6 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <li><a href="_ml_with_python.html">ML with Python</a>
 </li>
 <li><a href="_data_preprocessing.html">Data &amp; Preprocessing</a>
-<ul class="sectlevel2">
-<li><a href="_what_constitutes_1_data_point.html"><span class="toc-current">What constitutes 1 data point?</span></a>
-</li>
-<li><a href="_feature_extraction.html">Feature Extraction</a>
-</li>
-<li><a href="_feature_engineering_transformations.html">Feature Engineering &amp; Transformations</a>
-</li>
-<li><a href="_computing_similarities.html">Computing Similarities</a>
-</li>
-<li><a href="_garbage_in_garbage_out.html">Garbage in, garbage out!</a>
-</li>
-</ul>
 </li>
 <li><a href="_ml_solutions_overview.html">ML Solutions: Overview</a>
 </li>
@@ -700,6 +688,16 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <li><a href="_deep_learning_more.html">Deep Learning &amp; more</a>
 </li>
 <li><a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a>
+<ul class="sectlevel2">
+<li><a href="_model_does_not_generalize.html">Model does not generalize</a>
+</li>
+<li><a href="_model_abuses_spurious_correlations.html">Model abuses spurious correlations</a>
+</li>
+<li><a href="_model_discriminates.html"><span class="toc-current">Model discriminates</span></a>
+</li>
+<li><a href="_explainability_interpretable_ml.html">Explainability &amp; Interpretable ML</a>
+</li>
+</ul>
 </li>
 <li><a href="_reinforcement_learning.html">Reinforcement Learning</a>
 </li>
@@ -710,55 +708,165 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 <div id="content">
 <div class="sect2">
-<h3 id="_what_constitutes_1_data_point">What constitutes 1 data point?</h3>
+<h3 id="_model_discriminates">Model discriminates</h3>
 <div class="paragraph">
-<p>Even given the same raw data, depending on what you want to do, the <strong>definition of &#8216;1 data point&#8217;</strong> might be quite different.
-For example, when dealing with time series data, <strong>the raw data might always be in the form &#8216;<em>n</em> time points with measurements from <em>d</em> sensors&#8217;</strong>, but depending on the type of question you are trying to answer, the actual feature matrix can look quite different:</p>
+<p>As we ponder the true causal relations between variables in the data, we also need to consider whether there are some causal relationships encoded in the historical data that we <em>don&#8217;t</em> want a model to pick up on. For example, discrimination based on gender or ethnicity can leak into the training data, e.g., if white men got systematically lower credit interest rates that can not solely be explained by their higher incomes. If this is the case, we need to take extra measures to make sure that these patterns, although they might have been true causal relationships in the past, are not present in our model now.</p>
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">1 Data Point = 1 Time Point</dt>
+<dt class="hdlist1">Biased data leads to (strongly) biased models</dt>
 <dd>
-<p>e.g., anomaly detection (&#8594; determine for each time point if everything is normal or if there is something strange going on):</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/07_timeseries/timeseries1.png" alt="image" width="660">
-</div>
-</div>
-<div class="paragraph">
-<p>&#8594; \(X\): <em>n</em> time points \(\times\) <em>d</em> sensors, i.e., <em>n</em> data points represented as <em>d</em>-dimensional feature vectors</p>
-</div>
-</dd>
-<dt class="hdlist1">1 Data Point = 1 Time Series</dt>
-<dd>
-<p>e.g., cluster sensors (&#8594; see if some sensors measure related things):</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/07_timeseries/timeseries3.png" alt="image" width="660">
-</div>
-</div>
-<div class="paragraph">
-<p>&#8594; \(X\): <em>d</em> sensors \(\times\) <em>n</em> time points, i.e., <em>d</em> data points represented as <em>n</em>-dimensional feature vectors</p>
-</div>
-</dd>
-<dt class="hdlist1">1 Data Point = 1 Time Interval</dt>
-<dd>
-<p>e.g., classify time segments (&#8594; products are being produced one after another, some take longer to produce than others, and the task is to predict whether a product produced during one time window at the end meets the quality standards, i.e., we&#8217;re not interested in the process over time per se, but instead regard each produced product (and therefore each interval) as an independent data point):</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/07_timeseries/timeseries2.png" alt="image" width="660">
-</div>
-</div>
-<div class="paragraph">
-<p>&#8594; Data points always need to be represented as fixed-length feature vectors, where each dimension stands for a specific input variable. Since the intervals here have different lengths, we can&#8217;t just represent one product as the concatenation of all the sensor measurements collected during its production time interval, since these vectors would not be comparable for the different products. Instead, you could compute features for each time segment by aggregating the sensor measurements over the interval (e.g., min, max, mean, slope, &#8230;&#8203;)<br>
-&#8594; \(X\): <em>k</em> intervals \(\times\) <em>q</em> features (derived from the <em>d</em> sensors), i.e., <em>k</em> data points represented as <em>q</em>-dimensional feature vectors</p>
-</div>
+<p>Below are some examples where people with the best of intentions have set up an ML model that has learned problematic things from real world data.</p>
 </dd>
 </dl>
 </div>
+<div class="sidebarblock">
+<div class="content">
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/07_data_issues/bias_microsoft_tay.png" alt="image" width="550">
+</div>
+<div class="title"><span class="small">What started as a research project to see how humans would interact with an AI-based chatbot, ended as a PR-nightmare for Microsoft. The chatbot was supposed to learn from the messages written to it, but since the developers apparently thought more about their natural language models instead of human behavior on the internet, Tay mainly repeated all the racist, sexists things others tweeted.</span></div>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/07_data_issues/bias_gender_stereotypes_we.png" alt="image" width="620">
+</div>
+<div class="title"><span class="small">You&#8217;ve already seen how neural network language models learn word embeddings through self-supervised learning. As it turns out, a lot of the texts these models are trained on include, e.g., gender stereotypes, which are then also encoded in the word embeddings. So while the analogy question "<em>man</em> is to <em>king</em> as <em>women</em> is to <em>XXX</em>" might be answered correctly with "<em>queen</em>",  "<em>man</em> is to <em>doctor</em> as <em>women</em> is to <em>XXX</em>" is more likely to be answered with "<em>nurse</em>" instead of "<em>doctor</em>", since this role allocation was typical in the past and is therefore also present in many texts used as training data for these models.</span></div>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/07_data_issues/bias_twitter_imagecrop.png" alt="image" width="550">
+</div>
+<div class="title"><span class="small">Since many of the images posted on Twitter are larger than the available space for the preview image, Twitter decided to train a model to select &#8220;the most relevant part&#8221; of an image to be displayed as a preview. Unfortunately, as they had trained this model on a dataset with more pictures of white people than people of color, the model became racist and, for example, given a picture of Barack Obama and some random unimportant white politician, it always selected the white politician for the preview image. Similarly, such cropping algorithms were also reported to more often select faces as preview images for men and the body (specifically, you&#8217;ve guessed it, boobs) as preview images for women.</span></div>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/07_data_issues/bias_household_lowerincome.png" alt="image" width="700">
+</div>
+<div class="title"><span class="small">Most computer vision models are (pre-)trained on the ImageNet dataset, which contains over 14 million hand-annotated pictures, organized in more than 20k categories. However, since these pictures are sourced from the internet and more people from developed instead of developing nations tend to post pictures online, the variety of common household items, for example, is highly skewed towards products found in richer countries. Subsequently, these models mistake, e.g., bars of soap found in a poorer country as food (e.g., one could argue that these do indeed bear some resemblance to a plate of food that might be found in a fancy restaurant).</span></div>
+</div>
+<div class="paragraph text-center">
+<p><span class="small">de Vries, Terrance, et al. &#8220;Does object recognition work for everyone?&#8221; <em>IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops.</em> 2019.</span></p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>The above problems all arose because the data was not sampled uniformly:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Tay has seen many more racist and hateful comments and tweets than &#8216;normal&#8217; ones</p>
+</li>
+<li>
+<p>In historical texts, women were underrepresented in professions such as doctors, engineers, carpenters, etc.</p>
+</li>
+<li>
+<p>The image dataset Twitter trained its model on included more pictures of white people compared to people of color</p>
+</li>
+<li>
+<p>Similarly, given a random collection of photos from the internet, these images will have mostly been uploaded by people from developed countries, i.e., pictures displaying the status quo in developing nations will be underrepresented</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The first step to mitigating these problems is to become aware of them. While the training sets used to train modern ML models are usually too big to identify and correct all these problems, at least the test set should be well balanced and curated, such that it is possible to notice such a systematic bias, i.e., a poor performance for undersampled subgroups:</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="../images/07_data_issues/bias_unequal_lr.png" alt="image" width="420"></span>
+<span class="image"><img src="../images/07_data_issues/bias_equal_lr.png" alt="image" width="420"></span><br></p>
+</div>
+<div class="paragraph text-justify">
+<p><span class="small">These two plots show a simple linear regression model trained on data with 3 subgroups (e.g., subgroups could be based on gender and/or ethnicity). In both cases, the model performs well for the subgroup in the middle, but poorly for the marginalized subgroups. However, when only looking at the overall \(R^2\) value of the model, the poor performance of the model is only apparent when the subgroups are sampled equally, while in the first plot on the left, the performance of the model seems fine since here the good performance of the "main" subgroup drowns out the poor performance on the marginalized subgroups, since they are undersampled. Similarly, for example, it took researchers a while to realize that speech recognition algorithms perform considerably worse for women than men, where again the training and test data mostly contained data from men (e.g., transcribed political speeches).</span></p>
+</div>
+<div class="paragraph">
+<p>Therefore:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Assess the model&#8217;s performance for each (known) subgroup individually by slicing the data accordingly to verify that the prediction errors of the model are random and the model is not systematically worse for some subgroups / data slices.</p>
+</li>
+<li>
+<p>If it is not possible to obtain a well balanced training and/or test set, assign higher sample weights to data points from undersampled subgroups to make sure the algorithm pays enough attention to them during training and they are given more weight in the evaluation of the model (similar to using the balanced accuracy).</p>
+</li>
+</ul>
+</div>
+<h5 id="_explicit_discrimination" class="discrete">Explicit discrimination</h5>
+<div class="paragraph">
+<p>Even more problematic than a mere underrepresentation of certain subgroups (i.e., a skewed input distribution) is a pattern of systematic discrimination against them in historical data (i.e., a discriminatory shift in the assigned labels).</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/07_data_issues/bias_apple_card.png" alt="image" width="550">
+</div>
+<div class="title"><span class="small">A lot of explicit discrimination is often encoded in many datasets used to train models for assigning credit scores or determine interest rates for mortgages or loans. Since these application areas have a direct and severe influence on humans' lives, here you have to be especially careful and, for example, check that your model predicts the same score for a man and a woman if all the features of a data point are equal except those encoding a person&#8217;s gender.</span></div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>In general, you should always be very careful when including variables in the model that encode attributes such as gender or ethnicity. For example, the performance of a model that diagnoses heart attacks will most likely be improved by including &#8216;gender&#8217; as a feature, since men and women present different symptoms when they have a heart attack.</p>
+</div>
+<div class="paragraph text-center">
+<p><span class="image"><img src="../images/07_data_issues/bias_simpson_lr.png" alt="image" width="420"></span>
+<span class="image"><img src="../images/07_data_issues/bias_simpson_lrd.png" alt="image" width="405"></span><br></p>
+</div>
+<div class="paragraph text-justify">
+<p><span class="small">In the plot on the right, additional dummy variables to represent the different subgroups in the data are included in the model and improve its predictive performance. While this can make the bias of a model explicit, should this information be included at all? (By the way, this is also an example of <a href="https://en.wikipedia.org/wiki/Simpson&#8217;s_paradox" target="\_blank">Simpson&#8217;s paradox</a>, where the coefficients reverse their sign when additional features are included.)</span></p>
+</div>
+<div class="paragraph">
+<p>A model that assigns someone a credit score should probably not rely on the gender of the person for this decision, since, even though this might have been the case in the historical data because the humans that generated the data relied on their own stereotypes, women should not get a lower score just because they are female.</p>
+</div>
+<div class="paragraph">
+<p>However, a person&#8217;s gender or ethnicity, for example, is often correlated with other variables such as income or neighborhood, so even inconspicuous features can still leak problematic information to the model. Therefore, in those cases one should take some extra steps to ensure the model does not discriminate based on these features.</p>
+</div>
+<div class="paragraph">
+<p>This can, for example, be achieved by setting up a neural network that learns subgroup-invariant feature representations:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/07_data_issues/invariant_rep.png" alt="image" width="720">
+</div>
+</div>
+<div class="paragraph">
+<p>This architecture works similar to a <a href="https://en.wikipedia.org/wiki/Generative_adversarial_network" target="\_blank">Generative Adversarial Network (GAN)</a> in that there are two parts of the network, one that tries to predict the target from the intermediate feature representation and the other (i.e., the adversary) that tries to predict the subgroup label (e.g., gender) from the same representation. The goal here is to find an intermediate feature representation that still includes all the necessary information such that the first network can predict the target, but from which the adversarial network can not predict the subgroup anymore, which can be achieved by training both networks together.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>For other examples of what not to do, check out the <a href="https://incidentdatabase.ai/" target="\_blank">AI Incidence Database</a> and</p>
+</div>
+<div class="openblock float-group">
+<div class="content">
+<div class="paragraph">
+<p><span class="image left"><img src="../images/09_ml_in_practice/book_weapons_2016.jpg" alt="image" width="140"></span></p>
+</div>
+<div class="paragraph">
+<p>Book recommendation:<br>
+<strong>Weapons of Math Destruction</strong> by Cathy O’Neil (2016)</p>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="paragraph nav-footer">
-<p>↑ Up: <a href="_data_preprocessing.html">Data &amp; Preprocessing</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_feature_extraction.html">Feature Extraction</a> →</p>
+<p>← Previous: <a href="_model_abuses_spurious_correlations.html">Model abuses spurious correlations</a> | ↑ Up: <a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_explainability_interpretable_ml.html">Explainability &amp; Interpretable ML</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">
@@ -800,10 +908,10 @@ MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
 <!-- FOOTER  -->
 <div id="footer" class="outer">
   <footer class="inner">
-    <p><b>Book/Course Feedback: </b> <a href="https://forms.gle/Ccv5h5zQxwPjWtCS7" target="_blank">Full Feedback Survey</a> or <a href="https://forms.gle/qK8T5ALzgpiZaxd49" target="_blank">Short Comment</a><br>
+    <p><b>Book/Course Feedback: </b> <a href="https://forms.gle/Ccv5h5zQxwPjWtCS7" target="_blank" rel="nofollow">Full Feedback Survey</a> or <a href="https://forms.gle/qK8T5ALzgpiZaxd49" target="_blank" rel="nofollow">Short Comment</a><br>
 
-    <p>Find me on <a href="https://github.com/cod3licious/" target="_blank">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/" target="_blank">LinkedIn</a><br>
-      <a href="../index.html">Home</a> ~ <a href="mailto:hey@franziskahorn.de?Subject=ML%20book" target="_blank">Contact</a> ~ <a href="../impressum.html">Impressum</a></p>
+    <p>Find me on <a href="https://github.com/cod3licious/" target="_blank" rel="nofollow">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/" target="_blank" rel="nofollow">LinkedIn</a><br>
+      <a href="../index.html">Home</a> ~ <a href="mailto:hey@franziskahorn.de?Subject=ML%20book" target="_blank" rel="nofollow">Contact</a> ~ <a href="../impressum.html">Impressum</a></p>
   </footer>
 </div>
 </body>

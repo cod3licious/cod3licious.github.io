@@ -666,7 +666,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
 <span id="revnumber">version 1.2,</span>
-<span id="revdate">2022-01-02</span>
+<span id="revdate">2022-01-28</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -704,10 +704,13 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="sect2">
 <h3 id="_taxonomy_of_ml_problems_solutions">Taxonomy of ML problems &amp; solutions</h3>
 <div class="paragraph">
-<p>Machine learning algorithms can be used to solve a wide variety of problems involving different kinds of inputs data. But different problem types require different approaches and come with their own unique set of challenges.</p>
+<p>Machine learning algorithms can solve a wide variety of problems involving different kinds of inputs data. But different problem types require different approaches and come with their own unique set of challenges.</p>
 </div>
 <div class="paragraph">
-<p>The following is by no means an exhaustive list of all the different areas where machine learning is applied, but should cover the most important cases where ML currently adds value and why might it fail. (Please note, this summary contains some terms that will be explained in more detail the following chapters, so you might want to come back to this later.)</p>
+<p>The following is by no means an exhaustive list of all the different areas where machine learning is applied, but should cover the most important cases where ML currently adds value and why might it fail.</p>
+</div>
+<div class="paragraph">
+<p>Please note, this summary contains some terms that will be explained in more detail in the following chapters, so you might want to come back to this later.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -718,7 +721,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="title"><span class="underline">Goal:</span></div>
 <ul class="none">
 <li>
-<p>Automate tedious, repetitive tasks otherwise done by humans</p>
+<p>Automate tedious, repetitive tasks otherwise done by humans.</p>
 </li>
 </ul>
 </div>
@@ -741,7 +744,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <p>image classification / object recognition (e.g., identify problematic content (like child pornography) or detect street signs and pedestrians in autonomous driving)</p>
 </li>
 <li>
-<p>image captioning (generate text that describes what&#8217;s shown in an image, e.g., to improve the online experience for the visually impaired)</p>
+<p>image captioning (generate text that describes what&#8217;s shown in an image, e.g., to improve the online experience for for people with visual impairment)</p>
 </li>
 <li>
 <p>data generation (e.g., generate new photos/images of specific objects or scenes)</p>
@@ -758,7 +761,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="title"><span class="underline">Approach:</span></div>
 <ul class="none">
 <li>
-<p>usually deep learning, i.e., a task-specific neural network (NN) architecture</p>
+<p>Usually deep learning, i.e., a task-specific neural network (NN) architecture.</p>
 </li>
 </ul>
 </div>
@@ -795,7 +798,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="title"><span class="underline">Goal:</span></div>
 <ul class="none">
 <li>
-<p>Speed up the estimation for new samples by using an ML model to predict the results instead of the slow simulation model to compute them exactly</p>
+<p>Exact simulation models are often slow; to speed up the estimation for new samples, we instead predict the results with an ML model.</p>
 </li>
 </ul>
 </div>
@@ -814,7 +817,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="title"><span class="underline">Approach:</span></div>
 <ul class="none">
 <li>
-<p>usually deep learning, i.e., a task-specific neural network architecture</p>
+<p>Usually deep learning, i.e., a task-specific neural network architecture.</p>
 </li>
 </ul>
 </div>
@@ -879,19 +882,19 @@ For example, a manufacturing process may have some Key Performance Indicators (K
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>[Optional] Create a dashboard where the KPI(s) can be monitored</p>
+<p>[Optional] Create a dashboard where the KPI(s) can be monitored.</p>
 </li>
 <li>
-<p>Build a model that reliably captures the input-output relationship between the process variables and KPIs</p>
+<p>Build a model that reliably captures the input-output relationship between the process variables and KPIs.</p>
 </li>
 <li>
-<p>Analyze the model to identify root causes, i.e., determine which inputs have the most influence on the KPIs and investigate how they are related</p>
+<p>Analyze the model to identify root causes, i.e., determine which inputs have the most influence on the KPIs and investigate how they are related.</p>
 </li>
 <li>
-<p>Use the model in a what-if forecast to facilitate planning</p>
+<p>Use the model in a what-if forecast to facilitate planning.</p>
 </li>
 <li>
-<p>Use the model in an outer control loop to automatically find optimal inputs (either with classical optimization techniques or RL for longer time horizons)</p>
+<p>Use the model in an outer control loop to automatically find optimal inputs (either with classical optimization techniques or RL for longer time horizons).</p>
 </li>
 </ol>
 </div>
@@ -902,7 +905,7 @@ For example, a manufacturing process may have some Key Performance Indicators (K
 <div class="title"><span class="underline">Chance of success:</span></div>
 <ul class="none">
 <li>
-<p>Uncertain: while it is fairly straightforward to apply the models, it is difficult to determine in advance whether there even exists any relation between the measured inputs and KPIs (&#8594; beware of garbage in, garbage out! Also: <a href="_extrapolation_correlation_vs_causation.html">correlation does not imply causation</a>!).</p>
+<p>Uncertain: while it is fairly straightforward to apply the models, it is difficult to determine in advance whether there even exists any relation between the measured inputs and KPIs (&#8594; beware of garbage in, garbage out! Also: <a href="_model_abuses_spurious_correlations.html">correlation does not imply causation</a>!).</p>
 </li>
 </ul>
 </div>
@@ -910,16 +913,16 @@ For example, a manufacturing process may have some Key Performance Indicators (K
 <div class="title"><span class="underline">Possible challenges:</span></div>
 <ul>
 <li>
-<p>appropriate definition of the output/target/KPI that should be modeled, i.e., what does it actually mean for a process to run well and how might external factors influence this definition (e.g., can you expect the same performance on an exceptionally hot summer day?)</p>
+<p>appropriate definition of the output/target/KPI that should be modeled, i.e., what does it actually mean for a process to run well and how might external factors influence this definition (e.g., can we expect the same performance on an exceptionally hot summer day?)</p>
 </li>
 <li>
-<p>missing important input variables, e.g., if there exist other influencing factors that you haven&#8217;t considered or couldn&#8217;t measure, which means not all of the target variable&#8217;s variance can be explained</p>
+<p>missing important input variables, e.g., if there exist other influencing factors that we haven&#8217;t considered or couldn&#8217;t measure, which means not all of the target variable&#8217;s variance can be explained</p>
 </li>
 <li>
 <p>lots of possibly irrelevant input variables that require careful feature selection to avoid <a href="https://www.tylervigen.com/spurious-correlations" target="\_blank">spurious correlations</a>, which would result in incorrect &#8216;what-if&#8217; forecasts since the true causal relationship between the inputs and outputs isn&#8217;t captured</p>
 </li>
 <li>
-<p>often very time intensive data preprocessing necessary, e.g., when combining data from different sources</p>
+<p>often very time intensive data preprocessing necessary, e.g., when combining data from different sources and engineering additional features</p>
 </li>
 </ul>
 </div>
@@ -962,7 +965,7 @@ For example, a manufacturing process may have some Key Performance Indicators (K
 <div class="title"><span class="underline">Chance of success:</span></div>
 <ul class="none">
 <li>
-<p>Worth a try: usually these suggestions are better than not showing anything</p>
+<p>Worth a try: usually these suggestions are better than not showing anything.</p>
 </li>
 </ul>
 </div>
@@ -996,7 +999,7 @@ For example, a manufacturing process may have some Key Performance Indicators (K
 <div class="title"><span class="underline">Chance of success:</span></div>
 <ul class="none">
 <li>
-<p>Worth a try: whether these measures help or not depends on the dataset as well as the algorithms applied to the preprocessed data afterwards, but investing time in data cleaning is usually well spent</p>
+<p>Worth a try: whether these measures help or not depends on the dataset as well as the algorithms applied to the preprocessed data afterwards, but investing time in data cleaning is usually well spent.</p>
 </li>
 </ul>
 </div>
@@ -1022,7 +1025,7 @@ For example, a manufacturing process may have some Key Performance Indicators (K
 <div class="title"><span class="underline">Goal/Examples/Approach:</span></div>
 <ul class="none">
 <li>
-<p><strong>dimensionality reduction</strong> (e.g., with t-SNE): create a 2D visualization to explore the dataset as a whole, where you can often already see any clusters or outliers</p>
+<p><strong>dimensionality reduction</strong> (e.g., with t-SNE): create a 2D visualization to explore the dataset as a whole, where we can often already see some clusters or outliers</p>
 </li>
 <li>
 <p><strong>clustering</strong> (e.g., with <em>k</em>-means or DBSCAN): identify groups of related data points, e.g., customer segmentation for targeted marketing campaign</p>
@@ -1036,7 +1039,7 @@ For example, a manufacturing process may have some Key Performance Indicators (K
 <div class="title"><span class="underline">Chance of success:</span></div>
 <ul class="none">
 <li>
-<p>Worth a try: the algorithms will always find something, but whether this is useful (i.e., what the identified patterns mean) can only be determined by a human in a post-processing step</p>
+<p>Worth a try: the algorithms will always find something, but whether this is useful (i.e., what the identified patterns mean) can only be determined by a human in a post-processing step.</p>
 </li>
 </ul>
 </div>
@@ -1063,7 +1066,7 @@ For example, a manufacturing process may have some Key Performance Indicators (K
 <ul class="none">
 <li>
 <p>Determine an optimal sequence of actions given changing environmental conditions.<br>
-Unlike in regular optimization, where the optimal inputs given a single specific external condition are determined, here an &#8220;agent&#8221; (= the RL algorithm) tries to learn an optimal <em>sequence</em> of inputs to maximize the cumulative reward received over multiple time steps, where there can be a significant time delay between the inputs and the rewards that they generate (e.g., in a video game you might need to pick up a key in the beginning of a level, but the door that can be opened with it only comes several frames later).</p>
+Unlike in regular optimization, where the optimal inputs given a single specific external condition are determined, here an &#8220;agent&#8221; (= the RL algorithm) tries to learn an optimal <em>sequence</em> of inputs to maximize the cumulative reward received over multiple time steps, where there can be a significant time delay between the inputs and the rewards that they generate (e.g., in a video game we might need to pick up a key in the beginning of a level, but the door that can be opened with it only comes several frames later).</p>
 </li>
 </ul>
 </div>
@@ -1082,7 +1085,7 @@ Unlike in regular optimization, where the optimal inputs given a single specific
 <div class="title"><span class="underline">Approach:</span></div>
 <ul class="none">
 <li>
-<p>lots of options, many nowadays based on neural networks (e.g., AlphaGo / MuZero)</p>
+<p>Lots of options, many nowadays based on neural networks (e.g., AlphaGo / MuZero).</p>
 </li>
 </ul>
 </div>
@@ -1157,10 +1160,10 @@ MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
 <!-- FOOTER  -->
 <div id="footer" class="outer">
   <footer class="inner">
-    <p><b>Book/Course Feedback: </b> <a href="https://forms.gle/Ccv5h5zQxwPjWtCS7" target="_blank">Full Feedback Survey</a> or <a href="https://forms.gle/qK8T5ALzgpiZaxd49" target="_blank">Short Comment</a><br>
+    <p><b>Book/Course Feedback: </b> <a href="https://forms.gle/Ccv5h5zQxwPjWtCS7" target="_blank" rel="nofollow">Full Feedback Survey</a> or <a href="https://forms.gle/qK8T5ALzgpiZaxd49" target="_blank" rel="nofollow">Short Comment</a><br>
 
-    <p>Find me on <a href="https://github.com/cod3licious/" target="_blank">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/" target="_blank">LinkedIn</a><br>
-      <a href="../index.html">Home</a> ~ <a href="mailto:hey@franziskahorn.de?Subject=ML%20book" target="_blank">Contact</a> ~ <a href="../impressum.html">Impressum</a></p>
+    <p>Find me on <a href="https://github.com/cod3licious/" target="_blank" rel="nofollow">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/" target="_blank" rel="nofollow">LinkedIn</a><br>
+      <a href="../index.html">Home</a> ~ <a href="mailto:hey@franziskahorn.de?Subject=ML%20book" target="_blank" rel="nofollow">Contact</a> ~ <a href="../impressum.html">Impressum</a></p>
   </footer>
 </div>
 </body>

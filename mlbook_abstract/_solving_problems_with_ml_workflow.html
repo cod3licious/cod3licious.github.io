@@ -666,7 +666,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
 <span id="revnumber">version 1.2,</span>
-<span id="revdate">2022-01-02</span>
+<span id="revdate">2022-01-28</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -723,19 +723,19 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="ulist">
 <ul>
 <li>
-<p>Is there a <a href="_when_should_you_use_ml.html">simpler solution</a> (i.e., without using ML)?<br>
+<p>Is there a <a href="_when_should_you_use_ml.html">simpler solution</a>, i.e., without using ML?<br>
 &#8594; Use ML to learn <em>unknown, complex</em> rules from data</p>
 </li>
 <li>
-<p>Can it be solved with an <a href="_ml_solutions_overview.html">existing ML algorithm</a>?<br>
+<p>Can the problem be solved with an <a href="_ml_solutions_overview.html">existing ML algorithm</a>?<br>
 &#8594; Possibly break the input-output problem down into simpler steps with known solutions instead of spending years on research</p>
 </li>
 <li>
-<p>Do you have <a href="_garbage_in_garbage_out.html">enough high-quality data</a> available?<br>
+<p>Is there <a href="_garbage_in_garbage_out.html">enough high-quality data</a> available?<br>
 &#8594; ML models need the right inputs and learn best from unambiguous targets</p>
 </li>
 <li>
-<p>Will the solution give you a <a href="_ai_transformation_of_a_company.html">strategic advantage</a>?<br>
+<p>Will the solution result in a <a href="_ai_transformation_of_a_company.html">strategic advantage</a>?<br>
 &#8594; Should you <span class="underline">build</span> it yourself or can you <span class="underline">buy</span> it?<br>
 &#8594; Can you create synergies between departments that work with similar data?</p>
 </li>
@@ -747,12 +747,12 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="paragraph">
 <p><span class="underline">Specifically:</span><br>
 &#8658; <strong>Ask an ML expert</strong> whether a similar problem has already been solved with an existing algorithm<br>
-&#8658; <strong>Ask a domain expert</strong> whether she thinks all the relevant input data is available to compute the desired output. This is usually easy to determine for unstructured data such as images&#8201;&#8212;&#8201;if a human can see the thing in the image, ML should too. For structured data, such as a spreadsheets with hundreds of columns of sensor measurements, this often impossible to tell before doing any analysis on the data.</p>
+&#8658; <strong>Ask a domain expert</strong> whether she thinks all the relevant input data is available to compute the desired output. This is usually easy to determine for unstructured data such as images&#8201;&#8212;&#8201;if a human can see the thing in the image, ML should too. But for structured data, such as a spreadsheet with hundreds of columns of sensor measurements, this might be impossible to tell before doing any analysis on the data.</p>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>Once a suitable &#8220;input &#8594; output&#8221; problem as been identified, <strong>historic data needs to be gathered and the right ML algorithm needs to be selected and applied</strong> to obtain a working solution. This is what the next chapters are all about.</p>
+<p>Once a suitable &#8220;input &#8594; output&#8221; problem as been identified, <strong>historical data needs to be gathered and the right ML algorithm needs to be selected and applied</strong> to obtain a working solution. This is what the next chapters are all about.</p>
 </div>
 <div class="paragraph">
 <p>When the prototypical solution has been implemented and meets the required performance level, this solution then has to be deployed, i.e., <strong>integrated into the general workflow and infrastructure</strong> so that it can actually be used to improve the respective process in practice (as a piece of software that continuously makes predictions for new data points). There are generally two strategies for how to do this:</p>
@@ -763,7 +763,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <p>The ML model runs on an &#8220;edge&#8221; device, i.e., on each individual machine (e.g., mobile phone) where the respective data is generated and the output of the model is used in subsequent process steps. This is often the best strategy when results need to be computed in real time and / or a continuous Internet connection can not be guaranteed, e.g., in self-driving cars. However, the downside of this is that, depending on the type of ML model, comparatively expensive computing equipment needs to be installed in each machine, e.g., GPUs for neural network models.</p>
 </li>
 <li>
-<p>The ML model runs in the &#8220;cloud&#8221;, i.e., on a central server, e.g., in the form of a web application that receives data from individual users, processes it, and sends back the results. This is often the more efficient solution if a response within a few seconds is sufficient for the use case. However, processing personal information in the cloud also raises privacy concerns. One of the major benefits of this solution is that it is easier to update the ML model, for example, when more historic data becomes available or if the process changes and the model now has to deal with slightly different inputs (we&#8217;ll discuss this further in later chapters).</p>
+<p>The ML model runs in the &#8220;cloud&#8221;, i.e., on a central server, e.g., in the form of a web application that receives data from individual users, processes it, and sends back the results. This is often the more efficient solution, if a response within a few seconds is sufficient for the use case. However, processing personal information in the cloud also raises privacy concerns. One of the major benefits of this solution is that it is easier to update the ML model, for example, when more historical data becomes available or if the process changes and the model now has to deal with slightly different inputs (we&#8217;ll discuss this further in later chapters).</p>
 </li>
 </ol>
 </div>
@@ -774,7 +774,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <dl>
 <dt class="hdlist1">Machine Learning Workflow</dt>
 <dd>
-<p>Let&#8217;s look at the second main step, &#8220;devise a working solution&#8221;, in more detail. To solve a concrete problem using ML, you will generally follow this workflow:</p>
+<p>Let&#8217;s look at the second main step, &#8220;devise a working solution&#8221;, in more detail. To solve a concrete problem using ML, we follow a workflow like this:</p>
 </dd>
 </dl>
 </div>
@@ -782,10 +782,10 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="content">
 <img src="../images/01c_ds_workflow/data_science_workflow_17.png" alt="image" width="840">
 </div>
-<div class="title"><span class="small">You always start with some kind of question or problem that should be solved with ML. And to solve it, you need data, which you most likely have to clean before you can work with it (e.g., merge different excel files, fix missing values, etc.). Then it&#8217;s time for an exploratory analysis to better understand what you&#8217;re dealing with. Depending on the type of data, you also need to extract appropriate features or engineer additional ones, for which domain knowledge is invaluable. All these steps are grouped under "preprocessing" <em>(red box)</em> and the steps are not linear, as you often find yourself jumping back and forth between them. For example, by visualizing the dataset, you realize that the data contains some outliers that need to be removed, or after engineering new features, you go back and visualize the dataset again. Next comes the ML part <em>(green box)</em>: you normally start with some simple model, evaluate it, try a more complex model, experiment with different hyperparameters, &#8230;&#8203; and at some point realize, that you&#8217;ve exhausted your ML toolbox and are still not happy with the performance. This means you need to go back and either engineer better features or, if this also doesn&#8217;t help, collect more and/or better data (e.g., more samples, data from additional sensors, cleaner labels, etc.). Finally, when you&#8217;re confident in the model&#8217;s predictions, there are two routes you might take: Either the data science route, where you communicate your findings to the stakeholders (which most likely results in further questions). Or the ML software route, where the final model is deployed in production. Here it is important to continuously monitor the model&#8217;s performance and collect new data such that the model can be retrained, especially as the inevitable data or concept drifts occur. Working on a machine learning project is a very iterative process.</span></div>
+<div class="title"><span class="small">We always start with some kind of question or problem that should be solved with ML. And to solve it, we need data, which we most likely have to clean before we can work with it (e.g., merge different excel files, fix missing values, etc.). Then it&#8217;s time for an exploratory analysis to better understand what we&#8217;re dealing with. Depending on the type of data, we also need to extract appropriate features or engineer additional ones, for which domain knowledge is invaluable. All these steps are grouped under "preprocessing" <em>(red box)</em> and the steps are not linear, as we often find ourselves jumping back and forth between them. For example, by visualizing the dataset, we realize that the data contains some outliers that need to be removed, or after engineering new features, we go back and visualize the dataset again. Next comes the ML part <em>(green box)</em>: we normally start with some simple model, evaluate it, try a more complex model, experiment with different hyperparameters, &#8230;&#8203; and at some point realize, that we&#8217;ve exhausted our ML toolbox and are still not happy with the performance. This means we need to go back and either engineer better features or, if this also doesn&#8217;t help, collect more and/or better data (e.g., more samples, data from additional sensors, cleaner labels, etc.). Finally, when we&#8217;re confident in the model&#8217;s predictions, there are two routes we can take: Either the data science route, where we communicate our findings to the stakeholders (which most likely results in further questions). Or the ML software route, where the final model is deployed in production. Here it is important to continuously monitor the model&#8217;s performance and collect new data such that the model can be retrained, especially as the inevitable data or concept drifts occur. Above all, working on a machine learning project is a very iterative process.</span></div>
 </div>
 <div class="paragraph">
-<p>Unfortunately, due to a lack of standardized data infrastructure in many companies, the sad truth is that usually (at least) about 90% of a Data Scientist&#8217;s time will be spent collecting, cleaning, and otherwise preprocessing the data to get it into a format where the ML algorithms can be applied:</p>
+<p>Unfortunately, due to a lack of standardized data infrastructure in many companies, the sad truth is that usually (at least) about 90% of a Data Scientist&#8217;s time is spent collecting, cleaning, and otherwise preprocessing the data to get it into a format where the ML algorithms can be applied:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -793,7 +793,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 </div>
 <div class="paragraph">
-<p>While sometimes frustrating, the time spent cleaning and preprocessing your data is never wasted, as only with a solid data foundation the ML algorithms can achieve decent results.</p>
+<p>While sometimes frustrating, the time spent cleaning and preprocessing the data is never wasted, as only with a solid data foundation the ML algorithms can achieve decent results.</p>
 </div>
 </div>
 <div class="paragraph nav-footer">
@@ -839,10 +839,10 @@ MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
 <!-- FOOTER  -->
 <div id="footer" class="outer">
   <footer class="inner">
-    <p><b>Book/Course Feedback: </b> <a href="https://forms.gle/Ccv5h5zQxwPjWtCS7" target="_blank">Full Feedback Survey</a> or <a href="https://forms.gle/qK8T5ALzgpiZaxd49" target="_blank">Short Comment</a><br>
+    <p><b>Book/Course Feedback: </b> <a href="https://forms.gle/Ccv5h5zQxwPjWtCS7" target="_blank" rel="nofollow">Full Feedback Survey</a> or <a href="https://forms.gle/qK8T5ALzgpiZaxd49" target="_blank" rel="nofollow">Short Comment</a><br>
 
-    <p>Find me on <a href="https://github.com/cod3licious/" target="_blank">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/" target="_blank">LinkedIn</a><br>
-      <a href="../index.html">Home</a> ~ <a href="mailto:hey@franziskahorn.de?Subject=ML%20book" target="_blank">Contact</a> ~ <a href="../impressum.html">Impressum</a></p>
+    <p>Find me on <a href="https://github.com/cod3licious/" target="_blank" rel="nofollow">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/" target="_blank" rel="nofollow">LinkedIn</a><br>
+      <a href="../index.html">Home</a> ~ <a href="mailto:hey@franziskahorn.de?Subject=ML%20book" target="_blank" rel="nofollow">Contact</a> ~ <a href="../impressum.html">Impressum</a></p>
   </footer>
 </div>
 </body>

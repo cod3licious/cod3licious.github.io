@@ -666,7 +666,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
 <span id="revnumber">version 1.2,</span>
-<span id="revdate">2022-01-02</span>
+<span id="revdate">2022-01-28</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -695,7 +695,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <h2 id="_data_preprocessing">Data &amp; Preprocessing</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>As we&#8217;ve seen, ML algorithms solve input-output tasks. And to solve an ML problem, you first need to collect data. Preprocessing is the act of transforming raw data in such a way that ML algorithms can be applied:</p>
+<p>As we&#8217;ve seen, ML algorithms solve input-output tasks. And to solve an ML problem, we first need to collect data. Preprocessing is the act of transforming raw data in such a way that ML algorithms can be applied:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -703,7 +703,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 </div>
 <div class="paragraph">
-<p>For example, a production process, where you want to predict whether a produced part will be scrap given certain production conditions, would be a typical supervised learning problem. Here, the collected data for each produced part includes the process conditions under which it was produced, as well as the outcome, i.e., whether the product was okay or scrap:</p>
+<p>For example, a production process, where we want to predict whether a produced part is scrap given certain production conditions, is a typical supervised learning problem. Here, the collected data for each produced part includes the process conditions under which it was produced, as well as the outcome, i.e., whether the product was okay or scrap:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -715,18 +715,18 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="content">
 <img src="../images/02_data/toy_data6.png" alt="image" width="740">
 </div>
-<div class="title"><span class="small">The columns of the table contain the different measurements / variables that were collected for each sample. Here we distinguish between <em>features</em> (in this case the production conditions) and <em>labels</em> (whether the product produced under these conditions was okay or scrap). Features, also denoted as a matrix \(X\), are typically those measurements that we get basically for free, as they are often collected during the process for other purposes anyways. For example, when the operator of the machine sets the temperature for the production to a certain value, this is recorded as the signal is passed along to the heating unit. The corresponding labels, denoted as a vector \(\mathbf{y}\), are often more expensive to collect. For example, in the production process, to collect a data point with the label <em>"scrap"</em>, we have to (intentionally) produce a broken product, costing us valuable resources. Another example would be when Google paid a team of specialist doctors to discuss and re-label some of the diabetic retinopathy images about which there existed conflicting opinions. In the supervised learning setup, the features are used as the input to the model, while the labels constitute the target variable, i.e., the predicted output. Generally, features should be independent variables (e.g., settings that the operator can choose as he wishes), while the target value should be dependent on these inputs&#8201;&#8212;&#8201;otherwise we can&#8217;t predict it from these inputs alone.</span></div>
+<div class="title"><span class="small">The columns of the table contain the different measurements / variables that were collected for each sample. Here we distinguish between <em>features</em> (in this case the production conditions) and <em>labels</em> (whether the product produced under these conditions is okay or scrap). Features, also denoted as a matrix \(X\), are typically those measurements that we get basically for free, as they are often collected during the process for other purposes anyways. For example, when the operator of the machine sets the temperature for the production to a certain value, this is recorded as the signal is passed along to the heating unit. The corresponding labels, denoted as a vector \(\mathbf{y}\), are often more expensive to collect. For example, in the production process, to collect a data point with the label <em>"scrap"</em>, we have to (intentionally) produce a broken product, costing us valuable resources. Another example: Google had to pay a team of specialist doctors to discuss and re-label some of the diabetic retinopathy images about which there existed conflicting opinions. In the supervised learning setup, the features are used as the input to the model, while the labels constitute the target variable, i.e., the predicted output. Generally, features should be independent variables (e.g., settings that the operator can choose as he wishes), while the target value should be dependent on these inputs&#8201;&#8212;&#8201;otherwise we can&#8217;t predict it from these inputs alone.</span></div>
 </div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Structured vs. unstructured data</dt>
 <dd>
-<p>Data can come in various forms and while some data types might require additional preprocessing steps, in principle ML algorithms can be used with all kinds of data.</p>
+<p>Data can come in various forms and while some data types require additional preprocessing steps, in principle ML algorithms can be used with all kinds of data.</p>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/02_data/data_types2.png" alt="image" width="640">
 </div>
-<div class="title"><span class="small">The main distinction when characterizing data is made between <em>structured</em> data, which is any dataset that contains individual variables that represent unique quantities, and <em>unstructured</em> data, which can not be subdivided into meaningful variables. For example, in images &#8220;first pixel from the left&#8221; or in texts &#8220;10th word in the second paragraph&#8221; is not what you would call a variable, while &#8220;size in square meters&#8221; and &#8220;number of bedrooms&#8221; would be useful quantities to describe an apartment. Structured data is often <em>heterogeneous</em>, since the different variables in a dataset typically stand for very different things. For example, when working with sensor data, a dataset would normally not consist of only temperature measurements, but additionally it might contain, e.g., pressure and flow values, which have different units and might be on very different scales. Unstructured data, on the other hand, is <em>homogeneous</em>, e.g., there is no qualitative difference between the 10th and the 100th pixel in an image.</span></div>
+<div class="title"><span class="small">The main distinction when characterizing data is made between <em>structured</em> data, which is any dataset that contains individual variables that represent unique quantities, and <em>unstructured</em> data, which can not be subdivided into meaningful variables. For example, in images &#8220;first pixel from the left&#8221; or in texts &#8220;10th word in the second paragraph&#8221; is not what we would call a variable, while &#8220;size in square meters&#8221; and &#8220;number of bedrooms&#8221; are useful quantities to describe an apartment. Structured data is often <em>heterogeneous</em>, since the different variables in a dataset typically stand for very different things. For example, when working with sensor data, a dataset normally does not consist of only temperature measurements, but additionally it could contain, e.g., pressure and flow values, which have different units and measurement scales. Unstructured data, on the other hand, is <em>homogeneous</em>, e.g., there is no qualitative difference between the 10th and the 100th pixel in an image.</span></div>
 </div>
 </dd>
 </dl>
@@ -738,7 +738,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-<strong>What constitutes 1 data point?</strong> It&#8217;s always important to be really clear about what 1 data point actually is, i.e., what the inputs look like and what you want back as a result from the model for each sample / observation. Think of this in terms of how you plan to integrate the ML model with the rest of your workflow: what data is generated in the previous step and can be used as input for the ML part, and what do you need as an output for the following step?
+<strong>What constitutes one data point?</strong> It&#8217;s always important to be really clear about what one data point actually is, i.e., what the inputs look like and what we want back as a result from the model for each sample / observation. Think of this in terms of how you plan to integrate the ML model with the rest of your workflow: what data is generated in the previous step and can be used as input for the ML part, and what is needed as an output for the following step?
 </td>
 </tr>
 </table>
@@ -835,10 +835,10 @@ MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
 <!-- FOOTER  -->
 <div id="footer" class="outer">
   <footer class="inner">
-    <p><b>Book/Course Feedback: </b> <a href="https://forms.gle/Ccv5h5zQxwPjWtCS7" target="_blank">Full Feedback Survey</a> or <a href="https://forms.gle/qK8T5ALzgpiZaxd49" target="_blank">Short Comment</a><br>
+    <p><b>Book/Course Feedback: </b> <a href="https://forms.gle/Ccv5h5zQxwPjWtCS7" target="_blank" rel="nofollow">Full Feedback Survey</a> or <a href="https://forms.gle/qK8T5ALzgpiZaxd49" target="_blank" rel="nofollow">Short Comment</a><br>
 
-    <p>Find me on <a href="https://github.com/cod3licious/" target="_blank">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/" target="_blank">LinkedIn</a><br>
-      <a href="../index.html">Home</a> ~ <a href="mailto:hey@franziskahorn.de?Subject=ML%20book" target="_blank">Contact</a> ~ <a href="../impressum.html">Impressum</a></p>
+    <p>Find me on <a href="https://github.com/cod3licious/" target="_blank" rel="nofollow">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/" target="_blank" rel="nofollow">LinkedIn</a><br>
+      <a href="../index.html">Home</a> ~ <a href="mailto:hey@franziskahorn.de?Subject=ML%20book" target="_blank" rel="nofollow">Contact</a> ~ <a href="../impressum.html">Impressum</a></p>
   </footer>
 </div>
 </body>

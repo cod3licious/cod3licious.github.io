@@ -666,7 +666,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
 <span id="revnumber">version 1.2,</span>
-<span id="revdate">2022-01-02</span>
+<span id="revdate">2022-01-28</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -677,7 +677,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </li>
 <li><a href="_data_preprocessing.html">Data &amp; Preprocessing</a>
 <ul class="sectlevel2">
-<li><a href="_what_constitutes_1_data_point.html">What constitutes 1 data point?</a>
+<li><a href="_what_constitutes_one_data_point.html">What constitutes one data point?</a>
 </li>
 <li><a href="_feature_extraction.html">Feature Extraction</a>
 </li>
@@ -712,7 +712,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="sect2">
 <h3 id="_garbage_in_garbage_out">Garbage in, garbage out!</h3>
 <div class="paragraph">
-<p>Remember: data is your raw material when producing something valuable with ML. If the quality or quantity of the data is insufficient, you are facing a &#8220;garbage in, garbage out&#8221; scenario and no matter what kind of fancy ML algorithm you try, you wont get a satisfactory result. In fact, the fancier the algorithm (e.g., deep learning), the more data you need.</p>
+<p>Remember: data is our raw material when producing something valuable with ML. If the quality or quantity of the data is insufficient, we are facing a &#8220;garbage in, garbage out&#8221; scenario and no matter what kind of fancy ML algorithm we try, we wont get a satisfactory result. In fact, the fancier the algorithm (e.g., deep learning), the more data we need.</p>
 </div>
 <div class="paragraph">
 <p>Below you find a summary of some common risks associated with data that can make it complicated or even impossible to apply ML:</p>
@@ -732,13 +732,13 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <p>Manually entered values contains errors, e.g., misplaced decimal points.</p>
 </li>
 <li>
-<p>It is not possible to correct missing values. <em>Worst case:</em> Missing values are not random. For example, sensors fail only right before something goes wrong during the production process. Or in surveys, rich people more often decline to answer questions regarding their income compared to poor or middle class people. This can introduce a systematic bias into the dataset.</p>
+<p>It is not possible to correct missing values. <em>Worst case:</em> Missing values are not random. For example, sensors fail only right before something goes wrong during the production process. Or in surveys, rich people more often decline to answer questions regarding their income compared to poor or middle class people. This introduces a systematic bias in the dataset.</p>
 </li>
 <li>
 <p>The dataset consists of different data types (structured and/or unstructured) with different scales.</p>
 </li>
 <li>
-<p>The process changes over time, e.g., due to some external conditions like replacing a sensor or some other maintenance event, which means the data collected from different time periods are incompatible. <em>Worst case:</em> These external changes were not recorded anywhere and you only notice at the end of the analysis that the data you had been working with violated your assumptions.</p>
+<p>The process setup changes over time, e.g., due to some external conditions like replacing a sensor or some other maintenance event, which means the data collected from different time periods are incompatible. <em>Worst case:</em> These external changes were not recorded anywhere and we only notice at the end of the analysis that the data we were working with violated our assumptions.</p>
 </li>
 </ul>
 </div>
@@ -746,8 +746,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </dl>
 </div>
 <div class="paragraph">
-<p>&#8594; Data preprocessing takes a very long time<br>
-&#8594; Resulting dataset (after cleaning) is a lot smaller than expected&#8201;&#8212;&#8201;possibly too small to do any meaningful analysis</p>
+<p>&#8594; Data preprocessing takes a very long time.<br>
+&#8594; Resulting dataset (after cleaning) is a lot smaller than expected&#8201;&#8212;&#8201;possibly too small to do any meaningful analysis.</p>
 </div>
 <div class="paragraph">
 <p>&#8658; Before wanting to do ML, first think about how your data collection pipeline &amp; infrastructure could be improved!</p>
@@ -763,20 +763,21 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="ulist">
 <ul>
 <li>
-<p>Small dataset and/or too little variation, e.g., you produced only a few broken products or a process runs in a steady state most of the time, i.e., there is little or no variation in the inputs<br>
-&#8594; Effect of different input variables on the target can&#8217;t be estimated reliably from only a few observations<br>
-&#8658; Do some experiments where you systematically vary different inputs to collect a more diverse dataset</p>
+<p>Small dataset and/or too little variation, e.g., we produced only a few defective products or a process runs in a steady state most of the time, i.e., there is little or no variation in the inputs.<br>
+&#8594; Effect of different input variables on the target can&#8217;t be estimated reliably from only a few observations.<br>
+&#8658; Do some experiments where you systematically vary different inputs to collect a more diverse dataset.</p>
 </li>
 <li>
-<p>Data is inconsistent / incomplete, i.e., same inputs with different outputs, e.g., you produced two products under the same (measured) conditions, one is fine, the other is broken</p>
+<p>Data is inconsistent / incomplete, i.e., same inputs with different outputs, e.g., two products were produced under the same (measured) conditions, one is fine, the other is faulty.<br>
+This can have two reasons:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>The labels are very noisy, for example, because the human annotators didn&#8217;t follow the same set of clear rules or some examples were ambiguous, e.g., one QA-expert deems a product with a small scratch as still OK, while another labels it as defective<br>
+<p>The labels are very noisy, for example, because the human annotators didn&#8217;t follow the same set of clear rules or some examples were ambiguous, e.g., one QA-expert deems a product with a small scratch as still OK, while another labels it as defective.<br>
 &#8658; Clean up the data by relabeling, which can take some time but will pay off! See also this great <a href="https://youtu.be/06-AZXmwHjo" target="\_blank">MLOps / data-centric AI talk by Andrew Ng</a> on how a small high-quality dataset can be more valuable than a larger noisy dataset.</p>
 </li>
 <li>
-<p>Relevant input features are missing &#8594; While it is relatively easy for humans to assess if all the relevant information is present in unstructured data (e.g., images: either you see a cat or you don&#8217;t), structured data often has too many different variables and complex interactions to know right away if all the relevant features were included<br>
+<p>Relevant input features are missing: While it is relatively easy for humans to assess if all the relevant information is present in unstructured data (e.g., images: either we see a cat or we don&#8217;t), structured data often has too many different variables and complex interactions to know right away whether all the relevant features were included.<br>
 &#8658; Talk to a domain expert about which additional input features might be helpful and include these in the dataset. <em>Worst case:</em> Need to install a new sensor in the machine and collect this data, i.e., all the data collected in the past is basically useless. BUT: using the right sensor can simplify the problem immensely and installing it will be worth it!<br>
 <span class="small">In many applications, our first instinct is to use a camera to generate the input data, since we humans rely primarily on our visual system to solve many tasks. However, even though image recognition algorithms have come a long way, using such a setup instead of a more specialized sensor can make the solution more error prone.<br>
 Trying to detect mushy strawberries? Use a near infrared (NIR) sensor instead of a regular camera like <a href="https://www.aboutamazon.co.uk/innovation/machine-learning-using-algorithms-to-sort-fruit" target="\_blank">Amazon Fresh</a> did. They still use machine learning to analyze the resulting data, but in the NIR images the rotting parts of fruits are more easily visible than in normal photos.<br>
@@ -795,11 +796,11 @@ Trying to detect if a door is closed? With a simple <a href="https://www.deeplea
 </div>
 </div>
 </div>
-<div class="admonitionblock note">
+<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
 If you can, observe how the data is collected. As in: actually physically stand there and watch how someone enters the values in some program or how the machine operates as the sensors measure something. You will probably notice some things that can be optimized in the data collection process directly, which will save you lots of preprocessing work in the future.
@@ -811,7 +812,7 @@ If you can, observe how the data is collected. As in: actually physically stand 
 <dl>
 <dt class="hdlist1">Best Practice: Data Catalog</dt>
 <dd>
-<p>In structured datasets, you should always have information available for each variable like:</p>
+<p>To make datasets more accessible, especially in larger organizations, they should be documented. For example, in structured datasets, there should be information available on each variable like:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -827,7 +828,7 @@ If you can, observe how the data is collected. As in: actually physically stand 
 <p>Data type (e.g., numerical or categorical values)</p>
 </li>
 <li>
-<p>Date of first measurement</p>
+<p>Date of first measurement (e.g., in case a sensor was installed later than the others)</p>
 </li>
 <li>
 <p>Normal/expected range of values (&#8594; &#8220;If this variable is below this threshold, then the machine is off and the data points can be ignored.&#8221;)</p>
@@ -843,14 +844,14 @@ If you can, observe how the data is collected. As in: actually physically stand 
 </dd>
 </dl>
 </div>
-<div class="admonitionblock tip">
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-In addition to documenting datasets as a whole, it is also really helpful to store metadata for individual samples. For example, for image data, this could include the time stamp of when the image was taken, the geolocation (or if the camera is built into a manufacturing machine then the ID of this machine), information about the camera settings, etc.. This can greatly help when analyzing model prediction errors, as it might turn out that, for example, images taken with a particular camera setting are especially difficult to classify, which in turn gives us some hints on how to improve the data collection process.
+In addition to documenting datasets as a whole, it is also helpful to store metadata for individual samples. For example, for image data, this could include the time stamp of when the image was taken, the geolocation (or if the camera is built into a manufacturing machine then the ID of this machine), information about the camera settings, etc.. This can greatly help when analyzing model prediction errors, as it might turn out that, for example, images taken with a particular camera setting are especially difficult to classify, which in turn gives us some hints on how to improve the data collection process.
 </td>
 </tr>
 </table>
@@ -934,10 +935,10 @@ MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
 <!-- FOOTER  -->
 <div id="footer" class="outer">
   <footer class="inner">
-    <p><b>Book/Course Feedback: </b> <a href="https://forms.gle/Ccv5h5zQxwPjWtCS7" target="_blank">Full Feedback Survey</a> or <a href="https://forms.gle/qK8T5ALzgpiZaxd49" target="_blank">Short Comment</a><br>
+    <p><b>Book/Course Feedback: </b> <a href="https://forms.gle/Ccv5h5zQxwPjWtCS7" target="_blank" rel="nofollow">Full Feedback Survey</a> or <a href="https://forms.gle/qK8T5ALzgpiZaxd49" target="_blank" rel="nofollow">Short Comment</a><br>
 
-    <p>Find me on <a href="https://github.com/cod3licious/" target="_blank">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/" target="_blank">LinkedIn</a><br>
-      <a href="../index.html">Home</a> ~ <a href="mailto:hey@franziskahorn.de?Subject=ML%20book" target="_blank">Contact</a> ~ <a href="../impressum.html">Impressum</a></p>
+    <p>Find me on <a href="https://github.com/cod3licious/" target="_blank" rel="nofollow">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/" target="_blank" rel="nofollow">LinkedIn</a><br>
+      <a href="../index.html">Home</a> ~ <a href="mailto:hey@franziskahorn.de?Subject=ML%20book" target="_blank" rel="nofollow">Contact</a> ~ <a href="../impressum.html">Impressum</a></p>
   </footer>
 </div>
 </body>

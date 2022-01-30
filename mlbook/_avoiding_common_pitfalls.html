@@ -666,7 +666,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
 <span id="revnumber">version 1.2,</span>
-<span id="revdate">2022-01-02</span>
+<span id="revdate">2022-01-28</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -689,9 +689,11 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </li>
 <li><a href="_avoiding_common_pitfalls.html"><span class="toc-current">Avoiding Common Pitfalls</span></a>
 <ul class="sectlevel2">
-<li><a href="_interpolation_does_the_model_generalize.html">Interpolation: Does the model generalize?</a>
+<li><a href="_model_does_not_generalize.html">Model does not generalize</a>
 </li>
-<li><a href="_extrapolation_correlation_vs_causation.html">Extrapolation: Correlation vs. Causation</a>
+<li><a href="_model_abuses_spurious_correlations.html">Model abuses spurious correlations</a>
+</li>
+<li><a href="_model_discriminates.html">Model discriminates</a>
 </li>
 <li><a href="_explainability_interpretable_ml.html">Explainability &amp; Interpretable ML</a>
 </li>
@@ -725,7 +727,7 @@ All models are wrong, but some are useful.
 </div>
 </div>
 <div class="paragraph">
-<p>A supervised learning model tries to infer the relationship between some inputs and outputs from the given exemplary data points. What kind of relation will be found is largely determined by the chosen model type and its internal optimization algorithm, however, there is a lot you can (and should) do to make sure what the algorithm comes up with is not blatantly wrong.</p>
+<p>A supervised learning model tries to infer the relationship between some inputs and outputs from the given exemplary data points. What kind of relation will be found is largely determined by the chosen model type and its internal optimization algorithm, however, there is a lot we can (and should) do to make sure what the algorithm comes up with is not blatantly wrong.</p>
 </div>
 <div class="dlist">
 <dl>
@@ -756,27 +758,27 @@ All models are wrong, but some are useful.
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Common pitfalls include: </dt>
+<dt class="hdlist1">What can go wrong?</dt>
 <dd>
 <div class="ulist">
 <ul>
 <li>
-<p>evaluating the model with an inappropriate evaluation metric (e.g., accuracy instead of balanced accuracy for a classification problem with unbalanced class distributions), thereby not noticing the subpar performance of a model (e.g., worse than the stupid baseline)</p>
+<p>Evaluating the model with an inappropriate evaluation metric (e.g., accuracy instead of balanced accuracy for a classification problem with an unequal class distribution), thereby not noticing the subpar performance of a model (e.g., compared to a simple baseline).</p>
 </li>
 <li>
-<p>using a model that does not capture the &#8216;input &#8594; output&#8217; relationship correctly (due to underfitting) and does not generate useful predictions</p>
+<p>Using a model that can not capture the &#8216;input &#8594; output&#8217; relationship (due to underfitting) and does not generate useful predictions.</p>
 </li>
 <li>
-<p>using a model that memorized the training data and therefore does not generalize to new data points (i.e., overfitting)</p>
+<p>Using a model that overfit on the training data and therefore does not generalize to new data points.</p>
 </li>
 <li>
-<p>using a model that abuses spurious correlations</p>
+<p>Using a model that abuses spurious correlations.</p>
 </li>
 <li>
-<p>using a model that discriminates</p>
+<p>Using a model that discriminates.</p>
 </li>
 <li>
-<p>not monitoring and retraining the models regularly on new data</p>
+<p>Not monitoring and retraining the model regularly on new data.</p>
 </li>
 </ul>
 </div>
@@ -784,7 +786,7 @@ All models are wrong, but some are useful.
 </dl>
 </div>
 <div class="paragraph">
-<p>We&#8217;ll cover these points in more detail in the following sections, but below you find a quick summary of what you can do to not fall into any of these traps.</p>
+<p>Below you find a quick summary of what you can do to avoid these pitfalls and we&#8217;ll discuss most these points in more detail in the following sections.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -801,13 +803,16 @@ All models are wrong, but some are useful.
 <p>Sanity check: Does the dataset contain samples with the same inputs but different outputs? &#8658; Some important features might be missing or the targets are very noisy, e.g., due to inconsistent annotations&#8201;&#8212;&#8201;<a href="_garbage_in_garbage_out.html">fix this first!</a></p>
 </li>
 <li>
+<p>Try a simple model (linear model or decision tree)&#8201;&#8212;&#8201;this can serve as a reasonable baseline when experimenting with more complex models.</p>
+</li>
+<li>
 <p>Think about the structure of the problem and what type of model might be appropriate to learn the presumed &#8216;input &#8594; output&#8217; relationship. For example, if the problem is clearly nonlinear, the chosen model type also needs to be complex enough to at least in principle be able to pick up on this relation (i.e., such that the model does not underfit, see below). A lot of domain knowledge can also be put into the design of neural network architectures.</p>
 </li>
 <li>
-<p>Make sure the data satisfies the model&#8217;s assumptions &#8658; for pretty much all models except decision trees (and models based on decision trees, like random forests) the data should be approximately normally distributed.</p>
+<p>Make sure the data satisfies the model&#8217;s assumptions &#8658; for pretty much all models except decision trees and models based on decision trees, like random forests, the data should be approximately normally distributed.</p>
 </li>
 <li>
-<p>Make sure you&#8217;ve set aside a representative test set to evaluate the final model (and possibly a validation set for model selection and hyperparameter tuning).</p>
+<p>Make sure you&#8217;ve set aside a representative test set to evaluate the final model and possibly a validation set for model selection and hyperparameter tuning.</p>
 </li>
 </ul>
 </div>
@@ -817,19 +822,22 @@ All models are wrong, but some are useful.
 <div class="ulist">
 <ul>
 <li>
-<p>Evaluate the model with a meaningful <a href="_model_evaluation.html">evaluation metric</a> (especially for datasets with unbalanced class distributions (&#8594; balanced accuracy)!).</p>
+<p>Evaluate the model with a meaningful <a href="_model_evaluation.html">evaluation metric</a>, especially when the classes in the dataset are not distributed evenly (&#8594; balanced accuracy).</p>
 </li>
 <li>
-<p>Check that the model can interpolate, i.e., that it generalizes to unseen data points <em>from the same distribution as the training set</em> and does not <a href="_interpolation_does_the_model_generalize.html">over- or underfit</a>. Please note that this does <em>not</em> ensure that it can also extrapolate, i.e., that it has learned the true <a href="_extrapolation_correlation_vs_causation.html">causal relation</a> between inputs and outputs and can generate correct predictions for data points outside of the training domain!</p>
+<p>Check that the model can interpolate, i.e., that it generalizes to unseen data points <em>from the same distribution as the training set</em> and does not <a href="_model_does_not_generalize.html">over- or underfit</a>. Please note that this does <em>not</em> ensure that it can also extrapolate, i.e., that it has learned the true <a href="_model_abuses_spurious_correlations.html">causal relation</a> between inputs and outputs and can generate correct predictions for data points outside of the training domain!</p>
 </li>
 <li>
-<p>Carefully analyze the model&#8217;s prediction errors to check for systematic errors, which would indicate that the data might violate your initial assumptions (&#8594; performance for all classes should be approximately the same; the <a href="https://statisticsbyjim.com/regression/check-residual-plots-regression-analysis/" target="\_blank">residuals</a> in a regression problem should be <a href="https://www4.stat.ncsu.edu/~stefanski/NSF_Supported/Hidden_Images/Residual_Surrealism_TAS_2007.pdf" target="\_blank">independent</a>).</p>
+<p>Carefully analyze the model&#8217;s prediction errors to check for systematic errors, which can indicate that the data violates your initial assumptions. For example, in a classification task the performance for all classes should be approximately the same, while in a regression task the <a href="https://statisticsbyjim.com/regression/check-residual-plots-regression-analysis/" target="\_blank">residuals</a> should be <a href="https://www4.stat.ncsu.edu/~stefanski/NSF_Supported/Hidden_Images/Residual_Surrealism_TAS_2007.pdf" target="\_blank">independent</a>.</p>
 </li>
 <li>
-<p>Verify that the model does not discriminate. Due to the large quantities of data used to train ML models, it is not always possible to ensure that the training data does not contain any systematic biases (e.g., ethnicity/gender stereotypes) that a model might pick up on, but it is important to test the model on a well balanced and controlled test set to catch any discrimination before the model is deployed in production.</p>
+<p>Verify that the model does not <a href="_model_discriminates.html">discriminate</a>. Due to the large quantities of data used to train ML models, it is not always possible to ensure that the training data does not contain any systematic biases (e.g., ethnicity/gender stereotypes) that a model might pick up on, but it is important to test the model on a controlled test set and individual data slices to catch any discrimination before the model is deployed in production.</p>
 </li>
 <li>
-<p>Interpret the model and <a href="_explainability_interpretable_ml.html">explain its predictions</a>: Does it use the features you (or a domain expert) expected it to use or does it make the predictions based on any spurious correlations?</p>
+<p>Interpret the model and <a href="_explainability_interpretable_ml.html">explain its predictions</a>: Does it use the features you or a domain expert expected it to use or does it make predictions based on any spurious correlations?</p>
+</li>
+<li>
+<p>If necessary, use model editing or assertions to fix incorrect model predictions. For example, you can manually alter the rules learned by a decision tree or implement additional business rules that override model predictions or act as sanity checks (e.g., a predicted age should never be negative).</p>
 </li>
 </ul>
 </div>
@@ -845,29 +853,71 @@ All models are wrong, but some are useful.
 <dl>
 <dt class="hdlist1">And after the model was deployed&#8230;&#8203;</dt>
 <dd>
-<p><span class="underline">One of the biggest problems in practice: Data and Concept Drifts:</span></p>
-<div class="paragraph">
-<p><strong>ML fails silently!</strong> I.e., even if all predictions are wrong, the program does not simply crash with some error message.<br>
-&#8594; Need constant monitoring to detect changes that lead to a deteriorating performance!</p>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<strong>ML fails silently!</strong> I.e., even if all predictions are wrong, the program does not simply crash with some error message.<br>
+&#8594; Need constant monitoring to detect changes that lead to a deteriorating performance!
+</td>
+</tr>
+</table>
 </div>
 </dd>
 </dl>
 </div>
+<div class="paragraph">
+<p><span class="underline">One of the biggest problems in practice: Data and Concept Drifts:</span><br>
+The model performance quickly decays when the distribution of the data used for training \(P_{train}(y, X)\) is different from the data the model encounters in production \(P_{prod}(y, X)\). Such a discrepancy can be due to</p>
+</div>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p><em>Data drift:</em> input distribution \(X\) changes, e.g., a new user operates the machine differently<br>
-&#8594; Use statistical tests to detect changes in input distributions</p>
+<p><em>Data drift:</em> distribution of input features \(X\) changes, i.e., \(P_{train}(X) \neq P_{prod}(X)\)</p>
 </li>
 <li>
-<p><em>Concept drift:</em> input/output relation \(X \to y\) changes due to:</p>
+<p><em>Concept drift:</em> input/output relationship \(X \to y\) changes, i.e., \(P_{train}(y|X) \neq P_{prod}(y|X)\)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="underline">Example:</span> From the production settings incl. the size of a produced part (\(X\)) we want to predict whether the part is scrap or okay (\(y\)):</p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p><em>Data drift:</em> The company used to manufacture only small parts, now they also produce larger parts.</p>
+</li>
+<li>
+<p><em>Concept drift:</em> The company used to produce 10% scrap parts, but after some maintenance was done on the machine, the same production settings now result in only 5% scrap.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="underline">Possible reasons for data or concept drifts:</span></p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>External factors (e.g., changes in the process structure / setup: In a new version of a machine, the temperature sensor is in a different place, but still logs values under the same variable name.)</p>
+<p>New users behave differently: For example, the product is now used by a younger generation or the business recently expanded to a different country.</p>
 </li>
 <li>
-<p>Internal factors (feedback loop: presence of ML model alters behavior, for example, spammers change their strategy to evade the spam filter)</p>
+<p>Trends and seasonality: For example, certain products are bought primarily in a specific season (e.g., winter cloths) or new styles result in the same customers now buying different products because they are &#8220;in&#8221;.</p>
+</li>
+<li>
+<p>The process structure / setup changed: For example, in a new version of a device, a sensor has moved to a different location, but still logs values under the same variable name. Or, due to a software update, values that were previously logged as integers are suddenly converted to strings (although this should actually raise an error).</p>
+</li>
+<li>
+<p>Feedback loop, where the presence of an ML model alters user behavior: For example, spammers change their strategy to evade the spam filter.</p>
+</li>
+<li>
+<p>You used different preprocessing steps on the training and production data, for example, because you did not properly document all of the transformations that were applied to the initial dataset.</p>
+</li>
+</ul>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -880,21 +930,63 @@ These changes can either be <strong>gradual</strong> (e.g., languages change gra
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p><span class="underline">Mitigation Strategies:</span><br>
+The best way to counteract data and concept drifts is to frequently <strong>retrain the model</strong> on new data. This can either happen on a schedule (e.g., every weekend, depending on how quickly the data changes) or when your monitoring system (see below) raises an alert because it detected drifts in the inputs or a deteriorating model performance.<br>
+Data drifts can be seen as an opportunity to extend the training set with more diverse samples. Concept drifts, on the other hand, entail the need to remove samples from the original training set that do not conform to the novel input/output relation before retraining the model. While traditional ML models typically need to be retrained from scratch, neural network models can also be fine-tuned on newly collected data, however, this is only useful when faced with minor data drifts, not drastic concept drifts.<br>
+Additionally, known changes can also be included in the model as additional features (e.g., seasons).</p>
+</div>
+<div class="paragraph">
+<p>Possible components of a monitoring system:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Use statistical tests to detect skewed distributions of individual features:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Kullback-Leibler divergence</p>
+</li>
+<li>
+<p>Jensen-Shannon divergence</p>
+</li>
+<li>
+<p>Kolmogorov-Smirnov (K-S) test</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Use novelty detection or clustering to identify data points that are different from the training samples. Even if a sample&#8217;s individual feature values are still in a normal range, this particular combination of feature values can be far from what the model encountered during training.</p>
+</li>
+<li>
+<p>Check if there is a difference between the predicted and true (training) label frequencies. For example, if in reality usually about 10% of our produced products are faulty, but the model suddenly predicts that 50% of the products are faulty, then something is probably off.</p>
+</li>
+<li>
+<p>Check whether the confidence scores of the model predictions (i.e., the probability for a class, not the predicted class label) get lower, which indicates that new samples are closer to the model&#8217;s decision boundary than the training samples.</p>
+</li>
+<li>
+<p>Check the error metrics of the model on new data (only possibly if you continuously collected new <em>labeled</em> data).</p>
+</li>
+<li>
+<p>After retraining the model on new data, check if the feature importances changed, which indicates that it might be time to select different features for the prediction.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>&#8594; Check difference between predicted and true (training) label frequencies<br>
-&#8594; Frequently retrain models on new data (&amp; verify feature importances)<br>
-&#8594; Logging of known external events, e.g., maintenance on a machine (!!)<br></p>
+<p>These checks can be combined with a sliding window approach, for example, every hour the data collected in the last 48 hours is compared to the training data. If any of the monitoring values exceed some predefined threshold, the system triggers an alert.</p>
 </div>
-<div class="ulist none">
-<ul class="none">
+<div class="paragraph">
+<p>Additionally:</p>
+</div>
+<div class="ulist">
+<ul>
 <li>
-<p>&#8658; Include changes explicitly in the model as additional features / subgroups</p>
+<p>Validate the input data schema, i.e., check that data types and value ranges (incl. missing values / NaNs) match those encountered in the training data.</p>
 </li>
-</ul>
-</div>
+<li>
+<p>Log known external events (!!), e.g., maintenance on a machine.</p>
 </li>
 </ul>
 </div>
@@ -905,7 +997,7 @@ These changes can either be <strong>gradual</strong> (e.g., languages change gra
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-The "ML fails silently" part also applies to bugs in your code: especially when you just started with ML it often happens that your results seem fine (maybe just a little too good), but you have a subtle bug somewhere that doesn&#8217;t cause your program to crash, but just calculates something slightly wrong somewhere. These issues can be very hard to notice, so always triple-check your code and if you can, write <a href="https://realpython.com/python-testing/" target="\_blank">unit tests</a> for individual functions to make sure they do what you expect them to do.
+The "ML fails silently" part also applies to bugs in your code: Especially when you just started with ML it often happens that your results seem fine (maybe just a little too good), but you have a subtle bug somewhere that doesn&#8217;t cause your program to crash, but just calculates something slightly wrong somewhere. These issues can be very hard to notice, so always triple-check your code and if you can, write <a href="https://realpython.com/python-testing/" target="\_blank">unit tests</a> for individual functions to make sure they do what you expect them to do.
 </td>
 </tr>
 </table>
@@ -925,10 +1017,13 @@ You might also want to have a look at Google&#8217;s <a href="https://developers
 <div class="ulist">
 <ul>
 <li>
-<p><a href="_interpolation_does_the_model_generalize.html">Interpolation: Does the model generalize?</a></p>
+<p><a href="_model_does_not_generalize.html">Model does not generalize</a></p>
 </li>
 <li>
-<p><a href="_extrapolation_correlation_vs_causation.html">Extrapolation: Correlation vs. Causation</a></p>
+<p><a href="_model_abuses_spurious_correlations.html">Model abuses spurious correlations</a></p>
+</li>
+<li>
+<p><a href="_model_discriminates.html">Model discriminates</a></p>
 </li>
 <li>
 <p><a href="_explainability_interpretable_ml.html">Explainability &amp; Interpretable ML</a></p>
@@ -938,7 +1033,7 @@ You might also want to have a look at Google&#8217;s <a href="https://developers
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_recommender_systems_pairwise_data.html">Recommender Systems (Pairwise Data)</a> | ↑ Up: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_interpolation_does_the_model_generalize.html">Interpolation: Does the model generalize?</a> →</p>
+<p>← Previous: <a href="_recommender_systems_pairwise_data.html">Recommender Systems (Pairwise Data)</a> | ↑ Up: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_model_does_not_generalize.html">Model does not generalize</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">
@@ -980,10 +1075,10 @@ MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
 <!-- FOOTER  -->
 <div id="footer" class="outer">
   <footer class="inner">
-    <p><b>Book/Course Feedback: </b> <a href="https://forms.gle/Ccv5h5zQxwPjWtCS7" target="_blank">Full Feedback Survey</a> or <a href="https://forms.gle/qK8T5ALzgpiZaxd49" target="_blank">Short Comment</a><br>
+    <p><b>Book/Course Feedback: </b> <a href="https://forms.gle/Ccv5h5zQxwPjWtCS7" target="_blank" rel="nofollow">Full Feedback Survey</a> or <a href="https://forms.gle/qK8T5ALzgpiZaxd49" target="_blank" rel="nofollow">Short Comment</a><br>
 
-    <p>Find me on <a href="https://github.com/cod3licious/" target="_blank">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/" target="_blank">LinkedIn</a><br>
-      <a href="../index.html">Home</a> ~ <a href="mailto:hey@franziskahorn.de?Subject=ML%20book" target="_blank">Contact</a> ~ <a href="../impressum.html">Impressum</a></p>
+    <p>Find me on <a href="https://github.com/cod3licious/" target="_blank" rel="nofollow">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/" target="_blank" rel="nofollow">LinkedIn</a><br>
+      <a href="../index.html">Home</a> ~ <a href="mailto:hey@franziskahorn.de?Subject=ML%20book" target="_blank" rel="nofollow">Contact</a> ~ <a href="../impressum.html">Impressum</a></p>
   </footer>
 </div>
 </body>

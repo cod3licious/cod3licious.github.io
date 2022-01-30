@@ -659,83 +659,130 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
-<body id="_unsupervised_learning" class="book toc2 toc-left">
+<body id="_fehler_5_daten_konzept_drifts" class="book toc2 toc-left">
 <div id="header">
 <h1>A Practitioner&#8217;s Guide to Machine Learning</h1>
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
 <span id="revnumber">version 1.2,</span>
-<span id="revdate">2022-01-28</span>
+<span id="revdate">2022-01-23</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <p><span class="toc-root"><a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a></span></p><ul class="sectlevel1">
-<li><a href="_introduction.html">Introduction</a>
+<li><a href="_einleitung.html">Einleitung</a>
 </li>
-<li><a href="_ml_with_python.html">ML with Python</a>
+<li><a href="_daten_preprocessing.html">Daten &amp; Preprocessing</a>
 </li>
-<li><a href="_data_preprocessing.html">Data &amp; Preprocessing</a>
+<li><a href="_ml_lösungen_überblick.html">ML Lösungen: Überblick</a>
 </li>
-<li><a href="_ml_solutions_overview.html">ML Solutions: Overview</a>
+<li><a href="_supervised_learning.html">Supervised Learning</a>
 </li>
-<li><a href="_unsupervised_learning.html"><span class="toc-current">Unsupervised Learning</span></a>
+<li><a href="_häufige_fehler_vermeiden.html">Häufige Fehler vermeiden</a>
 <ul class="sectlevel2">
-<li><a href="_dimensionality_reduction.html">Dimensionality Reduction</a>
+<li><a href="_fehler_1_irreführende_modellevaluierung.html">[Fehler #1] Irreführende Modellevaluierung</a>
 </li>
-<li><a href="_outlier_anomaly_detection.html">Outlier / Anomaly Detection</a>
+<li><a href="_fehler_2_modell_generalisiert_nicht.html">[Fehler #2] Modell generalisiert nicht</a>
 </li>
-<li><a href="_clustering.html">Clustering</a>
+<li><a href="_fehler_3_modell_missbraucht_scheinkorrelationen.html">[Fehler #3] Modell missbraucht Scheinkorrelationen</a>
+</li>
+<li><a href="_fehler_4_modell_diskriminiert.html">[Fehler #4] Modell diskriminiert</a>
+</li>
+<li><a href="_fehler_5_daten_konzept_drifts.html"><span class="toc-current">[Fehler #5] Daten &amp; Konzept Drifts</span></a>
 </li>
 </ul>
 </li>
-<li><a href="_supervised_learning_basics.html">Supervised Learning Basics</a>
-</li>
-<li><a href="_supervised_learning_models.html">Supervised Learning Models</a>
-</li>
-<li><a href="_deep_learning_more.html">Deep Learning &amp; more</a>
-</li>
-<li><a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a>
-</li>
-<li><a href="_reinforcement_learning.html">Reinforcement Learning</a>
-</li>
-<li><a href="_conclusion.html">Conclusion</a>
+<li><a href="_fazit.html">Fazit</a>
 </li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="_unsupervised_learning">Unsupervised Learning</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_fehler_5_daten_konzept_drifts">[Fehler #5] Daten &amp; Konzept Drifts</h3>
 <div class="paragraph">
-<p>The first algorithms we look at in more detail are from the area of unsupervised learning:</p>
+<p>Wir dürfen nie vergessen, dass sich die Welt permanent verändert und Modelle regelmäßig mit neuen Daten nachtrainiert werden müssen. Nur so können sie sich an diese geänderten Umstände anpassen.</p>
 </div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01c_ml_overview/ml_algorithms_unsupervised.png" alt="image" width="840">
-</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<strong>ML versagt leise!</strong> D.h. auch wenn alle Vorhersagen falsch sind, stürzt das Programm nicht einfach mit einer Fehlermeldung ab.<br>
+&#8594; Wir brauchen ein konstantes Monitoring, um Veränderungen zu erkennen, die zu einer Verschlechterung der Modellperformance führen!
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>While the different subfields of unsupervised learning all include lots of algorithms that can be used for the respective purpose, we&#8217;ll always just examine a few example algorithms with different underlying ideas in more detail. But feel free to, e.g., have a look at the <a href="https://scikit-learn.org/stable/unsupervised_learning.html" target="\_blank">sklearn user guide</a> for more information about other models.</p>
+<p><span class="underline">Eins der größten Probleme in der Praxis: Daten und Konzept Drifts:</span><br>
+Die Vorhersagegenauigkeit eines Modells lässt schnell nach, wenn die Daten im Produktivbetrieb von den Trainingsdaten abweichen. Dabei unterscheiden wir zwischen:</p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p><em>Daten Drift:</em> Verteilung der Inputs \(X\) ändert sich</p>
+</li>
+<li>
+<p><em>Konzept Drift:</em> Input/Output Zusammenhang \(X \to y\) ändert sich</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="underline">Beispiel:</span> Anhand der Produktionsbedingungen inkl. der Größe des produzierten Teils (\(X\)) möchten wir vorhersagen ob das jeweilige Produkt in Ordnung oder Ausschuss ist (\(y\)):</p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p><em>Daten Drift:</em> Der Hersteller produzierte früher nur kleine Teile, nun aber auch größere Teile.</p>
+</li>
+<li>
+<p><em>Konzept Drift:</em> Während früher 10% Ausschuss produziert wurden, wird nach einer Reparatur der Maschine bei gleichen Produktionsbedingungen nur noch 5% Ausschuss produziert.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="underline">Mögliche Gründe für Daten oder Konzept Drifts:</span></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="_dimensionality_reduction.html">Dimensionality Reduction</a></p>
+<p>Neue Nutzer verhalten sich anders: Beispielsweise wird das Produkt jetzt von einer jüngeren Generation verwendet oder das Unternehmen expandierte vor kurzem in ein anderes Land.</p>
 </li>
 <li>
-<p><a href="_outlier_anomaly_detection.html">Outlier / Anomaly Detection</a></p>
+<p>Trends und Saisonalität: Beispielsweise werden bestimmte Produkte hauptsächlich in einer bestimmten Saison gekauft (z.B. Winterkleidung) oder neue Modeerscheinungen führen dazu, dass dieselben Kunden nun andere Produkte kaufen, weil diese jetzt &#8220;in&#8221; sind.</p>
 </li>
 <li>
-<p><a href="_clustering.html">Clustering</a></p>
+<p>Die Prozessstruktur / das Setup hat sich geändert: Beispielsweise ist in einer neuen Version eines Geräts ein Sensor an eine anderen Stelle, loggt aber immer noch Werte unter demselben Variablennamen.</p>
+</li>
+<li>
+<p>Feedback-Schleife, bei der das Vorhandensein des ML-Modells das Nutzerverhalten verändert: Beispielsweise ändern Spammer ihre Strategie, um den Spamfilter zu umgehen.</p>
 </li>
 </ul>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Diese Veränderungen können entweder <strong>graduell</strong> sein (z.B. Sprachen ändern sich schrittweise wenn neue Wörter geprägt werden; ein Kameraobjektiv staubt mit der Zeit ein), oder sie können als <strong>plötzlicher Schock</strong> auftreten (z.B. jemand reinigt das Kameraobjektiv; als die COVID-19-Pandemie ausbrach, wechselten plötzlich viele Menschen zum Online-Shopping, wodurch Systeme zur Erkennung von Kreditkartenbetrug erstmal irrtümlich Alarm schlugen).
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><span class="underline">Vorbeugende Maßnahmen:</span><br>
+Der beste Weg, Daten und Konzept Drifts entgegenzuwirken, besteht darin, das <strong>Modell häufig mit neuen Daten zu trainieren</strong>. Dies kann entweder nach einem fixen Zeitplan erfolgen (z.B. jedes Wochenende, je nachdem, wie schnell sich die Daten ändern) oder wenn das Monitoringsystem Alarm schlägt, weil es Drifts in den Inputs oder eine verschlechterte Modellperformance festgestellt hat.<br>
+Außerdem ist es immer sinnvoll, bekannte externe Ereignisse, wie z.B. eine Wartung an einer Maschine, zu protokollieren.</p>
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_taxonomy_of_ml_problems_solutions.html">Taxonomy of ML problems &amp; solutions</a> | ↑ Up: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_dimensionality_reduction.html">Dimensionality Reduction</a> →</p>
+<p>← Previous: <a href="_fehler_4_modell_diskriminiert.html">[Fehler #4] Modell diskriminiert</a> | ↑ Up: <a href="_häufige_fehler_vermeiden.html">Häufige Fehler vermeiden</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_fazit.html">Fazit</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

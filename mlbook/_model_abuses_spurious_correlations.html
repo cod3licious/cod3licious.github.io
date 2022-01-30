@@ -748,14 +748,14 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </style>
 
 </head>
-<body id="_interpolation_does_the_model_generalize" class="book toc2 toc-left">
+<body id="_model_abuses_spurious_correlations" class="book toc2 toc-left">
 <div id="header">
 <h1>A Practitioner&#8217;s Guide to Machine Learning</h1>
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
 <span id="revnumber">version 1.2,</span>
-<span id="revdate">2022-01-02</span>
+<span id="revdate">2022-01-28</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -778,13 +778,11 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </li>
 <li><a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a>
 <ul class="sectlevel2">
-<li><a href="_interpolation_does_the_model_generalize.html"><span class="toc-current">Interpolation: Does the model generalize?</span></a>
-<ul class="sectlevel3">
-<li><a href="_interpolation_does_the_model_generalize.html#_over_underfitting">Over- &amp; Underfitting</a>
+<li><a href="_model_does_not_generalize.html">Model does not generalize</a>
 </li>
-</ul>
+<li><a href="_model_abuses_spurious_correlations.html"><span class="toc-current">Model abuses spurious correlations</span></a>
 </li>
-<li><a href="_extrapolation_correlation_vs_causation.html">Extrapolation: Correlation vs. Causation</a>
+<li><a href="_model_discriminates.html">Model discriminates</a>
 </li>
 <li><a href="_explainability_interpretable_ml.html">Explainability &amp; Interpretable ML</a>
 </li>
@@ -799,176 +797,48 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </div>
 <div id="content">
 <div class="sect2">
-<h3 id="_interpolation_does_the_model_generalize">Interpolation: Does the model generalize?</h3>
+<h3 id="_model_abuses_spurious_correlations">Model abuses spurious correlations</h3>
 <div class="paragraph">
-<p>The first step in verifying that a model is not complete nonsense is to check whether it is capable of interpolating, i.e.:<br>
-<strong>Does the model generate reliable predictions for new data points from the same distribution as the training set?</strong></p>
+<p>By following the strategies outlined in the previous section, we can find a model that is good at interpolating, i.e., generating reliable predictions for new data points from the same distribution as the training set. However, this does not mean that the model actually picked up on the true causal relationship between the inputs and outputs!</p>
 </div>
-<div class="paragraph">
-<p>While the above does not ensure that the model has actually learned any true causal relationship between inputs and outputs and can extrapolate beyond the training domain (we&#8217;ll get to this part in the next section), at least we can be reasonably sure that the model will generate reliable predictions for data points similar to those used for training the model. If this isn&#8217;t given, the model is not only wrong, it&#8217;s also useless.</p>
-</div>
-<div class="sect3">
-<h4 id="_over_underfitting">Over- &amp; Underfitting</h4>
-<div class="paragraph">
-<p>So, why might a model make mistakes on new data points?</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/06_evaluation/overunderfitting.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">If we were to only look at the test errors for the different models shown here, we could conclude that the model on the left (overfitting) and the one on the right (underfitting) were equally wrong. While this is true in some sense, the test error alone does not tell us <em>why</em> the models are wrong or how we could improve their performance. As we can see, the two models make mistakes on the test set for completely different reasons: The model that overfits, memorized the training samples and is not able to generalize to new data points, while the model that underfits is too simple to capture the relationship between the inputs and outputs in general. Since these two scenarios require vastly different approaches to improve the model&#8217;s performance, it is important to look at the error on the training set in addition to the error on the test/validation set to determine whether the model&#8217;s errors on the test set are due to over- or underfitting.</span></div>
-</div>
-<div class="paragraph">
-<p>Since most datasets have lots of input variables, we can&#8217;t just plot the model like we did above to see if it is over- or underfitting, but instead we need to check the error, computed with a meaningful evaluation metric, on both the training and the test set:</p>
-</div>
-<div class="paragraph">
-<p><strong>Overfitting:</strong> great training performance, horrible on test set<br>
-<strong>Underfitting:</strong> poor training AND test performance</p>
-</div>
-<div class="paragraph">
-<p>Depending on whether a model over- or underfits, different measures can be taken to improve its performance:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/06_evaluation/overunderfitting_errors4.png" alt="image" width="640">
-</div>
-</div>
-<div class="paragraph">
-<p>However, it is unrealistic to expect a model to have a perfect performance, as some tasks are just hard, for example, because the data is very noisy.</p>
-</div>
-<div class="admonitionblock note">
+<div class="admonitionblock warning">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Always look at the data!! Is there a pattern among wrong predictions, e.g., is there a discrepancy between the performance for different classes? Could some additional preprocessing steps help to fix errors for some type of data points (e.g., blurry images)?
+ML models love to cheat &amp; take shortcuts! They will often pick up on <a href="https://www.tylervigen.com/spurious-correlations" target="\_blank">spurious correlations</a> instead of learning the true causal relationships. This makes them vulnerable to adversarial attacks and data/domain shifts, which force the model to extrapolate instead of interpolate.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Over- or underfitting  is (partly) due to the model&#8217;s complexity:</p>
+<p>Specifically, models that neither over- nor underfit, i.e., that perfectly capture the relation between inputs and outputs in the given samples, often still fail to extrapolate:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="../images/06_evaluation/modelcomplex3.png" alt="image" width="640">
+<img src="../images/07_causality/extrapolating_nn10.png" alt="image" width="440">
 </div>
-<div class="title"><span class="small">While a simple model (e.g., a linear model) has a high bias and might therefore underfit the data, a more complex model (e.g., a deep neural network) has high variance and is therefore at risk of overfitting the training set. Often, it makes sense to use a more complex model, but then reduce its variance through explicit (e.g., L2-regularization) and/or implicit regularization (e.g., data augmentation). Also, please note the <a href="https://openai.com/blog/deep-double-descent/" target="\_blank">double descent phenomenon</a> for neural networks, which often show a good generalization performance even if they are vastly over-parametrized.</span></div>
-</div>
-<div class="paragraph">
-<p>In general, you should first try to decrease the model&#8217;s bias, i.e., find a model that is complex enough and at least in principle capable of solving the task, since the error on the training data is the lower limit for the error on the test set. Then make sure the model doesn&#8217;t overfit, i.e., generalizes to new data points (what we ultimately care about).</p>
+<div class="title"><span class="small">These ten curves were generated by initializing the weights of a FFNN with one hidden layer of 20 units with a ReLU activation with ten different random seeds and then training the network on the data samples. While all these models generalize well on the known data distribution, they can&#8217;t produce correct predictions for data points outside of the training domain.</span></div>
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Will more data help?</dt>
-<dd>
-<p>With little data, you risk overfitting. But is it worth getting more data?<br>
-&#8594; check <em>learning curves</em>, i.e., how the performance improves when using more training samples:</p>
-</dd>
-</dl>
+<div class="paragraph">
+<p><strong>Extrapolation on feature combinations</strong></p>
+</div>
+<div class="paragraph">
+<p>Please note that only because we might have sampled a large range of values for each individual feature, this does not necessary entail that we&#8217;ve also covered all relevant combinations of feature values:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="../images/06_evaluation/learning_curve.png" alt="image" width="840">
+<img src="../images/07_causality/extrapolate_sampling.png" alt="image" width="240">
 </div>
 </div>
 <div class="paragraph">
-<p>Instead of <em>more</em>, it might also be helpful to get <em>cleaner</em> data! (See <a href="https://youtu.be/06-AZXmwHjo" target="\_blank">talk by Andrew Ng</a>.)</p>
+<p>If the two features and their effect on the target are independent of each other (e.g., \(y = ax_1 + bx_2\)), this is not too dramatic, however, if these variables interact in some complicated nonlinear way, this might not be modeled correctly when relevant combinations of feature values weren&#8217;t sampled.</p>
 </div>
 </div>
-</div>
-<div class="sect4">
-<h5 id="_feature_selection">Feature Selection</h5>
-<div class="paragraph">
-<p>In small datasets, some patterns can occur simply by chance (= <a href="https://www.tylervigen.com/spurious-correlations" target="\_blank">spurious correlations</a>).<br>
-&#8658; Exclude irrelevant features to avoid overfitting on the training data. This is especially important if the number of samples in the dataset is close to the number of features.</p>
-</div>
-<div class="paragraph">
-<p>Feature selection techniques are either</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>unsupervised</strong>, which means they only look at the features themselves, e.g., removing highly correlated/redundant features, or</p>
-</li>
-<li>
-<p><strong>supervised</strong>, which means they take into account the relationship between the features and target variable.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><span class="underline">Supervised Feature Selection Strategies:</span></p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">1.) Univariate feature selection</dt>
-<dd>
-<p>e.g., correlation between feature &amp; target</p>
-</dd>
-</dl>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.feature_selection</span> <span class="keyword">import</span> <span class="include">SelectKBest</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><strong>Careful:</strong> This can lead to the inclusion of redundant features or the exclusion of features that might seem useless by themselves, but can be very informative when taken together with other features:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/07_explainability/features_informative4.png" alt="image" width="720">
-</div>
-<div class="title"><span class="small">Guyon, Isabelle, and André Elisseeff. &#8220;An introduction to variable and feature selection.&#8221; <em>Journal of Machine Learning Research</em> 3.Mar (2003): 1157-1182.</span></div>
-</div>
-<div class="paragraph">
-<p>(Also, please note: if we were to reduce the dimensionality with PCA on these two datasets, for the plot on the right, the main direction of variance does not capture the class differences, i.e., while the second PC captures less variance overall, it capture the class-discriminative information that we care about.)</p>
-</div>
-<div class="paragraph">
-<p>&#8658; Better:</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">2.) Model-based feature selection</dt>
-<dd>
-<p>select features based on <code>coef_</code> or <code>feature_importances_</code> attribute of trained model</p>
-</dd>
-</dl>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.feature_selection</span> <span class="keyword">import</span> <span class="include">SelectFromModel</span></code></pre>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">3.) Sequential feature selection</dt>
-<dd>
-<p>greedy algorithm that iteratively includes/removes one feature at a time:</p>
-<div class="ulist">
-<ul>
-<li>
-<p><span class="underline">forward selection:</span> start with no features, iteratively add best feature until the performance stops improving</p>
-</li>
-<li>
-<p><span class="underline">backward elimination:</span> start with all features, iteratively eliminate worst feature until the performance starts to deteriorate</p>
-</li>
-</ul>
-</div>
-</dd>
-</dl>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.feature_selection</span> <span class="keyword">import</span> <span class="include">SequentialFeatureSelector</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><span class="underline">General rule</span>: Always remove truly redundant (i.e., 100% correlated) features, but otherwise if in doubt: keep all features</p>
 </div>
 <div class="admonitionblock caution">
 <table>
@@ -977,7 +847,255 @@ Always look at the data!! Is there a pattern among wrong predictions, e.g., is t
 <i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
-While feature selection can improve the performance, these automatic feature selection techniques will only select a subset of features that are good predictors of the target, i.e., highly correlated, not necessary variables that correspond to the true underlying causes! (see also next section)
+When deploying an ML system in production, you also need to replicate the preprocessing steps that were used to clean the training data. For example, if you removed outliers from the initial training set, you need to apply the same rules to sort out anomalies in the production data as well, since otherwise the ML model would be forced to extrapolate on these samples.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>When setting up a model, we always have to be clear about whether it is enough that the model is capable of interpolating or whether it might also need to extrapolate every once in a while.</p>
+</div>
+<div class="paragraph">
+<p>If the model will only be used to generate predictions for new data points from the same distribution as the original training samples and it is unlikely that any data drifts will occur, then a model that has a decent performance on a representative hold-out test set will be sufficient for the task. This might be the case when building a softsensor that just needs to construct a new signal from other fixed inputs in a tightly controlled loop.</p>
+</div>
+<div class="paragraph">
+<p>However, this assumption seldomly holds in practice and especially in safety-critical situations, such as image recognition in self-driving cars or at security checkpoints, it is vital that the model is robust and can not easily be fooled.
+Other use cases where it is important that the model picks up on meaningful causal relationships include using a model to identify root causes or generating counterfactual &#8220;what-if&#8221; forecasts, which also require extrapolation, e.g., when trying to simulate under which conditions a catastrophic event might occur without having observed one in the historical data.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>A correct prediction is not always made for the right reasons!</strong></p>
+</div>
+<div class="paragraph">
+<p>The graphic below is taken from a paper where the authors noticed that a fairly simple ML model (not a neural network) trained on a standard image classification dataset performed poorly for all ten classes in the dataset except one, horses. When they examined the dataset more closely and analyzed <em>why</em> the model predicted a certain class, i.e., which image features were used in the prediction (displayed as the heatmap on the right; see also next section on <a href="_explainability_interpretable_ml.html">Explainability &amp; Interpretable ML</a>), they noticed that most of the pictures of horses in the dataset were taken by the same photographer and they all had a characteristic copyright notice in the lower left corner.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/07_explainability/analyzing_classifiers.png" alt="image" width="840">
+</div>
+<div class="title"><span class="small">Lapuschkin, Sebastian, et al. &#8220;Analyzing classifiers: Fisher vectors and deep neural networks.&#8221; <em>IEEE Conference on Computer Vision and Pattern Recognition.</em> 2016.</span></div>
+</div>
+<div class="paragraph">
+<p>By relying on this artifact, the model could identify what it perceives as &#8220;horses&#8221; in this dataset with high accuracy&#8201;&#8212;&#8201;both in the training and the test set, which includes pictures from the same photographer. However, of course the model failed to learn what actually defines a horse and would not be able to extrapolate and achieve the same accuracy on other horse pictures without this copyright notice.
+Or, equally problematic, one could add such a copyright notice to a picture of another animal and suddenly the model would mistakenly classify this as a horse, too. This means, it is possible to purposefully trick the model, which is also called an &#8220;adversarial attack&#8221;.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>This is by far not the only example where a model has &#8220;cheated&#8221; by exploiting spurious correlations in the training set. Another popular example: A dataset with images of dogs and wolves, where all wolves were photographed on snowy backgrounds and the dogs on grass or other non-white backgrounds. Models trained on such a dataset can show a good predictive performance without having learned the true causal relationship between the features and labels.</p>
+</div>
+<div class="paragraph">
+<p>To catch these kinds of mishaps, it is important to</p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>a) critically examine the test set and hopefully notice any problematic patterns that could result in an overly optimistic performance estimate, and</p>
+</li>
+<li>
+<p>b) <strong>interpret the model and explain its predictions</strong> to see if it has focused on the features you (or a domain expert) would have expected (as they did in the paper above and we&#8217;ll discuss in the next section).</p>
+</li>
+</ul>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Adversarial Attacks: Fooling ML models on purpose</strong></p>
+</div>
+<div class="paragraph">
+<p>An adversarial attack on an ML model is performed by asking the model to make a prediction for an input that was modified in such a way that a human is unaware of the change and would still arrive at a correct result, but the ML model changes its prediction to something else.</p>
+</div>
+<div class="paragraph">
+<p>For example, while an ML model can easily recognize the &#8216;Stop&#8217; sign from the image on the left, the sign on the right is mistaken as a speed limit sign due to the strategically placed, inconspicuous stickers, which humans would just ignore:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/07_explainability/adversarial_attack2.png" alt="image" width="640">
+</div>
+</div>
+<div class="paragraph">
+<p>This happened because the model didn&#8217;t pick up on the true reasons humans identify a Stop sign as such, e.g., the octagonal form and the four white letters spelling &#8216;STOP&#8217; on a red background. Instead it relied on less meaningful correlations to distinguish it from other traffic signs.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Convolutional neural networks (CNN), the type of neural net typically used for image classification tasks, rely a lot on local patterns. This is why they are often easily <a href="https://www.sciencemag.org/news/2018/07/turtle-or-rifle-hackers-easily-fool-ais-seeing-wrong-thing" target="\_blank">fooled</a> by leaving the global shape of objects, which humans rely on for identification, intact and overlaying the images with specific textures or other high-frequency patterns to trick the model into predicting a different class.</p>
+</div>
+<h4 id="_learning_causal_models" class="discrete">Learning causal models</h4>
+<div class="paragraph">
+<p>Finding robust causal models that capture the true &#8216;input &#8594; output&#8217; relationship in the data is still <a href="https://bdtechtalks.com/2021/03/15/machine-learning-causality/" target="\_blank">an active research area</a> and a lot harder than learning a model that &#8220;only&#8221; generalizes well to the test set.</p>
+</div>
+<div class="paragraph">
+<p>Specifically, this requires knowledge of two things:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Which input features should be included in the model</strong>, i.e., which variables have a causal impact on the target. In practice, this can be complicated by the fact that we might not be able to measure all of these variables directly and have to rely on proxy values.</p>
+</li>
+<li>
+<p><strong>What kind of model best captures the true causal relationship</strong>, e.g., if the relationship between inputs and target is nonlinear, then a linear model wont be enough. One possibility here is to introduce domain knowledge into the design of a neural network architecture.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/07_causality/extrapolating_nn10_sin.png" alt="image" width="440">
+</div>
+<div class="title"><span class="small">Like in the initial example, these ten curves were generated by initializing the weights of a FFNN with one hidden layer of 20 units with a ReLU activation with ten different random seeds and then training the network on the data samples, only this time after the last layer a \(sin()\) activation was applied to the output. By including domain knowledge, we get much closer to the true causal relationship and can extrapolate beyond the training domain (to some extent).</span></div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><span class="small">The following example is adapted from: &#8220;Elements of Causal Inference&#8221; by Jonas Peters, Dominik Janzig, and Bernhard Schölkopf (2017).<br>
+See also Jonas Peters' great <a href="https://www.youtube.com/watch?v=zvrcyqcN9Wo" target="\_blank">lecture series on causality</a>. You can also play around with this example yourself in the <a href="https://github.com/cod3licious/ml_exercises/blob/main/notebooks/causal_model.ipynb" target="\_blank">causal model notebook</a>.</span></p>
+</div>
+<div class="paragraph">
+<p><strong>Example: Learning a causal model</strong></p>
+</div>
+<div class="paragraph">
+<p>Assume this is the true <em>causal graph</em> of some process, where the nodes represent different variables and the edges specify their (linear) influence on one another:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/07_causality/causality_network.png" alt="image" width="340">
+</div>
+</div>
+<div class="paragraph">
+<p>Please note that individual nodes in a causal graph can also represent hidden variables, i.e., process conditions that can not be directly observed, e.g., for which one might want to build a softsensor.</p>
+</div>
+<div class="paragraph">
+<p>Based on the above stated relationships, we can generate a dataset, where each variable additionally depends on an independent (w.r.t. the other variables) normally distributed noise component. This means for each sample some process conditions are set independently (<code>C</code> and <code>A</code>) while for others the value partially depends on the values already set for the other variables.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="python">n = <span class="integer">20000</span>
+C =              <span class="float">1.0</span> * np.random.randn(n)
+A =              <span class="float">0.8</span> * np.random.randn(n)
+K = A          + <span class="float">0.1</span> * np.random.randn(n)
+X = C - <span class="integer">2</span> * A  + <span class="float">0.2</span> * np.random.randn(n)
+F = <span class="integer">3</span> * X      + <span class="float">0.8</span> * np.random.randn(n)
+D = -<span class="integer">2</span> * X     + <span class="float">0.5</span> * np.random.randn(n)
+G = D          + <span class="float">0.5</span> * np.random.randn(n)
+Y = <span class="integer">2</span> * K - D  + <span class="float">0.2</span> * np.random.randn(n)
+H = <span class="float">0.5</span> * Y    + <span class="float">0.1</span> * np.random.randn(n)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Since the dependencies between the variables are linear, the optimal model type to learn any &#8216;input &#8594; output&#8217; relation on this dataset is a linear regression model. The true coefficients that this model should find for one input variable are the values on the edges on the way from this variable&#8217;s node to the target node multiplied with each other, e.g., for <code>X</code> (input) on <code>Y</code> (target) this would be <code>-2</code> (from <code>X</code> to <code>D</code>) times <code>-1</code> (from <code>D</code> to <code>Y</code>), i.e., <code>2</code>.</p>
+</div>
+<div class="paragraph">
+<p>Depending on which variables we include as input features, the models is or isn&#8217;t able to learn the correct coefficients:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="python"><span class="comment"># (1) missing relevant input feature K -&gt; wrong coefficient for X</span>
+R^<span class="integer">2</span> (train): <span class="float">0.844</span>; (test): <span class="float">0.848</span> =&gt; Y ~  <span class="float">0.001</span> + <span class="float">1.285</span> * X
+<span class="comment"># (2) all the right input features -&gt; correct coefficients</span>
+R^<span class="integer">2</span> (train): <span class="float">0.958</span>; (test): <span class="float">0.959</span> =&gt; Y ~  <span class="float">0.003</span> + <span class="float">2.003</span> * X + <span class="float">2.010</span> * K
+<span class="comment"># (3) additional input feature D, which has a more direct influence on Y than X</span>
+R^<span class="integer">2</span> (train): <span class="float">0.994</span>; (test): <span class="float">0.994</span> =&gt; Y ~ -<span class="float">0.002</span> - <span class="float">0.015</span> * X + <span class="float">1.998</span> * K - <span class="float">1.007</span> * D
+<span class="comment"># (4) additional input feature H, which is dependent on (i.e., highly correlated with) Y</span>
+R^<span class="integer">2</span> (train): <span class="float">0.995</span>; (test): <span class="float">0.995</span> =&gt; Y ~  <span class="float">0.001</span> + <span class="float">0.242</span> * X + <span class="float">0.245</span> * K + <span class="float">1.759</span> * H
+<span class="comment"># (5) additional input feature G that is not directly causal of Y, but dependent on D</span>
+R^<span class="integer">2</span> (train): <span class="float">0.977</span>; (test): <span class="float">0.976</span> =&gt; Y ~  <span class="float">0.004</span> + <span class="float">0.978</span> * X + <span class="float">2.002</span> * K - <span class="float">0.510</span> * G</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Often the best predictive model is not the true causal model (e.g., (4)) and especially regularized models, which try to explain the target with as few variables as possible, often choose variables dependent on the target (such as <code>H</code>) as the single best predictor instead of relying on multiple true causal influences (e.g., notice how <code>K</code> and <code>X</code> already have much lower coefficients in (4)).<br>
+But only the causal models are robust to data drifts and can extrapolate:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="python"><span class="comment"># Changed equations to generate test data (notice larger noise component)</span>
+X = C - <span class="integer">2</span> * A  + <span class="float">2.0</span> * np.random.randn(n)
+H = <span class="float">0.5</span> * Y    + <span class="float">1.0</span> * np.random.randn(n)
+
+<span class="comment"># model (2): true relationship between X and Y -&gt; test performance equally good</span>
+R^<span class="integer">2</span> (train): <span class="float">0.958</span>; (test): <span class="float">0.987</span> =&gt; Y ~ <span class="float">0.003</span> + <span class="float">2.003</span> * X + <span class="float">2.010</span> * K
+<span class="comment"># model (4): variable dependent on but not causal of Y -&gt; test performance a lot worse</span>
+R^<span class="integer">2</span> (train): <span class="float">0.995</span>; (test): <span class="float">0.866</span> =&gt; Y ~ <span class="float">0.001</span> + <span class="float">0.242</span> * X + <span class="float">0.245</span> * K + <span class="float">1.759</span> * H</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>But unfortunately none of the models can handle a <em>concept</em> drift, i.e., when the underlying process, from which the data is sampled, changes:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="python"><span class="comment"># Changed equation to generate test data (notice the reversed sign for X on the way to Y)</span>
+D =  <span class="integer">2</span> * X     + <span class="float">0.5</span> * np.random.randn(n)
+
+<span class="comment"># model (2): causal relationship between X and Y changed -&gt; test performance catastrophic</span>
+R^<span class="integer">2</span> (train): <span class="float">0.958</span>; (test): -<span class="float">1.797</span> =&gt; Y ~ <span class="float">0.003</span> + <span class="float">2.003</span> * X + <span class="float">2.010</span> * K</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this case only retraining the model on new data helps to recover the performance.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>&#8658; If the goal is to find a <strong>good predictive model</strong>, use as input variables the <a href="https://en.wikipedia.org/wiki/Markov_blanket" target="\_blank">Markov blanket</a> of the target variable, i.e., its parent nodes, child nodes, and the other parent nodes of these child nodes (in the above example, to predict <code>Y</code> this would be <code>D</code> and <code>K</code> (parent nodes) and <code>H</code> (child node that has no other parents)).<br>
+&#8658; If the goal is to find a <strong>causal model</strong> that can extrapolate, use as input variables only the parent nodes of the target variable.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Residual Plots</strong></p>
+</div>
+<div class="paragraph">
+<p>Residual plots can give us a hint as to whether or not we might be missing important input variables in the model.<br></p>
+</div>
+<div class="paragraph">
+<p>In regression problems we assume that the input variables explain all important external influences on the target and what remains is just random noise. I.e., as we predict the target as:</p>
+</div>
+<div class="stemblock">
+<div class="content">
+\[\hat{y} = b + w_1x_1 + w_2x_2 + ... + w_dx_d\]
+</div>
+</div>
+<div class="paragraph">
+<p>we assume that the true process that generated \(y\) looked like this:</p>
+</div>
+<div class="stemblock">
+<div class="content">
+\[y = b + w_1x_1 + w_2x_2 + ... + w_dx_d + \epsilon\]
+</div>
+</div>
+<div class="paragraph">
+<p>where \(\epsilon \in \mathcal{N}(0, \sigma)\) is the unexplained random noise with mean 0 and standard deviation \(\sigma\), which is assumed to be independent of all other factors.</p>
+</div>
+<div class="paragraph">
+<p>By plotting the residuals (i.e., prediction errors) \(y_i - \hat{y}_i\) against the predicted targets \(\hat{y}_i\) and other variables and observing whether or not these residuals show distinctive patterns or really look like random noise, we can check whether the model is missing important additional input variables.</p>
+</div>
+<div class="paragraph">
+<p>For example, from the example above for model (1), i.e., when using only <code>X</code> as an input to predict <code>Y</code>, the residuals plots looks like this:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/07_causality/residuals_dependent.png" alt="image" width="840">
+</div>
+</div>
+<div class="paragraph">
+<p>The residuals here are correlated with several other variables, which means we should probably include one of them as an additional input feature.</p>
+</div>
+<div class="paragraph">
+<p>The residuals plots for model (2), i.e., when using both <code>X</code> and <code>K</code> as features, on the other hand, show randomly distributed residuals, which means, we&#8217;re at least not missing some obvious influencing factors:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/07_causality/residuals_independent.png" alt="image" width="840">
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+When working with time series data, you should also check for autocorrelation between the residuals, i.e., it should not be possible to use the residual at time point <em>t</em> to predict the next residual at <em>t+1</em>.
 </td>
 </tr>
 </table>
@@ -986,7 +1104,7 @@ While feature selection can improve the performance, these automatic feature sel
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>↑ Up: <a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_extrapolation_correlation_vs_causation.html">Extrapolation: Correlation vs. Causation</a> →</p>
+<p>← Previous: <a href="_model_does_not_generalize.html">Model does not generalize</a> | ↑ Up: <a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_model_discriminates.html">Model discriminates</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">
@@ -1028,10 +1146,10 @@ MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
 <!-- FOOTER  -->
 <div id="footer" class="outer">
   <footer class="inner">
-    <p><b>Book/Course Feedback: </b> <a href="https://forms.gle/Ccv5h5zQxwPjWtCS7" target="_blank">Full Feedback Survey</a> or <a href="https://forms.gle/qK8T5ALzgpiZaxd49" target="_blank">Short Comment</a><br>
+    <p><b>Book/Course Feedback: </b> <a href="https://forms.gle/Ccv5h5zQxwPjWtCS7" target="_blank" rel="nofollow">Full Feedback Survey</a> or <a href="https://forms.gle/qK8T5ALzgpiZaxd49" target="_blank" rel="nofollow">Short Comment</a><br>
 
-    <p>Find me on <a href="https://github.com/cod3licious/" target="_blank">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/" target="_blank">LinkedIn</a><br>
-      <a href="../index.html">Home</a> ~ <a href="mailto:hey@franziskahorn.de?Subject=ML%20book" target="_blank">Contact</a> ~ <a href="../impressum.html">Impressum</a></p>
+    <p>Find me on <a href="https://github.com/cod3licious/" target="_blank" rel="nofollow">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/" target="_blank" rel="nofollow">LinkedIn</a><br>
+      <a href="../index.html">Home</a> ~ <a href="mailto:hey@franziskahorn.de?Subject=ML%20book" target="_blank" rel="nofollow">Contact</a> ~ <a href="../impressum.html">Impressum</a></p>
   </footer>
 </div>
 </body>

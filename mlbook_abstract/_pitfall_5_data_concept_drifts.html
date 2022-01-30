@@ -666,7 +666,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
 <span id="revnumber">version 1.2,</span>
-<span id="revdate">2022-01-02</span>
+<span id="revdate">2022-01-28</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -702,13 +702,13 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="sect2">
 <h3 id="_pitfall_5_data_concept_drifts">[Pitfall #5] Data &amp; concept drifts</h3>
 <div class="paragraph">
-<p>You must never forget that the world keeps on changing and that models need to be updated regularly with new data to be able to adapt to these changing circumstances!</p>
+<p>We must never forget that the world keeps on changing and that models need to be updated regularly with new data to be able to adapt to these changing circumstances!</p>
 </div>
-<div class="admonitionblock warning">
+<div class="admonitionblock caution">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
+<i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
 <strong>ML fails silently!</strong> I.e., even if all predictions are wrong, the program does not simply crash with some error message.<br>
@@ -718,22 +718,51 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </table>
 </div>
 <div class="paragraph">
-<p><span class="underline">One of the biggest problems in practice: Data and Concept Drifts:</span></p>
+<p><span class="underline">One of the biggest problems in practice: Data and Concept Drifts:</span><br>
+The model performance quickly decays when the distribution of the data used for training is different from the data the model encounters in production. Such a discrepancy can be due to</p>
 </div>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p><em>Data drift:</em> input distribution changes, e.g., a new user operates the machine differently</p>
+<p><em>Data drift:</em> distribution of input features \(X\) changes</p>
 </li>
 <li>
-<p><em>Concept drift:</em> input/output relation changes due to:</p>
+<p><em>Concept drift:</em> input/output relationship \(X \to y\) changes</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="underline">Example:</span> From the production settings incl. the size of a produced part (\(X\)) we want to predict whether the part is scrap or okay (\(y\)):</p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p><em>Data drift:</em> The company used to manufacture only small parts, now they also produce larger parts.</p>
+</li>
+<li>
+<p><em>Concept drift:</em> The company used to produce 10% scrap parts, but after some maintenance was done on the machine, the same production settings now result in only 5% scrap.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="underline">Possible reasons for data or concept drifts:</span></p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>External factors (e.g., changes in the process structure / setup: In a new version of a machine, the temperature sensor is in a different place, but still logs values under the same variable name.)</p>
+<p>New users behave differently: For example, the product is now used by a younger generation or the business recently expanded to a different country.</p>
 </li>
 <li>
-<p>Internal factors (feedback loop: presence of ML model alters behavior, for example, spammers change their strategy to evade the spam filter)</p>
+<p>Trends and seasonality: For example, certain products are bought primarily in a specific season (e.g., winter cloths) or new styles result in the same customers now buying different products because they are &#8220;in&#8221;.</p>
+</li>
+<li>
+<p>The process structure / setup changed: For example, in a new version of a device, a sensor has moved to a different location, but still logs values under the same variable name.</p>
+</li>
+<li>
+<p>Feedback loop, where the presence of an ML model alters user behavior: For example, spammers change their strategy to evade the spam filter.</p>
+</li>
+</ul>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -746,15 +775,10 @@ These changes can either be <strong>gradual</strong> (e.g., languages change gra
 </tr>
 </table>
 </div>
-</li>
-</ul>
-</div>
 <div class="paragraph">
-<p>&#8658; Logging of known external events, e.g., maintenance on a machine<br>
-&#8658; Frequently retrain models on new data</p>
-</div>
-</li>
-</ul>
+<p><span class="underline">Mitigation Strategies:</span><br>
+The best way to counteract data and concept drifts is to frequently <strong>retrain the model</strong> on new data. This can either happen on a schedule (e.g., every weekend, depending on how quickly the data changes) or when your monitoring system raises an alert because it detected drifts in the inputs or a deteriorating model performance.<br>
+Additionally, it is always helpful to log known external events, such as maintenance performed on a machine.</p>
 </div>
 </div>
 <div class="paragraph nav-footer">
@@ -800,10 +824,10 @@ MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
 <!-- FOOTER  -->
 <div id="footer" class="outer">
   <footer class="inner">
-    <p><b>Book/Course Feedback: </b> <a href="https://forms.gle/Ccv5h5zQxwPjWtCS7" target="_blank">Full Feedback Survey</a> or <a href="https://forms.gle/qK8T5ALzgpiZaxd49" target="_blank">Short Comment</a><br>
+    <p><b>Book/Course Feedback: </b> <a href="https://forms.gle/Ccv5h5zQxwPjWtCS7" target="_blank" rel="nofollow">Full Feedback Survey</a> or <a href="https://forms.gle/qK8T5ALzgpiZaxd49" target="_blank" rel="nofollow">Short Comment</a><br>
 
-    <p>Find me on <a href="https://github.com/cod3licious/" target="_blank">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/" target="_blank">LinkedIn</a><br>
-      <a href="../index.html">Home</a> ~ <a href="mailto:hey@franziskahorn.de?Subject=ML%20book" target="_blank">Contact</a> ~ <a href="../impressum.html">Impressum</a></p>
+    <p>Find me on <a href="https://github.com/cod3licious/" target="_blank" rel="nofollow">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/" target="_blank" rel="nofollow">LinkedIn</a><br>
+      <a href="../index.html">Home</a> ~ <a href="mailto:hey@franziskahorn.de?Subject=ML%20book" target="_blank" rel="nofollow">Contact</a> ~ <a href="../impressum.html">Impressum</a></p>
   </footer>
 </div>
 </body>

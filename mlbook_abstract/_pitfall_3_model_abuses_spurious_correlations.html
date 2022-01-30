@@ -666,7 +666,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
 <span id="revnumber">version 1.2,</span>
-<span id="revdate">2022-01-02</span>
+<span id="revdate">2022-01-28</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -722,7 +722,7 @@ ML models love to cheat &amp; take shortcuts! They will often pick up on <a href
 <p><strong>A correct prediction is not always made for the right reasons!</strong></p>
 </div>
 <div class="paragraph">
-<p>The graphic below is taken from a paper where the authors noticed that a fairly simple ML model trained on a standard image classification dataset performed poorly for all 10 classes in the dataset except one, horses. When they examined the dataset more closely and analyzed <em>why</em> the model predicted a certain class, i.e., which image features were used in the prediction (displayed as the heatmap on the right), they noticed that most of the pictures of horses in the dataset were taken by the same photographer and they all had a characteristic copyright notice in the lower left corner:</p>
+<p>The graphic below is taken from a paper where the authors noticed that a fairly simple ML model trained on a standard image classification dataset performed poorly for all ten classes in the dataset except one, horses. When they examined the dataset more closely and analyzed <em>why</em> the model predicted a certain class, i.e., which image features were used in the prediction (displayed as the heatmap on the right), they noticed that most of the pictures of horses in the dataset were taken by the same photographer and they all had a characteristic copyright notice in the lower left corner.</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -731,7 +731,8 @@ ML models love to cheat &amp; take shortcuts! They will often pick up on <a href
 <div class="title"><span class="small">Lapuschkin, Sebastian, et al. &#8220;Analyzing classifiers: Fisher vectors and deep neural networks.&#8221; <em>IEEE Conference on Computer Vision and Pattern Recognition.</em> 2016.</span></div>
 </div>
 <div class="paragraph">
-<p>By relying on this artifact, the model could identify what it perceives as &#8220;horses&#8221; in this dataset with high accuracy&#8201;&#8212;&#8201;both in the training and the test set, which includes pictures from the same photographer. However, of course the model failed to learn what actually defines a horse and it is not able to extrapolate and achieve the same accuracy on other images without this copyright notice. Or, equally problematic, the model would mistakenly classify new images of other objects or animals with a similar copyright notice as horses, too. Purposefully tricking the model by augmenting other images with such a copyright notice is an example of an adversarial attack, as discussed below.</p>
+<p>By relying on this artifact, the model could identify what it perceives as &#8220;horses&#8221; in this dataset with high accuracy&#8201;&#8212;&#8201;both in the training and the test set, which includes pictures from the same photographer. However, of course the model failed to learn what actually defines a horse and would not be able to extrapolate and achieve the same accuracy on other horse pictures without this copyright notice.
+Or, equally problematic, one could add such a copyright notice to a picture of another animal and suddenly the model would mistakenly classify this as a horse, too. This means, it is possible to purposefully trick the model, which is also called an &#8220;adversarial attack&#8221;.</p>
 </div>
 </div>
 </div>
@@ -812,10 +813,10 @@ MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
 <!-- FOOTER  -->
 <div id="footer" class="outer">
   <footer class="inner">
-    <p><b>Book/Course Feedback: </b> <a href="https://forms.gle/Ccv5h5zQxwPjWtCS7" target="_blank">Full Feedback Survey</a> or <a href="https://forms.gle/qK8T5ALzgpiZaxd49" target="_blank">Short Comment</a><br>
+    <p><b>Book/Course Feedback: </b> <a href="https://forms.gle/Ccv5h5zQxwPjWtCS7" target="_blank" rel="nofollow">Full Feedback Survey</a> or <a href="https://forms.gle/qK8T5ALzgpiZaxd49" target="_blank" rel="nofollow">Short Comment</a><br>
 
-    <p>Find me on <a href="https://github.com/cod3licious/" target="_blank">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/" target="_blank">LinkedIn</a><br>
-      <a href="../index.html">Home</a> ~ <a href="mailto:hey@franziskahorn.de?Subject=ML%20book" target="_blank">Contact</a> ~ <a href="../impressum.html">Impressum</a></p>
+    <p>Find me on <a href="https://github.com/cod3licious/" target="_blank" rel="nofollow">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/" target="_blank" rel="nofollow">LinkedIn</a><br>
+      <a href="../index.html">Home</a> ~ <a href="mailto:hey@franziskahorn.de?Subject=ML%20book" target="_blank" rel="nofollow">Contact</a> ~ <a href="../impressum.html">Impressum</a></p>
   </footer>
 </div>
 </body>

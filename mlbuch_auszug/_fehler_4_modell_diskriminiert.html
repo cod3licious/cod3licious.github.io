@@ -665,8 +665,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.2,</span>
-<span id="revdate">2022-01-23</span>
+<span id="revnumber">version 1.3,</span>
+<span id="revdate">2022-01-31</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -702,7 +702,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="sect2">
 <h3 id="_fehler_4_modell_diskriminiert">[Fehler #4] Modell diskriminiert</h3>
 <div class="paragraph">
-<p>Ein Modell, welches echte kausale Zusammenhänge zwischen den Variablen aufgegriffen hat, generiert zwar robustere Vorhersagen, doch es kann auch kausale Zusammenhänge in den historischen Daten geben, die ein Modell besser <em>nicht</em> lernen sollte. Wenn in der Vergangenheit Menschen aufgrund ihres Geschlechts oder ihrer Hautfarbe diskriminiert wurden, kann sich dies auch in den Trainingsdaten widerspiegeln, z.B. wenn weiße Männer systematisch niedrigere Kreditzinsen zahlen mussten, die nicht allein durch ihr höheres Einkommen erklärt werden können. In solchen Fällen müssen wir zusätzliche Maßnahmen ergreifen, damit diese Muster nicht in unserem Modell weiterbestehen&#8201;&#8212;&#8201;obwohl es in der Vergangenheit vielleicht echte kausale Zusammenhänge waren.</p>
+<p>Ein Modell, welches echte kausale Zusammenhänge zwischen den Variablen aufgegriffen hat, generiert zwar robustere Vorhersagen, doch es kann auch kausale Zusammenhänge in den historischen Daten geben, die ein Modell besser <em>nicht</em> lernen sollte. Wenn in der Vergangenheit Menschen aufgrund ihres Geschlechts oder ihrer Hautfarbe diskriminiert wurden, kann sich dies auch in den Trainingsdaten widerspiegeln und wir müssen zusätzliche Maßnahmen ergreifen, damit diese Muster nicht in unserem Modell weiterbestehen&#8201;&#8212;&#8201;obwohl es in der Vergangenheit vielleicht echte kausale Zusammenhänge waren.</p>
 </div>
 <div class="dlist">
 <dl>
@@ -762,9 +762,6 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </ul>
 </div>
 <div class="paragraph">
-<p>Bevor wir diese Probleme beheben können, müssen wir uns ihrer erstmal bewusst werden. Daher ist es wichtig, die Performance eines Modells immer für jede (bekannte) Untergruppe in den Daten einzeln zu bewerten, um sicherzustellen, dass die Vorhersagefehler des Modells zufällig sind und das Modell nicht für einige Untergruppen (z.B. Frauen) systematisch schlechter funktioniert.</p>
-</div>
-<div class="paragraph">
 <p>Noch problematischer als eine bloße Unterrepräsentation bestimmter Untergruppen (verzerrte Eingabeverteilung) ist ein Muster der systematischen Diskriminierung dieser Untergruppen in historischen Daten (diskriminierende Verschiebung der zugewiesenen Labels).</p>
 </div>
 <div class="sidebarblock">
@@ -778,8 +775,25 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 </div>
 <div class="paragraph">
-<p>Grundsätzlich ist immer Vorsicht geboten, wenn wir Variablen in das Modell aufnehmen, die Attribute wie Geschlecht oder Herkunft kodieren. Zum Beispiel wird die Performance eines Modells zur Diagnose von Herzinfarkten durch die Einbeziehung von &#8216;Geschlecht&#8217; als Merkmal höchstwahrscheinlich verbessert, da Männer und Frauen bei einem Herzinfarkt unterschiedliche Symptome zeigen. Andererseits sollte ein Modell, das jemandem eine Kreditwürdigkeit zuweist, bei dieser Entscheidung das Geschlecht der Person eher nicht berücksichtigen, da ansonsten die in historischen Daten kodierten Stereotypen weiterleben.
-Das Geschlecht oder die Hautfarbe einer Person kann jedoch auch mit anderen Variablen wie beispielsweise Einkommen oder Wohngegend korreliert sein, sodass selbst Features, die auf den ersten Blick harmlos erscheinen, problematische Informationen an das Modell weitergeben können. In solchen Fällen sind zusätzliche Schritte nötig, um zu vermeiden, dass das Modell diskriminiert.</p>
+<p><span class="underline">Zusammenfassend:</span> Ein verzerrtes Modell kann sich auf zwei Arten negativ auf die Nutzer auswirken:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Unverhältnismäßige Produktausfälle aufgrund unterrepräsentierter Stichproben. Beispielsweise funktionieren Spracherkennungsmodelle für Frauen oft weniger zuverlässig, weil sie mit mehr Daten von Männern trainiert wurden (z.B. transkribierte politische Reden).</p>
+</li>
+<li>
+<p>Schaden durch Benachteiligung / Verweigerung von Chancen aufgrund von in historischen Daten kodierten Stereotypen. Beispielsweise müssen Frauen höhere Kreditzinsen zahlen als Männer oder im Ausland geborene Personen gelten als weniger qualifiziert für eine Stelle, wenn ihre Lebensläufe von einem automatisierten Screening-Tool bewertet werden.</p>
+</li>
+</ul>
+</div>
+<h5 id="_auf_dem_weg_zu_fairen_modellen" class="discrete">Auf dem Weg zu fairen Modellen</h5>
+<div class="paragraph">
+<p>Bevor wir diese Probleme beheben können, müssen wir uns ihrer erstmal bewusst werden. Daher ist es wichtig, die Performance eines Modells immer für jede (bekannte) Untergruppe in den Daten einzeln zu bewerten, um sicherzustellen, dass die Vorhersagefehler des Modells zufällig sind und das Modell nicht für einige Untergruppen (z.B. Frauen) systematisch schlechter funktioniert.</p>
+</div>
+<div class="paragraph">
+<p>Außerdem ist grundsätzlich Vorsicht geboten, wenn wir Variablen in das Modell aufnehmen, die Attribute wie Geschlecht oder Herkunft kodieren. Zum Beispiel wird die Performance eines Modells zur Diagnose von Herzinfarkten durch die Einbeziehung von &#8216;Geschlecht&#8217; als Merkmal höchstwahrscheinlich verbessert, da Männer und Frauen bei einem Herzinfarkt unterschiedliche Symptome zeigen. Andererseits sollte ein Modell, das jemandem eine Kreditwürdigkeit zuweist, bei dieser Entscheidung das Geschlecht der Person eher nicht berücksichtigen, da ansonsten die in historischen Daten kodierten Stereotypen weiterleben.<br>
+Das Geschlecht oder die Hautfarbe einer Person kann jedoch auch mit anderen Variablen wie beispielsweise Einkommen oder Wohngegend korreliert sein, sodass selbst Features, die auf den ersten Blick harmlos erscheinen, problematische Informationen an das Modell weitergeben können. In solchen Fällen sind zusätzliche Maßnahmen nötig, um zu vermeiden, dass das Modell diskriminiert.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">

@@ -3199,7 +3199,7 @@ Unlike in regular optimization, where the optimal inputs given a single specific
 </div>
 </div>
 <div class="paragraph">
-<p>While the different subfields of unsupervised learning all include lots of algorithms that can be used for the respective purpose, we&#8217;ll always just examine a few example algorithms with different underlying ideas in more detail. But feel free to, e.g., have a look at the <a href="https://scikit-learn.org/stable/unsupervised_learning.html" target="\_blank">sklearn user guide</a> for more information about other models.</p>
+<p>While the subfields of unsupervised learning all include lots of different algorithms that can be used for the respective purpose, we&#8217;ll always just examine a few example algorithms with different underlying ideas in more detail. But feel free to, e.g., have a look at the <a href="https://scikit-learn.org/stable/unsupervised_learning.html" target="\_blank">sklearn user guide</a> for more information about other methods.</p>
 </div>
 <div class="sect2">
 <h3 id="_dimensionality_reduction">Dimensionality Reduction</h3>
@@ -3215,20 +3215,20 @@ Unlike in regular optimization, where the optimal inputs given a single specific
 <dl>
 <dt class="hdlist1">Goal</dt>
 <dd>
-<p>reduce the number of features without loosing relevant information</p>
+<p>Reduce the number of features without loosing relevant information.</p>
 </dd>
 <dt class="hdlist1">Advantages</dt>
 <dd>
 <div class="ulist">
 <ul>
 <li>
-<p>reduced data needs less memory (usually not that important anymore today)</p>
+<p>Reduced data needs less memory (usually not that important anymore today)</p>
 </li>
 <li>
-<p>noise reduction (by focusing on the most relevant signals)</p>
+<p>Noise reduction (by focusing on the most relevant signals)</p>
 </li>
 <li>
-<p>create a visualization of the dataset (what we will mostly be using these algorithms for)</p>
+<p>Create a visualization of the dataset (what we are mostly using these algorithms for)</p>
 </li>
 </ul>
 </div>
@@ -3239,7 +3239,7 @@ Unlike in regular optimization, where the optimal inputs given a single specific
 <div class="content">
 <img src="images/03_unsupervised/dimred_problem.png" alt="image" width="470">
 </div>
-<div class="title"><span class="small">Our dataset in this small example consists of a set of 8 x 8 pixel images showing handwritten digits (i.e., each data point can be represented as a 64-dimensional input feature vector containing the gray-scale pixel values). Usually, this dataset is used for classification, i.e., where a model should predict which number is shown on the image. We instead only want to get a better overview of the dataset, i.e., our goal is to reduce the dimensionality of this dataset to 2 coordinates, which we can then use to visualize all samples in a 2D overview map. Please note that the algorithms only use the original image pixel values as input to compute the 2D coordinates, but afterwards we additionally use the labels of the images (i.e., the digit shown in the image) to give the dots in the plot some color to better interpret the results.</span></div>
+<div class="title"><span class="small">The dataset in this small example consists of a set of 8 x 8 pixel images of handwritten digits, i.e., each data point can be represented as a 64-dimensional input feature vector containing the gray-scale pixel values. Usually, this dataset is used for classification, i.e., where a model should predict which number is shown on the image. We instead only want to get an overview of the dataset, i.e., our goal is to reduce the dimensionality of this dataset to two coordinates, which we can then use to visualize all samples in a 2D scatter plot. Please note that the algorithms only use the original image pixel values as input to compute the 2D coordinates, but afterwards we additionally use the labels of the images (i.e., the digit shown in the image) to give the dots in the plot some color to better interpret the results.</span></div>
 </div>
 <div class="openblock text-center">
 <div class="content">
@@ -3252,12 +3252,30 @@ Unlike in regular optimization, where the optimal inputs given a single specific
 <div class="openblock text-justify">
 <div class="content">
 <div class="paragraph">
-<p><span class="small">The two plots show the results, i.e., the 2-dimensional representation of the dataset, created with two different dimensionality reduction algorithms, PCA and t-SNE. Each point or thumbnail in the plot represents one data point (i.e., one image), where the colors, numbers, and example images were added in the graphic afterward to make it easier to interpret what is shown here. There is no right or wrong way to represent the data in 2D (it&#8217;s an unsupervised learning problem, which by definition has no ground truth answer), but the algorithms arrive at two very different solutions, since they follow different strategies and have a different definition of what it means to preserve the relevant information. While PCA created a plot that preserves the global relationship between the samples, t-SNE arranged the samples in localized clusters. The remarkable thing here is that these methods did not know about the fact that the images displayed different, distinct digits (i.e., they did not use the label information), yet t-SNE grouped images showing the same number closer together. From such a plot we can already see that if we were to solve the classification problem here (i.e., predict which digit is shown in an image), this task should be fairly easy, since even an unsupervised learning algorithm that did not use the label information showed that images displaying the same number are very similar to each other and can easily be distinguished from images showing different numbers (or conversely, if our classification model performed very poorly on this task, we would know that we have a bug somewhere, since apparently the relevant information is present in the features to solve this task). <em>Please note that even though t-SNE seems to create clusters here, this is not a clustering algorithm. As a dimensionality reduction algorithm, t-SNE produces a set of new 2D coordinates for our samples and when plotting the samples at these coordinates, they happen to be arranged in clusters. However, a clustering algorithm instead outputs cluster indices, that state which samples were assigned to the same group (which could then be used to color the points in the 2D coordinate plot).</em></span></p>
+<p><span class="small">The two plots show the results, i.e., the 2-dimensional representation of the dataset created with two different dimensionality reduction algorithms, PCA and t-SNE. Each point or thumbnail in the plot represents one data point (i.e., one image) and the colors, numbers, and example images were added after reducing the dimensionality so the plot is easier to interpret.</span></p>
 </div>
 </div>
 </div>
 </dd>
 </dl>
+</div>
+<div class="paragraph">
+<p>There is no right or wrong way to represent the data in 2D&#8201;&#8212;&#8201;it&#8217;s an unsupervised learning problem, which by definition has no ground truth answer. The algorithms arrive at two very different solutions, since they follow different strategies and have a different definition of what it means to preserve the relevant information. While PCA created a plot that preserves the global relationship between the samples, t-SNE arranged the samples in localized clusters.</p>
+</div>
+<div class="paragraph">
+<p>The remarkable thing here is that these methods did not know about the fact that the images displayed different, distinct digits (i.e., they did not use the label information), yet t-SNE grouped images showing the same number closer together. From such a plot we can already see that if we were to solve the corresponding classification problem (i.e., predict which digit is shown in an image), this task should be fairly easy, since even an unsupervised learning algorithm that did not use the label information showed that images displaying the same number are very similar to each other and can easily be distinguished from images showing different numbers. Or conversely, if our classification model performed poorly on this task, we would know that we have a bug somewhere, since apparently the relevant information is present in the features to solve this task.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Please note that even though t-SNE seems to create clusters here, it is <em>not a clustering algorithm</em>. As a dimensionality reduction algorithm, t-SNE produces a set of new 2D coordinates for our samples and when plotting the samples at these coordinates, they happen to be arranged in clusters. However, a clustering algorithm instead outputs cluster indices, that state which samples were assigned to the same group (which could then be used to color the points in the 2D coordinate plot).
+</td>
+</tr>
+</table>
 </div>
 <div class="sect3">
 <h4 id="_principal_component_analysis_pca">Principal Component Analysis (PCA)</h4>
@@ -3265,16 +3283,19 @@ Unlike in regular optimization, where the optimal inputs given a single specific
 <dl>
 <dt class="hdlist1">Useful for</dt>
 <dd>
-<p>general dimensionality reduction &amp; noise reduction (&#8594; the transformed data is then sometimes used as input to other algorithms instead of the original features)</p>
+<p>General dimensionality reduction &amp; noise reduction.<br>
+&#8658; The transformed data is sometimes used as input for other algorithms instead of the original features.</p>
 </dd>
 <dt class="hdlist1">Main idea</dt>
 <dd>
-<p>compute the eigendecomposition of the dataset&#8217;s covariance matrix (a symmetric matrix of size \(d \times d\) (with <em>d</em> = number of original input features), which states how strongly any two features co-vary, i.e., how related they are, similar to the linear correlation between two features). By computing the eigenvalues and -vectors of this matrix, the main directions of variance are identified as the new principle components (which can be expressed as linear combinations of the original features) and we can now reorient the data along these new axis (have a look at <a href="https://www.youtube.com/watch?v=5HNr_j6LmPc" target="\_blank">this video</a> for a more detailed explanation):</p>
+<p>Compute the eigendecomposition of the dataset&#8217;s covariance matrix, a symmetric matrix of size \(d \times d\) (with <em>d</em> = number of original input features), which states how strongly any two features co-vary, i.e., how related they are, similar to the linear correlation between two features.<br>
+By computing the eigenvalues and -vectors of this matrix, the main directions of variance in the data are identified. These are the principle components and can be expressed as linear combinations of the original features. We then reorient the data along these new axis.<br>
+Have a look at <a href="https://www.youtube.com/watch?v=5HNr_j6LmPc" target="\_blank">this video</a> for a more detailed explanation.</p>
 <div class="imageblock text-center">
 <div class="content">
 <img src="images/03_unsupervised/pca.png" alt="image" width="740">
 </div>
-<div class="title"><span class="small">Here the original data only has two features anyways, so a dimensionality reduction does not make much sense, but it nicely illustrates how the algorithm works: the main direction of variance is selected as the first new dimension, while the direction with the next strongest variation (orthogonal to the first) is the second new dimension, also called principle components. The data can then be rotated accordingly, such that the amount of captured variation in the data (i.e., the information content and also the eigenvalue associated with this principle component) decreases from the first to the last of these new dimensions.</span></div>
+<div class="title"><span class="small">In this example the original data only has two features anyways, so a dimensionality reduction does not make much sense, but it nicely illustrates how the PCA algorithm works: The main direction of variance is selected as the first new dimension, while the direction with the next strongest variation (orthogonal to the first) is the second new dimension. These new dimensions are the principle components. The data is then be rotated accordingly, such that the amount of variance in the data, i.e., the information content and therefore also the eigenvalue associated with the principle components, decreases from the first to the last of these new dimensions.</span></div>
 </div>
 </dd>
 </dl>
@@ -3292,7 +3313,7 @@ Unlike in regular optimization, where the optimal inputs given a single specific
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>&#8594; <code>n_components</code>: new dimensionality of data (this can be as many as the original features (or the rank of the feature matrix))</p>
+<p>&#8594; <code>n_components</code>: New dimensionality of data; this can be as many as the original features (or the rank of the feature matrix).</p>
 </li>
 </ul>
 </div>
@@ -3305,13 +3326,13 @@ Unlike in regular optimization, where the optimal inputs given a single specific
 <div class="ulist">
 <ul>
 <li>
-<p>linear algebra based: global optima (i.e., when you compute PCA multiple times on the same dataset you&#8217;ll always get the same solution)</p>
+<p>Linear algebra based: solution is a global optima, i.e., when we compute PCA multiple times on the same dataset we&#8217;ll always get the same results.</p>
 </li>
 <li>
-<p>know how much information is retained (check the attributes <code>explained_variance_ratio_</code> or <code>lambda_</code>):<br>
-the principle components are always ordered by the magnitude of their corresponding eigenvalues (largest first);<br>
-for <em>k</em> components with eigenvalues \(\lambda_i\), the amount of variation that is preserved is: \(\frac{\sum_{i=1}^k \lambda_i}{\sum_{i=1}^d \lambda_i}\)<br>
-(if the intrinsic dimensionality of the dataset is lower than the original number features, e.g., because some features were strongly correlated, then the last few eigenvalues will be zeros; you can also plot the <a href="https://en.wikipedia.org/wiki/Scree_plot" target="\_blank">eigenvalue spectrum</a>, i.e., the eigenvalues ordered by their magnitude, to see how many dimensions you might want to keep, i.e., when this curve starts to flatten out)</p>
+<p>Know how much information is retained in the low dimensional representation; stored in the attributes <code>explained_variance_ratio_</code> or <code>lambda_</code> (= eigenvalues of the respective PCs):<br>
+The principle components are always ordered by the magnitude of their corresponding eigenvalues (largest first);<br>
+When using the first <em>k</em> components with eigenvalues \(\lambda_i\), the amount of variance that is preserved is: \(\frac{\sum_{i=1}^k \lambda_i}{\sum_{i=1}^d \lambda_i}\).<br>
+<span class="underline">Note:</span> If the intrinsic dimensionality of the dataset is lower than the original number features, e.g., because some features were strongly correlated, then the last few eigenvalues will be zeros. You can also plot the <a href="https://en.wikipedia.org/wiki/Scree_plot" target="\_blank">eigenvalue spectrum</a>, i.e., the eigenvalues ordered by their magnitude, to see how many dimensions you might want to keep, i.e., where this curve starts to flatten out.</p>
 </li>
 </ul>
 </div>
@@ -3321,11 +3342,11 @@ for <em>k</em> components with eigenvalues \(\lambda_i\), the amount of variatio
 <div class="ulist">
 <ul>
 <li>
-<p>computationally expensive for many (&gt; 10k) features<br>
-&#8594; if you have less data points than features, consider using Kernel PCA instead (this computes the eigendecomposition of a similarity matrix, which is \(n \times n\) (with <em>n</em> = number of data points), i.e., when <em>n</em> &lt; <em>d</em> this matrix will be smaller than the covariance matrix and therefore computing its eigendecomposition will be faster)</p>
+<p>Computationally expensive for many (&gt; 10k) features.<br>
+<span class="underline">Tip:</span> If you have less data points than features, consider using Kernel PCA instead: This variant of the PCA algorithm computes the eigendecomposition of a similarity matrix, which is \(n \times n\) (with <em>n</em> = number of data points), i.e., when <em>n</em> &lt; <em>d</em> this matrix will be smaller than the covariance matrix and therefore computing its eigendecomposition will be faster.</p>
 </li>
 <li>
-<p>outliers can heavily skew the results (because a few points away from the center can introduce a large variance in that direction)</p>
+<p>Outliers can heavily skew the results, because a few points away from the center can introduce a large variance in that direction.</p>
 </li>
 </ul>
 </div>
@@ -3339,11 +3360,12 @@ for <em>k</em> components with eigenvalues \(\lambda_i\), the amount of variatio
 <dl>
 <dt class="hdlist1">Useful for</dt>
 <dd>
-<p>visualizing data in 2D (but please do not use the transformed data as input for other algorithms)</p>
+<p>Visualizing data in 2D&#8201;&#8212;&#8201;but please do not use the transformed data as input for other algorithms.</p>
 </dd>
 <dt class="hdlist1">Main idea</dt>
 <dd>
-<p>randomly initialize the points in 2D and move them around until their distances in 2D match the original distances in the high dimensional input space, i.e., until the points that were similar to each other in the original high dimensional space are located close together in the new 2D map of the dataset (&#8594; have a look at the animations in this great blog article to see <a href="https://distill.pub/2016/misread-tsne/" target="\_blank">t-SNE in action</a>)</p>
+<p>Randomly initialize the points in 2D and move them around until their distances in 2D match the original distances in the high dimensional input space, i.e., until the points that were similar to each other in the original high dimensional space are located close together in the new 2D map of the dataset.<br>
+&#8594; Have a look at the animations in this great blog article to see <a href="https://distill.pub/2016/misread-tsne/" target="\_blank">t-SNE in action</a>!</p>
 </dd>
 </dl>
 </div>
@@ -3360,10 +3382,11 @@ for <em>k</em> components with eigenvalues \(\lambda_i\), the amount of variatio
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>&#8594; <code>perplexity</code>: roughly: how many nearest neighbors a point is expected to have (see also the corresponding section in the blog article linked above for an example; what an appropriate value for this parameters is depends on the size and diversity of your dataset, e.g., if you have a dataset of 1000 images with 10 classes, then a perplexity of 5 might be a reasonable choice, while in a dataset with 1 million samples, 500 could be a good value <span class="small">(the original paper says values up to 50 work well, but in 2003 &#8220;big data&#8221; also wasn&#8217;t a buzzword yet ;-)</span>)</p>
+<p>&#8594; <code>perplexity</code>: Roughly: how many nearest neighbors a point is expected to have. Have a look at the corresponding section in the blog article linked above for an example. However, what an appropriate value for this parameter is depends on the size and diversity of the dataset, e.g., if a dataset consists of 1000 images with 10 classes, then a perplexity of 5 might be a reasonable choice, while for a dataset with 1 million samples, 500 could be a better value.<br>
+<span class="small">The original paper says values up to 50 work well, but in 2003 &#8220;big data&#8221; also wasn&#8217;t a buzzword yet ;-)</span></p>
 </li>
 <li>
-<p>&#8594; <code>metric</code>: how to compute the distances in the original high dimensional input space (which tells you which points should be close together in the 2D map)</p>
+<p>&#8594; <code>metric</code>: How to compute the distances in the original high dimensional input space, which tells the model which points should be close together in the 2D map.</p>
 </li>
 </ul>
 </div>
@@ -3376,7 +3399,7 @@ for <em>k</em> components with eigenvalues \(\lambda_i\), the amount of variatio
 <div class="ulist">
 <ul>
 <li>
-<p>very nice visualizations</p>
+<p>Very nice visualizations.</p>
 </li>
 </ul>
 </div>
@@ -3386,10 +3409,10 @@ for <em>k</em> components with eigenvalues \(\lambda_i\), the amount of variatio
 <div class="ulist">
 <ul>
 <li>
-<p>can get stuck in a local optimum (e.g., some points trapped between clusters)</p>
+<p>Algorithm can get stuck in a local optimum, e.g., with some points trapped between clusters.</p>
 </li>
 <li>
-<p>selection of distance metric for heterogeneous data (&#8594; normalize!)</p>
+<p>Selection of distance metric for heterogeneous data &#8658; normalize!</p>
 </li>
 </ul>
 </div>
@@ -3397,7 +3420,7 @@ for <em>k</em> components with eigenvalues \(\lambda_i\), the amount of variatio
 </dl>
 </div>
 <div class="paragraph">
-<p>&#8594; also check out the <a href="https://github.com/YingfanWang/PaCMAP" target="\_blank"><code>pacmap</code></a> and <a href="https://umap-learn.readthedocs.io/en/latest/" target="\_blank"><code>umap</code></a> libraries!</p>
+<p>&#8594; Also check out the <a href="https://umap-learn.readthedocs.io/en/latest/" target="\_blank"><code>umap</code></a> and <a href="https://github.com/YingfanWang/PaCMAP" target="\_blank"><code>pacmap</code></a> libraries!</p>
 </div>
 </div>
 </div>
@@ -3418,10 +3441,10 @@ for <em>k</em> components with eigenvalues \(\lambda_i\), the amount of variatio
 <div class="ulist">
 <ul>
 <li>
-<p>detecting anomalies for monitoring purposes (e.g., machine failures or fraudulent credit card transactions)<br></p>
+<p>Detecting anomalies for monitoring purposes, e.g., machine failures or fraudulent credit card transactions.<br></p>
 </li>
 <li>
-<p>removing outliers from the dataset to improve the performance of other algorithms</p>
+<p>Removing outliers from the dataset to improve the performance of other algorithms.</p>
 </li>
 </ul>
 </div>
@@ -3429,21 +3452,31 @@ for <em>k</em> components with eigenvalues \(\lambda_i\), the amount of variatio
 </dl>
 </div>
 <div class="paragraph">
-<p>When trying to remove outliers or detect anomalies, there are many things that need to be considered:</p>
+<p>Things to consider when trying to remove outliers or detect anomalies:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Does the dataset consist of <strong>independent data points or time series data</strong> with dependencies?</p>
+<p>Does the dataset consist of <strong>independent data points</strong> or <strong>time series data</strong> with dependencies?</p>
 </li>
 <li>
-<p>Are you looking for <strong>outliers in individual dimensions</strong> (e.g., in time series data you might not see a failure in all sensors simultaneously, but only one sensor might act up spontaneously (i.e., show a value very different from the previous time point), which would be enough to rule this time point an anomaly irrespective of the values of the other sensors) or is it necessary to consider <strong>multidimensional outlier patterns</strong> (e.g., for independent data points individual feature values might not seem anomalous by themselves, only when considered in combination with the data point&#8217;s other feature values (e.g., a \(35 m^2\) apartment could be a nice studio, but if this apartment is also supposed to have 5 bedrooms then something is off))?</p>
+<p>Are you trying to detect</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>outliers in individual dimensions</strong>? For example, in time series data we might not see a failure in all sensors simultaneously, but only one sensor acts up spontaneously, i.e., shows a value very different from the previous time point, which would be enough to rule this time point an anomaly irrespective of the values of the other sensors.</p>
 </li>
 <li>
-<p>Are you expecting a few <strong>individual outliers or clusters</strong> of outliers (the latter is especially common in time series data, where, e.g., a machine might experience an issue for several minutes or even hours before the signals look normal again)? Clusters of outliers are more tricky to detect, especially if the data also contains other &#8216;legitimate&#8217; clusters of normal points. Domain expertise is key here!</p>
+<p><strong>multidimensional outlier patterns</strong>? Individual feature values of independent data points might not seem anomalous by themselves, only when considered in combination with the data point&#8217;s other feature values. For example, a 35 \(m^2\) apartment could be a nice studio, but if this apartment supposedly has 5 bedrooms, then something is off.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p>Do you have any <strong>labels</strong> available? E.g., while you might not know what the different kinds of (future) anomalies could look like, maybe you <em>do</em> know what normal data points look like, which is important information that you can make use of by checking how far new points deviate from these normal points (also called novelty detection).</p>
+<p>Are you expecting a few <strong>individual outliers</strong> or <strong>clusters of outliers</strong>? The latter is especially common in time series data, where, e.g., a machine might experience an issue for several minutes or even hours before the signals look normal again. Clusters of outliers are more tricky to detect, especially if the data also contains other &#8216;legitimate&#8217; clusters of normal points. Domain expertise is key here!</p>
+</li>
+<li>
+<p>Do you have any <strong>labels</strong> available? While we might not know what the different kinds of (future) anomalies look like, maybe we <em>do</em> know what normal data points look like, which is important information that we can use to check how far new points deviate from these normal points, also called novelty detection.</p>
 </li>
 </ul>
 </div>
@@ -3454,7 +3487,7 @@ for <em>k</em> components with eigenvalues \(\lambda_i\), the amount of variatio
 <i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
-Know your data - are missing values marked as NaNs (= "Not a Number")?
+Know your data&#8201;&#8212;&#8201;are missing values marked as NaNs (&#8220;Not a Number&#8221;)?
 </td>
 </tr>
 </table>
@@ -3466,7 +3499,8 @@ Know your data - are missing values marked as NaNs (= "Not a Number")?
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-While removing outlier points from a dataset is often a necessary cleaning step, e.g., to obtain better prediction models, you should always be able to explain <em>why</em> you removed these points, as they could also be interesting edge cases. If possible, you should always remove as many outliers as possible with manually crafted rules (e.g., &#8220;when this sensor is 0, the machine is off and the points can be disregarded&#8221;), especially when the dataset contains clusters of outliers, which are also more difficult to detect with data-driven methods.
+Removing outlier points from a dataset is often a necessary cleaning step, e.g., to obtain better prediction models. However, we should always be able to explain <em>why</em> we removed these points, as they could also be interesting edge cases.<br>
+Try to remove as many outliers as possible with manually crafted rules (e.g., &#8220;when this sensor is 0, the machine is off and the points can be disregarded&#8221;), especially when the dataset contains clusters of outliers, which are harder to detect with data-driven methods.
 </td>
 </tr>
 </table>
@@ -3478,7 +3512,7 @@ While removing outlier points from a dataset is often a necessary cleaning step,
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Please note that some of the data points that will be encountered in the future might be outliers as well, i.e., before applying a prediction model to new test points in production, these should be screened for outliers as well, as the predictions for these points would not be accurate if the model was trained on a dataset with outliers removed.
+Please note that some of the data points a prediction model encounters in production might be outliers as well. Therefore, new data needs to be screened for outliers as well, as otherwise these points would force the model to extrapolate beyond the training domain.
 </td>
 </tr>
 </table>
@@ -3489,11 +3523,11 @@ Please note that some of the data points that will be encountered in the future 
 <dl>
 <dt class="hdlist1">Different methods for outlier/anomaly detection</dt>
 <dd>
-<p>There is no one-size-fits-all solution, but depending on the characteristics of your dataset you might want to experiment with some of these approaches:</p>
+<p>There is no one-size-fits-all solution, but depending on the characteristics of the dataset you might want to experiment with some of these approaches:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Detecting multidimensional outlier patterns, especially in datasets with independent data points (see also <a href="https://scikit-learn.org/stable/modules/outlier_detection.html" target="\_blank">sklearn user guide</a>):</p>
+<p>Detect multidimensional outlier patterns, especially in datasets with independent data points (see also <a href="https://scikit-learn.org/stable/modules/outlier_detection.html" target="\_blank">sklearn user guide</a>):</p>
 <div class="ulist">
 <ul>
 <li>
@@ -3515,7 +3549,7 @@ Please note that some of the data points that will be encountered in the future 
 </div>
 </li>
 <li>
-<p>Comparing actual data points to denoised samples or predicted values:</p>
+<p>Compare actual data points to denoised samples or predicted values:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -3528,7 +3562,7 @@ Please note that some of the data points that will be encountered in the future 
 </div>
 </li>
 <li>
-<p>Get creative: you know your data best&#8201;&#8212;&#8201;define rules and custom anomaly KPIs based on your domain knowledge (e.g., set thresholds for what would be considered unrealistic feature values etc.)</p>
+<p>Get creative: you know your data best&#8201;&#8212;&#8201;define rules and custom anomaly KPIs based on your domain knowledge, e.g., set thresholds for what would be considered unrealistic feature values etc.</p>
 </li>
 </ul>
 </div>
@@ -3546,9 +3580,9 @@ Please note that some of the data points that will be encountered in the future 
 <dl>
 <dt class="hdlist1">Main idea</dt>
 <dd>
-<p>compute the average distance of a point to its <em>k</em> nearest neighbors;<br>
-&#8594; points with a large average distance are likely to be outliers<br>
-(&#8658; set a threshold at what average distance the point is considered an outlier)</p>
+<p>Compute the average distance of a point to its <em>k</em> nearest neighbors:<br>
+&#8594; Points with a large average distance are more likely to be outliers.<br>
+&#8658; Set a threshold for the average distance when a point is considered an outlier.</p>
 </dd>
 </dl>
 </div>
@@ -3556,7 +3590,7 @@ Please note that some of the data points that will be encountered in the future 
 <div class="content">
 <img src="images/03_unsupervised/outliers.png" alt="image" width="640">
 </div>
-<div class="title"><span class="small">This is a toy example in 2D, while normally you would compute the Euclidean distance between the points in their (high dimensional) input feature space.</span></div>
+<div class="title"><span class="small">This toy example in 2D, but of course the Euclidean distance between the points can also be computed in higher dimensional features spaces.</span></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3606,7 +3640,7 @@ Please note that some of the data points that will be encountered in the future 
 <div class="ulist">
 <ul>
 <li>
-<p>conceptually very simple and easy to interpret</p>
+<p>Conceptually very simple and easy to interpret.</p>
 </li>
 </ul>
 </div>
@@ -3616,13 +3650,13 @@ Please note that some of the data points that will be encountered in the future 
 <div class="ulist">
 <ul>
 <li>
-<p>computationally expensive for large datasets (distance matrix: \(\mathcal{O}(n^2)\)) &#8594; compute distances to a random subsample of the dataset or to a smaller set of known non-anomalous points instead</p>
+<p>Computationally expensive for large datasets (distance matrix: \(\mathcal{O}(n^2)\)) &#8594; compute distances to a random subsample of the dataset or to a smaller set of known non-anomalous points instead.</p>
 </li>
 <li>
-<p>normalize heterogeneous datasets before computing distances!</p>
+<p>Normalize heterogeneous datasets before computing distances!</p>
 </li>
 <li>
-<p>know your data: does the dataset contain larger clusters of outliers? &#8594; <em>k</em> needs to be large enough such that a tight cluster of outliers is not mistaken as prototypical data points</p>
+<p>Know your data: does the dataset contain larger clusters of outliers? &#8594; <em>k</em> needs to be large enough such that a tight cluster of outliers is not mistaken as prototypical data points.</p>
 </li>
 </ul>
 </div>
@@ -3657,12 +3691,13 @@ Extension for time series data: don&#8217;t identify the <em>k</em> nearest neig
 <dl>
 <dt class="hdlist1">Useful for</dt>
 <dd>
-<p>identifying naturally occurring groups in the data (e.g., for customer segmentation)</p>
+<p>Identifying naturally occurring groups in the data (e.g., for customer segmentation).</p>
 </dd>
 </dl>
 </div>
 <div class="paragraph">
-<p>There exist <a href="https://scikit-learn.org/stable/modules/clustering.html" target="\_blank">quite a lot of different clustering algorithms</a> and we&#8217;ll only present two with different ideas here. If you look at the linked sklearn examples, please note that even though other clustering algorithms might seem to perform very well on fancy toy datasets, data in reality is seldom arranged in two concentric circles, and on real-world datasets the k-means clustering algorithm is often a robust choice.</p>
+<p>There exist <a href="https://scikit-learn.org/stable/modules/clustering.html" target="\_blank">quite a lot of different clustering algorithms</a> and we&#8217;ll only present two with different ideas here.<br>
+<span class="small">When you look at the linked sklearn examples, please note that even though other clustering algorithms might seem to perform very well on fancy toy datasets, data in reality is seldom arranged in two concentric circles, and on real-world datasets the k-means clustering algorithm is often a robust choice.</span></p>
 </div>
 <div class="sect3">
 <h4 id="_k_means_clustering"><em>k</em>-means clustering</h4>
@@ -3673,16 +3708,16 @@ Extension for time series data: don&#8217;t identify the <em>k</em> nearest neig
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>randomly place <em>k</em> cluster centers (where <em>k</em> is a hyperparameter set by the user);</p>
+<p>Randomly place <em>k</em> cluster centers (where <em>k</em> is a hyperparameter set by the user);</p>
 </li>
 <li>
-<p>assign each data point to its closest cluster center;</p>
+<p>Assign each data point to its closest cluster center;</p>
 </li>
 <li>
-<p>update cluster centers as the mean of the assigned data points;</p>
+<p>Update cluster centers as the mean of the assigned data points;</p>
 </li>
 <li>
-<p>repeat steps 2-3 until convergence.</p>
+<p>Repeat steps 2-3 until convergence.</p>
 </li>
 </ol>
 </div>
@@ -3708,7 +3743,7 @@ Extension for time series data: don&#8217;t identify the <em>k</em> nearest neig
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>&#8594; <code>n_clusters</code>: how many clusters (<em>k</em>) you want to find</p>
+<p>&#8594; <code>n_clusters</code>: How many clusters (<em>k</em>) the algorithm should find.</p>
 </li>
 </ul>
 </div>
@@ -3721,10 +3756,10 @@ Extension for time series data: don&#8217;t identify the <em>k</em> nearest neig
 <div class="ulist">
 <ul>
 <li>
-<p>fast</p>
+<p>Fast.</p>
 </li>
 <li>
-<p>usually good results on real world datasets</p>
+<p>Usually good results on real world datasets.</p>
 </li>
 </ul>
 </div>
@@ -3734,13 +3769,13 @@ Extension for time series data: don&#8217;t identify the <em>k</em> nearest neig
 <div class="ulist">
 <ul>
 <li>
-<p>depends on random initialization (&#8594; local optimum, but usually not problematic in practice due to multiple restarts)</p>
+<p>Depends on random initialization &#8594; solution is local optimum, but usually not problematic in practice due to multiple restarts.</p>
 </li>
 <li>
-<p>assumes spherical clusters</p>
+<p>Assumes spherical clusters.</p>
 </li>
 <li>
-<p>need to guess the number of clusters (but can be done with a heuristic; sometimes you also need to find a fixed number of clusters, e.g., if you only have the budged for 3 different marketing initiatives, you want to assign your customers to exactly 3 groups)</p>
+<p>Need to guess the number of clusters. But this can be done with a heuristic and sometimes we also need to find a fixed number of clusters, e.g., if we only have the budged for three different marketing initiatives, we want to assign our customers to exactly three groups.</p>
 </li>
 </ul>
 </div>
@@ -3754,7 +3789,7 @@ Extension for time series data: don&#8217;t identify the <em>k</em> nearest neig
 <dl>
 <dt class="hdlist1">Main idea</dt>
 <dd>
-<p>find &#8216;core samples&#8217; in dense areas of the data and then expand clusters by iteratively including points with a distance &lt; <code>eps</code></p>
+<p>Find &#8216;core samples&#8217; in dense areas of the data and then expand the clusters by iteratively including points with a distance &lt; <code>eps</code>.</p>
 <div class="imageblock text-center">
 <div class="content">
 <img src="images/03_unsupervised/dbscan.png" alt="image" width="840">
@@ -3776,10 +3811,10 @@ Extension for time series data: don&#8217;t identify the <em>k</em> nearest neig
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>&#8594; <code>eps</code>: maximum neighborhood distance of two samples</p>
+<p>&#8594; <code>eps</code>: Maximum neighborhood distance of two samples.</p>
 </li>
 <li>
-<p>&#8594; <code>metric</code>: how to compute the distance in the input feature space</p>
+<p>&#8594; <code>metric</code>: How to compute the distance in the input feature space.</p>
 </li>
 </ul>
 </div>
@@ -3792,10 +3827,10 @@ Extension for time series data: don&#8217;t identify the <em>k</em> nearest neig
 <div class="ulist">
 <ul>
 <li>
-<p>allows for noise (&#8594; can also use the algorithm to detect outliers)</p>
+<p>Allows for noise &#8658; can also be used to detect outliers.</p>
 </li>
 <li>
-<p>no need to guess the number of clusters</p>
+<p>No need to guess the number of clusters.</p>
 </li>
 </ul>
 </div>
@@ -3805,7 +3840,7 @@ Extension for time series data: don&#8217;t identify the <em>k</em> nearest neig
 <div class="ulist">
 <ul>
 <li>
-<p>very dependent on distance measure: may be tricky to get good results for heterogeneous data even after normalization (but: try on text data)</p>
+<p>Very dependent on distance measure: may be tricky to get good results for heterogeneous data even after normalization (but: try on text data).</p>
 </li>
 </ul>
 </div>
@@ -3813,7 +3848,7 @@ Extension for time series data: don&#8217;t identify the <em>k</em> nearest neig
 </dl>
 </div>
 <div class="paragraph">
-<p>&#8594; also check out the <a href="https://hdbscan.readthedocs.io/en/latest/" target="\_blank"><code>hdbscan</code></a> library!</p>
+<p>&#8594; Also check out the <a href="https://hdbscan.readthedocs.io/en/latest/" target="\_blank"><code>hdbscan</code></a> library!</p>
 </div>
 </div>
 </div>
@@ -6792,7 +6827,7 @@ When working with time series data, you should also check for autocorrelation be
 <div class="sect2">
 <h3 id="_model_discriminates">Model discriminates</h3>
 <div class="paragraph">
-<p>As we ponder the true causal relations between variables in the data, we also need to consider whether there are some causal relationships encoded in the historical data that we <em>don&#8217;t</em> want a model to pick up on. For example, discrimination based on gender or ethnicity can leak into the training data, e.g., if white men got systematically lower credit interest rates that can not solely be explained by their higher incomes. If this is the case, we need to take extra measures to make sure that these patterns, although they might have been true causal relationships in the past, are not present in our model now.</p>
+<p>As we ponder the true causal relations between variables in the data, we also need to consider whether there are some causal relationships encoded in the historical data that we <em>don&#8217;t</em> want a model to pick up on. For example, discrimination based on gender or ethnicity can leak into the training data and we need to take extra measures to make sure that these patterns, although they might have been true causal relationships in the past, are not present in our model now.</p>
 </div>
 <div class="dlist">
 <dl>
@@ -6851,28 +6886,56 @@ When working with time series data, you should also check for autocorrelation be
 <div class="ulist">
 <ul>
 <li>
-<p>Tay has seen many more racist and hateful comments and tweets than &#8216;normal&#8217; ones</p>
+<p>Tay has seen many more racist and hateful comments and tweets than &#8216;normal&#8217; ones.</p>
 </li>
 <li>
 <p>In historical texts, women were underrepresented in professions such as doctors, engineers, carpenters, etc.</p>
 </li>
 <li>
-<p>The image dataset Twitter trained its model on included more pictures of white people compared to people of color</p>
+<p>The image dataset Twitter trained its model on included more pictures of white people compared to people of color.</p>
 </li>
 <li>
-<p>Similarly, given a random collection of photos from the internet, these images will have mostly been uploaded by people from developed countries, i.e., pictures displaying the status quo in developing nations will be underrepresented</p>
+<p>Similarly, given a random collection of photos from the internet, these images will have mostly been uploaded by people from developed countries, i.e., pictures displaying the status quo in developing nations are underrepresented.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The first step to mitigating these problems is to become aware of them. While the training sets used to train modern ML models are usually too big to identify and correct all these problems, at least the test set should be well balanced and curated, such that it is possible to notice such a systematic bias, i.e., a poor performance for undersampled subgroups:</p>
+<p>Even more problematic than a mere underrepresentation of certain subgroups (i.e., a skewed input distribution) is a pattern of systematic discrimination against them in historical data (i.e., a discriminatory shift in the assigned labels).</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/07_data_issues/bias_apple_card.png" alt="image" width="550">
+</div>
+<div class="title"><span class="small">A lot of explicit discrimination is often encoded in datasets used to train models for assigning credit scores or determine interest rates for mortgages or loans. Since these application areas have a direct and severe influence on humans' lives, here we have to be especially careful and, for example, check that the model predicts the same score for a man and a woman if all the features of a data point are equal except those encoding a person&#8217;s gender.</span></div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><span class="underline">To summarize:</span> A biased model can negatively affect users in two ways:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Disproportionate product failures, due to skewed sampling. For example, speech recognition models are often less accurate for women, because they were trained on more data collected from men (e.g., transcribed political speeches).</p>
+</li>
+<li>
+<p>Harm by disadvantage / opportunity denial, due to stereotypes encoded in historical data. For example, women are assigned higher credit interest rates than men or people born in foreign countries are deemed less qualified for a job when their resumes are assessed by an automated screening tool.</p>
+</li>
+</ul>
+</div>
+<h5 id="_towards_fair_models" class="discrete">Towards fair models</h5>
+<div class="paragraph">
+<p><span class="underline">1.) Know you have a problem</span><br>
+The first step to mitigating these problems is to become aware of them. We often don&#8217;t notice a poor performance for an undersampled subgroup, because the model performance overall looks fine:</p>
 </div>
 <div class="paragraph text-center">
 <p><span class="image"><img src="images/07_data_issues/bias_unequal_lr.png" alt="image" width="420"></span>
 <span class="image"><img src="images/07_data_issues/bias_equal_lr.png" alt="image" width="420"></span><br></p>
 </div>
 <div class="paragraph text-justify">
-<p><span class="small">These two plots show a simple linear regression model trained on data with 3 subgroups (e.g., subgroups could be based on gender and/or ethnicity). In both cases, the model performs well for the subgroup in the middle, but poorly for the marginalized subgroups. However, when only looking at the overall \(R^2\) value of the model, the poor performance of the model is only apparent when the subgroups are sampled equally, while in the first plot on the left, the performance of the model seems fine since here the good performance of the "main" subgroup drowns out the poor performance on the marginalized subgroups, since they are undersampled. Similarly, for example, it took researchers a while to realize that speech recognition algorithms perform considerably worse for women than men, where again the training and test data mostly contained data from men (e.g., transcribed political speeches).</span></p>
+<p><span class="small">These two plots show a simple linear regression model trained on data with three subgroups (e.g., subgroups could be based on gender and/or ethnicity). In both cases, the model performs well for the subgroup in the middle, but poorly for the marginalized subgroups. However, if we only consider at the overall \(R^2\) value of the model, the performance of the model on the left seems fine, since here the good performance on the &#8216;main&#8217; subgroup drowns out the poor performance on the undersampled marginalized subgroups. The poor performance of the model is only apparent when the subgroups are sampled equally.</span></p>
 </div>
 <div class="paragraph">
 <p>Therefore:</p>
@@ -6883,33 +6946,26 @@ When working with time series data, you should also check for autocorrelation be
 <p>Assess the model&#8217;s performance for each (known) subgroup individually by slicing the data accordingly to verify that the prediction errors of the model are random and the model is not systematically worse for some subgroups / data slices.</p>
 </li>
 <li>
-<p>If it is not possible to obtain a well balanced training and/or test set, assign higher sample weights to data points from undersampled subgroups to make sure the algorithm pays enough attention to them during training and they are given more weight in the evaluation of the model (similar to using the balanced accuracy).</p>
+<p>If it is not possible to obtain a well balanced training and/or test set, assign higher sample weights to data points from undersampled subgroups to make sure the algorithm pays enough attention to them during training and they are given more weight when evaluating the model (similar to using the balanced accuracy).</p>
+</li>
+<li>
+<p>Check if/how the model&#8217;s prediction changes when everything about a data point is the same except attributes encoding gender / age / ethnicity / etc.</p>
+</li>
+<li>
+<p>Interpret the model to see whether features encoding subgroup-specific information have an unexpectedly high influence on the prediction.</p>
 </li>
 </ul>
 </div>
-<h5 id="_explicit_discrimination" class="discrete">Explicit discrimination</h5>
 <div class="paragraph">
-<p>Even more problematic than a mere underrepresentation of certain subgroups (i.e., a skewed input distribution) is a pattern of systematic discrimination against them in historical data (i.e., a discriminatory shift in the assigned labels).</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/07_data_issues/bias_apple_card.png" alt="image" width="550">
-</div>
-<div class="title"><span class="small">A lot of explicit discrimination is often encoded in many datasets used to train models for assigning credit scores or determine interest rates for mortgages or loans. Since these application areas have a direct and severe influence on humans' lives, here you have to be especially careful and, for example, check that your model predicts the same score for a man and a woman if all the features of a data point are equal except those encoding a person&#8217;s gender.</span></div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>In general, you should always be very careful when including variables in the model that encode attributes such as gender or ethnicity. For example, the performance of a model that diagnoses heart attacks will most likely be improved by including &#8216;gender&#8217; as a feature, since men and women present different symptoms when they have a heart attack.</p>
+<p><span class="underline">2.) Learn a fair model</span><br>
+In general, we should also <strong>be careful when including variables in the model that encode attributes such as gender or ethnicity</strong>. For example, the performance of a model that diagnoses heart attacks will most likely be improved by including &#8216;gender&#8217; as a feature, since men and women present different symptoms when they have a heart attack.</p>
 </div>
 <div class="paragraph text-center">
 <p><span class="image"><img src="images/07_data_issues/bias_simpson_lr.png" alt="image" width="420"></span>
 <span class="image"><img src="images/07_data_issues/bias_simpson_lrd.png" alt="image" width="405"></span><br></p>
 </div>
 <div class="paragraph text-justify">
-<p><span class="small">In the plot on the right, additional dummy variables to represent the different subgroups in the data are included in the model and improve its predictive performance. While this can make the bias of a model explicit, should this information be included at all? (By the way, this is also an example of <a href="https://en.wikipedia.org/wiki/Simpson&#8217;s_paradox" target="\_blank">Simpson&#8217;s paradox</a>, where the coefficients reverse their sign when additional features are included.)</span></p>
+<p><span class="small">In the plot on the right, additional dummy variables to represent the different subgroups in the data are included in the model and improve its predictive performance. While this can make the bias of a model explicit, should this information be included at all? (By the way, this is also an example of <a href="https://en.wikipedia.org/wiki/Simpson&#8217;s_paradox" target="\_blank">Simpson&#8217;s paradox</a>, where the model&#8217;s coefficients reverse their sign when additional features are included.)</span></p>
 </div>
 <div class="paragraph">
 <p>A model that assigns someone a credit score should probably not rely on the gender of the person for this decision, since, even though this might have been the case in the historical data because the humans that generated the data relied on their own stereotypes, women should not get a lower score just because they are female.</p>
@@ -6918,7 +6974,7 @@ When working with time series data, you should also check for autocorrelation be
 <p>However, a person&#8217;s gender or ethnicity, for example, is often correlated with other variables such as income or neighborhood, so even inconspicuous features can still leak problematic information to the model. Therefore, in those cases one should take some extra steps to ensure the model does not discriminate based on these features.</p>
 </div>
 <div class="paragraph">
-<p>This can, for example, be achieved by setting up a neural network that learns subgroup-invariant feature representations:</p>
+<p>This can, for example, be achieved by setting up a neural network that learns <strong>subgroup-invariant feature representations</strong>:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -6960,21 +7016,23 @@ When working with time series data, you should also check for autocorrelation be
 <div class="ulist">
 <ul>
 <li>
-<p><span class="underline">Local</span> Explainability: explain individual predictions (&#8594; which features from one particular sample lead the model to make a certain prediction (e.g., visualized as a heatmap like that over the image of a horse in the previous section, where the classification decision was made mostly because of the copyright notice))</p>
+<p><span class="underline">Local</span> Explainability: explain individual predictions.<br>
+&#8594; Which features from one particular sample swayed the model to make a certain prediction? This can, for example, be visualized as a heatmap like that over the image of a horse, where the classification decision was made mostly <a href="#_model_abuses_spurious_correlations">because of the copyright notice</a>.</p>
 </li>
 <li>
-<p><span class="underline">Global</span> Explainability: explain the model behavior in general (&#8594; which features are most important over all)</p>
+<p><span class="underline">Global</span> Explainability: explain the model behavior in general.<br>
+&#8594; Which features are most important over all?</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
 <p>&#8594; Some models are <em>intrinsically interpretable</em> (e.g., linear models, decision trees), others require <em>model-agnostic methods</em> to make them explainable, i.e., for these models the interpretability does not come for free.</p>
 </div>
-<div class="admonitionblock caution">
+<div class="admonitionblock important">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-caution" title="Caution"></i>
+<i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
 Explaining a model and its predictions helps to understand what it learned from the data and why it makes certain mistakes. But only when the model has a good predictive performance <em>and</em> there is reason to believe that the model actually captured the true causal relationship between the inputs and targets, then these explanations might shed light on the <a href="https://towardsdatascience.com/e68626e664b6" target="\_blank">true root causes</a> of the underlying process as well. Always discuss the results with a domain expert!
@@ -6989,16 +7047,16 @@ Explaining a model and its predictions helps to understand what it learned from 
 <div class="ulist">
 <ul>
 <li>
-<p>Correlated features can lead to misrepresented feature importances! (For example, when using a random forest, one decision tree might use one feature in the root node, while another decision tree uses a second feature that is correlated with the first, which means that overall it seems that both features are only somewhat important, while in fact they are just interchangeable and therefore their true feature importance would be the sum of the two individual feature importances.)</p>
+<p>Correlated features can lead to misrepresented feature importances! For example, when using a random forest, one decision tree might use one feature in the root node, while another decision tree uses a second feature that is correlated with the first, which means that overall it seems that both features are only somewhat important, while in fact they are just interchangeable and therefore their true feature importance would be the sum of the two individual feature importances.</p>
 </li>
 <li>
-<p>Beware of <a href="https://en.wikipedia.org/wiki/Simpson%27s_paradox" target="\_blank">Simpson&#8217;s paradox</a></p>
+<p>Beware of <a href="https://en.wikipedia.org/wiki/Simpson%27s_paradox" target="\_blank">Simpson&#8217;s paradox</a>.</p>
 </li>
 <li>
-<p>Possibly look at results for different subsamples of the data</p>
+<p>Possibly look at results for different subsamples of the data.</p>
 </li>
 <li>
-<p>Compare feature importances obtained for different models to get a better feeling for which features truly matter for the problem (e.g., investigate why a linear model and a decision tree might base their decisions on different features)</p>
+<p>Compare feature importances obtained for different models to get a better feeling for which features truly matter for the problem, e.g., investigate why a linear model and a decision tree might base their decisions on different features.</p>
 </li>
 </ul>
 </div>
@@ -7006,58 +7064,62 @@ Explaining a model and its predictions helps to understand what it learned from 
 </dl>
 </div>
 <div class="paragraph">
-<p><span class="underline">Recommended Reading:</span> <a href="https://christophm.github.io/interpretable-ml-book/" target="\_blank">Interpretable ML Book</a>, which additionally covers some more advanced methods (however, please keep in mind that explainable AI is about understanding better what happens&#8201;&#8212;&#8201;if you use a complex method to explain your model (e.g., the popular SHAP values) where it is difficult to understand how the explanations were derived, then this might instead result in further uncertainty).</p>
+<p><span class="underline">Recommended Reading:</span> <a href="https://christophm.github.io/interpretable-ml-book/" target="\_blank">Interpretable ML Book</a>, which additionally covers some more advanced methods. However, please keep in mind that explainable AI is about understanding better what happens&#8201;&#8212;&#8201;if you use a complex method to explain a model (e.g., the popular SHAP values) where it is difficult to understand how the explanations were derived, then this might instead result in further uncertainty.</p>
 </div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_explaining_decision_trees_random_forests">Explaining Decision Trees (&amp; Random Forests)</h4>
 <div class="paragraph">
-<p><strong>Explaining individual predictions</strong>: retrace decision path (in a single tree)</p>
+<p><strong>Explaining individual predictions</strong>: retrace decision path (in a single tree).</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="images/07_explainability/expl_dt.png" alt="image" width="540">
 </div>
-<div class="title"><span class="small">This is an example of a decision tree plot generated with <code>sklearn</code>. The decision tree has its root at the top (where you start when predicting for a new sample) and the leaves (i.e., those nodes that don&#8217;t branch off anymore) at the bottom (where you stop and make the final prediction). Each node in the tree shows in the first line the variable based on which the next split is made incl. the threshold value (except for leaf nodes), then the current Gini impurity (i.e., how homogeneous the labels of all the samples that ended up in this node are; this is what the decision tree internally optimizes, i.e., notice how the value gets smaller on at least one side after a split), then the fraction of samples that ended up in this node, and the distribution of samples into the different classes (for a classification problem), as well as the label that would be predicted for a sample at this point. So when making a prediction for a new sample with a decision tree, you start at the root node of the tree and then follow the branches down depending on the sample&#8217;s feature values until you reach a leaf node and would then know exactly based on which feature thresholds the prediction for the sample was made.</span></div>
+<div class="title"><span class="small">This is an example of a decision tree plot generated with <code>sklearn</code>. The decision tree has its root at the top (where we start when predicting for a new sample) and the leaves (i.e., those nodes that don&#8217;t branch off anymore) at the bottom (where we stop and make the final prediction). Each node in the tree shows in the first line the variable based on which the next split is made incl. the threshold value (except for leaf nodes), then the current Gini impurity (i.e., how homogeneous the labels of all the samples that ended up in this node are; this is what the decision tree internally optimizes, i.e., notice how the value gets smaller on at least one side after a split), then the fraction of samples that ended up in this node, and the distribution of samples for the different classes (for a classification problem), as well as the label that would be predicted for a sample at this point. So when making a prediction for a new sample with a decision tree, we start at the root node of the tree and then follow the branches down depending on the sample&#8217;s feature values until we reach a leaf node and would then know exactly based on which feature thresholds the prediction for the sample was made.</span></div>
 </div>
 <div class="paragraph">
-<p><strong>Global interpretation</strong>: a trained decision tree or random forest has an attribute <code>feature_importances_</code>, which indicates how much each feature contributed to reducing the (Gini) impurity. (Depends on the position of the feature in the tree and how many samples pass through this node.)</p>
+<p><strong>Global interpretation</strong>: a trained decision tree or random forest has an attribute <code>feature_importances_</code>, which indicates how much each feature contributed to reducing the (Gini) impurity. This is related to the position of the feature in the tree and how many samples pass through the respective node.</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="images/07_explainability/expl_dt_featimp.png" alt="image" width="400">
 </div>
-<div class="title"><span class="small">This is just a bar plot of the values from the <code>feature_importances_</code> attribute of the decision tree shown above. When you&#8217;re using a random forest instead of a single decision tree, it would be impractical to plot all of the individual trees contained in the forest to explain individual predictions, but a random forest at least also has the <code>feature_importances_</code> attribute to examine the global importance of the different features.</span></div>
+<div class="title"><span class="small">This is just a bar plot of the values from the <code>feature_importances_</code> attribute of the decision tree shown above. When we&#8217;re using a random forest instead of a single decision tree, it would be impractical to plot all of the individual trees contained in the forest to explain individual predictions, but a random forest at least also has the <code>feature_importances_</code> attribute to examine the global importance of the different features.</span></div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_explaining_linear_models_neural_networks">Explaining Linear Models (&amp; Neural Networks)</h4>
 <div class="paragraph">
-<p>Since the formula used to make predictions with a linear model is very simple, you can easily understand what is going on. To assess the importance of individual features, either for a single sample or overall, the sum can be decomposed into its individual components:<br>
+<p>Since the formula used to make predictions with a linear model is very simple, we can easily understand what is going on. To assess the importance of individual features, either for a single sample or overall, the sum can be decomposed into its individual components:<br>
 \(\hat{y} = b + \sum_{k=1}^d w_k \cdot x_k\) &#8658; effect of feature <em>k</em> for ith data point: \(w_k \cdot x_k^{(i)}\):</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="images/07_explainability/expl_lm_effects.png" alt="image" width="540">
 </div>
-<div class="title"><span class="small">The feature effects for a single sample are indicated by the red crosses, i.e., these show whether each feature contributed positively or negatively (or not at all) to the final prediction for this one sample. By computing the feature effects for all samples, we can generate the box plots shown below the red crosses, which display the distribution of feature effects for all samples and therefore indicate which features are overall important for the prediction (= those with the largest absolute values). For example, in this plot you can see that the feature 'AveOccup' has an effect of around zero for all but one sample, which indicates that the model might have overfit on one outlier point and it might be best to exclude this feature altogether.</span></div>
+<div class="title"><span class="small">The feature effects for a single sample are indicated by the red crosses, i.e., these show whether each feature contributed positively or negatively (or not at all) to the final prediction for this one sample. By computing the feature effects for all samples, we can generate the box plots shown below the red crosses, which display the distribution of feature effects for all samples and therefore indicate which features are overall important for the prediction (= those with the largest absolute values). For example, in this plot we can see that the feature 'AveOccup' has an effect of around zero for all but one sample, which indicates that the model might have overfit on one outlier point and it might be best to exclude this feature altogether.</span></div>
 </div>
 <div class="paragraph">
-<p>&#8594; It is easier to understand and validate the results if only a few features are considered important, therefore you might want to use a L1-regularized model (e.g., <code>linear_model.LassoLarsCV</code>) to get sparse weights.</p>
+<p>&#8594; It is easier to understand and validate the results if only a few features are considered important. Use an L1-regularized model (e.g., <code>linear_model.LassoLarsCV</code>) to get sparse weights.</p>
 </div>
 <div class="paragraph">
-<p><span class="underline">Generalization for neural networks:</span> <strong>Layer-wise Relevance Propagation (LRP)</strong>: similar to how the prediction of the linear model was split up into the contributions of the individual input features, by keeping track of the gradients in a neural network, here as well the decision can be decomposed to obtain the influence of each feature on the final prediction. This is similar to what happens in the backpropagation procedure when training the network, only that with LRP not the prediction error, but the prediction itself is propagated backwards layer by layer (hence the name) until we arrive at the input layer and get the individual contributions of the features.<br>
-(For <code>torch</code> networks, this approach is implemented in the <a href="https://captum.ai/" target="\_blank"><code>captum</code> library</a> as the &#8216;Input X Gradient&#8217; method. The library also contains many other methods for interpreting neural networks, however, I find this the most natural approach, since it is a direct extension of the intuitive feature effects approach used to interpret linear models.)</p>
+<p><span class="underline">Generalization for neural networks:</span> <strong>Layer-wise Relevance Propagation (LRP)</strong>: Similar to how the prediction of the linear model was split up into the contributions of the individual input features, by keeping track of the gradients in a neural network, the decision can be decomposed as well to obtain the influence of each feature on the final prediction. This is similar to what happens in the backpropagation procedure when training the network, only that with LRP not the prediction error, but the prediction itself is propagated backwards layer by layer (hence the name) until we arrive at the input layer and get the individual contributions of the features.<br>
+<span class="small">For <code>torch</code> networks, this approach is implemented in the <a href="https://captum.ai/" target="\_blank"><code>captum</code> library</a> as the &#8216;Input X Gradient&#8217; method. The library also contains many other methods for interpreting neural networks, however, I find this the most natural approach, since it is a direct extension of the intuitive feature effects approach used to interpret linear models.</span></p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_global_model_agnostic_permutation_feature_importance">[Global] Model-agnostic: permutation feature importance</h4>
 <div class="paragraph">
 <p>The first question when it comes to global explainability is always &#8220;Which features are important?&#8221;, i.e., how much does the model rely on each feature when making its predictions?
-You can shed light on this using the permutation importance, which, for each feature, is computed like this:<br>
-&#8216;Feature importance&#8217; = &#8216;performance of trained model on original dataset&#8217; minus &#8216;performance when values for this feature are shuffled&#8217;.<br>
-I.e., first, a trained model is normally evaluated on the original dataset (either training or test set), then for one feature the values for all samples are permuted and the performance of the trained model on this modified dataset is computed again. If there is a big discrepancy between the performance on the original and permuted datasets, this means the model heavily relies on this feature to make correct predictions, while if there is no difference, then this feature is not relevant (e.g., a linear model that has a coefficient of zero for one feature would not change its predictions if this feature was shuffled).</p>
+We can shed light on this using the permutation importance, which, for each feature, is computed like this:</p>
+</div>
+<div class="paragraph">
+<p>&#8216;Feature importance&#8217; = &#8216;performance of trained model on original dataset&#8217; minus &#8216;performance when values for this feature are shuffled&#8217;.</p>
+</div>
+<div class="paragraph">
+<p>I.e., first, a trained model is normally evaluated on the original dataset (either training or test set), then for one feature the values from all samples are permuted and the performance of the trained model on this modified dataset is computed again. If there is a big discrepancy between the performance on the original and permuted dataset, this means the model heavily relies on this feature to make correct predictions, while if there is no difference, then this feature is not relevant. For example, a linear model that has a coefficient of zero for one feature would not change its predictions if this feature was shuffled.</p>
 </div>
 <div class="paragraph">
 <p>Since a single permutation of a feature might by chance shuffle the values in a way that is close to the original ordering, this process is performed multiple times, i.e., we get a distribution of the permutation importance scores for each feature, which can again be visualized as a box plot:</p>
@@ -7076,10 +7138,13 @@ I.e., first, a trained model is normally evaluated on the original dataset (eith
 <div class="sect3">
 <h4 id="_global_model_agnostic_influence_of_individual_features_on_prediction">[Global] Model-agnostic: influence of individual features on prediction</h4>
 <div class="paragraph">
-<p>After you&#8217;ve identified which features are important for a model in general, you can dig deeper to see <em>how</em> each of these features influences the final prediction. A simple way to accomplish this is with <strong>Individual Conditional Expectation (ICE) &amp; Partial Dependence (PD) Plots</strong>. These are generated by taking some samples and systematically vary the feature in question (i.e., set it to many different values within the normal range of values for this feature while keeping everything else about the data points the same) and then observe by how much and in which direction the predictions for these samples change in response to the different values set for the feature.</p>
+<p>After we&#8217;ve identified which features are important for a model in general, we can dig deeper to see <em>how</em> each of these features influences the final prediction. A simple way to accomplish this is with <strong>Individual Conditional Expectation (ICE) &amp; Partial Dependence (PD) Plots</strong>.</p>
 </div>
 <div class="paragraph">
-<p>The ICE plot then shows the results for individual samples (thin lines), while the PD plot shows the averaged values (thick line), where the ICE plot can be used to verify that some opposite changes in individual samples are not averaged out in the PD plot:</p>
+<p>To generate these plots, we take some samples and systematically vary the feature in question for each sample, i.e., set it to many different values within the normal range of values for this feature while keeping everything else about the data points the same. We then observe by how much and in which direction the predictions for these samples change in response to the different values set for the feature.</p>
+</div>
+<div class="paragraph">
+<p>The ICE plot shows the results for individual samples (thin lines), while the PD plot shows the averaged values (thick line), where the ICE plot can be used to verify that some opposite changes in individual samples are not averaged out in the PD plot:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -7093,7 +7158,8 @@ I.e., first, a trained model is normally evaluated on the original dataset (eith
 <i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
-One big drawback of this approach is that it assumes that features are independent of each other, i.e., since the features are varied individually, this can result in unrealistic feature combinations (e.g., if one feature is the height of a person (in the range of 60-200cm) and another feature is the weight (30-120kg), then when these features are varied independently, at some point we would evaluate a data point with height: 200cm and weight: 30kg, which seems like a very unhealthy combination). However, by examining the ICE plot for possibly erratic changes for individual samples, this can usually be spotted. And in general&#8201;&#8212;&#8201;this goes for all explainability methods&#8201;&#8212;&#8201;the results should not be over-interpreted, i.e., they are good for showing rough trends, but remember that the plots might also look completely different when you use them with a different type of model trained on the same dataset, i.e., be careful before concluding anything about the root causes of a problem based on these results.
+One big drawback of this approach is that it assumes that the features are independent of each other, i.e., since the features are varied individually, this could otherwise result in unrealistic feature combinations. For example, if one feature is the height of a person (in the range of 60-200cm) and another feature is the weight (30-120kg), then when these features are varied independently, at some point we would evaluate a data point with height: 200cm and weight: 30kg, which seems like a very unhealthy combination.<br>
+However, by examining the ICE plot for possibly erratic changes for individual samples, this can usually be spotted. And in general&#8201;&#8212;&#8201;this goes for all explainability methods&#8201;&#8212;&#8201;the results should not be over-interpreted, i.e., they are good for showing rough trends, but remember that the plots might also look completely different for a different type of model trained on the same dataset, i.e., be careful before concluding anything about the root causes of a problem based on these results.
 </td>
 </tr>
 </table>
@@ -7105,7 +7171,7 @@ One big drawback of this approach is that it assumes that features are independe
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Usually, you want a model that reacts smoothly to changes in the input data. Drastic changes in the decision function as a result of minor changes to the input data suggest that a model might be vulnerable to an adversarial attack.
+Usually, we want a model that reacts smoothly to changes in the input data. Drastic changes in the decision function as a result of minor changes to the input data suggest that a model might be vulnerable to an adversarial attack. Data augmentation can help decrease the model&#8217;s sensitivity to noise and other minor variations in the input data.
 </td>
 </tr>
 </table>
@@ -7124,16 +7190,17 @@ Usually, you want a model that reacts smoothly to changes in the input data. Dra
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>generate a local neighborhood dataset through small perturbations of the sample&#8217;s feature vector</p>
+<p>Generate a local neighborhood dataset through small perturbations of the sample&#8217;s feature vector.</p>
 </li>
 <li>
-<p>use the original model to predict labels for these new points (i.e., generate an artificial labeled training set for the local surrogate model)</p>
+<p>Use the original model to predict labels for these new points, i.e., generate an artificial labeled training set for the local surrogate model.</p>
 </li>
 <li>
-<p>train an intrinsically interpretable model on the neighborhood dataset (e.g., a linear model, i.e., while the decision surface of the original model might be very complex, we assume that we can approximate it locally with a linear function)</p>
+<p>Train an intrinsically interpretable model (e.g., a linear model) on the neighborhood dataset.<br>
+&#8658; The decision surface of the original model is very complex, but we assume that it can be approximated locally with a linear function.</p>
 </li>
 <li>
-<p>interpret the local surrogate model&#8217;s prediction for the sample</p>
+<p>Interpret the local surrogate model&#8217;s prediction for the sample of interest.</p>
 </li>
 </ol>
 </div>
@@ -7144,7 +7211,7 @@ Usually, you want a model that reacts smoothly to changes in the input data. Dra
 <i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
-explaining ML with more ML&#8230;&#8203;
+Explaining ML with more ML&#8230;&#8203;
 </td>
 </tr>
 </table>
@@ -7161,10 +7228,10 @@ explaining ML with more ML&#8230;&#8203;
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Prototypes</strong>: representative samples, e.g., cluster centroids</p>
+<p><strong>Prototypes</strong>: Representative samples, e.g., cluster centroids.</p>
 </li>
 <li>
-<p><strong>Optimal inputs</strong>: optimized samples that result in a strong prediction of the given target. For example, in a neural network you can also optimize the input instead of the weights:</p>
+<p><strong>Optimal inputs</strong>: Optimized samples that result in a strong prediction of the given target. For example, in a neural network we can also optimize the input instead of the weights:</p>
 <div class="imageblock text-center">
 <div class="content">
 <img src="images/07_explainability/optimal_inputs.png" alt="image" width="600">
@@ -7173,10 +7240,10 @@ explaining ML with more ML&#8230;&#8203;
 </div>
 </li>
 <li>
-<p><strong>Counterfactual examples</strong>: samples with minor modifications that change the prediction (e.g., similar to how the optimal inputs are generated you can also start with an image from a different class (instead of random noise) and adapt it until the network changes its prediction for it)</p>
+<p><strong>Counterfactual examples</strong>: Samples with minor modifications that change the prediction. For example, similar to how the optimal inputs are generated, we can also start with an image from a different class (instead of random noise) and adapt it until the network changes its prediction for it.</p>
 </li>
 <li>
-<p><strong>Adversarial examples</strong>: counterfactual examples where a human doesn&#8217;t notice the change</p>
+<p><strong>Adversarial examples</strong>: Counterfactual examples where a human doesn&#8217;t notice the change.</p>
 </li>
 </ul>
 </div>

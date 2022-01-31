@@ -815,10 +815,10 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="ulist">
 <ul>
 <li>
-<p>detecting anomalies for monitoring purposes (e.g., machine failures or fraudulent credit card transactions)<br></p>
+<p>Detecting anomalies for monitoring purposes, e.g., machine failures or fraudulent credit card transactions.<br></p>
 </li>
 <li>
-<p>removing outliers from the dataset to improve the performance of other algorithms</p>
+<p>Removing outliers from the dataset to improve the performance of other algorithms.</p>
 </li>
 </ul>
 </div>
@@ -826,21 +826,31 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </dl>
 </div>
 <div class="paragraph">
-<p>When trying to remove outliers or detect anomalies, there are many things that need to be considered:</p>
+<p>Things to consider when trying to remove outliers or detect anomalies:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Does the dataset consist of <strong>independent data points or time series data</strong> with dependencies?</p>
+<p>Does the dataset consist of <strong>independent data points</strong> or <strong>time series data</strong> with dependencies?</p>
 </li>
 <li>
-<p>Are you looking for <strong>outliers in individual dimensions</strong> (e.g., in time series data you might not see a failure in all sensors simultaneously, but only one sensor might act up spontaneously (i.e., show a value very different from the previous time point), which would be enough to rule this time point an anomaly irrespective of the values of the other sensors) or is it necessary to consider <strong>multidimensional outlier patterns</strong> (e.g., for independent data points individual feature values might not seem anomalous by themselves, only when considered in combination with the data point&#8217;s other feature values (e.g., a \(35 m^2\) apartment could be a nice studio, but if this apartment is also supposed to have 5 bedrooms then something is off))?</p>
+<p>Are you trying to detect</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>outliers in individual dimensions</strong>? For example, in time series data we might not see a failure in all sensors simultaneously, but only one sensor acts up spontaneously, i.e., shows a value very different from the previous time point, which would be enough to rule this time point an anomaly irrespective of the values of the other sensors.</p>
 </li>
 <li>
-<p>Are you expecting a few <strong>individual outliers or clusters</strong> of outliers (the latter is especially common in time series data, where, e.g., a machine might experience an issue for several minutes or even hours before the signals look normal again)? Clusters of outliers are more tricky to detect, especially if the data also contains other &#8216;legitimate&#8217; clusters of normal points. Domain expertise is key here!</p>
+<p><strong>multidimensional outlier patterns</strong>? Individual feature values of independent data points might not seem anomalous by themselves, only when considered in combination with the data point&#8217;s other feature values. For example, a 35 \(m^2\) apartment could be a nice studio, but if this apartment supposedly has 5 bedrooms, then something is off.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p>Do you have any <strong>labels</strong> available? E.g., while you might not know what the different kinds of (future) anomalies could look like, maybe you <em>do</em> know what normal data points look like, which is important information that you can make use of by checking how far new points deviate from these normal points (also called novelty detection).</p>
+<p>Are you expecting a few <strong>individual outliers</strong> or <strong>clusters of outliers</strong>? The latter is especially common in time series data, where, e.g., a machine might experience an issue for several minutes or even hours before the signals look normal again. Clusters of outliers are more tricky to detect, especially if the data also contains other &#8216;legitimate&#8217; clusters of normal points. Domain expertise is key here!</p>
+</li>
+<li>
+<p>Do you have any <strong>labels</strong> available? While we might not know what the different kinds of (future) anomalies look like, maybe we <em>do</em> know what normal data points look like, which is important information that we can use to check how far new points deviate from these normal points, also called novelty detection.</p>
 </li>
 </ul>
 </div>
@@ -851,7 +861,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
-Know your data - are missing values marked as NaNs (= "Not a Number")?
+Know your data&#8201;&#8212;&#8201;are missing values marked as NaNs (&#8220;Not a Number&#8221;)?
 </td>
 </tr>
 </table>
@@ -863,7 +873,8 @@ Know your data - are missing values marked as NaNs (= "Not a Number")?
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-While removing outlier points from a dataset is often a necessary cleaning step, e.g., to obtain better prediction models, you should always be able to explain <em>why</em> you removed these points, as they could also be interesting edge cases. If possible, you should always remove as many outliers as possible with manually crafted rules (e.g., &#8220;when this sensor is 0, the machine is off and the points can be disregarded&#8221;), especially when the dataset contains clusters of outliers, which are also more difficult to detect with data-driven methods.
+Removing outlier points from a dataset is often a necessary cleaning step, e.g., to obtain better prediction models. However, we should always be able to explain <em>why</em> we removed these points, as they could also be interesting edge cases.<br>
+Try to remove as many outliers as possible with manually crafted rules (e.g., &#8220;when this sensor is 0, the machine is off and the points can be disregarded&#8221;), especially when the dataset contains clusters of outliers, which are harder to detect with data-driven methods.
 </td>
 </tr>
 </table>
@@ -875,7 +886,7 @@ While removing outlier points from a dataset is often a necessary cleaning step,
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Please note that some of the data points that will be encountered in the future might be outliers as well, i.e., before applying a prediction model to new test points in production, these should be screened for outliers as well, as the predictions for these points would not be accurate if the model was trained on a dataset with outliers removed.
+Please note that some of the data points a prediction model encounters in production might be outliers as well. Therefore, new data needs to be screened for outliers as well, as otherwise these points would force the model to extrapolate beyond the training domain.
 </td>
 </tr>
 </table>
@@ -886,11 +897,11 @@ Please note that some of the data points that will be encountered in the future 
 <dl>
 <dt class="hdlist1">Different methods for outlier/anomaly detection</dt>
 <dd>
-<p>There is no one-size-fits-all solution, but depending on the characteristics of your dataset you might want to experiment with some of these approaches:</p>
+<p>There is no one-size-fits-all solution, but depending on the characteristics of the dataset you might want to experiment with some of these approaches:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Detecting multidimensional outlier patterns, especially in datasets with independent data points (see also <a href="https://scikit-learn.org/stable/modules/outlier_detection.html" target="\_blank">sklearn user guide</a>):</p>
+<p>Detect multidimensional outlier patterns, especially in datasets with independent data points (see also <a href="https://scikit-learn.org/stable/modules/outlier_detection.html" target="\_blank">sklearn user guide</a>):</p>
 <div class="ulist">
 <ul>
 <li>
@@ -912,7 +923,7 @@ Please note that some of the data points that will be encountered in the future 
 </div>
 </li>
 <li>
-<p>Comparing actual data points to denoised samples or predicted values:</p>
+<p>Compare actual data points to denoised samples or predicted values:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -925,7 +936,7 @@ Please note that some of the data points that will be encountered in the future 
 </div>
 </li>
 <li>
-<p>Get creative: you know your data best&#8201;&#8212;&#8201;define rules and custom anomaly KPIs based on your domain knowledge (e.g., set thresholds for what would be considered unrealistic feature values etc.)</p>
+<p>Get creative: you know your data best&#8201;&#8212;&#8201;define rules and custom anomaly KPIs based on your domain knowledge, e.g., set thresholds for what would be considered unrealistic feature values etc.</p>
 </li>
 </ul>
 </div>
@@ -943,9 +954,9 @@ Please note that some of the data points that will be encountered in the future 
 <dl>
 <dt class="hdlist1">Main idea</dt>
 <dd>
-<p>compute the average distance of a point to its <em>k</em> nearest neighbors;<br>
-&#8594; points with a large average distance are likely to be outliers<br>
-(&#8658; set a threshold at what average distance the point is considered an outlier)</p>
+<p>Compute the average distance of a point to its <em>k</em> nearest neighbors:<br>
+&#8594; Points with a large average distance are more likely to be outliers.<br>
+&#8658; Set a threshold for the average distance when a point is considered an outlier.</p>
 </dd>
 </dl>
 </div>
@@ -953,7 +964,7 @@ Please note that some of the data points that will be encountered in the future 
 <div class="content">
 <img src="../images/03_unsupervised/outliers.png" alt="image" width="640">
 </div>
-<div class="title"><span class="small">This is a toy example in 2D, while normally you would compute the Euclidean distance between the points in their (high dimensional) input feature space.</span></div>
+<div class="title"><span class="small">This toy example in 2D, but of course the Euclidean distance between the points can also be computed in higher dimensional features spaces.</span></div>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1003,7 +1014,7 @@ Please note that some of the data points that will be encountered in the future 
 <div class="ulist">
 <ul>
 <li>
-<p>conceptually very simple and easy to interpret</p>
+<p>Conceptually very simple and easy to interpret.</p>
 </li>
 </ul>
 </div>
@@ -1013,13 +1024,13 @@ Please note that some of the data points that will be encountered in the future 
 <div class="ulist">
 <ul>
 <li>
-<p>computationally expensive for large datasets (distance matrix: \(\mathcal{O}(n^2)\)) &#8594; compute distances to a random subsample of the dataset or to a smaller set of known non-anomalous points instead</p>
+<p>Computationally expensive for large datasets (distance matrix: \(\mathcal{O}(n^2)\)) &#8594; compute distances to a random subsample of the dataset or to a smaller set of known non-anomalous points instead.</p>
 </li>
 <li>
-<p>normalize heterogeneous datasets before computing distances!</p>
+<p>Normalize heterogeneous datasets before computing distances!</p>
 </li>
 <li>
-<p>know your data: does the dataset contain larger clusters of outliers? &#8594; <em>k</em> needs to be large enough such that a tight cluster of outliers is not mistaken as prototypical data points</p>
+<p>Know your data: does the dataset contain larger clusters of outliers? &#8594; <em>k</em> needs to be large enough such that a tight cluster of outliers is not mistaken as prototypical data points.</p>
 </li>
 </ul>
 </div>

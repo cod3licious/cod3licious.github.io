@@ -2597,7 +2597,7 @@ Or, equally problematic, one could add such a copyright notice to a picture of a
 <div class="sect2">
 <h3 id="_pitfall_4_model_discriminates">[Pitfall #4] Model discriminates</h3>
 <div class="paragraph">
-<p>As we ponder the true causal relations between variables in the data, we also need to consider whether there are some causal relationships encoded in the historical data that we <em>don&#8217;t</em> want a model to pick up on. For example, discrimination based on gender or ethnicity can leak into the training data, e.g., if white men got systematically lower credit interest rates that can not solely be explained by their higher incomes. If this is the case, we need to take extra measures to make sure that these patterns, although they might have been true causal relationships in the past, are not present in our model now.</p>
+<p>As we ponder the true causal relations between variables in the data, we also need to consider whether there are some causal relationships encoded in the historical data that we <em>don&#8217;t</em> want a model to pick up on. For example, discrimination based on gender or ethnicity can leak into the training data and we need to take extra measures to make sure that these patterns, although they might have been true causal relationships in the past, are not present in our model now.</p>
 </div>
 <div class="dlist">
 <dl>
@@ -2646,18 +2646,15 @@ Or, equally problematic, one could add such a copyright notice to a picture of a
 <div class="ulist">
 <ul>
 <li>
-<p>Tay has seen many more racist and hateful comments and tweets than &#8216;normal&#8217; ones</p>
+<p>Tay has seen many more racist and hateful comments and tweets than &#8216;normal&#8217; ones.</p>
 </li>
 <li>
-<p>The image dataset Twitter trained its model on included more pictures of white people compared to people of color</p>
+<p>The image dataset Twitter trained its model on included more pictures of white people compared to people of color.</p>
 </li>
 <li>
-<p>Similarly, given a random collection of photos from the internet, these images will have mostly been uploaded by people from developed countries, i.e., pictures displaying the status quo in developing nations will be underrepresented</p>
+<p>Similarly, given a random collection of photos from the internet, these images will have mostly been uploaded by people from developed countries, i.e., pictures displaying the status quo in developing nations are underrepresented.</p>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p>The first step to mitigating these problems is to become aware of them. Therefore, it is important to always assess the model&#8217;s performance for each (known) subgroup individually to verify that the prediction errors of the model are random and the model is not systematically worse for some subgroups.</p>
 </div>
 <div class="paragraph">
 <p>Even more problematic than a mere underrepresentation of certain subgroups (i.e., a skewed input distribution) is a pattern of systematic discrimination against them in historical data (i.e., a discriminatory shift in the assigned labels).</p>
@@ -2668,12 +2665,29 @@ Or, equally problematic, one could add such a copyright notice to a picture of a
 <div class="content">
 <img src="images/07_data_issues/bias_apple_card.png" alt="image" width="550">
 </div>
-<div class="title"><span class="small">A lot of explicit discrimination is often encoded in many datasets used to train models for assigning credit scores or determine interest rates for mortgages or loans. Since these application areas have a direct and severe influence on humans' lives, here you have to be especially careful and, for example, check that your model predicts the same score for a man and a woman if all the features of a data point are equal except those encoding a person&#8217;s gender.</span></div>
+<div class="title"><span class="small">A lot of explicit discrimination is often encoded in datasets used to train models for assigning credit scores or determine interest rates for mortgages or loans. Since these application areas have a direct and severe influence on humans' lives, here we have to be especially careful and, for example, check that the model predicts the same score for a man and a woman if all the features of a data point are equal except those encoding a person&#8217;s gender.</span></div>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>In general, you should always be very careful when including variables in the model that encode attributes such as gender or ethnicity. For example, the performance of a model that diagnoses heart attacks will most likely be improved by including &#8216;gender&#8217; as a feature, since men and women present different symptoms when they have a heart attack. On the other hand, a model that assigns someone a credit score should probably not rely on the gender of the person for this decision, since, even though this might have been the case in the historical data because the humans that generated the data relied on their own stereotypes, women should not get a lower score just because they are female.
+<p><span class="underline">To summarize:</span> A biased model can negatively affect users in two ways:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Disproportionate product failures, due to skewed sampling. For example, speech recognition models are often less accurate for women, because they were trained on more data collected from men (e.g., transcribed political speeches).</p>
+</li>
+<li>
+<p>Harm by disadvantage / opportunity denial, due to stereotypes encoded in historical data. For example, women are assigned higher credit interest rates than men or people born in foreign countries are deemed less qualified for a job when their resumes are assessed by an automated screening tool.</p>
+</li>
+</ul>
+</div>
+<h5 id="_towards_fair_models" class="discrete">Towards fair models</h5>
+<div class="paragraph">
+<p>The first step to mitigating these problems is to become aware of them. Therefore, it is important to always assess the model&#8217;s performance for each (known) subgroup individually to verify that the prediction errors of the model are random and the model is not systematically worse for some subgroups.</p>
+</div>
+<div class="paragraph">
+<p>Furthermore, we should also be careful when including variables in the model that encode attributes such as gender or ethnicity. For example, the performance of a model that diagnoses heart attacks will most likely be improved by including &#8216;gender&#8217; as a feature, since men and women present different symptoms when they have a heart attack. On the other hand, a model that assigns someone a credit score should probably not rely on the gender of the person for this decision, since, even though this might have been the case in the historical data because the humans that generated the data relied on their own stereotypes, women should not get a lower score just because they are female.<br>
 However, a person&#8217;s gender or ethnicity, for example, is often correlated with other variables such as income or neighborhood, so even inconspicuous features can still leak problematic information to the model and require some extra steps to ensure the model does not discriminate.</p>
 </div>
 <div class="sidebarblock">

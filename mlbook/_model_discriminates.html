@@ -710,7 +710,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="sect2">
 <h3 id="_model_discriminates">Model discriminates</h3>
 <div class="paragraph">
-<p>As we ponder the true causal relations between variables in the data, we also need to consider whether there are some causal relationships encoded in the historical data that we <em>don&#8217;t</em> want a model to pick up on. For example, discrimination based on gender or ethnicity can leak into the training data, e.g., if white men got systematically lower credit interest rates that can not solely be explained by their higher incomes. If this is the case, we need to take extra measures to make sure that these patterns, although they might have been true causal relationships in the past, are not present in our model now.</p>
+<p>As we ponder the true causal relations between variables in the data, we also need to consider whether there are some causal relationships encoded in the historical data that we <em>don&#8217;t</em> want a model to pick up on. For example, discrimination based on gender or ethnicity can leak into the training data and we need to take extra measures to make sure that these patterns, although they might have been true causal relationships in the past, are not present in our model now.</p>
 </div>
 <div class="dlist">
 <dl>
@@ -769,28 +769,56 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="ulist">
 <ul>
 <li>
-<p>Tay has seen many more racist and hateful comments and tweets than &#8216;normal&#8217; ones</p>
+<p>Tay has seen many more racist and hateful comments and tweets than &#8216;normal&#8217; ones.</p>
 </li>
 <li>
 <p>In historical texts, women were underrepresented in professions such as doctors, engineers, carpenters, etc.</p>
 </li>
 <li>
-<p>The image dataset Twitter trained its model on included more pictures of white people compared to people of color</p>
+<p>The image dataset Twitter trained its model on included more pictures of white people compared to people of color.</p>
 </li>
 <li>
-<p>Similarly, given a random collection of photos from the internet, these images will have mostly been uploaded by people from developed countries, i.e., pictures displaying the status quo in developing nations will be underrepresented</p>
+<p>Similarly, given a random collection of photos from the internet, these images will have mostly been uploaded by people from developed countries, i.e., pictures displaying the status quo in developing nations are underrepresented.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The first step to mitigating these problems is to become aware of them. While the training sets used to train modern ML models are usually too big to identify and correct all these problems, at least the test set should be well balanced and curated, such that it is possible to notice such a systematic bias, i.e., a poor performance for undersampled subgroups:</p>
+<p>Even more problematic than a mere underrepresentation of certain subgroups (i.e., a skewed input distribution) is a pattern of systematic discrimination against them in historical data (i.e., a discriminatory shift in the assigned labels).</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/07_data_issues/bias_apple_card.png" alt="image" width="550">
+</div>
+<div class="title"><span class="small">A lot of explicit discrimination is often encoded in datasets used to train models for assigning credit scores or determine interest rates for mortgages or loans. Since these application areas have a direct and severe influence on humans' lives, here we have to be especially careful and, for example, check that the model predicts the same score for a man and a woman if all the features of a data point are equal except those encoding a person&#8217;s gender.</span></div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><span class="underline">To summarize:</span> A biased model can negatively affect users in two ways:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Disproportionate product failures, due to skewed sampling. For example, speech recognition models are often less accurate for women, because they were trained on more data collected from men (e.g., transcribed political speeches).</p>
+</li>
+<li>
+<p>Harm by disadvantage / opportunity denial, due to stereotypes encoded in historical data. For example, women are assigned higher credit interest rates than men or people born in foreign countries are deemed less qualified for a job when their resumes are assessed by an automated screening tool.</p>
+</li>
+</ul>
+</div>
+<h5 id="_towards_fair_models" class="discrete">Towards fair models</h5>
+<div class="paragraph">
+<p><span class="underline">1.) Know you have a problem</span><br>
+The first step to mitigating these problems is to become aware of them. We often don&#8217;t notice a poor performance for an undersampled subgroup, because the model performance overall looks fine:</p>
 </div>
 <div class="paragraph text-center">
 <p><span class="image"><img src="../images/07_data_issues/bias_unequal_lr.png" alt="image" width="420"></span>
 <span class="image"><img src="../images/07_data_issues/bias_equal_lr.png" alt="image" width="420"></span><br></p>
 </div>
 <div class="paragraph text-justify">
-<p><span class="small">These two plots show a simple linear regression model trained on data with 3 subgroups (e.g., subgroups could be based on gender and/or ethnicity). In both cases, the model performs well for the subgroup in the middle, but poorly for the marginalized subgroups. However, when only looking at the overall \(R^2\) value of the model, the poor performance of the model is only apparent when the subgroups are sampled equally, while in the first plot on the left, the performance of the model seems fine since here the good performance of the "main" subgroup drowns out the poor performance on the marginalized subgroups, since they are undersampled. Similarly, for example, it took researchers a while to realize that speech recognition algorithms perform considerably worse for women than men, where again the training and test data mostly contained data from men (e.g., transcribed political speeches).</span></p>
+<p><span class="small">These two plots show a simple linear regression model trained on data with three subgroups (e.g., subgroups could be based on gender and/or ethnicity). In both cases, the model performs well for the subgroup in the middle, but poorly for the marginalized subgroups. However, if we only consider at the overall \(R^2\) value of the model, the performance of the model on the left seems fine, since here the good performance on the &#8216;main&#8217; subgroup drowns out the poor performance on the undersampled marginalized subgroups. The poor performance of the model is only apparent when the subgroups are sampled equally.</span></p>
 </div>
 <div class="paragraph">
 <p>Therefore:</p>
@@ -801,33 +829,26 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <p>Assess the model&#8217;s performance for each (known) subgroup individually by slicing the data accordingly to verify that the prediction errors of the model are random and the model is not systematically worse for some subgroups / data slices.</p>
 </li>
 <li>
-<p>If it is not possible to obtain a well balanced training and/or test set, assign higher sample weights to data points from undersampled subgroups to make sure the algorithm pays enough attention to them during training and they are given more weight in the evaluation of the model (similar to using the balanced accuracy).</p>
+<p>If it is not possible to obtain a well balanced training and/or test set, assign higher sample weights to data points from undersampled subgroups to make sure the algorithm pays enough attention to them during training and they are given more weight when evaluating the model (similar to using the balanced accuracy).</p>
+</li>
+<li>
+<p>Check if/how the model&#8217;s prediction changes when everything about a data point is the same except attributes encoding gender / age / ethnicity / etc.</p>
+</li>
+<li>
+<p>Interpret the model to see whether features encoding subgroup-specific information have an unexpectedly high influence on the prediction.</p>
 </li>
 </ul>
 </div>
-<h5 id="_explicit_discrimination" class="discrete">Explicit discrimination</h5>
 <div class="paragraph">
-<p>Even more problematic than a mere underrepresentation of certain subgroups (i.e., a skewed input distribution) is a pattern of systematic discrimination against them in historical data (i.e., a discriminatory shift in the assigned labels).</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/07_data_issues/bias_apple_card.png" alt="image" width="550">
-</div>
-<div class="title"><span class="small">A lot of explicit discrimination is often encoded in many datasets used to train models for assigning credit scores or determine interest rates for mortgages or loans. Since these application areas have a direct and severe influence on humans' lives, here you have to be especially careful and, for example, check that your model predicts the same score for a man and a woman if all the features of a data point are equal except those encoding a person&#8217;s gender.</span></div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>In general, you should always be very careful when including variables in the model that encode attributes such as gender or ethnicity. For example, the performance of a model that diagnoses heart attacks will most likely be improved by including &#8216;gender&#8217; as a feature, since men and women present different symptoms when they have a heart attack.</p>
+<p><span class="underline">2.) Learn a fair model</span><br>
+In general, we should also <strong>be careful when including variables in the model that encode attributes such as gender or ethnicity</strong>. For example, the performance of a model that diagnoses heart attacks will most likely be improved by including &#8216;gender&#8217; as a feature, since men and women present different symptoms when they have a heart attack.</p>
 </div>
 <div class="paragraph text-center">
 <p><span class="image"><img src="../images/07_data_issues/bias_simpson_lr.png" alt="image" width="420"></span>
 <span class="image"><img src="../images/07_data_issues/bias_simpson_lrd.png" alt="image" width="405"></span><br></p>
 </div>
 <div class="paragraph text-justify">
-<p><span class="small">In the plot on the right, additional dummy variables to represent the different subgroups in the data are included in the model and improve its predictive performance. While this can make the bias of a model explicit, should this information be included at all? (By the way, this is also an example of <a href="https://en.wikipedia.org/wiki/Simpson&#8217;s_paradox" target="\_blank">Simpson&#8217;s paradox</a>, where the coefficients reverse their sign when additional features are included.)</span></p>
+<p><span class="small">In the plot on the right, additional dummy variables to represent the different subgroups in the data are included in the model and improve its predictive performance. While this can make the bias of a model explicit, should this information be included at all? (By the way, this is also an example of <a href="https://en.wikipedia.org/wiki/Simpson&#8217;s_paradox" target="\_blank">Simpson&#8217;s paradox</a>, where the model&#8217;s coefficients reverse their sign when additional features are included.)</span></p>
 </div>
 <div class="paragraph">
 <p>A model that assigns someone a credit score should probably not rely on the gender of the person for this decision, since, even though this might have been the case in the historical data because the humans that generated the data relied on their own stereotypes, women should not get a lower score just because they are female.</p>
@@ -836,7 +857,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <p>However, a person&#8217;s gender or ethnicity, for example, is often correlated with other variables such as income or neighborhood, so even inconspicuous features can still leak problematic information to the model. Therefore, in those cases one should take some extra steps to ensure the model does not discriminate based on these features.</p>
 </div>
 <div class="paragraph">
-<p>This can, for example, be achieved by setting up a neural network that learns subgroup-invariant feature representations:</p>
+<p>This can, for example, be achieved by setting up a neural network that learns <strong>subgroup-invariant feature representations</strong>:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">

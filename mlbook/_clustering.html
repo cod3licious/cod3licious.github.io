@@ -814,12 +814,13 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <dl>
 <dt class="hdlist1">Useful for</dt>
 <dd>
-<p>identifying naturally occurring groups in the data (e.g., for customer segmentation)</p>
+<p>Identifying naturally occurring groups in the data (e.g., for customer segmentation).</p>
 </dd>
 </dl>
 </div>
 <div class="paragraph">
-<p>There exist <a href="https://scikit-learn.org/stable/modules/clustering.html" target="\_blank">quite a lot of different clustering algorithms</a> and we&#8217;ll only present two with different ideas here. If you look at the linked sklearn examples, please note that even though other clustering algorithms might seem to perform very well on fancy toy datasets, data in reality is seldom arranged in two concentric circles, and on real-world datasets the k-means clustering algorithm is often a robust choice.</p>
+<p>There exist <a href="https://scikit-learn.org/stable/modules/clustering.html" target="\_blank">quite a lot of different clustering algorithms</a> and we&#8217;ll only present two with different ideas here.<br>
+<span class="small">When you look at the linked sklearn examples, please note that even though other clustering algorithms might seem to perform very well on fancy toy datasets, data in reality is seldom arranged in two concentric circles, and on real-world datasets the k-means clustering algorithm is often a robust choice.</span></p>
 </div>
 <div class="sect3">
 <h4 id="_k_means_clustering"><em>k</em>-means clustering</h4>
@@ -830,16 +831,16 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>randomly place <em>k</em> cluster centers (where <em>k</em> is a hyperparameter set by the user);</p>
+<p>Randomly place <em>k</em> cluster centers (where <em>k</em> is a hyperparameter set by the user);</p>
 </li>
 <li>
-<p>assign each data point to its closest cluster center;</p>
+<p>Assign each data point to its closest cluster center;</p>
 </li>
 <li>
-<p>update cluster centers as the mean of the assigned data points;</p>
+<p>Update cluster centers as the mean of the assigned data points;</p>
 </li>
 <li>
-<p>repeat steps 2-3 until convergence.</p>
+<p>Repeat steps 2-3 until convergence.</p>
 </li>
 </ol>
 </div>
@@ -865,7 +866,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>&#8594; <code>n_clusters</code>: how many clusters (<em>k</em>) you want to find</p>
+<p>&#8594; <code>n_clusters</code>: How many clusters (<em>k</em>) the algorithm should find.</p>
 </li>
 </ul>
 </div>
@@ -878,10 +879,10 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="ulist">
 <ul>
 <li>
-<p>fast</p>
+<p>Fast.</p>
 </li>
 <li>
-<p>usually good results on real world datasets</p>
+<p>Usually good results on real world datasets.</p>
 </li>
 </ul>
 </div>
@@ -891,13 +892,13 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="ulist">
 <ul>
 <li>
-<p>depends on random initialization (&#8594; local optimum, but usually not problematic in practice due to multiple restarts)</p>
+<p>Depends on random initialization &#8594; solution is local optimum, but usually not problematic in practice due to multiple restarts.</p>
 </li>
 <li>
-<p>assumes spherical clusters</p>
+<p>Assumes spherical clusters.</p>
 </li>
 <li>
-<p>need to guess the number of clusters (but can be done with a heuristic; sometimes you also need to find a fixed number of clusters, e.g., if you only have the budged for 3 different marketing initiatives, you want to assign your customers to exactly 3 groups)</p>
+<p>Need to guess the number of clusters. But this can be done with a heuristic and sometimes we also need to find a fixed number of clusters, e.g., if we only have the budged for three different marketing initiatives, we want to assign our customers to exactly three groups.</p>
 </li>
 </ul>
 </div>
@@ -911,7 +912,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <dl>
 <dt class="hdlist1">Main idea</dt>
 <dd>
-<p>find &#8216;core samples&#8217; in dense areas of the data and then expand clusters by iteratively including points with a distance &lt; <code>eps</code></p>
+<p>Find &#8216;core samples&#8217; in dense areas of the data and then expand the clusters by iteratively including points with a distance &lt; <code>eps</code>.</p>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/03_unsupervised/dbscan.png" alt="image" width="840">
@@ -933,10 +934,10 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>&#8594; <code>eps</code>: maximum neighborhood distance of two samples</p>
+<p>&#8594; <code>eps</code>: Maximum neighborhood distance of two samples.</p>
 </li>
 <li>
-<p>&#8594; <code>metric</code>: how to compute the distance in the input feature space</p>
+<p>&#8594; <code>metric</code>: How to compute the distance in the input feature space.</p>
 </li>
 </ul>
 </div>
@@ -949,10 +950,10 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="ulist">
 <ul>
 <li>
-<p>allows for noise (&#8594; can also use the algorithm to detect outliers)</p>
+<p>Allows for noise &#8658; can also be used to detect outliers.</p>
 </li>
 <li>
-<p>no need to guess the number of clusters</p>
+<p>No need to guess the number of clusters.</p>
 </li>
 </ul>
 </div>
@@ -962,7 +963,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="ulist">
 <ul>
 <li>
-<p>very dependent on distance measure: may be tricky to get good results for heterogeneous data even after normalization (but: try on text data)</p>
+<p>Very dependent on distance measure: may be tricky to get good results for heterogeneous data even after normalization (but: try on text data).</p>
 </li>
 </ul>
 </div>
@@ -970,7 +971,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </dl>
 </div>
 <div class="paragraph">
-<p>&#8594; also check out the <a href="https://hdbscan.readthedocs.io/en/latest/" target="\_blank"><code>hdbscan</code></a> library!</p>
+<p>&#8594; Also check out the <a href="https://hdbscan.readthedocs.io/en/latest/" target="\_blank"><code>hdbscan</code></a> library!</p>
 </div>
 </div>
 </div>

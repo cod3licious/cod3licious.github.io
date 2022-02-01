@@ -685,11 +685,11 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <ul class="sectlevel2">
 <li><a href="_different_types_of_models.html"><span class="toc-current">Different types of models</span></a>
 <ul class="sectlevel3">
-<li><a href="_different_types_of_models.html#_problem_type_regression_vs_classification">Problem type: Regression vs. Classification</a>
+<li><a href="_different_types_of_models.html#_problem_type_regression_vs_classification">Problem type: regression vs. classification</a>
 </li>
 <li><a href="_different_types_of_models.html#_problem_complexity_linear_or_nonlinear">Problem complexity: linear or nonlinear</a>
 </li>
-<li><a href="_different_types_of_models.html#_algorithmic_approaches_features_based_vs_similarity_based_models">Algorithmic approaches: Features-based vs. similarity-based models</a>
+<li><a href="_different_types_of_models.html#_algorithmic_approaches_features_based_vs_similarity_based_models">Algorithmic approaches: features-based vs. similarity-based models</a>
 </li>
 </ul>
 </li>
@@ -719,7 +719,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="sidebarblock">
 <div class="content">
 <div class="paragraph">
-<div class="title"><span class="underline">3 considerations when choosing a supervised learning model</span></div>
+<div class="title"><span class="underline">Three considerations when choosing a supervised learning model</span></div>
 <p></p>
 </div>
 <div class="dlist">
@@ -727,83 +727,84 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <dt class="hdlist1">1. Problem type</dt>
 <dd>
 <p>What kind of problem are you trying to solve: <em>regression</em> or <em>classification</em>?<br>
-&#8594; depends on the type of target variable, i.e., if it has continuous or discrete values</p>
+&#8594; Depends on the type of target variable, i.e., if it has continuous or discrete values.</p>
 </dd>
 <dt class="hdlist1">2. Problem complexity</dt>
 <dd>
 <p>How complicated is the relationship between the input features and target variable: <em>linear</em> or <em>nonlinear</em>?<br>
-&#8594; depends on the available data</p>
+&#8594; Depends on the available data, i.e., how easily the target can be predicted from the inputs.</p>
 </dd>
 <dt class="hdlist1">3. Algorithmic approach</dt>
 <dd>
 <p>Which type of model works best for this dataset size &amp; complexity: <em>features-based</em> or <em>similarity-based</em>?<br>
-&#8594; depends on the model you choose, i.e., it either learns according to the first or second strategy</p>
+&#8594; Depends on the model you choose, i.e., it either learns according to the first or second strategy.</p>
 </dd>
 </dl>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_problem_type_regression_vs_classification">Problem type: Regression vs. Classification</h4>
+<h4 id="_problem_type_regression_vs_classification">Problem type: regression vs. classification</h4>
 <div class="paragraph">
-<p>The type of the target variable that you need to predict determines whether you are dealing with a regression or classification problem.</p>
+<p>The type of the target variable that we want to predict determines whether we are dealing with a regression or classification problem.</p>
 </div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Regression</dt>
 <dd>
-<p>prediction of continuous value(s) <em>(e.g., price, number of users, etc.)</em></p>
+<p>Prediction of continuous value(s) <em>(e.g., price, number of users, etc.)</em>.</p>
 </dd>
 <dt class="hdlist1">Classification</dt>
 <dd>
-<p>prediction of discrete values, either<br></p>
+<p>Prediction of discrete values, either<br></p>
 <div class="ulist">
 <ul>
 <li>
 <p>binary <em>(e.g., product will be faulty: yes/no)</em> or</p>
 </li>
 <li>
-<p>multi-class <em>(e.g., picture displays cat/dog/house/car/&#8230;&#8203;)</em></p>
+<p>multi-class <em>(e.g., picture displays cat/dog/house/car/&#8230;&#8203;)</em>.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>&#8594; many classification models actually predict probabilities for the different classes (i.e., a score between 0 and 1 for each class), and the final class label is then chosen by applying a threshold on this score (typically 0.5 for binary classification problems) or by taking the outcome with the highest score (in multi-class problems)</p>
+<p>&#8594; Many classification models actually predict probabilities for the different classes, i.e., a score between 0 and 1 for each class. The final class label is then chosen by applying a threshold on this score (typically 0.5 for binary classification problems) or by taking the outcome with the highest score (in multi-class problems).</p>
 </div>
 </dd>
 </dl>
 </div>
 <div class="paragraph">
-<p>&#8658; Whether you are dealing with a regression or classification problem is important to know and has implications for your overall workflow, e.g., how you should define &amp; measure success. However, the actual models that you can use to solve these problems are very similar, e.g., almost all <code>sklearn</code> models exist in either a <code>Regressor</code> or <code>Classifier</code> variant to generate the appropriate output for the respective problem type.</p>
+<p>&#8658; Whether we are dealing with a regression or classification problem is important to know and has implications for our overall workflow, e.g., how we define &amp; measure success. However, the actual models that we use to solve these problems are very similar, e.g., almost all <code>sklearn</code> models exist in either a <code>Regressor</code> or <code>Classifier</code> variant to generate the appropriate output for the respective problem type.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="paragraph">
-<p>In some cases it is even entirely up to you whether to frame the task as a regression or classification problem.</p>
+<p>In some cases it is even entirely up to us whether to frame the task as a regression or classification problem.</p>
 </div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Example</dt>
 <dd>
-<p>A product is deemed faulty, if it breaks within the warranty period of 6 months (where we assume that normally the product would be used at most 300 times during these 6 months).</p>
+<p>A product is deemed faulty, if it breaks within the warranty period of 6 months, where we assume that normally the product would be used at most 300 times during these 6 months.</p>
 </dd>
 </dl>
 </div>
 <div class="paragraph">
-<p>Depending on your use case, you might either be interested in how long a product lasts in total, or only whether this product will be a warranty case or not, i.e., you could formulate your problem as:</p>
+<p>Depending on the use case, we might either be interested in how long a product lasts in total, or only whether this product will be a warranty case or not, i.e., we could formulate the problem as:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>a regression task: predict, <em>after how many uses</em> the product will break</p>
+<p>A regression task: Predict, <em>after how many uses</em> the product will break.</p>
 </li>
 <li>
-<p>a classification task: predict, <em>if the product will break</em> before it was used 300 times</p>
+<p>A classification task: Predict, <em>if the product will break</em> before it was used 300 times.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>However, in many cases where you have a continuous target variable, you can learn a more accurate prediction model with the regression approach, since here the labels carry much more information and edge case errors are not penalized as much (e.g., in the classification case, predicting that a product is okay when it lasted 299 uses would be just as wrong as predicting &#8216;okay&#8217; for a product that lasted only 2 uses). If the workflow where your model is later embedded in requires a classification output, you can still transform the regression output of the model into a classification output later by simply setting a threshold, i.e., in this case if the regression model predicts a value lower than 300 you would output &#8216;faulty&#8217; and otherwise &#8216;okay&#8217;.</p>
+<p>However, in many cases with a continuous target variable, we can learn a more accurate prediction model with the regression approach, since here the labels carry more information and edge case errors are not penalized as much. For example, in the classification case, predicting that a product is okay when it lasted 299 uses would be just as wrong as predicting &#8216;okay&#8217; for a product that lasted only 2 uses.<br>
+If the workflow, where our model is later embedded in, requires a classification output, we can still transform the regression output of the model into a classification output later by simply setting a threshold, i.e., in this case if the regression model predicts a value lower than 300 we would output &#8216;faulty&#8217; and otherwise &#8216;okay&#8217;.</p>
 </div>
 </div>
 </div>
@@ -817,31 +818,32 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="content">
 <img src="../images/04_supervised_intro/problem_types2.png" alt="image" width="340">
 </div>
-<div class="title"><span class="small">The first input feature we consider is the production temperature, which is an independent variable, since the operator in control of the production process is free to just choose some value here. The target variable that we want to predict is the lifetime of the produced product and depends on this input variable. For the different temperature settings that were tested, we have collected the respective lifetime measurements (and, as you can imagine, getting such labels can be quite expensive, since these products not only needed to be produced, but also go through some stress test to determine after how many uses they break).</span></div>
+<div class="title"><span class="small">The first input feature we consider is the production temperature, which is an independent variable, since the operator in control of the production process is free to just choose some value here. The target variable that we want to predict is the lifetime of the produced product and is dependent on this input variable. For the different temperature settings that were tested, we have collected the respective lifetime measurements (and, as you can imagine, getting such labels can be quite expensive, since these products not only needed to be produced, but also go through some stress test to determine after how many uses they break).</span></div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/04_supervised_intro/problem_types8.png" alt="image" width="840">
 </div>
-<div class="title"><span class="small">As you might have already guessed, the relationship between the target variable lifetime and the input feature temperature <em>(top left)</em> is a linear one, i.e., you could describe it by a straight line. Since the lifetime is a continuous variable, this is a regression problem. However, by defining some cutoff on the target variable (e.g., at 300 usages for in and out of warranty), this problem can be transformed into a classification problem, where the task here is to distinguish between faulty and good products <em>(bottom left)</em>. Again, the relationship between the target and the input variable temperature is linear, since the problem can be solved by drawing one line parallel to the y-axis, which defines some threshold on the temperature, where all data points with a temperature lower than this threshold would be classified as &#8216;ok&#8217; and those products produced at a higher temperature would be predicted as &#8216;broken&#8217;. In the center panel, we have the same situation only this time with a different input feature, pressure. In the regression case, the lifetime values now follow some quadratic curve, i.e., we could not adequately describe the relationship between our target variable and the input feature &#8216;pressure&#8217; with a single straight line, which makes this a nonlinear problem. Similarly, in the classification case below, we would need to define two thresholds on the pressure values to separate the two classes, i.e., again we could not solve the problem with a single straight line. While these 4 examples were univariate problems, i.e., with a single input variable, in machine learning we usually deal with multivariate problems, often with hundreds or even thousands of input features. For the case of two input variables, this is illustrated on the right, where the data is now plotted in a scatter plot where the axis correspond to the features temperature and pressure, while the color of the dots indicates the target value (either on a continuous scale or the discrete class labels). In the multidimensional case, a problem would be considered linear if it can by solved by a single hyperplane (instead of a line) in the input feature space.</span></div>
+<div class="title"><span class="small">As you might have already guessed, the relationship between the target variable lifetime and the input feature temperature <em>(top left)</em> is a linear one, i.e., we could describe it by a straight line. Since the lifetime is a continuous variable, this is a regression problem. However, by defining some cutoff on the target variable (e.g., at 300 usages for in and out of warranty), this problem can be transformed into a classification problem, where the task here is to distinguish between faulty and good products <em>(bottom left)</em>. Again, the relationship between the target and the input variable temperature is linear, since the problem can be solved by drawing one line parallel to the y-axis, which defines some threshold on the temperature, where all data points with a temperature lower than this threshold would be classified as &#8216;ok&#8217; and those products produced at a higher temperature would be predicted as &#8216;broken&#8217;. In the center panel, we have the same situation only this time with a different input feature, pressure. In the regression case, the lifetime values now follow some quadratic curve, i.e., we could not adequately describe the relationship between our target variable and the input feature &#8216;pressure&#8217; with a single straight line, which makes this a nonlinear problem. Similarly, in the classification case below, we would need to define two thresholds on the pressure values to separate the two classes, i.e., again we could not solve the problem with a single straight line. While these four examples were univariate problems, i.e., with a single input variable, in machine learning we usually deal with multivariate problems, often with hundreds or even thousands of input features. For the case of two input variables, this is illustrated on the right, where the data is now plotted in a scatter plot where the axis correspond to the features temperature and pressure, while the color of the dots indicates the target value (either on a continuous scale or the discrete class labels). In the multidimensional case, a problem would be considered linear if it can by solved by a single hyperplane (instead of a line) in the input feature space.</span></div>
 </div>
 <div class="paragraph">
-<p>As illustrated in the above examples, whether your problem can be solved by a simple linear model (i.e., a single straight line or hyperplane) or requires a more complex nonlinear model to adequately describe the relationship between the input features and target variable entirely depends on the given data. This also means that sometimes you might just need to install an additional sensor to measure some feature that is linearly related to your target variable or do some feature engineering to then be able to get satisfactory results with a linear model, i.e., sometimes, with the right preprocessing, a nonlinear problem can also be transformed into a linear one.</p>
+<p>As illustrated in the above examples, whether a problem can be solved by a simple linear model (i.e., a single straight line or hyperplane) or requires a more complex nonlinear model to adequately describe the relationship between the input features and target variable entirely depends on the given data.<br>
+This also means that sometimes we can just install an additional sensor to measure some feature that is linearly related to the target variable or do some feature engineering to then be able to get satisfactory results with a linear model, i.e., sometimes, with the right preprocessing, a nonlinear problem can also be transformed into a linear one.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_algorithmic_approaches_features_based_vs_similarity_based_models">Algorithmic approaches: Features-based vs. similarity-based models</h4>
+<h4 id="_algorithmic_approaches_features_based_vs_similarity_based_models">Algorithmic approaches: features-based vs. similarity-based models</h4>
 <div class="paragraph">
 <p>Finally, lets look at how the different models work and arrive at their predictions. This is what really distinguishes the various algorithms, whereas we have already established that there always exists a regression and a classification variant of each model and some models are inherently expressive enough that they can be used to describe nonlinear relationships in the data, while others will only yield satisfactory results if there exists a linear relationship between the available input features and the target variable.</p>
 </div>
 <div class="paragraph">
-<p>While features-based models learn some parameters or rules that are applied directly to a new data point&#8217;s input feature vector \(\mathbf{x} \in \mathbb{R}^d\), for the similarity-based models, first a vector \(\mathbf{s} \in \mathbb{R}^n\) with the similarities of the new data point to the training data points is computed and the model then operates on this vector instead of the original input features:</p>
+<p>Features-based models learn some parameters or rules that are applied directly to a new data point&#8217;s input feature vector \(\mathbf{x} \in \mathbb{R}^d\). Similarity-based models, on the other hand, first compute a vector \(\mathbf{s} \in \mathbb{R}^n\) with the similarities of the new sample to the training data points and the model then operates on this vector instead of the original input features.</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/04_supervised_intro/algo_approach_handout.png" alt="image" width="640">
 </div>
-<div class="title"><span class="small"><em>Left:</em> Features-based models can be described by a parametrized function that operates on the original input features. For example, in the regression case <em>(top)</em>, the predicted target for a new data point would be the value on the line corresponding to its input features, while in the classification case <em>(bottom)</em>, the prediction would be made according to on which side of the dividing line the inputs lie. <em>Right:</em> The similarity-based models make the prediction for a new sample based on this data point&#8217;s nearest neighbors. Depending on the type of model, this could be as simple as predicting the average target value of the nearest neighbors (regression, <em>top</em>) or their most frequent class (classification, <em>bottom</em>).</span></div>
+<div class="title"><span class="small"><em>Left:</em> Features-based models are described by a parametrized function that operates on the original input features. For example, in the regression case <em>(top)</em>, the predicted target for a new data point is the value on the line corresponding to its input features, while in the classification case <em>(bottom)</em>, the prediction is made according to on which side of the dividing line the inputs lie. <em>Right:</em> The similarity-based models make the prediction for a new sample based on this data point&#8217;s nearest neighbors. Depending on the type of model, this could be as simple as predicting the average target value of the nearest neighbors (regression, <em>top</em>) or their most frequent class (classification, <em>bottom</em>).</span></div>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -850,13 +852,13 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-This distinction between algorithmic approaches is not only interesting from a theoretical point of view, but even more so from a practitioner&#8217;s perspective: when using a similarity-based algorithm, you have to be very careful which features you include when computing the similarities, make sure that these features are appropriately scaled, and in general think about which similarity measure is appropriate for your data (e.g., you could capture domain knowledge by using a custom similarity function specifically tailored to your problem). When using a features-based model, on the other hand, the model itself can learn which features are most predictive by assigning individual weights to each input feature and therefore possibly ignore irrelevant features or account for variations in heterogeneous data (of course, domain knowledge is still beneficial here, as it can, for example, guide you when engineering additional, more informative input features).
+This distinction between algorithmic approaches is not only interesting from a theoretical point of view, but even more so from a practitioner&#8217;s perspective: When using a similarity-based algorithm, we have to be deliberate about which features to include when computing the similarities, make sure that these features are appropriately scaled, and in general think about which similarity measure is appropriate for this data. For example, we could capture domain knowledge by using a custom similarity function specifically tailored to the problem. When using a features-based model, on the other hand, the model itself can learn which features are most predictive by assigning individual weights to each input feature and therefore possibly ignore irrelevant features or account for variations in heterogeneous data. But of course, domain knowledge is still beneficial here, as it can, for example, guide us when engineering additional, more informative input features.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Okay, now, when should you use which approach?</p>
+<p>Okay, now, when should we use which approach?</p>
 </div>
 <div class="dlist">
 <dl>
@@ -865,13 +867,13 @@ This distinction between algorithmic approaches is not only interesting from a t
 <div class="ulist">
 <ul>
 <li>
-<p>number of features should be less than the number of samples!</p>
+<p>Number of features should be less than the number of samples!</p>
 </li>
 <li>
-<p>good for heterogeneous data due to individual feature weights (although scaling is usually still a good idea)</p>
+<p>Good for heterogeneous data due to individual feature weights (although scaling is usually still a good idea).</p>
 </li>
 <li>
-<p>easier to interpret (since they describe a direct relationship between input features &amp; target)</p>
+<p>Easier to interpret (since they describe a direct relationship between input features &amp; target).</p>
 </li>
 </ul>
 </div>
@@ -881,10 +883,10 @@ This distinction between algorithmic approaches is not only interesting from a t
 <div class="ulist">
 <ul>
 <li>
-<p>nonlinear models for small datasets</p>
+<p>Nonlinear models for small datasets.</p>
 </li>
 <li>
-<p>need appropriate similarity function &#8594; domain knowledge! (especially for heterogeneous data)</p>
+<p>Need appropriate similarity function &#8594; domain knowledge! (especially for heterogeneous data)</p>
 </li>
 </ul>
 </div>

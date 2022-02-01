@@ -801,7 +801,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="sect2">
 <h3 id="_model_evaluation">Model Evaluation</h3>
 <div class="paragraph">
-<p>Since in supervised learning problems we know the ground truth, we can now objectively evaluate different models and benchmark them against each other.</p>
+<p>Since in supervised learning problems we know the ground truth, we can objectively evaluate different models and benchmark them against each other.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -812,7 +812,7 @@ I.e., does the model generate <em>reliable predictions</em> for <em>new data poi
 <div class="ulist">
 <ul>
 <li>
-<p>Split the data into training and test sets to be able to get a reliable estimate of how your model will later perform when applied to new data points that it wasn&#8217;t trained on.</p>
+<p>Split the data into training and test sets to be able to get a reliable estimate of how the model will later perform when applied to new data points that it wasn&#8217;t trained on.</p>
 </li>
 <li>
 <p>Quantify the quality of the model&#8217;s predictions on the test set with a suitable evaluation metric (depending on the problem type).<br></p>
@@ -832,7 +832,7 @@ I.e., does the model generate <em>reliable predictions</em> for <em>new data poi
 </div>
 </li>
 <li>
-<p>Compare your model to a &#8216;stupid baseline&#8217; that predicts the mean (&#8594; regression) or most frequent class (&#8594; classification).</p>
+<p>Compare the model to a &#8216;stupid baseline&#8217; that predicts the mean (&#8594; regression) or most frequent class (&#8594; classification).</p>
 </li>
 </ul>
 </div>
@@ -841,7 +841,7 @@ I.e., does the model generate <em>reliable predictions</em> for <em>new data poi
 <div class="sect3">
 <h4 id="_evaluation_metrics">Evaluation Metrics</h4>
 <div class="paragraph">
-<p>We start with 3 evaluation metrics for regression problems: the mean absolute error, mean squared error, and \(R^2\).</p>
+<p>We start with three evaluation metrics for regression problems: the mean absolute error, mean squared error, and \(R^2\).</p>
 </div>
 <div class="dlist">
 <dl>
@@ -851,7 +851,7 @@ I.e., does the model generate <em>reliable predictions</em> for <em>new data poi
 <div class="content">
 <img src="../images/06_evaluation/error_mean_absolute.png" alt="image" width="480">
 </div>
-<div class="title"><span class="small">This is probably the most straightforward regression error metric and additionally easy to interpret since the error is given in the same units of measurement as the target variable (e.g., if you&#8217;re predicting a price in euros, you would know exactly by how many euros the model is off on average).</span></div>
+<div class="title"><span class="small">This is probably the most straightforward regression error metric and additionally easy to interpret since the error is given in the same units of measurement as the target variable (e.g., if we&#8217;re predicting a price in euros, we would know exactly by how many euros the model is off on average).</span></div>
 </div>
 </dd>
 </dl>
@@ -909,7 +909,7 @@ I.e., does the model generate <em>reliable predictions</em> for <em>new data poi
 <div class="content">
 <img src="../images/06_evaluation/error_class2.png" alt="image" width="560">
 </div>
-<div class="title"><span class="small">Most (binary) classification models predict the probability that a sample belongs to a certain class, i.e., a score between 0 and 1. By setting a threshold on this probability (typically at 0.5), the prediction score can be transformed into the class label, i.e., either predicting the positive or negative class for this sample. We distinguish between two types of mistakes that a classification model can make in this prediction: <em>false positives (FP)</em>, i.e., incorrectly predicting the positive class for samples belonging to the negative class, and <em>false negatives (FN)</em>, i.e., incorrectly predicting the negative class for samples from the positive class. Depending on the goal of your application, one type of error might be worse than the other, e.g., in a medical test you might rather tell someone that they should come in for a second test to confirm some problematic results than send them home with an undetected disease. By moving the classification threshold, you can control the trade-off between FP and FN.</span></div>
+<div class="title"><span class="small">Most (binary) classification models predict the probability that a sample belongs to a certain class, i.e., a score between 0 and 1. By setting a threshold on this probability (typically at 0.5), the prediction score can be transformed into the class label, i.e., either predicting the positive or negative class for this sample. We distinguish between two types of mistakes that a classification model can make in this prediction: <em>false positives (FP)</em>, i.e., incorrectly predicting the positive class for samples belonging to the negative class, and <em>false negatives (FN)</em>, i.e., incorrectly predicting the negative class for samples from the positive class. Depending on the goal of our application, one type of error might be worse than the other, e.g., in a medical test we might rather tell someone that they should come in for a second test to confirm some problematic results than send them home with an undetected disease. By moving the classification threshold, we can control the trade-off between FP and FN.</span></div>
 </div>
 <div class="dlist">
 <dl>
@@ -919,7 +919,7 @@ I.e., does the model generate <em>reliable predictions</em> for <em>new data poi
 <div class="content">
 <img src="../images/06_evaluation/error_class_accuracy.png" alt="image" width="440">
 </div>
-<div class="title"><span class="small">The accuracy is the most widely used classification evaluation metric, where you simply check out of all samples, how many were classified correctly (i.e., TP and TN). However, this can be misleading for unequal class distributions and you should always compare the accuracy of your model against the &#8216;stupid baseline&#8217; for classification, i.e., what the accuracy would be for a &#8220;model&#8221; that always predicts the most frequent class.</span></div>
+<div class="title"><span class="small">The accuracy is the most widely used classification evaluation metric, where we simply check, out of all samples, how many were classified correctly (i.e., TP and TN). However, this can be misleading for unequal class distributions and we should always compare the accuracy of the model against the &#8216;stupid baseline&#8217; for classification, i.e., what the accuracy would be for a &#8220;model&#8221; that always predicts the most frequent class.</span></div>
 </div>
 </dd>
 </dl>
@@ -942,7 +942,7 @@ I.e., does the model generate <em>reliable predictions</em> for <em>new data poi
 </div>
 </div>
 <div class="paragraph">
-<p>With unbalanced class distributions, e.g., in this case a lot more samples from the blue compared to the red class, the accuracy of a model that simply always predicts the most frequent class can be quite large. But while a 90% accuracy might sound impressive when we report the performance of a model to the project&#8217;s stakeholders, this does not necessarily mean that the model is actually useful, especially since in real world problems the undersampled class is often the one we care about most, e.g., people with a rare disease or products that have a defect.</p>
+<p>With unbalanced class distributions, e.g., in this case a lot more samples from the blue compared to the red class, the accuracy of a model that simply always predicts the most frequent class can be quite large. But while a 90% accuracy might sound impressive when we report the performance of a model to the project&#8217;s stakeholders, this does not necessarily mean that the model is useful, especially since in real world problems the undersampled class is often the one we care about most, e.g., people with a rare disease or products that have a defect.</p>
 </div>
 <div class="paragraph">
 <p>Instead, the balanced accuracy is often the more informative measure when evaluating classification models and can help us to distinguish between a model that has actually learned something and the &#8216;stupid baseline&#8217;:</p>
@@ -980,12 +980,12 @@ I.e., does the model generate <em>reliable predictions</em> for <em>new data poi
 <dl>
 <dt class="hdlist1">Multi-class problems: micro vs. macro averaging</dt>
 <dd>
-<p>The accuracy and balanced accuracy scores can also be generalized for the multi-class classification case. Here we instead use the terms micro- and macro-averaging to describe the two strategies (which can also be used for other kinds of metrics like the F1-score), where micro-averaging means we compute the score by averaging over all samples, while macro-averaging means we first compute the score for each class separately and then average over the values for the different classes.</p>
+<p>The accuracy and balanced accuracy scores can be generalized to the multi-class classification case. Here we instead use the terms micro- and macro-averaging to describe the two strategies (which can also be used for other kinds of metrics like the F1-score), where micro-averaging means we compute the score by averaging over all samples, while macro-averaging means we first compute the score for each class separately and then average over the values for the different classes.</p>
 </dd>
 </dl>
 </div>
 <div class="paragraph">
-<p>micro-averaged score (&#8594; <code>accuracy_score</code>):</p>
+<p>Micro-averaged score (&#8594; <code>accuracy_score</code>):</p>
 </div>
 <div class="stemblock">
 <div class="content">
@@ -999,7 +999,7 @@ I.e., does the model generate <em>reliable predictions</em> for <em>new data poi
 \(TP_{c}\) : number of correctly classified samples from class \(c\)</p>
 </div>
 <div class="paragraph">
-<p>macro-averaged score (&#8594; <code>balanced_accuracy_score</code>):</p>
+<p>Macro-averaged score (&#8594; <code>balanced_accuracy_score</code>):</p>
 </div>
 <div class="stemblock">
 <div class="content">
@@ -1017,7 +1017,7 @@ I.e., does the model generate <em>reliable predictions</em> for <em>new data poi
 <div class="content">
 <img src="../images/06_evaluation/confusion_matrix2.png" alt="image" width="740">
 </div>
-<div class="title"><span class="small">The heatmap on the left show the (normalized) confusion matrix for a 10-class classification problem (recognizing handwritten digits), while the plot on the right shows example images for each case. Examining the confusion matrix and some individual examples can give you more faith in the predictions of your model, as you might realize that some misclassifications (highlighted in red) could also happen to a human, e.g., the 4 that was classified as a 1 or even the 4 that was classified as a 7 (which might even be a labeling error from when the dataset was originally created).</span></div>
+<div class="title"><span class="small">The heatmap on the left shows the (normalized) confusion matrix for a ten-class classification problem (recognizing handwritten digits), while the plot on the right shows example images for each case. Examining the confusion matrix and some individual examples can give us more faith in the predictions of our model, as we might realize that some misclassifications (highlighted in red) could also happen to a human, e.g., the 4 that was classified as a 1 or even the 4 that was classified as a 7 (which might even be a labeling error from when the dataset was originally created).</span></div>
 </div>
 </dd>
 </dl>
@@ -1031,7 +1031,7 @@ I.e., does the model generate <em>reliable predictions</em> for <em>new data poi
 <div class="sect3">
 <h4 id="_model_selection">Model Selection</h4>
 <div class="paragraph">
-<p>After you&#8217;ve chosen an appropriate evaluation metric for your problem, you can use the resulting scores to automatically select the best model hyperparameters and ultimately the best model.</p>
+<p>After we&#8217;ve chosen an appropriate evaluation metric for our problem, we can use the resulting scores to automatically select the best hyperparameters for a model and ultimately the best model.</p>
 </div>
 <div class="dlist">
 <dl>
@@ -1041,10 +1041,13 @@ I.e., does the model generate <em>reliable predictions</em> for <em>new data poi
 <div class="content">
 <img src="../images/06_evaluation/validation_set.png" alt="image" width="480">
 </div>
-<div class="title"><span class="small">As we&#8217;ve established in the beginning, before experimenting with any models, the dataset should always be split into a training and test set. However, this was actually not the complete picture: since you are typically experimenting with many different types of models and for each model type with dozens of hyperparameter settings, you should not use this test set to evaluate each of these model candidates, since it might happen that with all these things you try you end up choosing a model that performs really well on this test set, but then actually does not generalize to new data later and you would have no way of finding this out before deploying the model in production. Therefore, we introduce a new data split, the <strong>validation set</strong>, that is used to evaluate the different candidate models, while the test set remains locked away until you&#8217;re ready to evaluate your final model to get a realistic estimate of how it should actually perform on new data. If your original dataset is quite big, say, over 100k samples (depending on the diversity of your data, e.g., the number of classes), then it is usually enough to just split the data into training, validation, and test sets at the start, where the validation and test sets could contain about 10% of the data each and should be representative of the diversity of the original dataset. However, when the original dataset is smaller, it might not be possible to get such representative splits, which is when a technique called <em>cross-validation</em> (also abbreviated x-val) can come in very handy.</span></div>
+<div class="title"><span class="small">As we&#8217;ve established in the beginning, before experimenting with any models, the dataset should be split into a training and test set. However, this isn&#8217;t all: Since we are typically experimenting with many different types of models and for each model type with dozens of hyperparameter settings, we should not use this test set to evaluate each of these model candidates, since it might happen that with all these things we try out, we end up choosing a model that just by chance performs well on this test set, but does not generalize to new data later and we would have no way of finding this out before deploying the model in production. Therefore, we introduce a new data split, the <strong>validation set</strong>, that is used to evaluate the different candidate models, while the test set remains locked away until we&#8217;re ready to evaluate our final model to get a realistic estimate of how it performs on new data.</span></div>
 </div>
 </dd>
 </dl>
+</div>
+<div class="paragraph">
+<p>If the original dataset is quite big, say, over 100k samples (depending on the diversity of the data, e.g., the number of classes), then it is usually enough to just split the data into training, validation, and test sets at the start, where the validation and test sets contain about 10% of the data each and should be representative of the diversity of the original dataset. However, when the original dataset is smaller, it might not be possible to get such representative splits, which is when a technique called <em>cross-validation</em> (&#8220;x-val&#8221;) comes in handy.</p>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -1079,7 +1082,7 @@ Especially when working with small datasets, it is important that these splits a
 <dl>
 <dt class="hdlist1">Hyperparameter Tuning</dt>
 <dd>
-<p>Often it is necessary to systematically evaluate a given model with different hyperparameter settings to find the best option. One straightforward approach for doing this is a <strong>grid search</strong>. In a grid search, you define the different values you want to test for each of the model&#8217;s hyperparameters and then all combinations of these different values for all hyperparameters are automatically evaluated, similar to how you would do it manually with nested for-loops. This is very useful, as often the different hyperparameter settings influence each other. Conveniently, sklearn furthermore combines this with a cross-validation. However, with many individual settings, this also comes at a computational cost, as the model is trained and evaluated \(k \times m_1 \times m_2 \times \dots \times m_i\) times, where \(k\) is the number of folds in the cross-validation and \(m_1...m_i\) are the number of values that need to be tested for each of the <em>i</em> hyperparameters of the model.<br></p>
+<p>Often it is necessary to systematically evaluate a given model with different hyperparameter values to find the best settings. One straightforward approach for doing this is a <strong>grid search</strong>: In a grid search, we define the different values we want to test for each of the model&#8217;s hyperparameters and then all combinations of these different values for all hyperparameters are automatically evaluated, similar to how we would do it manually with nested for-loops. This is very useful, as often the different hyperparameter settings influence each other. Conveniently, sklearn furthermore combines this with a cross-validation. However, with many individual settings, this also comes at a computational cost, as the model is trained and evaluated \(k \times m_1 \times m_2 \times \dots \times m_i\) times, where \(k\) is the number of folds in the cross-validation and \(m_1...m_i\) are the number of values that need to be tested for each of the <em>i</em> hyperparameters of the model.<br></p>
 <div class="paragraph">
 <p>For example, with two hyperparameters, the grid search results could look something like the plot below, which shows a heatmap of the average accuracy achieved with each hyperparameter combination of a model in the cross-validation:</p>
 </div>
@@ -1089,7 +1092,8 @@ Especially when working with small datasets, it is important that these splits a
 </div>
 </div>
 <div class="paragraph">
-<p>While sklearn&#8217;s grid search method will always directly tell you the best hyperparameter combination out of the ones it tested (here marked with a red star), it is important to actually check the complete set of results to verify that you have <strong>covered the whole range of possible hyperparameter values</strong> that could give good results (e.g., in the plot here we see a peak in the middle with the results getting worse to the sides, i.e., we know that better hyperparameter values are unlikely to lie outside of the range we&#8217;ve tested). It is generally a good idea to first start with a large range of values and then zoom in to the area that seems most promising (and of course knowledge about the different algorithms helps a lot in choosing reasonable settings as well).<br></p>
+<p>While sklearn&#8217;s grid search method tells us directly what the best hyperparameter combination is out of the ones it tested (marked with a red star in the plot), it is important to check the complete set of results to verify that we have <strong>covered the whole range of possible hyperparameter values</strong> that could give good results. For example, in the plot above, we see a peak in the middle with the results getting worse to the sides, i.e., we know that better hyperparameter values are unlikely to lie outside of the range we&#8217;ve tested.<br>
+It is generally a good idea to first start with a large range of values and then zoom in to the area that seems most promising. And of course knowledge about the different algorithms helps a lot in choosing reasonable settings as well.<br></p>
 </div>
 <div class="paragraph">
 <p>Besides the basic grid search, there also exist other, more advanced hyperparameter tuning routines. For example, sklearn additionally implements a randomized search, and other dedicated libraries provide even fancier approaches, such as <a href="https://machinelearningmastery.com/what-is-bayesian-optimization/" target="\_blank">Bayesian optimization</a>.<br></p>

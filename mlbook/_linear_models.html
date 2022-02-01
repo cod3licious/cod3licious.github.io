@@ -811,7 +811,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </div>
 </div>
 <div class="paragraph">
-<p>Linear models can be used for regression problems (&#8594; the typical linear regression model that you might have already heard of) as well as for classification problems (&#8594; logistic regression, which predicts a probability score between 0 and 1):</p>
+<p><br>
+Linear models can be used for regression problems (&#8594; the standard linear regression model that you might have already heard of) as well as for classification problems (&#8594; logistic regression, which predicts a probability score between 0 and 1):</p>
 </div>
 <div class="paragraph text-center">
 <p><span class="image"><img src="../images/05_supervised_other/linreg.png" alt="image" width="340"></span>
@@ -830,18 +831,13 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 \[f(\mathbf{x}; \mathbf{w}) = b + \langle\mathbf{w}, \mathbf{x}\rangle = b + \sum_{k=1}^d w_k \cdot x_k = \hat{y}\]
 </div>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.linear_model</span> <span class="keyword">import</span> <span class="include">LinearRegression</span>, <span class="include">LogisticRegression</span></code></pre>
-</div>
-</div>
 <div class="paragraph">
 <p><strong>Linear Regression</strong>:<br>
-find \(\mathbf{w}\) that minimizes MSE \(\| \mathbf{y} - \mathbf{\hat y}\|_2^2\) with \(\hat y\) computed as described above</p>
+Find \(\mathbf{w}\) that minimizes MSE \(\| \mathbf{y} - \mathbf{\hat y}\|_2^2\) with \(\hat y\) computed as in the formula above.</p>
 </div>
 <div class="paragraph">
 <p><strong>Logistic Regression</strong> (&#8594; for classification problems!):<br>
-make predictions as</p>
+Make predictions as</p>
 </div>
 <div class="stemblock">
 <div class="content">
@@ -849,7 +845,12 @@ make predictions as</p>
 </div>
 </div>
 <div class="paragraph">
-<p>where \(\sigma(z)\) is the so-called sigmoid (or logistic) function that squeezes the output of the linear model within the interval \([0, 1\)] (i.e., the S-curve you&#8217;ve seen in the plot at the beginning).</p>
+<p>where \(\sigma(z)\) is the so-called sigmoid (or logistic) function that squeezes the output of the linear model within the interval \([0, 1\)] (i.e., the S-curve shown in the plot above).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.linear_model</span> <span class="keyword">import</span> <span class="include">LinearRegression</span>, <span class="include">LogisticRegression</span></code></pre>
+</div>
 </div>
 <div class="dlist">
 <dl>
@@ -858,10 +859,10 @@ make predictions as</p>
 <div class="ulist">
 <ul>
 <li>
-<p>linear models are good for small datasets</p>
+<p>Linear models are good for small datasets.</p>
 </li>
 <li>
-<p>extensions for nonlinear problems exist (&#8594; feature engineering (e.g., including interaction terms), GAMs, etc.)</p>
+<p>Extensions for nonlinear problems exist &#8658; feature engineering (e.g., including interaction terms), GAMs, etc.</p>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -869,7 +870,7 @@ make predictions as</p>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-When a statistician tells you that he did a &#8220;polynomial regression&#8221; what he really means is that he did some feature engineering to include new variables like \(x_5^2\) and \(x_2^3x_7\) and then fitted a linear regression model on this extended set of features. I.e., the model is still linear in the parameters (i.e., the prediction is still a linear combination of the inputs), but some of the inputs are now polynomial terms of the original features.
+When a statistician tells you that he did a &#8220;polynomial regression&#8221; what he really means is that he did some feature engineering to include new variables like \(x_5^2\) and \(x_2^3x_7\) and then fitted a linear regression model on this extended set of features. This means the model is still linear in the parameters, i.e., the prediction is still a linear combination of the inputs, but some of the inputs are now polynomial terms computed from the original features.
 </td>
 </tr>
 </table>
@@ -883,7 +884,7 @@ When a statistician tells you that he did a &#8220;polynomial regression&#8221; 
 <div class="ulist">
 <ul>
 <li>
-<p>regularization (to keep \(\mathbf{w}\) in check) is often a good idea</p>
+<p>Regularization (to keep \(\mathbf{w}\) in check) is often a good idea.</p>
 </li>
 </ul>
 </div>
@@ -892,7 +893,7 @@ When a statistician tells you that he did a &#8220;polynomial regression&#8221; 
 </div>
 <h4 id="_regularization" class="discrete">Regularization</h4>
 <div class="paragraph">
-<p>Motivation: for uncorrelated but noisy data, which model should you choose?</p>
+<p>Motivation: For uncorrelated but noisy data, which model should you choose?</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -900,7 +901,7 @@ When a statistician tells you that he did a &#8220;polynomial regression&#8221; 
 </div>
 </div>
 <div class="paragraph">
-<p>&#8658; regularization = assume no relationship between \(x\) and \(y\) unless the data strongly suggests otherwise</p>
+<p>&#8658; Regularization = assume no relationship between \(x\) and \(y\) unless the data strongly suggests otherwise.</p>
 </div>
 <div class="paragraph">
 <p>This is accomplished by imposing constraints on the model&#8217;s weights by adding penalty terms in the optimization:</p>
@@ -914,12 +915,12 @@ When a statistician tells you that he did a &#8220;polynomial regression&#8221; 
 <p>This means the optimal solution now not only achieves a low MSE between the true and predicted values (i.e., the normal linear regression error), but additionally does so with the smallest possible weights. (The regularization therefore also defines a unique solution in the face of collinearity.)</p>
 </div>
 <div class="paragraph">
-<p><strong><em>L1</em> Regularization</strong> (&#8594; Lasso Regression): sparse weights (i.e., many 0, others normal)<br>
- &#8594; good for data with possibly irrelevant features</p>
+<p><strong><em>L1</em> Regularization</strong> (&#8594; Lasso Regression): Sparse weights (i.e., many 0, others normal)<br>
+ &#8594; Good for data with possibly irrelevant features.</p>
 </div>
 <div class="paragraph">
-<p><strong><em>L2</em> Regularization</strong> (&#8594; Ridge Regression): small weights<br>
- &#8594; computationally beneficial; can help for data with outliers</p>
+<p><strong><em>L2</em> Regularization</strong> (&#8594; Ridge Regression): Small weights<br>
+ &#8594; Computationally beneficial; can help for data with outliers.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -928,7 +929,7 @@ When a statistician tells you that he did a &#8220;polynomial regression&#8221; 
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Often when you&#8217;re working with a new dataset, it might include lots of variables, many of which might not be relevant for the prediction problem. In this case, an <em>L1</em>-regularized model can be helpful to sort out irrelevant features. Then, when you are sure which input variables are relevant for the prediction problem, an <em>L2</em>-regularized model can give you a robust performance.
+When you&#8217;re working with a new dataset, it often includes lots of variables, many of which might not be relevant for the prediction problem. In this case, an <em>L1</em>-regularized model is helpful to sort out irrelevant features. Then, when you are sure which input variables are relevant for the prediction problem, an <em>L2</em>-regularized model gives a robust performance.
 </td>
 </tr>
 </table>

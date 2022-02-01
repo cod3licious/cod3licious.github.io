@@ -894,7 +894,7 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 </div>
 </div>
 <div class="paragraph">
-<p>(for simplicity, we omit the bias term \(b\) here; using a bias term is equivalent to including an additional input feature that is always 1).</p>
+<p>For simplicity, we omit the bias term \(b\) here; using a bias term is equivalent to including an additional input feature that is always 1.</p>
 </div>
 </dd>
 <dt class="hdlist1">Intuitive Explanation of Neural Networks</dt>
@@ -957,7 +957,7 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 </div>
 </div>
 <div class="paragraph">
-<p>We will talk about these different architectures in more detail in the next section.</p>
+<p>These different architectures are explained in more detail in the next section.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -968,10 +968,10 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <div class="ulist">
 <ul>
 <li>
-<p>state-of-the-art performance (especially on data with <a href="https://towardsdatascience.com/geometric-foundations-of-deep-learning-94cdd45b451d" target="\_blank">input invariances</a>)</p>
+<p>State-of-the-art performance (especially on data with <a href="https://towardsdatascience.com/geometric-foundations-of-deep-learning-94cdd45b451d" target="\_blank">input invariances</a>).</p>
 </li>
 <li>
-<p>prediction for new test points is fast (just a few matrix multiplications)</p>
+<p>Prediction for new test points is fast (just a few matrix multiplications).</p>
 </li>
 </ul>
 </div>
@@ -981,16 +981,16 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <div class="ulist">
 <ul>
 <li>
-<p>can take a long time to train (use a GPU!!! (or <a href="https://en.wikipedia.org/wiki/Tensor_Processing_Unit" target="\_blank">TPU</a>))</p>
+<p>Can take a long time to train (use a GPU!!! (or <a href="https://en.wikipedia.org/wiki/Tensor_Processing_Unit" target="\_blank">TPU</a>)).</p>
 </li>
 <li>
-<p>need a lot of data (depending on the size of the NN architecture)</p>
+<p>Need a lot of data (depending on the size of the NN architecture).</p>
 </li>
 <li>
-<p>solution only a local optimum (which is usually not too problematic in practice, as there are many good optima)</p>
+<p>Solution only a local optimum (which is usually not too problematic in practice, as there are many good optima).</p>
 </li>
 <li>
-<p>tricky to train: performance depends on many parameters like learning rate, batch size, and even the random seed used when initializing the weights!</p>
+<p>Tricky to train: Performance depends on many parameters like learning rate, batch size, and even the random seed used when initializing the weights!</p>
 </li>
 </ul>
 </div>
@@ -1003,12 +1003,12 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <div class="sect3">
 <h4 id="_nn_architectures">NN architectures</h4>
 <div class="paragraph">
-<p>Just like domain-specific feature engineering can result in vastly improved model performances, it really pays off to construct a neural network architecture tailored to the task.</p>
+<p>Similar to how domain-specific feature engineering can result in vastly improved model performances, it pays off to construct a neural network architecture tailored to the task.</p>
 </div>
 <div class="sect4">
 <h5 id="_feed_forward_neural_network_ffnn">Feed Forward Neural Network (FFNN)</h5>
 <div class="paragraph">
-<p>This is the original and most straightforward neural network architecture, which you&#8217;ve already seen in the initial example, only that in practice it usually has a few more layers and units per layer. Each layer here is basically a linear model, i.e., it consists of a weight matrix \(W_i\) and some nonlinear activation function \(\sigma_i\) that is applied to the output. These layers are applied sequentially to the input features \(\mathbf{x}\), i.e., the network computes a composite function (in this case for 3 layers):</p>
+<p>This is the original and most straightforward neural network architecture, which we&#8217;ve already seen in the initial example, only that in practice such a model usually has a few more layers and units per layer. Each layer here is basically a linear model, i.e., it consists of a weight matrix \(W_i\) and some nonlinear activation function \(\sigma_i\) that is applied to the output. These layers are applied sequentially to the input features \(\mathbf{x}\), i.e., the network computes a composite function (in this case for three layers):</p>
 </div>
 <div class="stemblock">
 <div class="content">
@@ -1030,10 +1030,10 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <div class="ulist">
 <ul>
 <li>
-<p>Why do you need the nonlinear activation functions between the layers, i.e., how could you simplify a network with multiple layers, if it didn&#8217;t have any nonlinear activation functions between the layers?</p>
+<p>Why do we need the nonlinear activation functions between the layers, i.e., how could we simplify a network with multiple layers, if it didn&#8217;t have any nonlinear activation functions between the layers?</p>
 </li>
 <li>
-<p>In what way could you manipulate the parameters (i.e., weight matrices) of an existing neural network without changing its predictions? (This is also a reason why there exist many equally good local optima.)</p>
+<p>In what way could we manipulate the parameters (i.e., weight matrices) of an existing neural network without changing its predictions? (This is also a reason why there exist many equally good local optima.)</p>
 </li>
 </ul>
 </div>
@@ -1046,7 +1046,7 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <dl>
 <dt class="hdlist1">Number of hidden layers and units: </dt>
 <dd>
-<p>While the size of the input and output layers are determined by the number of input features and targets respectively, the dimensionality and number of hidden layers of the network is up to you. Usually, the hidden layers get smaller (i.e., have fewer units) as the data moves from the input to the output layer and when experimenting with different settings you can start with no hidden layers (which should give you the same result as with a linear model) and then progressively increase the size of the network until the performance stops improving.</p>
+<p>While the size of the input and output layers are determined by the number of input features and targets respectively, the dimensionality and number of hidden layers of the network is up to us. Usually, the hidden layers get smaller (i.e., have fewer units) as the data moves from the input to the output layer and when experimenting with different settings we can start with no hidden layers (which should give the same result as a linear model) and then progressively increase the size of the network until the performance stops improving.</p>
 </dd>
 </dl>
 </div>
@@ -1056,9 +1056,9 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <dl>
 <dt class="hdlist1">Training Neural Networks</dt>
 <dd>
-<p>To train a neural network, one first needs to choose the loss function that should be optimized (e.g., mean squared error for regression problems or cross-entropy for classification problems).<br></p>
+<p>To train a neural network, we first need to choose a loss function that should be optimized (e.g., mean squared error for regression problems or cross-entropy for classification problems).<br></p>
 <div class="paragraph">
-<p>While for a linear regression model, the optimal weights could be found analytically by setting the derivative of this loss function to 0 and solving for the weights, in a network with multiple layers and therefore many more weights, this is not feasible. Instead, the weights are tuned iteratively using a <strong>gradient descent</strong> procedure, where the derivative of the loss function w.r.t. each layer is computed step by step using the chain rule by basically pushing the error backwards through the network (i.e., from the output, where the error is computed, to the input layer), also called error <strong>backpropagation</strong>. At the beginning, all weight matrices are randomly initialized, so, for example, in the classification problem, for a given sample the network would predict approximately equal probabilities for all classes. The weights are then adapted according to their gradient, such that the next time the same samples are passed through the network, the prediction will be closer to the true output (and the value of the loss function is closer to a local minima).<br></p>
+<p>While for a linear regression model, the optimal weights can be found analytically by setting the derivative of this loss function to 0 and solving for the weights, in a network with multiple layers and therefore many more weights, this is not feasible. Instead, the weights are tuned iteratively using a <strong>gradient descent</strong> procedure, where the derivative of the loss function w.r.t. each layer is computed step by step using the chain rule by basically pushing the error backwards through the network (i.e., from the output, where the error is computed, to the input layer), also called error <strong>backpropagation</strong>. At the beginning, all weight matrices are randomly initialized, so, for example, for a classification problem, for a given sample the network would predict approximately equal probabilities for all classes. The weights are then adapted according to their gradient, such that the next time the same samples are passed through the network, the prediction will be closer to the true output (and the value of the loss function is closer to a local minima).<br></p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -1068,7 +1068,10 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 </div>
 <div class="paragraph">
 <p>Typically, the weights are adapted over multiple <strong>epochs</strong>, where one epoch means going over the whole training set once.
-By plotting the <a href="https://machinelearningmastery.com/learning-curves-for-diagnosing-machine-learning-model-performance/" target="\_blank">learning curves</a>, i.e., the training and validation loss against the number of training epochs, one can check whether the training was successful (i.e., whether the weights have converged to a good solution). Since a training set usually contains lots of data points, it would be too computationally expensive to do gradient descent based on the whole dataset at once in each epoch and instead one uses mini-<strong>batches</strong>, i.e., subsets of 16-128 data points, for each training step.</p>
+By plotting the <a href="https://machinelearningmastery.com/learning-curves-for-diagnosing-machine-learning-model-performance/" target="\_blank">learning curves</a>, i.e., the training and validation loss against the number of training epochs, we can check whether the training was successful (i.e., whether the weights have converged to a good solution).</p>
+</div>
+<div class="paragraph">
+<p>Since a training set usually contains lots of data points, it would be too computationally expensive to do gradient descent based on the whole dataset at once in each epoch, so we instead use mini-<strong>batches</strong>, i.e., subsets of 16-128 data points, for each training step.</p>
 </div>
 </dd>
 </dl>
@@ -1102,7 +1105,7 @@ By plotting the <a href="https://machinelearningmastery.com/learning-curves-for-
 <p>The original RNN layer uses a very simple update rule for the hidden state, but there also exist more advanced <a href="https://towardsdatascience.com/44e9eb85bf21" target="\_blank">types of RNNs</a>, like the Long Short Term Memory (LSTM) network or Gated Recurrent Units (GRU), which define more complex rules for how to combine the new input with the existing hidden state, i.e., they learn in more detail what to remember and which parts to forget, which can be beneficial when the data consists of longer sequences.</p>
 </div>
 <div class="paragraph">
-<p>The cool thing about RNNs is that they can process input sequences of varying length (where one sequence represents one data point, e.g., a text document), whereas all methods that we&#8217;ve discussed so far always expected the feature vectors that represent one data point to have a fixed dimensionality. For RNNs, while the input at a single time step (i.e., \(\mathbf{x}_t\) with \(t \in \{1, ..., T\}\)) is also a feature vector of a fixed dimensionality, the sequences themselves do not need to be of the same length \(T\) (e.g., text documents can consist of different numbers of words). This comes in especially handy for time series analysis, as you&#8217;ll see in the next chapter.</p>
+<p>The cool thing about RNNs is that they can process input sequences of varying length (where one sequence represents one data point, e.g., a text document), whereas all methods that we&#8217;ve discussed so far always expected the feature vectors that represent one data point to have a fixed dimensionality. For RNNs, while the input at a single time step (i.e., \(\mathbf{x}_t\) with \(t \in \{1, ..., T\}\)) is also a feature vector of a fixed dimensionality, the sequences themselves do not need to be of the same length \(T\) (e.g., text documents can consist of different numbers of words). This comes in especially handy for time series analysis, as we&#8217;ll see in the next chapter.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -1117,7 +1120,7 @@ By plotting the <a href="https://machinelearningmastery.com/learning-curves-for-
 <div class="content">
 <img src="../images/07_nlp/rnn_wordemb.png" alt="image" width="440">
 </div>
-<div class="title"><span class="small">This is an example architecture for a sentence classification task (e.g., sentiment analysis, i.e., deciding whether the text is positive or negative). The individual words in the sentence are represented as so-called word embeddings, which are just <em>d</em>-dimensional vectors that contain some (learned) information about the individual words (e.g., whether the word is more male or female; how these embeddings are created is discussed in the section on self-supervised learning below). The RNN is then fed the sentence word by word and at the end of the sentence, the final hidden state (which contains the accumulated information of the whole sentence) is used to make the prediction. Since the RNN processes the words in the sentence sequentially, the order of the words is taken into account (e.g., whether a &#8220;not&#8221; occurred before an adjective), and since we use word embeddings as inputs, which capture semantic and syntactic information about the words, similarity between individual words (e.g., synonyms) is captured, thereby creating more meaningful representations of text documents compared to TF-IDF vectors (at the expense of greater computational complexity).</span></div>
+<div class="title"><span class="small">This is an example architecture for a sentence classification task (e.g., sentiment analysis, i.e., deciding whether the text is positive or negative). The individual words in the sentence are represented as so-called word embeddings, which are just <em>d</em>-dimensional vectors that contain some (learned) information about the individual words (e.g., whether the word is more male or female; how these embeddings are created is discussed in the section on self-supervised learning below). The RNN is then fed the sentence word by word and at the end of the sentence, the final hidden state, which contains the accumulated information of the whole sentence, is used to make the prediction. Since the RNN processes the words in the sentence sequentially, the order of the words is taken into account (e.g., whether a &#8220;not&#8221; occurred before an adjective), and since we use word embeddings as inputs, which capture semantic and syntactic information about the words, similarity between individual words (e.g., synonyms) is captured, thereby creating more meaningful representations of text documents compared to TF-IDF vectors (at the expense of greater computational complexity).</span></div>
 </div>
 </dd>
 </dl>
@@ -1137,7 +1140,7 @@ By plotting the <a href="https://machinelearningmastery.com/learning-curves-for-
 <div class="content">
 <img src="../images/05_supervised_nn/cnn.png" alt="image" width="840">
 </div>
-<div class="title"><span class="small">CNNs utilize two important operations, convolutions and pooling layers, to generate meaningful feature representations: A <a href="https://en.m.wikipedia.org/wiki/Convolution" target="\_blank">convolution</a> is computed by taking a small filter patch (e.g., a \(5 \times 5\) matrix) and moving it over the image pixel by pixel and row by row, at each position multiplying the filter with the image (see also <a href="https://youtu.be/Oqm9vsf_hvU?t=275" target="\_blank">this animation</a>). This results in a feature map of the same size as the original image, where a high value at some position indicates that the respective feature in the filter (e.g., an edge with a specific orientation) was detected at this position in the original image. Since this is done for multiple filters, the output after a convolutional layer consists of as many new feature maps as the layer had filters. The filter patches (i.e., multiple small matrices) are the learned weights of the CNN, and after training they can look something like the small tiles shown below the network architecture. The pooling layers then perform a subsampling of the individual feature maps by taking the max (or sometimes mean) value of multiple pixels in a small area. This reduces the dimensionality of the hidden layer representation, thereby improving the computational efficiency. Additionally, the pooling introduces some positional invariance, since it is not important anymore where exactly in some area a detected feature was, e.g., a face can be recognized even if the eyes of one person are further apart than usual or they have a longer nose, etc. Usually, the convolutional and pooling layers are interleaved, however, there is no strict rule saying that a pooling layer always has to follow a convolutional layer. With more layers, more and more complex features can be detected as a composition of the features identified in the lower layers (notice how the filters first detect edges, then individual components of a face, then full faces), i.e., by making the network deeper, we can solve more complex tasks. Finally, after multiple convolution and pooling layers, the feature representation is flattened into a vector and fed to a FFNN to perform the classification.</span></div>
+<div class="title"><span class="small">CNNs utilize two important operations, convolutions and pooling layers, to generate meaningful feature representations: A <a href="https://en.m.wikipedia.org/wiki/Convolution" target="\_blank">convolution</a> is computed by taking a small filter patch (e.g., a \(5 \times 5\) matrix) and moving it over the image pixel by pixel and row by row, at each position multiplying the filter with the image (see also <a href="https://youtu.be/Oqm9vsf_hvU?t=275" target="\_blank">this animation</a>). This results in a feature map of the same size as the original image, where a high value at some position indicates that the respective feature in the filter (e.g., an edge with a specific orientation) was detected at this position in the original image. Since this is done for multiple filters, the output after a convolutional layer consists of as many new feature maps as the layer had filters. The filter patches (i.e., multiple small matrices) are the learned weights of the CNN, and after training they can look something like the small tiles shown below the network architecture. The pooling layers then perform a subsampling of the individual feature maps by taking the max (or sometimes mean) value of multiple pixels in a small area. This reduces the dimensionality of the hidden layer representation, thereby improving the computational efficiency. Additionally, the pooling introduces some positional invariance, since it is not important anymore where exactly in some area a detected feature was, e.g., a face can be recognized even if the eyes of one person are further apart than usual or they have a longer nose, etc. Usually, the convolutional and pooling layers are interleaved, however, there is no strict rule saying that a pooling layer always has to follow a convolutional layer. With more layers, more and more complex features can be detected as a composition of the features identified in the lower layers (notice how the filters first detect edges, then individual components of a face, then full faces), i.e., by making the network deeper, we can solve more complex tasks. Finally, after multiple convolution and pooling layers, the feature representation is flattened into a vector and fed to a FFNN (i.e., fully connected layers) to perform the classification.</span></div>
 </div>
 <div class="paragraph">
 <p>Compared to the dense / fully-connected layers in FFNNs, which consist of one huge matrix mapping from one layer to the next, the filter patches used in convolutional layers are very small, i.e., there are less parameters that need to be learned. Furthermore, the fact that the filters are applied at every position in the image has a regularizing effect, since the filters need to be general enough capture relevant information in multiple areas of the images.</p>
@@ -1164,16 +1167,16 @@ By the way, the edge filters typically learned in the first layer of a CNN nicel
 <div class="content">
 <img src="../images/05_supervised_nn/nn_architectures4.png" alt="image" width="740">
 </div>
-<div class="title"><span class="small">As we&#8217;ve seen in the CNN used for image classification in the previous section, the representation generated by the CNN is at some point flattened and a FFNN then computes the final prediction for the classification task. Similarly, the final hidden state of a RNN, representing the information contained in a sentences, can be passed to a FFNN to generate a prediction (e.g., for sentiment analysis). However, some problems do not fall into the category of simple supervised learning tasks (i.e., regression or classification), and require a different output. For example, in machine translation, the output should be the sentence translated into the other language, which can be achieved by coupling two RNNs: the first &#8216;understands&#8217; the sentence in the original language and this representation of the meaning of the sentence is then passed to a second RNN, which generates from it the translated sentence word by word. (If you need to translate texts from and to multiple languages, this can be done very efficiently by using just one input and one output network for each language and have them operate on the same meaning representations, i.e., instead of learning multiple pairs of networks for each language combination individually, you only learn for each language one network to understand this language and one network to generate output sentences in this language.) Another example would be the task of image captioning (i.e., generating text describing what can be seen on an image, e.g., to improve the online experience for people with visual impairment), where first the image is &#8216;understood&#8217; by a CNN and then this representation of the input image is passed to a RNN to generate the matching text.</span></div>
+<div class="title"><span class="small">As we&#8217;ve seen in the CNN used for image classification in the previous section, the representation generated by the CNN is at some point flattened and a FFNN then computes the final prediction for the classification task. Similarly, the final hidden state of a RNN, representing the information contained in a sentences, can be passed to a FFNN to generate a prediction (e.g., for sentiment analysis). However, some problems do not fall into the category of simple supervised learning tasks (i.e., regression or classification), and require a different output. For example, in machine translation, the output should be the sentence translated into the other language, which can be achieved by coupling two RNNs: the first &#8216;understands&#8217; the sentence in the original language and this representation of the meaning of the sentence is then passed to a second RNN, which generates from it the translated sentence word by word. (If we need to translate texts from and to multiple languages, this can be done very efficiently by using just one input and one output network for each language and have them operate on the same meaning representations, i.e., instead of learning multiple pairs of networks for each language combination individually, we only learn for each language one network to understand this language and one network to generate output sentences in this language.) Another example is the task of image captioning (i.e., generating text describing what can be seen on an image, e.g., to improve the online experience for people with visual impairment), where first the image is &#8216;understood&#8217; by a CNN and then this representation of the input image is passed to a RNN to generate the matching text.</span></div>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="paragraph">
-<p>Here are two examples of neural network architectures that deal with somewhat unusual inputs and outputs and incorporate a lot of domain knowledge, which enables them to achieve state-of-the-art performance on the respective tasks:</p>
+<p>Below are two examples of neural network architectures that deal with somewhat unusual inputs and outputs and incorporate a lot of domain knowledge, which enables them to achieve state-of-the-art performance on the respective tasks:</p>
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Predicting the 3D structure of a protein from its amino acid sequence with Alpha Fold</dt>
+<dt class="hdlist1">Predicting the 3D structure of a protein from its amino acid sequence with AlphaFold</dt>
 <dd>
 <div class="imageblock text-center">
 <div class="content">
@@ -1202,7 +1205,7 @@ By the way, the edge filters typically learned in the first layer of a CNN nicel
 <div class="sect4">
 <h5 id="_self_supervised_transfer_learning">Self-Supervised &amp; Transfer Learning</h5>
 <div class="paragraph">
-<p><a href="https://ai.facebook.com/blog/self-supervised-learning-the-dark-matter-of-intelligence/" target="_blank" rel="noopener"><strong>Self-supervised learning</strong></a> is a very powerful technique with which neural networks can learn meaningful feature representations from unlabeled data. Using this technique is cheap since, like in unsupervised learning, it does not require any labels generated by human annotators. Instead, pseudo labels are generated from the inputs themselves by masking parts of it. For example, a network could be trained by giving it the first 5 words of a sentence as input and then asking it to predict what the next word should be. This way, the network learns some general statistics and knowledge about the world, similar to how human brains interpolate from the given information (e.g., in the <a href="https://en.wikipedia.org/wiki/Blind_spot_(vision)" target="\_blank">blind spot test</a> you can nicely observe how your brain predicts missing information from the given context). Self-supervised learning is often used to &#8220;pretrain&#8221; a neural network before using it on a supervised learning task (see transfer learning below).</p>
+<p><a href="https://ai.facebook.com/blog/self-supervised-learning-the-dark-matter-of-intelligence/" target="_blank" rel="noopener"><strong>Self-supervised learning</strong></a> is a very powerful technique with which neural networks can learn meaningful feature representations from unlabeled data. Using this technique is cheap since, like in unsupervised learning, it does not require any labels generated by human annotators. Instead, pseudo-labels are generated from the inputs themselves by masking parts of it. For example, a network can be trained by giving it the first five words of a sentence as input and then asking it to predict what the next word should be. This way, the network learns some general statistics and knowledge about the world, similar to how human brains interpolate from the given information (e.g., with the <a href="https://en.wikipedia.org/wiki/Blind_spot_(vision)" target="\_blank">blind spot test</a> you can nicely observe how your brain predicts missing information from the given context). Self-supervised learning is often used to &#8220;pretrain&#8221; a neural network before using it on a supervised learning task (see transfer learning below).</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -1213,39 +1216,41 @@ By the way, the edge filters typically learned in the first layer of a CNN nicel
 <div class="content">
 <img src="../images/07_nlp/word2vec.png" alt="image" width="640">
 </div>
-<div class="title"><span class="small">The learned word embeddings can be used to solve analogy questions like those posed in an IQ test, e.g., "<em>man</em> is to <em>king</em> as <em>women</em> is to <em>XXX</em>", where the correct answer would be <em>queen</em>. This can be solved with vector arithmetic, i.e., by taking the word embedding for <em>king</em>, subtracting from it the embedding for <em>man</em>, adding the embedding for <em>women</em> and then checking which word embedding is closest to this new vector (which should be the embedding for <em>queen</em>).</span></div>
+<div class="title"><span class="small">The learned word embeddings can be used to solve analogy questions like those posed in an IQ test, e.g., "<em>man</em> is to <em>king</em> as <em>women</em> is to <em>XXX</em>", where the correct answer is <em>queen</em>. This can be solved with vector arithmetic, i.e., by taking the word embedding for <em>king</em>, subtracting from it the embedding for <em>man</em>, adding the embedding for <em>women</em> and then checking which word embedding is closest to this new vector (which should be the embedding for <em>queen</em>).</span></div>
 </div>
 <div class="paragraph">
-<p>&#8594; these word embedding vectors can then be used as input to a RNN</p>
+<p>&#8658; These word embedding vectors can then be used as input to a RNN.</p>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p><strong>Transfer learning</strong> is the idea of using what a network has learned before on a different task (e.g., a self-supervised learning task) as a starting point when tackling a new task. In practice, this means the weights of the network are initialized with (some of) the weights of a network trained on another task, before training the network on the new task. We also say that the network was pretrained on a source task before it is fine-tuned on the target task.</p>
+<p><strong>Transfer learning</strong> is the idea of using what a network has learned before on a different task (e.g., a self-supervised learning task) as a starting point when tackling a new task. In practice, this means the weights of our network are initialized with (some of) the weights of a network trained on another task, before training our network on the new task. We also say that the network was pretrained on a source task before it is fine-tuned on the target task.</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/05_supervised_nn/transfer_learning_nn.png" alt="image" width="760">
 </div>
-<div class="title"><span class="small">From an old project, you have a network that was trained on a large dataset to recognize dogs in images (= source task). Now you&#8217;re working on a new project, where you want to recognize cats in images (= target task). Since the two tasks are very similar (cats and dogs share a lot of the same features) and you only have a small dataset available for the new task, transfer learning could improve the prediction performance on the target task.</span></div>
+<div class="title"><span class="small">From an old project, we have a network that was trained on a large dataset to recognize dogs in images (= source task). Now we&#8217;re working on a new project, where we want to recognize cats in images (= target task). Since the two tasks are very similar (cats and dogs share a lot of the same features) and we only have a small dataset available for the new task, transfer learning could improve the prediction performance on the target task.</span></div>
 </div>
 <div class="paragraph">
-<p>Typically, not all the weights of a target network are initialized with weights from a source network, but only those from the earlier layers, where the source network has learned some general principles that are not task specific (e.g., observe how the first layer of the CNN in the previous section had learned to detect edges, which seems like a relevant skill for pretty much all computer vision tasks). Often, using a pretrained network will give you a more robust solution and boost the prediction performance, especially if you only have a very small dataset for the target task available to train the network. However, since when training a neural network you&#8217;re trying to find weights that minimize your loss function by iteratively improving the weights starting with some initialization, if this initialization is unfavorable because it is very far away from a good minimum (i.e., further away than a random initialization), e.g., because you&#8217;ve initialized the weights with those from a source network trained on a very different task, then this will actually hurt the performance, since the network first has to unlearn a lot of things from this unrelated task before it can learn the actual task. Therefore, transfer learning should only be used if the source and target tasks are &#8220;related enough&#8221;. Pretraining a network on a self-supervised learning task (i.e., a task that is just about understanding the world in general, not solving a different kind of specific task) usually works quite well though.<br>
-When using transfer learning, one question is whether to &#8220;freeze&#8221; the weights that were copied from the source network, i.e., to use the pretrained part of the network as a fixed feature extractor and only train the later layers that generate the final prediction. This is basically the same as first transforming the whole dataset once by pushing it through the first layers of a network trained on a similar task and then using these new feature representations to train a different model. While you often get good results when training a traditional model (e.g., a SVM) on these new feature representations, it is generally not recommended for neural networks. In some cases, you might want to keep the pretrained weights fixed for the first few epochs, but in most cases the performance will be best if all weights are eventually fine-tuned on the target task.</p>
+<p>Typically, not all the weights of a target network are initialized with weights from a source network, but only those from the earlier layers, where the source network has learned some general principles that are not task specific (e.g., observe how the first layer of the CNN in the previous section had learned to detect edges, which seems like a relevant skill for pretty much all computer vision tasks). Often, using a pretrained network will give us a more robust solution and boost the prediction performance, especially if we only have a very small dataset for the target task available to train the network. However, since when training a neural network we&#8217;re trying to find weights that minimize the loss function by iteratively improving the weights starting with some initialization, if this initialization is unfavorable because it is very far away from a good minimum (i.e., further away than a random initialization), e.g., because we&#8217;ve initialized the weights with those from a source network trained on a very different task, then this can hurt the performance, since the network first has to unlearn a lot of things from this unrelated task before it can learn the actual task. Therefore, transfer learning should only be used if the source and target tasks are &#8220;related enough&#8221;. Pretraining a network on a self-supervised learning task (i.e., a task that is just about understanding the world in general, not solving a different kind of specific task) usually works quite well though.</p>
 </div>
 <div class="paragraph">
-<p>In cases where transfer learning is not beneficial, because it turns out that the source and target tasks are too different after all, it can nevertheless be helpful to copy the network architecture in general (i.e., number and shape of the hidden layers). Using an appropriate architecture is often more crucial than initializing the weights themselves.</p>
+<p>When using transfer learning, one question is whether to &#8220;freeze&#8221; the weights that were copied from the source network, i.e., to use the pretrained part of the network as a fixed feature extractor and only train the later layers that generate the final prediction. This is basically the same as first transforming the whole dataset once by pushing it through the first layers of a network trained on a similar task and then using these new feature representations to train a different model. While we often get good results when training a traditional model (e.g., a SVM) on these new feature representations, it is generally not recommended for neural networks. In some cases, we might want to keep the pretrained weights fixed for the first few epochs, but in most cases the performance will be best if all weights are eventually fine-tuned on the target task.</p>
+</div>
+<div class="paragraph">
+<p>In cases where transfer learning is not beneficial, because the source and target tasks are not similar enough, it can nevertheless be helpful to copy the network architecture in general (i.e., number and shape of the hidden layers). Using an appropriate architecture is often more crucial than initializing the weights themselves.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_how_to_get_your_network_to_learn_something">How to get your network to learn something</h5>
+<h5 id="_how_to_get_a_network_to_learn_something">How to get a network to learn something</h5>
 <div class="ulist">
 <ul>
 <li>
-<p>scale your data (for classification tasks only inputs, for regression tasks also outputs or adapt the bias of the last layer; <code>StandardScaler</code> is usually a good choice) as otherwise the weights have to move far from their initialization to scale the data for you</p>
+<p>Scale the data (for classification tasks only inputs, for regression tasks also outputs or adapt the bias of the last layer; <code>StandardScaler</code> is usually a good choice) as otherwise the weights have to move far from their initialization to scale the data for us.</p>
 </li>
 <li>
-<p>use sample weights for classification problems with unequal class distributions</p>
+<p>Use sample weights for classification problems with unequal class distributions.</p>
 </li>
 <li>
 <p>NN are trained with gradient descent, which requires a good learning rate (i.e., step size for each training iteration &#8594; not too small, otherwise nothing is learned, not too big, otherwise it spirals out of control):</p>
@@ -1253,23 +1258,23 @@ When using transfer learning, one question is whether to &#8220;freeze&#8221; th
 <div class="content">
 <img src="../images/05_supervised_nn/nn_learning_rate4.png" alt="image" width="540">
 </div>
-<div class="title"><span class="small">A simple strategy to select a suitable initial learning rate is to train the network with different learning rates for one epoch an a subsample of your dataset and then check the loss after training. For too small learning rates (left), the loss will stay the same, while for too large learning rates (right) the loss will be higher after training.</span></div>
+<div class="title"><span class="small">A simple strategy to select a suitable initial learning rate is to train the network with different learning rates for one epoch on a subsample of the dataset and then check the loss after training. For too small learning rates (left), the loss will stay the same, while for too large learning rates (right) the loss will be higher after training.</span></div>
 </div>
 </li>
 <li>
-<p>sanity check: a linear network (i.e., a FFNN with only 1 layer mapping directly from the inputs to the outputs) should achieve approximately the same performance as the corresponding linear model from sklearn</p>
+<p>Sanity check: A linear network (i.e., a FFNN with only one layer mapping directly from the inputs to the outputs) should achieve approximately the same performance as the corresponding linear model from sklearn.</p>
 </li>
 <li>
-<p>gradually make the network more complex until it can perfectly memorize a small training dataset (to get a network that has enough capacity to at least in principle capture the complexity of the task)</p>
+<p>Gradually make the network more complex until it can perfectly memorize a small training dataset (to get a network that has enough capacity to at least in principle capture the complexity of the task).</p>
 </li>
 <li>
-<p>when selecting hyperparameters, always check if there is a clear trend towards an optimal setting; if the pattern seems random, initialize your network with different random seeds to see how robust the results are</p>
+<p>When selecting hyperparameters, always check if there is a clear trend towards an optimal setting; if the pattern seems random, initialize the network with different random seeds to see how robust the results are.</p>
 </li>
 <li>
-<p>using a learning rate scheduler (to decrease the learning rate over time to facilitate convergence) or early stopping (i.e., stopping the training when the performance on the validation set stops improving) can improve the generalization performance</p>
+<p>Using a learning rate scheduler (to decrease the learning rate over time to facilitate convergence) or early stopping (i.e., stopping the training when the performance on the validation set stops improving) can improve the generalization performance.</p>
 </li>
 <li>
-<p>but often it is more important to train the network long enough, like, for hundreds of epochs (depending on the dataset size).</p>
+<p>But often it is more important to train the network long enough, like, for hundreds of epochs (depending on the dataset size).</p>
 </li>
 </ul>
 </div>
@@ -1293,7 +1298,7 @@ If you want to learn more about neural networks, there are many great free resou
 <div class="sect3">
 <h4 id="_neural_networks_in_python">Neural Networks in Python</h4>
 <div class="paragraph">
-<p>There are several libraries available for working efficiently with neural networks (especially since many of the big firms doing machine learning decided to develop their own library): <code>theano</code> was the first major deep learning Python framework, developed by the MILA institute at the university of Montreal (founded by Yoshua Bengio), then came <code>TensorFlow</code>, developed by the Google Brain team, <code>MXNet</code> (pushed by Amazon), and finally <code>PyTorch</code>, developed by the Facebook AI Research (FAIR) team (lead by Yann LeCun). PyTorch is currently preferred by most ML researchers, while TensorFlow is still found in many (older) applications used in production.</p>
+<p>There are several libraries available for working efficiently with neural networks (especially since many of the big firms doing machine learning decided to develop their own library): <code>theano</code> was the first major deep learning Python framework, developed by the MILA institute at the university of Montreal (founded by Yoshua Bengio), then came <code>TensorFlow</code>, developed by the Google Brain team, <code>MXNet</code> (pushed by Amazon), and finally <code>PyTorch</code>, developed by the Facebook/Meta AI Research team (lead by Yann LeCun). PyTorch is currently preferred by most ML researchers, while TensorFlow is still found in many (older) applications used in production.</p>
 </div>
 <div class="paragraph">
 <p>Below you can find some example code for how to construct a neural network using PyTorch or Keras (which is a wrapper for TensorFlow to simplify model creation and training). Further details can be found in the example notebooks on GitHub, which also use the (Fashion) MNIST datasets described below to benchmark different architectures.</p>
@@ -1318,7 +1323,7 @@ If you want to learn more about neural networks, there are many great free resou
         <span class="comment"># a Linear layer is the basic layer in a FFNN with a weight matrix,</span>
         <span class="comment"># in this case with shape (n_in, n_hl1), and a bias vector</span>
         <span class="predefined-constant">self</span>.l1 = torch.nn.Linear(n_in, n_hl1)  <span class="comment"># maps from dimensionality n_in to n_hl1</span>
-        <span class="comment"># you need to make sure that the shape of the weights matches up</span>
+        <span class="comment"># we need to make sure that the shape of the weights matches up</span>
         <span class="comment"># with that from the previous layer</span>
         <span class="predefined-constant">self</span>.l2 = torch.nn.Linear(n_hl1, n_hl2)
         <span class="predefined-constant">self</span>.lout = torch.nn.Linear(n_hl2, n_out)
@@ -1350,7 +1355,7 @@ y_pred = my_nn(X_batch)
 <span class="comment"># construct a feed forward network:</span>
 <span class="comment"># 784 -&gt; 512 [relu] -&gt; 256 [relu] -&gt; 10 [softmax]</span>
 model = keras.Sequential()
-<span class="comment"># you need to tell the first layer the shape of your input features</span>
+<span class="comment"># we need to tell the first layer the shape of our input features</span>
 model.add(keras.layers.Dense(<span class="integer">512</span>, activation=<span class="string"><span class="delimiter">'</span><span class="content">relu</span><span class="delimiter">'</span></span>, input_shape=(<span class="integer">784</span>,)))
 <span class="comment"># the following layers know their input shape from the previous layer</span>
 model.add(keras.layers.Dense(<span class="integer">256</span>, activation=<span class="string"><span class="delimiter">'</span><span class="content">relu</span><span class="delimiter">'</span></span>))
@@ -1365,7 +1370,7 @@ model.fit(X, y)
 y_pred = np.argmax(model.predict(X_test), axis=<span class="integer">1</span>)
 <span class="comment"># evaluate the model (returns loss and whatever was specified for metrics in .compile())</span>
 print(<span class="string"><span class="delimiter">&quot;</span><span class="content">The model is this good:</span><span class="delimiter">&quot;</span></span>, model.evaluate(X_test, y_test)[<span class="integer">1</span>])
-<span class="comment"># but of course you can also use the evaluation functions from sklearn</span>
+<span class="comment"># but of course we can also use the evaluation functions from sklearn</span>
 print(<span class="string"><span class="delimiter">&quot;</span><span class="content">Equivalently:</span><span class="delimiter">&quot;</span></span>, accuracy_score(y_test, y_pred))</code></pre>
 </div>
 </div>
@@ -1373,7 +1378,7 @@ print(<span class="string"><span class="delimiter">&quot;</span><span class="con
 <dl>
 <dt class="hdlist1">Standard ML Benchmarking Datasets</dt>
 <dd>
-<p>The MNIST handwritten digits dataset is very old and super easy even for traditional models<br>
+<p>The MNIST handwritten digits dataset is very old and super easy even for traditional models.<br>
 &#8594; \(28 \times 28\) pixel gray-scale images with 10 different classes:</p>
 <div class="imageblock text-center">
 <div class="content">
@@ -1381,7 +1386,8 @@ print(<span class="string"><span class="delimiter">&quot;</span><span class="con
 </div>
 </div>
 <div class="paragraph">
-<p>The new MNIST dataset: Fashion &#8658; same format (i.e., also 10 classes and images of the same shape), but more useful for benchmarks since the task is harder</p>
+<p>The new MNIST dataset: Fashion<br>
+&#8658; Same format (i.e., also 10 classes and images of the same shape), but more useful for benchmarks since the task is harder.</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">

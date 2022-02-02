@@ -753,8 +753,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.2,</span>
-<span id="revdate">2022-01-28</span>
+<span id="revnumber">version 1.3,</span>
+<span id="revdate">2022-02-02</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -7306,8 +7306,8 @@ Explaining ML with more ML&#8230;&#8203;
 <div class="title"><span class="small">The environment lets the agent know in which state it currently is. Then the agent selects some action, i.e., how it responds to this state, according to its internal policy function \(\pi\) (the main thing that is learned in RL). The environment evaluates the consequences of this action and returns an immediate reward (e.g., "game over" or "collected a coin"), as well as the next state, at which point the cycle repeats.</span></div>
 </div>
 <div class="paragraph">
-<p><span class="underline">Goal:</span> maximize the <em>cumulative</em> reward (also called <em>return</em>), i.e., the sum of the immediate rewards received from the environment over all time steps in an episode (e.g., one level in a video game).<br>
-The difficult thing here is that sometimes an action might not result in a big immediate reward, but is still crucial for the agent&#8217;s long-term success (e.g., finding a key at the beginning of a level and the door for which you need the key comes much later). This means the agent needs to learn to perform an optimal <em>sequence of actions</em> from <em>delayed labels</em>.</p>
+<p><span class="underline">Goal:</span> Maximize the <em>cumulative</em> reward (also called <em>return</em>), i.e., the sum of the immediate rewards received from the environment over all time steps in an episode (e.g., one level in a video game).<br>
+The difficult thing here is that sometimes an action might not result in a big immediate reward, but is still crucial for the agent&#8217;s long-term success (e.g., finding a key at the beginning of a level and the door for which we need the key comes much later). This means the agent needs to learn to perform an optimal <em>sequence of actions</em> from <em>delayed labels</em>.</p>
 </div>
 <div class="paragraph">
 <p>The agent&#8217;s decision trajectory basically defines one path among a bunch of different possible parallel universes, which is then judged in the end by the collected return:</p>
@@ -7323,10 +7323,10 @@ The difficult thing here is that sometimes an action might not result in a big i
 <dl>
 <dt class="hdlist1">Reinforcement Learning vs. &#8216;normal&#8217; Optimization</dt>
 <dd>
-<p>In regular mathematical optimization, you are given some fixed function \(f: \mathbb{R}^d \to \mathbb{R}\) and try to find the inputs \(\mathbf{x} \in  \mathbb{R}^d\) that maximize (or minimize) the value of \(f(\mathbf{x})\). Since each evaluation of \(f(\mathbf{x})\) is independent of the next, you could theoretically try as many different values for \(\mathbf{x}\) as you wanted, until you&#8217;ve found some combination of inputs that results in an optimal value for \(f\).<br>
-<span class="small">If \(f\) is easily differentiable, the solution to the optimization problem can be found analytically by setting the first derivative of \(f\) to zero to obtain the local extrema or saddle points of \(f\), which can then be examined further to determine the (global) maximum or minimum. If \(f\) is not differentiable (or very complicated), there exist other methods to find optimal values (for example, the gradient descent procedure used to tune the weights of neural networks is one method for obtaining a (local) optimum without calculating the derivative of the network&#8217;s error function directly, while a naive grid search, where you just try many different input combinations and then select the values with the best outcome, or more fancy approaches such as <a href="https://en.wikipedia.org/wiki/Particle_swarm_optimization" target="\_blank">particle swarm optimization</a>, can also be applied to functions that are non-differentiable).</span><br></p>
+<p>In regular mathematical optimization, we are given some fixed function \(f: \mathbb{R}^d \to \mathbb{R}\) and try to find the inputs \(\mathbf{x} \in  \mathbb{R}^d\) that maximize (or minimize) the value of \(f(\mathbf{x})\). Since each evaluation of \(f(\mathbf{x})\) is independent of the next, we could theoretically try as many different values for \(\mathbf{x}\) as we wanted, until we&#8217;ve found some combination of inputs that results in an optimal value for \(f\).<br>
+<span class="small">If \(f\) is easily differentiable, the solution to the optimization problem can be found analytically by setting the first derivative of \(f\) to zero to obtain the local extrema or saddle points of \(f\), which can then be examined further to determine the (global) maximum or minimum. If \(f\) is not differentiable (or very complicated), there exist other methods to find optimal values (for example, the gradient descent procedure used to tune the weights of neural networks is one method for obtaining a (local) optimum without calculating the derivative of the network&#8217;s error function directly, while a naive grid search, where we just try many different input combinations and then select the values with the best outcome, or more fancy approaches such as <a href="https://en.wikipedia.org/wiki/Particle_swarm_optimization" target="\_blank">particle swarm optimization</a>, can also be applied to functions that are non-differentiable).</span><br></p>
 <div class="paragraph">
-<p>Translated to RL terms, \(f\) would be the environment <em>in one particular state</em>, \(\mathbf{x}\) would be the action, and \(f(\mathbf{x})\) would be the immediate reward as a result of taking this action in the current state. However, since in RL setups the state of the environment changes with each action that is taken, this means the function \(f\) also changes in each step and an action that might have resulted in a high reward in the previous step could now mean &#8220;game over&#8221;. Furthermore, in RL we&#8217;re not actually too concerned about every single immediate reward, but instead we want to achieve long-term success, measured by the return (i.e., cumulative rewards), and an action with a low immediate reward might still pay off later.</p>
+<p>Translated to RL terms, \(f\) would be the environment <em>in one particular state</em>, \(\mathbf{x}\) would be the action, and \(f(\mathbf{x})\) would be the immediate reward as a result of taking this action in the current state. However, since in RL setups the state of the environment changes with each action that is taken, this means the function \(f\) also changes in each step and an action that might have resulted in a high reward in the previous step could now mean &#8220;game over&#8221;. Furthermore, in RL we&#8217;re not too concerned about every single immediate reward, but instead we want to achieve long-term success, measured by the return (i.e., cumulative rewards), and an action with a low immediate reward might still pay off later.</p>
 </div>
 </dd>
 </dl>
@@ -7342,7 +7342,7 @@ The difficult thing here is that sometimes an action might not result in a big i
 <div class="content">
 <img src="images/08_rl/rl_value3.png" alt="image" width="640">
 </div>
-<div class="title"><span class="small"><em>Left:</em> This is a simple "grid world", where an agent can move up, down, left, or right through the states. This small environment contains three terminal states (i.e., when the agent reaches one of them, the episode ends): Two states mean "game over" with an infinite negative reward, while reaching the state in the lower right corner means receiving a large positive immediate reward. When the agent resides in any of the other (reachable) states, it receives a small negative reward, which is meant to "motivate" the agent to go to the goal state as quickly as possible. However, knowing only the immediate reward for each state is not very helpful to decide which action to take next, since in most states, the reward for moving to any of the surrounding states or staying in place would be the same. Therefore, what the agent needs to learn in order to be able to choose an action in each state that has the potential of bringing it closer to the goal state, is the value of being in each state. <em>Right:</em> The value of a state is the expected return when starting from this state. Of course, the expected return is highly dependent on the agent&#8217;s policy \(\pi\) (i.e., the actions it takes), e.g., if the agent would always move to the left, then it would never be able to reach the goal, i.e., the expected return starting from any state (except the goal state itself) would always be negative. If we assume an optimal policy (i.e., the agent always takes the quickest way to the goal), then the value of each state would correspond to the ones shown in the graphic, i.e., for each state "100 minus the number of steps to reach the goal from here". Knowing these values, the agent can now very easily select the best next action in each state, by simply choosing that action, which brings it to the next reachable state with the highest value.</span></div>
+<div class="title"><span class="small"><em>Left:</em> This is a simple "grid world", where an agent can move up, down, left, or right through the states. This small environment contains three terminal states (i.e., when the agent reaches one of them, the episode ends): Two states mean "game over" with an infinite negative reward, while reaching the state in the lower right corner means receiving a large positive immediate reward. When the agent resides in any of the other (reachable) states, it receives a small negative reward, which is meant to "motivate" the agent to go to the goal state as quickly as possible. However, knowing only the immediate reward for each state is not very helpful to decide which action to take next, since in most states, the reward for moving to any of the surrounding states or staying in place would be the same. Therefore, what the agent needs to learn in order to be able to choose an action in each state that has the potential of bringing it closer to the goal state, is the value of being in each state. <em>Right:</em> The value of a state is the expected return when starting from this state. Of course, the expected return is highly dependent on the agent&#8217;s policy \(\pi\) (i.e., the actions it takes), e.g., if the agent would always move to the left, then it would never be able to reach the goal, i.e., the expected return starting from any state (except the goal state itself) would always be negative. If we assume an optimal policy (i.e., the agent always takes the quickest way to the goal), then the value of each state corresponds to the ones shown in the graphic, i.e., for each state "100 minus the number of steps to reach the goal from here". Knowing these values, the agent can now very easily select the best next action in each state, by simply choosing that action, which brings it to the next reachable state with the highest value.</span></div>
 </div>
 </dd>
 </dl>
@@ -7359,7 +7359,7 @@ The difficult thing here is that sometimes an action might not result in a big i
 <p>The most naive way to calculate \(V^\pi(s)\) would be to let the agent start from this state several times (depending on how complex the environment is usually several thousand times), observe how each of the episodes play out, and then compute the average return that the agent had received in all these runs starting from state \(s\).</p>
 </div>
 <div class="paragraph">
-<p>Similarly, we can also use the expected return when executing action \(a\) in state \(s\):</p>
+<p>Similarly, we can calculate the expected return when executing action \(a\) in state \(s\):</p>
 </div>
 <div class="stemblock">
 <div class="content">
@@ -7379,10 +7379,10 @@ The difficult thing here is that sometimes an action might not result in a big i
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>&#8594; <strong><em>Exploration:</em></strong> Learn something about the environment (e.g., try a new restaurant)</p>
+<p>&#8594; <strong><em>Exploration:</em></strong> Learn something about the environment (e.g., try a new restaurant).</p>
 </li>
 <li>
-<p>&#8594; <strong><em>Exploitation:</em></strong> Use the collected knowledge to maximize your reward (e.g., eat somewhere you know you love the food)</p>
+<p>&#8594; <strong><em>Exploitation:</em></strong> Use the collected knowledge to maximize your reward (e.g., eat somewhere you know you like the food).</p>
 </li>
 </ul>
 </div>
@@ -7405,7 +7405,7 @@ The difficult thing here is that sometimes an action might not result in a big i
 </dd>
 <dt class="hdlist1">Tabular RL: Q-Learning</dt>
 <dd>
-<p>This brings us to the simplest form of RL, tabular RL, where an agent has a finite set of actions to choose from and operates in an environment with a finite set of states (like the grid world from above). Here, one could simply compute the Q-value for each (state, action)-combination as described above, and save these values in a big table. This so-called Q-table then acts as a cheat sheet, since for each state the agent is in, it can just look up the Q-values for all of the available actions and then simply choose the action with the highest Q-value (when in exploitation-mode):</p>
+<p>This brings us to the simplest form of RL, tabular RL, where an agent has a finite set of actions to choose from and operates in an environment with a finite set of states (like the grid world from above). Here, we could simply compute the Q-value for each (state, action)-combination as described above, and save these values in a big table. This so-called Q-table then acts as a cheat sheet, since for each state the agent is in, it can just look up the Q-values for all of the available actions and then choose the action with the highest Q-value (when in exploitation-mode):</p>
 <div class="imageblock text-center">
 <div class="content">
 <img src="images/08_rl/rl_tabular3.png" alt="image" width="580">
@@ -7414,7 +7414,7 @@ The difficult thing here is that sometimes an action might not result in a big i
 </dd>
 <dt class="hdlist1">Function Approximation: Deep Q-Learning</dt>
 <dd>
-<p>Unfortunately, almost no practical RL application operates in an environment consisting of a finite set of discrete states (and sometimes even the agent&#8217;s actions are not discrete (e.g., the steering wheel in a self-driving car), but this goes too far here). In video games, for example, each frame would be considered a new state and depending on the complexity of the game, no two frames might be exactly alike. This is where deep Q-learning comes in:<br></p>
+<p>Unfortunately, almost no practical RL application operates in an environment consisting of a finite set of discrete states (and sometimes even the agent&#8217;s actions are not discrete, e.g., the steering wheel positions in a self-driving car&#8201;&#8212;&#8201;but this goes too far here). In video games, for example, each frame is a new state and depending on the complexity of the game, no two frames might be exactly alike. This is where Deep Q-Learning comes in:<br></p>
 <div class="paragraph">
 <p>Given a state \(s\) (represented by a feature vector \(\mathbf{x}_s\)), predict the Q-value of each action \(a_1 ... a_k\) with a neural network:</p>
 </div>
@@ -7424,8 +7424,8 @@ The difficult thing here is that sometimes an action might not result in a big i
 </div>
 </div>
 <div class="paragraph">
-<p>This can be seen as a direct extension of the tabular Q-learning: If we represented our states as one-hot encoded vectors and used a linear network with a single weight matrix that consisted of the Q-table we had constructed before, by multiplying such a one-hot encoded vector with the Q-table, the network would &#8220;predict&#8221; the row containing the Q-values for all actions in this state.<br>
-By using a more complex network together with meaningful feature representations for the states, with deep Q-learning the agent is able to generalize to unseen states. (Just like in time series forecasting tasks, here again the feature representation of a state needs to include all the relevant information about the past, e.g., in video games (think: old pong game) the feature vector could contain the last 4 frames to additionally capture the direction of movement.)</p>
+<p>This can be seen as a direct extension of the tabular Q-learning: If we represented our states as one-hot encoded vectors and used a linear network with a single weight matrix that consisted of the Q-table we had constructed before, by multiplying the one-hot encoded vector with the Q-table, the network would &#8220;predict&#8221; the row containing the Q-values for all actions in this state.<br>
+By using a more complex network together with meaningful feature representations for the states, deep Q-learning enables the agent to generalize to unseen states. However, just like in time series forecasting tasks, here again the feature representation of a state needs to include all the relevant information about the past, e.g., in video games (think: old pong game) the feature vector could contain the last four frames to additionally capture the direction of movement.</p>
 </div>
 </dd>
 </dl>
@@ -7440,9 +7440,9 @@ By using a more complex network together with meaningful feature representations
 <ul>
 <li>
 <p>RL works well for games:<br>
-&#8594; environment = game = simulation (i.e., no discrepancy between &#8220;real world&#8221; and simulation model)<br>
-&#8594; well defined reward function<br>
-&#8594; utilize &#8220;self-play&#8221; for multi-player games, i.e., two RL agents playing against each other</p>
+&#8594; Environment = Game = Simulation (i.e., no discrepancy between &#8220;real world&#8221; and simulation model).<br>
+&#8594; Well defined reward function.<br>
+&#8594; Utilize &#8220;self-play&#8221; for multi-player games, i.e., two RL agents playing against each other.</p>
 </li>
 </ul>
 </div>
@@ -7452,23 +7452,23 @@ By using a more complex network together with meaningful feature representations
 <div class="ulist">
 <ul>
 <li>
-<p>Acting in the real world is too expensive &#8594; need accurate (simulation) model of the environment</p>
+<p>Acting in the real world is too expensive &#8594; need accurate (simulation) model of the environment.</p>
 </li>
 <li>
-<p>AIs love to cheat and exploit bugs in the simulation</p>
+<p>AIs love to cheat and exploit bugs in the simulation.</p>
 </li>
 <li>
-<p>Difficult to design appropriate reward function (and RL will overfit it, resulting in unintended consequences)</p>
+<p>Difficult to design appropriate reward function (and RL will overfit it, resulting in unintended consequences).</p>
 </li>
 <li>
-<p>Model-free RL is very sample inefficient (i.e., needs millions of iterations, which takes too long in real-time)</p>
+<p>Model-free RL is very sample inefficient (i.e., needs millions of iterations, which takes too long in real-time).</p>
 </li>
 <li>
-<p>Agent is responsible for collecting its own experiences: bad policy &#8658; bad data &#8658; no improvement</p>
+<p>Agent is responsible for collecting its own experiences: bad policy &#8658; bad data &#8658; no improvement.</p>
 </li>
 <li>
 <p>Deep RL: complex network architectures, very sensitive to hyperparameter choices<br>
-&#8658; hard to train &amp; get robust results (&#8594; requires lots of tricks)</p>
+&#8658; Hard to train &amp; get robust results &#8594; requires lots of tricks.</p>
 </li>
 </ul>
 </div>
@@ -7476,7 +7476,7 @@ By using a more complex network together with meaningful feature representations
 </dl>
 </div>
 <div class="paragraph">
-<p>&#8594; <em>Imitation learning</em> is often used instead of RL, which just means using supervised learning to train an agent to react similar to a human in some situation. Often, it is also easier to collect data from humans than to define a complicated reward function (e.g., humans drive around all the time, however, it is hard to define what would be considered &#8220;good driving&#8221; under lots of different circumstances).</p>
+<p>&#8594; <em>Imitation learning</em> is often used instead of RL, which just means using supervised learning to train an agent to react similar to a human in some situation. Often, it is also easier to collect data from humans than to define a complicated reward function, e.g., humans drive around all the time, however, it is hard to define what would be considered &#8220;good driving&#8221; under lots of different circumstances. After the agent was pretrained on the human behavior, its policy can still be fine-tuned with an RL approach (e.g., this is how AlphaGo became better than a human Go master).</p>
 </div>
 </div>
 </div>
@@ -7554,13 +7554,13 @@ By using a more complex network together with meaningful feature representations
 </div>
 </div>
 <div class="paragraph">
-<p>&#8230;&#8203;it is time to do a bit of a reality check.</p>
+<p>&#8230;&#8203;it is time for a reality check.</p>
 </div>
 <div class="paragraph">
 <p><strong>Hype vs. Reality</strong></p>
 </div>
 <div class="paragraph">
-<p>In the introduction, you&#8217;ve seen a lot of examples that contribute to the ML hype. However, especially when applying ML in the manufacturing industry, for example, the reality often looks quite different and not every idea might work out as hoped:</p>
+<p>In the introduction, we&#8217;ve seen a lot of examples that contribute to the ML hype. However, especially when applying ML in the manufacturing industry, for example, the reality often looks quite different and not every idea might work out as hoped:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -7575,17 +7575,17 @@ By using a more complex network together with meaningful feature representations
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">database with millions of examples</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Database with millions of examples</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">150 manual entries in an excel sheet</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">homogeneous unstructured data (e.g., pixels, sound, text)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">measurements from different sources with different scales (e.g., temperature, flow, pressure sensors)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Homogeneous unstructured data (e.g., pixels, sound, text)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Measurements from different sources with different scales (e.g., temperature, flow, pressure sensors)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">fancy deep learning architectures</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">neural networks are tricky to train and even more difficult to explain<br>
-&#8594; need to understand and trust predictions to make business decisions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fancy deep learning architectures</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Neural networks are tricky to train and even more difficult to explain<br>
+&#8594; Need to understand and trust predictions to make business decisions</p></td>
 </tr>
 </tbody>
 </table>
@@ -7619,21 +7619,21 @@ But it can be done! A good example comes from the startup alcemy, which uses ML 
 <ol class="arabic">
 <li>
 <p>Do you <em>really</em> have Big Data?<br>
-measurements from 100 sensors every second for 1 year:<br>
+Measurements from 100 sensors every second for one year:<br>
 ❌ \(100\times 365 \times 24 \times 60 \times 60 \times 64 \text{ bits} \approx 25\text{ gb}\)<br>
 Process changes slowly &#8594; take hourly averages:<br>
 ✅ \(100\times 365 \times 24 \times 64 \text{ bits} \approx 7\text{ mb}\)</p>
 </li>
 <li>
-<p>Get more RAM! (E.g., through a cloud service like AWS)</p>
+<p>Get more RAM! (E.g., through a cloud service like AWS).</p>
 </li>
 <li>
 <p>Use an ensemble method, i.e.,<br>
-a) split your data in equal (RAM-sized) chunks,<br>
+a) split the data in equal (RAM-sized) chunks,<br>
 b) train a model on each chunk,<br>
 c) combine the predictions of all models.</p>
 <div class="paragraph">
-<p>This is also what the &#8216;big data&#8217; libraries do internally, e.g., MapReduce; especially useful when the data doesn&#8217;t fit onto a single hard drive anymore.</p>
+<p>This is also what the &#8216;big data&#8217; libraries do internally, e.g., the MapReduce approach. These frameworks are especially useful when the data doesn&#8217;t fit onto a single hard drive anymore.</p>
 </div>
 </li>
 </ol>
@@ -7657,7 +7657,7 @@ c) combine the predictions of all models.</p>
 </dd>
 <dt class="hdlist1">Domain knowledge is key!</dt>
 <dd>
-<p>In the introduction, you&#8217;ve seen the Venn diagram showing that ML lies at the intersection of math and computer science. However, this is actually not the complete picture. In the previous chapters, you&#8217;ve hopefully picked up on the fact that in order to build trustworthy models that use meaningful features to arrive at robust conclusions, it is necessary to combine ML with some domain knowledge &amp; understanding of the business problems, what is then often referred to as Data Science:</p>
+<p>In the introduction, you&#8217;ve seen the Venn diagram showing that ML lies at the intersection of math and computer science. However, this is actually not the complete picture. In the previous chapters, you&#8217;ve hopefully picked up on the fact that in order to build trustworthy models that use meaningful features to arrive at robust conclusions, it is necessary to combine ML with some domain knowledge and understanding of the business problems, what is then often referred to as Data Science:</p>
 <div class="imageblock text-center">
 <div class="content">
 <img src="images/01b_intro_ml/venn3.png" alt="image" width="680">
@@ -7678,20 +7678,20 @@ c) combine the predictions of all models.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>ML is &amp; will be transforming all areas of our lives incl. work</p>
+<p>ML is and will be transforming all areas of our lives incl. work.</p>
 </li>
 <li>
 <p>ML has limitations:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Performance: some problems are hard</p>
+<p>Performance: Some problems are hard.</p>
 </li>
 <li>
 <p>Data Quality &amp; Quantity: Garbage in, garbage out!</p>
 </li>
 <li>
-<p>Causality &amp; Adversarial Attacks &#8658; Explainability!!!</p>
+<p>Causality &amp; Adversarial Attacks &#8658; Explainability!!</p>
 </li>
 </ul>
 </div>
@@ -7700,14 +7700,14 @@ c) combine the predictions of all models.</p>
 <p>Combine ML with domain expertise!</p>
 </li>
 <li>
-<p>It’s an iterative process!</p>
+<p>It&#8217;s an iterative process:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Don’t expect ML to work right away!</p>
+<p>Don&#8217;t expect ML to work right away!</p>
 </li>
 <li>
-<p>Monitor &amp; update after initial release</p>
+<p>Monitor and update after initial release.</p>
 </li>
 </ul>
 </div>
@@ -7723,22 +7723,22 @@ c) combine the predictions of all models.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>be clear about what you want to do (inputs &amp; outputs; model type; evaluation metric)</p>
+<p>Be clear about what you want to do (inputs &amp; outputs; model type; evaluation metric).</p>
 </li>
 <li>
-<p>data preprocessing &amp; feature engineering are at least as important as the &#8220;real&#8221; ML stuff</p>
+<p>Data preprocessing and feature engineering are at least as important as the &#8220;real&#8221; ML stuff.</p>
 </li>
 <li>
-<p>fancy deep learning methods might not work with the data in your excel sheet</p>
+<p>Fancy deep learning methods might not work with the data in your excel sheet.</p>
 </li>
 <li>
-<p>but linear models and decision trees are great too (with the right features)</p>
+<p>But linear models and decision trees are great too (with the right features).</p>
 </li>
 <li>
-<p>always be careful when evaluating your models; manually examine some errors</p>
+<p>Always be careful when evaluating your models; manually examine some errors.</p>
 </li>
 <li>
-<p>KNOW YOUR DATA</p>
+<p>KNOW YOUR DATA!</p>
 </li>
 </ul>
 </div>
@@ -7753,7 +7753,7 @@ c) combine the predictions of all models.</p>
 <div class="content">
 <div class="dlist left">
 <dl>
-<dt class="hdlist1">5 Steps for a successful AI Transformation by Andrew Ng</dt>
+<dt class="hdlist1">Five steps for a successful AI Transformation by Andrew Ng</dt>
 <dd>
 <div class="olist arabic">
 <ol class="arabic">
@@ -7801,9 +7801,9 @@ Before implementing some big AI initiative spanning the whole company, it is the
 When choosing a pilot project, the most important factor is not the Return on Investment (ROI) of the project, since here the experience with ML gained along the way should be the priority. However, it is important to choose a project that is <strong>technically feasible</strong>, i.e., which can be solved with existing ML algorithms and you don&#8217;t need years of research to develop your own fancy neural network architecture. Furthermore, you should have enough high-quality <strong>data available</strong> to get started, so you don&#8217;t spend months just on data preprocessing, e.g., due to the need to combine data from different sources within a poor data infrastructure.<br>
 If you do not yet have the necessary AI talent in-house to tackle such a project, you can also partner with external consultants, which provide the ML expertise, while you supply the domain knowledge to ensure the pilot project is a success.</p>
 </dd>
-<dt class="hdlist1">[Step 2] Set up a centralized AI team and data infrastructure to carry out bigger projects efficiently &amp; effectively</dt>
+<dt class="hdlist1">[Step 2] Set up a centralized AI team and data infrastructure to carry out bigger projects efficiently and effectively</dt>
 <dd>
-<p>We&#8217;ve already seen that in practice, it&#8217;s really about the intersection of Theory, Programming, and Domain Knowledge, i.e., Data Science. However, it is unlikely that you&#8217;ll find a single person that is truly competent in all three areas. Instead, people will always have a certain focus and we therefore propose three distinct roles, which also align very well with the three main steps for successfully executing a ML project:</p>
+<p>We&#8217;ve already seen that in practice, it&#8217;s really about the intersection of Theory, Programming, and Domain Knowledge, i.e., Data Science. However, it is unlikely that you&#8217;ll find a single person that is truly competent in all three areas. Instead, people will always have a certain focus and we therefore propose three distinct roles, which also align very well with the three main steps for successfully executing an ML project:</p>
 <div class="imageblock text-center">
 <div class="content">
 <img src="images/01b_intro_ml/venn7.png" alt="image" width="680">
@@ -7825,23 +7825,23 @@ If you do not yet have the necessary AI talent in-house to tackle such a project
 <div class="ulist">
 <ul>
 <li>
-<p>Data scientists can discuss solutions with other ML experts (&#8594; many problems will be similar from an algorithmic standpoint)</p>
+<p>Data scientists can discuss solutions with other ML experts &#8594; many problems will be similar from an algorithmic standpoint.</p>
 </li>
 <li>
-<p>Combine data from the whole company for a holistic analysis</p>
+<p>Combine data from the whole company for a holistic analysis.</p>
 </li>
 <li>
-<p>Funding independent from individual business unit (necessary for the up front investment in data infrastructure, time required to keep up with new research, etc.)</p>
+<p>Funding independent from individual business unit, e.g., necessary for the up front investment in data infrastructure, time required to keep up with new research, etc.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>As we&#8217;ve discussed in the introduction, about 90% of the time in an ML project is spent on data wrangling. Therefore, especially in the beginning, <strong>the AI team should contain more Data Engineers than Data Scientists</strong>, so they can build a solid data infrastructure, which will save Data Scientists lots of time &amp; headaches later.</p>
+<p>As we&#8217;ve discussed in the introduction, about 90% of the time in an ML project is spent on data wrangling. Therefore, especially in the beginning, <strong>the AI team should contain more Data Engineers than Data Scientists</strong>, so they can build a solid data infrastructure, which will save Data Scientists lots of time and headaches later.</p>
 </div>
 </dd>
-<dt class="hdlist1">[Step 3] Train other employees to recognize ML problems &amp; establish a data-driven culture</dt>
+<dt class="hdlist1">[Step 3] Train other employees to recognize ML problems and establish a data-driven culture</dt>
 <dd>
-<p>While data scientists need to be intimately familiar with the algorithms they are using, other employees (especially data strategists and department leaders) should have some basic understanding of what ML is and is not capable of, such that they can identify possible ML problems and refer them to the AI team.</p>
+<p>While data scientists need to be intimately familiar with the algorithms they are using, other employees, especially data strategists and department leaders, should have some basic understanding of what ML is and is not capable of, such that they can identify possible ML problems and refer them to the AI team.</p>
 <div class="imageblock text-center">
 <div class="content">
 <img src="images/09_ml_in_practice/ml_workshops.png" alt="image" width="840">
@@ -7851,7 +7851,7 @@ If you do not yet have the necessary AI talent in-house to tackle such a project
 </dd>
 <dt class="hdlist1">[Step 4] Devise a cohesive strategy with long-term goals that result in a competitive advantage</dt>
 <dd>
-<p>Developing a strategy might be the first impulse of an executive when confronted with a new topic such as AI. However, since AI problems are so different from other kinds of projects, it really pays off to first gain some experience with this topic (i.e., start at step 1!). After you&#8217;ve successfully completed some pilot projects and set the wheels in motion to create an AI team as well as educate the other employees to get them on board, here are a few things to consider w.r.t. a companywide strategy to give you an advantage over your competition:</p>
+<p>Developing a strategy might be the first impulse of an executive when confronted with a new topic such as AI. However, since AI problems are so different from other kinds of projects, it really pays off to first gain some experience with this topic (i.e., start with step 1!). After you&#8217;ve successfully completed some pilot projects and set the wheels in motion to create an AI team as well as educate the other employees to get them on board, here are a few things to consider w.r.t. a companywide strategy to give you an advantage over your competition:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -7862,7 +7862,7 @@ If you do not yet have the necessary AI talent in-house to tackle such a project
 <p>Long-term planning: Which data might be valuable in the future? &#8594; Start collecting it now!</p>
 </li>
 <li>
-<p>Up-front investments: What infrastructure &amp; processes are needed to make the data accessible to the right people?</p>
+<p>Up-front investments: What infrastructure and processes are needed to make the data accessible to the right people?</p>
 </li>
 <li>
 <p>How can you combine data from different divisions to enable the AI team to &#8220;connect the dots&#8221; and gain a unique edge over the competition?</p>
@@ -7911,13 +7911,13 @@ If you do not yet have the necessary AI talent in-house to tackle such a project
 <div class="ulist">
 <ul>
 <li>
-<p>the overview: <a href="https://franziskahorn.de/mlws_resources/ml_project_considerations.pdf" target="\_blank">3 main steps of an ML project</a>, which can help you plan your next machine learning project</p>
+<p>The overview: <a href="https://franziskahorn.de/mlws_resources/ml_project_considerations.pdf" target="\_blank">3 main steps of an ML project</a>, which can help you plan your next machine learning project.</p>
 </li>
 <li>
-<p>the <a href="https://franziskahorn.de/mlws_resources/cheatsheet.pdf" target="\_blank">cheat sheet</a>, which includes a step-by-step guide on how to solve a data science problem (incl. code snippets)</p>
+<p>The <a href="https://franziskahorn.de/mlws_resources/cheatsheet.pdf" target="\_blank">cheat sheet</a>, which includes a step-by-step guide on how to solve a data science problem (incl. code snippets).</p>
 </li>
 <li>
-<p>and the <a href="https://github.com/cod3licious/ml_exercises" target="\_blank">programming exercises</a>, to get your hands dirty and apply what you&#8217;ve learned.</p>
+<p>The <a href="https://github.com/cod3licious/ml_exercises" target="\_blank">programming exercises</a>, to get your hands dirty and apply what you&#8217;ve learned.</p>
 </li>
 </ul>
 </div>

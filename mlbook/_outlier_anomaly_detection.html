@@ -1017,8 +1017,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.3,</span>
-<span id="revdate">2022-02-02</span>
+<span id="revnumber">version 1.4,</span>
+<span id="revdate">2022-05-29</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -1163,6 +1163,16 @@ Please note that some of the data points a prediction model encounters in produc
 <p>There is no one-size-fits-all solution, but depending on the characteristics of the dataset you might want to experiment with some of these approaches:</p>
 <div class="ulist">
 <ul>
+<li>
+<p>Detect outliers in individual feature dimensions:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Compute the <a href="https://en.wikipedia.org/wiki/Interquartile_range">interquartile range (IQR)</a>, i.e., the difference between the 75th and 25th percentiles of the data, as \(\text{IQR} = Q_3 - Q_1\), where \(Q_1\) and \(Q_3\) are the lower and upper quartiles. All data points with values outside of the range \([Q_1-1.5\cdot \text{IQR},\; Q_3+1.5\cdot \text{IQR}\)] are considered outliers.</p>
+</li>
+</ul>
+</div>
+</li>
 <li>
 <p>Detect multidimensional outlier patterns, especially in datasets with independent data points (see also <a href="https://scikit-learn.org/stable/modules/outlier_detection.html" target="\_blank">sklearn user guide</a>):</p>
 <div class="ulist">
@@ -1311,6 +1321,16 @@ Extension for time series data: don&#8217;t identify the <em>k</em> nearest neig
 </td>
 </tr>
 </table>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>You&#8217;ve found an outlier&#8201;&#8212;&#8201;now what?</strong></p>
+</div>
+<div class="video-container">
+    <iframe class="video" src="https://www.youtube.com/embed/OYwq0MlY11g" allowfullscreen></iframe>
+</div>
+</div>
 </div>
 </div>
 </div>

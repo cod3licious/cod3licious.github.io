@@ -927,8 +927,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.3,</span>
-<span id="revdate">2022-01-31</span>
+<span id="revnumber">version 1.4,</span>
+<span id="revdate">2022-05-29</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -936,9 +936,10 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <li><a href="#_einleitung">Einleitung</a>
 <ul class="sectlevel2">
 <li><a href="#_ml_ist_überall">ML ist überall!</a></li>
-<li><a href="#_ml_geschichte_warum_jetzt">ML Geschichte: Warum jetzt?</a></li>
+<li><a href="#_daten_sind_das_neue_öl">Daten sind das neue Öl!?</a></li>
 <li><a href="#_was_ist_ml">Was ist ML?</a></li>
 <li><a href="#_wie_lernen_maschinen">Wie &#8220;lernen&#8221; Maschinen?</a></li>
+<li><a href="#_ml_geschichte_warum_jetzt">ML Geschichte: Warum jetzt?</a></li>
 <li><a href="#_wann_sollte_man_ml_verwenden">Wann sollte man ML verwenden?</a></li>
 <li><a href="#_probleme_mit_ml_lösen_workflow">Probleme mit ML lösen: Workflow</a></li>
 </ul>
@@ -1228,76 +1229,121 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <p><strong>Neuronale Netze werden kreativ</strong></p>
 </div>
 <div class="paragraph">
-<p>Viele unterhaltsame Anwendungen verwenden neuronale Netze, um neue Inhalte zu generieren, d.h. kreative Tätigkeiten auszuführen, die bisher ausschließlich den Menschen vorbehalten schienen. Zum Beispiel hat eine KI ein etwas verwirrendes, aber urkomisches <a href="https://arstechnica.com/gaming/2021/05/an-ai-wrote-this-movie-and-its-strangely-moving/" target="\_blank">Skript für einen Film</a> geschrieben, der dann sogar produziert wurde. Und du hast wahrscheinlich auch schon einige Beispiele für <a href="https://pytorch.org/tutorials/advanced/neural_style_tutorial.html" target="\_blank">&#8220;Neural Style Transfer&#8221;</a> gesehen, eine Technik mit der man z.B. ein Social-Media-Profilbild wie ein Van-Gogh-Gemälde aussehen lassen kann. Schließlich werden neuronale Netze auch verwendet, um Musik zu visualisieren. Dabei werden passende Bilder kombiniert und fließend transformiert wie in diesem Video:</p>
+<p>Viele unterhaltsame Anwendungen verwenden neuronale Netze, um neue Inhalte zu generieren, d.h. kreative Tätigkeiten auszuführen, die bisher ausschließlich den Menschen vorbehalten schienen.</p>
+</div>
+<div class="paragraph">
+<p>Zum Beispiel hat eine KI ein etwas verwirrendes, aber urkomisches <a href="https://arstechnica.com/gaming/2021/05/an-ai-wrote-this-movie-and-its-strangely-moving/" target="\_blank">Skript für einen Film</a> geschrieben, der dann sogar produziert wurde.</p>
+</div>
+<div class="paragraph">
+<p>Neuronale Netze auch verwendet, um Musik zu visualisieren. Dabei werden passende Bilder kombiniert und fließend transformiert wie in diesem Video:</p>
 </div>
 <div class="video-container">
     <iframe class="video" src="https://www.youtube.com/embed/85l961MmY8Y" allowfullscreen></iframe>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div class="paragraph">
+<p>Und du hast wahrscheinlich auch schon einige Beispiele für <a href="https://pytorch.org/tutorials/advanced/neural_style_tutorial.html" target="\_blank">&#8220;Neural Style Transfer&#8221;</a> gesehen, eine Technik mit der man z.B. ein Social-Media-Profilbild wie ein Van-Gogh-Gemälde aussehen lassen kann:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="https://pytorch.org/tutorials/_images/neuralstyle.png" alt="styletransfer" width="940">
+</div>
+<div class="title"><span class="small">Source: https://pytorch.org</span></div>
+</div>
+<div class="paragraph">
+<p>Auch Stock-Fotos sind nun im Grunde obsolet, da man mit Hilfe neuronaler Netze <a href="https://imagen.research.google/" target="\_blank">Bilder aus einer Textbeschreibung generieren</a> kann:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/01a_intro/01_imagen_examples.png" alt="imagen" width="940">
+</div>
+<div class="title"><span class="small">Screenshot: https://imagen.research.google/ (28.05.2022)</span></div>
 </div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ml_geschichte_warum_jetzt">ML Geschichte: Warum jetzt?</h3>
+<h3 id="_daten_sind_das_neue_öl">Daten sind das neue Öl!?</h3>
 <div class="paragraph">
-<p>Warum gibt es einen solchen Anstieg von ML Anwendungen?
-Allgegenwärtig ist ML nicht nur in unserem Alltag, auch die Zahl der jährlich veröffentlichten Forschungsarbeiten zu dem Thema ist exponentiell gestiegen:</p>
+<p>Lass uns von vorne anfangen. Alles beginnt mit Daten.
+Wahrscheinlich hast du diese Behauptung schon einmal gehört: &#8220;Daten sind das neue Öl!&#8221;. Dies legt nahe, dass Daten wertvoll sind. Aber sind sie das?<br>
+Der Grund, warum Öl als wertvoll angesehen wird, liegt darin, dass wir wichtige Anwendungsfälle dafür haben: den Antrieb unserer Autos, die Beheizung unserer Häuser und die Herstellung von Kunststoffen oder Düngemitteln.
+Genauso verhält es sich auch mit Daten: sie sind nur so wertvoll wie das was wir aus ihnen machen. Wofür können wir also Daten verwenden?</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="images/01a_intro/ML_history2.png" alt="history1" width="740">
+<img src="images/01b_intro_ml/data_value.png" alt="image" width="440">
 </div>
-<div class="title"><span class="small">Datenquelle: https://www.webofknowledge.com/</span></div>
-</div>
-<div class="paragraph">
-<p>Interessanterweise liegt das aber nicht etwa an einer Fülle bahnbrechender theoretischer Errungenschaften in den letzten Jahren (in der Grafik als violette Rauten gekennzeichnet). Im Gegenteil: Viele der heute verwendeten Algorithmen wurden bereits Ende der 50er / Anfang der 60er Jahre entwickelt. So ist beispielsweise das Perzeptron der Vorläufer von neuronalen Netzen, die hinter allen im letzten Abschnitt gezeigten Beispielen stecken. Die wichtigsten neuronalen Netzarchitekturen, Recurrent Neural Networks (RNN, &#8220;rekurrente neuronale Netze&#8221;) und Convolutional Neural Networks (CNN, &#8220;faltende neuronale Netze&#8221;), welche die Grundlage für moderne Sprach- bzw. Bildverarbeitung bilden, wurden in den frühen 80er und 90er Jahren entwickelt. Aber zu dieser Zeit hatten wir noch nicht die Rechenressourcen, um diese Modelle für mehr als kleine Experimente zu verwenden.</p>
 </div>
 <div class="paragraph">
-<p>Aufgrund dessen korreliert der Anstieg der ML-Publikationen stärker mit der Anzahl der Transistoren auf CPUs (also den regulären Prozessoren in normalen Computern) und GPUs (Grafikkarten, die die Arten von Berechnungen parallelisieren, die zum effizienten Trainieren von neuronalen Netzwerkmodellen erforderlich sind):</p>
+<p>Die wichtigsten Anwendungsfälle fallen in diese beiden Kategorien:</p>
 </div>
-<div class="imageblock text-center">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Verwertbare Erkenntnisse</strong>, die es Entscheidungsträgern ermöglichen, bessere, <strong>datengestützte Entscheidungen</strong> zu treffen (anstatt blind ihrem Bauchgefühl zu vertrauen).<br>
+<span class="underline">Beispiel:</span> <em>Wir benutzen tagtäglich Erkenntnisse, die wir aus der Analyse von Daten gewonnen haben, um selbst triviale Entscheidungen zu treffen, wie z.B. wohin wir zum Abendessen gehen. Der erste Gedanke wenn du ein Restaurant siehst ist vielleicht "Ich hab ein schlechtes Gefühl bei diesem Laden; die Plastikblumendeko sieht billig aus, lass uns da nicht rein gehn", aber nachdem du ein paar Rezessionen (= Daten) gelesen hast, realisierst du, dass dies ein verstecktes Juwel mit wirklich leckerem, authentischem Essen ist.</em></p>
+<div class="sidebarblock">
 <div class="content">
-<img src="images/01a_intro/ML_history4.png" alt="history2" width="740">
+<div class="paragraph">
+<p>Diese Erkenntnisse werden durch eine einmalige Analyse historischer Daten mit hauptsächlich &#8220;traditionellen Methoden&#8221; generiert:</p>
 </div>
-<div class="title"><span class="small">Datenquelle: https://en.wikipedia.org/wiki/Transistor_count</span></div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Beschreibende Analyse:</strong> Durch die Visualisierung der Daten und die Berechnung zusammenfassender Statistiken finden wir möglicherweise etwas Interessantes, d.h. <strong>lassen uns von den Daten inspirieren</strong>.<br>
+<span class="underline">Beispiel:</span> <em>Euer Unternehmen verkauft eine Softwarelösung, für die ihr eine 14-tägige kostenlose Testversion anbietet, bevor Kunden den vollen Preis zahlen müssen. Bei der Analyse, welche Kunden letztendlich die Software kaufen, stellst du fest, dass eine überraschend hohe Anzahl eurer potenziellen Kunden Studenten sind, die die Software jedoch nach Ablauf der kostenlosen Testversion fast nie kaufen. Dies inspiriert euch dazu, spezielle Angebote für Studenten anzubieten.</em><br>
+Die Durchführung einer solchen explorativen Datenanalyse ist auch zu Beginn eines ML-Projekts hilfreich, um ein besseres Gefühl für die Daten zu bekommen (z.B. um zu überprüfen, welche Variablen relevant sein könnten).</p>
+</li>
+<li>
+<p><strong>Statistische Inferenz:</strong> Während deskriptive Analysen es uns ermöglichen, bessere Fragen zu stellen, hilft uns die statistische Inferenz, bessere Antworten zu erhalten, indem sie es uns ermöglicht, <strong>Schlussfolgerungen zu ziehen, die über die vorliegenden Daten hinausgehen</strong>. Oft möchten wir eine Aussage über eine ganze <em>Population</em> treffen (z.B. alle Menschen, die derzeit auf dieser Erde leben), aber wir haben nur Zugriff auf einige (hoffentlich repräsentative) Beobachtungen, aus denen wir unsere Schlussfolgerung ziehen können. Bei der statistischen Inferenz geht es darum, unsere Meinung trotz dieser Unsicherheit zu ändern: Wir nehmen eine Nullhypothese an und prüfen dann, ob das, was wir in unserer Stichprobe beobachten, diese Nullhypothese lächerlich erscheinen lässt. Ist dies der Fall, verwerfen wir sie und nehmen stattdessen die alternative Hypothese an.<br>
+<span class="underline">Beispiel:</span> <em>Euer Unternehmen hat einen Online-Shop und möchte ein neues Empfehlungssystem einführen, aber ihr seid euch nicht sicher, ob Kunden diese Empfehlungen hilfreich finden und mehr kaufen werden. Bevor ihr mit dem neuen System live geht, führt ihr daher einen A/B-Test durch, bei dem ein Prozentsatz zufällig ausgewählter Nutzer die neuen Empfehlungen sieht, während die anderen zur ursprünglichen Version des Online-Shops weitergeleitet werden. Die Nullhypothese lautet, dass die neue Version nicht besser ist als das Original. Aber es stellt sich heraus, dass das durchschnittliche Verkaufsvolumen der Kunden, die die neuen Empfehlungen sehen, viel höher ist als das der Kunden, die die ursprüngliche Website besuchen. Dieser Unterschied ist so groß, dass es in einer Welt, in der die Nullhypothese wahr wäre, äußerst unwahrscheinlich wäre, dass eine zufällige Stichprobe uns diese Ergebnisse liefern würde. Wir verwerfen daher die Nullhypothese und gehen von der Alternativhypothese aus, dass die neuen Empfehlungen höhere Umsätze generieren.</em></p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Darüber hinaus hat die Veröffentlichung vieler Open-Source-Bibliotheken wie scikit-learn (für traditionelle ML-Modelle) und theano, tensorflow und (py)torch (für die Implementierung neuronaler Netze) die Verwendung von ML-Algorithmen in anderen Fachbereichen deutlich erleichtert.</p>
+<p><span class="small">Lies <a href="https://towardsdatascience.com/whats-the-difference-between-analytics-and-statistics-cd35d457e17" target="\_blank">diesen Artikel</a> wenn du mehr über den Unterschied zwischen Analysten und Statistikern erfahren möchtest und warum diese immer mit unterschiedlichen Teilen eines Datensatzes arbeiten sollten.</span></p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Einerseits demokratisieren solche Bibliotheken die Verwendung von ML, andererseits resultiert eine Nutzung ohne Wissen über die theoretischen Grundlagen auch in Fehlanwendungen. Die Modelle zeigen dann oft nicht die erwartete Performance, was zu (deplatzierter) Enttäuschung führt. Im ungünstigsten Fall kann es passieren, dass die Modelle bestimmte Teile der Bevölkerung diskriminieren, z.B. Kreditbewertungsalgorithmen, die von Banken verwendet werden und die aufgrund von Verzerrungen in den historischen Daten Frauen systematisch Kredite zu höheren Zinssätzen anbieten als Männern. Wir werden solche Probleme im Kapitel zur Vermeidung häufiger Fehler besprechen.
-</td>
-</tr>
-</table>
 </div>
-<div class="paragraph">
-<p>Ein weiterer Faktor, der zur Verbreitung von ML beiträgt, ist die Verfügbarkeit von (digitalen) Daten. Unternehmen wie Google, Amazon und Facebook hatten hier einen Vorsprung, da ihr Geschäftsmodell von Anfang an auf Daten aufgebaute. Andere Unternehmen holen inzwischen langsam auf. Während traditionelle ML-Modelle nur minimal von diesen verfügbaren Daten profitieren, können große neuronale Netzmodelle mit vielen Freiheitsgraden jetzt ihr volles Potenzial entfalten, indem sie aus all den Texten und Bildern lernen, die täglich im Internet veröffentlicht werden:</p>
 </div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/01a_intro/ML_why_now_data5.png" alt="datagrowth" width="640">
-</div>
+</li>
+<li>
+<p><strong>Software</strong>, welche kontinuierlich Vorhersagen für neue Datenpunkte generiert, um <strong>eine &#8216;Input &#8594; Output&#8217; Aufgabe zu automatisieren</strong>, welche sonst ein (speziell geschulter) Mensche erledigen müsste.<br>
+<strong>Hier kommen die Machine Learning Algorithmen ins Spiel.</strong><br>
+<span class="underline">Beispiel:</span> <em>Ein als Teil einer Montagelinie installiertes Computer-Vision-System erkennt automatisch Produkte mit Defekten/Kratzern und sortiert sie aus. Früher musste dort den ganzen Tag ein Mensch sitzen und jedes produzierte Teil manuell inspizieren.</em></p>
+</li>
+</ol>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="paragraph">
-<p>Aber wir sind nach wie vor noch <em>sehr weit</em> von Artificial <strong>General</strong> Intelligence (AGI, &#8220;künstliche allgemeine Intelligenz&#8221; oder &#8220;starke KI&#8221;) entfernt!</p>
+<p>Analog zu den Werkzeugen, mit denen man etwas in einem traditionellen Produktionsprozess herstellt, kann man sich <strong>ML-Algorithmen als Werkzeuge vorstellen, um Wert aus Daten zu generieren</strong>:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="images/01a_intro/01_killer_robot_style.jpg" alt="agi" width="240">
+<img src="images/01b_intro_ml/ml_carpentry_analogy2.png" alt="image" width="840">
 </div>
 </div>
 <div class="paragraph">
-<p>Eine AGI ist ein Computerprogramm, das wie ein Mensch die unterschiedlichsten Aufgaben gleichzeitig meistert und selbstständig neue Fähigkeiten lernen kann.</p>
+<p>Um ML erfolgreich anzuwenden, sollte man sich einige wichtige Fragen stellen:</p>
 </div>
-<div class="paragraph">
-<p>In der Praxis wird stattdessen <strong>Artificial <em>Narrow</em> Intelligence</strong> (ANI, auch &#8220;schwache KI&#8221;) verwendet: Modelle, die <strong>explizit programmiert wurden, um eine bestimmte Aufgabe zu lösen</strong>, z.B. Texte von einer Sprache in eine andere übersetzen. Diese Modelle können <strong>nicht (eigenständig) verallgemeinern und zusätzliche Aufgaben lernen</strong>, sprich das maschinelle Übersetzungsmodell wird nicht morgen auf die Idee kommen, dass es nun auch Gesichter in Bildern erkennen will. Natürlich kann man mehrere einzelne ANIs in einem großen Programm kombinieren, um so mehrere verschiedene Aufgaben zu lösen, aber auch diese Sammlung von ANIs ist nicht in der Lage, selbstständig neue Fähigkeiten darüber hinaus zu erlernen. Viele KI-Forscher sind derzeit überzeugt, dass wir möglicherweise nie eine echte menschenähnliche AGI erschaffen werden.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><em>Was könnte wertvoll sein?</em></strong> Dies kann beispielsweise ein neues Feature für ein existierendes Produkt sein, z.B. Face ID als neue Möglichkeit um ein Smartphone zu entsperren.</p>
+</li>
+<li>
+<p><strong><em>Welche Daten werden benötigt?</em></strong> Einen Holzstuhl kann man nicht aus Stoff und Metall oder ein paar im Wald gefundenen Zweigen herstellen. Genauso benötigt man je nachdem, was man mit ML erreichen möchte, auch die richtigen Daten in ausreichender Qualität &amp; Quantität um die Algorithmen überhaupt anwenden zu können. In vielen Anwendungsfällen ist dieser Teil besonders schwierig, da man die benötigten Daten oft nicht einfach kaufen kann, wie Holz im Baumarkt, sondern diese selbst sammeln&#8201;&#8212;&#8201;also quasi einen eigenen Wald anpflanzen muss, was einige Zeit dauern kann.</p>
+</li>
+<li>
+<p><strong><em>Welcher ML-Algorithmus ist das richtige Werkzeug für diese Aufgabe?</em></strong> (Mehr zu den verschiedenen Arten von ML-Algorithmen in den nächsten Abschnitten.)</p>
+</li>
+<li>
+<p>Verfüge ich bzw. meine Mitarbeiter über die <strong><em>notwendigen Fähigkeiten und genügend Rechenleistung</em></strong>, um das Vorhaben erfolgreich umzusetzen?</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -1332,47 +1378,6 @@ Vereinfacht kann man sich einen <strong>Algorithmus</strong> als <strong>Strateg
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">ML-Algorithmen = Werkzeuge um aus Daten Wert zu schöpfen</dt>
-<dd>
-<p>Analog zu den Werkzeugen, mit denen man etwas in einem traditionellen Produktionsprozess herstellt, kann man sich ML-Algorithmen als Werkzeuge vorstellen, um Wert aus Daten zu generieren:</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/01b_intro_ml/ml_carpentry_analogy2.png" alt="image" width="840">
-</div>
-</div>
-<div class="paragraph">
-<p>Um ML erfolgreich anzuwenden, sollte man sich einige wichtige Fragen stellen:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong><em>Was könnte wertvoll sein?</em></strong> Dies kann entweder ein Softwaremodul (z.B. Gesichtserkennungsalgorithmus) sein, um beispielsweise einem existierenden Produkt eine neue Funktion hinzuzufügen, oder es können Erkenntnisse sein, die durch die Analyse eines Datensatzes generiert werden.</p>
-</li>
-<li>
-<p><strong><em>Welche Daten werden benötigt?</em></strong> Einen Holzstuhl kann man nicht aus Stoff und Metall oder ein paar im Wald gefundenen Zweigen herstellen. Genauso benötigt man je nachdem, was man mit ML erreichen möchte, auch die richtigen Daten in ausreichender Qualität &amp; Quantität um die Algorithmen überhaupt anwenden zu können. In vielen Anwendungsfällen ist dieser Teil besonders schwierig, da man die benötigten Daten oft nicht einfach kaufen kann, wie Holz im Baumarkt, sondern diese selbst sammeln&#8201;&#8212;&#8201;also quasi einen eigenen Wald anpflanzen muss, was einige Zeit dauern kann.</p>
-</li>
-<li>
-<p><strong><em>Welcher ML-Algorithmus ist das richtige Werkzeug für diese Aufgabe?</em></strong> (Mehr zu den verschiedenen Arten von ML-Algorithmen in den nächsten Abschnitten.)</p>
-</li>
-<li>
-<p>Verfüge ich bzw. meine Mitarbeiter über die <strong><em>notwendigen Fähigkeiten und genügend Rechenleistung</em></strong>, um das Vorhaben erfolgreich umzusetzen?</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Es gibt viele verschiedene ML Algorithmen&#8201;&#8212;&#8201;sie bilden quasi unseren <strong>ML Werkzeugkasten</strong>:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/01b_intro_ml/ml_toolset6.png" alt="image" width="640">
-</div>
-<div class="title"><span class="small">ML selbst ist ein Teilbereich der Künstlichen Intelligenz (KI/AI), das derzeit zwar häufiger verwendete Buzzword, jedoch basieren alle wirklich interessanten Anwendungen, z.B. die initial gezeigten Beispiele, tatsächlich auf ML. Zu KI gehören ansonsten zum Beispiel noch einige Suchalgorithmen, die beim Bau der ersten Schachcomputer verwendet wurden. ML kann wiederum in drei Hauptbereiche unterteilt werden, Unsupervised (&#8220;Unüberwachtes&#8221;), Supervised (&#8220;Überwachtes&#8221;) und Reinforcement (&#8220;Bestärkendes&#8221;) Learning. Das Buzzword &#8220;Deep Learning&#8221; ist außerdem ein Überbegriff für neuronale Netzwerkmodelle. Einige der einfachsten im ML verwendeten Algorithmen, wie die lineare Regression oder PCA (sehr ähnlich der Faktorenanalyse), werden auch von Statistikern verwendet, die jedoch auch andere Werkzeuge wie Hypothesentests verwenden, welche keine Regeln oder Muster aus Daten lernen. Die meisten Data Scientists verwenden viele Methoden aus ML und Statistik, aber auch zusätzliche Werkzeuge wie A/B-Tests, z.B. um zu überprüfen, ob ein roter oder grüner &#8220;Kaufen&#8221;-Button auf einer Website mehr Umsatz generiert.</span></div>
-</div>
-<div class="dlist">
-<dl>
 <dt class="hdlist1">ML Algorithmen lösen &#8220;Input &#8594; Output&#8221; Probleme</dt>
 <dd>
 <p>All diesen ML-Algorithmen aus unserem Werkzeugkasten ist gemein, dass sie &#8220;Input &#8594; Output&#8221; Probleme wie diese lösen:</p>
@@ -1390,6 +1395,15 @@ Vereinfacht kann man sich einen <strong>Algorithmus</strong> als <strong>Strateg
 </div>
 <div class="paragraph">
 <p>Während in den obigen Beispielen ein (entsprechend geschulter) Mensch zur jeweiligen Eingabe in der Regel leicht die richtige Ausgabe erzeugt (z.B. kann sogar ein kleines Kind die Katze im ersten Bild erkennen), fällt es Menschen oft schwer zu beschreiben, <em>wie</em> sie zur richtigen Antwort gekommen sind (woran erkennt man, dass dies eine Katze und kein kleiner Hund ist? an den spitzen Ohren? den Schnurrhaaren?). Im Gegensatz dazu <strong>lernen ML-Algorithmen solche Regeln aus den gegebenen Beispieldaten</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Die unterschiedlichen Algorithmen bilden unseren <strong>ML Werkzeugkasten</strong>:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/01b_intro_ml/ml_toolset6.png" alt="image" width="640">
+</div>
+<div class="title"><span class="small">ML selbst ist ein Teilbereich der Künstlichen Intelligenz (KI/AI), das derzeit zwar häufiger verwendete Buzzword, jedoch basieren alle wirklich interessanten Anwendungen, z.B. die initial gezeigten Beispiele, tatsächlich auf ML. Zu KI gehören ansonsten zum Beispiel noch einige Suchalgorithmen, die beim Bau der ersten Schachcomputer verwendet wurden. ML kann wiederum in drei Hauptbereiche unterteilt werden, Unsupervised (&#8220;Unüberwachtes&#8221;), Supervised (&#8220;Überwachtes&#8221;) und Reinforcement (&#8220;Bestärkendes&#8221;) Learning. Das Buzzword &#8220;Deep Learning&#8221; ist außerdem ein Überbegriff für neuronale Netzwerkmodelle. Einige der einfachsten im ML verwendeten Algorithmen, wie die lineare Regression oder PCA (sehr ähnlich der Faktorenanalyse), werden auch von Statistikern verwendet, die jedoch auch andere Werkzeuge wie Hypothesentests verwenden, welche keine Regeln oder Muster aus Daten lernen. Die meisten Data Scientists verwenden viele Methoden aus ML und Statistik, aber auch zusätzliche Werkzeuge wie A/B-Tests, z.B. um zu überprüfen, ob ein roter oder grüner &#8220;Kaufen&#8221;-Button auf einer Website mehr Umsatz generiert.</span></div>
 </div>
 </div>
 <div class="sect2">
@@ -1537,55 +1551,73 @@ In diesem Buch werden die Begriffe &#8220;ML-Algorithmus&#8221; und &#8220;ML-Mo
 </div>
 </div>
 <div class="sect2">
-<h3 id="_wann_sollte_man_ml_verwenden">Wann sollte man ML verwenden?</h3>
+<h3 id="_ml_geschichte_warum_jetzt">ML Geschichte: Warum jetzt?</h3>
+<div class="paragraph">
+<p>Warum gibt es einen solchen Anstieg von ML Anwendungen?
+Allgegenwärtig ist ML nicht nur in unserem Alltag, auch die Zahl der jährlich veröffentlichten Forschungsarbeiten zu dem Thema ist exponentiell gestiegen:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/01a_intro/ML_history2.png" alt="history1" width="740">
+</div>
+<div class="title"><span class="small">Datenquelle: https://www.webofknowledge.com/</span></div>
+</div>
+<div class="paragraph">
+<p>Interessanterweise liegt das aber nicht etwa an einer Fülle bahnbrechender theoretischer Errungenschaften in den letzten Jahren (in der Grafik als violette Rauten gekennzeichnet). Im Gegenteil: Viele der heute verwendeten Algorithmen wurden bereits Ende der 50er / Anfang der 60er Jahre entwickelt. So ist beispielsweise das Perzeptron der Vorläufer von neuronalen Netzen, die hinter allen im letzten Abschnitt gezeigten Beispielen stecken. Die wichtigsten neuronalen Netzarchitekturen, Recurrent Neural Networks (RNN, &#8220;rekurrente neuronale Netze&#8221;) und Convolutional Neural Networks (CNN, &#8220;faltende neuronale Netze&#8221;), welche die Grundlage für moderne Sprach- bzw. Bildverarbeitung bilden, wurden in den frühen 80er und 90er Jahren entwickelt. Aber zu dieser Zeit hatten wir noch nicht die Rechenressourcen, um diese Modelle für mehr als kleine Experimente zu verwenden.</p>
+</div>
+<div class="paragraph">
+<p>Aufgrund dessen korreliert der Anstieg der ML-Publikationen stärker mit der Anzahl der Transistoren auf CPUs (also den regulären Prozessoren in normalen Computern) und GPUs (Grafikkarten, die die Arten von Berechnungen parallelisieren, die zum effizienten Trainieren von neuronalen Netzwerkmodellen erforderlich sind):</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/01a_intro/ML_history4.png" alt="history2" width="740">
+</div>
+<div class="title"><span class="small">Datenquelle: https://en.wikipedia.org/wiki/Transistor_count</span></div>
+</div>
+<div class="paragraph">
+<p>Darüber hinaus hat die Veröffentlichung vieler Open-Source-Bibliotheken wie scikit-learn (für traditionelle ML-Modelle) und theano, tensorflow und (py)torch (für die Implementierung neuronaler Netze) die Verwendung von ML-Algorithmen in anderen Fachbereichen deutlich erleichtert.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Einerseits demokratisieren solche Bibliotheken die Verwendung von ML, andererseits resultiert eine Nutzung ohne Wissen über die theoretischen Grundlagen auch in Fehlanwendungen. Die Modelle zeigen dann oft nicht die erwartete Performance, was zu (deplatzierter) Enttäuschung führt. Im ungünstigsten Fall kann es passieren, dass die Modelle bestimmte Teile der Bevölkerung diskriminieren, z.B. Kreditbewertungsalgorithmen, die von Banken verwendet werden und die aufgrund von Verzerrungen in den historischen Daten Frauen systematisch Kredite zu höheren Zinssätzen anbieten als Männern. Wir werden solche Probleme im Kapitel zur Vermeidung häufiger Fehler besprechen.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Ein weiterer Faktor, der zur Verbreitung von ML beiträgt, ist die Verfügbarkeit von (digitalen) Daten. Unternehmen wie Google, Amazon und Facebook hatten hier einen Vorsprung, da ihr Geschäftsmodell von Anfang an auf Daten aufgebaute. Andere Unternehmen holen inzwischen langsam auf. Während traditionelle ML-Modelle nur minimal von diesen verfügbaren Daten profitieren, können große neuronale Netzmodelle mit vielen Freiheitsgraden jetzt ihr volles Potenzial entfalten, indem sie aus all den Texten und Bildern lernen, die täglich im Internet veröffentlicht werden:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/01a_intro/ML_why_now_data5.png" alt="datagrowth" width="640">
+</div>
+</div>
 <div class="sidebarblock">
 <div class="content">
 <div class="paragraph">
-<p>Machine Learning kann auf zwei Arten Wert schaffen:</p>
+<p>Aber wir sind nach wie vor noch <em>sehr weit</em> von Artificial <strong>General</strong> Intelligence (AGI, &#8220;künstliche allgemeine Intelligenz&#8221; oder &#8220;starke KI&#8221;) entfernt!</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Erkenntnisse</strong>, generiert aus einer einmaligen Analyse historischer Daten:</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Explorative Analyse</strong> eines Datensatzes mit Unsupervised Learning Algorithmen (wobei in der Regel ein Mensch mit den Ergebnissen weiterarbeitet)<br>
-<em>Identifizieren verschiedener Kundengruppen  (&#8658; Mensch erstellt gezielte Marketing Kampagnen)</em></p>
-</li>
-<li>
-<p>Interpretation eines gelernten Modells und seiner Vorhersagen, um <strong>die zugrundeliegenden Ursache-Wirkung Beziehungen in einem Prozess besser zu verstehen</strong><br>
-<em>Das Modell sagt die Qualität eines Produkts aus den Produktionsbedingungen vorher &#8594; Welche Faktoren führen zu Produkten von geringerer Qualität?</em></p>
-</li>
-<li>
-<p>Verwenden eines Modells für Was-wäre-wenn-Vorhersagen, um zu untersuchen, wie ein System auf unterschiedliche Bedingungen reagieren könnte (aber <a href="#_fehler_3_modell_missbraucht_scheinkorrelationen">Vorsicht</a>!)<br>
-<em>Wie schnell würde eine bestimmte Maschinenkomponente unter solchen Prozessbedingungen verschleißen?</em></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Software</strong>, um kontinuierlich Vorhersagen für neue Datenpunkte zu generieren:</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Automatisierung einer &#8216;Input &#8594; Output&#8217; Aufgabe</strong> mithilfe eines Supervised Learning Modells, welche sonst von einem (speziell geschulten) Menschen erledigt würde<br>
-<em>Produkte mit Mängeln/Kratzern automatisch erkennen &amp; aussortieren</em></p>
-</li>
-<li>
-<p>In einer Optimierungsschleife systematisch verschiedene Eingaben mit dem gelernten Modell bewerten, um <strong>optimale Einstellungen zu finden</strong><br>
-<em>Automatische Bestimmung der besten Produktionseinstellungen für einen neuen Rohstofftyp mithilfe eines Modells, das die Qualität eines Produkts aus den Prozessbedingungen vorhersagt</em></p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/01a_intro/01_killer_robot_style.jpg" alt="agi" width="240">
 </div>
 </div>
 <div class="paragraph">
-<p><span class="underline">ML Softwarelösungen</span></p>
+<p>Eine AGI ist ein Computerprogramm, das wie ein Mensch die unterschiedlichsten Aufgaben gleichzeitig meistert und <strong>selbstständig neue Fähigkeiten lernen</strong> kann.</p>
 </div>
+<div class="paragraph">
+<p>In der Praxis wird stattdessen <strong>Artificial <em>Narrow</em> Intelligence</strong> (ANI, auch &#8220;schwache KI&#8221;) verwendet: Modelle, die <strong>explizit programmiert wurden, um eine bestimmte Aufgabe zu lösen</strong>, z.B. Texte von einer Sprache in eine andere übersetzen. Diese Modelle können <strong>nicht (eigenständig) verallgemeinern und zusätzliche Aufgaben lernen</strong>, sprich das maschinelle Übersetzungsmodell wird nicht morgen auf die Idee kommen, dass es nun auch Gesichter in Bildern erkennen will. Natürlich kann man mehrere einzelne ANIs in einem großen Programm kombinieren, um so <a href="https://www.deepmind.com/publications/a-generalist-agent">mehrere verschiedene Aufgaben zu lösen</a>, aber auch diese Sammlung von ANIs ist nicht in der Lage, selbstständig neue Fähigkeiten darüber hinaus zu erlernen. Viele KI-Forscher sind derzeit überzeugt, dass wir möglicherweise nie eine echte menschenähnliche AGI erschaffen werden.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_wann_sollte_man_ml_verwenden">Wann sollte man ML verwenden?</h3>
 <div class="paragraph">
 <p>Während man <strong>herkömmliche Software</strong>-Lösungen dazu verwenden kann, um Aufgaben zu automatisieren, bei denen eine vordefinierte Abfolge von Aktionen nach einigen <strong>festgeschriebenen Regeln</strong> ausgeführt wird (z.B. &#8220;Eine Tür soll sich öffnen, <em>wenn</em> ein Objekt eine Lichtschranke durchquert und sich 20 Sekunden später wieder schließen&#8221;), kann man mit maschinellem Lernen <strong>&#8220;Input &#8594; Output&#8221;-Aufgaben automatisieren</strong>, für die es sonst <strong>schwierig wäre, solche Regeln aufzustellen</strong>.</p>
 </div>
@@ -1680,6 +1712,33 @@ In diesem Buch werden die Begriffe &#8220;ML-Algorithmus&#8221; und &#8220;ML-Mo
 </div>
 </div>
 </div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Du hast ein ML-Modell trainiert? Super&#8201;&#8212;&#8201;aber da geht noch mehr!</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>Interpretiere das gelernte Modell und seine Vorhersagen, um <strong>die zugrundeliegenden Ursache-Wirkung Beziehungen des Prozesses besser zu verstehen</strong>.<br>
+<em>Gegeben ein Modell, welches die Qualität eines Produkts aus den Produktionsbedingungen vorhersagt, verstehe welche Faktoren dazu führen dass Produkte von geringerer Qualität sind.</em></p>
+</li>
+<li>
+<p>Verwende das gelernte Modells für eine <strong>Was-wäre-wenn-Vorhersage</strong>, um zu untersuchen, wie ein System auf unterschiedliche Bedingungen reagieren könnte (aber <a href="#_fehler_3_modell_missbraucht_scheinkorrelationen">Vorsicht</a>!).<br>
+<em>Gegeben ein Modell, welches die verbleibende Lebenszeit für eine Maschinenkomponente aus den Prozessbedingungen vorhersagt, wie schnell würde diese Komponente unter anderen Prozessbedingungen verschleißen?</em></p>
+</li>
+<li>
+<p>Bewerte systematisch verschiedene Inputs mit dem gelernten Modell in einer Optimierungsschleife um <strong>optimale Einstellungen zu finden</strong>.<br>
+<em>Gegeben ein Modell, welches die Qualität eines Produkts aus den Produktionsbedingungen vorhersagt, bestimme automatisch die besten Produktionseinstellungen für einen neuen Rohstofftyp.</em></p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_probleme_mit_ml_lösen_workflow">Probleme mit ML lösen: Workflow</h3>
@@ -1727,6 +1786,9 @@ In diesem Buch werden die Begriffe &#8220;ML-Algorithmus&#8221; und &#8220;ML-Mo
 <div class="paragraph">
 <p>&#8658; <strong>Frage eine ML-Expertin</strong>, ob ein ähnliches Problem bereits mit einem bewährten Algorithmus gelöst wurde<br>
 &#8658; <strong>Frage einen Fachexperten</strong>, ob er der Meinung ist, dass alle relevanten Inputdaten verfügbar sind, um den gewünschten Output zu berechnen. Dies ist normalerweise bei unstrukturierten Daten wie Bildern leicht zu bestimmen: wenn ein Mensch das Objekt im Bild erkennen kann, sollte ML es auch können. Schwieriger wird dies bei strukturierten Daten, wie Tabellen mit hunderten von Spalten mit Sensormessungen.</p>
+</div>
+<div class="paragraph">
+<p>Für weitere Informationen lies <a href="https://towardsdatascience.com/the-ultimate-guide-to-starting-ai-d506255d7ea" target="\_blank">diesen Blog Artikel</a>.</p>
 </div>
 </div>
 </div>
@@ -2326,7 +2388,7 @@ Neben der Dokumentation von Datensätzen als Ganzes ist es auch sehr hilfreich, 
 </div>
 </div>
 <div class="paragraph">
-<p>Zusammengefasst:</p>
+<p>Zusammengefasst (siehe auch: <a href="https://franziskahorn.de/mlws_resources/algorithm_cheatsheet.pdf">Übersichtstabelle als PDF</a>):</p>
 </div>
 <div class="dlist">
 <dl>
@@ -2353,7 +2415,7 @@ Neben der Dokumentation von Datensätzen als Ganzes ist es auch sehr hilfreich, 
 <p><span class="underline">Empfehlungssysteme &amp; Information Retrieval:</span> <strong>Rangliste einer Menge von Elementen</strong> (Empfehlungssysteme ordnen beispielsweise die Produkte nach Relevanz für den jeweiligen Nutzer; Information Retrieval Systeme sortieren Elemente nach ihrer Ähnlichkeit zu einer gegebenen Suchanfrage)</p>
 </li>
 <li>
-<p>andere <span class="underline">Deep Learning</span> Lösungen: <strong>unstrukturierte Outputs wie Text oder Bild</strong> (z.B. Spracherkennung, maschinelle Übersetzung oder Neural Style Transfer)</p>
+<p>andere <span class="underline">Deep Learning</span> Lösungen: <strong>unstrukturierte Outputs wie Text oder Bild</strong> (z.B. Spracherkennung, maschinelle Übersetzung, Bild Generierung oder Neural Style Transfer)</p>
 </li>
 </ul>
 </div>
@@ -2411,6 +2473,18 @@ Text &#8594; Audio</p>
 <div class="title"><span class="small">Zunächst muss der Smart Speaker wissen, ob er mit einem bestimmten Triggerwort (z.B. &#8220;Hey Siri&#8221;) angesprochen wurde. Dies ist eine einfache binäre Klassifikation (ja/nein), die normalerweise auf dem Gerät selbst ausgeführt wird, da wir nicht möchten, dass alles was wir sagen permanent in die Cloud gestreamt wird. Als nächstes werden die nach dem Triggerwort gesprochenen Wörter in Text übersetzt. Text ist einfacher zu handhaben, da beispielsweise Variationen aufgrund unterschiedlicher Akzente entfernt werden. Anhand dieses Textes wird die Absicht des Nutzers erkannt, also welche der verschiedenen Funktionalitäten des virtuellen Assistenten genutzt werden soll (z.B. Witz erzählen, Musik abspielen, Wecker stellen etc.). Dies ist ein Multiclass-Klassifikationsproblem. Zur Ausführung des Befehls wird kein ML benötigt, sondern ein normales, aufgabenspezifisches Programm, das als App auf dem Gerät installiert ist, z.B. wird ein Witz aus einer Datenbank ausgewählt oder ein Timer gesetzt usw.. Anschließend muss der Output des ausgeführten Programms wieder in ein Audiosignal umgewandelt werden. Ein ML-Modell kann dabei helfen, flüssig gesprochenen Text zu erzeugen&#8201;&#8212;&#8201;und in naher Zukunft vielleicht auch mit der Stimme von Morgan Freeman oder einer anderen berühmten Person, wie bei &#8220;Deep Fake&#8221;-Anwendungen.</span></div>
 <p><br>
 &#8658; Generell sollte man zunächst darüber nachzudenken, ob man ein Problem in leichter zu lösende Teilprobleme zerlegen kann, da es dafür oft schon große Datensätze oder sogar fertige Modelle gibt. Ein Modell für Spracherkennung kann beispielsweise zusätzlich auf Hörbüchern und transkribierten politische Reden trainiert werden, nicht nur auf den Daten, die von den Sprachassistent-Nutzern gesammelt wurden.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Wenn ein ML-Modell als Input den Output eines anderen ML-Modells erhält, bedeutet dies, dass wir, sobald wir eine neue Version des ersten ML-Modells verwenden, auch die folgenden Modelle neu trainieren sollten, da diese Modelle dann evtl. leicht andere Inputs erhalten, d.h. wir es mit einem <a href="#_fehler_5_daten_konzept_drifts">Daten Drift</a> zu tun haben.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>

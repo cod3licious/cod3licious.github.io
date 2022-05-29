@@ -922,7 +922,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
-<body id="_ml_lösungen_überblick" class="book toc2 toc-left">
+<body id="_data_is_the_new_oil" class="book toc2 toc-left">
 <div id="header">
 <h1>A Practitioner&#8217;s Guide to Machine Learning</h1>
 <div class="details">
@@ -934,401 +934,134 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <p><span class="toc-root"><a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a></span></p><ul class="sectlevel1">
-<li><a href="_einleitung.html">Einleitung</a>
+<li><a href="_introduction.html">Introduction</a>
+<ul class="sectlevel2">
+<li><a href="_ml_is_everywhere.html">ML is everywhere!</a>
 </li>
-<li><a href="_daten_preprocessing.html">Daten &amp; Preprocessing</a>
+<li><a href="_data_is_the_new_oil.html"><span class="toc-current">Data is the new oil!?</span></a>
 </li>
-<li><a href="_ml_lösungen_überblick.html"><span class="toc-current">ML Lösungen: Überblick</span></a>
+<li><a href="_what_is_ml.html">What is ML?</a>
 </li>
-<li><a href="_supervised_learning.html">Supervised Learning</a>
+<li><a href="_how_do_machines_learn.html">How do machines &#8220;learn&#8221;?</a>
 </li>
-<li><a href="_häufige_fehler_vermeiden.html">Häufige Fehler vermeiden</a>
+<li><a href="_ml_history_why_now.html">ML history: Why now?</a>
 </li>
-<li><a href="_fazit.html">Fazit</a>
+<li><a href="_when_should_you_use_ml.html">When should you use ML?</a>
+</li>
+<li><a href="_solving_problems_with_ml_workflow.html">Solving problems with ML: Workflow</a>
+</li>
+</ul>
+</li>
+<li><a href="_ml_with_python.html">ML with Python</a>
+</li>
+<li><a href="_data_preprocessing.html">Data &amp; Preprocessing</a>
+</li>
+<li><a href="_ml_solutions_overview.html">ML Solutions: Overview</a>
+</li>
+<li><a href="_unsupervised_learning.html">Unsupervised Learning</a>
+</li>
+<li><a href="_supervised_learning_basics.html">Supervised Learning Basics</a>
+</li>
+<li><a href="_supervised_learning_models.html">Supervised Learning Models</a>
+</li>
+<li><a href="_deep_learning_more.html">Deep Learning &amp; more</a>
+</li>
+<li><a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a>
+</li>
+<li><a href="_reinforcement_learning.html">Reinforcement Learning</a>
+</li>
+<li><a href="_conclusion.html">Conclusion</a>
 </li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="_ml_lösungen_überblick">ML Lösungen: Überblick</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_data_is_the_new_oil">Data is the new oil!?</h3>
 <div class="paragraph">
-<p>Nachdem wir jetzt gesehen haben, wie wir Rohdaten vorverarbeiten können, um sie in das richtige Format für die Anwendung von ML zu bringen, kommen wir nun zum interessanten Teil:</p>
+<p>Let&#8217;s take a step back. Because it all begins with data.
+You&#8217;ve probably heard this claim before: &#8220;Data is the new oil!&#8221;. This suggests that data is valuable. But is it?<br>
+The reason why oil is considered valuable is because we have important use cases for it: powering our cars, heating our homes, and producing plastics or fertilizers.
+Similarly, our data is only as valuable as what we make of it. So what can we use data for?</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="../images/01c_ds_workflow/data_science_workflow_ml.png" alt="image" width="840">
-</div>
-</div>
-<div class="paragraph">
-<p>ML-Algorithmen können auf Input Daten in verschiedensten Formaten angewendet werden, aber unser Ziel, also der gewünschte Output, bestimmt welche Art von Algorithmus wir für das Problem verwenden sollten:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01b_intro_ml/ml_goals3.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">Wenn wir einen Datensatz etwas besser verstehen und uns einen Überblick verschaffen wollen, dann können wir zur Visualisierung einen Dimensionsreduktionsalgorithmus aus dem Bereich Unsupervised Learning verwenden. Andere Unsupervised Learning Algorithmen ermöglichen uns, Muster in Daten zu entdecken, wobei es hier darauf ankommt, welche Art von Muster man finden möchte: Mit Algorithmen zur Ausreißer-/Anomalieerkennung (Anomaly Detection) lassen sich einzelne Datenpunkte identifizieren, die stark vom Rest abweichen (z.B. eine defekte Maschine oder eine betrügerische Kreditkartentransaktion). Clustering-Algorithmen wiederum finden Gruppen ähnlicher Datenpunkte (z.B. zur Kundensegmentierung). Wenn wir stattdessen ein Vorhersagemodell möchten, um für einen speziellen Input den entsprechenden Output zu berechnen (z.B. vorhersagen, ob ein Produkt fehlerhaft ist, wenn es unter bestimmten Bedingungen produziert wird), dann brauchen wir dafür einen Algorithmus aus dem Bereich Supervised Learning. In erster Linie wird hier zwischen Regressions- und Klassifikationsalgorithmen unterschieden: Bei Regressionsaufgaben ist die zu prognostizierende Zielgröße kontinuierlich (z.B. Nutzeranzahl, Preis etc.), bei Klassifikationsaufgaben ist die Zielgröße diskret, d.h. sie kann nur einen eindeutigen Wert annehmen und es gibt kein Kontinuum zwischen den verschiedenen Werten (z.B. kann ein Tier auf einem Bild entweder eine Katze oder ein Hund sein, aber nichts dazwischen). Während Unsupervised und Supervised Learning die meisten allgemeinen Anwendungsfälle abdecken, gibt es auch Algorithmen für speziellere Anwendungen, z.B. Empfehlungssysteme (Recommender Systems).</span></div>
-</div>
-<div class="paragraph">
-<p>Einige Beispiele für Input &#8594; Output Aufgaben und welche Art von ML-Algorithmus verwendet werden kann, um sie zu lösen:</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Input \(X\)</th>
-<th class="tableblock halign-left valign-top">Output \(Y\)</th>
-<th class="tableblock halign-left valign-top">ML-Algorithmus Kategorie</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Fragebogenantworten</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Kundensegmentierung</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Clustering</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Sensormessungen</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">alles normal?</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Anomalieerkennung</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Vergangene Nutzung einer Maschine</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Restlebensdauer</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Regression</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">E-Mail</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Spam (ja/nein)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Klassifikation (binär)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Bild</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">welches Tier?</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Klassifikation (mehrere Klassen)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Bisherige Einkäufe des Nutzers</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Produktvorschläge</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Empfehlungssysteme</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Suchanfrage</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">relevante Dokumente</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Information Retrieval</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Audio</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Text</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Spracherkennung</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Text auf Englisch</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Text auf Französisch</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Maschinelle Übersetzung</p></td>
-</tr>
-</tbody>
-</table>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Unsupervised &amp; Supervised Learning</dt>
-<dd>
-<p>Beginnen wir mit einem detaillierteren Blick auf die verschiedenen Unsupervised und Supervised Learning Algorithmen und wie sie uns helfen können:</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01c_ml_overview/ml_algorithms_12.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">Für die Anwendung von Unsupervised Learning Algorithmen braucht man nur eine Feature Matrix \(X\), während man zum Erlernen eines Vorhersagemodells mit Supervised Learning Algorithmen auch die dazugehörigen Labels \(\mathbf{y}\) benötigt. Auch wenn unser eigentliches Ziel darin besteht, etwas vorherzusagen (also Supervised Learning zu verwenden), kann es dennoch sehr hilfreich sein, zunächst Unsupervised Learning Algorithmen anzuwenden, um den Datensatz besser zu verstehen. Beispielsweise kann man die Daten im Vorfeld mit Dimensionsreduktionsmethoden visualisieren, um alle Datenpunkte und ihre Vielfalt auf einen Blick zu sehen. Anschließend kann man den Datensatz bereinigen, in dem man Ausreißer identifiziert. Bei einem Klassifikationsproblem ist es häufig sinnvoll, die Datenpunkte zuerst zu clustern, um zu überprüfen, in wie weit die angegebenen Klassenlabels mit den natürlich vorkommenden Gruppen in den Daten übereinstimmen. Beispielsweise sieht man dann vielleicht, dass man das Problem vereinfachen kann, in dem man zwei sehr ähnliche Klassen kombiniert.</span></div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Gleicher Datensatz, unterschiedliche Anwendungsfälle</dt>
-<dd>
-<p>Wir veranschaulichen den Nutzen der fünf verschiedenen Arten von Unsupervised und Supervised Learning Algorithmen in dem wir sie auf diesen Beispieldatensatz anwenden:</p>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2858%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-center valign-top">m<sup>2</sup></th>
-<th class="tableblock halign-center valign-top"># Schlafz.</th>
-<th class="tableblock halign-center valign-top"># Bad</th>
-<th class="tableblock halign-center valign-top">Renoviert</th>
-<th class="tableblock halign-center valign-top">&#8230;&#8203;</th>
-<th class="tableblock halign-center valign-top">Preis</th>
-<th class="tableblock halign-center valign-top">Verkauft</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock">125</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">4</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">2000</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">500k</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock">75</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">1990</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">350k</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock">150</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">6</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">2010</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">750k</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">0</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock">35</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">5</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">1999</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">620k</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">0</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock">65</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">3</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">2015</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">220k</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock">100</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">3</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">2003</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">450k</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">0</p></td>
-</tr>
-</tbody>
-</table>
-</dd>
-</dl>
-</div>
-<div class="paragraph text-justify">
-<p><span class="small">Dies ist ein kleiner Musterdatensatz mit strukturierten Daten über verschiedene Wohnungen, wie sie jemand über eine Immobilienwebsite gesammelt haben könnte, z.B. die Größe der Wohnung in Quadratmetern, die Anzahl der Schlafzimmer, die Anzahl der Badezimmer, das Jahr der letzten Renovierung und schließlich den Preis der Wohnung und ob sie zu diesem Preis verkauft wurde (1) oder nicht (0).</span></p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Beispiel Unsupervised Learning: Dimensionsreduktion</dt>
-<dd>
-<p><strong>Ziel:</strong> Datensatz visualisieren</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01b_housing_example/dimred.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">Der erste Schritt bei der Analyse eines neuen Datensatzes besteht normalerweise darin, diesen zu visualisieren, um einen besseren Überblick über alle Datenpunkte und ihre Vielfalt zu erhalten. Dafür eignet sich ein Dimensionsreduktionsalgorithmus, der die ursprünglichen hochdimensionalen Daten als Input nimmt, wobei jede Spalte (= Feature) in der Tabelle eine Dimension darstellt, und eine niedrigerdimensionale Darstellung der Datenpunkte ausgibt, d.h. eine neue Matrix mit weniger Spalten (normalerweise zwei für eine Visualisierung). Diese beiden neuen Features, in unserem Fall \(z_1\) und \(z_2\) genannt, können jetzt verwendet werden, um einen Scatterplot des Datensatzes zu erstellen. Dabei wird jeder Datenpunkt / Zeile (also in diesem Fall jede Wohnung) als Punkt in diesem neuen 2D-Koordinatensystems dargestellt. Wir können uns diese Darstellung als eine Landkarte unseres Datensatzes vorstellen, die es uns ermöglicht, alle Datenpunkte auf einen Blick zu sehen und evtl. schon interessante Muster zu erkennen, z.B. Gruppen ähnlicher Datenpunkte, die auf dieser 2D-Karte eng beieinander liegen. Aber bitte beachte: was sich hinter diesen neuen Koordinaten verbirgt lässt sich bei den meisten Dimensionsreduktionsmethoden nicht genau nachvollziehen. Insbesondere sind dies nicht einfach die beiden informativsten Originalfeatures, sondern völlig neue Variablen, die die Informationen der ursprünglichen Inputs zusammenfassen. Um den Scatterplot besser interpretieren zu können, ist es oft hilfreich, die Punkte nachträglich mit den Werten einer Variablen einzufärben, wodurch möglicherweise die treibenden Faktoren hinter den auffälligsten Mustern im Datensatz aufgedeckt werden können. In diesem Beispiel hätten wir die Punkte nach dem Preis der entsprechenden Wohnung einfärben können und dadurch gesehen, ob ähnlich bepreiste Wohnungen nah beieinander liegen.</span></div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Beispiel Unsupervised Learning: Anomalieerkennung</dt>
-<dd>
-<p><strong>Ziel:</strong> Ausreißer im Datensatz finden</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01b_housing_example/anomaly.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">Als nächstes prüfen wir unseren Datensatz auf Ausreißer/Anomalien (Outliers/Anomalies), um diese Datenpunkte dann gegebenenfalls nachträglich zu korrigieren oder zu entfernen. Ein Algorithmus zur Anomalieerkennung gibt für jeden Datenpunkt einen Anomalie-Score aus, der angibt, inwieweit dieser Datenpunkt von der Norm abweicht. Diese Scores können wir auch verwenden, um die 2D-Landkarte unseres Datensatzes aus dem vorherigen Schritt einzufärben. Dadurch werden die Anomalien im Kontext sichtbar. Leider sagt uns ein Anomalieerkennungsalgorithmus nicht, <em>warum</em> ein bestimmter Punkt als Ausreißer erkannt wurde. Ein Data Scientist muss deshalb die gefundenen Anomalien untersuchen und entscheiden, ob diese z.B. aufgrund fehlerhafter Messungen entfernt werden sollten oder ob sie interessante Sonderfälle darstellen. In unserem Beispiel handelt es sich bei dem als Anomalie identifizierten Datenpunkt um eine Wohnung, die angeblich nur eine Größe von 35 \(m^2\), aber gleichzeitig 5 Schlafzimmer hat. Da liegt die Vermutung nahe, dass hier beim Eintragen der Daten ein Fehler passiert ist und die Größe der Wohnung stattdessen 135 \(m^2\) sein sollte.</span></div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Beispiel Unsupervised Learning: Clustering</dt>
-<dd>
-<p><strong>Ziel:</strong> Natürlich vorkommende Gruppen im Datensatz finden</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01b_housing_example/clustering.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">Als letzte explorative Analyse können wir überprüfen, ob der Datensatz natürlich vorkommende Gruppen enthält. Das funktioniert mit einem Clustering-Algorithmus, der einen Cluster-Index für jeden Datenpunkt zurückgibt, wobei Punkte mit demselben Index in der selben Gruppe sind. Bitte beachte, dass diese Cluster-Indizes nicht geordnet sind und beim erneuten Ausführen des Algorithmus den Datenpunkten möglicherweise andere Nummern zugewiesen werden. Die Datenpunkte, denen vorher die gleiche Nummer zugewiesen wurde, sollten allerdings immer noch im gleichen Cluster sein, nur kann es eben sein, dass dieser Cluster nun &#8216;5&#8217; statt &#8216;3&#8217; heißt. Auch diese Cluster-Indizes können wir zur Einfärbung unserer Daten-Landkarte verwenden, um die Cluster im Kontext zu sehen. Allerdings sagt uns auch ein Clustering-Algorithmus wieder nur, welche Punkte sich ähnlich genug sind, um zusammen gruppiert zu werden, aber nicht, <em>warum</em> die Punkte dem Cluster zugeordnet wurden und was die Cluster bedeuten. Die Data Scientistin muss auch hier wieder die Ergebnisse untersuchen und versuchen zu interpretieren, worin sich die Cluster unterscheiden. In unserem Beispiel könnten die Cluster &#8220;billige Studiowohnungen&#8221;, &#8220;große Familienwohnungen&#8221; und &#8220;luxuriöse Penthouse Wohnungen&#8221; sein. Beim Unsupervised Learning gibt es keine richtige Lösung und ein anderer Clustering-Algorithmus könnte andere Ergebnisse liefern. Verwende einfach die Lösung, die für deinen Anwendungsfall am hilfreichsten ist.</span></div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Beispiel Supervised Learning: Klassifikation</dt>
-<dd>
-<p><strong>Ziel:</strong> Vorhersage eines diskreten Werts für jeden Datenpunkt</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01b_housing_example/classification.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">Nun könnten wir vorhersagen, ob eine Wohnung zum angegebenen Preis verkauft wird. Da die Variable &#8220;Verkauft&#8221; nur die diskreten Werte &#8216;ja&#8217; (1) oder &#8216;nein&#8217; (0) annehmen kann, ist dies ein binäres Klassifikationsproblem. Ein Klassifikationsmodell nimmt die Attribute einer Wohnung zusammen mit dem Angebotspreis als Input und berechnet dann, ob die Wohnung zu diesem Preis verkauft wird oder nicht. Da wir hier nun die wahren Labels kennen (zumindest für den ursprünglich gesammelten Datensatz), können wir die Genauigkeit des Modells bewerten, indem wir berechnen, wie viele falsche Vorhersagen es generiert. Das ist ein Vorteil beim Supervised Learning: Wir können objektiv bestimmen, wie gut eine Lösung ist, und somit verschiedene Modelle systematisch miteinander vergleichen, während die Data Scientistin beim Unsupervised Learning die Ergebnisse manuell im Detail untersuchen muss, um sie zu bewerten.</span></div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Beispiel Supervised Learning: Regression</dt>
-<dd>
-<p><strong>Ziel:</strong> Vorhersage eines kontinuierlichen Werts für jeden Datenpunkt</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01b_housing_example/regression.png" alt="image" width="760">
-</div>
-<div class="title"><span class="small">Schließlich möchten wir vielleicht für eine neue Wohnung einen angemessenen Preis vorhersagen. Da Preise kontinuierliche Werte sind, ist dies ein Regressionsproblem. Das Modell verwendet die Attribute der Wohnungen als Input und schlägt dann einen geeigneten Preis vor. Da uns für die erhobenen Daten die tatsächlichen (bzw. vom Immobilienmakler bestimmten) Preise vorliegen, können wir erneut berechnen, inwieweit das Regressionsmodell mit seinen Schätzungen vom Originalpreis abweicht.</span></div>
-</div>
+<img src="../images/01b_intro_ml/data_value.png" alt="image" width="440">
 </div>
 </div>
 <div class="paragraph">
-<p>Zusammengefasst (siehe auch: <a href="https://franziskahorn.de/mlws_resources/algorithm_cheatsheet.pdf">Übersichtstabelle als PDF</a>):</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Existierende ML-Lösungen &amp; entsprechende Outputs (für einen Datenpunkt): </dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p><span class="underline">Dimensionsreduktion:</span> (normalerweise) <strong>2D-Koordinaten</strong> (um den Datensatz zu visualisieren)</p>
-</li>
-<li>
-<p><span class="underline">Ausreißer-/Anomalieerkennung:</span> <strong>Anomalie-Score</strong> (normalerweise ein Wert zwischen 0 und 1, der angibt, inwiefern dieser Punkt von der Norm abweicht)</p>
-</li>
-<li>
-<p><span class="underline">Clustering:</span> <strong>Cluster-Index</strong> (eine Zahl zwischen 0 und <em>k-1</em>, die angibt, zu welchem der <em>k</em> Cluster ein Datenpunkt gehört (oder -1 für Ausreißer))</p>
-</li>
-<li>
-<p><span class="underline">Regression:</span> ein <strong>kontinuierlicher Wert</strong> (eine numerischer Größe, die vorhergesagt werden soll)</p>
-</li>
-<li>
-<p><span class="underline">Klassifikation:</span> ein <strong>diskreter Wert</strong> (eine von mehreren sich gegenseitig ausschließenden Kategorien)</p>
-</li>
-<li>
-<p><span class="underline">Empfehlungssysteme &amp; Information Retrieval:</span> <strong>Rangliste einer Menge von Elementen</strong> (Empfehlungssysteme ordnen beispielsweise die Produkte nach Relevanz für den jeweiligen Nutzer; Information Retrieval Systeme sortieren Elemente nach ihrer Ähnlichkeit zu einer gegebenen Suchanfrage)</p>
-</li>
-<li>
-<p>andere <span class="underline">Deep Learning</span> Lösungen: <strong>unstrukturierte Outputs wie Text oder Bild</strong> (z.B. Spracherkennung, maschinelle Übersetzung, Bild Generierung oder Neural Style Transfer)</p>
-</li>
-</ul>
-</div>
-</dd>
-</dl>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-ML-Algorithmen werden anhand des Outputs kategorisiert, den sie für eine Eingabe generieren. Wenn man ein &#8216;Input &#8594; Output&#8217;-Problem mit einem anderen als den oben aufgeführten Outputs lösen möchte, wird das wahrscheinlich auf ein mehrjähriges Forschungsprojekt hinauslaufen&#8201;&#8212;&#8201;wenn das Problem überhaupt mit ML gelöst werden kann!
-</td>
-</tr>
-</table>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<p>Um komplexe Probleme zu lösen, benötigt man möglicherweise mehrere Algorithmen:</p>
-</div>
-<div class="paragraph">
-<p>Beispiel: virtueller Assistent (z.B. Siri oder Alexa): &#8220;<em>Hey &lt;Sprachassistent&gt;, erzähl mir einen Witz!</em>&#8221; &#8594; ein zufälliger Witz</p>
-</div>
-<div class="paragraph">
-<div class="title"><span class="small">Das sieht zwar zunächst wie ein Input-Output-Problem aus, es direkt zu lösen wäre allerdings sehr schwierig und ineffizient. Stattdessen zerlegen wir das Problem in kleinere Teilaufgaben, die mit bestehenden Algorithmen gelöst werden können:</span></div>
-<p></p>
+<p>The main use cases fall into these two categories:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><strong>Triggerwort Erkennung:</strong><br>
-Audio &#8594; &#8220;Hey &lt;Sprachassistent&gt;&#8221; (ja/nein)?</p>
-</li>
-<li>
-<p><strong>Spracherkennung:</strong><br>
-Audio &#8594; Text</p>
-</li>
-<li>
-<p><strong>Klassifizierung der Absicht:</strong><br>
-Text &#8594; (Witz/Timer/Wettervorhersage/&#8230;&#8203;)?</p>
-</li>
-<li>
-<p><strong>Führe spezifisches Programm aus (z.B. wähle zufälligen Witz aus)</strong></p>
-</li>
-<li>
-<p><strong>Sprachgenerierung:</strong><br>
-Text &#8594; Audio</p>
-</li>
-</ol>
-</div>
+<p><strong>Actionable insights</strong> that enable decision makers to arrive at better, <strong>data-driven decisions</strong> (instead of blindly trusting their instincts).<br>
+<span class="underline">Example:</span> <em>We rely on insights obtained by analyzing data all the time to improve even trivial decisions such as deciding where to eat dinner. You might see a restaurant and your first thought is "I have a bad feeling about this place; the plastic flowers they use as decorations look cheap, let&#8217;s not go in there", however, because you stopped to read some reviews (= data) you discover that this is a hidden gem with really tasty, authentic food.</em></p>
+<div class="sidebarblock">
+<div class="content">
 <div class="paragraph">
-<div class="title"><span class="small">Zunächst muss der Smart Speaker wissen, ob er mit einem bestimmten Triggerwort (z.B. &#8220;Hey Siri&#8221;) angesprochen wurde. Dies ist eine einfache binäre Klassifikation (ja/nein), die normalerweise auf dem Gerät selbst ausgeführt wird, da wir nicht möchten, dass alles was wir sagen permanent in die Cloud gestreamt wird. Als nächstes werden die nach dem Triggerwort gesprochenen Wörter in Text übersetzt. Text ist einfacher zu handhaben, da beispielsweise Variationen aufgrund unterschiedlicher Akzente entfernt werden. Anhand dieses Textes wird die Absicht des Nutzers erkannt, also welche der verschiedenen Funktionalitäten des virtuellen Assistenten genutzt werden soll (z.B. Witz erzählen, Musik abspielen, Wecker stellen etc.). Dies ist ein Multiclass-Klassifikationsproblem. Zur Ausführung des Befehls wird kein ML benötigt, sondern ein normales, aufgabenspezifisches Programm, das als App auf dem Gerät installiert ist, z.B. wird ein Witz aus einer Datenbank ausgewählt oder ein Timer gesetzt usw.. Anschließend muss der Output des ausgeführten Programms wieder in ein Audiosignal umgewandelt werden. Ein ML-Modell kann dabei helfen, flüssig gesprochenen Text zu erzeugen&#8201;&#8212;&#8201;und in naher Zukunft vielleicht auch mit der Stimme von Morgan Freeman oder einer anderen berühmten Person, wie bei &#8220;Deep Fake&#8221;-Anwendungen.</span></div>
-<p><br>
-&#8658; Generell sollte man zunächst darüber nachzudenken, ob man ein Problem in leichter zu lösende Teilprobleme zerlegen kann, da es dafür oft schon große Datensätze oder sogar fertige Modelle gibt. Ein Modell für Spracherkennung kann beispielsweise zusätzlich auf Hörbüchern und transkribierten politische Reden trainiert werden, nicht nur auf den Daten, die von den Sprachassistent-Nutzern gesammelt wurden.</p>
-</div>
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-caution" title="Caution"></i>
-</td>
-<td class="content">
-Wenn ein ML-Modell als Input den Output eines anderen ML-Modells erhält, bedeutet dies, dass wir, sobald wir eine neue Version des ersten ML-Modells verwenden, auch die folgenden Modelle neu trainieren sollten, da diese Modelle dann evtl. leicht andere Inputs erhalten, d.h. wir es mit einem <a href="_fehler_5_daten_konzept_drifts.html">Daten Drift</a> zu tun haben.
-</td>
-</tr>
-</table>
-</div>
-</div>
+<p>These insights are generated through an one-off analysis of historical data using mainly &#8220;traditional methods&#8221;:</p>
 </div>
 <div class="ulist">
 <ul>
+<li>
+<p><strong>Descriptive Analytics:</strong> By visualizing the data and computing summary statistics we might find something interesting, i.e., <strong>get inspired by the data</strong>.<br>
+<span class="underline">Example:</span> <em>Your company sells a software solution, for which you offer a 14-day free trail version before customers have to pay full price. When analyzing which customers end up buying the software, you notice that a surprisingly high number of your potential customers are students, but they almost never buy the software after the free trial ends. This inspires you to offer special deals for students.</em><br>
+Performing such an exploratory data analysis is also helpful at the start of an ML project to get a better sense of the data we&#8217;re working with (e.g., to check which variables might be relevant).</p>
+</li>
+<li>
+<p><strong>Statistical Inference:</strong> While descriptive analytics enables us to ask better questions, statistical inference helps us to get better answers by enabling us to <strong>draw conclusions that reach beyond the data at hand</strong>. Often we would like to make a statement about a whole <em>population</em> (e.g., all humans currently living on this earth), but we only have access to a few (hopefully representative) observations to draw our conclusion from. Statistical inference is about changing our mind under uncertainty: We start with a null hypothesis and then check if what we see in the sample dataset makes this null hypothesis look ridiculous, at which point we reject it and go with our alternative hypothesis instead.<br>
+<span class="underline">Example:</span> <em>Your company has an online store and wants to roll out a new recommendation system, but you are unsure whether customers will find these recommendations helpful and buy more. Therefore, before going live with the new system, you perform an A/B test, where a percentage of randomly selected users see the new recommendations, while the others are routed to the original version of the online store. The null hypothesis is that the new version is no better than the original. But it turns out that the average sales volume of customers seeing the new recommendations is a lot higher than that of the customers browsing the original site. This difference is so large that in a world where the null hypothesis were true, it would be extremely unlikely that a random sample would give us these results. We therefore reject the null hypothesis and go with the alternative hypothesis, that the new recommendations generate higher sales.</em></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="small">Read <a href="https://towardsdatascience.com/whats-the-difference-between-analytics-and-statistics-cd35d457e17" target="\_blank">this article</a> to learn more about the difference between analysts and statisticians and why they should work on distinct splits of your dataset.</span></p>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p><strong>Software</strong> to continuously make predictions for new data points to <strong>automate an &#8216;input &#8594; output&#8217; task</strong> otherwise requiring a human (expert).<br>
+<strong>This is where machine learning algorithms come into play.</strong><br>
+<span class="underline">Example:</span> <em>A computer vision system installed as part of an assembly line automatically recognizes and discards products with defects/scratches. Previously, a human had to sit there all day and inspect each produced part manually.</em></p>
+</li>
+</ol>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>Analogous to the tools used in a traditional manufacturing process to build something, you can think of <strong>ML algorithms as tools to generate value from data</strong>:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/01b_intro_ml/ml_carpentry_analogy2.png" alt="image" width="840">
+</div>
+</div>
+<div class="paragraph">
+<p>In order to successfully apply ML, you should ask yourself some important questions:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><em>What could be valuable?</em></strong> For example, this could be a new feature for an existing product, like Face ID as a new way to unlock your phone.</p>
+</li>
+<li>
+<p><strong><em>What raw inputs are needed?</em></strong> We can&#8217;t build a wooden chair using only fabric and metal or a few twigs we found in the woods. Similarly, depending on what we want to achieve with ML, we also need the right data (quality &amp; quantity) to apply the algorithms in the first place. This can be especially tricky since in most cases we can&#8217;t just buy the data we need like wood at a hardware store, but we have to collect it ourselves, i.e., grow our own trees, which can take some time.</p>
+</li>
+<li>
+<p><strong><em>Which ML algorithm is the right tool for the task?</em></strong> (More on the different kinds of ML algorithms in the next sections.)</p>
+</li>
+<li>
+<p>Do I or my employees have the <strong><em>necessary skills and enough compute power</em></strong> to accomplish this in practice?</p>
+</li>
 </ul>
 </div>
 </div>
 </div>
+</div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_garbage_in_garbage_out.html">Garbage in, Garbage out!</a> | ↑ Up: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_supervised_learning.html">Supervised Learning</a> →</p>
+<p>← Previous: <a href="_ml_is_everywhere.html">ML is everywhere!</a> | ↑ Up: <a href="_introduction.html">Introduction</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_what_is_ml.html">What is ML?</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

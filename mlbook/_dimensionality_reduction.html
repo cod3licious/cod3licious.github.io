@@ -1017,8 +1017,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.4,</span>
-<span id="revdate">2022-05-29</span>
+<span id="revnumber">version 1.5,</span>
+<span id="revdate">2022-08-13</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -1051,11 +1051,9 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </li>
 <li><a href="_supervised_learning_models.html">Supervised Learning Models</a>
 </li>
-<li><a href="_deep_learning_more.html">Deep Learning &amp; more</a>
-</li>
 <li><a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a>
 </li>
-<li><a href="_reinforcement_learning.html">Reinforcement Learning</a>
+<li><a href="_advanced_topics.html">Advanced Topics</a>
 </li>
 <li><a href="_conclusion.html">Conclusion</a>
 </li>
@@ -1191,7 +1189,7 @@ Have a look at <a href="https://www.youtube.com/watch?v=5HNr_j6LmPc" target="\_b
 <p>Linear algebra based: solution is a global optima, i.e., when we compute PCA multiple times on the same dataset we&#8217;ll always get the same results.</p>
 </li>
 <li>
-<p>Know how much information is retained in the low dimensional representation; stored in the attributes <code>explained_variance_ratio_</code> or <code>lambda_</code> (= eigenvalues of the respective PCs):<br>
+<p>Know how much information is retained in the low dimensional representation; stored in the attributes <code>explained_variance_ratio_</code> or <code>singular_values_</code> / <code>eigenvalues_</code> (= eigenvalues of the respective PCs):<br>
 The principle components are always ordered by the magnitude of their corresponding eigenvalues (largest first);<br>
 When using the first <em>k</em> components with eigenvalues \(\lambda_i\), the amount of variance that is preserved is: \(\frac{\sum_{i=1}^k \lambda_i}{\sum_{i=1}^d \lambda_i}\).<br>
 <span class="underline">Note:</span> If the intrinsic dimensionality of the dataset is lower than the original number features, e.g., because some features were strongly correlated, then the last few eigenvalues will be zeros. You can also plot the <a href="https://en.wikipedia.org/wiki/Scree_plot" target="\_blank">eigenvalue spectrum</a>, i.e., the eigenvalues ordered by their magnitude, to see how many dimensions you might want to keep, i.e., where this curve starts to flatten out.</p>

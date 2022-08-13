@@ -1016,8 +1016,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.4,</span>
-<span id="revdate">2022-05-29</span>
+<span id="revnumber">version 1.5,</span>
+<span id="revdate">2022-08-13</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -1064,18 +1064,11 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_supervised_learning_models">Supervised Learning Models</a>
 <ul class="sectlevel2">
 <li><a href="#_linear_models">Linear Models</a></li>
+<li><a href="#_neural_networks">Neural Networks</a></li>
 <li><a href="#_decision_trees">Decision Trees</a></li>
 <li><a href="#_ensemble_methods">Ensemble Methods</a></li>
 <li><a href="#_k_nearest_neighbors_knn">k-Nearest Neighbors (kNN)</a></li>
 <li><a href="#_kernel_methods">Kernel Methods</a></li>
-</ul>
-</li>
-<li><a href="#_deep_learning_more">Deep Learning &amp; more</a>
-<ul class="sectlevel2">
-<li><a href="#_information_retrieval_similarity_search">Information Retrieval (Similarity Search)</a></li>
-<li><a href="#_deep_learning_neural_networks">Deep Learning (Neural Networks)</a></li>
-<li><a href="#_time_series_forecasting">Time Series Forecasting</a></li>
-<li><a href="#_recommender_systems_pairwise_data">Recommender Systems (Pairwise Data)</a></li>
 </ul>
 </li>
 <li><a href="#_avoiding_common_pitfalls">Avoiding Common Pitfalls</a>
@@ -1086,7 +1079,15 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_explainability_interpretable_ml">Explainability &amp; Interpretable ML</a></li>
 </ul>
 </li>
+<li><a href="#_advanced_topics">Advanced Topics</a>
+<ul class="sectlevel2">
+<li><a href="#_information_retrieval_similarity_search">Information Retrieval (Similarity Search)</a></li>
+<li><a href="#_deep_learning">Deep Learning</a></li>
+<li><a href="#_time_series_forecasting">Time Series Forecasting</a></li>
+<li><a href="#_recommender_systems_pairwise_data">Recommender Systems (Pairwise Data)</a></li>
 <li><a href="#_reinforcement_learning">Reinforcement Learning</a></li>
+</ul>
+</li>
 <li><a href="#_conclusion">Conclusion</a>
 <ul class="sectlevel2">
 <li><a href="#_ai_transformation_of_a_company">AI Transformation of a Company</a></li>
@@ -3665,7 +3666,7 @@ Have a look at <a href="https://www.youtube.com/watch?v=5HNr_j6LmPc" target="\_b
 <p>Linear algebra based: solution is a global optima, i.e., when we compute PCA multiple times on the same dataset we&#8217;ll always get the same results.</p>
 </li>
 <li>
-<p>Know how much information is retained in the low dimensional representation; stored in the attributes <code>explained_variance_ratio_</code> or <code>lambda_</code> (= eigenvalues of the respective PCs):<br>
+<p>Know how much information is retained in the low dimensional representation; stored in the attributes <code>explained_variance_ratio_</code> or <code>singular_values_</code> / <code>eigenvalues_</code> (= eigenvalues of the respective PCs):<br>
 The principle components are always ordered by the magnitude of their corresponding eigenvalues (largest first);<br>
 When using the first <em>k</em> components with eigenvalues \(\lambda_i\), the amount of variance that is preserved is: \(\frac{\sum_{i=1}^k \lambda_i}{\sum_{i=1}^d \lambda_i}\).<br>
 <span class="underline">Note:</span> If the intrinsic dimensionality of the dataset is lower than the original number features, e.g., because some features were strongly correlated, then the last few eigenvalues will be zeros. You can also plot the <a href="https://en.wikipedia.org/wiki/Scree_plot" target="\_blank">eigenvalue spectrum</a>, i.e., the eigenvalues ordered by their magnitude, to see how many dimensions you might want to keep, i.e., where this curve starts to flatten out.</p>
@@ -4761,7 +4762,7 @@ It is generally a good idea to first start with a large range of values and then
 <h2 id="_supervised_learning_models">Supervised Learning Models</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now that you&#8217;re familiar with the basics of supervised learning&#8201;&#8212;&#8201;problem types, algorithmic approaches, model evaluation and selection&#8201;&#8212;&#8201;we discuss the different features- and similarity-based models in more detail (except neural networks, which are covered in the chapter on <a href="#_deep_learning_more">Deep Learning &amp; more</a>):</p>
+<p>Now that you&#8217;re familiar with the basics of supervised learning&#8201;&#8212;&#8201;problem types, algorithmic approaches, model evaluation and selection&#8201;&#8212;&#8201;we discuss the different features- and similarity-based models in more detail:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -4937,6 +4938,316 @@ Regularization is also used in many other <code>sklearn</code> models. Depending
 </div>
 <div class="paragraph">
 <p>&#8594; <code>gam</code> library in R; Python: <a href="https://pygam.readthedocs.io/" target="\_blank"><code>pyGAM</code></a>, <a href="https://github.com/interpretml/interpret" target="\_blank"><code>interpret</code></a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_neural_networks">Neural Networks</h3>
+<div class="openblock float-group">
+<div class="content">
+<div class="paragraph">
+<p><span class="image left"><img src="images/04_supervised_intro/comparison_nn.png" alt="image" width="180"></span></p>
+</div>
+<div class="paragraph">
+<p>Next up are neural networks (NN), which can be used to solve extremely complex problems (besides regular supervised learning tasks), but that are also rather data hungry (depending on the size of the network).<br>
+We&#8217;ll only cover the basics here; more advanced NN architectures, like those used to process image and text data, are discussed in the chapter on <a href="#_deep_learning">Deep Learning</a>.</p>
+</div>
+</div>
+</div>
+<div class="sidebarblock text-center">
+<div class="content">
+<div class="paragraph">
+<p><strong>Basic Math</strong></p>
+</div>
+<div class="stemblock">
+<div class="content">
+\[\begin{aligned}
+\begin{pmatrix}
+W_{11} &amp; W_{12} &amp; \cdots &amp; W_{1j}\\
+W_{21} &amp; W_{22} &amp; \cdots &amp; W_{2j}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+W_{i1} &amp; W_{i2} &amp; \cdots &amp; W_{ij}\\
+\end{pmatrix}
+\end{aligned}\]
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Dangerous Artificial Intelligence</strong></p>
+</div>
+<div class="stemblock">
+<div class="content">
+\[\begin{aligned}
+\begin{pmatrix}
+W_{11} &amp; W_{12} &amp; \cdots &amp; W_{1j}\\
+W_{21} &amp; W_{22} &amp; \cdots &amp; W_{2j}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+W_{i1} &amp; W_{i2} &amp; \cdots &amp; W_{ij}\\
+\end{pmatrix} \cdot
+\begin{pmatrix}
+W_{11} &amp; W_{12} &amp; \cdots &amp; W_{1k}\\
+W_{21} &amp; W_{22} &amp; \cdots &amp; W_{2k}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+W_{j1} &amp; W_{j2} &amp; \cdots &amp; W_{jk}\\
+\end{pmatrix} \cdot
+\begin{pmatrix}
+W_{11} &amp; W_{12} &amp; \cdots &amp; W_{1l}\\
+W_{21} &amp; W_{22} &amp; \cdots &amp; W_{2l}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+W_{k1} &amp; W_{k2} &amp; \cdots &amp; W_{kl}\\
+\end{pmatrix} \cdot
+\begin{pmatrix}
+W_{11} &amp; W_{12} &amp; \cdots &amp; W_{1m}\\
+W_{21} &amp; W_{22} &amp; \cdots &amp; W_{2m}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
+\end{pmatrix}
+\end{aligned}\]
+</div>
+</div>
+<div class="paragraph">
+<p><span class="small">Deep learning just means using more matrices.</span></p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_overview">Overview</h4>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Recap: Linear Models</dt>
+<dd>
+<p>Prediction is a linear combination of input features (and intercept / bias term \(b\)):</p>
+<div class="stemblock">
+<div class="content">
+\[f(\mathbf{x}; \mathbf{w}) = b + \langle\mathbf{w},\mathbf{x}\rangle = b + \sum_{k=1}^d w_k \cdot x_k = \hat{y}\]
+</div>
+</div>
+<div class="paragraph">
+<p>In the case of multiple outputs \(\mathbf{y}\) (e.g., in a multi-class classification problem \(\mathbf{y}\) could contain the probabilities for all classes):</p>
+</div>
+<div class="stemblock">
+<div class="content">
+\[f(\mathbf{x}; W) = \mathbf{x^\top}W = \mathbf{\hat{y}}\]
+</div>
+</div>
+<div class="paragraph">
+<p>For simplicity, we omit the bias term \(b\) here; using a bias term is equivalent to including an additional input feature that is always 1.</p>
+</div>
+</dd>
+<dt class="hdlist1">Intuitive Explanation of Neural Networks</dt>
+<dd>
+<p><span class="small">[Adapted from: &#8220;AI for everyone&#8221; by Andrew Ng (coursera.org)]</span></p>
+<div class="paragraph">
+<p>Let&#8217;s say we have an online shop and are trying to predict how much of a product we will sell in the next month. The price we are willing to sell the product for will obviously influence the demand, as people are trying to get a good deal, i.e., the lower the price, the higher the demand; a negative correlation that can be captured by a linear model. However, the demand will never be below zero (i.e., when the price is very high, people wont suddenly return the product), so we need to adapt the model such that the predicted output is never negative. This can be achieved by applying the max function, in this context also called a nonlinear activation function, to the output of the linear model, so that now when the linear model would return a negative value, we instead predict 0.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/05_supervised_nn/neural_network_intuitive_a4.png" alt="image" width="440">
+</div>
+<div class="title"><span class="small">A very simple linear model with one input and one output variable and a nonlinear activation function (the max function).</span></div>
+</div>
+<div class="paragraph">
+<p>This functional relationship can be visualized as a circle with one input <em>(price)</em> and one output <em>(demand)</em>, where the S-curve in the circle indicates that a nonlinear activation function is applied to the result. We will later see these circles as single units or &#8220;neurons&#8221; of a neural network.</p>
+</div>
+<div class="paragraph">
+<p>To get better results, we can extend the model and use multiple input features for the prediction:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/05_supervised_nn/neural_network_intuitive_b2.png" alt="image" width="540">
+</div>
+<div class="title"><span class="small">A linear model with multiple inputs, where the prediction is computed as a weighted sum of the inputs, together with the max function to prevent negative values.</span></div>
+</div>
+<div class="paragraph">
+<p>To improve the performance even further, we could now manually construct more informative features from the original inputs by combining them in meaningful ways (&#8594; feature engineering) before computing the output:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/05_supervised_nn/neural_network_intuitive_b6.png" alt="image" width="540">
+</div>
+<div class="title"><span class="small">Our example is about an online shop, so the customers additionally have to pay shipping fees, which means to reflect the true affordability of the product, we need to combine the product price with the shipping costs. Next, the customers are interested in high quality products. However, not only the actual quality of the raw materials we used to make the product influences how the customers perceive the product, but we can also reinforce the impression that the product is of high quality with a marketing campaign. Furthermore, a high price also suggests that the product is superior. This means by creating these additional features, the price can actually contribute in two ways towards the final prediction: while, on the one hand, a lower price is beneficial for the affordability of the product, a higher price, on the other hand, results in a larger perceived quality.</span></div>
+</div>
+<div class="paragraph">
+<p>While in this toy example, it was possible to construct such features manually, the nice thing about neural networks is that they do exactly that automatically: By using multiple layers, i.e., stacking multiple linear models (with nonlinear activation functions) on top of each other, it is possible to create more and more complex combinations of the original input features, which can improve the performance of the model. The more layers the network uses, i.e., the &#8220;deeper&#8221; it is, the more complex the resulting feature representations.</p>
+</div>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Since different tasks and especially different types of input data benefit from different feature representations, there exist different types of neural network architectures to accommodate this, e.g.</p>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>&#8594; Feed Forward Neural Networks (FFNNs), also called Multi-Layer Perceptrons (MLPs), for &#8216;normal&#8217; (e.g., structured) data</p>
+</li>
+<li>
+<p>&#8594; Convolutional Neural Networks (CNNs) for images</p>
+</li>
+<li>
+<p>&#8594; Recurrent Neural Networks (RNNs) for sequential data like text or time series</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>We&#8217;ll only cover FFNNs here; the other architectures are discussed in the chapter on <a href="#_deep_learning">Deep Learning</a>.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Pros</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>State-of-the-art performance (especially on data with <a href="https://towardsdatascience.com/geometric-foundations-of-deep-learning-94cdd45b451d" target="\_blank">input invariances</a>).</p>
+</li>
+<li>
+<p>Prediction for new test points is fast (just a few matrix multiplications).</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Careful</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>Can take a long time to train (use a GPU!!! (or <a href="https://en.wikipedia.org/wiki/Tensor_Processing_Unit" target="\_blank">TPU</a>)).</p>
+</li>
+<li>
+<p>Need a lot of data (depending on the size of the NN architecture).</p>
+</li>
+<li>
+<p>Solution only a local optimum (which is usually not too problematic in practice, as there are many good optima).</p>
+</li>
+<li>
+<p>Tricky to train: Performance depends on many parameters like learning rate, batch size, and even the random seed used when initializing the weights!</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_feed_forward_neural_network_ffnn">Feed Forward Neural Network (FFNN)</h5>
+<div class="paragraph">
+<p>This is the original and most straightforward neural network architecture, which we&#8217;ve already seen in the initial example, only that in practice such a model usually has a few more layers and units per layer. Each layer here is basically a linear model, i.e., it consists of a weight matrix \(W_i\) and some nonlinear activation function \(\sigma_i\) that is applied to the output. These layers are applied sequentially to the input features \(\mathbf{x}\), i.e., the network computes a composite function (in this case for three layers):</p>
+</div>
+<div class="stemblock">
+<div class="content">
+\[f(\mathbf{x}) = \sigma_3(\sigma_2(\sigma_1(\mathbf{x^\top}W_1)W_2)W_3) = \mathbf{\hat{y}}\]
+</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/05_supervised_nn/neural_network.png" alt="image" width="840">
+</div>
+<div class="title"><span class="small">Feed Forward Neural Network (FFNN) architecture: The input feature vector \(\mathbf{x}\), representing one data point, is multiplied by the first weight matrix \(W_1\) to create a new vector, which, after applying the nonlinear activation function (e.g., a ReLU function as we&#8217;ve seen in the initial example) results in the first hidden layer representation \(\mathbf{x}'\). This new vector is then multiplied by the second weight matrix \(W_2\) and again a nonlinear activation function is applied to yield the second hidden layer representation of the sample, \(\mathbf{x}''\). Depending on how many layers the network has (i.e., how deep it is), this could be repeated multiple times now until finally the last layer computes the predicted output \(\mathbf{\hat{y}}\). For a regression problem, the output would be a direct prediction of the target values (i.e., without applying a final nonlinear activation function), while for a classification problem, the output consists of a vector with probabilities for the different classes, created by applying a softmax activation function on the output, which ensures all values are between 0 and 1 and sum up to 1.</span></div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Test your understanding</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>Why do we need the nonlinear activation functions between the layers, i.e., how could we simplify a network with multiple layers, if it didn&#8217;t have any nonlinear activation functions between the layers?</p>
+</li>
+<li>
+<p>In what way could we manipulate the parameters (i.e., weight matrices) of an existing neural network without changing its predictions? (This is also a reason why there exist many equally good local optima.)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Number of hidden layers and units: </dt>
+<dd>
+<p>While the size of the input and output layers are determined by the number of input features and targets respectively, the dimensionality and number of hidden layers of the network is up to us. Usually, the hidden layers get smaller (i.e., have fewer units) as the data moves from the input to the output layer and when experimenting with different settings we can start with no hidden layers (which should give the same result as a linear model) and then progressively increase the size of the network until the performance stops improving. Just <a href="https://playground.tensorflow.org/" target="\_blank">play around</a> a bit.</p>
+</dd>
+</dl>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Training Neural Networks</dt>
+<dd>
+<p>To train a neural network, we first need to choose a loss function that should be optimized (e.g., mean squared error for regression problems or cross-entropy for classification problems).<br></p>
+<div class="paragraph">
+<p>While for a linear regression model, the optimal weights can be found analytically by setting the derivative of this loss function to 0 and solving for the weights, in a network with multiple layers and therefore many more weights, this is not feasible. Instead, the weights are tuned iteratively using a <strong>gradient descent</strong> procedure, where the derivative of the loss function w.r.t. each layer is computed step by step using the chain rule by basically pushing the error backwards through the network (i.e., from the output, where the error is computed, to the input layer), also called error <strong>backpropagation</strong>. At the beginning, all weight matrices are randomly initialized, so, for example, for a classification problem, for a given sample the network would predict approximately equal probabilities for all classes. The weights are then adapted according to their gradient, such that the next time the same samples are passed through the network, the prediction will be closer to the true output (and the value of the loss function is closer to a local minima).<br></p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/05_supervised_nn/loss_surface.png" alt="image" width="460">
+</div>
+<div class="title"><span class="small">Training loss surface over the network&#8217;s parameter space (simplified, i.e., showing only two weights (\(\theta_1\) and \(\theta_2\)), while in reality, this would be a super complex nonlinear function in a very high-dimensional space), where every possible weight configuration of a network results in a different loss on the training set. By taking a step into the direction of steepest descent of this loss function, the weights of the network get closer to a configuration where the loss is at a local minimum.</span></div>
+</div>
+<div class="paragraph">
+<p>Typically, the weights are adapted over multiple <strong>epochs</strong>, where one epoch means going over the whole training set once.
+By plotting the <a href="https://machinelearningmastery.com/learning-curves-for-diagnosing-machine-learning-model-performance/" target="\_blank">learning curves</a>, i.e., the training and validation loss against the number of training epochs, we can check whether the training was successful (i.e., whether the weights have converged to a good solution).</p>
+</div>
+<div class="paragraph">
+<p>Since a training set usually contains lots of data points, it would be too computationally expensive to do gradient descent based on the whole dataset at once in each epoch, so we instead use mini-<strong>batches</strong>, i.e., subsets of 16-128 data points, for each training step.</p>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_tips_tricks">Tips &amp; Tricks</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Scale the data (for classification tasks only inputs, for regression tasks also outputs or adapt the bias of the last layer; <code>StandardScaler</code> is usually a good choice) as otherwise the weights have to move far from their initialization to scale the data for us.</p>
+</li>
+<li>
+<p>Use sample weights for classification problems with unequal class distributions.</p>
+</li>
+<li>
+<p>NN are trained with gradient descent, which requires a good learning rate (i.e., step size for each training iteration &#8594; not too small, otherwise nothing is learned, not too big, otherwise it spirals out of control):</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/05_supervised_nn/nn_learning_rate4.png" alt="image" width="540">
+</div>
+<div class="title"><span class="small">A simple strategy to select a suitable initial learning rate is to train the network with different learning rates for one epoch on a subsample of the dataset and then check the loss after training. For too small learning rates (left), the loss will stay the same, while for too large learning rates (right) the loss will be higher after training.</span></div>
+</div>
+</li>
+<li>
+<p>Sanity check: A linear network (i.e., a FFNN with only one layer mapping directly from the inputs to the outputs) should achieve approximately the same performance as the corresponding linear model from sklearn.</p>
+</li>
+<li>
+<p>Gradually make the network more complex until it can perfectly memorize a small training dataset (to get a network that has enough capacity to at least in principle capture the complexity of the task).</p>
+</li>
+<li>
+<p>When selecting hyperparameters, always check if there is a clear trend towards an optimal setting; if the pattern seems random, initialize the network with different random seeds to see how robust the results are.</p>
+</li>
+<li>
+<p>Using a learning rate scheduler (to decrease the learning rate over time to facilitate convergence) or early stopping (i.e., stopping the training when the performance on the validation set stops improving) can improve the generalization performance.</p>
+</li>
+<li>
+<p>But often it is more important to train the network long enough, like, for hundreds of epochs (depending on the dataset size).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="small">&#8594; more tips for training NN: <a href="http://karpathy.github.io/2019/04/25/recipe/" class="bare">http://karpathy.github.io/2019/04/25/recipe/</a></span></p>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -5436,965 +5747,6 @@ If you are curious what the kernel feature space looks like for some kernel func
 <p>Kernel functions, just like other similarity functions, benefit from scaled heterogeneous data.</p>
 </li>
 </ul>
-</div>
-</dd>
-</dl>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_deep_learning_more">Deep Learning &amp; more</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Now that we&#8217;ve discussed different unsupervised and supervised learning methods, we explore some other special-purpose models (except reinforcement learning), which can be used to solve somewhat less straightforward problems:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/01b_intro_ml/ml_goals_other.png" alt="image" width="840">
-</div>
-</div>
-<div class="sect2">
-<h3 id="_information_retrieval_similarity_search">Information Retrieval (Similarity Search)</h3>
-<div class="paragraph">
-<p>The goal of information retrieval is to identify similar items given some query:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/05_supervised_other/inforetr.png" alt="image" width="640">
-</div>
-<div class="title"><span class="small">Just like in the reverse Google image search, we here use as input a query image and get as a result the <em>k</em> images that are most similar to it.</span></div>
-</div>
-<div class="paragraph">
-<p>This can be accomplished by building a nearest neighbors search tree (i.e., just like for the k-nearest neighbors algorithm, only that here we return the neighbors directly instead of using them to predict the label for the new data point).</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.neighbors</span> <span class="keyword">import</span> <span class="include">NearestNeighbors</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>But of course, the success of this approach is again highly dependent on being able to compute meaningful similarities between the data points. For text datasets, information retrieval often works quite well by using simple TF-IDF feature vectors together with a cosine similarity, however, for images, for example, out-of-the-box similarity measures that operate directly on the original input features (i.e., pixel values) are only able to identify images with similar colors, not necessarily similar content (e.g., an image showing a black cat would be more similar to an image showing a black dog than a white cat). To get around this problem, we could use neural networks to obtain a more informative feature representation, with which it is then easier to compute meaningful semantic similarities.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_deep_learning_neural_networks">Deep Learning (Neural Networks)</h3>
-<div class="openblock float-group">
-<div class="content">
-<div class="paragraph">
-<p><span class="image left"><img src="images/04_supervised_intro/comparison_nn.png" alt="image" width="180"></span></p>
-</div>
-<div class="paragraph">
-<p>The next topic is &#8220;deep learning&#8221;, i.e., neural networks, the most sophisticated model class, which can be used to solve extremely complex problems (besides regular supervised learning tasks), but that are also rather data hungry (depending on the size of the network).</p>
-</div>
-</div>
-</div>
-<div class="sidebarblock text-center">
-<div class="content">
-<div class="paragraph">
-<p><strong>Basic Math</strong></p>
-</div>
-<div class="stemblock">
-<div class="content">
-\[\begin{aligned}
-\begin{pmatrix}
-W_{11} &amp; W_{12} &amp; \cdots &amp; W_{1j}\\
-W_{21} &amp; W_{22} &amp; \cdots &amp; W_{2j}\\
-\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
-W_{i1} &amp; W_{i2} &amp; \cdots &amp; W_{ij}\\
-\end{pmatrix}
-\end{aligned}\]
-</div>
-</div>
-<div class="paragraph">
-<p><strong>Dangerous Artificial Intelligence</strong></p>
-</div>
-<div class="stemblock">
-<div class="content">
-\[\begin{aligned}
-\begin{pmatrix}
-W_{11} &amp; W_{12} &amp; \cdots &amp; W_{1j}\\
-W_{21} &amp; W_{22} &amp; \cdots &amp; W_{2j}\\
-\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
-W_{i1} &amp; W_{i2} &amp; \cdots &amp; W_{ij}\\
-\end{pmatrix} \cdot
-\begin{pmatrix}
-W_{11} &amp; W_{12} &amp; \cdots &amp; W_{1k}\\
-W_{21} &amp; W_{22} &amp; \cdots &amp; W_{2k}\\
-\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
-W_{j1} &amp; W_{j2} &amp; \cdots &amp; W_{jk}\\
-\end{pmatrix} \cdot
-\begin{pmatrix}
-W_{11} &amp; W_{12} &amp; \cdots &amp; W_{1l}\\
-W_{21} &amp; W_{22} &amp; \cdots &amp; W_{2l}\\
-\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
-W_{k1} &amp; W_{k2} &amp; \cdots &amp; W_{kl}\\
-\end{pmatrix} \cdot
-\begin{pmatrix}
-W_{11} &amp; W_{12} &amp; \cdots &amp; W_{1m}\\
-W_{21} &amp; W_{22} &amp; \cdots &amp; W_{2m}\\
-\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
-W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
-\end{pmatrix}
-\end{aligned}\]
-</div>
-</div>
-<div class="paragraph">
-<p><span class="small">Deep learning just means using more matrices.</span></p>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_overview">Overview</h4>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Recap: Linear Models</dt>
-<dd>
-<p>Prediction is a linear combination of input features (and intercept / bias term \(b\)):</p>
-<div class="stemblock">
-<div class="content">
-\[f(\mathbf{x}; \mathbf{w}) = b + \langle\mathbf{w},\mathbf{x}\rangle = b + \sum_{k=1}^d w_k \cdot x_k = \hat{y}\]
-</div>
-</div>
-<div class="paragraph">
-<p>In the case of multiple outputs \(\mathbf{y}\) (e.g., in a multi-class classification problem \(\mathbf{y}\) could contain the probabilities for all classes):</p>
-</div>
-<div class="stemblock">
-<div class="content">
-\[f(\mathbf{x}; W) = \mathbf{x^\top}W = \mathbf{\hat{y}}\]
-</div>
-</div>
-<div class="paragraph">
-<p>For simplicity, we omit the bias term \(b\) here; using a bias term is equivalent to including an additional input feature that is always 1.</p>
-</div>
-</dd>
-<dt class="hdlist1">Intuitive Explanation of Neural Networks</dt>
-<dd>
-<p><span class="small">[Adapted from: &#8220;AI for everyone&#8221; by Andrew Ng (coursera.org)]</span></p>
-<div class="paragraph">
-<p>Let&#8217;s say we have an online shop and are trying to predict how much of a product we will sell in the next month. The price we are willing to sell the product for will obviously influence the demand, as people are trying to get a good deal, i.e., the lower the price, the higher the demand; a negative correlation that can be captured by a linear model. However, the demand will never be below zero (i.e., when the price is very high, people wont suddenly return the product), so we need to adapt the model such that the predicted output is never negative. This can be achieved by applying the max function, in this context also called a nonlinear activation function, to the output of the linear model, so that now when the linear model would return a negative value, we instead predict 0.</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/05_supervised_nn/neural_network_intuitive_a4.png" alt="image" width="440">
-</div>
-<div class="title"><span class="small">A very simple linear model with one input and one output variable and a nonlinear activation function (the max function).</span></div>
-</div>
-<div class="paragraph">
-<p>This functional relationship can be visualized as a circle with one input <em>(price)</em> and one output <em>(demand)</em>, where the S-curve in the circle indicates that a nonlinear activation function is applied to the result. We will later see these circles as single units or &#8220;neurons&#8221; of a neural network.</p>
-</div>
-<div class="paragraph">
-<p>To get better results, we can extend the model and use multiple input features for the prediction:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/05_supervised_nn/neural_network_intuitive_b2.png" alt="image" width="540">
-</div>
-<div class="title"><span class="small">A linear model with multiple inputs, where the prediction is computed as a weighted sum of the inputs, together with the max function to prevent negative values.</span></div>
-</div>
-<div class="paragraph">
-<p>To improve the performance even further, we could now manually construct more informative features from the original inputs by combining them in meaningful ways (&#8594; feature engineering) before computing the output:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/05_supervised_nn/neural_network_intuitive_b6.png" alt="image" width="540">
-</div>
-<div class="title"><span class="small">Our example is about an online shop, so the customers additionally have to pay shipping fees, which means to reflect the true affordability of the product, we need to combine the product price with the shipping costs. Next, the customers are interested in high quality products. However, not only the actual quality of the raw materials we used to make the product influences how the customers perceive the product, but we can also reinforce the impression that the product is of high quality with a marketing campaign. Furthermore, a high price also suggests that the product is superior. This means by creating these additional features, the price can actually contribute in two ways towards the final prediction: while, on the one hand, a lower price is beneficial for the affordability of the product, a higher price, on the other hand, results in a larger perceived quality.</span></div>
-</div>
-<div class="paragraph">
-<p>While in this toy example, it was possible to construct such features manually, the nice thing about neural networks is that they do exactly that automatically: By using multiple layers, i.e., stacking multiple linear models (with nonlinear activation functions) on top of each other, it is possible to create more and more complex combinations of the original input features, which can improve the performance of the model. The more layers the network uses, i.e., the &#8220;deeper&#8221; it is, the more complex the resulting feature representations.</p>
-</div>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>Since different tasks and especially different types of input data benefit from different feature representations, there exist different types of neural network architectures to accommodate this, e.g.</p>
-</div>
-<div class="openblock">
-<div class="content">
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>&#8594; Feed Forward Neural Networks (FFNNs) for &#8216;normal&#8217; (e.g., structured) data</p>
-</li>
-<li>
-<p>&#8594; Convolutional Neural Networks (CNNs) for images</p>
-</li>
-<li>
-<p>&#8594; Recurrent Neural Networks (RNNs) for sequential data like text or time series</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>These different architectures are explained in more detail in the next section.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Pros</dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p>State-of-the-art performance (especially on data with <a href="https://towardsdatascience.com/geometric-foundations-of-deep-learning-94cdd45b451d" target="\_blank">input invariances</a>).</p>
-</li>
-<li>
-<p>Prediction for new test points is fast (just a few matrix multiplications).</p>
-</li>
-</ul>
-</div>
-</dd>
-<dt class="hdlist1">Careful</dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p>Can take a long time to train (use a GPU!!! (or <a href="https://en.wikipedia.org/wiki/Tensor_Processing_Unit" target="\_blank">TPU</a>)).</p>
-</li>
-<li>
-<p>Need a lot of data (depending on the size of the NN architecture).</p>
-</li>
-<li>
-<p>Solution only a local optimum (which is usually not too problematic in practice, as there are many good optima).</p>
-</li>
-<li>
-<p>Tricky to train: Performance depends on many parameters like learning rate, batch size, and even the random seed used when initializing the weights!</p>
-</li>
-</ul>
-</div>
-</dd>
-</dl>
-</div>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_nn_architectures">NN architectures</h4>
-<div class="paragraph">
-<p>Similar to how domain-specific feature engineering can result in vastly improved model performances, it pays off to construct a neural network architecture tailored to the task.</p>
-</div>
-<div class="sect4">
-<h5 id="_feed_forward_neural_network_ffnn">Feed Forward Neural Network (FFNN)</h5>
-<div class="paragraph">
-<p>This is the original and most straightforward neural network architecture, which we&#8217;ve already seen in the initial example, only that in practice such a model usually has a few more layers and units per layer. Each layer here is basically a linear model, i.e., it consists of a weight matrix \(W_i\) and some nonlinear activation function \(\sigma_i\) that is applied to the output. These layers are applied sequentially to the input features \(\mathbf{x}\), i.e., the network computes a composite function (in this case for three layers):</p>
-</div>
-<div class="stemblock">
-<div class="content">
-\[f(\mathbf{x}) = \sigma_3(\sigma_2(\sigma_1(\mathbf{x^\top}W_1)W_2)W_3) = \mathbf{\hat{y}}\]
-</div>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/05_supervised_nn/neural_network.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">Feed Forward Neural Network (FFNN) architecture: The input feature vector \(\mathbf{x}\), representing one data point, is multiplied by the first weight matrix \(W_1\) to create a new vector, which, after applying the nonlinear activation function (e.g., a ReLU function as we&#8217;ve seen in the initial example) results in the first hidden layer representation \(\mathbf{x}'\). This new vector is then multiplied by the second weight matrix \(W_2\) and again a nonlinear activation function is applied to yield the second hidden layer representation of the sample, \(\mathbf{x}''\). Depending on how many layers the network has (i.e., how deep it is), this could be repeated multiple times now until finally the last layer computes the predicted output \(\mathbf{\hat{y}}\). For a regression problem, the output would be a direct prediction of the target values (i.e., without applying a final nonlinear activation function), while for a classification problem, the output consists of a vector with probabilities for the different classes, created by applying a softmax activation function on the output, which ensures all values are between 0 and 1 and sum up to 1.</span></div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Test your understanding</dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p>Why do we need the nonlinear activation functions between the layers, i.e., how could we simplify a network with multiple layers, if it didn&#8217;t have any nonlinear activation functions between the layers?</p>
-</li>
-<li>
-<p>In what way could we manipulate the parameters (i.e., weight matrices) of an existing neural network without changing its predictions? (This is also a reason why there exist many equally good local optima.)</p>
-</li>
-</ul>
-</div>
-</dd>
-</dl>
-</div>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Number of hidden layers and units: </dt>
-<dd>
-<p>While the size of the input and output layers are determined by the number of input features and targets respectively, the dimensionality and number of hidden layers of the network is up to us. Usually, the hidden layers get smaller (i.e., have fewer units) as the data moves from the input to the output layer and when experimenting with different settings we can start with no hidden layers (which should give the same result as a linear model) and then progressively increase the size of the network until the performance stops improving. Just <a href="https://playground.tensorflow.org/" target="\_blank">play around</a> a bit.</p>
-</dd>
-</dl>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Training Neural Networks</dt>
-<dd>
-<p>To train a neural network, we first need to choose a loss function that should be optimized (e.g., mean squared error for regression problems or cross-entropy for classification problems).<br></p>
-<div class="paragraph">
-<p>While for a linear regression model, the optimal weights can be found analytically by setting the derivative of this loss function to 0 and solving for the weights, in a network with multiple layers and therefore many more weights, this is not feasible. Instead, the weights are tuned iteratively using a <strong>gradient descent</strong> procedure, where the derivative of the loss function w.r.t. each layer is computed step by step using the chain rule by basically pushing the error backwards through the network (i.e., from the output, where the error is computed, to the input layer), also called error <strong>backpropagation</strong>. At the beginning, all weight matrices are randomly initialized, so, for example, for a classification problem, for a given sample the network would predict approximately equal probabilities for all classes. The weights are then adapted according to their gradient, such that the next time the same samples are passed through the network, the prediction will be closer to the true output (and the value of the loss function is closer to a local minima).<br></p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/05_supervised_nn/loss_surface.png" alt="image" width="460">
-</div>
-<div class="title"><span class="small">Training loss surface over the network&#8217;s parameter space (simplified, i.e., showing only two weights (\(\theta_1\) and \(\theta_2\)), while in reality, this would be a super complex nonlinear function in a very high-dimensional space), where every possible weight configuration of a network results in a different loss on the training set. By taking a step into the direction of steepest descent of this loss function, the weights of the network get closer to a configuration where the loss is at a local minimum.</span></div>
-</div>
-<div class="paragraph">
-<p>Typically, the weights are adapted over multiple <strong>epochs</strong>, where one epoch means going over the whole training set once.
-By plotting the <a href="https://machinelearningmastery.com/learning-curves-for-diagnosing-machine-learning-model-performance/" target="\_blank">learning curves</a>, i.e., the training and validation loss against the number of training epochs, we can check whether the training was successful (i.e., whether the weights have converged to a good solution).</p>
-</div>
-<div class="paragraph">
-<p>Since a training set usually contains lots of data points, it would be too computationally expensive to do gradient descent based on the whole dataset at once in each epoch, so we instead use mini-<strong>batches</strong>, i.e., subsets of 16-128 data points, for each training step.</p>
-</div>
-</dd>
-</dl>
-</div>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_recurrent_neural_network_rnn">Recurrent Neural Network (RNN)</h5>
-<div class="paragraph">
-<p>Recurrent neural networks are great for sequential data such as time series data or text (i.e., a sequence of words).</p>
-</div>
-<div class="paragraph">
-<p>In its simplest form, a RNN is like a FFNN, but with additional recurrent connections \(W_h\) in the hidden layer to create a memory of the past:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/05_supervised_nn/rnn2.png" alt="image" width="460">
-</div>
-</div>
-<div class="paragraph">
-<p>It&#8217;s easiest when thinking about the RNN unrolled in time:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/05_supervised_nn/rnn_unrolled2.png" alt="image" width="540">
-</div>
-<div class="title"><span class="small">At the beginning of a new sequence, the hidden state \(\mathbf{x}'_0\) is initialized with zeros. Then for each new sample \(\mathbf{x}_t\) (with \(t \in \{1, ..., T\}\)) in the sequence, the hidden state is updated based on this new input (after multiplying \(\mathbf{x}_t\) with \(W_1\)), as well as the previous hidden state at \(t-1\) (by multiplying  \(\mathbf{x}'_{t-1}\) with \(W_h\)). From this new hidden state \(\mathbf{x}'_t\), the output for this time step can then be predicted (by multiplying \(\mathbf{x}'_t\) with \(W_2\)). While this network only includes a single recurrent layer, a more complex architecture could also contain multiple such layers.</span></div>
-</div>
-<div class="paragraph">
-<p>The original RNN layer uses a very simple update rule for the hidden state, but there also exist more advanced <a href="https://towardsdatascience.com/44e9eb85bf21" target="\_blank">types of RNNs</a>, like the Long Short Term Memory (LSTM) network or Gated Recurrent Units (GRU), which define more complex rules for how to combine the new input with the existing hidden state, i.e., they learn in more detail what to remember and which parts to forget, which can be beneficial when the data consists of longer sequences.</p>
-</div>
-<div class="paragraph">
-<p>The cool thing about RNNs is that they can process input sequences of varying length (where one sequence represents one data point, e.g., a text document), whereas all methods that we&#8217;ve discussed so far always expected the feature vectors that represent one data point to have a fixed dimensionality. For RNNs, while the input at a single time step (i.e., \(\mathbf{x}_t\) with \(t \in \{1, ..., T\}\)) is also a feature vector of a fixed dimensionality, the sequences themselves do not need to be of the same length \(T\) (e.g., text documents can consist of different numbers of words). This comes in especially handy for time series analysis, as we&#8217;ll see in the next chapter.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<p>Useful in Natural Language Processing (NLP):</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">RNNs can take word order into account, which is ignored in TF-IDF vectors</dt>
-<dd>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/07_nlp/rnn_wordemb.png" alt="image" width="440">
-</div>
-<div class="title"><span class="small">This is an example architecture for a sentence classification task (e.g., sentiment analysis, i.e., deciding whether the text is positive or negative). The individual words in the sentence are represented as so-called word embeddings, which are just <em>d</em>-dimensional vectors that contain some (learned) information about the individual words (e.g., whether the word is more male or female; how these embeddings are created is discussed in the section on self-supervised learning below). The RNN is then fed the sentence word by word and at the end of the sentence, the final hidden state, which contains the accumulated information of the whole sentence, is used to make the prediction. Since the RNN processes the words in the sentence sequentially, the order of the words is taken into account (e.g., whether a &#8220;not&#8221; occurred before an adjective), and since we use word embeddings as inputs, which capture semantic and syntactic information about the words, similarity between individual words (e.g., synonyms) is captured, thereby creating more meaningful representations of text documents compared to TF-IDF vectors (at the expense of greater computational complexity).</span></div>
-</div>
-</dd>
-</dl>
-</div>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_convolutional_neural_network_cnn">Convolutional Neural Network (CNN)</h5>
-<div class="paragraph">
-<p>Manual feature engineering for computer vision tasks is incredibly difficult. While humans recognize a multitude of objects in images without effort, it is hard to describe <em>why</em> we can identify what we see, e.g., which features allow us to distinguish a cat from a small dog. Deep learning had its first breakthrough success in this field, because neural networks, in particular CNNs, manage to learn meaningful feature representations of visual information through a hierarchy of layers.</p>
-</div>
-<div class="paragraph">
-<p>Convolutional neural networks are very well suited for processing visual information, because they can operate on the 2D images directly and do not need the input to be flattened into a vector. Furthermore, they utilize the fact that images are composed of a lot of local information (e.g., eyes, nose, and mouth are all localized components of a face).</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/05_supervised_nn/cnn.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">CNNs utilize two important operations, convolutions and pooling layers, to generate meaningful feature representations: A <a href="https://en.m.wikipedia.org/wiki/Convolution" target="\_blank">convolution</a> is computed by taking a small filter patch (e.g., a \(5 \times 5\) matrix) and moving it over the image pixel by pixel and row by row, at each position multiplying the filter with the image (see also <a href="https://youtu.be/Oqm9vsf_hvU?t=275" target="\_blank">this animation</a>). This results in a feature map of the same size as the original image, where a high value at some position indicates that the respective feature in the filter (e.g., an edge with a specific orientation) was detected at this position in the original image. Since this is done for multiple filters, the output after a convolutional layer consists of as many new feature maps as the layer had filters. The filter patches (i.e., multiple small matrices) are the learned weights of the CNN, and after training they can look something like the small tiles shown below the network architecture. The pooling layers then perform a subsampling of the individual feature maps by taking the max (or sometimes mean) value of multiple pixels in a small area. This reduces the dimensionality of the hidden layer representation, thereby improving the computational efficiency. Additionally, the pooling introduces some positional invariance, since it is not important anymore where exactly in some area a detected feature was, e.g., a face can be recognized even if the eyes of one person are further apart than usual or they have a longer nose, etc. Usually, the convolutional and pooling layers are interleaved, however, there is no strict rule saying that a pooling layer always has to follow a convolutional layer. With more layers, more and more complex features can be detected as a composition of the features identified in the lower layers (notice how the filters first detect edges, then individual components of a face, then full faces), i.e., by making the network deeper, we can solve more complex tasks. Finally, after multiple convolution and pooling layers, the feature representation is flattened into a vector and fed to a FFNN (i.e., fully connected layers) to perform the classification.</span></div>
-</div>
-<div class="paragraph">
-<p>Compared to the dense / fully-connected layers in FFNNs, which consist of one huge matrix mapping from one layer to the next, the filter patches used in convolutional layers are very small, i.e., there are less parameters that need to be learned. Furthermore, the fact that the filters are applied at every position in the image has a regularizing effect, since the filters need to be general enough capture relevant information in multiple areas of the images.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-By the way, the edge filters typically learned in the first layer of a CNN nicely match the <a href="https://en.wikipedia.org/wiki/Gabor_filter" target="\_blank">Gabor filters</a> used in early computer vision feature engineering attempts. Combined with the subsequent pooling operation, they compute something similar as the <a href="https://towardsdatascience.com/45afa1046f7f" target="\_blank">simple and complex cells</a> in the human primary visual cortex.
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_general_principles_advanced_architectures">General Principles &amp; Advanced Architectures</h5>
-<div class="paragraph">
-<p>When trying to solve a problem with a NN, always consider that the network needs to understand the inputs, as well as generate the desired outputs:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/05_supervised_nn/nn_architectures4.png" alt="image" width="740">
-</div>
-<div class="title"><span class="small">As we&#8217;ve seen in the CNN used for image classification in the previous section, the representation generated by the CNN is at some point flattened and a FFNN then computes the final prediction for the classification task. Similarly, the final hidden state of a RNN, representing the information contained in a sentences, can be passed to a FFNN to generate a prediction (e.g., for sentiment analysis). However, some problems do not fall into the category of simple supervised learning tasks (i.e., regression or classification), and require a different output. For example, in machine translation, the output should be the sentence translated into the other language, which can be achieved by coupling two RNNs: the first &#8216;understands&#8217; the sentence in the original language and this representation of the meaning of the sentence is then passed to a second RNN, which generates from it the translated sentence word by word. (If we need to translate texts from and to multiple languages, this can be done very efficiently by using just one input and one output network for each language and have them operate on the same meaning representations, i.e., instead of learning multiple pairs of networks for each language combination individually, we only learn for each language one network to understand this language and one network to generate output sentences in this language.) Another example is the task of image captioning (i.e., generating text describing what can be seen on an image, e.g., to improve the online experience for people with visual impairment), where first the image is &#8216;understood&#8217; by a CNN and then this representation of the input image is passed to a RNN to generate the matching text.</span></div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<p>Below are two examples of neural network architectures that deal with somewhat unusual inputs and outputs and incorporate a lot of domain knowledge, which enables them to achieve state-of-the-art performance on the respective tasks:</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Predicting the 3D structure of a protein from its amino acid sequence with AlphaFold</dt>
-<dd>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/05_supervised_nn/01_alphafold_nn.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">https://deepmind.com/blog/article/alphafold-a-solution-to-a-50-year-old-grand-challenge-in-biology (30.11.2020)</span></div>
-</div>
-</dd>
-<dt class="hdlist1">Predicting properties of molecules with SchNet (which is an example of a <a href="https://www.youtube.com/watch?v=uF53xsT7mjc" target="\_blank">Graph Neural Network (GNN)</a>)</dt>
-<dd>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/05_supervised_nn/schnet.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">Schütt, Kristof T., et al. &#8220;Quantum-chemical insights from deep tensor neural networks.&#8221; <em>Nature communications</em> 8.1 (2017): 1-8.</span></div>
-</div>
-</dd>
-</dl>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_tips_tricks">Tips &amp; Tricks</h4>
-<div class="sect4">
-<h5 id="_self_supervised_transfer_learning">Self-Supervised &amp; Transfer Learning</h5>
-<div class="paragraph">
-<p><a href="https://ai.facebook.com/blog/self-supervised-learning-the-dark-matter-of-intelligence/" target="_blank" rel="noopener"><strong>Self-supervised learning</strong></a> is a very powerful technique with which neural networks can learn meaningful feature representations from unlabeled data. Using this technique is cheap since, like in unsupervised learning, it does not require any labels generated by human annotators. Instead, pseudo-labels are generated from the inputs themselves by masking parts of it. For example, a network can be trained by giving it the first five words of a sentence as input and then asking it to predict what the next word should be. This way, the network learns some general statistics and knowledge about the world, similar to how human brains interpolate from the given information (e.g., with the <a href="https://en.wikipedia.org/wiki/Blind_spot_(vision)" target="\_blank">blind spot test</a> you can nicely observe how your brain predicts missing information from the given context). Self-supervised learning is often used to &#8220;pretrain&#8221; a neural network before using it on a supervised learning task (see transfer learning below).</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<p>NLP Example: <strong>Neural Network Language Models</strong> (e.g., <code>word2vec</code> &#8594; have a look at <a href="https://jalammar.github.io/illustrated-word2vec/" target="\_blank">this blog article</a> for more details) use self-supervised learning to generate word embeddings that capture semantic &amp; syntactic relationships between the words (which is ignored in TF-IDF vectors, where each word dimension has the same distance to all other words):</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/07_nlp/word2vec.png" alt="image" width="640">
-</div>
-<div class="title"><span class="small">The learned word embeddings can be used to solve analogy questions like those posed in an IQ test, e.g., "<em>man</em> is to <em>king</em> as <em>women</em> is to <em>XXX</em>", where the correct answer is <em>queen</em>. This can be solved with vector arithmetic, i.e., by taking the word embedding for <em>king</em>, subtracting from it the embedding for <em>man</em>, adding the embedding for <em>women</em> and then checking which word embedding is closest to this new vector (which should be the embedding for <em>queen</em>).</span></div>
-</div>
-<div class="paragraph">
-<p>&#8658; These word embedding vectors can then be used as input to a RNN.</p>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p><strong>Transfer learning</strong> is the idea of using what a network has learned before on a different task (e.g., a self-supervised learning task) as a starting point when tackling a new task. In practice, this means the weights of our network are initialized with (some of) the weights of a network trained on another task, before training our network on the new task. We also say that the network was pretrained on a source task before it is fine-tuned on the target task.</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/05_supervised_nn/transfer_learning_nn.png" alt="image" width="760">
-</div>
-<div class="title"><span class="small">From an old project, we have a network that was trained on a large dataset to recognize dogs in images (= source task). Now we&#8217;re working on a new project, where we want to recognize cats in images (= target task). Since the two tasks are very similar (cats and dogs share a lot of the same features) and we only have a small dataset available for the new task, transfer learning could improve the prediction performance on the target task.</span></div>
-</div>
-<div class="paragraph">
-<p>Typically, not all the weights of a target network are initialized with weights from a source network, but only those from the earlier layers, where the source network has learned some general principles that are not task specific (e.g., observe how the first layer of the CNN in the previous section had learned to detect edges, which seems like a relevant skill for pretty much all computer vision tasks). Often, using a pretrained network will give us a more robust solution and boost the prediction performance, especially if we only have a very small dataset for the target task available to train the network. However, since when training a neural network we&#8217;re trying to find weights that minimize the loss function by iteratively improving the weights starting with some initialization, if this initialization is unfavorable because it is very far away from a good minimum (i.e., further away than a random initialization), e.g., because we&#8217;ve initialized the weights with those from a source network trained on a very different task, then this can hurt the performance, since the network first has to unlearn a lot of things from this unrelated task before it can learn the actual task. Therefore, transfer learning should only be used if the source and target tasks are &#8220;related enough&#8221;. Pretraining a network on a self-supervised learning task (i.e., a task that is just about understanding the world in general, not solving a different kind of specific task) usually works quite well though.</p>
-</div>
-<div class="paragraph">
-<p>When using transfer learning, one question is whether to &#8220;freeze&#8221; the weights that were copied from the source network, i.e., to use the pretrained part of the network as a fixed feature extractor and only train the later layers that generate the final prediction. This is basically the same as first transforming the whole dataset once by pushing it through the first layers of a network trained on a similar task and then using these new feature representations to train a different model. While we often get good results when training a traditional model (e.g., a SVM) on these new feature representations, it is generally not recommended for neural networks. In some cases, we might want to keep the pretrained weights fixed for the first few epochs, but in most cases the performance will be best if all weights are eventually fine-tuned on the target task.</p>
-</div>
-<div class="paragraph">
-<p>In cases where transfer learning is not beneficial, because the source and target tasks are not similar enough, it can nevertheless be helpful to copy the network architecture in general (i.e., number and shape of the hidden layers). Using an appropriate architecture is often more crucial than initializing the weights themselves.</p>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_how_to_get_a_network_to_learn_something">How to get a network to learn something</h5>
-<div class="ulist">
-<ul>
-<li>
-<p>Scale the data (for classification tasks only inputs, for regression tasks also outputs or adapt the bias of the last layer; <code>StandardScaler</code> is usually a good choice) as otherwise the weights have to move far from their initialization to scale the data for us.</p>
-</li>
-<li>
-<p>Use sample weights for classification problems with unequal class distributions.</p>
-</li>
-<li>
-<p>NN are trained with gradient descent, which requires a good learning rate (i.e., step size for each training iteration &#8594; not too small, otherwise nothing is learned, not too big, otherwise it spirals out of control):</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/05_supervised_nn/nn_learning_rate4.png" alt="image" width="540">
-</div>
-<div class="title"><span class="small">A simple strategy to select a suitable initial learning rate is to train the network with different learning rates for one epoch on a subsample of the dataset and then check the loss after training. For too small learning rates (left), the loss will stay the same, while for too large learning rates (right) the loss will be higher after training.</span></div>
-</div>
-</li>
-<li>
-<p>Sanity check: A linear network (i.e., a FFNN with only one layer mapping directly from the inputs to the outputs) should achieve approximately the same performance as the corresponding linear model from sklearn.</p>
-</li>
-<li>
-<p>Gradually make the network more complex until it can perfectly memorize a small training dataset (to get a network that has enough capacity to at least in principle capture the complexity of the task).</p>
-</li>
-<li>
-<p>When selecting hyperparameters, always check if there is a clear trend towards an optimal setting; if the pattern seems random, initialize the network with different random seeds to see how robust the results are.</p>
-</li>
-<li>
-<p>Using a learning rate scheduler (to decrease the learning rate over time to facilitate convergence) or early stopping (i.e., stopping the training when the performance on the validation set stops improving) can improve the generalization performance.</p>
-</li>
-<li>
-<p>But often it is more important to train the network long enough, like, for hundreds of epochs (depending on the dataset size).</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><span class="small">&#8594; more tips for training NN: <a href="http://karpathy.github.io/2019/04/25/recipe/" class="bare">http://karpathy.github.io/2019/04/25/recipe/</a></span></p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-If you want to learn more about neural networks, there are many great free resources available online, such as the introductory videos from <a href="https://www.3blue1brown.com/topics/neural-networks" target="\_blank">3blue1brown</a>, which nicely illustrate what neural networks are actually computing and how backpropagation works; the <a href="https://www.coursera.org/specializations/deep-learning" target="\_blank">Coursera Deep Learning Specialization (by Andrew Ng)</a>, which provides a good general introduction with many practical tips and also covers application areas like computer vision and NLP; or the <a href="https://atcold.github.io/pytorch-Deep-Learning/" target="\_blank">Deep Learning with PyTorch course (by Yann LeCun)</a>, which is a bit more advanced and discusses state-of-the-art architectures.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_neural_networks_in_python">Neural Networks in Python</h4>
-<div class="paragraph">
-<p>There are several libraries available for working efficiently with neural networks (especially since many of the big firms doing machine learning decided to develop their own library): <code>theano</code> was the first major deep learning Python framework, developed by the MILA institute at the university of Montreal (founded by Yoshua Bengio), then came <code>TensorFlow</code>, developed by the Google Brain team, <code>MXNet</code> (pushed by Amazon), and finally <code>PyTorch</code>, developed by the Facebook/Meta AI Research team (lead by Yann LeCun). PyTorch is currently preferred by most ML researchers, while TensorFlow is still found in many (older) applications used in production.</p>
-</div>
-<div class="paragraph">
-<p>Below you can find some example code for how to construct a neural network using PyTorch or Keras (which is a wrapper for TensorFlow to simplify model creation and training). Further details can be found in the example notebooks on GitHub, which also use the (Fashion) MNIST datasets described below to benchmark different architectures.</p>
-</div>
-<div class="paragraph">
-<p>[Recommended:] <a href="https://pytorch.org/" target="\_blank"><code>torch</code> library</a>
-(&#8594; to simplify model training, combine with <a href="https://skorch.readthedocs.io/en/stable/" target="\_blank"><code>skorch</code> library</a>!)</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">import</span> <span class="include">torch</span>
-<span class="keyword">import</span> <span class="include">torch.nn.functional</span> <span class="keyword">as</span> F
-
-<span class="keyword">class</span> <span class="class">MyNeuralNet</span>(torch.nn.Module):
-
-    <span class="keyword">def</span> <span class="function">__init__</span>(<span class="predefined-constant">self</span>, n_in, n_hl1, n_hl2, n_out=<span class="integer">10</span>):
-        <span class="comment"># neural networks are always a subclass of torch modules, which makes it possible</span>
-        <span class="comment"># to use backpropagation and gradient descent to learn the weights</span>
-        <span class="comment"># the call to the super() constructor is vital for this to work!</span>
-        <span class="predefined">super</span>(MyNeuralNet, <span class="predefined-constant">self</span>).__init__()
-        <span class="comment"># initialize the layers of the network with random weights</span>
-        <span class="comment"># a Linear layer is the basic layer in a FFNN with a weight matrix,</span>
-        <span class="comment"># in this case with shape (n_in, n_hl1), and a bias vector</span>
-        <span class="predefined-constant">self</span>.l1 = torch.nn.Linear(n_in, n_hl1)  <span class="comment"># maps from dimensionality n_in to n_hl1</span>
-        <span class="comment"># we need to make sure that the shape of the weights matches up</span>
-        <span class="comment"># with that from the previous layer</span>
-        <span class="predefined-constant">self</span>.l2 = torch.nn.Linear(n_hl1, n_hl2)
-        <span class="predefined-constant">self</span>.lout = torch.nn.Linear(n_hl2, n_out)
-
-    <span class="keyword">def</span> <span class="function">forward</span>(<span class="predefined-constant">self</span>, x):
-        <span class="comment"># this defines what the network is actually doing, i.e.,</span>
-        <span class="comment"># how the layers are connected to each other</span>
-        <span class="comment"># they are now applied in order to transform the input into the hidden layer representations</span>
-        h = F.relu(<span class="predefined-constant">self</span>.l1(x))       <span class="comment"># 784 -&gt; 512 [relu]</span>
-        h = F.relu(<span class="predefined-constant">self</span>.l2(h))       <span class="comment"># 512 -&gt; 256 [relu]</span>
-        <span class="comment"># and finally to predict the probabilities for the different classes</span>
-        y = F.softmax(<span class="predefined-constant">self</span>.lout(h))  <span class="comment"># 256 -&gt; 10 [softmax]</span>
-        <span class="keyword">return</span> y
-
-<span class="comment"># this initializes a new network</span>
-my_nn = MyNeuralNet(<span class="integer">784</span>, <span class="integer">512</span>, <span class="integer">256</span>)
-<span class="comment"># this calls the forward function on a batch of training samples</span>
-y_pred = my_nn(X_batch)
-<span class="comment"># (btw: using an object like a function also works for other classes if you implement a __call__ method)</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><a href="https://keras.io/" target="\_blank"><code>keras</code> framework</a> (which simplifies the construction and training of <a href="https://www.tensorflow.org/" target="\_blank">TensorFlow</a> networks)</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">tensorflow</span> <span class="keyword">import</span> <span class="include">keras</span>
-
-<span class="comment"># construct a feed forward network:</span>
-<span class="comment"># 784 -&gt; 512 [relu] -&gt; 256 [relu] -&gt; 10 [softmax]</span>
-model = keras.Sequential()
-<span class="comment"># we need to tell the first layer the shape of our input features</span>
-model.add(keras.layers.Dense(<span class="integer">512</span>, activation=<span class="string"><span class="delimiter">'</span><span class="content">relu</span><span class="delimiter">'</span></span>, input_shape=(<span class="integer">784</span>,)))
-<span class="comment"># the following layers know their input shape from the previous layer</span>
-model.add(keras.layers.Dense(<span class="integer">256</span>, activation=<span class="string"><span class="delimiter">'</span><span class="content">relu</span><span class="delimiter">'</span></span>))
-model.add(keras.layers.Dense(<span class="integer">10</span>, activation=<span class="string"><span class="delimiter">'</span><span class="content">softmax</span><span class="delimiter">'</span></span>))
-
-<span class="comment"># compile &amp; train the model (for a classification task)</span>
-model.compile(loss=keras.losses.categorical_crossentropy,
-              optimizer=keras.optimizers.Adam(), metrics=[<span class="string"><span class="delimiter">'</span><span class="content">accuracy</span><span class="delimiter">'</span></span>])
-model.fit(X, y)
-
-<span class="comment"># predict() gives probabilities for all classes; with argmax we get the actual labels</span>
-y_pred = np.argmax(model.predict(X_test), axis=<span class="integer">1</span>)
-<span class="comment"># evaluate the model (returns loss and whatever was specified for metrics in .compile())</span>
-print(<span class="string"><span class="delimiter">&quot;</span><span class="content">The model is this good:</span><span class="delimiter">&quot;</span></span>, model.evaluate(X_test, y_test)[<span class="integer">1</span>])
-<span class="comment"># but of course we can also use the evaluation functions from sklearn</span>
-print(<span class="string"><span class="delimiter">&quot;</span><span class="content">Equivalently:</span><span class="delimiter">&quot;</span></span>, accuracy_score(y_test, y_pred))</code></pre>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Standard ML Benchmarking Datasets</dt>
-<dd>
-<p>The MNIST handwritten digits dataset is very old and super easy even for traditional models.<br>
-&#8594; \(28 \times 28\) pixel gray-scale images with 10 different classes:</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/05_supervised_nn/MnistExamples.png" alt="image" width="640">
-</div>
-</div>
-<div class="paragraph">
-<p>The new MNIST dataset: Fashion<br>
-&#8658; Same format (i.e., also 10 classes and images of the same shape), but more useful for benchmarks since the task is harder.</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/05_supervised_nn/mnist_fashion.jpeg" alt="image" width="640">
-</div>
-</div>
-</dd>
-</dl>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_time_series_forecasting">Time Series Forecasting</h3>
-<div class="paragraph">
-<p>In the chapter on data, where we discussed what can be considered <a href="#_what_constitutes_one_data_point">&#8216;one data point&#8217;</a>, you&#8217;ve already encountered some tasks that involve time series data. Now we&#8217;re looking into possibly the most difficult question that one can try to solve with time series data, namely predicting the future.</p>
-</div>
-<div class="paragraph">
-<p>In time series forecasting, the goal is to predict the future time course of a variable (i.e., its values for \(t' &gt; t\)) from its past values (and possibly some additional information).
-This is, for example, used in <strong>Predictive Maintenance</strong>, where the remaining life span or degradation of important process components is forecast based on their past usage and possibly some future process conditions:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/07_timeseries/timeseries4.png" alt="image" width="660">
-</div>
-<div class="title"><span class="small">One predictive maintenance problem coming up over and over again in the chemical production industry is trying to predict the remaining activity or lifetime of a catalyst (a critical component in a chemical plant that facilitates the reaction; visualized as the purple line) under different process conditions (which are planned for the future; blue and green lines). For example, the catalyst might decay faster, if the process is run at a higher temperature. If the weekend is coming up, a predictive maintenance model could be used to estimate the temperature at which the process should be run such that the catalyst lasts until the next Monday, when the crew to replace it is back.</span></div>
-</div>
-<div class="paragraph">
-<p><strong>Predictive Maintenance Example Paper:</strong><br>
-Bogojeski, M., et al. &#8220;Forecasting industrial aging processes with machine learning methods.&#8221; <em>Computers and Chemical Engineering</em> 144 (2021): 107123. <a href="https://arxiv.org/abs/2002.01768" target="\_blank">(arXiv:2002.01768)</a></p>
-</div>
-<div class="sect3">
-<h4 id="_input_and_target_variables">Input and Target Variables</h4>
-<div class="paragraph">
-<p>Basically, we can think of time series forecasting as a supervised learning problem with more complicated inputs &amp; outputs:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/07_timeseries/tsf_inout8.png" alt="image" width="800">
-</div>
-<div class="title"><span class="small">Depending on the task (i.e., what we want to forecast), we either have a <strong>univariate</strong> forecasting problem (if we only need to predict the development of a single variable) or a <strong>multivariate</strong> problem (i.e., with multiple target variables). Additionally, it is important to note for <strong>how many time steps into the future</strong> the variables need to be forecast: In the easiest case, only the next time step needs to be predicted, but it might also be necessary to predict a fixed window of \(k\) time steps into the future, and sometimes the prediction horizons might even be of varying lengths. In any case, we should always try to make use of as much (relevant) information as possible when making forecasts. In principle, <strong>all values from the past can be used as input features</strong>, especially those from the target variable(s) (&#8594; see also auto-regressive models, e.g., <a href="https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average" target="\_blank">ARIMA</a>). What is often overlooked, however, is all the additional <strong>information about the future</strong> that can be used as inputs as well, provided that these values are independent of the targets, i.e., <strong>exogenous variables</strong> outside of the system.</span></div>
-</div>
-<div class="paragraph">
-<p>For example, let&#8217;s say we own a small cafe and want to predict how much ice cream we are likely to sell tomorrow. Certainly, the amount of ice cream we&#8217;ve sold yesterday or on the same day last week will be useful input features, but additionally, for example, the weather forecast for tomorrow or whether or not there is a holiday or some special event happening would be useful predictive information that should not be ignored and that can be used since these are independent variables.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<p><span class="underline">Know your data: Beware of hidden feedback loops!</span></p>
-</div>
-<div class="paragraph">
-<p>In this predictive maintenance example, the pressure in some pipes indicates how much residual material has built up on the walls of the pipes (&#8594; <a href="https://en.wikipedia.org/wiki/Fouling" target="\_blank">fouling</a>) and the task is to predict when these pipes need to be cleaned again, i.e., when the next maintenance event is due.</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">What are input features, what are targets?</dt>
-<dd>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/07_timeseries/input_target_leak4.png" alt="image" width="580">
-</div>
-</div>
-<div class="paragraph">
-<p>While in general many future process conditions (e.g., the planned amount of product that should be produced in the next weeks), can be used as input variables at \(t' &gt; t\), this does not hold for the process condition &#8216;temperature&#8217; in this example, since it is not a true exogenous variable, even though it could theoretically be set independently. In the historical data, the value of the temperature at \(t+1\) is dependent on the target variable (pressure) at \(t\), therefore, if we want to forecast the target for more than one time step, only the past values of temperature can be used as input features.</p>
-</div>
-</dd>
-</dl>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>We need a feature vector for every time point we want to make a prediction about. Think about what it is we&#8217;re trying to predict and what values could influence this target variable, i.e., what inputs are needed such that we have all the required information to make the prediction. Especially when using stateless models (see below), the feature vectors need to capture all the relevant information about the past.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Possible Input Features</dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p>Known information about future (e.g., weather forecast, planned process conditions).</p>
-</li>
-<li>
-<p>Auto-regressive: Lagged (target) variable (i.e. values at \(t' \leq t\)).<br>
-❗️ Don&#8217;t use the <em>predicted</em> target value for this (in a multi-step forecast) – errors accumulate!</p>
-</li>
-<li>
-<p>Account for cyclical (e.g., seasonal) trends &#8594; check auto-correlation or spectral analysis.<br>
-<span class="small">For example, a cafe might sell more ice cream during the summer or it could be located next to a school and therefore sell more on days the kids come by in their lunch break:</span><br>
-<span class="image"><img src="images/07_timeseries/ts_months.png" alt="image" width="160"></span>
-<span class="image"><img src="images/07_timeseries/ts_week.png" alt="image" width="160"></span><br>
-&#8594; Include categorical variables <code>month</code> and <code>day_of_week</code>.</p>
-</li>
-<li>
-<p>For predictive maintenance: hours / integral of input variable since last maintenance event (maybe take log).<br>
-<span class="image"><img src="images/07_timeseries/ts_integralfeat.png" alt="image" width="470"></span></p>
-</li>
-</ul>
-</div>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>&#8594; For more ideas: <a href="https://tsfresh.readthedocs.io/en/latest/" target="\_blank">tsfresh library</a>, <a href="https://machinelearningmastery.com/category/deep-learning-time-series/" target="\_blank">time series analysis blog posts</a></p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_stateless_vs_stateful_models">Stateless vs. Stateful Models</h4>
-<div class="paragraph">
-<p>When dealing with time series data, one should always think carefully about how complex the dependencies between the past and future process values in the respective forecasting task are.<br>
-For example, when trying to predict <strong>spontaneous events</strong>, like a sudden increase in the emissions produced in the process, then the relevant time window into the past, when the process conditions might have had an influence on this target variable, would be very short, i.e., only the process values from time \(t\) need to be included in the input feature vector to predict the anomalous event at time \(t+1\).<br>
-For other prediction tasks, what happened over a <strong>longer (but uniquely determined) interval</strong> might be relevant, but can be <strong>summarized with simple features</strong>. For example, in a production process, one might want to predict the quality of the final product that is produced within a fixed time interval. In this case, the process conditions during the time interval where the respective product is produced will be important for the prediction, but the process conditions during the time where the previous product was produced are most likely not relevant. Additionally, it would be enough to compute only some summary statistics (like mean/max/min values of the process conditions during the time interval of interest) and use these as input features to capture all the relevant information.<br>
-The third case are prediction tasks for which it is necessary to consider <strong>very long time windows</strong>, often of varying lengths, with some <strong>complex long-ranging dependencies</strong> between the process conditions at different time points. For example, in some predictive maintenance tasks, the decay of the critical process component might not happen in some linear fashion (unlike, for example, a light bulb, which might have some fixed life expectancy and one only needs to count the number of hours it was turned on up to now to estimate when it needs to be replaced. Instead, there exist more complex dependencies, for example, the component might decay faster if it is already in a poor state. Therefore, if some unfortunate combination of process conditions lead to a strain on the component early on, it might have to be replaced a lot sooner then under otherwise identical conditions without this initial mishap, i.e., <strong>the order of events matters</strong> a lot, too.</p>
-</div>
-<div class="paragraph">
-<p>Depending on how complex the dependencies are between the process values over time, it will be more or less complicated to construct feature vectors that capture all the relevant information to make accurate predictions. In general, one should always try to come up with <strong>features that contain all the relevant information about the past</strong>, i.e., that fulfill the <a href="https://en.wikipedia.org/wiki/Markov_property" target="\_blank">Markov assumption</a> that given this information the future is otherwise independent of the history of the process: For example, if we knew the number of hours a light bulb was turned on up to now, we would have a complete picture about the state the light bulb is currently in; everything else that happened in the past, like how many people were in the room while the light was on, is irrelevant for the state of the light bulb. Another example is the current position of pieces on a chess board: To plan our next move, we don&#8217;t need to know the exact order in which the pieces were moved before, but only the position of all the pieces right now.</p>
-</div>
-<div class="paragraph">
-<p>If we are able to derive such input features, we can use a <strong>stateless model</strong> for the prediction (e.g., any of the supervised learning models we&#8217;ve discussed so far except RNNs), i.e., treat all data points as independent regardless of where in time they occurred. If it is not possible to construct such an informative feature vector that captures all the relevant information about the past, e.g., because of complex long-ranging dependencies that can not be adequately captured by simple summary statistics, then we have to use a <strong>stateful model</strong> (e.g., a form of Recurrent Neural Network (RNN)), which internally constructs a full memory of the history of the process, i.e., it keeps track of the current state of the process.</p>
-</div>
-<div class="paragraph">
-<p>Whether to use a stateless or stateful model is also an important consideration when dealing with other kinds of sequential data such as text. Analogous to the three scenarios described above, we can also find similar cases for natural language processing (NLP) problems that either benefit from the use of stateful models or where a simple stateless model is enough:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Spontaneous event:</strong> Trigger word detection for smart speakers: A simple classification task for which only the last 1-2 spoken words, i.e., the audio signal from a time window of a few seconds, are relevant.</p>
-</li>
-<li>
-<p><strong>Fixed interval &amp; summary features:</strong> Text classification, e.g., determining the category of a newspaper article (e.g., &#8216;sports&#8217; or &#8216;politics&#8217;): While here a longer span of text needs to be considered to make the prediction, a simple TF-IDF vector is usually sufficient to represent the contents of the whole document, since such categories can easily be identified by simply checking whether the terms &#8220;soccer&#8221; or &#8220;politician&#8221; occur more often in the current article.</p>
-</li>
-<li>
-<p><strong>Complex long-ranging dependencies:</strong> For some tasks like sentiment analysis or machine translation, it doesn&#8217;t just matter which words occurred in a text, but also in which order and what their larger surrounding context was.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>&#8594; While for 1. and 2. a stateless model will do just fine, for 3. the best performance is achieved with a stateful model that can keep track of the more complex dependencies.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">TL;DR: Which type of model should we use?</dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p>How much does the future depend on the past?<br>
-a) Values at \(t\) or simple summary statistics are sufficient as input features to predict \(t' &gt; t\).<br>
-b) There exist complex long-ranging dependencies between past and future values and the order of events matters.</p>
-</li>
-<li>
-<p>How many time steps into the future do we need to predict?<br>
-a) A fixed, small window of \(1\) or \(k\) steps.<br>
-b) Arbitrarily long prediction horizons.</p>
-</li>
-</ul>
-</div>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>If <strong>only a)</strong>:<br>
-&#8594; <em>Stateless</em> model, e.g., linear model, FFNN, random forest, &#8230;&#8203;<br>
-If <strong>any b)</strong>:<br>
-&#8594; <em>Stateful</em> model, e.g., recurrent neural network (RNN)</p>
-</div>
-</div>
-</div>
-<div class="openblock">
-<div class="content">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Output prediction with <em>stateless</em> models (e.g., linear regression, FFNN)</dt>
-<dd>
-<p>Only predict for a fixed time window of 1 or <em>k</em> steps:<br></p>
-</dd>
-</dl>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>Univariate, single-step prediction:</p>
-<div class="stemblock">
-<div class="content">
-\[[\underbrace{\quad y_1 \quad}_{t' \,\leq\, t} | \underbrace{\, x_1 \, | \,  x_2 \, }_{t+1} ] \; \to \; [\underbrace{y_1}_{t+1}]\]
-</div>
-</div>
-</li>
-<li>
-<p>Multivariate, single-step prediction:</p>
-<div class="stemblock">
-<div class="content">
-\[[\underbrace{\quad y_1  \quad | \quad y_2 \quad}_{t' \,\leq\, t} | \underbrace{\, x_1 \, | \,  x_2 \, }_{t+1} ] \; \to \; [\underbrace{\, y_1  \, | \, y_2 \, }_{t+1}]\]
-</div>
-</div>
-</li>
-<li>
-<p>Multivariate, multi-step prediction:</p>
-<div class="stemblock">
-<div class="content">
-\[[\underbrace{\quad y_1  \quad | \quad y_2 \quad}_{t' \,\leq\, t} | \underbrace{\quad\quad x_1 \quad\quad | \quad\quad  x_2 \quad\quad }_{t+1\, ...\, t+k} ] \; \to \; [\underbrace{\quad\quad y_1 \quad\quad | \quad\quad  y_2 \quad\quad }_{t+1\, ...\, t+k}]\]
-</div>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Output prediction with <em>stateful</em> models (e.g., RNN, LSTM, GRU, Echo State Network)</dt>
-<dd>
-<p>The model builds up a memory of the past by mirroring the actual process, i.e., even if we don&#8217;t need the prediction at some time step \(t-5\), we still need to feed the model the inputs from this time step so that it can build up the appropriate hidden state.</p>
-<div class="paragraph">
-<p>Multivariate, multi-step prediction:</p>
-</div>
-</dd>
-</dl>
-</div>
-<div class="stemblock">
-<div class="content">
-\[\begin{aligned}
-...\\
-t-1:\quad [\, x_1 \, | \,  x_2 \,]\; &amp;\to \; [\, y_1  \, | \, y_2 \,]\\
-\text{memory state buildup} \quad\quad\quad\quad t:\quad [\, x_1 \, | \,  x_2 \,]\; &amp;\to \; [\, y_1  \, | \, y_2 \,]\\
----------------------&amp;------\\
-\text{prediction} \quad\quad\quad\quad\quad t+1:\quad [\, x_1 \, | \,  x_2 \,]\; &amp;\to \; [\, y_1  \, | \, y_2 \,]\\
-t+2:\quad [\, x_1 \, | \,  x_2 \,]\; &amp;\to \; [\, y_1  \, | \, y_2 \,]\\
-...\\
-t+k:\quad [\, x_1 \, | \,  x_2 \,]\; &amp;\to \; [\, y_1  \, | \, y_2 \,]
-\end{aligned}\]
-</div>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-When working with time series data, the train, validation, and test data splits should be in chronological order, i.e., the model is trained on the oldest time points and evaluated on more recent samples to get a realistic performance estimate, especially in cases where the data changes over time, e.g., due to smaller changes in the underlying process.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_recommender_systems_pairwise_data">Recommender Systems (Pairwise Data)</h3>
-<div class="paragraph">
-<p>Recommender systems can be found on many websites to promote products, content, or ads that a specific user might be interested in (e.g., on Amazon, Netflix, Facebook, YouTube, etc.).</p>
-</div>
-<div class="paragraph">
-<p>What is special about them is that here we&#8217;re not really dealing with single data points, but instead with pairwise data, i.e., we have samples from two groups (e.g., users and movies), where each combination of samples (e.g., each (user, movie)-tuple) is assigned a label (e.g., the rating the user gave to the movie).</p>
-</div>
-<div class="paragraph">
-<p>Typically, the training set contains only very few labels (e.g., since there are many users and many movies, but every user has only rated a handful of movies) and the task is to predict all the missing labels, based on which then, for example, a user would be recommended the movie with the highest predicted rating.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<p><span class="underline">Recommender Systems Overview:</span></p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Pairwise data</dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p>(user, movie) &#8594; rating (1 - 5 stars)</p>
-</li>
-<li>
-<p>(drug, protein) &#8594; bind (yes / no)</p>
-</li>
-</ul>
-</div>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p><strong>Idea:</strong> Similar users watch similar movies.<br>
-<strong>Given:</strong> Very sparse matrix with known interactions:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/07_recsys/rec_sys_pairwise.png" alt="image" width="200">
-</div>
-</div>
-<div class="paragraph">
-<p><strong>Task:</strong> Fill in the missing values.</p>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>There are lots of different approaches for how to accomplish this, and we&#8217;ll only look at two here, the traditional method of collaborative filtering, and a more modern approach relying on neural networks that falls under the category of triplet learning.</p>
-</div>
-<div class="paragraph">
-<p>&#8594; One possible Python library: <a href="http://surpriselib.com/" target="\_blank"><code>surprise</code></a></p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Collaborative Filtering</dt>
-<dd>
-<p>Using a <a href="https://en.wikipedia.org/wiki/Singular_value_decomposition" target="\_blank">singular value decomposition</a> (SVD; basically the big sister of the eigendecomposition, e.g., from <code>scipy.sparse.linalg.svds</code>), the matrix with the known interactions can be decomposed into two smaller matrices of shapes (number of movies \(\times\, d\)) and (\(d \,\times\) number of users) and by multiplying these matrices together, the missing values from the original matrix are approximated:</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/07_recsys/rec_sys_svd3.png" alt="image" width="600">
-</div>
-<div class="title"><span class="small">The two matrices we obtain from the SVD contain <em>d</em>-dimensional latent variable representations of movies and users respectively, where <em>d</em> denotes the number of eigenvectors we decided to keep (corresponding to the <em>d</em> largest eigenvalues of the original matrix). You can think of these as feature vectors, where, for example, one of the <em>d</em> dimensions in the vector representing a movie might correspond to how much this movie is considered a horror movie, while the same dimension in a user vector indicates how much this user likes horror movies. If both entries for some dimension in the vectors point in the same direction (e.g., the movie is a horror movie and the user likes horror movies), then the product of the two entries will contribute positively to the overall scalar product of the vectors and therefore the approximated rating. However, please note that just like with the new feature dimensions we got from PCA, it is very difficult to determine exactly what is actually encoded in each dimension.</span></div>
-</div>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>One big problem with this approach is that we always need some initial ratings for each user and movie, otherwise we can&#8217;t generate any useful personalized recommendations. This is also referred to as the &#8220;cold start problem&#8221;, which can be addressed with triplet learning.</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Triplet Learning / Content-based Filtering</dt>
-<dd>
-<p>In triplet learning, we don&#8217;t directly work with the full matrix of known interactions, but instead the training dataset consists of triplets for the existing labels (e.g., (user <em>i</em>, movie <em>j</em>, 4 stars), which can also be a more memory-friendly representation). Additionally, we assume that we have feature vectors available for the users and movies (e.g., the users might have filled out a short survey when they set up an account and for the movies we know the genres, directors, and plot keywords; if all fails, this could also just be a one-hot encoding).<br>
-Given the two feature vectors of a user and a movie, we predict the interaction value directly:</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/07_recsys/rec_sys_triplet2.png" alt="image" width="700">
-</div>
-<div class="title"><span class="small">These are two possible neural network architectures for predicting the rating a user might give to a movie. The architecture on the left first processes the user and movie feature vectors individually (in case they require a certain type of network to be understood, e.g., for the movie plot description or poster), and then the representations are concatenated into a single vector, which is then passed to a FFNN to predict the rating (= a regression task). A different approach is shown on the right, where instead the two original feature representations for users and movies are projected into the same vector space, where then the cosine similarity of these two vectors is computed to predict the interaction between them (similar as with the <em>d</em>-dimensional latent variable representations in the collaborative filtering approach).</span></div>
-</div>
-<div class="paragraph">
-<p>&#8594; Given the feature vector of a new user who has not rated any movies yet, we are now able to generate useful predictions.</p>
 </div>
 </dd>
 </dl>
@@ -7243,7 +6595,7 @@ When working with time series data, you should also check for autocorrelation be
 <div class="content">
 <img src="images/07_data_issues/bias_gender_stereotypes_we.png" alt="image" width="620">
 </div>
-<div class="title"><span class="small">You&#8217;ve already seen how neural network language models learn word embeddings through self-supervised learning. As it turns out, a lot of the texts these models are trained on include, e.g., gender stereotypes, which are then also encoded in the word embeddings. So while the analogy question "<em>man</em> is to <em>king</em> as <em>women</em> is to <em>XXX</em>" might be answered correctly with "<em>queen</em>",  "<em>man</em> is to <em>doctor</em> as <em>women</em> is to <em>XXX</em>" is more likely to be answered with "<em>nurse</em>" instead of "<em>doctor</em>", since this role allocation was typical in the past and is therefore also present in many texts used as training data for these models.</span></div>
+<div class="title"><span class="small">In the chapter on deep learning we&#8217;ll discuss how neural network language models learn word embeddings through self-supervised learning. As it turns out, a lot of the texts these models are trained on include, e.g., gender stereotypes, which are then also encoded in the word embeddings. So while the analogy question "<em>man</em> is to <em>king</em> as <em>women</em> is to <em>XXX</em>" might be answered correctly with "<em>queen</em>",  "<em>man</em> is to <em>doctor</em> as <em>women</em> is to <em>XXX</em>" is more likely to be answered with "<em>nurse</em>" instead of "<em>doctor</em>", since this role allocation was typical in the past and is therefore also present in many texts used as training data for these models.</span></div>
 </div>
 </div>
 </div>
@@ -7642,8 +6994,658 @@ Explaining ML with more ML&#8230;&#8203;
 </div>
 </div>
 <div class="sect1">
-<h2 id="_reinforcement_learning">Reinforcement Learning</h2>
+<h2 id="_advanced_topics">Advanced Topics</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Now that we&#8217;ve discussed different unsupervised and supervised learning methods, we explore some other special-purpose methods, which can be used to solve somewhat less straightforward problems:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/01b_intro_ml/ml_goals_other.png" alt="image" width="840">
+</div>
+</div>
+<div class="sect2">
+<h3 id="_information_retrieval_similarity_search">Information Retrieval (Similarity Search)</h3>
+<div class="paragraph">
+<p>The goal of information retrieval is to identify similar items given some query:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/05_supervised_other/inforetr.png" alt="image" width="640">
+</div>
+<div class="title"><span class="small">Just like in the reverse Google image search, we here use as input a query image and get as a result the <em>k</em> images that are most similar to it.</span></div>
+</div>
+<div class="paragraph">
+<p>This can be accomplished by building a nearest neighbors search tree (i.e., just like for the k-nearest neighbors algorithm, only that here we return the neighbors directly instead of using them to predict the label for the new data point).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.neighbors</span> <span class="keyword">import</span> <span class="include">NearestNeighbors</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>But of course, the success of this approach is again highly dependent on being able to compute meaningful similarities between the data points. For text datasets, information retrieval often works quite well by using simple TF-IDF feature vectors together with a cosine similarity, however, for images, for example, out-of-the-box similarity measures that operate directly on the original input features (i.e., pixel values) are only able to identify images with similar colors, not necessarily similar content (e.g., an image showing a black cat would be more similar to an image showing a black dog than a white cat). To get around this problem, we could use neural networks to obtain a more informative feature representation, with which it is then easier to compute meaningful semantic similarities.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_deep_learning">Deep Learning</h3>
+<div class="paragraph">
+<p>We&#8217;ve already covered the general principles behind neural networks in a <a href="#_neural_networks">previous chapter</a>. Now we&#8217;ll have a look at more complex architectures to work with, for example, image or text data, as well as some advanced training techniques and special-purpose Python libraries for implementing custom neural network architectures.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you want to learn more about deep learning, there are many great free resources available online, such as the introductory videos from <a href="https://www.3blue1brown.com/topics/neural-networks" target="\_blank">3blue1brown</a>, which nicely illustrate what neural networks are actually computing and how backpropagation works; the <a href="https://www.coursera.org/specializations/deep-learning" target="\_blank">Coursera Deep Learning Specialization (by Andrew Ng)</a>, which provides a good general introduction with many practical tips and also covers application areas like computer vision and NLP; or the <a href="https://atcold.github.io/pytorch-Deep-Learning/" target="\_blank">Deep Learning with PyTorch course (by Yann LeCun)</a>, which is a bit more advanced and discusses state-of-the-art architectures.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_advanced_nn_architectures">Advanced NN architectures</h4>
+<div class="paragraph">
+<p>Similar to how domain-specific feature engineering can result in vastly improved model performances, it pays off to construct a neural network architecture tailored to the task.</p>
+</div>
+<div class="sect4">
+<h5 id="_recurrent_neural_network_rnn">Recurrent Neural Network (RNN)</h5>
+<div class="paragraph">
+<p>Recurrent neural networks are great for sequential data such as time series data or text (i.e., a sequence of words).</p>
+</div>
+<div class="paragraph">
+<p>In its simplest form, a RNN is like a FFNN, but with additional recurrent connections \(W_h\) in the hidden layer to create a memory of the past:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/05_supervised_nn/rnn2.png" alt="image" width="460">
+</div>
+</div>
+<div class="paragraph">
+<p>It&#8217;s easiest when thinking about the RNN unrolled in time:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/05_supervised_nn/rnn_unrolled2.png" alt="image" width="540">
+</div>
+<div class="title"><span class="small">At the beginning of a new sequence, the hidden state \(\mathbf{x}'_0\) is initialized with zeros. Then for each new sample \(\mathbf{x}_t\) (with \(t \in \{1, ..., T\}\)) in the sequence, the hidden state is updated based on this new input (after multiplying \(\mathbf{x}_t\) with \(W_1\)), as well as the previous hidden state at \(t-1\) (by multiplying  \(\mathbf{x}'_{t-1}\) with \(W_h\)). From this new hidden state \(\mathbf{x}'_t\), the output for this time step can then be predicted (by multiplying \(\mathbf{x}'_t\) with \(W_2\)). While this network only includes a single recurrent layer, a more complex architecture could also contain multiple such layers.</span></div>
+</div>
+<div class="paragraph">
+<p>The original RNN layer uses a very simple update rule for the hidden state, but there also exist more advanced <a href="https://towardsdatascience.com/44e9eb85bf21" target="\_blank">types of RNNs</a>, like the Long Short Term Memory (LSTM) network or Gated Recurrent Units (GRU), which define more complex rules for how to combine the new input with the existing hidden state, i.e., they learn in more detail what to remember and which parts to forget, which can be beneficial when the data consists of longer sequences.</p>
+</div>
+<div class="paragraph">
+<p>The cool thing about RNNs is that they can process input sequences of varying length (where one sequence represents one data point, e.g., a text document), whereas all methods that we&#8217;ve discussed so far always expected the feature vectors that represent one data point to have a fixed dimensionality. For RNNs, while the input at a single time step (i.e., \(\mathbf{x}_t\) with \(t \in \{1, ..., T\}\)) is also a feature vector of a fixed dimensionality, the sequences themselves do not need to be of the same length \(T\) (e.g., text documents can consist of different numbers of words). This comes in especially handy for time series analysis, as we&#8217;ll see in the next chapter.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>Useful in Natural Language Processing (NLP):</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">RNNs can take word order into account, which is ignored in TF-IDF vectors</dt>
+<dd>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/07_nlp/rnn_wordemb.png" alt="image" width="440">
+</div>
+<div class="title"><span class="small">This is an example architecture for a sentence classification task (e.g., sentiment analysis, i.e., deciding whether the text is positive or negative). The individual words in the sentence are represented as so-called word embeddings, which are just <em>d</em>-dimensional vectors that contain some (learned) information about the individual words (e.g., whether the word is more male or female; how these embeddings are created is discussed in the section on self-supervised learning below). The RNN is then fed the sentence word by word and at the end of the sentence, the final hidden state, which contains the accumulated information of the whole sentence, is used to make the prediction. Since the RNN processes the words in the sentence sequentially, the order of the words is taken into account (e.g., whether a &#8220;not&#8221; occurred before an adjective), and since we use word embeddings as inputs, which capture semantic and syntactic information about the words, similarity between individual words (e.g., synonyms) is captured, thereby creating more meaningful representations of text documents compared to TF-IDF vectors (at the expense of greater computational complexity).</span></div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_convolutional_neural_network_cnn">Convolutional Neural Network (CNN)</h5>
+<div class="paragraph">
+<p>Manual feature engineering for computer vision tasks is incredibly difficult. While humans recognize a multitude of objects in images without effort, it is hard to describe <em>why</em> we can identify what we see, e.g., which features allow us to distinguish a cat from a small dog. Deep learning had its first breakthrough success in this field, because neural networks, in particular CNNs, manage to learn meaningful feature representations of visual information through a hierarchy of layers.</p>
+</div>
+<div class="paragraph">
+<p>Convolutional neural networks are very well suited for processing visual information, because they can operate on the 2D images directly and do not need the input to be flattened into a vector. Furthermore, they utilize the fact that images are composed of a lot of local information (e.g., eyes, nose, and mouth are all localized components of a face).</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/05_supervised_nn/cnn.png" alt="image" width="840">
+</div>
+<div class="title"><span class="small">CNNs utilize two important operations, convolutions and pooling layers, to generate meaningful feature representations: A <a href="https://en.m.wikipedia.org/wiki/Convolution" target="\_blank">convolution</a> is computed by taking a small filter patch (e.g., a \(5 \times 5\) matrix) and moving it over the image pixel by pixel and row by row, at each position multiplying the filter with the image (see also <a href="https://youtu.be/Oqm9vsf_hvU?t=275" target="\_blank">this animation</a>). This results in a feature map of the same size as the original image, where a high value at some position indicates that the respective feature in the filter (e.g., an edge with a specific orientation) was detected at this position in the original image. Since this is done for multiple filters, the output after a convolutional layer consists of as many new feature maps as the layer had filters. The filter patches (i.e., multiple small matrices) are the learned weights of the CNN, and after training they can look something like the small tiles shown below the network architecture. The pooling layers then perform a subsampling of the individual feature maps by taking the max (or sometimes mean) value of multiple pixels in a small area. This reduces the dimensionality of the hidden layer representation, thereby improving the computational efficiency. Additionally, the pooling introduces some positional invariance, since it is not important anymore where exactly in some area a detected feature was, e.g., a face can be recognized even if the eyes of one person are further apart than usual or they have a longer nose, etc. Usually, the convolutional and pooling layers are interleaved, however, there is no strict rule saying that a pooling layer always has to follow a convolutional layer. With more layers, more and more complex features can be detected as a composition of the features identified in the lower layers (notice how the filters first detect edges, then individual components of a face, then full faces), i.e., by making the network deeper, we can solve more complex tasks. Finally, after multiple convolution and pooling layers, the feature representation is flattened into a vector and fed to a FFNN (i.e., fully connected layers) to perform the classification.</span></div>
+</div>
+<div class="paragraph">
+<p>Compared to the dense / fully-connected layers in FFNNs, which consist of one huge matrix mapping from one layer to the next, the filter patches used in convolutional layers are very small, i.e., there are less parameters that need to be learned. Furthermore, the fact that the filters are applied at every position in the image has a regularizing effect, since the filters need to be general enough capture relevant information in multiple areas of the images.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+By the way, the edge filters typically learned in the first layer of a CNN nicely match the <a href="https://en.wikipedia.org/wiki/Gabor_filter" target="\_blank">Gabor filters</a> used in early computer vision feature engineering attempts. Combined with the subsequent pooling operation, they compute something similar as the <a href="https://towardsdatascience.com/45afa1046f7f" target="\_blank">simple and complex cells</a> in the human primary visual cortex.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_general_principles">General Principles</h5>
+<div class="paragraph">
+<p>When trying to solve a problem with a NN, always consider that the network needs to understand the inputs, as well as generate the desired outputs:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/05_supervised_nn/nn_architectures4.png" alt="image" width="740">
+</div>
+<div class="title"><span class="small">As we&#8217;ve seen in the CNN used for image classification in the previous section, the representation generated by the CNN is at some point flattened and a FFNN then computes the final prediction for the classification task. Similarly, the final hidden state of a RNN, representing the information contained in a sentences, can be passed to a FFNN to generate a prediction (e.g., for sentiment analysis). However, some problems do not fall into the category of simple supervised learning tasks (i.e., regression or classification), and require a different output. For example, in machine translation, the output should be the sentence translated into the other language, which can be achieved by coupling two RNNs: the first &#8216;understands&#8217; the sentence in the original language and this representation of the meaning of the sentence is then passed to a second RNN, which generates from it the translated sentence word by word. (If we need to translate texts from and to multiple languages, this can be done very efficiently by using just one input and one output network for each language and have them operate on the same meaning representations, i.e., instead of learning multiple pairs of networks for each language combination individually, we only learn for each language one network to understand this language and one network to generate output sentences in this language.) Another example is the task of image captioning (i.e., generating text describing what can be seen on an image, e.g., to improve the online experience for people with visual impairment), where first the image is &#8216;understood&#8217; by a CNN and then this representation of the input image is passed to a RNN to generate the matching text.</span></div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>Below are two examples of neural network architectures that deal with somewhat unusual inputs and outputs and incorporate a lot of domain knowledge, which enables them to achieve state-of-the-art performance on the respective tasks:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Predicting the 3D structure of a protein from its amino acid sequence with AlphaFold</dt>
+<dd>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/05_supervised_nn/01_alphafold_nn.png" alt="image" width="840">
+</div>
+<div class="title"><span class="small">https://deepmind.com/blog/article/alphafold-a-solution-to-a-50-year-old-grand-challenge-in-biology (30.11.2020)</span></div>
+</div>
+</dd>
+<dt class="hdlist1">Predicting properties of molecules with SchNet (which is an example of a <a href="https://www.youtube.com/watch?v=uF53xsT7mjc" target="\_blank">Graph Neural Network (GNN)</a>)</dt>
+<dd>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/05_supervised_nn/schnet.png" alt="image" width="840">
+</div>
+<div class="title"><span class="small">Schütt, Kristof T., et al. &#8220;Quantum-chemical insights from deep tensor neural networks.&#8221; <em>Nature communications</em> 8.1 (2017): 1-8.</span></div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_self_supervised_transfer_learning">Self-Supervised &amp; Transfer Learning</h4>
+<div class="paragraph">
+<p><a href="https://ai.facebook.com/blog/self-supervised-learning-the-dark-matter-of-intelligence/" target="_blank" rel="noopener"><strong>Self-supervised learning</strong></a> is a very powerful technique with which neural networks can learn meaningful feature representations from unlabeled data. Using this technique is cheap since, like in unsupervised learning, it does not require any labels generated by human annotators. Instead, pseudo-labels are generated from the inputs themselves by masking parts of it. For example, a network can be trained by giving it the first five words of a sentence as input and then asking it to predict what the next word should be. This way, the network learns some general statistics and knowledge about the world, similar to how human brains interpolate from the given information (e.g., with the <a href="https://en.wikipedia.org/wiki/Blind_spot_(vision)" target="\_blank">blind spot test</a> you can nicely observe how your brain predicts missing information from the given context). Self-supervised learning is often used to &#8220;pretrain&#8221; a neural network before using it on a supervised learning task (see transfer learning below).</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>NLP Example: <strong>Neural Network Language Models</strong> (e.g., <code>word2vec</code> &#8594; have a look at <a href="https://jalammar.github.io/illustrated-word2vec/" target="\_blank">this blog article</a> for more details) use self-supervised learning to generate word embeddings that capture semantic &amp; syntactic relationships between the words (which is ignored in TF-IDF vectors, where each word dimension has the same distance to all other words):</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/07_nlp/word2vec.png" alt="image" width="640">
+</div>
+<div class="title"><span class="small">The learned word embeddings can be used to solve analogy questions like those posed in an IQ test, e.g., "<em>man</em> is to <em>king</em> as <em>women</em> is to <em>XXX</em>", where the correct answer is <em>queen</em>. This can be solved with vector arithmetic, i.e., by taking the word embedding for <em>king</em>, subtracting from it the embedding for <em>man</em>, adding the embedding for <em>women</em> and then checking which word embedding is closest to this new vector (which should be the embedding for <em>queen</em>).</span></div>
+</div>
+<div class="paragraph">
+<p>&#8658; These word embedding vectors can then be used as input to a RNN.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Transfer learning</strong> is the idea of using what a network has learned before on a different task (e.g., a self-supervised learning task) as a starting point when tackling a new task. In practice, this means the weights of our network are initialized with (some of) the weights of a network trained on another task, before training our network on the new task. We also say that the network was pretrained on a source task before it is fine-tuned on the target task.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/05_supervised_nn/transfer_learning_nn.png" alt="image" width="760">
+</div>
+<div class="title"><span class="small">From an old project, we have a network that was trained on a large dataset to recognize dogs in images (= source task). Now we&#8217;re working on a new project, where we want to recognize cats in images (= target task). Since the two tasks are very similar (cats and dogs share a lot of the same features) and we only have a small dataset available for the new task, transfer learning could improve the prediction performance on the target task.</span></div>
+</div>
+<div class="paragraph">
+<p>Typically, not all the weights of a target network are initialized with weights from a source network, but only those from the earlier layers, where the source network has learned some general principles that are not task specific (e.g., observe how the first layer of the CNN in the previous section had learned to detect edges, which seems like a relevant skill for pretty much all computer vision tasks). Often, using a pretrained network will give us a more robust solution and boost the prediction performance, especially if we only have a very small dataset for the target task available to train the network. However, since when training a neural network we&#8217;re trying to find weights that minimize the loss function by iteratively improving the weights starting with some initialization, if this initialization is unfavorable because it is very far away from a good minimum (i.e., further away than a random initialization), e.g., because we&#8217;ve initialized the weights with those from a source network trained on a very different task, then this can hurt the performance, since the network first has to unlearn a lot of things from this unrelated task before it can learn the actual task. Therefore, transfer learning should only be used if the source and target tasks are &#8220;related enough&#8221;. Pretraining a network on a self-supervised learning task (i.e., a task that is just about understanding the world in general, not solving a different kind of specific task) usually works quite well though.</p>
+</div>
+<div class="paragraph">
+<p>When using transfer learning, one question is whether to &#8220;freeze&#8221; the weights that were copied from the source network, i.e., to use the pretrained part of the network as a fixed feature extractor and only train the later layers that generate the final prediction. This is basically the same as first transforming the whole dataset once by pushing it through the first layers of a network trained on a similar task and then using these new feature representations to train a different model. While we often get good results when training a traditional model (e.g., a SVM) on these new feature representations, it is generally not recommended for neural networks. In some cases, we might want to keep the pretrained weights fixed for the first few epochs, but in most cases the performance will be best if all weights are eventually fine-tuned on the target task.</p>
+</div>
+<div class="paragraph">
+<p>In cases where transfer learning is not beneficial, because the source and target tasks are not similar enough, it can nevertheless be helpful to copy the network architecture in general (i.e., number and shape of the hidden layers). Using an appropriate architecture is often more crucial than initializing the weights themselves.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_neural_networks_in_python">Neural Networks in Python</h4>
+<div class="paragraph">
+<p>There are several libraries available for working efficiently with neural networks (especially since many of the big firms doing machine learning decided to develop their own library): <code>theano</code> was the first major deep learning Python framework, developed by the MILA institute at the university of Montreal (founded by Yoshua Bengio), then came <code>TensorFlow</code>, developed by the Google Brain team, <code>MXNet</code> (pushed by Amazon), and finally <code>PyTorch</code>, developed by the Facebook/Meta AI Research team (lead by Yann LeCun). PyTorch is currently preferred by most ML researchers, while TensorFlow is still found in many (older) applications used in production.</p>
+</div>
+<div class="paragraph">
+<p>Below you can find some example code for how to construct a neural network using PyTorch or Keras (which is a wrapper for TensorFlow to simplify model creation and training). Further details can be found in the example notebooks on GitHub, which also use the (Fashion) MNIST datasets described below to benchmark different architectures.</p>
+</div>
+<div class="paragraph">
+<p>[Recommended:] <a href="https://pytorch.org/" target="\_blank"><code>torch</code> library</a>
+(&#8594; to simplify model training, combine with <a href="https://skorch.readthedocs.io/en/stable/" target="\_blank"><code>skorch</code> library</a>!)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">import</span> <span class="include">torch</span>
+<span class="keyword">import</span> <span class="include">torch.nn.functional</span> <span class="keyword">as</span> F
+
+<span class="keyword">class</span> <span class="class">MyNeuralNet</span>(torch.nn.Module):
+
+    <span class="keyword">def</span> <span class="function">__init__</span>(<span class="predefined-constant">self</span>, n_in, n_hl1, n_hl2, n_out=<span class="integer">10</span>):
+        <span class="comment"># neural networks are always a subclass of torch modules, which makes it possible</span>
+        <span class="comment"># to use backpropagation and gradient descent to learn the weights</span>
+        <span class="comment"># the call to the super() constructor is vital for this to work!</span>
+        <span class="predefined">super</span>(MyNeuralNet, <span class="predefined-constant">self</span>).__init__()
+        <span class="comment"># initialize the layers of the network with random weights</span>
+        <span class="comment"># a Linear layer is the basic layer in a FFNN with a weight matrix,</span>
+        <span class="comment"># in this case with shape (n_in, n_hl1), and a bias vector</span>
+        <span class="predefined-constant">self</span>.l1 = torch.nn.Linear(n_in, n_hl1)  <span class="comment"># maps from dimensionality n_in to n_hl1</span>
+        <span class="comment"># we need to make sure that the shape of the weights matches up</span>
+        <span class="comment"># with that from the previous layer</span>
+        <span class="predefined-constant">self</span>.l2 = torch.nn.Linear(n_hl1, n_hl2)
+        <span class="predefined-constant">self</span>.lout = torch.nn.Linear(n_hl2, n_out)
+
+    <span class="keyword">def</span> <span class="function">forward</span>(<span class="predefined-constant">self</span>, x):
+        <span class="comment"># this defines what the network is actually doing, i.e.,</span>
+        <span class="comment"># how the layers are connected to each other</span>
+        <span class="comment"># they are now applied in order to transform the input into the hidden layer representations</span>
+        h = F.relu(<span class="predefined-constant">self</span>.l1(x))       <span class="comment"># 784 -&gt; 512 [relu]</span>
+        h = F.relu(<span class="predefined-constant">self</span>.l2(h))       <span class="comment"># 512 -&gt; 256 [relu]</span>
+        <span class="comment"># and finally to predict the probabilities for the different classes</span>
+        y = F.softmax(<span class="predefined-constant">self</span>.lout(h))  <span class="comment"># 256 -&gt; 10 [softmax]</span>
+        <span class="keyword">return</span> y
+
+<span class="comment"># this initializes a new network</span>
+my_nn = MyNeuralNet(<span class="integer">784</span>, <span class="integer">512</span>, <span class="integer">256</span>)
+<span class="comment"># this calls the forward function on a batch of training samples</span>
+y_pred = my_nn(X_batch)
+<span class="comment"># (btw: using an object like a function also works for other classes if you implement a __call__ method)</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><a href="https://keras.io/" target="\_blank"><code>keras</code> framework</a> (which simplifies the construction and training of <a href="https://www.tensorflow.org/" target="\_blank">TensorFlow</a> networks)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">tensorflow</span> <span class="keyword">import</span> <span class="include">keras</span>
+
+<span class="comment"># construct a feed forward network:</span>
+<span class="comment"># 784 -&gt; 512 [relu] -&gt; 256 [relu] -&gt; 10 [softmax]</span>
+model = keras.Sequential()
+<span class="comment"># we need to tell the first layer the shape of our input features</span>
+model.add(keras.layers.Dense(<span class="integer">512</span>, activation=<span class="string"><span class="delimiter">'</span><span class="content">relu</span><span class="delimiter">'</span></span>, input_shape=(<span class="integer">784</span>,)))
+<span class="comment"># the following layers know their input shape from the previous layer</span>
+model.add(keras.layers.Dense(<span class="integer">256</span>, activation=<span class="string"><span class="delimiter">'</span><span class="content">relu</span><span class="delimiter">'</span></span>))
+model.add(keras.layers.Dense(<span class="integer">10</span>, activation=<span class="string"><span class="delimiter">'</span><span class="content">softmax</span><span class="delimiter">'</span></span>))
+
+<span class="comment"># compile &amp; train the model (for a classification task)</span>
+model.compile(loss=keras.losses.categorical_crossentropy,
+              optimizer=keras.optimizers.Adam(), metrics=[<span class="string"><span class="delimiter">'</span><span class="content">accuracy</span><span class="delimiter">'</span></span>])
+model.fit(X, y)
+
+<span class="comment"># predict() gives probabilities for all classes; with argmax we get the actual labels</span>
+y_pred = np.argmax(model.predict(X_test), axis=<span class="integer">1</span>)
+<span class="comment"># evaluate the model (returns loss and whatever was specified for metrics in .compile())</span>
+print(<span class="string"><span class="delimiter">&quot;</span><span class="content">The model is this good:</span><span class="delimiter">&quot;</span></span>, model.evaluate(X_test, y_test)[<span class="integer">1</span>])
+<span class="comment"># but of course we can also use the evaluation functions from sklearn</span>
+print(<span class="string"><span class="delimiter">&quot;</span><span class="content">Equivalently:</span><span class="delimiter">&quot;</span></span>, accuracy_score(y_test, y_pred))</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Standard ML Benchmarking Datasets</dt>
+<dd>
+<p>The MNIST handwritten digits dataset is very old and super easy even for traditional models.<br>
+&#8594; \(28 \times 28\) pixel gray-scale images with 10 different classes:</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/05_supervised_nn/MnistExamples.png" alt="image" width="640">
+</div>
+</div>
+<div class="paragraph">
+<p>The new MNIST dataset: Fashion<br>
+&#8658; Same format (i.e., also 10 classes and images of the same shape), but more useful for benchmarks since the task is harder.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/05_supervised_nn/mnist_fashion.jpeg" alt="image" width="640">
+</div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_time_series_forecasting">Time Series Forecasting</h3>
+<div class="paragraph">
+<p>In the chapter on data, where we discussed what can be considered <a href="#_what_constitutes_one_data_point">&#8216;one data point&#8217;</a>, you&#8217;ve already encountered some tasks that involve time series data. Now we&#8217;re looking into possibly the most difficult question that one can try to solve with time series data, namely predicting the future.</p>
+</div>
+<div class="paragraph">
+<p>In time series forecasting, the goal is to predict the future time course of a variable (i.e., its values for \(t' &gt; t\)) from its past values (and possibly some additional information).
+This is, for example, used in <strong>Predictive Maintenance</strong>, where the remaining life span or degradation of important process components is forecast based on their past usage and possibly some future process conditions:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/07_timeseries/timeseries4.png" alt="image" width="660">
+</div>
+<div class="title"><span class="small">One predictive maintenance problem coming up over and over again in the chemical production industry is trying to predict the remaining activity or lifetime of a catalyst (a critical component in a chemical plant that facilitates the reaction; visualized as the purple line) under different process conditions (which are planned for the future; blue and green lines). For example, the catalyst might decay faster, if the process is run at a higher temperature. If the weekend is coming up, a predictive maintenance model could be used to estimate the temperature at which the process should be run such that the catalyst lasts until the next Monday, when the crew to replace it is back.</span></div>
+</div>
+<div class="paragraph">
+<p><strong>Predictive Maintenance Example Paper:</strong><br>
+Bogojeski, M., et al. &#8220;Forecasting industrial aging processes with machine learning methods.&#8221; <em>Computers and Chemical Engineering</em> 144 (2021): 107123. <a href="https://arxiv.org/abs/2002.01768" target="\_blank">(arXiv:2002.01768)</a></p>
+</div>
+<div class="sect3">
+<h4 id="_input_and_target_variables">Input and Target Variables</h4>
+<div class="paragraph">
+<p>Basically, we can think of time series forecasting as a supervised learning problem with more complicated inputs &amp; outputs:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/07_timeseries/tsf_inout8.png" alt="image" width="800">
+</div>
+<div class="title"><span class="small">Depending on the task (i.e., what we want to forecast), we either have a <strong>univariate</strong> forecasting problem (if we only need to predict the development of a single variable) or a <strong>multivariate</strong> problem (i.e., with multiple target variables). Additionally, it is important to note for <strong>how many time steps into the future</strong> the variables need to be forecast: In the easiest case, only the next time step needs to be predicted, but it might also be necessary to predict a fixed window of \(k\) time steps into the future, and sometimes the prediction horizons might even be of varying lengths. In any case, we should always try to make use of as much (relevant) information as possible when making forecasts. In principle, <strong>all values from the past can be used as input features</strong>, especially those from the target variable(s) (&#8594; see also auto-regressive models, e.g., <a href="https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average" target="\_blank">ARIMA</a>). What is often overlooked, however, is all the additional <strong>information about the future</strong> that can be used as inputs as well, provided that these values are independent of the targets, i.e., <strong>exogenous variables</strong> outside of the system.</span></div>
+</div>
+<div class="paragraph">
+<p>For example, let&#8217;s say we own a small cafe and want to predict how much ice cream we are likely to sell tomorrow. Certainly, the amount of ice cream we&#8217;ve sold yesterday or on the same day last week will be useful input features, but additionally, for example, the weather forecast for tomorrow or whether or not there is a holiday or some special event happening would be useful predictive information that should not be ignored and that can be used since these are independent variables.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><span class="underline">Know your data: Beware of hidden feedback loops!</span></p>
+</div>
+<div class="paragraph">
+<p>In this predictive maintenance example, the pressure in some pipes indicates how much residual material has built up on the walls of the pipes (&#8594; <a href="https://en.wikipedia.org/wiki/Fouling" target="\_blank">fouling</a>) and the task is to predict when these pipes need to be cleaned again, i.e., when the next maintenance event is due.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">What are input features, what are targets?</dt>
+<dd>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/07_timeseries/input_target_leak4.png" alt="image" width="580">
+</div>
+</div>
+<div class="paragraph">
+<p>While in general many future process conditions (e.g., the planned amount of product that should be produced in the next weeks), can be used as input variables at \(t' &gt; t\), this does not hold for the process condition &#8216;temperature&#8217; in this example, since it is not a true exogenous variable, even though it could theoretically be set independently. In the historical data, the value of the temperature at \(t+1\) is dependent on the target variable (pressure) at \(t\), therefore, if we want to forecast the target for more than one time step, only the past values of temperature can be used as input features.</p>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>We need a feature vector for every time point we want to make a prediction about. Think about what it is we&#8217;re trying to predict and what values could influence this target variable, i.e., what inputs are needed such that we have all the required information to make the prediction. Especially when using stateless models (see below), the feature vectors need to capture all the relevant information about the past.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Possible Input Features</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>Known information about future (e.g., weather forecast, planned process conditions).</p>
+</li>
+<li>
+<p>Auto-regressive: Lagged (target) variable (i.e. values at \(t' \leq t\)).<br>
+❗️ Don&#8217;t use the <em>predicted</em> target value for this (in a multi-step forecast) – errors accumulate!</p>
+</li>
+<li>
+<p>Account for cyclical (e.g., seasonal) trends &#8594; check auto-correlation or spectral analysis.<br>
+<span class="small">For example, a cafe might sell more ice cream during the summer or it could be located next to a school and therefore sell more on days the kids come by in their lunch break:</span><br>
+<span class="image"><img src="images/07_timeseries/ts_months.png" alt="image" width="160"></span>
+<span class="image"><img src="images/07_timeseries/ts_week.png" alt="image" width="160"></span><br>
+&#8594; Include categorical variables <code>month</code> and <code>day_of_week</code>.</p>
+</li>
+<li>
+<p>For predictive maintenance: hours / integral of input variable since last maintenance event (maybe take log).<br>
+<span class="image"><img src="images/07_timeseries/ts_integralfeat.png" alt="image" width="470"></span></p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>&#8594; For more ideas: <a href="https://tsfresh.readthedocs.io/en/latest/" target="\_blank">tsfresh library</a>, <a href="https://machinelearningmastery.com/category/deep-learning-time-series/" target="\_blank">time series analysis blog posts</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_stateless_vs_stateful_models">Stateless vs. Stateful Models</h4>
+<div class="paragraph">
+<p>When dealing with time series data, one should always think carefully about how complex the dependencies between the past and future process values in the respective forecasting task are.<br>
+For example, when trying to predict <strong>spontaneous events</strong>, like a sudden increase in the emissions produced in the process, then the relevant time window into the past, when the process conditions might have had an influence on this target variable, would be very short, i.e., only the process values from time \(t\) need to be included in the input feature vector to predict the anomalous event at time \(t+1\).<br>
+For other prediction tasks, what happened over a <strong>longer (but uniquely determined) interval</strong> might be relevant, but can be <strong>summarized with simple features</strong>. For example, in a production process, one might want to predict the quality of the final product that is produced within a fixed time interval. In this case, the process conditions during the time interval where the respective product is produced will be important for the prediction, but the process conditions during the time where the previous product was produced are most likely not relevant. Additionally, it would be enough to compute only some summary statistics (like mean/max/min values of the process conditions during the time interval of interest) and use these as input features to capture all the relevant information.<br>
+The third case are prediction tasks for which it is necessary to consider <strong>very long time windows</strong>, often of varying lengths, with some <strong>complex long-ranging dependencies</strong> between the process conditions at different time points. For example, in some predictive maintenance tasks, the decay of the critical process component might not happen in some linear fashion (unlike, for example, a light bulb, which might have some fixed life expectancy and one only needs to count the number of hours it was turned on up to now to estimate when it needs to be replaced. Instead, there exist more complex dependencies, for example, the component might decay faster if it is already in a poor state. Therefore, if some unfortunate combination of process conditions lead to a strain on the component early on, it might have to be replaced a lot sooner then under otherwise identical conditions without this initial mishap, i.e., <strong>the order of events matters</strong> a lot, too.</p>
+</div>
+<div class="paragraph">
+<p>Depending on how complex the dependencies are between the process values over time, it will be more or less complicated to construct feature vectors that capture all the relevant information to make accurate predictions. In general, one should always try to come up with <strong>features that contain all the relevant information about the past</strong>, i.e., that fulfill the <a href="https://en.wikipedia.org/wiki/Markov_property" target="\_blank">Markov assumption</a> that given this information the future is otherwise independent of the history of the process: For example, if we knew the number of hours a light bulb was turned on up to now, we would have a complete picture about the state the light bulb is currently in; everything else that happened in the past, like how many people were in the room while the light was on, is irrelevant for the state of the light bulb. Another example is the current position of pieces on a chess board: To plan our next move, we don&#8217;t need to know the exact order in which the pieces were moved before, but only the position of all the pieces right now.</p>
+</div>
+<div class="paragraph">
+<p>If we are able to derive such input features, we can use a <strong>stateless model</strong> for the prediction (e.g., any of the supervised learning models we&#8217;ve discussed so far except RNNs), i.e., treat all data points as independent regardless of where in time they occurred. If it is not possible to construct such an informative feature vector that captures all the relevant information about the past, e.g., because of complex long-ranging dependencies that can not be adequately captured by simple summary statistics, then we have to use a <strong>stateful model</strong> (e.g., a form of Recurrent Neural Network (RNN)), which internally constructs a full memory of the history of the process, i.e., it keeps track of the current state of the process.</p>
+</div>
+<div class="paragraph">
+<p>Whether to use a stateless or stateful model is also an important consideration when dealing with other kinds of sequential data such as text. Analogous to the three scenarios described above, we can also find similar cases for natural language processing (NLP) problems that either benefit from the use of stateful models or where a simple stateless model is enough:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Spontaneous event:</strong> Trigger word detection for smart speakers: A simple classification task for which only the last 1-2 spoken words, i.e., the audio signal from a time window of a few seconds, are relevant.</p>
+</li>
+<li>
+<p><strong>Fixed interval &amp; summary features:</strong> Text classification, e.g., determining the category of a newspaper article (e.g., &#8216;sports&#8217; or &#8216;politics&#8217;): While here a longer span of text needs to be considered to make the prediction, a simple TF-IDF vector is usually sufficient to represent the contents of the whole document, since such categories can easily be identified by simply checking whether the terms &#8220;soccer&#8221; or &#8220;politician&#8221; occur more often in the current article.</p>
+</li>
+<li>
+<p><strong>Complex long-ranging dependencies:</strong> For some tasks like sentiment analysis or machine translation, it doesn&#8217;t just matter which words occurred in a text, but also in which order and what their larger surrounding context was.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>&#8594; While for 1. and 2. a stateless model will do just fine, for 3. the best performance is achieved with a stateful model that can keep track of the more complex dependencies.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">TL;DR: Which type of model should we use?</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>How much does the future depend on the past?<br>
+a) Values at \(t\) or simple summary statistics are sufficient as input features to predict \(t' &gt; t\).<br>
+b) There exist complex long-ranging dependencies between past and future values and the order of events matters.</p>
+</li>
+<li>
+<p>How many time steps into the future do we need to predict?<br>
+a) A fixed, small window of \(1\) or \(k\) steps.<br>
+b) Arbitrarily long prediction horizons.</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>If <strong>only a)</strong>:<br>
+&#8594; <em>Stateless</em> model, e.g., linear model, FFNN, random forest, &#8230;&#8203;<br>
+If <strong>any b)</strong>:<br>
+&#8594; <em>Stateful</em> model, e.g., recurrent neural network (RNN)</p>
+</div>
+</div>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Output prediction with <em>stateless</em> models (e.g., linear regression, FFNN)</dt>
+<dd>
+<p>Only predict for a fixed time window of 1 or <em>k</em> steps:<br></p>
+</dd>
+</dl>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>Univariate, single-step prediction:</p>
+<div class="stemblock">
+<div class="content">
+\[[\underbrace{\quad y_1 \quad}_{t' \,\leq\, t} | \underbrace{\, x_1 \, | \,  x_2 \, }_{t+1} ] \; \to \; [\underbrace{y_1}_{t+1}]\]
+</div>
+</div>
+</li>
+<li>
+<p>Multivariate, single-step prediction:</p>
+<div class="stemblock">
+<div class="content">
+\[[\underbrace{\quad y_1  \quad | \quad y_2 \quad}_{t' \,\leq\, t} | \underbrace{\, x_1 \, | \,  x_2 \, }_{t+1} ] \; \to \; [\underbrace{\, y_1  \, | \, y_2 \, }_{t+1}]\]
+</div>
+</div>
+</li>
+<li>
+<p>Multivariate, multi-step prediction:</p>
+<div class="stemblock">
+<div class="content">
+\[[\underbrace{\quad y_1  \quad | \quad y_2 \quad}_{t' \,\leq\, t} | \underbrace{\quad\quad x_1 \quad\quad | \quad\quad  x_2 \quad\quad }_{t+1\, ...\, t+k} ] \; \to \; [\underbrace{\quad\quad y_1 \quad\quad | \quad\quad  y_2 \quad\quad }_{t+1\, ...\, t+k}]\]
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Output prediction with <em>stateful</em> models (e.g., RNN, LSTM, GRU, Echo State Network)</dt>
+<dd>
+<p>The model builds up a memory of the past by mirroring the actual process, i.e., even if we don&#8217;t need the prediction at some time step \(t-5\), we still need to feed the model the inputs from this time step so that it can build up the appropriate hidden state.</p>
+<div class="paragraph">
+<p>Multivariate, multi-step prediction:</p>
+</div>
+</dd>
+</dl>
+</div>
+<div class="stemblock">
+<div class="content">
+\[\begin{aligned}
+...\\
+t-1:\quad [\, x_1 \, | \,  x_2 \,]\; &amp;\to \; [\, y_1  \, | \, y_2 \,]\\
+\text{memory state buildup} \quad\quad\quad\quad t:\quad [\, x_1 \, | \,  x_2 \,]\; &amp;\to \; [\, y_1  \, | \, y_2 \,]\\
+---------------------&amp;------\\
+\text{prediction} \quad\quad\quad\quad\quad t+1:\quad [\, x_1 \, | \,  x_2 \,]\; &amp;\to \; [\, y_1  \, | \, y_2 \,]\\
+t+2:\quad [\, x_1 \, | \,  x_2 \,]\; &amp;\to \; [\, y_1  \, | \, y_2 \,]\\
+...\\
+t+k:\quad [\, x_1 \, | \,  x_2 \,]\; &amp;\to \; [\, y_1  \, | \, y_2 \,]
+\end{aligned}\]
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+When working with time series data, the train, validation, and test data splits should be in chronological order, i.e., the model is trained on the oldest time points and evaluated on more recent samples to get a realistic performance estimate, especially in cases where the data changes over time, e.g., due to smaller changes in the underlying process.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_recommender_systems_pairwise_data">Recommender Systems (Pairwise Data)</h3>
+<div class="paragraph">
+<p>Recommender systems can be found on many websites to promote products, content, or ads that a specific user might be interested in (e.g., on Amazon, Netflix, Facebook, YouTube, etc.).</p>
+</div>
+<div class="paragraph">
+<p>What is special about them is that here we&#8217;re not really dealing with single data points, but instead with pairwise data, i.e., we have samples from two groups (e.g., users and movies), where each combination of samples (e.g., each (user, movie)-tuple) is assigned a label (e.g., the rating the user gave to the movie).</p>
+</div>
+<div class="paragraph">
+<p>Typically, the training set contains only very few labels (e.g., since there are many users and many movies, but every user has only rated a handful of movies) and the task is to predict all the missing labels, based on which then, for example, a user would be recommended the movie with the highest predicted rating.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><span class="underline">Recommender Systems Overview:</span></p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Pairwise data</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>(user, movie) &#8594; rating (1 - 5 stars)</p>
+</li>
+<li>
+<p>(drug, protein) &#8594; bind (yes / no)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p><strong>Idea:</strong> Similar users watch similar movies.<br>
+<strong>Given:</strong> Very sparse matrix with known interactions:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/07_recsys/rec_sys_pairwise.png" alt="image" width="200">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Task:</strong> Fill in the missing values.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>There are lots of different approaches for how to accomplish this, and we&#8217;ll only look at two here, the traditional method of collaborative filtering, and a more modern approach relying on neural networks that falls under the category of triplet learning.</p>
+</div>
+<div class="paragraph">
+<p>&#8594; One possible Python library: <a href="http://surpriselib.com/" target="\_blank"><code>surprise</code></a></p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Collaborative Filtering</dt>
+<dd>
+<p>Using a <a href="https://en.wikipedia.org/wiki/Singular_value_decomposition" target="\_blank">singular value decomposition</a> (SVD; basically the big sister of the eigendecomposition, e.g., from <code>scipy.sparse.linalg.svds</code>), the matrix with the known interactions can be decomposed into two smaller matrices of shapes (number of movies \(\times\, d\)) and (\(d \,\times\) number of users) and by multiplying these matrices together, the missing values from the original matrix are approximated:</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/07_recsys/rec_sys_svd3.png" alt="image" width="600">
+</div>
+<div class="title"><span class="small">The two matrices we obtain from the SVD contain <em>d</em>-dimensional latent variable representations of movies and users respectively, where <em>d</em> denotes the number of eigenvectors we decided to keep (corresponding to the <em>d</em> largest eigenvalues of the original matrix). You can think of these as feature vectors, where, for example, one of the <em>d</em> dimensions in the vector representing a movie might correspond to how much this movie is considered a horror movie, while the same dimension in a user vector indicates how much this user likes horror movies. If both entries for some dimension in the vectors point in the same direction (e.g., the movie is a horror movie and the user likes horror movies), then the product of the two entries will contribute positively to the overall scalar product of the vectors and therefore the approximated rating. However, please note that just like with the new feature dimensions we got from PCA, it is very difficult to determine exactly what is actually encoded in each dimension.</span></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>One big problem with this approach is that we always need some initial ratings for each user and movie, otherwise we can&#8217;t generate any useful personalized recommendations. This is also referred to as the &#8220;cold start problem&#8221;, which can be addressed with triplet learning.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Triplet Learning / Content-based Filtering</dt>
+<dd>
+<p>In triplet learning, we don&#8217;t directly work with the full matrix of known interactions, but instead the training dataset consists of triplets for the existing labels (e.g., (user <em>i</em>, movie <em>j</em>, 4 stars), which can also be a more memory-friendly representation). Additionally, we assume that we have feature vectors available for the users and movies (e.g., the users might have filled out a short survey when they set up an account and for the movies we know the genres, directors, and plot keywords; if all fails, this could also just be a one-hot encoding).<br>
+Given the two feature vectors of a user and a movie, we predict the interaction value directly:</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/07_recsys/rec_sys_triplet2.png" alt="image" width="700">
+</div>
+<div class="title"><span class="small">These are two possible neural network architectures for predicting the rating a user might give to a movie. The architecture on the left first processes the user and movie feature vectors individually (in case they require a certain type of network to be understood, e.g., for the movie plot description or poster), and then the representations are concatenated into a single vector, which is then passed to a FFNN to predict the rating (= a regression task). A different approach is shown on the right, where instead the two original feature representations for users and movies are projected into the same vector space, where then the cosine similarity of these two vectors is computed to predict the interaction between them (similar as with the <em>d</em>-dimensional latent variable representations in the collaborative filtering approach).</span></div>
+</div>
+<div class="paragraph">
+<p>&#8594; Given the feature vector of a new user who has not rated any movies yet, we are now able to generate useful predictions.</p>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_reinforcement_learning">Reinforcement Learning</h3>
 <div class="paragraph">
 <p>Finally, we come to the last main category of ML algorithms besides unsupervised and supervised learning: reinforcement learning.</p>
 </div>
@@ -7895,6 +7897,7 @@ By using a more complex network together with meaningful feature representations
 <p><a href="https://youtu.be/wRCAl9m3ce8?t=1493" target="\_blank">Playing video games</a> with Layer-wise Relevance Propagation (LRP) to show the evolution of strategy</p>
 </li>
 </ul>
+</div>
 </div>
 </div>
 </div>

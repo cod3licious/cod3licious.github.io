@@ -927,8 +927,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.4,</span>
-<span id="revdate">2022-08-13</span>
+<span id="revnumber">version 1.6,</span>
+<span id="revdate">2022-08-28</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -938,10 +938,9 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <li><a href="#_ml_ist_überall">ML ist überall!</a></li>
 <li><a href="#_daten_sind_das_neue_öl">Daten sind das neue Öl!?</a></li>
 <li><a href="#_was_ist_ml">Was ist ML?</a></li>
-<li><a href="#_wie_lernen_maschinen">Wie &#8220;lernen&#8221; Maschinen?</a></li>
 <li><a href="#_ml_geschichte_warum_jetzt">ML Geschichte: Warum jetzt?</a></li>
-<li><a href="#_wann_sollte_man_ml_verwenden">Wann sollte man ML verwenden?</a></li>
-<li><a href="#_probleme_mit_ml_lösen_workflow">Probleme mit ML lösen: Workflow</a></li>
+<li><a href="#_wie_lernen_maschinen">Wie &#8220;lernen&#8221; Maschinen?</a></li>
+<li><a href="#_mit_ml_probleme_lösen">Mit ML Probleme lösen</a></li>
 </ul>
 </li>
 <li><a href="#_daten_preprocessing">Daten &amp; Preprocessing</a>
@@ -949,7 +948,6 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <li><a href="#_garbage_in_garbage_out">Garbage in, Garbage out!</a></li>
 </ul>
 </li>
-<li><a href="#_ml_lösungen_überblick">ML Lösungen: Überblick</a></li>
 <li><a href="#_supervised_learning">Supervised Learning</a>
 <ul class="sectlevel2">
 <li><a href="#_deep_learning_neuronale_netze">Deep Learning (Neuronale Netze)</a></li>
@@ -1267,8 +1265,28 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="sect2">
 <h3 id="_daten_sind_das_neue_öl">Daten sind das neue Öl!?</h3>
 <div class="paragraph">
-<p>Lass uns von vorne anfangen. Alles beginnt mit Daten.
-Wahrscheinlich hast du diese Behauptung schon einmal gehört: &#8220;Daten sind das neue Öl!&#8221;. Dies legt nahe, dass Daten wertvoll sind. Aber sind sie das?<br>
+<p>Lass uns von vorne anfangen. Alles beginnt mit Daten.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Strukturierte vs. Unstrukturierte Daten</dt>
+<dd>
+<p>Daten können in verschiedenen Formaten vorliegen und während einige Datentypen evtl. zusätzliche Verarbeitungsschritte erfordern, können ML-Algorithmen im Prinzip mit jeder Art von Daten arbeiten.</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/02_data/data_types2.png" alt="image" width="640">
+</div>
+<div class="title"><span class="small">Die wichtigste Unterscheidung bei der Charakterisierung von Daten liegt zwischen <em>strukturierten</em> Daten, das ist jeder Datensatz, der einzelne Messgrößen/Variablen enthält, die eindeutige Größen darstellen, und <em>unstrukturierten</em> Daten, die nicht in sinnvolle Variablen unterteilt werden können. Z.B. in Bildern &#8220;erster Pixel von links&#8221; oder in Texten &#8220;10. Wort im 2. Absatz&#8221; würden wir nicht Variablen nennen, im Gegensatz zu &#8220;Fläche in Quadratmetern&#8221; oder &#8220;Anzahl Schlafzimmern&#8221;, womit man sinnvoll eine Wohnung beschreiben könnte. Strukturierte Daten sind oft <em>heterogen</em>, da die verschiedenen Variablen in einem Datensatz typischerweise für sehr unterschiedliche Dinge stehen. Wenn man beispielsweise mit Sensordaten arbeitet enthält ein Datensatz nicht nur Temperaturmessungen, sondern zusätzlich z.B. Druck und Durchflusswerte, die unterschiedliche Einheiten haben und in sehr unterschiedlichen Skalen gemessen werden können. Unstrukturierte Daten hingegen sind <em>homogen</em>, z.B. gibt es keinen qualitativen Unterschied zwischen dem 10. und dem 100. Pixel in einem Bild.</span></div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Wahrscheinlich hast du diese Behauptung schon einmal gehört: &#8220;Daten sind das neue Öl!&#8221;. Dies legt nahe, dass Daten wertvoll sind. Aber sind sie das?<br>
 Der Grund, warum Öl als wertvoll angesehen wird, liegt darin, dass wir wichtige Anwendungsfälle dafür haben: den Antrieb unserer Autos, die Beheizung unserer Häuser und die Herstellung von Kunststoffen oder Düngemitteln.
 Genauso verhält es sich auch mit Daten: sie sind nur so wertvoll wie das was wir aus ihnen machen. Wofür können wir also Daten verwenden?</p>
 </div>
@@ -1316,37 +1334,6 @@ Die Durchführung einer solchen explorativen Datenanalyse ist auch zu Beginn ein
 </li>
 </ol>
 </div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<p>Analog zu den Werkzeugen, mit denen man etwas in einem traditionellen Produktionsprozess herstellt, kann man sich <strong>ML-Algorithmen als Werkzeuge vorstellen, um Wert aus Daten zu generieren</strong>:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/01b_intro_ml/ml_carpentry_analogy2.png" alt="image" width="840">
-</div>
-</div>
-<div class="paragraph">
-<p>Um ML erfolgreich anzuwenden, sollte man sich einige wichtige Fragen stellen:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong><em>Was könnte wertvoll sein?</em></strong> Dies kann beispielsweise ein neues Feature für ein existierendes Produkt sein, z.B. Face ID als neue Möglichkeit um ein Smartphone zu entsperren.</p>
-</li>
-<li>
-<p><strong><em>Welche Daten werden benötigt?</em></strong> Einen Holzstuhl kann man nicht aus Stoff und Metall oder ein paar im Wald gefundenen Zweigen herstellen. Genauso benötigt man je nachdem, was man mit ML erreichen möchte, auch die richtigen Daten in ausreichender Qualität &amp; Quantität um die Algorithmen überhaupt anwenden zu können. In vielen Anwendungsfällen ist dieser Teil besonders schwierig, da man die benötigten Daten oft nicht einfach kaufen kann, wie Holz im Baumarkt, sondern diese selbst sammeln&#8201;&#8212;&#8201;also quasi einen eigenen Wald anpflanzen muss, was einige Zeit dauern kann.</p>
-</li>
-<li>
-<p><strong><em>Welcher ML-Algorithmus ist das richtige Werkzeug für diese Aufgabe?</em></strong> (Mehr zu den verschiedenen Arten von ML-Algorithmen in den nächsten Abschnitten.)</p>
-</li>
-<li>
-<p>Verfüge ich bzw. meine Mitarbeiter über die <strong><em>notwendigen Fähigkeiten und genügend Rechenleistung</em></strong>, um das Vorhaben erfolgreich umzusetzen?</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
 </div>
 <div class="sect2">
 <h3 id="_was_ist_ml">Was ist ML?</h3>
@@ -1391,10 +1378,28 @@ Vereinfacht kann man sich einen <strong>Algorithmus</strong> als <strong>Strateg
 <div class="title"><span class="small">Beispiel &#8220;Input &#8594; Output&#8221; ML Probleme: Erkennen von Objekten in Bildern; Übersetzen von Text von einer Sprache in eine andere; Bestimmen eines guten nächsten Zuges angesichts des aktuellen Zustands eines Go-Boards; Gruppieren ähnlicher Nutzer/Kunden anhand verschiedener Informationen über sie, wie z.B. Umfrageantworten (im Marketing als Kundensegmentierung bezeichnet dient dies dazu z.B. unterschiedliche Kundengruppen in sozialen Medien mit spezifischen Werbekampagnen anzusprechen).</span></div>
 </div>
 <div class="paragraph">
-<p>Welche <strong>Art von Output</strong> ein ML Algorithmus erzeugt, hängt von der <a href="#_ml_lösungen_überblick">Art des Algorithmus</a> ab.</p>
+<p>Während in den obigen Beispielen ein (entsprechend geschulter) Mensch zur jeweiligen Eingabe in der Regel leicht die richtige Ausgabe erzeugt (z.B. kann sogar ein kleines Kind die Katze im ersten Bild erkennen), fällt es Menschen oft schwer zu beschreiben, <em>wie</em> sie zur richtigen Antwort gekommen sind (woran erkennt man, dass dies eine Katze und kein kleiner Hund ist? an den spitzen Ohren? den Schnurrhaaren?). Im Gegensatz dazu <strong>lernen ML-Algorithmen solche Regeln aus den gegebenen Beispieldaten</strong>.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>ML vs. herkömmliche Software</strong></p>
 </div>
 <div class="paragraph">
-<p>Während in den obigen Beispielen ein (entsprechend geschulter) Mensch zur jeweiligen Eingabe in der Regel leicht die richtige Ausgabe erzeugt (z.B. kann sogar ein kleines Kind die Katze im ersten Bild erkennen), fällt es Menschen oft schwer zu beschreiben, <em>wie</em> sie zur richtigen Antwort gekommen sind (woran erkennt man, dass dies eine Katze und kein kleiner Hund ist? an den spitzen Ohren? den Schnurrhaaren?). Im Gegensatz dazu <strong>lernen ML-Algorithmen solche Regeln aus den gegebenen Beispieldaten</strong>.</p>
+<p>Während man <strong>herkömmliche Software</strong>-Lösungen dazu verwenden kann, um Aufgaben zu automatisieren, bei denen eine vordefinierte Abfolge von Aktionen nach einigen <strong>festgeschriebenen Regeln</strong> ausgeführt wird (z.B. &#8220;Eine Tür soll sich öffnen, <em>wenn</em> ein Objekt eine Lichtschranke durchquert und sich 20 Sekunden später wieder schließen&#8221;), kann man mit maschinellem Lernen <strong>&#8220;Input &#8594; Output&#8221;-Aufgaben automatisieren</strong>, für die es sonst <strong>schwierig wäre, solche Regeln aufzustellen</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Die Qualitätskontrolle in einer Keks-Fabrik ist ein Beispiel für eine solche &#8220;Input (Keks) &#8594; Output (ok/fehlerhaft)&#8221;-Aufgabe: Während z.B. zerbrochene Kekse automatisch aussortiert werden könnten, indem man überprüft, dass jeder Keks etwa 15g wiegt, ist es schwierig, Regeln zu formulieren, die alle möglichen Produktionsfehler zuverlässig abfangen. Also müsste entweder ein Mensch die Produktionslinie beobachten, um z.B. zusätzlich verbrannte Kekse zu erkennen, oder man könnte Bilder von den Keksen machen und sie als Input für ein Machine Learning Modell verwenden, um die fehlerhaften Kekse zu erkennen:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/01b_intro_ml/input_output_solving_cookie3.png" alt="image" width="780">
+</div>
+</div>
+<div class="paragraph">
+<p>Um dieses Problem mit ML zu lösen, muss zunächst ein großer Datensatz mit Fotos vieler guter, aber auch allerlei fehlerhafter Kekse zusammengestellt werden, inklusive der entsprechenden Annotationen, also einem Label für jedes Bild, ob es einen guten oder fehlerhaften Keks zeigt (aber nicht unbedingt die Art des Fehlers). Aus diesen Beispielen kann dann ein ML-Algorithmus lernen, zwischen guten und fehlerhaften Keksen zu unterscheiden.</p>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p>Die unterschiedlichen Algorithmen bilden unseren <strong>ML Werkzeugkasten</strong>:</p>
@@ -1405,149 +1410,181 @@ Vereinfacht kann man sich einen <strong>Algorithmus</strong> als <strong>Strateg
 </div>
 <div class="title"><span class="small">ML selbst ist ein Teilbereich der Künstlichen Intelligenz (KI/AI), das derzeit zwar häufiger verwendete Buzzword, jedoch basieren alle wirklich interessanten Anwendungen, z.B. die initial gezeigten Beispiele, tatsächlich auf ML. Zu KI gehören ansonsten zum Beispiel noch einige Suchalgorithmen, die beim Bau der ersten Schachcomputer verwendet wurden. ML kann wiederum in drei Hauptbereiche unterteilt werden, Unsupervised (&#8220;Unüberwachtes&#8221;), Supervised (&#8220;Überwachtes&#8221;) und Reinforcement (&#8220;Bestärkendes&#8221;) Learning. Das Buzzword &#8220;Deep Learning&#8221; ist außerdem ein Überbegriff für neuronale Netzwerkmodelle. Einige der einfachsten im ML verwendeten Algorithmen, wie die lineare Regression oder PCA (sehr ähnlich der Faktorenanalyse), werden auch von Statistikern verwendet, die jedoch auch andere Werkzeuge wie Hypothesentests verwenden, welche keine Regeln oder Muster aus Daten lernen. Die meisten Data Scientists verwenden viele Methoden aus ML und Statistik, aber auch zusätzliche Werkzeuge wie A/B-Tests, z.B. um zu überprüfen, ob ein roter oder grüner &#8220;Kaufen&#8221;-Button auf einer Website mehr Umsatz generiert.</span></div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_wie_lernen_maschinen">Wie &#8220;lernen&#8221; Maschinen?</h3>
 <div class="paragraph">
-<p>Wie lösen ML-Algorithmen diese &#8220;Input &#8594; Output&#8221; Probleme, also wie erkennen sie Muster und lernen Regeln aus Daten?</p>
-</div>
-<div class="paragraph">
-<p>ML-Algorithmen lassen sich nach ihrer Funktionsweise, d.h. wie sie lernen, weiter unterteilen. Diese Unterteilung ist inspiriert von der Art und Weise wie Menschen lernen:</p>
+<p>ML-Algorithmen können auf Input Daten in verschiedensten Formaten angewendet werden, aber unser Ziel, also der gewünschte Output, bestimmt welche <strong>Art von Algorithmus</strong> wir für das Problem verwenden sollten:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="images/01b_intro_ml/ml_algorithms_short_human4.png" alt="image" width="740">
+<img src="images/01b_intro_ml/ml_goals3.png" alt="image" width="840">
 </div>
-<div class="title"><span class="small"><strong>Unsupervised Learning:</strong> Menschen sind sehr gut darin, statistische Gesetzmäßigkeiten in der Welt zu erkennen, ohne dass sie ausdrücklich dazu aufgefordert werden. Ist dir zum Beispiel schon einmal aufgefallen, dass wir beim Sprechen keine &#8230;&#8203; Pausen &#8230;&#8203; zwischen &#8230;&#8203; Wörtern machen? Dennoch lernen Kinder intuitiv, welche Silben zu einem Wort gehören und wo dieses Wort endet und das nächste beginnt. Dies funktioniert, weil die Silben eines Wortes immer in dieser spezifischen Kombination vorkommen, diesem Wort dann aber unterschiedliche Wörter, beginnend mit vielen verschiedenen Silben, folgen. Das bedeutet, dass wir durch Hören von gesprochenem Text die bedingten Wahrscheinlichkeitsverteilungen von Silben erfassen. <strong>Supervised Learning:</strong> Diese Art des Lernens benötigt eine Lehrerin, die uns die richtigen Antworten sagt und uns korrigiert, wenn wir etwas falsch machen. Um z.B. einem Kind ein Wort beizubringen veranschaulicht man ihm die Bedeutung anhand von Beispielen, und wenn das Kind etwas falsch benennt, z.B. einen kleinen Hund als Katze bezeichnet, korrigiert man es. <strong>Reinforcement Learning:</strong> Auch diese Art von &#8220;Learning by Doing&#8221; passiert ganz natürlich wenn Menschen aus den Konsequenzen ihrer Handlungen lernen. Durch Experimentieren und Üben können wir zum Beispiel eine komplexe Abfolge von Handbewegungen einstudieren, mit der wir einer Geige schöne Klänge entlocken, anstatt schmerzhaftes Kreischen zu erzeugen. Zwar ist keine einzelne Handbewegung an sich gut oder schlecht, jedoch nur die richtige Kombination bringt Musik in unsere Ohren.</span></div>
+<div class="title"><span class="small">Wenn wir einen Datensatz etwas besser verstehen und uns einen Überblick verschaffen wollen, dann können wir zur Visualisierung einen Dimensionsreduktionsalgorithmus aus dem Bereich Unsupervised Learning verwenden. Andere Unsupervised Learning Algorithmen ermöglichen uns, Muster in Daten zu entdecken, wobei es hier darauf ankommt, welche Art von Muster man finden möchte: Mit Algorithmen zur Ausreißer-/Anomalieerkennung (Anomaly Detection) lassen sich einzelne Datenpunkte identifizieren, die stark vom Rest abweichen (z.B. eine defekte Maschine oder eine betrügerische Kreditkartentransaktion). Clustering-Algorithmen wiederum finden Gruppen ähnlicher Datenpunkte (z.B. zur Kundensegmentierung). Wenn wir stattdessen ein Vorhersagemodell möchten, um für einen speziellen Input den entsprechenden Output zu berechnen (z.B. vorhersagen, ob ein Produkt fehlerhaft ist, wenn es unter bestimmten Bedingungen produziert wird), dann brauchen wir dafür einen Algorithmus aus dem Bereich Supervised Learning. In erster Linie wird hier zwischen Regressions- und Klassifikationsalgorithmen unterschieden: Bei Regressionsaufgaben ist die zu prognostizierende Zielgröße kontinuierlich (z.B. Nutzeranzahl, Preis etc.), bei Klassifikationsaufgaben ist die Zielgröße diskret, d.h. sie kann nur einen eindeutigen Wert annehmen und es gibt kein Kontinuum zwischen den verschiedenen Werten (z.B. kann ein Tier auf einem Bild entweder eine Katze oder ein Hund sein, aber nichts dazwischen). Während Unsupervised und Supervised Learning die meisten allgemeinen Anwendungsfälle abdecken, gibt es auch Algorithmen für speziellere Anwendungen, z.B. Empfehlungssysteme (Recommender Systems).</span></div>
 </div>
 <div class="paragraph">
-<p>Analog dazu können auch Maschinen nach diesen drei Strategien lernen:</p>
+<p>Einige Beispiele für Input &#8594; Output Aufgaben und welche Art von ML-Algorithmus verwendet werden kann, um sie zu lösen:</p>
 </div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/01b_intro_ml/ml_algorithms_short4.png" alt="image" width="740">
-</div>
-<div class="title"><span class="small"><strong>Unsupervised Learning:</strong> Diese Algorithmen erkennen statistische Regelmäßigkeiten in den Daten, z.B. können sie Gruppen ähnlicher Dinge identifizieren (Beispiel Kundensegmentierung) oder einzelne Punkte finden, die aus der Reihe tanzen (Anomalieerkennung), z.B. ungewöhnliches Verhalten einer Maschine aufgrund eines defekten Teils oder verdächtige Kreditkartentransaktionen im Onlinehandel. <strong>Supervised Learning:</strong> Diese Algorithmen lernen aus vielen Input-Output-Beispielen, z.B. Bilder und darauf sichtbare Objekte oder Produktionsbedingungen zusammen mit der resultierenden Produktqualität. Das gelernte Modell kann dann für einen neuen Input den dazugehörigen Output vorhersagen. <strong>Reinforcement Learning:</strong> Diese Art des Lernens ist etwas komplizierter: Der Lernalgorithmus wird hier als Agent bezeichnet, welcher sich in einer Umgebung bewegt, z.B. ein Roboter in der realen Welt oder ein virtueller Agent in einer Simulationsumgebung wie einem Videospiel (was normalerweise viel billiger ist ;-)). Die Umgebung teilt dem Agenten mit, in welchem Zustand oder in welcher Situation er sich gerade befindet, dann kann der Agent auswählen, wie er in diesem Zustand reagieren will, d.h. welche (vordefinierte) Aktion er ausführt. Die Konsequenzen dieser Aktion werden anschließend durch die Umgebung bestimmt (z.B. ein Monster in einem Videospiel besiegen oder von einer Klippe fallen) und je nach Ergebnis wird eine Belohnung zurückgeben (z.B. zusätzliche Punkte für eingesammelte Münzen). Dann wiederholt sich der Zyklus, da sich der Agent im nächsten Zustand befindet. Basierend auf der erhaltenen Belohnung lernt der Agent im Laufe der Zeit, welche Aktionen in welchen Situationen von Vorteil sind und wie er sich in der Umgebung zurechtfindet. Das Schwierige daran ist, dass der Agent die Belohnungssignale teilweise erst lange nachdem die Aktion ausgeführt wurde erhält. In einem Videospiel zum Beispiel findet der Agent zu Beginn eines Levels einen Schlüssel, aber die Tür, die damit geöffnet werden kann, kommt erst viele Frames später. Eine verzögerte Belohnung macht es dem Agent schwerer diese mit der entsprechenden Aktion zu verknüpfen. Da Menschen viel Hintergrundwissen haben, ist es für uns viel einfacher herauszufinden, was in einem Spiel funktioniert und was nicht.</span></div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Input \(X\)</th>
+<th class="tableblock halign-left valign-top">Output \(Y\)</th>
+<th class="tableblock halign-left valign-top">ML-Algorithmus Kategorie</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fragebogenantworten</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kundensegmentierung</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clustering</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sensormessungen</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">alles normal?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Anomalieerkennung</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Vergangene Nutzung einer Maschine</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Restlebensdauer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Regression</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E-Mail</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Spam (ja/nein)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Klassifikation (binär)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bild</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">welches Tier?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Klassifikation (mehrere Klassen)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bisherige Einkäufe des Nutzers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Produktvorschläge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Empfehlungssysteme</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Suchanfrage</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">relevante Dokumente</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Information Retrieval</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Audio</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Spracherkennung</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Text auf Englisch</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Text auf Französisch</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maschinelle Übersetzung</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Zusammengefasst (siehe auch: <a href="https://franziskahorn.de/mlws_resources/algorithm_cheatsheet.pdf">Übersichtstabelle als PDF</a>):</p>
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Voraussetzungen für das Lernen mit diesen Strategien: </dt>
-</dl>
-</div>
-<div class="ulist none">
-<ul class="none">
+<dt class="hdlist1">Existierende ML-Lösungen &amp; entsprechende Outputs (für einen Datenpunkt): </dt>
+<dd>
+<div class="ulist">
+<ul>
 <li>
-<p><span class="underline">Unsupervised Learning:</span> ein Datensatz mit Beispielen</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/01b_intro_ml/requirements_learning_unsupervised.png" alt="image" width="500">
-</div>
-</div>
+<p><span class="underline">Dimensionsreduktion:</span> (normalerweise) <strong>2D-Koordinaten</strong> (um den Datensatz zu visualisieren)</p>
 </li>
 <li>
-<p><span class="underline">Supervised Learning:</span> ein Datensatz mit <strong><em>gelabelten</em></strong> Beispielen</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/01b_intro_ml/requirements_learning_supervised.png" alt="image" width="500">
-</div>
-</div>
+<p><span class="underline">Ausreißer-/Anomalieerkennung:</span> <strong>Anomalie-Score</strong> (normalerweise ein Wert zwischen 0 und 1, der angibt, inwiefern dieser Punkt von der Norm abweicht)</p>
 </li>
 <li>
-<p><span class="underline">Reinforcement Learning:</span> eine (Simulations-) Umgebung, die, basierend auf den Aktionen des Agenten, Daten (Belohnung + neue Zustände) generiert</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/01b_intro_ml/requirements_learning_reinforce.png" alt="image" width="460">
-</div>
-</div>
+<p><span class="underline">Clustering:</span> <strong>Cluster-Index</strong> (eine Zahl zwischen 0 und <em>k-1</em>, die angibt, zu welchem der <em>k</em> Cluster ein Datenpunkt gehört (oder -1 für Ausreißer))</p>
+</li>
+<li>
+<p><span class="underline">Regression:</span> ein <strong>kontinuierlicher Wert</strong> (eine numerischer Größe, die vorhergesagt werden soll)</p>
+</li>
+<li>
+<p><span class="underline">Klassifikation:</span> ein <strong>diskreter Wert</strong> (eine von mehreren sich gegenseitig ausschließenden Kategorien)</p>
+</li>
+<li>
+<p><span class="underline">Empfehlungssysteme &amp; Information Retrieval:</span> <strong>Rangliste einer Menge von Elementen</strong> (Empfehlungssysteme ordnen beispielsweise die Produkte nach Relevanz für den jeweiligen Nutzer; Information Retrieval Systeme sortieren Elemente nach ihrer Ähnlichkeit zu einer gegebenen Suchanfrage)</p>
+</li>
+<li>
+<p>andere <span class="underline">Deep Learning</span> Lösungen: <strong>unstrukturierte Outputs wie Text oder Bild</strong> (z.B. Spracherkennung, maschinelle Übersetzung, Bild Generierung oder Neural Style Transfer)</p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>Aufgrund der Abhängigkeit von einer datenerzeugenden Umgebung ist Reinforcement Learning ein Sonderfall. Außerdem ist es derzeit noch sehr schwer, Reinforcement Learning Algorithmen zum Laufen zu bringen, weshalb sie hauptsächlich in der Forschung und weniger für praktische Anwendungen verwendet werden. Aus diesem Grund konzentrieren wir uns hier vor allem auf das Supervised und Unsupervised Learning.</p>
+</dd>
+</dl>
 </div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<p><strong>Unsupervised Learning hat keine zugrundeliegende Wahrheit</strong></p>
-</div>
-<div class="paragraph">
-<p>Bei Unsupervised Learning Problemen sollte uns bewusst sein, dass es keine richtigen oder falschen Antworten gibt. Unsupervised Learning Algorithmen erkennen lediglich Muster in den Daten. Das Ergebnis kann für uns Menschen sinnvoll sein oder auch nicht.</p>
-</div>
-<div class="paragraph">
-<p>Ein Beispiel: Im Bereich Unsupervised Learning gibt es eine Reihe verschiedener Algorithmen, die Datenpunkte in Cluster gruppieren. Dabei arbeitet jeder Algorithmus nach einer etwas anderen Strategie und bewertet unterschiedlich, ab wann zwei Punkte ähnlich genug sind, dass sie in denselben Cluster eingeordnet werden können.</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/01b_intro_ml/clustering_ambiguous3.png" alt="image" width="640">
-</div>
-<div class="title"><span class="small">Die offensichtlichste Reaktion eines Menschen ist, diese Bilder nach den darauf gezeigten Früchten zu sortieren. Theoretisch ist es jedoch genauso richtig, die Bilder anhand eines anderen Merkmals zu gruppieren, z.B. der Hintergrundfarbe, ob an der Frucht ein Blatt hängt, in welche Richtung der Stiel zeigt usw.</span></div>
-</div>
-<div class="paragraph">
-<p>Es ist unsere Aufgabe, die Ergebnisse eines Unsupervised Learning Algorithmus zu untersuchen und zu verstehen. Entsprechen die Resultate nicht unseren Erwartungen, spricht nichts dagegen, einen anderen Algorithmus auszuprobieren.</p>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Beim Supervised Learning möchten wir ein <strong>Modell (= eine mathematische Funktion)</strong> \(f(x)\) lernen, um den Zusammenhang zwischen einem oder mehreren <strong>Input(s)</strong> \(x\) (z.B. Produktionsbedingungen wie Temperatur, Material, etc.) und einem <strong>Output</strong> \(y\) (z.B. resultierende Produktqualität) zu beschreiben. Dieses Modell kann dann verwendet werden, um <strong>Vorhersagen für neue Datenpunkte zu machen</strong>, also \(f(x') = y\) für ein neues \(x'\) zu berechnen (z.B. für einen neuen Satz von Produktionsbedingungen vorhersagen, ob das Produkt von hoher Qualität sein wird, oder ob man den Vorgang lieber gleich abbrechen sollte).</p>
-</div>
-<div class="paragraph">
-<p>Die existierenden Supervised Learning Algorithmen unterscheiden sich in der <strong>Art des \(x \to y\,\) Zusammenhangs</strong>, den sie beschreiben können (z.B. linear oder nichtlinear) und welche Art von <strong>Zielfunktion</strong> (auch Fehlerfunktion genannt) sie minimieren. Die Aufgabe eines Data Scientists besteht darin, einen für den Datensatz passenden Modelltyp auszuwählen. Den Rest erledigt dann eine <strong>Optimierungsmethode, die Parameter für das Modells findet, welche die Zielfunktion des Modells minimieren</strong>, d.h. sodass der Vorhersagefehler des Modells auf den gegebenen Daten so klein wie möglich ist.</p>
-</div>
-<div class="admonitionblock tip">
+<div class="admonitionblock important">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
+<i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-Video Empfehlung: <strong>Wenn dir lineare Regression nichts sagt</strong>, findest du hier eine tolle Erklärung von der Google-Mitarbeiterin Cassie Kozyrkov zur Funktionsweise der linearen Regression, des einfachsten Supervised Learning Algorithmus: [<a href="https://youtu.be/j8VjRnaHRBM" target="\_blank">Teil 1</a>] [<a href="https://youtu.be/VqhafjGTDI8" target="\_blank">Teil 2</a>] [<a href="https://youtu.be/sxZDZVN0JAg" target="\_blank">Teil 3</a>]
+ML-Algorithmen werden anhand des Outputs kategorisiert, den sie für eine Eingabe generieren. Wenn man ein &#8216;Input &#8594; Output&#8217;-Problem mit einem anderen als den oben aufgeführten Outputs lösen möchte, wird das wahrscheinlich auf ein mehrjähriges Forschungsprojekt hinauslaufen&#8201;&#8212;&#8201;wenn das Problem überhaupt mit ML gelöst werden kann!
 </td>
 </tr>
 </table>
 </div>
 <div class="sidebarblock">
 <div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Um komplexe Probleme zu lösen, benötigt man möglicherweise mehrere Algorithmen</dt>
+<dd>
+<p>Beispiel: virtueller Assistent (z.B. Siri oder Alexa): &#8220;<em>Hey &lt;Sprachassistent&gt;, erzähl mir einen Witz!</em>&#8221; &#8594; ein zufälliger Witz</p>
+</dd>
+</dl>
+</div>
 <div class="paragraph">
-<div class="title"><span class="underline">Wie ein (Supervised Learning) Algorithmus aus Daten &#8220;lernt&#8221;:</span></div>
+<div class="title"><span class="small">Das sieht zwar zunächst wie ein Input-Output-Problem aus, es direkt zu lösen wäre allerdings sehr schwierig und ineffizient. Stattdessen zerlegen wir das Problem in kleinere Teilaufgaben, die mit bestehenden Algorithmen gelöst werden können:</span></div>
 <p></p>
-</div>
-<div class="paragraph">
-<p><strong>Ziel:</strong> Beschreibe den Zusammenhang zwischen Input(s) \(x\) und Output \(y\) mit einem Modell, d.h. einer mathematischen Funktion \(f(x)\)</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/01b_intro_ml/learning_model_handout.png" alt="image" width="940">
-</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><strong>Wähle eine Modell Klasse (= Struktur der Funktion):</strong> Annahme: Zusammenhang ist linear<br>
-&#8594; lineares Regressionsmodell: \(y = f(x) = b + w\cdot x\)</p>
+<p><strong>Triggerwort Erkennung:</strong><br>
+Audio &#8594; &#8220;Hey &lt;Sprachassistent&gt;&#8221; (ja/nein)?</p>
 </li>
 <li>
-<p><strong>Definiere die Zielfunktion:</strong> Minimiere die Abweichung zwischen echtem &amp; vorhergesagtem \(y\):<br>
-&#8594; \(\min_{b,w} \sum_i (y_i - f(x_i))^2\)</p>
+<p><strong>Spracherkennung:</strong><br>
+Audio &#8594; Text</p>
 </li>
 <li>
-<p><strong>Finde die besten Modellparameter für die gegebenen Daten:</strong> d.h. löse das in Schritt 2 definierte Optimierungsproblem <br>
-&#8658; \(f(x) = -2.7 + 5.2x\)</p>
+<p><strong>Klassifizierung der Absicht:</strong><br>
+Text &#8594; (Witz/Timer/Wettervorhersage/&#8230;&#8203;)?</p>
+</li>
+<li>
+<p><strong>Führe spezifisches Programm aus (z.B. wähle zufälligen Witz aus)</strong></p>
+</li>
+<li>
+<p><strong>Sprachgenerierung:</strong><br>
+Text &#8594; Audio</p>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<div class="title"><span class="small">Zunächst muss der Smart Speaker wissen, ob er mit einem bestimmten Triggerwort (z.B. &#8220;Hey Siri&#8221;) angesprochen wurde. Dies ist eine einfache binäre Klassifikation (ja/nein), die normalerweise auf dem Gerät selbst ausgeführt wird, da wir nicht möchten, dass alles was wir sagen permanent in die Cloud gestreamt wird. Als nächstes werden die nach dem Triggerwort gesprochenen Wörter in Text übersetzt. Text ist einfacher zu handhaben, da beispielsweise Variationen aufgrund unterschiedlicher Akzente entfernt werden. Anhand dieses Textes wird die Absicht des Nutzers erkannt, also welche der verschiedenen Funktionalitäten des virtuellen Assistenten genutzt werden soll (z.B. Witz erzählen, Musik abspielen, Wecker stellen etc.). Dies ist ein Multiclass-Klassifikationsproblem. Zur Ausführung des Befehls wird kein ML benötigt, sondern ein normales, aufgabenspezifisches Programm, das als App auf dem Gerät installiert ist, z.B. wird ein Witz aus einer Datenbank ausgewählt oder ein Timer gesetzt usw.. Anschließend muss der Output des ausgeführten Programms wieder in ein Audiosignal umgewandelt werden. Ein ML-Modell kann dabei helfen, flüssig gesprochenen Text zu erzeugen&#8201;&#8212;&#8201;und in naher Zukunft vielleicht auch mit der Stimme von Morgan Freeman oder einer anderen berühmten Person, wie bei &#8220;Deep Fake&#8221;-Anwendungen.</span></div>
+<p><br>
+&#8658; Generell sollte man zunächst darüber nachzudenken, ob man ein Problem in leichter zu lösende Teilprobleme zerlegen kann, da es dafür oft schon große Datensätze oder sogar fertige Modelle gibt. Ein Modell für Spracherkennung kann beispielsweise zusätzlich auf Hörbüchern und transkribierten politische Reden trainiert werden, nicht nur auf den Daten, die von den Sprachassistent-Nutzern gesammelt wurden.</p>
 </div>
-</div>
-<div class="admonitionblock note">
+<div class="admonitionblock caution">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
-In diesem Buch werden die Begriffe &#8220;ML-Algorithmus&#8221; und &#8220;ML-Modell&#8221; meist synonym verwendet. Wenn man es aber genau nimmt, verarbeitet der Algorithmus die gegebenen Daten und lernt die Parameterwerte. Die gefundenen Parameter bestimmen das eigentliche Modell. Ein lineares Regressions<em>modell</em> wird beispielsweise durch seine Koeffizienten (d.h. die Parameter des Modells) definiert. Diese werden gefunden, in dem die Schritte des linearen Regressions<em>algorithmus</em> befolgt werden, also das Optimierungsproblem auf den gegebenen Daten gelöst wird.
+Wenn ein ML-Modell als Input den Output eines anderen ML-Modells erhält, bedeutet dies, dass wir, sobald wir eine neue Version des ersten ML-Modells verwenden, auch die folgenden Modelle neu trainieren sollten, da diese Modelle dann evtl. leicht andere Inputs erhalten, d.h. wir es mit einem <a href="#_fehler_5_daten_konzept_drifts">Daten Drift</a> zu tun haben.
 </td>
 </tr>
 </table>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1617,20 +1654,450 @@ Einerseits demokratisieren solche Bibliotheken die Verwendung von ML, anderersei
 </div>
 </div>
 <div class="sect2">
-<h3 id="_wann_sollte_man_ml_verwenden">Wann sollte man ML verwenden?</h3>
+<h3 id="_wie_lernen_maschinen">Wie &#8220;lernen&#8221; Maschinen?</h3>
 <div class="paragraph">
-<p>Während man <strong>herkömmliche Software</strong>-Lösungen dazu verwenden kann, um Aufgaben zu automatisieren, bei denen eine vordefinierte Abfolge von Aktionen nach einigen <strong>festgeschriebenen Regeln</strong> ausgeführt wird (z.B. &#8220;Eine Tür soll sich öffnen, <em>wenn</em> ein Objekt eine Lichtschranke durchquert und sich 20 Sekunden später wieder schließen&#8221;), kann man mit maschinellem Lernen <strong>&#8220;Input &#8594; Output&#8221;-Aufgaben automatisieren</strong>, für die es sonst <strong>schwierig wäre, solche Regeln aufzustellen</strong>.</p>
+<p>Wie lösen ML-Algorithmen diese &#8220;Input &#8594; Output&#8221; Probleme, also wie erkennen sie Muster und lernen Regeln aus Daten?</p>
 </div>
 <div class="paragraph">
-<p>Die Qualitätskontrolle in einer Keks-Fabrik ist ein Beispiel für eine solche &#8220;Input (Keks) &#8594; Output (ok/fehlerhaft)&#8221;-Aufgabe: Während z.B. zerbrochene Kekse automatisch aussortiert werden könnten, indem man überprüft, dass jeder Keks etwa 15g wiegt, ist es schwierig, Regeln zu formulieren, die alle möglichen Produktionsfehler zuverlässig abfangen. Also müsste entweder ein Mensch die Produktionslinie beobachten, um z.B. zusätzlich verbrannte Kekse zu erkennen, oder man könnte Bilder von den Keksen machen und sie als Input für ein Machine Learning Modell verwenden, um die fehlerhaften Kekse zu erkennen:</p>
+<p>ML-Algorithmen lassen sich nach ihrer Funktionsweise, d.h. wie sie lernen, weiter unterteilen. Diese Unterteilung ist inspiriert von der Art und Weise wie Menschen lernen:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="images/01b_intro_ml/input_output_solving_cookie3.png" alt="image" width="780">
+<img src="images/01b_intro_ml/ml_algorithms_short_human4.png" alt="image" width="740">
+</div>
+<div class="title"><span class="small"><strong>Unsupervised Learning:</strong> Menschen sind sehr gut darin, statistische Gesetzmäßigkeiten in der Welt zu erkennen, ohne dass sie ausdrücklich dazu aufgefordert werden. Ist dir zum Beispiel schon einmal aufgefallen, dass wir beim Sprechen keine &#8230;&#8203; Pausen &#8230;&#8203; zwischen &#8230;&#8203; Wörtern machen? Dennoch lernen Kinder intuitiv, welche Silben zu einem Wort gehören und wo dieses Wort endet und das nächste beginnt. Dies funktioniert, weil die Silben eines Wortes immer in dieser spezifischen Kombination vorkommen, diesem Wort dann aber unterschiedliche Wörter, beginnend mit vielen verschiedenen Silben, folgen. Das bedeutet, dass wir durch Hören von gesprochenem Text die bedingten Wahrscheinlichkeitsverteilungen von Silben erfassen. <strong>Supervised Learning:</strong> Diese Art des Lernens benötigt eine Lehrerin, die uns die richtigen Antworten sagt und uns korrigiert, wenn wir etwas falsch machen. Um z.B. einem Kind ein Wort beizubringen veranschaulicht man ihm die Bedeutung anhand von Beispielen, und wenn das Kind etwas falsch benennt, z.B. einen kleinen Hund als Katze bezeichnet, korrigiert man es. <strong>Reinforcement Learning:</strong> Auch diese Art von &#8220;Learning by Doing&#8221; passiert ganz natürlich wenn Menschen aus den Konsequenzen ihrer Handlungen lernen. Durch Experimentieren und Üben können wir zum Beispiel eine komplexe Abfolge von Handbewegungen einstudieren, mit der wir einer Geige schöne Klänge entlocken, anstatt schmerzhaftes Kreischen zu erzeugen. Zwar ist keine einzelne Handbewegung an sich gut oder schlecht, jedoch nur die richtige Kombination bringt Musik in unsere Ohren.</span></div>
+</div>
+<div class="paragraph">
+<p>Analog dazu können auch Maschinen nach diesen drei Strategien lernen:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/01b_intro_ml/ml_algorithms_short4.png" alt="image" width="740">
+</div>
+<div class="title"><span class="small"><strong>Unsupervised Learning:</strong> Diese Algorithmen erkennen statistische Regelmäßigkeiten in den Daten, z.B. können sie Gruppen ähnlicher Dinge identifizieren (Beispiel Kundensegmentierung) oder einzelne Punkte finden, die aus der Reihe tanzen (Anomalieerkennung), z.B. ungewöhnliches Verhalten einer Maschine aufgrund eines defekten Teils oder verdächtige Kreditkartentransaktionen im Onlinehandel. <strong>Supervised Learning:</strong> Diese Algorithmen lernen aus vielen Input-Output-Beispielen, z.B. Bilder und darauf sichtbare Objekte oder Produktionsbedingungen zusammen mit der resultierenden Produktqualität. Das gelernte Modell kann dann für einen neuen Input den dazugehörigen Output vorhersagen. <strong>Reinforcement Learning:</strong> Diese Art des Lernens ist etwas komplizierter: Der Lernalgorithmus wird hier als Agent bezeichnet, welcher sich in einer Umgebung bewegt, z.B. ein Roboter in der realen Welt oder ein virtueller Agent in einer Simulationsumgebung wie einem Videospiel (was normalerweise viel billiger ist ;-)). Die Umgebung teilt dem Agenten mit, in welchem Zustand oder in welcher Situation er sich gerade befindet, dann kann der Agent auswählen, wie er in diesem Zustand reagieren will, d.h. welche (vordefinierte) Aktion er ausführt. Die Konsequenzen dieser Aktion werden anschließend durch die Umgebung bestimmt (z.B. ein Monster in einem Videospiel besiegen oder von einer Klippe fallen) und je nach Ergebnis wird eine Belohnung zurückgeben (z.B. zusätzliche Punkte für eingesammelte Münzen). Dann wiederholt sich der Zyklus, da sich der Agent im nächsten Zustand befindet. Basierend auf der erhaltenen Belohnung lernt der Agent im Laufe der Zeit, welche Aktionen in welchen Situationen von Vorteil sind und wie er sich in der Umgebung zurechtfindet. Das Schwierige daran ist, dass der Agent die Belohnungssignale teilweise erst lange nachdem die Aktion ausgeführt wurde erhält. In einem Videospiel zum Beispiel findet der Agent zu Beginn eines Levels einen Schlüssel, aber die Tür, die damit geöffnet werden kann, kommt erst viele Frames später. Eine verzögerte Belohnung macht es dem Agent schwerer diese mit der entsprechenden Aktion zu verknüpfen. Da Menschen viel Hintergrundwissen haben, ist es für uns viel einfacher herauszufinden, was in einem Spiel funktioniert und was nicht.</span></div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Voraussetzungen für das Lernen mit diesen Strategien: </dt>
+</dl>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p><span class="underline">Unsupervised Learning:</span> ein Datensatz mit Beispielen</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/01b_intro_ml/requirements_learning_unsupervised.png" alt="image" width="500">
+</div>
+</div>
+</li>
+<li>
+<p><span class="underline">Supervised Learning:</span> ein Datensatz mit <strong><em>gelabelten</em></strong> Beispielen</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/01b_intro_ml/requirements_learning_supervised.png" alt="image" width="500">
+</div>
+</div>
+</li>
+<li>
+<p><span class="underline">Reinforcement Learning:</span> eine (Simulations-) Umgebung, die, basierend auf den Aktionen des Agenten, Daten (Belohnung + neue Zustände) generiert</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/01b_intro_ml/requirements_learning_reinforce.png" alt="image" width="460">
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Aufgrund der Abhängigkeit von einer datenerzeugenden Umgebung ist Reinforcement Learning ein Sonderfall. Außerdem ist es derzeit noch sehr schwer, Reinforcement Learning Algorithmen zum Laufen zu bringen, weshalb sie hauptsächlich in der Forschung und weniger für praktische Anwendungen verwendet werden. Aus diesem Grund konzentrieren wir uns hier vor allem auf das Supervised und Unsupervised Learning.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Features &amp; Labels</strong></p>
+</div>
+<div class="paragraph">
+<p>Ein typisches Supervised Learning Problem wäre beispielsweise ein Produktionsprozess, bei dem wir vorhersagen möchten, ob ein unter bestimmten Produktionsbedingungen produziertes Teil Ausschuss ist. Hier beinhalten die gesammelten Daten für jedes produzierte Teil die Prozessbedingungen, unter denen es hergestellt wurde, und ob das resultierende Produkt in Ordnung oder Ausschuss war:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/02_data/toy_data3.png" alt="image" width="740">
+</div>
+<div class="title"><span class="small">Bei den für diesen Anwendungsfall erhobenen Daten handelt es sich um strukturierte Daten in tabellarischer Form (z.B. in einer Excel-Tabelle). Ein Datenpunkt / eine Probe / eine Beobachtung befindet sich immer in einer Zeile dieser Tabelle.</span></div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/02_data/toy_data6.png" alt="image" width="740">
+</div>
+<div class="title"><span class="small">Die Spalten der Tabelle enthalten die unterschiedlichen Messwerte/Variablen, welche für jeden Datenpunkt erhoben wurden. Dabei unterscheiden wir zwischen <em>Features</em> (in diesem Fall die Produktionsbedingungen) und <em>Labels</em> (ob das jeweilige Produkt in Ordnung oder Ausschuss war). Features, auch als Matrix \(X\) bezeichnet, sind typischerweise diejenigen Messwerte, die wir ohne Aufwand erhalten, da sie während des Prozesses bereits für andere Zwecke gesammelt werden. Wenn beispielsweise der Bediener der Maschine die Temperatur für die Produktion auf einen bestimmten Wert einstellt, wird dies aufgezeichnet während das Signal an das Heizgerät weitergeleitet wird. Das Sammeln der dazugehörigen Labels, bezeichnet als Vektor \(\mathbf{y}\), ist oft kostspieliger. Um beispielsweise im Produktionsprozess einen Datenpunkt mit dem Label <em>"Ausschuss"</em> zu sammeln, muss (vorsätzlich) ein fehlerhaftes Produkt produziert werden, was uns wertvolle Ressourcen kostet. Ein anderes Beispiel für die mit Labels verbunden Kosten ist die Tatsache, dass Google ein Team von Fachärzten bezahlte, um mehrere Bilder von diabetischer Retinopathie, zu denen es widersprüchliche Meinungen gab, zu diskutieren und neu zu bewerten.</span></div>
+</div>
+<div class="paragraph">
+<p>Im Supervised Learning werden die Features als Input (Eingabe) für das Modell verwendet, während die Labels die Zielvariable, d.h. der vorhergesagte Output (Ausgabe) darstellen. Im Allgemeinen sollten Features unabhängige Variablen sein (z.B. Einstellungen, die der Bediener nach Belieben wählen kann), während der Zielwert von diesen Eingaben abhängig sein sollte, damit wir ihn vorhersagen können.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_unsupervised_learning">(Un)Supervised Learning</h4>
+<div class="paragraph">
+<p>Beginnen wir mit einem detaillierteren Blick auf die verschiedenen Unsupervised und Supervised Learning Algorithmen und wie sie uns helfen können:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/01c_ml_overview/ml_algorithms_12.png" alt="image" width="840">
+</div>
+<div class="title"><span class="small">Für die Anwendung von Unsupervised Learning Algorithmen braucht man nur eine Feature Matrix \(X\), während man zum Erlernen eines Vorhersagemodells mit Supervised Learning Algorithmen auch die dazugehörigen Labels \(\mathbf{y}\) benötigt. Auch wenn unser eigentliches Ziel darin besteht, etwas vorherzusagen (also Supervised Learning zu verwenden), kann es dennoch sehr hilfreich sein, zunächst Unsupervised Learning Algorithmen anzuwenden, um den Datensatz besser zu verstehen. Beispielsweise kann man die Daten im Vorfeld mit Dimensionsreduktionsmethoden visualisieren, um alle Datenpunkte und ihre Vielfalt auf einen Blick zu sehen. Anschließend kann man den Datensatz bereinigen, in dem man Ausreißer identifiziert. Bei einem Klassifikationsproblem ist es häufig sinnvoll, die Datenpunkte zuerst zu clustern, um zu überprüfen, in wie weit die angegebenen Klassenlabels mit den natürlich vorkommenden Gruppen in den Daten übereinstimmen. Beispielsweise sieht man dann vielleicht, dass man das Problem vereinfachen kann, in dem man zwei sehr ähnliche Klassen kombiniert.</span></div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Gleicher Datensatz, unterschiedliche Anwendungsfälle</dt>
+<dd>
+<p>Wir veranschaulichen den Nutzen der fünf verschiedenen Arten von Unsupervised und Supervised Learning Algorithmen in dem wir sie auf diesen Beispieldatensatz anwenden:</p>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2858%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-center valign-top">m<sup>2</sup></th>
+<th class="tableblock halign-center valign-top"># Schlafz.</th>
+<th class="tableblock halign-center valign-top"># Bad</th>
+<th class="tableblock halign-center valign-top">Renoviert</th>
+<th class="tableblock halign-center valign-top">&#8230;&#8203;</th>
+<th class="tableblock halign-center valign-top">Preis</th>
+<th class="tableblock halign-center valign-top">Verkauft</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">125</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">2000</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">500k</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">75</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1990</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">350k</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">150</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">6</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">2010</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">750k</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">35</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">5</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1999</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">620k</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">65</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">2015</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">220k</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">100</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">2003</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">450k</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</div>
+<div class="paragraph text-justify">
+<p><span class="small">Dies ist ein kleiner Musterdatensatz mit strukturierten Daten über verschiedene Wohnungen, wie sie jemand über eine Immobilienwebsite gesammelt haben könnte, z.B. die Größe der Wohnung in Quadratmetern, die Anzahl der Schlafzimmer, die Anzahl der Badezimmer, das Jahr der letzten Renovierung und schließlich den Preis der Wohnung und ob sie zu diesem Preis verkauft wurde (1) oder nicht (0).</span></p>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Beispiel Unsupervised Learning: Dimensionsreduktion</dt>
+<dd>
+<p><strong>Ziel:</strong> Datensatz visualisieren</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/01b_housing_example/dimred.png" alt="image" width="840">
+</div>
+<div class="title"><span class="small">Der erste Schritt bei der Analyse eines neuen Datensatzes besteht normalerweise darin, diesen zu visualisieren, um einen besseren Überblick über alle Datenpunkte und ihre Vielfalt zu erhalten. Dafür eignet sich ein Dimensionsreduktionsalgorithmus, der die ursprünglichen hochdimensionalen Daten als Input nimmt, wobei jede Spalte (= Feature) in der Tabelle eine Dimension darstellt, und eine niedrigerdimensionale Darstellung der Datenpunkte ausgibt, d.h. eine neue Matrix mit weniger Spalten (normalerweise zwei für eine Visualisierung). Diese beiden neuen Features, in unserem Fall \(z_1\) und \(z_2\) genannt, können jetzt verwendet werden, um einen Scatterplot des Datensatzes zu erstellen. Dabei wird jeder Datenpunkt / Zeile (also in diesem Fall jede Wohnung) als Punkt in diesem neuen 2D-Koordinatensystems dargestellt. Wir können uns diese Darstellung als eine Landkarte unseres Datensatzes vorstellen, die es uns ermöglicht, alle Datenpunkte auf einen Blick zu sehen und evtl. schon interessante Muster zu erkennen, z.B. Gruppen ähnlicher Datenpunkte, die auf dieser 2D-Karte eng beieinander liegen. Aber bitte beachte: was sich hinter diesen neuen Koordinaten verbirgt lässt sich bei den meisten Dimensionsreduktionsmethoden nicht genau nachvollziehen. Insbesondere sind dies nicht einfach die beiden informativsten Originalfeatures, sondern völlig neue Variablen, die die Informationen der ursprünglichen Inputs zusammenfassen. Um den Scatterplot besser interpretieren zu können, ist es oft hilfreich, die Punkte nachträglich mit den Werten einer Variablen einzufärben, wodurch möglicherweise die treibenden Faktoren hinter den auffälligsten Mustern im Datensatz aufgedeckt werden können. In diesem Beispiel hätten wir die Punkte nach dem Preis der entsprechenden Wohnung einfärben können und dadurch gesehen, ob ähnlich bepreiste Wohnungen nah beieinander liegen.</span></div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Beispiel Unsupervised Learning: Anomalieerkennung</dt>
+<dd>
+<p><strong>Ziel:</strong> Ausreißer im Datensatz finden</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/01b_housing_example/anomaly.png" alt="image" width="840">
+</div>
+<div class="title"><span class="small">Als nächstes prüfen wir unseren Datensatz auf Ausreißer/Anomalien (Outliers/Anomalies), um diese Datenpunkte dann gegebenenfalls nachträglich zu korrigieren oder zu entfernen. Ein Algorithmus zur Anomalieerkennung gibt für jeden Datenpunkt einen Anomalie-Score aus, der angibt, inwieweit dieser Datenpunkt von der Norm abweicht. Diese Scores können wir auch verwenden, um die 2D-Landkarte unseres Datensatzes aus dem vorherigen Schritt einzufärben. Dadurch werden die Anomalien im Kontext sichtbar. Leider sagt uns ein Anomalieerkennungsalgorithmus nicht, <em>warum</em> ein bestimmter Punkt als Ausreißer erkannt wurde. Ein Data Scientist muss deshalb die gefundenen Anomalien untersuchen und entscheiden, ob diese z.B. aufgrund fehlerhafter Messungen entfernt werden sollten oder ob sie interessante Sonderfälle darstellen. In unserem Beispiel handelt es sich bei dem als Anomalie identifizierten Datenpunkt um eine Wohnung, die angeblich nur eine Größe von 35 \(m^2\), aber gleichzeitig 5 Schlafzimmer hat. Da liegt die Vermutung nahe, dass hier beim Eintragen der Daten ein Fehler passiert ist und die Größe der Wohnung stattdessen 135 \(m^2\) sein sollte.</span></div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Beispiel Unsupervised Learning: Clustering</dt>
+<dd>
+<p><strong>Ziel:</strong> Natürlich vorkommende Gruppen im Datensatz finden</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/01b_housing_example/clustering.png" alt="image" width="840">
+</div>
+<div class="title"><span class="small">Als letzte explorative Analyse können wir überprüfen, ob der Datensatz natürlich vorkommende Gruppen enthält. Das funktioniert mit einem Clustering-Algorithmus, der einen Cluster-Index für jeden Datenpunkt zurückgibt, wobei Punkte mit demselben Index in der selben Gruppe sind. Bitte beachte, dass diese Cluster-Indizes nicht geordnet sind und beim erneuten Ausführen des Algorithmus den Datenpunkten möglicherweise andere Nummern zugewiesen werden. Die Datenpunkte, denen vorher die gleiche Nummer zugewiesen wurde, sollten allerdings immer noch im gleichen Cluster sein, nur kann es eben sein, dass dieser Cluster nun &#8216;5&#8217; statt &#8216;3&#8217; heißt. Auch diese Cluster-Indizes können wir zur Einfärbung unserer Daten-Landkarte verwenden, um die Cluster im Kontext zu sehen. Allerdings sagt uns auch ein Clustering-Algorithmus wieder nur, welche Punkte sich ähnlich genug sind, um zusammen gruppiert zu werden, aber nicht, <em>warum</em> die Punkte dem Cluster zugeordnet wurden und was die Cluster bedeuten. Die Data Scientistin muss auch hier wieder die Ergebnisse untersuchen und versuchen zu interpretieren, worin sich die Cluster unterscheiden. In unserem Beispiel könnten die Cluster &#8220;billige Studiowohnungen&#8221;, &#8220;große Familienwohnungen&#8221; und &#8220;luxuriöse Penthouse Wohnungen&#8221; sein. Beim Unsupervised Learning gibt es keine richtige Lösung und ein anderer Clustering-Algorithmus könnte andere Ergebnisse liefern. Verwende einfach die Lösung, die für deinen Anwendungsfall am hilfreichsten ist.</span></div>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Unsupervised Learning hat keine zugrundeliegende Wahrheit</strong></p>
+</div>
+<div class="paragraph">
+<p>Bei Unsupervised Learning Problemen sollte uns bewusst sein, dass es keine richtigen oder falschen Antworten gibt. Unsupervised Learning Algorithmen erkennen lediglich Muster in den Daten. Das Ergebnis kann für uns Menschen sinnvoll sein oder auch nicht.</p>
+</div>
+<div class="paragraph">
+<p>Ein Beispiel: Im Bereich Unsupervised Learning gibt es eine Reihe verschiedener Algorithmen, die Datenpunkte in Cluster gruppieren. Dabei arbeitet jeder Algorithmus nach einer etwas anderen Strategie und bewertet unterschiedlich, ab wann zwei Punkte ähnlich genug sind, dass sie in denselben Cluster eingeordnet werden können.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/01b_intro_ml/clustering_ambiguous3.png" alt="image" width="640">
+</div>
+<div class="title"><span class="small">Die offensichtlichste Reaktion eines Menschen ist, diese Bilder nach den darauf gezeigten Früchten zu sortieren. Theoretisch ist es jedoch genauso richtig, die Bilder anhand eines anderen Merkmals zu gruppieren, z.B. der Hintergrundfarbe, ob an der Frucht ein Blatt hängt, in welche Richtung der Stiel zeigt usw.</span></div>
+</div>
+<div class="paragraph">
+<p>Es ist unsere Aufgabe, die Ergebnisse eines Unsupervised Learning Algorithmus zu untersuchen und zu verstehen. Entsprechen die Resultate nicht unseren Erwartungen, spricht nichts dagegen, einen anderen Algorithmus auszuprobieren.</p>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Beispiel Supervised Learning: Klassifikation</dt>
+<dd>
+<p><strong>Ziel:</strong> Vorhersage eines diskreten Werts für jeden Datenpunkt</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/01b_housing_example/classification.png" alt="image" width="840">
+</div>
+<div class="title"><span class="small">Nun könnten wir vorhersagen, ob eine Wohnung zum angegebenen Preis verkauft wird. Da die Variable &#8220;Verkauft&#8221; nur die diskreten Werte &#8216;ja&#8217; (1) oder &#8216;nein&#8217; (0) annehmen kann, ist dies ein binäres Klassifikationsproblem. Ein Klassifikationsmodell nimmt die Attribute einer Wohnung zusammen mit dem Angebotspreis als Input und berechnet dann, ob die Wohnung zu diesem Preis verkauft wird oder nicht. Da wir hier nun die wahren Labels kennen (zumindest für den ursprünglich gesammelten Datensatz), können wir die Genauigkeit des Modells bewerten, indem wir berechnen, wie viele falsche Vorhersagen es generiert. Das ist ein Vorteil beim Supervised Learning: Wir können objektiv bestimmen, wie gut eine Lösung ist, und somit verschiedene Modelle systematisch miteinander vergleichen, während die Data Scientistin beim Unsupervised Learning die Ergebnisse manuell im Detail untersuchen muss, um sie zu bewerten.</span></div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Beispiel Supervised Learning: Regression</dt>
+<dd>
+<p><strong>Ziel:</strong> Vorhersage eines kontinuierlichen Werts für jeden Datenpunkt</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/01b_housing_example/regression.png" alt="image" width="760">
+</div>
+<div class="title"><span class="small">Schließlich möchten wir vielleicht für eine neue Wohnung einen angemessenen Preis vorhersagen. Da Preise kontinuierliche Werte sind, ist dies ein Regressionsproblem. Das Modell verwendet die Attribute der Wohnungen als Input und schlägt dann einen geeigneten Preis vor. Da uns für die erhobenen Daten die tatsächlichen (bzw. vom Immobilienmakler bestimmten) Preise vorliegen, können wir erneut berechnen, inwieweit das Regressionsmodell mit seinen Schätzungen vom Originalpreis abweicht.</span></div>
+</div>
 </div>
 </div>
 <div class="paragraph">
-<p>Um dieses Problem mit ML zu lösen, muss zunächst ein großer Datensatz mit Fotos vieler guter, aber auch allerlei fehlerhafter Kekse zusammengestellt werden, inklusive der entsprechenden Annotationen, also einem Label für jedes Bild, ob es einen guten oder fehlerhaften Keks zeigt (aber nicht unbedingt die Art des Fehlers). Aus diesen Beispielen kann dann ein ML-Algorithmus lernen, zwischen guten und fehlerhaften Keksen zu unterscheiden.</p>
+<p>Beim Supervised Learning möchten wir ein <strong>Modell (= eine mathematische Funktion)</strong> \(f(x)\) lernen, um den Zusammenhang zwischen einem oder mehreren <strong>Input(s)</strong> \(x\) (z.B. Produktionsbedingungen wie Temperatur, Material, etc.) und einem <strong>Output</strong> \(y\) (z.B. resultierende Produktqualität) zu beschreiben. Dieses Modell kann dann verwendet werden, um <strong>Vorhersagen für neue Datenpunkte zu machen</strong>, also \(f(x') = y\) für ein neues \(x'\) zu berechnen (z.B. für einen neuen Satz von Produktionsbedingungen vorhersagen, ob das Produkt von hoher Qualität sein wird, oder ob man den Vorgang lieber gleich abbrechen sollte).</p>
+</div>
+<div class="paragraph">
+<p>Die existierenden Supervised Learning Algorithmen unterscheiden sich in der <strong>Art des \(x \to y\,\) Zusammenhangs</strong>, den sie beschreiben können (z.B. linear oder nichtlinear) und welche Art von <strong>Zielfunktion</strong> (auch Fehlerfunktion genannt) sie minimieren. Die Aufgabe eines Data Scientists besteht darin, einen für den Datensatz passenden Modelltyp auszuwählen. Den Rest erledigt dann eine <strong>Optimierungsmethode, die Parameter für das Modells findet, welche die Zielfunktion des Modells minimieren</strong>, d.h. sodass der Vorhersagefehler des Modells auf den gegebenen Daten so klein wie möglich ist.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Video Empfehlung: <strong>Wenn dir lineare Regression nichts sagt</strong>, findest du hier eine tolle Erklärung von der Google-Mitarbeiterin Cassie Kozyrkov zur Funktionsweise der linearen Regression, des einfachsten Supervised Learning Algorithmus: [<a href="https://youtu.be/j8VjRnaHRBM" target="\_blank">Teil 1</a>] [<a href="https://youtu.be/VqhafjGTDI8" target="\_blank">Teil 2</a>] [<a href="https://youtu.be/sxZDZVN0JAg" target="\_blank">Teil 3</a>]
+</td>
+</tr>
+</table>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<div class="title"><span class="underline">Wie ein (Supervised Learning) Algorithmus aus Daten &#8220;lernt&#8221;:</span></div>
+<p></p>
+</div>
+<div class="paragraph">
+<p><strong>Ziel:</strong> Beschreibe den Zusammenhang zwischen Input(s) \(x\) und Output \(y\) mit einem Modell, d.h. einer mathematischen Funktion \(f(x)\)</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/01b_intro_ml/learning_model_handout.png" alt="image" width="940">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Wähle eine Modell Klasse (= Struktur der Funktion):</strong> Annahme: Zusammenhang ist linear<br>
+&#8594; lineares Regressionsmodell: \(y = f(x) = b + w\cdot x\)</p>
+</li>
+<li>
+<p><strong>Definiere die Zielfunktion:</strong> Minimiere die Abweichung zwischen echtem &amp; vorhergesagtem \(y\):<br>
+&#8594; \(\min_{b,w} \sum_i (y_i - f(x_i))^2\)</p>
+</li>
+<li>
+<p><strong>Finde die besten Modellparameter für die gegebenen Daten:</strong> d.h. löse das in Schritt 2 definierte Optimierungsproblem <br>
+&#8658; \(f(x) = -2.7 + 5.2x\)</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+In diesem Buch werden die Begriffe &#8220;ML-Algorithmus&#8221; und &#8220;ML-Modell&#8221; meist synonym verwendet. Wenn man es aber genau nimmt, verarbeitet der Algorithmus die gegebenen Daten und lernt die Parameterwerte. Die gefundenen Parameter bestimmen das eigentliche Modell. Ein lineares Regressions<em>modell</em> wird beispielsweise durch seine Koeffizienten (d.h. die Parameter des Modells) definiert. Diese werden gefunden, in dem die Schritte des linearen Regressions<em>algorithmus</em> befolgt werden, also das Optimierungsproblem auf den gegebenen Daten gelöst wird.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_mit_ml_probleme_lösen">Mit ML Probleme lösen</h3>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>Analog zu den Werkzeugen, mit denen man etwas in einem traditionellen Produktionsprozess herstellt, kann man sich <strong>ML-Algorithmen als Werkzeuge vorstellen, um Wert aus Daten zu generieren</strong>:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/01b_intro_ml/ml_carpentry_analogy2.png" alt="image" width="840">
+</div>
+</div>
+<div class="paragraph">
+<p>Um ML erfolgreich anzuwenden, sollte man sich einige wichtige Fragen stellen:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><em>Was könnte wertvoll sein?</em></strong> Dies kann beispielsweise ein neues Feature für ein existierendes Produkt sein, z.B. Face ID als neue Möglichkeit um ein Smartphone zu entsperren.</p>
+</li>
+<li>
+<p><strong><em>Welche Daten werden benötigt?</em></strong> Einen Holzstuhl kann man nicht aus Stoff und Metall oder ein paar im Wald gefundenen Zweigen herstellen. Genauso benötigt man je nachdem, was man mit ML erreichen möchte, auch die richtigen Daten in ausreichender Qualität &amp; Quantität um die Algorithmen überhaupt anwenden zu können. In vielen Anwendungsfällen ist dieser Teil besonders schwierig, da man die benötigten Daten oft nicht einfach kaufen kann, wie Holz im Baumarkt, sondern diese selbst sammeln&#8201;&#8212;&#8201;also quasi einen eigenen Wald anpflanzen muss, was einige Zeit dauern kann.</p>
+</li>
+<li>
+<p><strong><em>Welcher ML-Algorithmus ist das richtige Werkzeug für diese Aufgabe?</em></strong> (Mehr zu den verschiedenen Arten von ML-Algorithmen in den nächsten Abschnitten.)</p>
+</li>
+<li>
+<p>Verfüge ich bzw. meine Mitarbeiter über die <strong><em>notwendigen Fähigkeiten und genügend Rechenleistung</em></strong>, um das Vorhaben erfolgreich umzusetzen?</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Das Lösen von &#8220;Input &#8594; Output&#8221;-Problemen mit ML erfordert drei Hauptschritte:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/01b_intro_ml/input_output_solving_abstract6.png" alt="image" width="680">
+</div>
+</div>
+<div class="sect3">
+<h4 id="_1_identifiziere_ein_problem">1. Identifiziere ein Problem</h4>
+<div class="paragraph">
+<p>Der erste (und wohl wichtigste) Schritt besteht darin, zu <strong>identifizieren, wo maschinelles Lernen überhaupt eingesetzt werden kann (und sollte)</strong>.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Checkliste für ML-Probleme</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>Gibt es eine einfachere Lösung ohne ML?<br>
+&#8594; Verwende ML, um <em>unbekannte, komplexe</em> Regeln aus Daten zu lernen</p>
+</li>
+<li>
+<p>Kann das Problem mit einem <a href="#_was_ist_ml">existierenden ML-Algorithmus</a> gelöst werden?<br>
+&#8594; Eventuell das Input-Output-Problem in Teilschritte zerlegen, für die bekannte Lösungen existieren, statt jahrelang an einem neuen Algorithmus zu forschen</p>
+</li>
+<li>
+<p>Gibt es <a href="#_garbage_in_garbage_out">genügend hochwertige Daten</a>?<br>
+&#8594; ML-Modelle brauchen die richtigen Inputs und lernen am besten aus eindeutigen Labels</p>
+</li>
+<li>
+<p>Würde die Lösung einen <a href="#_ki_transformation_eines_unternehmens">strategischen Vorteil</a> schaffen? <br>
+&#8594; Sollte man die Lösung selbst <span class="underline">bauen</span> oder könnte man sie auch <span class="underline">einkaufen</span>?<br>
+&#8594; Können Synergien geschaffen werden zwischen Abteilungen, die mit ähnlichen Daten arbeiten?</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>&#8658; <strong>Frage eine ML-Expertin</strong>, ob ein ähnliches Problem bereits mit einem bewährten Algorithmus gelöst wurde<br>
+&#8658; <strong>Frage einen Fachexperten</strong>, ob er der Meinung ist, dass alle relevanten Inputdaten verfügbar sind, um den gewünschten Output zu berechnen. Dies ist normalerweise bei unstrukturierten Daten wie Bildern leicht zu bestimmen: wenn ein Mensch das Objekt im Bild erkennen kann, sollte ML es auch können. Schwieriger wird dies bei strukturierten Daten, wie Tabellen mit hunderten von Spalten mit Sensormessungen.</p>
+</div>
+<div class="paragraph">
+<p>Für weitere Informationen lies <a href="https://towardsdatascience.com/the-ultimate-guide-to-starting-ai-d506255d7ea" target="\_blank">diesen Blog Artikel</a>.</p>
+</div>
+</div>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -1644,7 +2111,7 @@ Einerseits demokratisieren solche Bibliotheken die Verwendung von ML, anderersei
 <div class="ulist">
 <ul>
 <li>
-<p>ein manuell definiertes Regelwerk oder ein mechanistisches (white box) Modell das Problem lösen kann. Wenn beispielsweise in der Keks-Fabrik aus dem obigen Beispiel das einzige Qualitätsproblem immer nur zerbrochene Kekse wären, dann würde die Regel &#8220;Keks-Gewicht muss zwischen 14-16g liegen&#8221; ausreichen, um alle fehlerhaften Kekse zuverlässig zu erkennen. Eine solche Regel ist außerdem einfacher zu implementieren, da nicht erst ein großer Datensatz gesammelt werden muss.</p>
+<p>ein manuell definiertes Regelwerk oder ein mechanistisches (white box) Modell das Problem lösen kann. Wenn beispielsweise in unserer Keks-Fabrik das einzige Qualitätsproblem immer nur zerbrochene Kekse wären, dann würde die Regel &#8220;Keks-Gewicht muss zwischen 14-16g liegen&#8221; ausreichen, um alle fehlerhaften Kekse zuverlässig zu erkennen. Eine solche Regel ist außerdem einfacher zu implementieren, da nicht erst ein großer Datensatz gesammelt werden muss.</p>
 </li>
 </ul>
 </div>
@@ -1712,6 +2179,32 @@ Einerseits demokratisieren solche Bibliotheken die Verwendung von ML, anderersei
 </div>
 </div>
 </div>
+</div>
+<div class="sect3">
+<h4 id="_2_entwickle_eine_lösung">2. Entwickle eine Lösung</h4>
+<div class="paragraph">
+<p>Sobald ein geeignetes &#8220;Input &#8594; Output&#8221;-Problem identifiziert wurde, müssen <strong>historische Daten gesammelt und der richtige ML-Algorithmus ausgewählt und angewendet werden</strong>, um eine funktionierende Lösung zu erhalten. Darum geht es in den nächsten Kapiteln.</p>
+</div>
+<div class="paragraph">
+<p>Um ein konkretes Problem mit ML zu lösen, gehen wir in der Regel wie folgt vor:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/01c_ds_workflow/data_science_workflow_17.png" alt="image" width="840">
+</div>
+<div class="title"><span class="small">Wir beginnen immer mit einer Fragestellung oder einem Problem, das mit ML gelöst werden soll. Und um es zu lösen, benötigen wir Daten, die in der Regel bereinigt werden müssen, bevor man mit ihnen arbeiten kann (z.B. verschiedene Excel-Dateien zusammenführen, fehlende Werte korrigieren usw.). Dann ist es Zeit für eine explorative Analyse, um besser zu verstehen, womit wir es zu tun haben. Abhängig von der Art der Daten ist es evtl. erforderlich, geeignete &#8220;Features&#8221; (Charakteristiken oder Kennzahlen) zu extrahieren oder zusätzlich zu berechnen, wobei Domänenwissen sehr hilfreich ist. Alle diese Schritte sind unter &#8220;Preprocessing&#8221; (Vorverarbeitung) gruppiert <em>(roter Kasten)</em> und die Arbeitsschritte sind nicht linear angeordnet, da wir oft zwischen diesen Schritten hin- und herspringen. Beispielsweise stellen wir bei der Visualisierung des Datensatzes fest, dass es Ausreißer in den Daten gibt, die wir entfernen müssen, oder nachdem neue Features berechnet wurden, gehen wir zurück und visualisieren den Datensatz erneut. Als nächstes kommt der ML-Teil <em>(grüner Kasten)</em>: Normalerweise fängt man mit einem einfachen Modell an, evaluiert es, probiert ein komplexeres Modell aus, experimentiert mit verschiedenen Hyperparametern, &#8230;&#8203; und stellt dann fest, dass man den ML-Werkzeugkasten durch hat, aber kein Modell eine zufriedenstellende Performance zeigt. An diesem Punkt muss man einen Schritt zurück gehen und entweder aussagekräftigere Features berechnen oder, wenn das auch nicht hilft, mehr und/oder bessere Daten sammeln (z.B. mehr Proben, Daten von zusätzlichen Sensoren, eindeutigere Labels usw.). Wenn wir uns schließlich auf die Vorhersagen des Modells verlassen können, gibt es zwei Wege, die man gehen kann: Entweder die Data Science Route, bei der die gewonnen Erkenntnisse an Stakeholder übermittelt werden (was oft zu weiteren Fragen führt). Oder die ML-Software Route, in welcher das endgültige Modell in den Prozess eingebunden wird. Aber Achtung: Die Performance des Modells muss kontinuierlich überwacht werden und es müssen auch in Zukunft weiterhin neue Daten gesammelt werden, damit das Modell immer wieder nachtrainiert werden kann, vor allem falls es Änderungen im Prozess gibt. Insgesamt ist die Arbeit an einem Machine Learning Projekt ein sehr iterativer Prozess.</span></div>
+</div>
+<div class="paragraph">
+<p>Da viele Unternehmen keine standardisierte Dateninfrastruktur besitzen, ist die traurige Wahrheit leider, dass eine Data Scientistin normalerweise (mindestens) etwa 90% ihrer Zeit damit verbringt, die Daten zu sammeln, zu bereinigen und anderweitig vorzuverarbeiten, um sie in ein Format zu bringen worauf die ML-Algorithmen angewendet werden können:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/01c_ds_workflow/data_science_workflow_19.png" alt="image" width="840">
+</div>
+</div>
+<div class="paragraph">
+<p>Auch wenn es manchmal frustrierend ist, ist die Zeit, die man mit der Bereinigung und Vorverarbeitung der Daten verbringt, nie verschwendet, da die ML-Algorithmen nur mit einer soliden Datengrundlage brauchbare Ergebnisse erzielen können.</p>
+</div>
 <div class="sidebarblock">
 <div class="content">
 <div class="dlist">
@@ -1740,61 +2233,8 @@ Einerseits demokratisieren solche Bibliotheken die Verwendung von ML, anderersei
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_probleme_mit_ml_lösen_workflow">Probleme mit ML lösen: Workflow</h3>
-<div class="paragraph">
-<p>Das Lösen von &#8220;Input &#8594; Output&#8221;-Problemen mit ML erfordert drei Hauptschritte:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/01b_intro_ml/input_output_solving_abstract6.png" alt="image" width="680">
-</div>
-</div>
-<div class="paragraph">
-<p>Der erste (und wohl wichtigste) Schritt besteht darin, zu <strong>identifizieren, wo maschinelles Lernen überhaupt eingesetzt werden kann (und sollte)</strong>.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Checkliste für ML-Probleme</dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p>Gibt es eine <a href="#_wann_sollte_man_ml_verwenden">einfachere Lösung</a> ohne ML?<br>
-&#8594; Verwende ML, um <em>unbekannte, komplexe</em> Regeln aus Daten zu lernen</p>
-</li>
-<li>
-<p>Kann das Problem mit einem <a href="#_ml_lösungen_überblick">existierenden ML-Algorithmus</a> gelöst werden?<br>
-&#8594; Eventuell das Input-Output-Problem in Teilschritte zerlegen, für die bekannte Lösungen existieren, statt jahrelang an einem neuen Algorithmus zu forschen</p>
-</li>
-<li>
-<p>Gibt es <a href="#_garbage_in_garbage_out">genügend hochwertige Daten</a>?<br>
-&#8594; ML-Modelle brauchen die richtigen Inputs und lernen am besten aus eindeutigen Labels</p>
-</li>
-<li>
-<p>Würde die Lösung einen <a href="#_ki_transformation_eines_unternehmens">strategischen Vorteil</a> schaffen? <br>
-&#8594; Sollte man die Lösung selbst <span class="underline">bauen</span> oder könnte man sie auch <span class="underline">einkaufen</span>?<br>
-&#8594; Können Synergien geschaffen werden zwischen Abteilungen, die mit ähnlichen Daten arbeiten?</p>
-</li>
-</ul>
-</div>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>&#8658; <strong>Frage eine ML-Expertin</strong>, ob ein ähnliches Problem bereits mit einem bewährten Algorithmus gelöst wurde<br>
-&#8658; <strong>Frage einen Fachexperten</strong>, ob er der Meinung ist, dass alle relevanten Inputdaten verfügbar sind, um den gewünschten Output zu berechnen. Dies ist normalerweise bei unstrukturierten Daten wie Bildern leicht zu bestimmen: wenn ein Mensch das Objekt im Bild erkennen kann, sollte ML es auch können. Schwieriger wird dies bei strukturierten Daten, wie Tabellen mit hunderten von Spalten mit Sensormessungen.</p>
-</div>
-<div class="paragraph">
-<p>Für weitere Informationen lies <a href="https://towardsdatascience.com/the-ultimate-guide-to-starting-ai-d506255d7ea" target="\_blank">diesen Blog Artikel</a>.</p>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Sobald ein geeignetes &#8220;Input &#8594; Output&#8221;-Problem identifiziert wurde, müssen <strong>historische Daten gesammelt und der richtige ML-Algorithmus ausgewählt und angewendet werden</strong>, um eine funktionierende Lösung zu erhalten. Darum geht es in den nächsten Kapiteln.</p>
-</div>
+<div class="sect3">
+<h4 id="_3_setze_die_lösung_ein">3. Setze die Lösung ein</h4>
 <div class="paragraph">
 <p>Wenn die prototypische Lösung implementiert ist und das geforderte Performance-Level erfüllt, muss diese Lösung dann &#8220;deployed&#8221; werden, d.h. <strong>produktiv in den allgemeinen Workflow und die Infrastruktur integriert werden</strong>, damit sie in der Praxis tatsächlich zur Verbesserung des jeweiligen Prozesses eingesetzt werden kann (als Software, die kontinuierlich Vorhersagen für neue Datenpunkte macht). Es gibt im Allgemeinen zwei Strategien, um dies zu tun:</p>
 </div>
@@ -1811,30 +2251,6 @@ Einerseits demokratisieren solche Bibliotheken die Verwendung von ML, anderersei
 <div class="paragraph">
 <p>&#8594; Da diese Entscheidungen stark vom spezifischen Anwendungsfall abhängen, sprengen sie den Rahmen dieses Buches. Suche online nach &#8220;MLOps&#8221;, um mehr über diese Themen zu erfahren und beauftrage eine:n Machine Learning oder Data Engineer, um die erforderliche Infrastruktur im Unternehmen einzurichten.</p>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Machine Learning Workflow</dt>
-<dd>
-<p>Schauen wir uns den zweiten Hauptschritt &#8220;eine funktionierende Lösung entwickeln&#8221; etwas genauer an. Um ein konkretes Problem mit ML zu lösen, gehen wir in der Regel wie folgt vor:</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/01c_ds_workflow/data_science_workflow_17.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">Wir beginnen immer mit einer Fragestellung oder einem Problem, das mit ML gelöst werden soll. Und um es zu lösen, benötigen wir Daten, die in der Regel bereinigt werden müssen, bevor man mit ihnen arbeiten kann (z.B. verschiedene Excel-Dateien zusammenführen, fehlende Werte korrigieren usw.). Dann ist es Zeit für eine explorative Analyse, um besser zu verstehen, womit wir es zu tun haben. Abhängig von der Art der Daten ist es evtl. erforderlich, geeignete &#8220;Features&#8221; (Charakteristiken oder Kennzahlen) zu extrahieren oder zusätzlich zu berechnen, wobei Domänenwissen sehr hilfreich ist. Alle diese Schritte sind unter &#8220;Preprocessing&#8221; (Vorverarbeitung) gruppiert <em>(roter Kasten)</em> und die Arbeitsschritte sind nicht linear angeordnet, da wir oft zwischen diesen Schritten hin- und herspringen. Beispielsweise stellen wir bei der Visualisierung des Datensatzes fest, dass es Ausreißer in den Daten gibt, die wir entfernen müssen, oder nachdem neue Features berechnet wurden, gehen wir zurück und visualisieren den Datensatz erneut. Als nächstes kommt der ML-Teil <em>(grüner Kasten)</em>: Normalerweise fängt man mit einem einfachen Modell an, evaluiert es, probiert ein komplexeres Modell aus, experimentiert mit verschiedenen Hyperparametern, &#8230;&#8203; und stellt dann fest, dass man den ML-Werkzeugkasten durch hat, aber kein Modell eine zufriedenstellende Performance zeigt. An diesem Punkt muss man einen Schritt zurück gehen und entweder aussagekräftigere Features berechnen oder, wenn das auch nicht hilft, mehr und/oder bessere Daten sammeln (z.B. mehr Proben, Daten von zusätzlichen Sensoren, eindeutigere Labels usw.). Wenn wir uns schließlich auf die Vorhersagen des Modells verlassen können, gibt es zwei Wege, die man gehen kann: Entweder die Data Science Route, bei der die gewonnen Erkenntnisse an Stakeholder übermittelt werden (was oft zu weiteren Fragen führt). Oder die ML-Software Route, in welcher das endgültige Modell in den Prozess eingebunden wird. Aber Achtung: Die Performance des Modells muss kontinuierlich überwacht werden und es müssen auch in Zukunft weiterhin neue Daten gesammelt werden, damit das Modell immer wieder nachtrainiert werden kann, vor allem falls es Änderungen im Prozess gibt. Insgesamt ist die Arbeit an einem Machine Learning Projekt ein sehr iterativer Prozess.</span></div>
-</div>
-<div class="paragraph">
-<p>Da viele Unternehmen keine standardisierte Dateninfrastruktur besitzen, ist die traurige Wahrheit leider, dass eine Data Scientistin normalerweise (mindestens) etwa 90% ihrer Zeit damit verbringt, die Daten zu sammeln, zu bereinigen und anderweitig vorzuverarbeiten, um sie in ein Format zu bringen worauf die ML-Algorithmen angewendet werden können:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/01c_ds_workflow/data_science_workflow_19.png" alt="image" width="840">
-</div>
-</div>
-<div class="paragraph">
-<p>Auch wenn es manchmal frustrierend ist, ist die Zeit, die man mit der Bereinigung und Vorverarbeitung der Daten verbringt, nie verschwendet, da die ML-Algorithmen nur mit einer soliden Datengrundlage brauchbare Ergebnisse erzielen können.</p>
 </div>
 </div>
 </div>
@@ -1850,32 +2266,14 @@ Einerseits demokratisieren solche Bibliotheken die Verwendung von ML, anderersei
 <img src="images/01c_ds_workflow/data_science_workflow_prepr.png" alt="image" width="840">
 </div>
 </div>
-<div class="paragraph">
-<p>Ein typisches Supervised Learning Problem wäre beispielsweise ein Produktionsprozess, bei dem wir vorhersagen möchten, ob ein unter bestimmten Produktionsbedingungen produziertes Teil Ausschuss ist. Hier beinhalten die gesammelten Daten für jedes produzierte Teil die Prozessbedingungen, unter denen es hergestellt wurde, und ob das resultierende Produkt in Ordnung oder Ausschuss war:</p>
-</div>
-<div class="imageblock text-center">
+<div class="sidebarblock">
 <div class="content">
-<img src="images/02_data/toy_data3.png" alt="image" width="740">
-</div>
-<div class="title"><span class="small">Bei den für diesen Anwendungsfall erhobenen Daten handelt es sich um strukturierte Daten in tabellarischer Form (z.B. in einer Excel-Tabelle). Ein Datenpunkt / eine Probe / eine Beobachtung befindet sich immer in einer Zeile dieser Tabelle.</span></div>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/02_data/toy_data6.png" alt="image" width="740">
-</div>
-<div class="title"><span class="small">Die Spalten der Tabelle enthalten die unterschiedlichen Messwerte/Variablen, welche für jeden Datenpunkt erhoben wurden. Dabei unterscheiden wir zwischen <em>Features</em> (in diesem Fall die Produktionsbedingungen) und <em>Labels</em> (ob das jeweilige Produkt in Ordnung oder Ausschuss war). Features, auch als Matrix \(X\) bezeichnet, sind typischerweise diejenigen Messwerte, die wir ohne Aufwand erhalten, da sie während des Prozesses bereits für andere Zwecke gesammelt werden. Wenn beispielsweise der Bediener der Maschine die Temperatur für die Produktion auf einen bestimmten Wert einstellt, wird dies aufgezeichnet während das Signal an das Heizgerät weitergeleitet wird. Das Sammeln der dazugehörigen Labels, bezeichnet als Vektor \(\mathbf{y}\), ist oft kostspieliger. Um beispielsweise im Produktionsprozess einen Datenpunkt mit dem Label <em>"Ausschuss"</em> zu sammeln, muss (vorsätzlich) ein fehlerhaftes Produkt produziert werden, was uns wertvolle Ressourcen kostet. Ein anderes Beispiel für die mit Labels verbunden Kosten ist die Tatsache, dass Google ein Team von Fachärzten bezahlte, um mehrere Bilder von diabetischer Retinopathie, zu denen es widersprüchliche Meinungen gab, zu diskutieren und neu zu bewerten. Im Supervised Learning werden die Features als Input (Eingabe) für das Modell verwendet, während die Labels die Zielvariable, d.h. der vorhergesagte Output (Ausgabe) darstellen. Im Allgemeinen sollten Features unabhängige Variablen sein (z.B. Einstellungen, die der Bediener nach Belieben wählen kann), während der Zielwert von diesen Eingaben abhängig sein sollte, damit wir ihn vorhersagen können.</span></div>
-</div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Strukturierte vs. Unstrukturierte Daten</dt>
+<dt class="hdlist1">Rohdaten</dt>
 <dd>
-<p>Daten können in verschiedenen Formaten vorliegen und während einige Datentypen evtl. zusätzliche Preprocessing Schritte erfordern, können ML-Algorithmen im Prinzip mit jeder Art von Daten arbeiten.</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/02_data/data_types2.png" alt="image" width="640">
-</div>
-<div class="title"><span class="small">Die wichtigste Unterscheidung bei der Charakterisierung von Daten liegt zwischen <em>strukturierten</em> Daten, das ist jeder Datensatz, der einzelne Variablen enthält, die eindeutige Größen darstellen, und <em>unstrukturierten</em> Daten, die nicht in sinnvolle Variablen unterteilt werden können. Z.B. in Bildern &#8220;erster Pixel von links&#8221; oder in Texten &#8220;10. Wort im 2. Absatz&#8221; würden wir nicht Variablen nennen, im Gegensatz zu &#8220;Fläche in Quadratmetern&#8221; oder &#8220;Anzahl Schlafzimmern&#8221;, womit man sinnvoll eine Wohnung beschreiben könnte. Strukturierte Daten sind oft <em>heterogen</em>, da die verschiedenen Variablen in einem Datensatz typischerweise für sehr unterschiedliche Dinge stehen. Wenn man beispielsweise mit Sensordaten arbeitet enthält ein Datensatz nicht nur Temperaturmessungen, sondern zusätzlich z.B. Druck und Durchflusswerte, die unterschiedliche Einheiten haben und in sehr unterschiedlichen Skalen gemessen werden können. Unstrukturierte Daten hingegen sind <em>homogen</em>, z.B. gibt es keinen qualitativen Unterschied zwischen dem 10. und dem 100. Pixel in einem Bild.</span></div>
-</div>
+<p>können in vielen verschiedenen Formaten vorliegen, z.B. Sensormessungen, Pixelwerte, Text (z.B. HTML-Seite), SAP-Datenbank, &#8230;&#8203;<br>
+&#8594; <em>n</em> Datenpunkte, gespeichert als Zeilen in einem Excel-Spreadsheet, als einzelne Dateien, usw.</p>
 </dd>
 </dl>
 </div>
@@ -1891,15 +2289,8 @@ Einerseits demokratisieren solche Bibliotheken die Verwendung von ML, anderersei
 </tr>
 </table>
 </div>
-<div class="sidebarblock">
-<div class="content">
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Rohdaten</dt>
-<dd>
-<p>können in vielen verschiedenen Formaten vorliegen, z.B. Sensormessungen, Pixelwerte, Text (z.B. HTML-Seite), SAP-Datenbank, &#8230;&#8203;<br>
-&#8594; <em>n</em> Datenpunkte, gespeichert als Zeilen in einem Excel-Spreadsheet, als einzelne Dateien, usw.</p>
-</dd>
 <dt class="hdlist1">Preprocessing</dt>
 <dd>
 <p>Transformation und Anreicherung der Rohdaten vor der Anwendung von ML, zum Beispiel:</p>
@@ -2112,379 +2503,6 @@ Neben der Dokumentation von Datensätzen als Ganzes ist es auch sehr hilfreich, 
 </dd>
 </dl>
 </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_ml_lösungen_überblick">ML Lösungen: Überblick</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Nachdem wir jetzt gesehen haben, wie wir Rohdaten vorverarbeiten können, um sie in das richtige Format für die Anwendung von ML zu bringen, kommen wir nun zum interessanten Teil:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/01c_ds_workflow/data_science_workflow_ml.png" alt="image" width="840">
-</div>
-</div>
-<div class="paragraph">
-<p>ML-Algorithmen können auf Input Daten in verschiedensten Formaten angewendet werden, aber unser Ziel, also der gewünschte Output, bestimmt welche Art von Algorithmus wir für das Problem verwenden sollten:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/01b_intro_ml/ml_goals3.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">Wenn wir einen Datensatz etwas besser verstehen und uns einen Überblick verschaffen wollen, dann können wir zur Visualisierung einen Dimensionsreduktionsalgorithmus aus dem Bereich Unsupervised Learning verwenden. Andere Unsupervised Learning Algorithmen ermöglichen uns, Muster in Daten zu entdecken, wobei es hier darauf ankommt, welche Art von Muster man finden möchte: Mit Algorithmen zur Ausreißer-/Anomalieerkennung (Anomaly Detection) lassen sich einzelne Datenpunkte identifizieren, die stark vom Rest abweichen (z.B. eine defekte Maschine oder eine betrügerische Kreditkartentransaktion). Clustering-Algorithmen wiederum finden Gruppen ähnlicher Datenpunkte (z.B. zur Kundensegmentierung). Wenn wir stattdessen ein Vorhersagemodell möchten, um für einen speziellen Input den entsprechenden Output zu berechnen (z.B. vorhersagen, ob ein Produkt fehlerhaft ist, wenn es unter bestimmten Bedingungen produziert wird), dann brauchen wir dafür einen Algorithmus aus dem Bereich Supervised Learning. In erster Linie wird hier zwischen Regressions- und Klassifikationsalgorithmen unterschieden: Bei Regressionsaufgaben ist die zu prognostizierende Zielgröße kontinuierlich (z.B. Nutzeranzahl, Preis etc.), bei Klassifikationsaufgaben ist die Zielgröße diskret, d.h. sie kann nur einen eindeutigen Wert annehmen und es gibt kein Kontinuum zwischen den verschiedenen Werten (z.B. kann ein Tier auf einem Bild entweder eine Katze oder ein Hund sein, aber nichts dazwischen). Während Unsupervised und Supervised Learning die meisten allgemeinen Anwendungsfälle abdecken, gibt es auch Algorithmen für speziellere Anwendungen, z.B. Empfehlungssysteme (Recommender Systems).</span></div>
-</div>
-<div class="paragraph">
-<p>Einige Beispiele für Input &#8594; Output Aufgaben und welche Art von ML-Algorithmus verwendet werden kann, um sie zu lösen:</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Input \(X\)</th>
-<th class="tableblock halign-left valign-top">Output \(Y\)</th>
-<th class="tableblock halign-left valign-top">ML-Algorithmus Kategorie</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Fragebogenantworten</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Kundensegmentierung</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Clustering</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Sensormessungen</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">alles normal?</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Anomalieerkennung</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Vergangene Nutzung einer Maschine</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Restlebensdauer</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Regression</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">E-Mail</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Spam (ja/nein)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Klassifikation (binär)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Bild</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">welches Tier?</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Klassifikation (mehrere Klassen)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Bisherige Einkäufe des Nutzers</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Produktvorschläge</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Empfehlungssysteme</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Suchanfrage</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">relevante Dokumente</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Information Retrieval</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Audio</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Text</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Spracherkennung</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Text auf Englisch</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Text auf Französisch</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Maschinelle Übersetzung</p></td>
-</tr>
-</tbody>
-</table>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Unsupervised &amp; Supervised Learning</dt>
-<dd>
-<p>Beginnen wir mit einem detaillierteren Blick auf die verschiedenen Unsupervised und Supervised Learning Algorithmen und wie sie uns helfen können:</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/01c_ml_overview/ml_algorithms_12.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">Für die Anwendung von Unsupervised Learning Algorithmen braucht man nur eine Feature Matrix \(X\), während man zum Erlernen eines Vorhersagemodells mit Supervised Learning Algorithmen auch die dazugehörigen Labels \(\mathbf{y}\) benötigt. Auch wenn unser eigentliches Ziel darin besteht, etwas vorherzusagen (also Supervised Learning zu verwenden), kann es dennoch sehr hilfreich sein, zunächst Unsupervised Learning Algorithmen anzuwenden, um den Datensatz besser zu verstehen. Beispielsweise kann man die Daten im Vorfeld mit Dimensionsreduktionsmethoden visualisieren, um alle Datenpunkte und ihre Vielfalt auf einen Blick zu sehen. Anschließend kann man den Datensatz bereinigen, in dem man Ausreißer identifiziert. Bei einem Klassifikationsproblem ist es häufig sinnvoll, die Datenpunkte zuerst zu clustern, um zu überprüfen, in wie weit die angegebenen Klassenlabels mit den natürlich vorkommenden Gruppen in den Daten übereinstimmen. Beispielsweise sieht man dann vielleicht, dass man das Problem vereinfachen kann, in dem man zwei sehr ähnliche Klassen kombiniert.</span></div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Gleicher Datensatz, unterschiedliche Anwendungsfälle</dt>
-<dd>
-<p>Wir veranschaulichen den Nutzen der fünf verschiedenen Arten von Unsupervised und Supervised Learning Algorithmen in dem wir sie auf diesen Beispieldatensatz anwenden:</p>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2858%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-center valign-top">m<sup>2</sup></th>
-<th class="tableblock halign-center valign-top"># Schlafz.</th>
-<th class="tableblock halign-center valign-top"># Bad</th>
-<th class="tableblock halign-center valign-top">Renoviert</th>
-<th class="tableblock halign-center valign-top">&#8230;&#8203;</th>
-<th class="tableblock halign-center valign-top">Preis</th>
-<th class="tableblock halign-center valign-top">Verkauft</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock">125</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">4</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">2000</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">500k</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock">75</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">1990</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">350k</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock">150</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">6</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">2010</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">750k</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">0</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock">35</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">5</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">1999</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">620k</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">0</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock">65</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">3</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">2015</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">220k</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock">100</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">3</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">2003</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">450k</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">0</p></td>
-</tr>
-</tbody>
-</table>
-</dd>
-</dl>
-</div>
-<div class="paragraph text-justify">
-<p><span class="small">Dies ist ein kleiner Musterdatensatz mit strukturierten Daten über verschiedene Wohnungen, wie sie jemand über eine Immobilienwebsite gesammelt haben könnte, z.B. die Größe der Wohnung in Quadratmetern, die Anzahl der Schlafzimmer, die Anzahl der Badezimmer, das Jahr der letzten Renovierung und schließlich den Preis der Wohnung und ob sie zu diesem Preis verkauft wurde (1) oder nicht (0).</span></p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Beispiel Unsupervised Learning: Dimensionsreduktion</dt>
-<dd>
-<p><strong>Ziel:</strong> Datensatz visualisieren</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/01b_housing_example/dimred.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">Der erste Schritt bei der Analyse eines neuen Datensatzes besteht normalerweise darin, diesen zu visualisieren, um einen besseren Überblick über alle Datenpunkte und ihre Vielfalt zu erhalten. Dafür eignet sich ein Dimensionsreduktionsalgorithmus, der die ursprünglichen hochdimensionalen Daten als Input nimmt, wobei jede Spalte (= Feature) in der Tabelle eine Dimension darstellt, und eine niedrigerdimensionale Darstellung der Datenpunkte ausgibt, d.h. eine neue Matrix mit weniger Spalten (normalerweise zwei für eine Visualisierung). Diese beiden neuen Features, in unserem Fall \(z_1\) und \(z_2\) genannt, können jetzt verwendet werden, um einen Scatterplot des Datensatzes zu erstellen. Dabei wird jeder Datenpunkt / Zeile (also in diesem Fall jede Wohnung) als Punkt in diesem neuen 2D-Koordinatensystems dargestellt. Wir können uns diese Darstellung als eine Landkarte unseres Datensatzes vorstellen, die es uns ermöglicht, alle Datenpunkte auf einen Blick zu sehen und evtl. schon interessante Muster zu erkennen, z.B. Gruppen ähnlicher Datenpunkte, die auf dieser 2D-Karte eng beieinander liegen. Aber bitte beachte: was sich hinter diesen neuen Koordinaten verbirgt lässt sich bei den meisten Dimensionsreduktionsmethoden nicht genau nachvollziehen. Insbesondere sind dies nicht einfach die beiden informativsten Originalfeatures, sondern völlig neue Variablen, die die Informationen der ursprünglichen Inputs zusammenfassen. Um den Scatterplot besser interpretieren zu können, ist es oft hilfreich, die Punkte nachträglich mit den Werten einer Variablen einzufärben, wodurch möglicherweise die treibenden Faktoren hinter den auffälligsten Mustern im Datensatz aufgedeckt werden können. In diesem Beispiel hätten wir die Punkte nach dem Preis der entsprechenden Wohnung einfärben können und dadurch gesehen, ob ähnlich bepreiste Wohnungen nah beieinander liegen.</span></div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Beispiel Unsupervised Learning: Anomalieerkennung</dt>
-<dd>
-<p><strong>Ziel:</strong> Ausreißer im Datensatz finden</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/01b_housing_example/anomaly.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">Als nächstes prüfen wir unseren Datensatz auf Ausreißer/Anomalien (Outliers/Anomalies), um diese Datenpunkte dann gegebenenfalls nachträglich zu korrigieren oder zu entfernen. Ein Algorithmus zur Anomalieerkennung gibt für jeden Datenpunkt einen Anomalie-Score aus, der angibt, inwieweit dieser Datenpunkt von der Norm abweicht. Diese Scores können wir auch verwenden, um die 2D-Landkarte unseres Datensatzes aus dem vorherigen Schritt einzufärben. Dadurch werden die Anomalien im Kontext sichtbar. Leider sagt uns ein Anomalieerkennungsalgorithmus nicht, <em>warum</em> ein bestimmter Punkt als Ausreißer erkannt wurde. Ein Data Scientist muss deshalb die gefundenen Anomalien untersuchen und entscheiden, ob diese z.B. aufgrund fehlerhafter Messungen entfernt werden sollten oder ob sie interessante Sonderfälle darstellen. In unserem Beispiel handelt es sich bei dem als Anomalie identifizierten Datenpunkt um eine Wohnung, die angeblich nur eine Größe von 35 \(m^2\), aber gleichzeitig 5 Schlafzimmer hat. Da liegt die Vermutung nahe, dass hier beim Eintragen der Daten ein Fehler passiert ist und die Größe der Wohnung stattdessen 135 \(m^2\) sein sollte.</span></div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Beispiel Unsupervised Learning: Clustering</dt>
-<dd>
-<p><strong>Ziel:</strong> Natürlich vorkommende Gruppen im Datensatz finden</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/01b_housing_example/clustering.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">Als letzte explorative Analyse können wir überprüfen, ob der Datensatz natürlich vorkommende Gruppen enthält. Das funktioniert mit einem Clustering-Algorithmus, der einen Cluster-Index für jeden Datenpunkt zurückgibt, wobei Punkte mit demselben Index in der selben Gruppe sind. Bitte beachte, dass diese Cluster-Indizes nicht geordnet sind und beim erneuten Ausführen des Algorithmus den Datenpunkten möglicherweise andere Nummern zugewiesen werden. Die Datenpunkte, denen vorher die gleiche Nummer zugewiesen wurde, sollten allerdings immer noch im gleichen Cluster sein, nur kann es eben sein, dass dieser Cluster nun &#8216;5&#8217; statt &#8216;3&#8217; heißt. Auch diese Cluster-Indizes können wir zur Einfärbung unserer Daten-Landkarte verwenden, um die Cluster im Kontext zu sehen. Allerdings sagt uns auch ein Clustering-Algorithmus wieder nur, welche Punkte sich ähnlich genug sind, um zusammen gruppiert zu werden, aber nicht, <em>warum</em> die Punkte dem Cluster zugeordnet wurden und was die Cluster bedeuten. Die Data Scientistin muss auch hier wieder die Ergebnisse untersuchen und versuchen zu interpretieren, worin sich die Cluster unterscheiden. In unserem Beispiel könnten die Cluster &#8220;billige Studiowohnungen&#8221;, &#8220;große Familienwohnungen&#8221; und &#8220;luxuriöse Penthouse Wohnungen&#8221; sein. Beim Unsupervised Learning gibt es keine richtige Lösung und ein anderer Clustering-Algorithmus könnte andere Ergebnisse liefern. Verwende einfach die Lösung, die für deinen Anwendungsfall am hilfreichsten ist.</span></div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Beispiel Supervised Learning: Klassifikation</dt>
-<dd>
-<p><strong>Ziel:</strong> Vorhersage eines diskreten Werts für jeden Datenpunkt</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/01b_housing_example/classification.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">Nun könnten wir vorhersagen, ob eine Wohnung zum angegebenen Preis verkauft wird. Da die Variable &#8220;Verkauft&#8221; nur die diskreten Werte &#8216;ja&#8217; (1) oder &#8216;nein&#8217; (0) annehmen kann, ist dies ein binäres Klassifikationsproblem. Ein Klassifikationsmodell nimmt die Attribute einer Wohnung zusammen mit dem Angebotspreis als Input und berechnet dann, ob die Wohnung zu diesem Preis verkauft wird oder nicht. Da wir hier nun die wahren Labels kennen (zumindest für den ursprünglich gesammelten Datensatz), können wir die Genauigkeit des Modells bewerten, indem wir berechnen, wie viele falsche Vorhersagen es generiert. Das ist ein Vorteil beim Supervised Learning: Wir können objektiv bestimmen, wie gut eine Lösung ist, und somit verschiedene Modelle systematisch miteinander vergleichen, während die Data Scientistin beim Unsupervised Learning die Ergebnisse manuell im Detail untersuchen muss, um sie zu bewerten.</span></div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Beispiel Supervised Learning: Regression</dt>
-<dd>
-<p><strong>Ziel:</strong> Vorhersage eines kontinuierlichen Werts für jeden Datenpunkt</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/01b_housing_example/regression.png" alt="image" width="760">
-</div>
-<div class="title"><span class="small">Schließlich möchten wir vielleicht für eine neue Wohnung einen angemessenen Preis vorhersagen. Da Preise kontinuierliche Werte sind, ist dies ein Regressionsproblem. Das Modell verwendet die Attribute der Wohnungen als Input und schlägt dann einen geeigneten Preis vor. Da uns für die erhobenen Daten die tatsächlichen (bzw. vom Immobilienmakler bestimmten) Preise vorliegen, können wir erneut berechnen, inwieweit das Regressionsmodell mit seinen Schätzungen vom Originalpreis abweicht.</span></div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Zusammengefasst (siehe auch: <a href="https://franziskahorn.de/mlws_resources/algorithm_cheatsheet.pdf">Übersichtstabelle als PDF</a>):</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Existierende ML-Lösungen &amp; entsprechende Outputs (für einen Datenpunkt): </dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p><span class="underline">Dimensionsreduktion:</span> (normalerweise) <strong>2D-Koordinaten</strong> (um den Datensatz zu visualisieren)</p>
-</li>
-<li>
-<p><span class="underline">Ausreißer-/Anomalieerkennung:</span> <strong>Anomalie-Score</strong> (normalerweise ein Wert zwischen 0 und 1, der angibt, inwiefern dieser Punkt von der Norm abweicht)</p>
-</li>
-<li>
-<p><span class="underline">Clustering:</span> <strong>Cluster-Index</strong> (eine Zahl zwischen 0 und <em>k-1</em>, die angibt, zu welchem der <em>k</em> Cluster ein Datenpunkt gehört (oder -1 für Ausreißer))</p>
-</li>
-<li>
-<p><span class="underline">Regression:</span> ein <strong>kontinuierlicher Wert</strong> (eine numerischer Größe, die vorhergesagt werden soll)</p>
-</li>
-<li>
-<p><span class="underline">Klassifikation:</span> ein <strong>diskreter Wert</strong> (eine von mehreren sich gegenseitig ausschließenden Kategorien)</p>
-</li>
-<li>
-<p><span class="underline">Empfehlungssysteme &amp; Information Retrieval:</span> <strong>Rangliste einer Menge von Elementen</strong> (Empfehlungssysteme ordnen beispielsweise die Produkte nach Relevanz für den jeweiligen Nutzer; Information Retrieval Systeme sortieren Elemente nach ihrer Ähnlichkeit zu einer gegebenen Suchanfrage)</p>
-</li>
-<li>
-<p>andere <span class="underline">Deep Learning</span> Lösungen: <strong>unstrukturierte Outputs wie Text oder Bild</strong> (z.B. Spracherkennung, maschinelle Übersetzung, Bild Generierung oder Neural Style Transfer)</p>
-</li>
-</ul>
-</div>
-</dd>
-</dl>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-ML-Algorithmen werden anhand des Outputs kategorisiert, den sie für eine Eingabe generieren. Wenn man ein &#8216;Input &#8594; Output&#8217;-Problem mit einem anderen als den oben aufgeführten Outputs lösen möchte, wird das wahrscheinlich auf ein mehrjähriges Forschungsprojekt hinauslaufen&#8201;&#8212;&#8201;wenn das Problem überhaupt mit ML gelöst werden kann!
-</td>
-</tr>
-</table>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<p>Um komplexe Probleme zu lösen, benötigt man möglicherweise mehrere Algorithmen:</p>
-</div>
-<div class="paragraph">
-<p>Beispiel: virtueller Assistent (z.B. Siri oder Alexa): &#8220;<em>Hey &lt;Sprachassistent&gt;, erzähl mir einen Witz!</em>&#8221; &#8594; ein zufälliger Witz</p>
-</div>
-<div class="paragraph">
-<div class="title"><span class="small">Das sieht zwar zunächst wie ein Input-Output-Problem aus, es direkt zu lösen wäre allerdings sehr schwierig und ineffizient. Stattdessen zerlegen wir das Problem in kleinere Teilaufgaben, die mit bestehenden Algorithmen gelöst werden können:</span></div>
-<p></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Triggerwort Erkennung:</strong><br>
-Audio &#8594; &#8220;Hey &lt;Sprachassistent&gt;&#8221; (ja/nein)?</p>
-</li>
-<li>
-<p><strong>Spracherkennung:</strong><br>
-Audio &#8594; Text</p>
-</li>
-<li>
-<p><strong>Klassifizierung der Absicht:</strong><br>
-Text &#8594; (Witz/Timer/Wettervorhersage/&#8230;&#8203;)?</p>
-</li>
-<li>
-<p><strong>Führe spezifisches Programm aus (z.B. wähle zufälligen Witz aus)</strong></p>
-</li>
-<li>
-<p><strong>Sprachgenerierung:</strong><br>
-Text &#8594; Audio</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<div class="title"><span class="small">Zunächst muss der Smart Speaker wissen, ob er mit einem bestimmten Triggerwort (z.B. &#8220;Hey Siri&#8221;) angesprochen wurde. Dies ist eine einfache binäre Klassifikation (ja/nein), die normalerweise auf dem Gerät selbst ausgeführt wird, da wir nicht möchten, dass alles was wir sagen permanent in die Cloud gestreamt wird. Als nächstes werden die nach dem Triggerwort gesprochenen Wörter in Text übersetzt. Text ist einfacher zu handhaben, da beispielsweise Variationen aufgrund unterschiedlicher Akzente entfernt werden. Anhand dieses Textes wird die Absicht des Nutzers erkannt, also welche der verschiedenen Funktionalitäten des virtuellen Assistenten genutzt werden soll (z.B. Witz erzählen, Musik abspielen, Wecker stellen etc.). Dies ist ein Multiclass-Klassifikationsproblem. Zur Ausführung des Befehls wird kein ML benötigt, sondern ein normales, aufgabenspezifisches Programm, das als App auf dem Gerät installiert ist, z.B. wird ein Witz aus einer Datenbank ausgewählt oder ein Timer gesetzt usw.. Anschließend muss der Output des ausgeführten Programms wieder in ein Audiosignal umgewandelt werden. Ein ML-Modell kann dabei helfen, flüssig gesprochenen Text zu erzeugen&#8201;&#8212;&#8201;und in naher Zukunft vielleicht auch mit der Stimme von Morgan Freeman oder einer anderen berühmten Person, wie bei &#8220;Deep Fake&#8221;-Anwendungen.</span></div>
-<p><br>
-&#8658; Generell sollte man zunächst darüber nachzudenken, ob man ein Problem in leichter zu lösende Teilprobleme zerlegen kann, da es dafür oft schon große Datensätze oder sogar fertige Modelle gibt. Ein Modell für Spracherkennung kann beispielsweise zusätzlich auf Hörbüchern und transkribierten politische Reden trainiert werden, nicht nur auf den Daten, die von den Sprachassistent-Nutzern gesammelt wurden.</p>
-</div>
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-caution" title="Caution"></i>
-</td>
-<td class="content">
-Wenn ein ML-Modell als Input den Output eines anderen ML-Modells erhält, bedeutet dies, dass wir, sobald wir eine neue Version des ersten ML-Modells verwenden, auch die folgenden Modelle neu trainieren sollten, da diese Modelle dann evtl. leicht andere Inputs erhalten, d.h. wir es mit einem <a href="#_fehler_5_daten_konzept_drifts">Daten Drift</a> zu tun haben.
-</td>
-</tr>
-</table>
 </div>
 </div>
 </div>

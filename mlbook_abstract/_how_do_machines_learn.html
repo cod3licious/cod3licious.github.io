@@ -928,8 +928,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.5,</span>
-<span id="revdate">2022-08-13</span>
+<span id="revnumber">version 1.6,</span>
+<span id="revdate">2022-08-28</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -942,19 +942,19 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </li>
 <li><a href="_what_is_ml.html">What is ML?</a>
 </li>
-<li><a href="_how_do_machines_learn.html"><span class="toc-current">How do machines &#8220;learn&#8221;?</span></a>
-</li>
 <li><a href="_ml_history_why_now.html">ML history: Why now?</a>
 </li>
-<li><a href="_when_should_you_use_ml.html">When should you use ML?</a>
+<li><a href="_how_do_machines_learn.html"><span class="toc-current">How do machines &#8220;learn&#8221;?</span></a>
+<ul class="sectlevel3">
+<li><a href="_how_do_machines_learn.html#_unsupervised_learning">(Un)Supervised Learning</a>
 </li>
-<li><a href="_solving_problems_with_ml_workflow.html">Solving problems with ML: Workflow</a>
+</ul>
+</li>
+<li><a href="_solving_problems_with_ml.html">Solving problems with ML</a>
 </li>
 </ul>
 </li>
 <li><a href="_data_preprocessing.html">Data &amp; Preprocessing</a>
-</li>
-<li><a href="_ml_solutions_overview.html">ML Solutions: Overview</a>
 </li>
 <li><a href="_supervised_learning.html">Supervised Learning</a>
 </li>
@@ -1028,6 +1028,190 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="sidebarblock">
 <div class="content">
 <div class="paragraph">
+<p><strong>Features &amp; Labels</strong></p>
+</div>
+<div class="paragraph">
+<p>A production process, where we want to predict whether a produced part is scrap given certain production conditions, is an example of a typical supervised learning problem. Here, the collected data for each produced part includes the process conditions under which it was produced, as well as the outcome, i.e., whether the product was okay or scrap:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/02_data/toy_data3.png" alt="image" width="740">
+</div>
+<div class="title"><span class="small">The data collected for this use case is structured data in a tabular form (e.g., in an excel sheet). One data point / sample / observation is always in one row of this table.</span></div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/02_data/toy_data6.png" alt="image" width="740">
+</div>
+<div class="title"><span class="small">The columns of the table contain the different measurements / variables that were collected for each sample. Here we distinguish between <em>features</em> (in this case the production conditions) and <em>labels</em> (whether the product produced under these conditions is okay or scrap). Features, also denoted as a matrix \(X\), are typically those measurements that we get basically for free, as they are often collected during the process for other purposes anyways. For example, when the operator of the machine sets the temperature for the production to a certain value, this is recorded as the signal is passed along to the heating unit. The corresponding labels, denoted as a vector \(\mathbf{y}\), are often more expensive to collect. For example, in the production process, to collect a data point with the label <em>"scrap"</em>, we have to (intentionally) produce a broken product, costing us valuable resources. Another example: Google had to pay a team of specialist doctors to discuss and re-label some of the diabetic retinopathy images about which there existed conflicting opinions.</span></div>
+</div>
+<div class="paragraph">
+<p>In the supervised learning setup, the features are used as the input to the model, while the labels constitute the target variable, i.e., the predicted output. Generally, features should be independent variables (e.g., settings that the operator can choose as he wishes), while the target value should be dependent on these inputs&#8201;&#8212;&#8201;otherwise we can&#8217;t predict it from these inputs alone.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_unsupervised_learning">(Un)Supervised Learning</h4>
+<div class="paragraph">
+<p>Let&#8217;s start with a more detailed look at the different unsupervised &amp; supervised learning algorithms and what they are good for:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/01c_ml_overview/ml_algorithms_12.png" alt="image" width="840">
+</div>
+<div class="title"><span class="small">To apply unsupervised learning algorithms, we only need a feature matrix \(X\), while learning a prediction model with supervised learning algorithms additionally requires the corresponding labels \(\mathbf{y}\). Even if our ultimate goal is to predict something (i.e., use supervised learning), it can still be helpful to first use unsupervised learning to get a better understanding of the dataset, for example, by visualizing the data with dimensionality reduction methods to see all samples and their diversity at a glance, by identifying outliers to clean the dataset, or, for classification problems, by first clustering the samples to check whether the given class labels match the naturally occurring groups in the data or if, e.g., two very similar classes could be combined to simplify the problem.</span></div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Same dataset, different use cases</dt>
+<dd>
+<p>To illustrate the usefulness of the five different types of unsupervised and supervised learning algorithms, lets apply them to this example dataset:</p>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2858%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-center valign-top">m<sup>2</sup></th>
+<th class="tableblock halign-center valign-top"># Bedr</th>
+<th class="tableblock halign-center valign-top"># Bath</th>
+<th class="tableblock halign-center valign-top">Renovated</th>
+<th class="tableblock halign-center valign-top">&#8230;&#8203;</th>
+<th class="tableblock halign-center valign-top">Price</th>
+<th class="tableblock halign-center valign-top">Sold</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">125</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">2000</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">500k</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">75</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1990</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">350k</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">150</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">6</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">2010</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">750k</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">35</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">5</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1999</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">620k</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">65</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">2015</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">220k</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">100</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">2003</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">450k</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</div>
+<div class="paragraph text-justify">
+<p><span class="small">This is a small toy dataset with structured data about different apartments, which someone might have gathered from a real estate website. It includes the size of the apartment in square meters, the number of bedrooms, the number of bathrooms, the year it was last renovated, and finally the price of the listing and whether it was sold for this price (1) or not (0).</span></p>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Example Unsupervised Learning: Dimensionality Reduction</dt>
+<dd>
+<p><strong>Goal:</strong> Visualize the dataset</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/01b_housing_example/dimred.png" alt="image" width="840">
+</div>
+<div class="title"><span class="small">The first step when working with a new dataset is usually to visualize it, to get a better overview of all the samples and their diversity. This is done with a dimensionality reduction algorithm, which takes the original high dimensional data as input, where each column (= feature) in the table is one dimension, and outputs a lower dimensional representation of the samples, i.e., a new matrix with fewer columns (usually two for a visualization). With these two new features, here called \(z_1\) and \(z_2\), we can create a scatter plot of the dataset, where each sample / row (in this case each apartment) is represented as one point in this new 2D coordinate system. We can think of this plot as a map of our dataset that enables us to view all data points at a glance. This plot often shows interesting patterns, for example, groups of similar points, which would be located close to each other in this 2D map. Please note that for most dimensionality reduction methods, it is not possible to describe what is behind this new coordinate system. Specifically, these are not just the two most informative original features, but completely new dimensions that summarize the information of the original inputs. To better interpret these plots, it is helpful to color the dots afterwards by some variable, which can then reveal the driving factors behind the most salient patterns in the dataset. In this example, we could have used the price of each apartment to color the respective dot in the map, which might then reveal that similarly priced apartments are arranged next to each other.</span></div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Example Unsupervised Learning: Anomaly Detection</dt>
+<dd>
+<p><strong>Goal:</strong> Find outliers in the dataset</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/01b_housing_example/anomaly.png" alt="image" width="840">
+</div>
+<div class="title"><span class="small">Next, we can check the dataset for outliers and then subsequently correct or remove these samples. An outlier detection algorithm outputs for each sample an anomaly score, which indicates whether this data point deviates from the norm. We can use these scores to colorize the 2D map of the dataset generated in the previous step to see the anomalies in context. One drawback is that an anomaly detection algorithm does not tell us <em>why</em> it considers an individual point an outlier. A data scientist needs to examine the points identified as outlier to see, e.g., if these should be removed due to flawed measurements or if they constitute some interesting edge cases. In this example, the sample identified as an anomaly is an apartment that supposedly has a size of only 35 \(m^2\), but at the same time 5 bedrooms, i.e., most likely the person that originally entered the data made a mistake and the size of the listing should actually be 135 \(m^2\).</span></div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Example Unsupervised Learning: Clustering</dt>
+<dd>
+<p><strong>Goal:</strong> Find naturally occurring groups in the dataset</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/01b_housing_example/clustering.png" alt="image" width="840">
+</div>
+<div class="title"><span class="small">We can also check if the dataset contains naturally occurring groups. This is accomplished with a clustering algorithm, which returns a cluster index for each sample, where points with the same index are in the same cluster. Please note that these cluster indices are not ordered and when running the algorithm again, the samples might be assigned different numbers, however, the groups of samples that were assigned the same number should still be in a cluster together, i.e., this cluster might now just be called &#8216;5&#8217; instead of &#8216;3&#8217;. These cluster indices can again be used to colorize the 2D map of the dataset to see the clusters in context. While a clustering algorithm groups similar points together, it does not tell us <em>why</em> the points were assigned to a cluster and what this cluster means. Therefore, the data scientist again needs to examine the results to try to describe the different clusters. In our example, the clusters might be &#8220;cheap studio apartments&#8221;, &#8220;large family apartments&#8221;, and &#8220;luxurious penthouses&#8221;. In unsupervised learning, there is no correct solution and a different algorithm might return different results. Just use the solution that is most helpful for your use case.</span></div>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
 <p><strong>Unsupervised learning has no ground truth</strong></p>
 </div>
 <div class="paragraph">
@@ -1044,6 +1228,38 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 <div class="paragraph">
 <p>It is up to the data scientist to examine the results of an unsupervised learning algorithm and make sense of them. And if they don&#8217;t match our expectations, we can simply try a different algorithm.</p>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Example Supervised Learning: Classification</dt>
+<dd>
+<p><strong>Goal:</strong> Predict a discrete value for each data point</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/01b_housing_example/classification.png" alt="image" width="840">
+</div>
+<div class="title"><span class="small">Next, we can predict whether an apartment will be sold for the listed price. Since the variable &#8220;sold&#8221; only takes on the discrete values &#8216;yes&#8217; (1) or &#8216;no&#8217; (0), this is a binary classification problem. A classification model uses the attributes of an apartment together with the listing&#8217;s price as inputs and predicts whether the apartment will be sold for this price. Since we have the true labels available for the initially collected dataset, we can evaluate how well the model performed by computing the number of wrong predictions it generated. This is the nice thing about supervised learning: We can objectively determine how good a solution is and benchmark different models against each other, while in unsupervised learning the data scientist needs to manually examine the results to make sense of them.</span></div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Example Supervised Learning: Regression</dt>
+<dd>
+<p><strong>Goal:</strong> Predict a continuous value for each data point</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/01b_housing_example/regression.png" alt="image" width="760">
+</div>
+<div class="title"><span class="small">Finally, we can predict a reasonable price for a listing. Since prices are continuous values, this is a regression problem, where the model uses as inputs the attributes of the apartments and predicts a suitable price. Again we have the true prices available and can compute the deviation of the regression model&#8217;s estimates from the original price set by a real estate agent.</span></div>
 </div>
 </div>
 </div>
@@ -1110,8 +1326,9 @@ In most of the book, the terms &#8220;ML algorithm&#8221; and &#8220;ML model&#8
 </table>
 </div>
 </div>
+</div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_what_is_ml.html">What is ML?</a> | ↑ Up: <a href="_introduction.html">Introduction</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_ml_history_why_now.html">ML history: Why now?</a> →</p>
+<p>← Previous: <a href="_ml_history_why_now.html">ML history: Why now?</a> | ↑ Up: <a href="_introduction.html">Introduction</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_solving_problems_with_ml.html">Solving problems with ML</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

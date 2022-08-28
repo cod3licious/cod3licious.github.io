@@ -928,8 +928,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.5,</span>
-<span id="revdate">2022-08-13</span>
+<span id="revnumber">version 1.6,</span>
+<span id="revdate">2022-08-28</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -942,19 +942,15 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </li>
 <li><a href="_what_is_ml.html">What is ML?</a>
 </li>
-<li><a href="_how_do_machines_learn.html">How do machines &#8220;learn&#8221;?</a>
-</li>
 <li><a href="_ml_history_why_now.html">ML history: Why now?</a>
 </li>
-<li><a href="_when_should_you_use_ml.html">When should you use ML?</a>
+<li><a href="_how_do_machines_learn.html">How do machines &#8220;learn&#8221;?</a>
 </li>
-<li><a href="_solving_problems_with_ml_workflow.html">Solving problems with ML: Workflow</a>
+<li><a href="_solving_problems_with_ml.html">Solving problems with ML</a>
 </li>
 </ul>
 </li>
 <li><a href="_data_preprocessing.html">Data &amp; Preprocessing</a>
-</li>
-<li><a href="_ml_solutions_overview.html">ML Solutions: Overview</a>
 </li>
 <li><a href="_supervised_learning.html">Supervised Learning</a>
 </li>
@@ -969,8 +965,28 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="sect2">
 <h3 id="_data_is_the_new_oil">Data is the new oil!?</h3>
 <div class="paragraph">
-<p>Let&#8217;s take a step back. Because it all begins with data.
-You&#8217;ve probably heard this claim before: &#8220;Data is the new oil!&#8221;. This suggests that data is valuable. But is it?<br>
+<p>Let&#8217;s take a step back. Because it all begins with data.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Structured vs. unstructured data</dt>
+<dd>
+<p>Data can come in various forms and while some data types require additional preprocessing steps, in principle ML algorithms can be used with all kinds of data.</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/02_data/data_types2.png" alt="image" width="640">
+</div>
+<div class="title"><span class="small">The main distinction when characterizing data is made between <em>structured</em> data, which is any dataset that contains individual measurements/variables that represent unique quantities, and <em>unstructured</em> data, which can not be subdivided into meaningful variables. For example, in images &#8220;first pixel from the left&#8221; or in texts &#8220;10th word in the second paragraph&#8221; is not what we would call a variable, while &#8220;size in square meters&#8221; and &#8220;number of bedrooms&#8221; are useful quantities to describe an apartment. Structured data is often <em>heterogeneous</em>, since the different variables in a dataset typically stand for very different things. For example, when working with sensor data, a dataset normally does not consist of only temperature measurements, but additionally it could contain, e.g., pressure and flow values, which have different units and measurement scales. Unstructured data, on the other hand, is <em>homogeneous</em>, e.g., there is no qualitative difference between the 10th and the 100th pixel in an image.</span></div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>You&#8217;ve probably heard this claim before: &#8220;Data is the new oil!&#8221;. This suggests that data is valuable. But is it?<br>
 The reason why oil is considered valuable is because we have important use cases for it: powering our cars, heating our homes, and producing plastics or fertilizers.
 Similarly, our data is only as valuable as what we make of it. So what can we use data for?</p>
 </div>
@@ -1017,37 +1033,6 @@ Performing such an exploratory data analysis is also helpful at the start of an 
 <span class="underline">Example:</span> <em>A computer vision system installed as part of an assembly line automatically recognizes and discards products with defects/scratches. Previously, a human had to sit there all day and inspect each produced part manually.</em></p>
 </li>
 </ol>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<p>Analogous to the tools used in a traditional manufacturing process to build something, you can think of <strong>ML algorithms as tools to generate value from data</strong>:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01b_intro_ml/ml_carpentry_analogy2.png" alt="image" width="840">
-</div>
-</div>
-<div class="paragraph">
-<p>In order to successfully apply ML, you should ask yourself some important questions:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong><em>What could be valuable?</em></strong> For example, this could be a new feature for an existing product, like Face ID as a new way to unlock your phone.</p>
-</li>
-<li>
-<p><strong><em>What raw inputs are needed?</em></strong> We can&#8217;t build a wooden chair using only fabric and metal or a few twigs we found in the woods. Similarly, depending on what we want to achieve with ML, we also need the right data (quality &amp; quantity) to apply the algorithms in the first place. This can be especially tricky since in most cases we can&#8217;t just buy the data we need like wood at a hardware store, but we have to collect it ourselves, i.e., grow our own trees, which can take some time.</p>
-</li>
-<li>
-<p><strong><em>Which ML algorithm is the right tool for the task?</em></strong> (More on the different kinds of ML algorithms in the next sections.)</p>
-</li>
-<li>
-<p>Do I or my employees have the <strong><em>necessary skills and enough compute power</em></strong> to accomplish this in practice?</p>
-</li>
-</ul>
-</div>
-</div>
 </div>
 </div>
 <div class="paragraph nav-footer">

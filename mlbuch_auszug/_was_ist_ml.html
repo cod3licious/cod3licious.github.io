@@ -928,8 +928,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.4,</span>
-<span id="revdate">2022-08-13</span>
+<span id="revnumber">version 1.6,</span>
+<span id="revdate">2022-08-28</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -942,19 +942,15 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </li>
 <li><a href="_was_ist_ml.html"><span class="toc-current">Was ist ML?</span></a>
 </li>
-<li><a href="_wie_lernen_maschinen.html">Wie &#8220;lernen&#8221; Maschinen?</a>
-</li>
 <li><a href="_ml_geschichte_warum_jetzt.html">ML Geschichte: Warum jetzt?</a>
 </li>
-<li><a href="_wann_sollte_man_ml_verwenden.html">Wann sollte man ML verwenden?</a>
+<li><a href="_wie_lernen_maschinen.html">Wie &#8220;lernen&#8221; Maschinen?</a>
 </li>
-<li><a href="_probleme_mit_ml_lösen_workflow.html">Probleme mit ML lösen: Workflow</a>
+<li><a href="_mit_ml_probleme_lösen.html">Mit ML Probleme lösen</a>
 </li>
 </ul>
 </li>
 <li><a href="_daten_preprocessing.html">Daten &amp; Preprocessing</a>
-</li>
-<li><a href="_ml_lösungen_überblick.html">ML Lösungen: Überblick</a>
 </li>
 <li><a href="_supervised_learning.html">Supervised Learning</a>
 </li>
@@ -1009,10 +1005,28 @@ Vereinfacht kann man sich einen <strong>Algorithmus</strong> als <strong>Strateg
 <div class="title"><span class="small">Beispiel &#8220;Input &#8594; Output&#8221; ML Probleme: Erkennen von Objekten in Bildern; Übersetzen von Text von einer Sprache in eine andere; Bestimmen eines guten nächsten Zuges angesichts des aktuellen Zustands eines Go-Boards; Gruppieren ähnlicher Nutzer/Kunden anhand verschiedener Informationen über sie, wie z.B. Umfrageantworten (im Marketing als Kundensegmentierung bezeichnet dient dies dazu z.B. unterschiedliche Kundengruppen in sozialen Medien mit spezifischen Werbekampagnen anzusprechen).</span></div>
 </div>
 <div class="paragraph">
-<p>Welche <strong>Art von Output</strong> ein ML Algorithmus erzeugt, hängt von der <a href="_ml_lösungen_überblick.html">Art des Algorithmus</a> ab.</p>
+<p>Während in den obigen Beispielen ein (entsprechend geschulter) Mensch zur jeweiligen Eingabe in der Regel leicht die richtige Ausgabe erzeugt (z.B. kann sogar ein kleines Kind die Katze im ersten Bild erkennen), fällt es Menschen oft schwer zu beschreiben, <em>wie</em> sie zur richtigen Antwort gekommen sind (woran erkennt man, dass dies eine Katze und kein kleiner Hund ist? an den spitzen Ohren? den Schnurrhaaren?). Im Gegensatz dazu <strong>lernen ML-Algorithmen solche Regeln aus den gegebenen Beispieldaten</strong>.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>ML vs. herkömmliche Software</strong></p>
 </div>
 <div class="paragraph">
-<p>Während in den obigen Beispielen ein (entsprechend geschulter) Mensch zur jeweiligen Eingabe in der Regel leicht die richtige Ausgabe erzeugt (z.B. kann sogar ein kleines Kind die Katze im ersten Bild erkennen), fällt es Menschen oft schwer zu beschreiben, <em>wie</em> sie zur richtigen Antwort gekommen sind (woran erkennt man, dass dies eine Katze und kein kleiner Hund ist? an den spitzen Ohren? den Schnurrhaaren?). Im Gegensatz dazu <strong>lernen ML-Algorithmen solche Regeln aus den gegebenen Beispieldaten</strong>.</p>
+<p>Während man <strong>herkömmliche Software</strong>-Lösungen dazu verwenden kann, um Aufgaben zu automatisieren, bei denen eine vordefinierte Abfolge von Aktionen nach einigen <strong>festgeschriebenen Regeln</strong> ausgeführt wird (z.B. &#8220;Eine Tür soll sich öffnen, <em>wenn</em> ein Objekt eine Lichtschranke durchquert und sich 20 Sekunden später wieder schließen&#8221;), kann man mit maschinellem Lernen <strong>&#8220;Input &#8594; Output&#8221;-Aufgaben automatisieren</strong>, für die es sonst <strong>schwierig wäre, solche Regeln aufzustellen</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Die Qualitätskontrolle in einer Keks-Fabrik ist ein Beispiel für eine solche &#8220;Input (Keks) &#8594; Output (ok/fehlerhaft)&#8221;-Aufgabe: Während z.B. zerbrochene Kekse automatisch aussortiert werden könnten, indem man überprüft, dass jeder Keks etwa 15g wiegt, ist es schwierig, Regeln zu formulieren, die alle möglichen Produktionsfehler zuverlässig abfangen. Also müsste entweder ein Mensch die Produktionslinie beobachten, um z.B. zusätzlich verbrannte Kekse zu erkennen, oder man könnte Bilder von den Keksen machen und sie als Input für ein Machine Learning Modell verwenden, um die fehlerhaften Kekse zu erkennen:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/01b_intro_ml/input_output_solving_cookie3.png" alt="image" width="780">
+</div>
+</div>
+<div class="paragraph">
+<p>Um dieses Problem mit ML zu lösen, muss zunächst ein großer Datensatz mit Fotos vieler guter, aber auch allerlei fehlerhafter Kekse zusammengestellt werden, inklusive der entsprechenden Annotationen, also einem Label für jedes Bild, ob es einen guten oder fehlerhaften Keks zeigt (aber nicht unbedingt die Art des Fehlers). Aus diesen Beispielen kann dann ein ML-Algorithmus lernen, zwischen guten und fehlerhaften Keksen zu unterscheiden.</p>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p>Die unterschiedlichen Algorithmen bilden unseren <strong>ML Werkzeugkasten</strong>:</p>
@@ -1023,9 +1037,185 @@ Vereinfacht kann man sich einen <strong>Algorithmus</strong> als <strong>Strateg
 </div>
 <div class="title"><span class="small">ML selbst ist ein Teilbereich der Künstlichen Intelligenz (KI/AI), das derzeit zwar häufiger verwendete Buzzword, jedoch basieren alle wirklich interessanten Anwendungen, z.B. die initial gezeigten Beispiele, tatsächlich auf ML. Zu KI gehören ansonsten zum Beispiel noch einige Suchalgorithmen, die beim Bau der ersten Schachcomputer verwendet wurden. ML kann wiederum in drei Hauptbereiche unterteilt werden, Unsupervised (&#8220;Unüberwachtes&#8221;), Supervised (&#8220;Überwachtes&#8221;) und Reinforcement (&#8220;Bestärkendes&#8221;) Learning. Das Buzzword &#8220;Deep Learning&#8221; ist außerdem ein Überbegriff für neuronale Netzwerkmodelle. Einige der einfachsten im ML verwendeten Algorithmen, wie die lineare Regression oder PCA (sehr ähnlich der Faktorenanalyse), werden auch von Statistikern verwendet, die jedoch auch andere Werkzeuge wie Hypothesentests verwenden, welche keine Regeln oder Muster aus Daten lernen. Die meisten Data Scientists verwenden viele Methoden aus ML und Statistik, aber auch zusätzliche Werkzeuge wie A/B-Tests, z.B. um zu überprüfen, ob ein roter oder grüner &#8220;Kaufen&#8221;-Button auf einer Website mehr Umsatz generiert.</span></div>
 </div>
+<div class="paragraph">
+<p>ML-Algorithmen können auf Input Daten in verschiedensten Formaten angewendet werden, aber unser Ziel, also der gewünschte Output, bestimmt welche <strong>Art von Algorithmus</strong> wir für das Problem verwenden sollten:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/01b_intro_ml/ml_goals3.png" alt="image" width="840">
+</div>
+<div class="title"><span class="small">Wenn wir einen Datensatz etwas besser verstehen und uns einen Überblick verschaffen wollen, dann können wir zur Visualisierung einen Dimensionsreduktionsalgorithmus aus dem Bereich Unsupervised Learning verwenden. Andere Unsupervised Learning Algorithmen ermöglichen uns, Muster in Daten zu entdecken, wobei es hier darauf ankommt, welche Art von Muster man finden möchte: Mit Algorithmen zur Ausreißer-/Anomalieerkennung (Anomaly Detection) lassen sich einzelne Datenpunkte identifizieren, die stark vom Rest abweichen (z.B. eine defekte Maschine oder eine betrügerische Kreditkartentransaktion). Clustering-Algorithmen wiederum finden Gruppen ähnlicher Datenpunkte (z.B. zur Kundensegmentierung). Wenn wir stattdessen ein Vorhersagemodell möchten, um für einen speziellen Input den entsprechenden Output zu berechnen (z.B. vorhersagen, ob ein Produkt fehlerhaft ist, wenn es unter bestimmten Bedingungen produziert wird), dann brauchen wir dafür einen Algorithmus aus dem Bereich Supervised Learning. In erster Linie wird hier zwischen Regressions- und Klassifikationsalgorithmen unterschieden: Bei Regressionsaufgaben ist die zu prognostizierende Zielgröße kontinuierlich (z.B. Nutzeranzahl, Preis etc.), bei Klassifikationsaufgaben ist die Zielgröße diskret, d.h. sie kann nur einen eindeutigen Wert annehmen und es gibt kein Kontinuum zwischen den verschiedenen Werten (z.B. kann ein Tier auf einem Bild entweder eine Katze oder ein Hund sein, aber nichts dazwischen). Während Unsupervised und Supervised Learning die meisten allgemeinen Anwendungsfälle abdecken, gibt es auch Algorithmen für speziellere Anwendungen, z.B. Empfehlungssysteme (Recommender Systems).</span></div>
+</div>
+<div class="paragraph">
+<p>Einige Beispiele für Input &#8594; Output Aufgaben und welche Art von ML-Algorithmus verwendet werden kann, um sie zu lösen:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Input \(X\)</th>
+<th class="tableblock halign-left valign-top">Output \(Y\)</th>
+<th class="tableblock halign-left valign-top">ML-Algorithmus Kategorie</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fragebogenantworten</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kundensegmentierung</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clustering</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sensormessungen</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">alles normal?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Anomalieerkennung</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Vergangene Nutzung einer Maschine</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Restlebensdauer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Regression</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">E-Mail</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Spam (ja/nein)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Klassifikation (binär)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bild</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">welches Tier?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Klassifikation (mehrere Klassen)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bisherige Einkäufe des Nutzers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Produktvorschläge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Empfehlungssysteme</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Suchanfrage</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">relevante Dokumente</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Information Retrieval</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Audio</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Spracherkennung</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Text auf Englisch</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Text auf Französisch</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maschinelle Übersetzung</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Zusammengefasst (siehe auch: <a href="https://franziskahorn.de/mlws_resources/algorithm_cheatsheet.pdf">Übersichtstabelle als PDF</a>):</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Existierende ML-Lösungen &amp; entsprechende Outputs (für einen Datenpunkt): </dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p><span class="underline">Dimensionsreduktion:</span> (normalerweise) <strong>2D-Koordinaten</strong> (um den Datensatz zu visualisieren)</p>
+</li>
+<li>
+<p><span class="underline">Ausreißer-/Anomalieerkennung:</span> <strong>Anomalie-Score</strong> (normalerweise ein Wert zwischen 0 und 1, der angibt, inwiefern dieser Punkt von der Norm abweicht)</p>
+</li>
+<li>
+<p><span class="underline">Clustering:</span> <strong>Cluster-Index</strong> (eine Zahl zwischen 0 und <em>k-1</em>, die angibt, zu welchem der <em>k</em> Cluster ein Datenpunkt gehört (oder -1 für Ausreißer))</p>
+</li>
+<li>
+<p><span class="underline">Regression:</span> ein <strong>kontinuierlicher Wert</strong> (eine numerischer Größe, die vorhergesagt werden soll)</p>
+</li>
+<li>
+<p><span class="underline">Klassifikation:</span> ein <strong>diskreter Wert</strong> (eine von mehreren sich gegenseitig ausschließenden Kategorien)</p>
+</li>
+<li>
+<p><span class="underline">Empfehlungssysteme &amp; Information Retrieval:</span> <strong>Rangliste einer Menge von Elementen</strong> (Empfehlungssysteme ordnen beispielsweise die Produkte nach Relevanz für den jeweiligen Nutzer; Information Retrieval Systeme sortieren Elemente nach ihrer Ähnlichkeit zu einer gegebenen Suchanfrage)</p>
+</li>
+<li>
+<p>andere <span class="underline">Deep Learning</span> Lösungen: <strong>unstrukturierte Outputs wie Text oder Bild</strong> (z.B. Spracherkennung, maschinelle Übersetzung, Bild Generierung oder Neural Style Transfer)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+ML-Algorithmen werden anhand des Outputs kategorisiert, den sie für eine Eingabe generieren. Wenn man ein &#8216;Input &#8594; Output&#8217;-Problem mit einem anderen als den oben aufgeführten Outputs lösen möchte, wird das wahrscheinlich auf ein mehrjähriges Forschungsprojekt hinauslaufen&#8201;&#8212;&#8201;wenn das Problem überhaupt mit ML gelöst werden kann!
+</td>
+</tr>
+</table>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Um komplexe Probleme zu lösen, benötigt man möglicherweise mehrere Algorithmen</dt>
+<dd>
+<p>Beispiel: virtueller Assistent (z.B. Siri oder Alexa): &#8220;<em>Hey &lt;Sprachassistent&gt;, erzähl mir einen Witz!</em>&#8221; &#8594; ein zufälliger Witz</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<div class="title"><span class="small">Das sieht zwar zunächst wie ein Input-Output-Problem aus, es direkt zu lösen wäre allerdings sehr schwierig und ineffizient. Stattdessen zerlegen wir das Problem in kleinere Teilaufgaben, die mit bestehenden Algorithmen gelöst werden können:</span></div>
+<p></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Triggerwort Erkennung:</strong><br>
+Audio &#8594; &#8220;Hey &lt;Sprachassistent&gt;&#8221; (ja/nein)?</p>
+</li>
+<li>
+<p><strong>Spracherkennung:</strong><br>
+Audio &#8594; Text</p>
+</li>
+<li>
+<p><strong>Klassifizierung der Absicht:</strong><br>
+Text &#8594; (Witz/Timer/Wettervorhersage/&#8230;&#8203;)?</p>
+</li>
+<li>
+<p><strong>Führe spezifisches Programm aus (z.B. wähle zufälligen Witz aus)</strong></p>
+</li>
+<li>
+<p><strong>Sprachgenerierung:</strong><br>
+Text &#8594; Audio</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<div class="title"><span class="small">Zunächst muss der Smart Speaker wissen, ob er mit einem bestimmten Triggerwort (z.B. &#8220;Hey Siri&#8221;) angesprochen wurde. Dies ist eine einfache binäre Klassifikation (ja/nein), die normalerweise auf dem Gerät selbst ausgeführt wird, da wir nicht möchten, dass alles was wir sagen permanent in die Cloud gestreamt wird. Als nächstes werden die nach dem Triggerwort gesprochenen Wörter in Text übersetzt. Text ist einfacher zu handhaben, da beispielsweise Variationen aufgrund unterschiedlicher Akzente entfernt werden. Anhand dieses Textes wird die Absicht des Nutzers erkannt, also welche der verschiedenen Funktionalitäten des virtuellen Assistenten genutzt werden soll (z.B. Witz erzählen, Musik abspielen, Wecker stellen etc.). Dies ist ein Multiclass-Klassifikationsproblem. Zur Ausführung des Befehls wird kein ML benötigt, sondern ein normales, aufgabenspezifisches Programm, das als App auf dem Gerät installiert ist, z.B. wird ein Witz aus einer Datenbank ausgewählt oder ein Timer gesetzt usw.. Anschließend muss der Output des ausgeführten Programms wieder in ein Audiosignal umgewandelt werden. Ein ML-Modell kann dabei helfen, flüssig gesprochenen Text zu erzeugen&#8201;&#8212;&#8201;und in naher Zukunft vielleicht auch mit der Stimme von Morgan Freeman oder einer anderen berühmten Person, wie bei &#8220;Deep Fake&#8221;-Anwendungen.</span></div>
+<p><br>
+&#8658; Generell sollte man zunächst darüber nachzudenken, ob man ein Problem in leichter zu lösende Teilprobleme zerlegen kann, da es dafür oft schon große Datensätze oder sogar fertige Modelle gibt. Ein Modell für Spracherkennung kann beispielsweise zusätzlich auf Hörbüchern und transkribierten politische Reden trainiert werden, nicht nur auf den Daten, die von den Sprachassistent-Nutzern gesammelt wurden.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Wenn ein ML-Modell als Input den Output eines anderen ML-Modells erhält, bedeutet dies, dass wir, sobald wir eine neue Version des ersten ML-Modells verwenden, auch die folgenden Modelle neu trainieren sollten, da diese Modelle dann evtl. leicht andere Inputs erhalten, d.h. wir es mit einem <a href="_fehler_5_daten_konzept_drifts.html">Daten Drift</a> zu tun haben.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_daten_sind_das_neue_öl.html">Daten sind das neue Öl!?</a> | ↑ Up: <a href="_einleitung.html">Einleitung</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_wie_lernen_maschinen.html">Wie &#8220;lernen&#8221; Maschinen?</a> →</p>
+<p>← Previous: <a href="_daten_sind_das_neue_öl.html">Daten sind das neue Öl!?</a> | ↑ Up: <a href="_einleitung.html">Einleitung</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_ml_geschichte_warum_jetzt.html">ML Geschichte: Warum jetzt?</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

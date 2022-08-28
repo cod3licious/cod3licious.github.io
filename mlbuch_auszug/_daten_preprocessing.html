@@ -928,8 +928,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.4,</span>
-<span id="revdate">2022-08-13</span>
+<span id="revnumber">version 1.6,</span>
+<span id="revdate">2022-08-28</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -941,8 +941,6 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <li><a href="_garbage_in_garbage_out.html">Garbage in, Garbage out!</a>
 </li>
 </ul>
-</li>
-<li><a href="_ml_lösungen_überblick.html">ML Lösungen: Überblick</a>
 </li>
 <li><a href="_supervised_learning.html">Supervised Learning</a>
 </li>
@@ -965,32 +963,14 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <img src="../images/01c_ds_workflow/data_science_workflow_prepr.png" alt="image" width="840">
 </div>
 </div>
-<div class="paragraph">
-<p>Ein typisches Supervised Learning Problem wäre beispielsweise ein Produktionsprozess, bei dem wir vorhersagen möchten, ob ein unter bestimmten Produktionsbedingungen produziertes Teil Ausschuss ist. Hier beinhalten die gesammelten Daten für jedes produzierte Teil die Prozessbedingungen, unter denen es hergestellt wurde, und ob das resultierende Produkt in Ordnung oder Ausschuss war:</p>
-</div>
-<div class="imageblock text-center">
+<div class="sidebarblock">
 <div class="content">
-<img src="../images/02_data/toy_data3.png" alt="image" width="740">
-</div>
-<div class="title"><span class="small">Bei den für diesen Anwendungsfall erhobenen Daten handelt es sich um strukturierte Daten in tabellarischer Form (z.B. in einer Excel-Tabelle). Ein Datenpunkt / eine Probe / eine Beobachtung befindet sich immer in einer Zeile dieser Tabelle.</span></div>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/02_data/toy_data6.png" alt="image" width="740">
-</div>
-<div class="title"><span class="small">Die Spalten der Tabelle enthalten die unterschiedlichen Messwerte/Variablen, welche für jeden Datenpunkt erhoben wurden. Dabei unterscheiden wir zwischen <em>Features</em> (in diesem Fall die Produktionsbedingungen) und <em>Labels</em> (ob das jeweilige Produkt in Ordnung oder Ausschuss war). Features, auch als Matrix \(X\) bezeichnet, sind typischerweise diejenigen Messwerte, die wir ohne Aufwand erhalten, da sie während des Prozesses bereits für andere Zwecke gesammelt werden. Wenn beispielsweise der Bediener der Maschine die Temperatur für die Produktion auf einen bestimmten Wert einstellt, wird dies aufgezeichnet während das Signal an das Heizgerät weitergeleitet wird. Das Sammeln der dazugehörigen Labels, bezeichnet als Vektor \(\mathbf{y}\), ist oft kostspieliger. Um beispielsweise im Produktionsprozess einen Datenpunkt mit dem Label <em>"Ausschuss"</em> zu sammeln, muss (vorsätzlich) ein fehlerhaftes Produkt produziert werden, was uns wertvolle Ressourcen kostet. Ein anderes Beispiel für die mit Labels verbunden Kosten ist die Tatsache, dass Google ein Team von Fachärzten bezahlte, um mehrere Bilder von diabetischer Retinopathie, zu denen es widersprüchliche Meinungen gab, zu diskutieren und neu zu bewerten. Im Supervised Learning werden die Features als Input (Eingabe) für das Modell verwendet, während die Labels die Zielvariable, d.h. der vorhergesagte Output (Ausgabe) darstellen. Im Allgemeinen sollten Features unabhängige Variablen sein (z.B. Einstellungen, die der Bediener nach Belieben wählen kann), während der Zielwert von diesen Eingaben abhängig sein sollte, damit wir ihn vorhersagen können.</span></div>
-</div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Strukturierte vs. Unstrukturierte Daten</dt>
+<dt class="hdlist1">Rohdaten</dt>
 <dd>
-<p>Daten können in verschiedenen Formaten vorliegen und während einige Datentypen evtl. zusätzliche Preprocessing Schritte erfordern, können ML-Algorithmen im Prinzip mit jeder Art von Daten arbeiten.</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/02_data/data_types2.png" alt="image" width="640">
-</div>
-<div class="title"><span class="small">Die wichtigste Unterscheidung bei der Charakterisierung von Daten liegt zwischen <em>strukturierten</em> Daten, das ist jeder Datensatz, der einzelne Variablen enthält, die eindeutige Größen darstellen, und <em>unstrukturierten</em> Daten, die nicht in sinnvolle Variablen unterteilt werden können. Z.B. in Bildern &#8220;erster Pixel von links&#8221; oder in Texten &#8220;10. Wort im 2. Absatz&#8221; würden wir nicht Variablen nennen, im Gegensatz zu &#8220;Fläche in Quadratmetern&#8221; oder &#8220;Anzahl Schlafzimmern&#8221;, womit man sinnvoll eine Wohnung beschreiben könnte. Strukturierte Daten sind oft <em>heterogen</em>, da die verschiedenen Variablen in einem Datensatz typischerweise für sehr unterschiedliche Dinge stehen. Wenn man beispielsweise mit Sensordaten arbeitet enthält ein Datensatz nicht nur Temperaturmessungen, sondern zusätzlich z.B. Druck und Durchflusswerte, die unterschiedliche Einheiten haben und in sehr unterschiedlichen Skalen gemessen werden können. Unstrukturierte Daten hingegen sind <em>homogen</em>, z.B. gibt es keinen qualitativen Unterschied zwischen dem 10. und dem 100. Pixel in einem Bild.</span></div>
-</div>
+<p>können in vielen verschiedenen Formaten vorliegen, z.B. Sensormessungen, Pixelwerte, Text (z.B. HTML-Seite), SAP-Datenbank, &#8230;&#8203;<br>
+&#8594; <em>n</em> Datenpunkte, gespeichert als Zeilen in einem Excel-Spreadsheet, als einzelne Dateien, usw.</p>
 </dd>
 </dl>
 </div>
@@ -1006,15 +986,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </tr>
 </table>
 </div>
-<div class="sidebarblock">
-<div class="content">
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Rohdaten</dt>
-<dd>
-<p>können in vielen verschiedenen Formaten vorliegen, z.B. Sensormessungen, Pixelwerte, Text (z.B. HTML-Seite), SAP-Datenbank, &#8230;&#8203;<br>
-&#8594; <em>n</em> Datenpunkte, gespeichert als Zeilen in einem Excel-Spreadsheet, als einzelne Dateien, usw.</p>
-</dd>
 <dt class="hdlist1">Preprocessing</dt>
 <dd>
 <p>Transformation und Anreicherung der Rohdaten vor der Anwendung von ML, zum Beispiel:</p>
@@ -1056,7 +1029,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_probleme_mit_ml_lösen_workflow.html">Probleme mit ML lösen: Workflow</a> | ↑ Up: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_garbage_in_garbage_out.html">Garbage in, Garbage out!</a> →</p>
+<p>← Previous: <a href="_mit_ml_probleme_lösen.html">Mit ML Probleme lösen</a> | ↑ Up: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_garbage_in_garbage_out.html">Garbage in, Garbage out!</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

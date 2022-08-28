@@ -922,14 +922,14 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
-<body id="_solving_problems_with_ml_workflow" class="book toc2 toc-left">
+<body id="_solving_problems_with_ml" class="book toc2 toc-left">
 <div id="header">
 <h1>A Practitioner&#8217;s Guide to Machine Learning</h1>
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.5,</span>
-<span id="revdate">2022-08-13</span>
+<span id="revnumber">version 1.6,</span>
+<span id="revdate">2022-08-28</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -942,31 +942,27 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </li>
 <li><a href="_what_is_ml.html">What is ML?</a>
 </li>
-<li><a href="_how_do_machines_learn.html">How do machines &#8220;learn&#8221;?</a>
-</li>
 <li><a href="_ml_history_why_now.html">ML history: Why now?</a>
 </li>
-<li><a href="_when_should_you_use_ml.html">When should you use ML?</a>
+<li><a href="_how_do_machines_learn.html">How do machines &#8220;learn&#8221;?</a>
 </li>
-<li><a href="_solving_problems_with_ml_workflow.html"><span class="toc-current">Solving problems with ML: Workflow</span></a>
+<li><a href="_solving_problems_with_ml.html"><span class="toc-current">Solving problems with ML</span></a>
+<ul class="sectlevel3">
+<li><a href="_solving_problems_with_ml.html#_1_identify_a_suitable_problem">1. Identify a suitable problem</a>
+</li>
+<li><a href="_solving_problems_with_ml.html#_2_devise_a_working_solution">2. Devise a working solution</a>
+</li>
+<li><a href="_solving_problems_with_ml.html#_3_get_it_ready_for_production">3. Get it ready for production</a>
 </li>
 </ul>
 </li>
-<li><a href="_ml_with_python.html">ML with Python</a>
+</ul>
 </li>
 <li><a href="_data_preprocessing.html">Data &amp; Preprocessing</a>
 </li>
-<li><a href="_ml_solutions_overview.html">ML Solutions: Overview</a>
-</li>
-<li><a href="_unsupervised_learning.html">Unsupervised Learning</a>
-</li>
-<li><a href="_supervised_learning_basics.html">Supervised Learning Basics</a>
-</li>
-<li><a href="_supervised_learning_models.html">Supervised Learning Models</a>
+<li><a href="_supervised_learning.html">Supervised Learning</a>
 </li>
 <li><a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a>
-</li>
-<li><a href="_advanced_topics.html">Advanced Topics</a>
 </li>
 <li><a href="_conclusion.html">Conclusion</a>
 </li>
@@ -975,7 +971,38 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 <div id="content">
 <div class="sect2">
-<h3 id="_solving_problems_with_ml_workflow">Solving problems with ML: Workflow</h3>
+<h3 id="_solving_problems_with_ml">Solving problems with ML</h3>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>Analogous to the tools used in a traditional manufacturing process to build something, you can think of <strong>ML algorithms as tools to generate value from data</strong>:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/01b_intro_ml/ml_carpentry_analogy2.png" alt="image" width="840">
+</div>
+</div>
+<div class="paragraph">
+<p>In order to successfully apply ML, you should ask yourself some important questions:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><em>What could be valuable?</em></strong> For example, this could be a new feature for an existing product, like Face ID as a new way to unlock your phone.</p>
+</li>
+<li>
+<p><strong><em>What raw inputs are needed?</em></strong> We can&#8217;t build a wooden chair using only fabric and metal or a few twigs we found in the woods. Similarly, depending on what we want to achieve with ML, we also need the right data (quality &amp; quantity) to apply the algorithms in the first place. This can be especially tricky since in most cases we can&#8217;t just buy the data we need like wood at a hardware store, but we have to collect it ourselves, i.e., grow our own trees, which can take some time.</p>
+</li>
+<li>
+<p><strong><em>Which ML algorithm is the right tool for the task?</em></strong> (More on the different kinds of ML algorithms in the next sections.)</p>
+</li>
+<li>
+<p>Do I or my employees have the <strong><em>necessary skills and enough compute power</em></strong> to accomplish this in practice?</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
 <div class="paragraph">
 <p>Solving &#8220;input &#8594; output&#8221; problems with ML requires three main steps:</p>
 </div>
@@ -984,6 +1011,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <img src="../images/01b_intro_ml/input_output_solving_abstract6.png" alt="image" width="680">
 </div>
 </div>
+<div class="sect3">
+<h4 id="_1_identify_a_suitable_problem">1. Identify a suitable problem</h4>
 <div class="paragraph">
 <p>The first (and arguably most important) step is to <strong>identify where machine learning can (and should) be used</strong> in the first place.</p>
 </div>
@@ -996,11 +1025,11 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="ulist">
 <ul>
 <li>
-<p>Is there a <a href="_when_should_you_use_ml.html">simpler solution</a>, i.e., without using ML?<br>
+<p>Is there a simpler solution, i.e., without using ML?<br>
 &#8594; Use ML to learn <em>unknown, complex</em> rules from data</p>
 </li>
 <li>
-<p>Can the problem be solved with an <a href="_ml_solutions_overview.html">existing ML algorithm</a>?<br>
+<p>Can the problem be solved with an <a href="_what_is_ml.html">existing ML algorithm</a>?<br>
 &#8594; Possibly break the input-output problem down into simpler steps with known solutions instead of spending years on research</p>
 </li>
 <li>
@@ -1027,32 +1056,92 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 </div>
 </div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><span class="underline">When (not) to use ML:</span></p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">ML is overkill if: </dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>a manually defined set of rules or mechanistic (white box) model can solve the problem. For example, if in our example cookie factory broken cookies were the only quality problem that ever occurred, then the rule &#8220;cookie weight needs to be between 14-16g&#8221; would suffice to detect defective cookies. And such a rule is easier to implement as there is no need to collect a large dataset.</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">ML has great potential when: </dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>an exact simulation with a mechanistic model takes too long (but can be used to generate a high quality dataset). For example, the AlphaFold model shown in the first section, which is used to predict the 3D structure of a protein from its amino acid sequence, can be trained on the data generated by the original simulation model used to solve this task before, which is too slow to be applied to a large number of proteins.</p>
+</li>
+<li>
+<p>solving a &#8220;simple&#8221; but hard to explain task that takes a human ~1 second, like recognizing something in an image.<br>
+&#8658; Use ML to automate repetitive tasks &amp; make expert knowledge available to everyone, e.g., Google&#8217;s diabetic retinopathy diagnostic model shown in the first section.<br>
+<span class="underline">But:</span> success depends on data quality &amp; quantity!<br>
+&#8594; Humans are much better at generalizing from a few examples. For example, a doctor can still easily recognize the disease even if the pictures were taken with a slightly different setup that might result, for example, in noisier images. The ML model, on the other hand, needs to be specifically trained for these cases, which means that in the worst case we might need to collect a lot of additional data for this new setup.</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">ML is your best chance when: </dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>humans are overwhelmed by very complex, high dimensional data. For example, given an excel spreadsheet with hundreds of columns, a human can&#8217;t easily recognize any patterns in this sea of numbers. In the worst case, there actually aren&#8217;t any relationships in the data that could be discovered (maybe we didn&#8217;t measure all the relevant factors), but if there are, ML will most likely find them.</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Steps to identify a potential ML project</dt>
+<dd>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a process map: which steps are executed in the business process (flow of materials &amp; information) and what data is collected where. For example, in a production process where some of the produced parts are defective:</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/01b_intro_ml/automate_insights7a.png" alt="image" width="700">
+</div>
+</div>
+</li>
+<li>
+<p>Identify parts of the process that could either be automated with ML (e.g., straightforward, repetitive tasks otherwise done by humans) or in other ways improved by analyzing data (e.g., to understand root causes of a problem, improve planning with what-if simulations, or optimize the use of resources):</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/01b_intro_ml/automate_insights7b.png" alt="image" width="840">
+</div>
+<div class="title"><span class="small">The first idea is to automate the quality check that was so far done by a human: since the human can easily recognize the defects in the pictures taken of the products, an ML model should be able to do this, too. The next idea is to try to predict in advance whether a product will be faulty or not based on the composition of raw materials and the proposed process conditions: success here is unclear, since the human experts are not sure whether all of the information necessary to determine if the product will be fine is contained in this data&#8201;&#8212;&#8201;but nevertheless it&#8217;s worth a try since this could save lots of resources. While the final ML model that solves the input-output problem can be deployed as software in the ongoing process, when a data scientist analyzes the results and interprets the model, she can additionally generate insights that can be translated into action recommendations.</span></div>
+</div>
+</li>
+<li>
+<p>Prioritize: which project will have a high impact, but at the same time also a good chance of success, i.e., should yield a high return on investment (ROI)? For example, using ML to automate a simple task is a comparatively low risk investment, but might cause some assembly-line workers to loose their jobs. In contrast, identifying the root causes of why a production process results in 10% scrap could save millions, but it is not clear from the start that such an analysis will yield useful results, since the collected data on the process conditions might not contain all the needed information.</p>
+</li>
+</ol>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_2_devise_a_working_solution">2. Devise a working solution</h4>
 <div class="paragraph">
 <p>Once a suitable &#8220;input &#8594; output&#8221; problem as been identified, <strong>historical data needs to be gathered and the right ML algorithm needs to be selected and applied</strong> to obtain a working solution. This is what the next chapters are all about.</p>
 </div>
 <div class="paragraph">
-<p>When the prototypical solution has been implemented and meets the required performance level, this solution then has to be deployed, i.e., <strong>integrated into the general workflow and infrastructure</strong> so that it can actually be used to improve the respective process in practice (as a piece of software that continuously makes predictions for new data points). There are generally two strategies for how to do this:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>The ML model runs on an &#8220;edge&#8221; device, i.e., on each individual machine (e.g., mobile phone) where the respective data is generated and the output of the model is used in subsequent process steps. This is often the best strategy when results need to be computed in real time and / or a continuous Internet connection can not be guaranteed, e.g., in self-driving cars. However, the downside of this is that, depending on the type of ML model, comparatively expensive computing equipment needs to be installed in each machine, e.g., GPUs for neural network models.</p>
-</li>
-<li>
-<p>The ML model runs in the &#8220;cloud&#8221;, i.e., on a central server, e.g., in the form of a web application that receives data from individual users, processes it, and sends back the results. This is often the more efficient solution, if a response within a few seconds is sufficient for the use case. However, processing personal information in the cloud also raises privacy concerns. One of the major benefits of this solution is that it is easier to update the ML model, for example, when more historical data becomes available or if the process changes and the model now has to deal with slightly different inputs (we&#8217;ll discuss this further in later chapters).</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>&#8594; As these decisions heavily depend on your specific use case, they go beyond the scope of this book. Search online for &#8220;MLOps&#8221; to find out more about these topics and hire a machine learning or data engineer to set up the required infrastructure in your company.</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Machine Learning Workflow</dt>
-<dd>
-<p>Let&#8217;s look at the second main step, &#8220;devise a working solution&#8221;, in more detail. To solve a concrete problem using ML, we follow a workflow like this:</p>
-</dd>
-</dl>
+<p>To solve a concrete problem using ML, we follow a workflow like this:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -1071,9 +1160,57 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="paragraph">
 <p>While sometimes frustrating, the time spent cleaning and preprocessing the data is never wasted, as only with a solid data foundation the ML algorithms can achieve decent results.</p>
 </div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">You&#8217;ve trained an ML model? Great&#8201;&#8212;&#8201;but don&#8217;t stop there!</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>Interpret the learned model and explain its predictions to <strong>understand root causes</strong> in a process.<br>
+<em>Given a model that predicts the quality of a product from the process conditions, identify which conditions result in lower quality products.</em></p>
+</li>
+<li>
+<p>Use the learned model in a <strong>&#8220;what-if&#8221; forecast</strong> to explore how a system might react to different conditions to make better decisions
+(use with <a href="_pitfall_3_model_abuses_spurious_correlations.html">caution</a>!).<br>
+<em>Given a model that predicts the remaining lifetime of a machine component under some process conditions, simulate how quickly this component would deteriorate if you changed the process conditions.</em></p>
+</li>
+<li>
+<p>Use the learned model inside an optimization loop to systematically evaluate different inputs with the model to <strong>find optimal settings</strong>.<br>
+<em>Given a model that predicts the quality of a product from the process conditions, automatically determine the best production settings for a new type of raw material.</em></p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_3_get_it_ready_for_production">3. Get it ready for production</h4>
+<div class="paragraph">
+<p>When the prototypical solution has been implemented and meets the required performance level, this solution then has to be deployed, i.e., <strong>integrated into the general workflow and infrastructure</strong> so that it can actually be used to improve the respective process in practice (as a piece of software that continuously makes predictions for new data points). There are generally two strategies for how to do this:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The ML model runs on an &#8220;edge&#8221; device, i.e., on each individual machine (e.g., mobile phone) where the respective data is generated and the output of the model is used in subsequent process steps. This is often the best strategy when results need to be computed in real time and / or a continuous Internet connection can not be guaranteed, e.g., in self-driving cars. However, the downside of this is that, depending on the type of ML model, comparatively expensive computing equipment needs to be installed in each machine, e.g., GPUs for neural network models.</p>
+</li>
+<li>
+<p>The ML model runs in the &#8220;cloud&#8221;, i.e., on a central server, e.g., in the form of a web application that receives data from individual users, processes it, and sends back the results. This is often the more efficient solution, if a response within a few seconds is sufficient for the use case. However, processing personal information in the cloud also raises privacy concerns. One of the major benefits of this solution is that it is easier to update the ML model, for example, when more historical data becomes available or if the process changes and the model now has to deal with slightly different inputs (we&#8217;ll discuss this further in later chapters).</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>&#8594; As these decisions heavily depend on your specific use case, they go beyond the scope of this book. Search online for &#8220;MLOps&#8221; to find out more about these topics and hire a machine learning or data engineer to set up the required infrastructure in your company.</p>
+</div>
+</div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_when_should_you_use_ml.html">When should you use ML?</a> | ↑ Up: <a href="_introduction.html">Introduction</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_ml_with_python.html">ML with Python</a> →</p>
+<p>← Previous: <a href="_how_do_machines_learn.html">How do machines &#8220;learn&#8221;?</a> | ↑ Up: <a href="_introduction.html">Introduction</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_data_preprocessing.html">Data &amp; Preprocessing</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

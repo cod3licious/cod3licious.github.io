@@ -922,149 +922,79 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
-<body id="_probleme_mit_ml_lösen_workflow" class="book toc2 toc-left">
+<body id="_unsupervised_learning_2" class="book toc2 toc-left">
 <div id="header">
 <h1>A Practitioner&#8217;s Guide to Machine Learning</h1>
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.4,</span>
-<span id="revdate">2022-08-13</span>
+<span id="revnumber">version 1.6,</span>
+<span id="revdate">2022-08-28</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <p><span class="toc-root"><a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a></span></p><ul class="sectlevel1">
-<li><a href="_einleitung.html">Einleitung</a>
+<li><a href="_introduction.html">Introduction</a>
+</li>
+<li><a href="_ml_with_python.html">ML with Python</a>
+</li>
+<li><a href="_data_preprocessing.html">Data &amp; Preprocessing</a>
+</li>
+<li><a href="_unsupervised_learning_2.html"><span class="toc-current">Unsupervised Learning</span></a>
 <ul class="sectlevel2">
-<li><a href="_ml_ist_überall.html">ML ist überall!</a>
+<li><a href="_dimensionality_reduction.html">Dimensionality Reduction</a>
 </li>
-<li><a href="_daten_sind_das_neue_öl.html">Daten sind das neue Öl!?</a>
+<li><a href="_outlier_anomaly_detection.html">Outlier / Anomaly Detection</a>
 </li>
-<li><a href="_was_ist_ml.html">Was ist ML?</a>
-</li>
-<li><a href="_wie_lernen_maschinen.html">Wie &#8220;lernen&#8221; Maschinen?</a>
-</li>
-<li><a href="_ml_geschichte_warum_jetzt.html">ML Geschichte: Warum jetzt?</a>
-</li>
-<li><a href="_wann_sollte_man_ml_verwenden.html">Wann sollte man ML verwenden?</a>
-</li>
-<li><a href="_probleme_mit_ml_lösen_workflow.html"><span class="toc-current">Probleme mit ML lösen: Workflow</span></a>
+<li><a href="_clustering.html">Clustering</a>
 </li>
 </ul>
 </li>
-<li><a href="_daten_preprocessing.html">Daten &amp; Preprocessing</a>
+<li><a href="_supervised_learning_basics.html">Supervised Learning Basics</a>
 </li>
-<li><a href="_ml_lösungen_überblick.html">ML Lösungen: Überblick</a>
+<li><a href="_supervised_learning_models.html">Supervised Learning Models</a>
 </li>
-<li><a href="_supervised_learning.html">Supervised Learning</a>
+<li><a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a>
 </li>
-<li><a href="_häufige_fehler_vermeiden.html">Häufige Fehler vermeiden</a>
+<li><a href="_advanced_topics.html">Advanced Topics</a>
 </li>
-<li><a href="_fazit.html">Fazit</a>
+<li><a href="_conclusion.html">Conclusion</a>
 </li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div class="sect2">
-<h3 id="_probleme_mit_ml_lösen_workflow">Probleme mit ML lösen: Workflow</h3>
+<div class="sect1">
+<h2 id="_unsupervised_learning_2">Unsupervised Learning</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Das Lösen von &#8220;Input &#8594; Output&#8221;-Problemen mit ML erfordert drei Hauptschritte:</p>
+<p>The first algorithms we look at in more detail are from the area of unsupervised learning:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="../images/01b_intro_ml/input_output_solving_abstract6.png" alt="image" width="680">
+<img src="../images/01c_ml_overview/ml_algorithms_unsupervised.png" alt="image" width="840">
 </div>
 </div>
 <div class="paragraph">
-<p>Der erste (und wohl wichtigste) Schritt besteht darin, zu <strong>identifizieren, wo maschinelles Lernen überhaupt eingesetzt werden kann (und sollte)</strong>.</p>
+<p>While the subfields of unsupervised learning all include lots of different algorithms that can be used for the respective purpose, we&#8217;ll always just examine a few example algorithms with different underlying ideas in more detail. But feel free to, e.g., have a look at the <a href="https://scikit-learn.org/stable/unsupervised_learning.html" target="\_blank">sklearn user guide</a> for more information about other methods.</p>
 </div>
-<div class="sidebarblock">
-<div class="content">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Checkliste für ML-Probleme</dt>
-<dd>
 <div class="ulist">
 <ul>
 <li>
-<p>Gibt es eine <a href="_wann_sollte_man_ml_verwenden.html">einfachere Lösung</a> ohne ML?<br>
-&#8594; Verwende ML, um <em>unbekannte, komplexe</em> Regeln aus Daten zu lernen</p>
+<p><a href="_dimensionality_reduction.html">Dimensionality Reduction</a></p>
 </li>
 <li>
-<p>Kann das Problem mit einem <a href="_ml_lösungen_überblick.html">existierenden ML-Algorithmus</a> gelöst werden?<br>
-&#8594; Eventuell das Input-Output-Problem in Teilschritte zerlegen, für die bekannte Lösungen existieren, statt jahrelang an einem neuen Algorithmus zu forschen</p>
+<p><a href="_outlier_anomaly_detection.html">Outlier / Anomaly Detection</a></p>
 </li>
 <li>
-<p>Gibt es <a href="_garbage_in_garbage_out.html">genügend hochwertige Daten</a>?<br>
-&#8594; ML-Modelle brauchen die richtigen Inputs und lernen am besten aus eindeutigen Labels</p>
-</li>
-<li>
-<p>Würde die Lösung einen <a href="_ki_transformation_eines_unternehmens.html">strategischen Vorteil</a> schaffen? <br>
-&#8594; Sollte man die Lösung selbst <span class="underline">bauen</span> oder könnte man sie auch <span class="underline">einkaufen</span>?<br>
-&#8594; Können Synergien geschaffen werden zwischen Abteilungen, die mit ähnlichen Daten arbeiten?</p>
+<p><a href="_clustering.html">Clustering</a></p>
 </li>
 </ul>
 </div>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>&#8658; <strong>Frage eine ML-Expertin</strong>, ob ein ähnliches Problem bereits mit einem bewährten Algorithmus gelöst wurde<br>
-&#8658; <strong>Frage einen Fachexperten</strong>, ob er der Meinung ist, dass alle relevanten Inputdaten verfügbar sind, um den gewünschten Output zu berechnen. Dies ist normalerweise bei unstrukturierten Daten wie Bildern leicht zu bestimmen: wenn ein Mensch das Objekt im Bild erkennen kann, sollte ML es auch können. Schwieriger wird dies bei strukturierten Daten, wie Tabellen mit hunderten von Spalten mit Sensormessungen.</p>
-</div>
-<div class="paragraph">
-<p>Für weitere Informationen lies <a href="https://towardsdatascience.com/the-ultimate-guide-to-starting-ai-d506255d7ea" target="\_blank">diesen Blog Artikel</a>.</p>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Sobald ein geeignetes &#8220;Input &#8594; Output&#8221;-Problem identifiziert wurde, müssen <strong>historische Daten gesammelt und der richtige ML-Algorithmus ausgewählt und angewendet werden</strong>, um eine funktionierende Lösung zu erhalten. Darum geht es in den nächsten Kapiteln.</p>
-</div>
-<div class="paragraph">
-<p>Wenn die prototypische Lösung implementiert ist und das geforderte Performance-Level erfüllt, muss diese Lösung dann &#8220;deployed&#8221; werden, d.h. <strong>produktiv in den allgemeinen Workflow und die Infrastruktur integriert werden</strong>, damit sie in der Praxis tatsächlich zur Verbesserung des jeweiligen Prozesses eingesetzt werden kann (als Software, die kontinuierlich Vorhersagen für neue Datenpunkte macht). Es gibt im Allgemeinen zwei Strategien, um dies zu tun:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Das ML-Modell läuft auf einem &#8220;Edge-Gerät&#8221;, d.h. auf jedem einzelnen Gerät (z.B. Smartphone), das Inputdaten erzeugt und die Ergebnisse des Modells im nachfolgenden Prozessschritt verwendet. Dies ist oft die beste Strategie, wenn Ergebnisse in Echtzeit berechnet werden müssen und/oder eine durchgehende Internetverbindung nicht gewährleistet ist, wie z.B. bei selbstfahrenden Autos. Der Nachteil dieser Strategie ist jedoch, dass je nach Art des ML-Modells vergleichsweise teure Rechenressourcen in jedes Gerät eingebaut werden müssen, z.B. GPUs für neuronale Netze.</p>
-</li>
-<li>
-<p>Das ML-Modell läuft in der &#8220;Cloud&#8221;, d.h. auf einem zentralen Server, z.B. in Form einer Webanwendung, die Daten einzelner Nutzer entgegennimmt, verarbeitet und die Ergebnisse zurücksendet. Dies ist oft die effizientere Lösung, wenn für den Anwendungsfall eine Antwort innerhalb weniger Sekunden ausreicht. Die Verarbeitung personenbezogener Daten in der &#8220;Cloud&#8221; kann jedoch Datenschutzbedenken mit sich bringen. Einer der Hauptvorteile dieser Lösung besteht darin, dass man das ML-Modell einfacher aktualisieren kann, sobald mehr historische Daten verfügbar werden oder wenn sich der Prozess ändert und das Modell nun mit leicht anderen Eingaben umgehen muss (worauf wir in späteren Kapiteln noch ausführlicher eingehen).</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>&#8594; Da diese Entscheidungen stark vom spezifischen Anwendungsfall abhängen, sprengen sie den Rahmen dieses Buches. Suche online nach &#8220;MLOps&#8221;, um mehr über diese Themen zu erfahren und beauftrage eine:n Machine Learning oder Data Engineer, um die erforderliche Infrastruktur im Unternehmen einzurichten.</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Machine Learning Workflow</dt>
-<dd>
-<p>Schauen wir uns den zweiten Hauptschritt &#8220;eine funktionierende Lösung entwickeln&#8221; etwas genauer an. Um ein konkretes Problem mit ML zu lösen, gehen wir in der Regel wie folgt vor:</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01c_ds_workflow/data_science_workflow_17.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">Wir beginnen immer mit einer Fragestellung oder einem Problem, das mit ML gelöst werden soll. Und um es zu lösen, benötigen wir Daten, die in der Regel bereinigt werden müssen, bevor man mit ihnen arbeiten kann (z.B. verschiedene Excel-Dateien zusammenführen, fehlende Werte korrigieren usw.). Dann ist es Zeit für eine explorative Analyse, um besser zu verstehen, womit wir es zu tun haben. Abhängig von der Art der Daten ist es evtl. erforderlich, geeignete &#8220;Features&#8221; (Charakteristiken oder Kennzahlen) zu extrahieren oder zusätzlich zu berechnen, wobei Domänenwissen sehr hilfreich ist. Alle diese Schritte sind unter &#8220;Preprocessing&#8221; (Vorverarbeitung) gruppiert <em>(roter Kasten)</em> und die Arbeitsschritte sind nicht linear angeordnet, da wir oft zwischen diesen Schritten hin- und herspringen. Beispielsweise stellen wir bei der Visualisierung des Datensatzes fest, dass es Ausreißer in den Daten gibt, die wir entfernen müssen, oder nachdem neue Features berechnet wurden, gehen wir zurück und visualisieren den Datensatz erneut. Als nächstes kommt der ML-Teil <em>(grüner Kasten)</em>: Normalerweise fängt man mit einem einfachen Modell an, evaluiert es, probiert ein komplexeres Modell aus, experimentiert mit verschiedenen Hyperparametern, &#8230;&#8203; und stellt dann fest, dass man den ML-Werkzeugkasten durch hat, aber kein Modell eine zufriedenstellende Performance zeigt. An diesem Punkt muss man einen Schritt zurück gehen und entweder aussagekräftigere Features berechnen oder, wenn das auch nicht hilft, mehr und/oder bessere Daten sammeln (z.B. mehr Proben, Daten von zusätzlichen Sensoren, eindeutigere Labels usw.). Wenn wir uns schließlich auf die Vorhersagen des Modells verlassen können, gibt es zwei Wege, die man gehen kann: Entweder die Data Science Route, bei der die gewonnen Erkenntnisse an Stakeholder übermittelt werden (was oft zu weiteren Fragen führt). Oder die ML-Software Route, in welcher das endgültige Modell in den Prozess eingebunden wird. Aber Achtung: Die Performance des Modells muss kontinuierlich überwacht werden und es müssen auch in Zukunft weiterhin neue Daten gesammelt werden, damit das Modell immer wieder nachtrainiert werden kann, vor allem falls es Änderungen im Prozess gibt. Insgesamt ist die Arbeit an einem Machine Learning Projekt ein sehr iterativer Prozess.</span></div>
-</div>
-<div class="paragraph">
-<p>Da viele Unternehmen keine standardisierte Dateninfrastruktur besitzen, ist die traurige Wahrheit leider, dass eine Data Scientistin normalerweise (mindestens) etwa 90% ihrer Zeit damit verbringt, die Daten zu sammeln, zu bereinigen und anderweitig vorzuverarbeiten, um sie in ein Format zu bringen worauf die ML-Algorithmen angewendet werden können:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01c_ds_workflow/data_science_workflow_19.png" alt="image" width="840">
-</div>
-</div>
-<div class="paragraph">
-<p>Auch wenn es manchmal frustrierend ist, ist die Zeit, die man mit der Bereinigung und Vorverarbeitung der Daten verbringt, nie verschwendet, da die ML-Algorithmen nur mit einer soliden Datengrundlage brauchbare Ergebnisse erzielen können.</p>
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_wann_sollte_man_ml_verwenden.html">Wann sollte man ML verwenden?</a> | ↑ Up: <a href="_einleitung.html">Einleitung</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_daten_preprocessing.html">Daten &amp; Preprocessing</a> →</p>
+<p>← Previous: <a href="_garbage_in_garbage_out.html">Garbage in, garbage out!</a> | ↑ Up: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_dimensionality_reduction.html">Dimensionality Reduction</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

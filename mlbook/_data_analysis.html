@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="generator" content="Asciidoctor 2.0.18">
 <meta name="author" content="Dr. Franziska Horn">
 <meta name="copyright" content="Dr. Franziska Horn">
 <title>A Practitioner&#8217;s Guide to Machine Learning</title>
@@ -922,114 +922,399 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
-<body id="_daten_preprocessing" class="book toc2 toc-left">
+<body id="_data_analysis" class="book toc2 toc-left">
 <div id="header">
 <h1>A Practitioner&#8217;s Guide to Machine Learning</h1>
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.6,</span>
-<span id="revdate">2022-08-28</span>
+<span id="revnumber">version 1.7,</span>
+<span id="revdate">2022-11-06</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <p><span class="toc-root"><a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a></span></p><ul class="sectlevel1">
-<li><a href="_einleitung.html">Einleitung</a>
+<li><a href="_introduction.html">Introduction</a>
 </li>
-<li><a href="_daten_preprocessing.html"><span class="toc-current">Daten &amp; Preprocessing</span></a>
+<li><a href="_ml_with_python.html">ML with Python</a>
+</li>
+<li><a href="_data_analysis_preprocessing.html">Data Analysis &amp; Preprocessing</a>
 <ul class="sectlevel2">
-<li><a href="_garbage_in_garbage_out.html">Garbage in, Garbage out!</a>
+<li><a href="_data_analysis.html"><span class="toc-current">Data Analysis</span></a>
+<ul class="sectlevel3">
+<li><a href="_data_analysis.html#_data_driven_decisions">Data-driven Decisions</a>
+</li>
+<li><a href="_data_analysis.html#_communicating_insights">Communicating Insights</a>
 </li>
 </ul>
 </li>
-<li><a href="_supervised_learning.html">Supervised Learning</a>
+<li><a href="_garbage_in_garbage_out.html">Garbage in, garbage out!</a>
 </li>
-<li><a href="_häufige_fehler_vermeiden.html">Häufige Fehler vermeiden</a>
+<li><a href="_data_preprocessing.html">Data Preprocessing</a>
 </li>
-<li><a href="_fazit.html">Fazit</a>
+</ul>
+</li>
+<li><a href="_unsupervised_learning_2.html">Unsupervised Learning</a>
+</li>
+<li><a href="_supervised_learning_basics.html">Supervised Learning Basics</a>
+</li>
+<li><a href="_supervised_learning_models.html">Supervised Learning Models</a>
+</li>
+<li><a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a>
+</li>
+<li><a href="_advanced_topics.html">Advanced Topics</a>
+</li>
+<li><a href="_conclusion.html">Conclusion</a>
 </li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="_daten_preprocessing">Daten &amp; Preprocessing</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_data_analysis">Data Analysis</h3>
 <div class="paragraph">
-<p>Wie wir gesehen haben, lösen ML-Algorithmen Input-Output-Aufgaben. Und um ein ML-Problem zu lösen, müssen wir zunächst Daten sammeln. Das &#8220;Preprocessing&#8221; (Vorverarbeitung) ist der Vorgang, Rohdaten so zu transformieren, dass ML-Algorithmen angewendet werden können:</p>
+<p>Analyzing data is not only an important step before using this data for a machine learning project, but can also generate valuable insights that result in better (data-driven) decisions.</p>
 </div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01c_ds_workflow/data_science_workflow_prepr.png" alt="image" width="840">
+<div class="paragraph">
+<p>We usually analyze data for one of two reasons:</p>
 </div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>we need some specific information to make a (better) decision <em>(reactive analysis)</em> or</p>
+</li>
+<li>
+<p>we&#8217;re curious about the data and don&#8217;t know yet what the analysis will bring <em>(proactive analysis)</em>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>In both cases we start with an <strong>exploratory data analysis</strong> to turn data into insights.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Rohdaten</dt>
+<dt class="hdlist1">What is an insight?</dt>
 <dd>
-<p>können in vielen verschiedenen Formaten vorliegen, z.B. Sensormessungen, Pixelwerte, Text (z.B. HTML-Seite), SAP-Datenbank, &#8230;&#8203;<br>
-&#8594; <em>n</em> Datenpunkte, gespeichert als Zeilen in einem Excel-Spreadsheet, als einzelne Dateien, usw.</p>
+<p>Psychologist Gary Klein defines an insight as &#8220;an unexpected shift in the way we understand things&#8221;.</p>
 </dd>
 </dl>
 </div>
-<div class="admonitionblock important">
+</div>
+</div>
+<div class="paragraph">
+<p>An exploratory analysis is often a quick and dirty process where we <strong>generate lots of plots to better understand the data</strong>. In accordance with Gary Klein, we&#8217;re <strong>looking for things that are unexpected</strong>, e.g., an unusual increase or decrease in some metric. Then we dig deeper to understand where this difference between what we expected and what we saw in the data is coming from, e.g., by examining other correlated variables.</p>
+</div>
+<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-important" title="Important"></i>
+<i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-<strong>Was ist ein Datenpunkt?</strong> Es ist äußerst wichtig sich darüber im Klaren zu sein, was eigentlich ein Datenpunkt ist, d.h. wie die Inputs aussehen und welches Ergebnis das Modell für jede Probe/Beobachtung zurückgegeben soll. Um das zu bestimmen, hilft es sich zu überlegen, wie das ML-Modell später in den Rest des Workflows integriert werden soll: Welche Daten werden im vorherigen Schritt erzeugt und können als Input für den ML-Teil verwendet werden, und was für einen Output braucht man für den darauffolgenden Schritt?
+Knowing which values are unexpected and where it might pay off to dig deeper often requires some domain knowledge, so you might want to examine the results <strong>together with a subject matter expert</strong>.
 </td>
 </tr>
 </table>
 </div>
+<div class="sidebarblock">
+<div class="content">
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Preprocessing</dt>
+<dt class="hdlist1">The Art of Exploratory Data Analysis</dt>
 <dd>
-<p>Transformation und Anreicherung der Rohdaten vor der Anwendung von ML, zum Beispiel:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Feature Extraktion: Rohdaten in numerische Werte umwandeln (z.B. Text)</p>
+<p>Examine summary statistics (e.g., mean, standard deviation (std), min/max values, etc.), e.g., by calling <code>df.describe()</code> on a pandas data frame.</p>
 </li>
 <li>
-<p>Fehlende oder falsch eingetragene Werte entfernen / korrigieren (z.B. falsch gesetztes Dezimalkomma)</p>
+<p>Examine the distributions of individual variables (using histograms or violin plots):</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Is the variable normally distributed (otherwise it might need to be transformed later)?</p>
 </li>
 <li>
-<p>Null-Varianz-Features (d.h. Variablen mit immer gleichem Wert) und unsinnige Variablen (z.B. IDs) ausschließen</p>
+<p>Does the distribution have a single or multiple peaks? Is this expected?</p>
 </li>
 <li>
-<p>Feature Engineering: Berechnen zusätzlicher/besserer Features aus den ursprünglichen Variablen</p>
+<p>Is the range of values broad or narrow? Any (unexpected) gaps?</p>
+</li>
+<li>
+<p>Are there any outliers (e.g., due to measurement errors or wrongly encoded data)?</p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>&#8658; <strong><em>Feature Matrix</em></strong> \(\,X \in \mathbb{R}^{n\times d}\): <em>n</em> Datenpunkte; jeder repräsentiert als ein <em>d</em>-dimensionaler Vektor (d.h. mit <em>d</em> Features)<br></p>
+</li>
+<li>
+<p>Examine trends over time (by plotting variables over time)</p>
+</li>
+<li>
+<p>Examine relationships between variables (using scatter plots)</p>
+</li>
+<li>
+<p>Examine patterns in multidimensional data (using parallel coordinate plots)</p>
+</li>
+</ul>
 </div>
-</dd>
-<dt class="hdlist1">Vorhersage-Targets?</dt>
-<dd>
-<p>&#8594; <strong><em>Label Vektor</em></strong> \(\,\mathbf{y}\) : <em>n</em>-dimensionaler Vektor mit einem Target Wert (Label) pro Datenpunkt</p>
 </dd>
 </dl>
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_data_driven_decisions">Data-driven Decisions</h4>
+<div class="paragraph">
+<p>While learning something about the data and its context is often interesting and can feel rewarding in itself, it is not yet valuable.
+Insights become valuable when they influence a decision and inspire a different course of action, better than the default that would have been taken without the analysis.</p>
+</div>
+<div class="paragraph">
+<p>For this, we first need to determine <strong>which decision</strong> our insights should influence (which is usually easier in the case of a reactive compared to a proactive analysis) and then communicate our results accordingly.</p>
+</div>
+<div class="paragraph">
+<p>For this we need to be clear on:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="_garbage_in_garbage_out.html">Garbage in, Garbage out!</a></p>
+<p>Who are the relevant stakeholder (= our audience)?</p>
+</li>
+<li>
+<p>What is their goal?</p>
+</li>
+<li>
+<p>What questions need to be answered to make progress towards this goal?</p>
+</li>
+<li>
+<p>What visualizations can help answer these questions?</p>
+</li>
+<li>
+<p>What action would we recommend based on the answer?</p>
+</li>
+</ul>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Example business decisions</dt>
+<dd>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><span class="underline">Question:</span> Is the customer service department reaching its goals?<br>
+<span class="underline">Answer:</span> In the last 3 months, customer service only managed to resolve 80% of requests.<br>
+<span class="underline">Recommended Action:</span> We should hire more people.</p>
+</li>
+<li>
+<p><span class="underline">Question:</span> What country should we expand to next?<br>
+<span class="underline">Answer:</span> The market potential for countries A/B/C is 200/500/300 million euros respectively.<br>
+<span class="underline">Recommended Action:</span> We should target country B next.</p>
+</li>
+<li>
+<p><span class="underline">Question:</span> Do we need to order more inventory?<br>
+<span class="underline">Answer:</span> Sales forecasts show that our current inventory should last until after Christmas.<br>
+<span class="underline">Recommended Action:</span> No, we should not order more inventory.</p>
+</li>
+<li>
+<p><span class="underline">Question:</span> Can we drop support for Internet Explorer for our web application?<br>
+<span class="underline">Answer:</span> Only 10% of our users still use IE while our developers complain about the high maintenance effort.<br>
+<span class="underline">Recommended Action:</span> Full support for IE is not worth it anymore.</p>
+</li>
+</ol>
+</div>
+</dd>
+<dt class="hdlist1">Example ML-related decisions</dt>
+<dd>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><span class="underline">Question:</span> Should this data point be excluded from the training set because it is an outlier?<br>
+<span class="underline">Answer:</span> Outlier score of the data point is greater than the threshold.<br>
+<span class="underline">Recommended Action:</span> Exclude the data point.</p>
+</li>
+<li>
+<p><span class="underline">Question:</span> Do we need extra preprocessing steps for this variable (e.g., because it is not normally distributed)?<br>
+<span class="underline">Answer:</span> A statistical test confirms the variable is not normally distributed with p=0.02.<br>
+<span class="underline">Recommended Action:</span> Apply a transformation to the data point as described in the chapter on <a href="_data_preprocessing.html">Data Preprocessing</a>.</p>
+</li>
+<li>
+<p><span class="underline">Question:</span> Are the predictions of our ML model accurate enough such that we can use it in the live system?<br>
+<span class="underline">Answer:</span> Model accuracy dropped below 85% last week.<br>
+<span class="underline">Recommended Action:</span> We should retrain the model on more recent data.</p>
+</li>
+</ol>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Don&#8217;t just look for data that confirms the story you want to tell and supports the action you wanted to take from the start (i.e., beware of confirmation bias)! Instead be open and actively try to disprove your hypothesis.
+</td>
+</tr>
+</table>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><span class="underline">But:</span> Not all decisions need to be made in a data-driven way:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Our best web developers threatened to quit, if they have to keep supporting Internet Explorer. No matter how many users would be affected by the change, we can&#8217;t lose these developers!</p>
+</li>
+<li>
+<p>Our ML model is retrained on new data every week anyways, no matter the performance.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>&#8658; Be transparent and upfront about whether a decision can be influenced by analysis results and if not, save the analysts the effort.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_communicating_insights">Communicating Insights</h4>
+<div class="paragraph">
+<p>The plots that were created during the exploratory analysis should not be the plots we show our audience when we&#8217;re trying to communicate our findings. Since our audience is far less familiar with the data than us and probably also not interested / doesn&#8217;t have the time to dive deeper into the data, we need to make the results more accessible, a process often called <em>explanatory analysis</em>.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Don&#8217;t &#8220;just show all the data&#8221; and hope that your audience will make something of it&#8201;&#8212;&#8201;this is the downfall of many dashboards. It is essential, that you understand what goal your audience is trying to achieve and what questions they need answers to.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_step_1_choose_the_right_plot_type">Step 1: Choose the right plot type</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>get inspired by visualization libraries (e.g., <a href="https://github.com/Financial-Times/chart-doctor/blob/main/visual-vocabulary/Visual-vocabulary-en.pdf" target="\_blank">here</a> or <a href="https://datavizcatalogue.com/" target="\_blank">here</a>)</p>
+</li>
+<li>
+<p>don&#8217;t use 3D effects!</p>
+</li>
+<li>
+<p>don&#8217;t use pie or donut charts (angles are hard to interpret)</p>
+</li>
+<li>
+<p>use line plots for time series data</p>
+</li>
+<li>
+<p>use horizontal instead of vertical bar charts for audiences that read left to right</p>
+</li>
+<li>
+<p>consider using <a href="https://en.wikipedia.org/wiki/Small_multiple" target="\_blank">small multiples</a> or sparklines instead of cramming too much into a single chart</p>
 </li>
 </ul>
 </div>
 </div>
+<div class="sect4">
+<h5 id="_step_2_cut_clutter_maximize_data_to_ink_ratio">Step 2: Cut clutter / maximize data-to-ink ratio</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>remove border</p>
+</li>
+<li>
+<p>remove gridlines</p>
+</li>
+<li>
+<p>remove data markers</p>
+</li>
+<li>
+<p>clean up axis labels</p>
+</li>
+<li>
+<p>label data directly</p>
+</li>
+<li>
+<p>leverage consistent color</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_step_3_focus_attention">Step 3: Focus attention</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>start with gray, i.e., push everything in the background</p>
+</li>
+<li>
+<p>use pre-attentive attributes like color strategically</p>
+</li>
+<li>
+<p>use data labels sparingly</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_step_4_make_data_accessible">Step 4: Make data accessible</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>add context: which values are good (target state), which are bad (alert threshold)?</p>
+</li>
+<li>
+<p>annotate the plot with text explaining the main takeaways</p>
+</li>
+</ul>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Further reading</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p><em>Better Data Visualizations: A Guide for Scholars, Researchers, and Wonks</em> by Jonathan Schwabish</p>
+</li>
+<li>
+<p><em>Effective Data Storytelling: How to drive change with data, narrative, and visuals</em> by Brent Dykes</p>
+</li>
+<li>
+<p><em>Storytelling with Data: A data visualization guide for business professionals</em> by Cole Nussbaum Knaflic</p>
+</li>
+<li>
+<p><em>Data Visualization: A successful design process</em> by Andy Kirk</p>
+</li>
+<li>
+<p>Various <a href="https://kozyrkov.medium.com/" target="\_blank">blog posts</a> by Cassie Kozyrkov</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_mit_ml_probleme_lösen.html">Mit ML Probleme lösen</a> | ↑ Up: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_garbage_in_garbage_out.html">Garbage in, Garbage out!</a> →</p>
+<p>↑ Up: <a href="_data_analysis_preprocessing.html">Data Analysis &amp; Preprocessing</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_garbage_in_garbage_out.html">Garbage in, garbage out!</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

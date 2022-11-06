@@ -922,7 +922,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
-<body id="_fehler_4_modell_diskriminiert" class="book toc2 toc-left">
+<body id="_preprocessing" class="book toc2 toc-left">
 <div id="header">
 <h1>A Practitioner&#8217;s Guide to Machine Learning</h1>
 <div class="details">
@@ -937,22 +937,18 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <li><a href="_einleitung.html">Einleitung</a>
 </li>
 <li><a href="_datenanalyse_preprocessing.html">Datenanalyse &amp; Preprocessing</a>
+<ul class="sectlevel2">
+<li><a href="_datenanalyse.html">Datenanalyse</a>
+</li>
+<li><a href="_garbage_in_garbage_out.html">Garbage in, Garbage out!</a>
+</li>
+<li><a href="_preprocessing.html"><span class="toc-current">Preprocessing</span></a>
+</li>
+</ul>
 </li>
 <li><a href="_supervised_learning.html">Supervised Learning</a>
 </li>
 <li><a href="_häufige_fehler_vermeiden.html">Häufige Fehler vermeiden</a>
-<ul class="sectlevel2">
-<li><a href="_fehler_1_irreführende_modellevaluierung.html">[Fehler #1] Irreführende Modellevaluierung</a>
-</li>
-<li><a href="_fehler_2_modell_generalisiert_nicht.html">[Fehler #2] Modell generalisiert nicht</a>
-</li>
-<li><a href="_fehler_3_modell_missbraucht_scheinkorrelationen.html">[Fehler #3] Modell missbraucht Scheinkorrelationen</a>
-</li>
-<li><a href="_fehler_4_modell_diskriminiert.html"><span class="toc-current">[Fehler #4] Modell diskriminiert</span></a>
-</li>
-<li><a href="_fehler_5_daten_konzept_drifts.html">[Fehler #5] Daten &amp; Konzept Drifts</a>
-</li>
-</ul>
 </li>
 <li><a href="_fazit.html">Fazit</a>
 </li>
@@ -961,122 +957,69 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 <div id="content">
 <div class="sect2">
-<h3 id="_fehler_4_modell_diskriminiert">[Fehler #4] Modell diskriminiert</h3>
+<h3 id="_preprocessing">Preprocessing</h3>
 <div class="paragraph">
-<p>Ein Modell, welches echte kausale Zusammenhänge zwischen den Variablen aufgegriffen hat, generiert zwar robustere Vorhersagen, doch es kann auch kausale Zusammenhänge in den historischen Daten geben, die ein Modell besser <em>nicht</em> lernen sollte. Wenn in der Vergangenheit Menschen aufgrund ihres Geschlechts oder ihrer Hautfarbe diskriminiert wurden, kann sich dies auch in den Trainingsdaten widerspiegeln und wir müssen zusätzliche Maßnahmen ergreifen, damit diese Muster nicht in unserem Modell weiterbestehen&#8201;&#8212;&#8201;obwohl es in der Vergangenheit vielleicht echte kausale Zusammenhänge waren.</p>
+<p>Jetzt, da wir unsere Daten besser verstehen und sicher gestellt haben, dass sie (hoffentlich) von guter Qualität sind, können wir sie für unsere Machine Learning Algorithmen aufbereiten.</p>
 </div>
+<div class="sidebarblock">
+<div class="content">
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Systematisch verzerrte Daten führen zu (stark) verzerrten Modellen</dt>
+<dt class="hdlist1">Rohdaten</dt>
 <dd>
-<p>Im Folgenden sind einige Beispiele aufgeführt, bei denen Menschen mit den besten Absichten ein ML-Modell entwickelt haben, das problematische Dinge aus realen Daten gelernt hat.</p>
+<p>können in vielen verschiedenen Formaten vorliegen, z.B. Sensormessungen, Pixelwerte, Text (z.B. HTML-Seite), SAP-Datenbank, &#8230;&#8203;<br>
+&#8594; <em>n</em> Datenpunkte, gespeichert als Zeilen in einem Excel-Spreadsheet, als einzelne Dateien, usw.</p>
 </dd>
 </dl>
 </div>
-<div class="sidebarblock">
-<div class="content">
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/07_data_issues/bias_microsoft_tay.png" alt="image" width="550">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<strong>Was ist ein Datenpunkt?</strong> Es ist äußerst wichtig sich darüber im Klaren zu sein, was eigentlich ein Datenpunkt ist, d.h. wie die Inputs aussehen und welches Ergebnis das Modell für jede Probe/Beobachtung zurückgegeben soll. Um das zu bestimmen, hilft es sich zu überlegen, wie das ML-Modell später in den Rest des Workflows integriert werden soll: Welche Daten werden im vorherigen Schritt erzeugt und können als Input für den ML-Teil verwendet werden, und was für einen Output braucht man für den darauffolgenden Schritt?
+</td>
+</tr>
+</table>
 </div>
-<div class="title"><span class="small">Was als Forschungsprojekt begann, um herauszufinden, wie Menschen mit einem KI-basierten Chatbot interagieren, endete für Microsoft als PR-Albtraum. Der Chatbot &#8216;Tay&#8217; sollte aus den an sie geschriebenen Nachrichten lernen. Aber da die Entwickler offenbar mehr über ihre ML-Modelle als über menschliches Verhalten im Internet nachdachten, wiederholte Tay vor allem rassistische und sexistische Aussagen, die andere ihr gegenüber twitterten.</span></div>
-</div>
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/07_data_issues/bias_twitter_imagecrop.png" alt="image" width="550">
-</div>
-<div class="title"><span class="small">Da viele auf Twitter gepostete Bilder größer sind als der verfügbare Platz für das Vorschaubild, wollte Twitter &#8220;den relevantesten Teil&#8221; eines Bildes für die Vorschau mit einem ML-Modell auswählen. Da sie dieses Modell leider auf einem Datensatz trainierten, der mehr Bilder von Menschen mit weißer als dunkler Hautfarbe enthielt, wurde das Modell rassistisch und wählte beispielsweise bei einem Bild von Barack Obama und einem zufälligen unwichtigen weißen Politiker immer den weißen Politiker für das Vorschaubild. Des weiteren fiel auf, dass diese Zuschneide-Algorithmen häufiger Gesichter als Vorschaubilder für Männer und den Körper (insbesondere&#8201;&#8212;&#8201;wer hätte es gedacht&#8201;&#8212;&#8201;Brüste) als Vorschaubilder für Frauen auswählten.</span></div>
-</div>
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/07_data_issues/bias_household_lowerincome.png" alt="image" width="700">
-</div>
-<div class="title"><span class="small">Die meisten Computer Vision Modelle werden auf dem ImageNet-Datensatz (vor-)trainiert, der über 14 Millionen handgelabelte Bilder enthält, die in mehr als 20.000 Kategorien organisiert sind. Da diese Bilder jedoch aus dem Internet stammen und mehr Menschen aus Industrieländern als aus Entwicklungsländern dazu neigen, Bilder online zu stellen, sind beispielsweise gängige Haushaltsgegenstände aus reicheren Ländern stark überrepräsentiert. Als Folge verwechseln diese Modelle z.B. Seifenstücke, wie sie in einem ärmeren Land verwendet werden, mit Lebensmitteln (z.B. könnte man argumentieren, dass diese tatsächlich eine gewisse Ähnlichkeit haben mit einem Teller mit Essen in einem Sterne-Restaurant).</span></div>
-</div>
-<div class="paragraph text-center">
-<p><span class="small">de Vries, Terrance, et al. &#8220;Does object recognition work for everyone?&#8221; <em>IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops.</em> 2019.</span></p>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Die oben genannten Probleme traten alle auf, weil die Daten nicht gleichmäßig verteilt waren:</p>
-</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Preprocessing</dt>
+<dd>
+<p>Transformation und Anreicherung der Rohdaten vor der Anwendung von ML, zum Beispiel:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Tay hat viel mehr rassistische und hasserfüllte Kommentare und Tweets gesehen als neutrale oder wertschätzende Äußerungen.</p>
+<p>Feature Extraktion: Rohdaten in numerische Werte umwandeln (z.B. Text)</p>
 </li>
 <li>
-<p>Der Bilddatensatz, auf dem Twitter sein Modell trainierte, enthielt mehr Bilder von weißen als von nicht-weißen Personen.</p>
+<p>Fehlende oder falsch eingetragene Werte entfernen / korrigieren (z.B. falsch gesetztes Dezimalkomma)</p>
 </li>
 <li>
-<p>Bei einer zufälligen Stichprobe von Fotos aus dem Internet wurden diese Bilder meist von Menschen aus Industrieländern hochgeladen, d.h. Bilder, die den Status Quo in Entwicklungsländern zeigen, sind unterrepräsentiert.</p>
+<p>Null-Varianz-Features (d.h. Variablen mit immer gleichem Wert) und unsinnige Variablen (z.B. IDs) ausschließen</p>
+</li>
+<li>
+<p>Feature Engineering: Berechnen zusätzlicher/besserer Features aus den ursprünglichen Variablen</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Noch problematischer als eine bloße Unterrepräsentation bestimmter Untergruppen (verzerrte Eingabeverteilung) ist ein Muster der systematischen Diskriminierung dieser Untergruppen in historischen Daten (diskriminierende Verschiebung der zugewiesenen Labels).</p>
+<p>&#8658; <strong><em>Feature Matrix</em></strong> \(\,X \in \mathbb{R}^{n\times d}\): <em>n</em> Datenpunkte; jeder repräsentiert als ein <em>d</em>-dimensionaler Vektor (d.h. mit <em>d</em> Features)<br></p>
 </div>
-<div class="sidebarblock">
-<div class="content">
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/07_data_issues/bias_apple_card.png" alt="image" width="550">
-</div>
-<div class="title"><span class="small">In vielen Datensätzen, die zum Trainieren von Modellen für die Vergabe von Kreditscores oder zur Bestimmung von Zinssätzen für Hypotheken oder Kredite verwendet werden, ist oft eine Menge expliziter Diskriminierung kodiert. Da diese Anwendungsbereiche einen direkten und starken Einfluss auf das Leben der Menschen haben, muss man hier besonders vorsichtig sein. Beispielsweise sollte man überprüfen, ob ein Modell für einen Mann und eine Frau den gleichen Score vorhersagt, wenn alle Merkmale mit Ausnahme des Geschlechts bei einem Datenpunkt übereinstimmen.</span></div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p><span class="underline">Zusammenfassend:</span> Ein verzerrtes Modell kann sich auf zwei Arten negativ auf die Nutzer auswirken:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Unverhältnismäßige Produktausfälle aufgrund unterrepräsentierter Stichproben. Beispielsweise funktionieren Spracherkennungsmodelle für Frauen oft weniger zuverlässig, weil sie mit mehr Daten von Männern trainiert wurden (z.B. transkribierte politische Reden).</p>
-</li>
-<li>
-<p>Schaden durch Benachteiligung / Verweigerung von Chancen aufgrund von in historischen Daten kodierten Stereotypen. Beispielsweise müssen Frauen höhere Kreditzinsen zahlen als Männer oder im Ausland geborene Personen gelten als weniger qualifiziert für eine Stelle, wenn ihre Lebensläufe von einem automatisierten Screening-Tool bewertet werden.</p>
-</li>
-</ul>
-</div>
-<h5 id="_auf_dem_weg_zu_fairen_modellen" class="discrete">Auf dem Weg zu fairen Modellen</h5>
-<div class="paragraph">
-<p>Bevor wir diese Probleme beheben können, müssen wir uns ihrer erstmal bewusst werden. Daher ist es wichtig, die Performance eines Modells immer für jede (bekannte) Untergruppe in den Daten einzeln zu bewerten, um sicherzustellen, dass die Vorhersagefehler des Modells zufällig sind und das Modell nicht für einige Untergruppen (z.B. Frauen) systematisch schlechter funktioniert.</p>
-</div>
-<div class="paragraph">
-<p>Außerdem ist grundsätzlich Vorsicht geboten, wenn wir Variablen in das Modell aufnehmen, die Attribute wie Geschlecht oder Herkunft kodieren. Zum Beispiel wird die Performance eines Modells zur Diagnose von Herzinfarkten durch die Einbeziehung von &#8216;Geschlecht&#8217; als Merkmal höchstwahrscheinlich verbessert, da Männer und Frauen bei einem Herzinfarkt unterschiedliche Symptome zeigen. Andererseits sollte ein Modell, das jemandem eine Kreditwürdigkeit zuweist, bei dieser Entscheidung das Geschlecht der Person eher nicht berücksichtigen, da ansonsten die in historischen Daten kodierten Stereotypen weiterleben.<br>
-Das Geschlecht oder die Hautfarbe einer Person kann jedoch auch mit anderen Variablen wie beispielsweise Einkommen oder Wohngegend korreliert sein, sodass selbst Features, die auf den ersten Blick harmlos erscheinen, problematische Informationen an das Modell weitergeben können. In solchen Fällen sind zusätzliche Maßnahmen nötig, um zu vermeiden, dass das Modell diskriminiert.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<p>Weitere Negativbeispiele findest du auf der Seite <a href="https://incidentdatabase.ai/" target="\_blank">AI Incidence Database</a> und</p>
-</div>
-<div class="openblock float-group">
-<div class="content">
-<div class="paragraph">
-<p><span class="image left"><img src="../images/09_ml_in_practice/book_weapons_2016.jpg" alt="image" width="140"></span></p>
-</div>
-<div class="paragraph">
-<p>Buch Empfehlung:<br>
-<strong>Weapons of Math Destruction</strong> von Cathy O&#8217;Neil (2016)</p>
-</div>
-</div>
+</dd>
+<dt class="hdlist1">Vorhersage-Targets?</dt>
+<dd>
+<p>&#8594; <strong><em>Label Vektor</em></strong> \(\,\mathbf{y}\) : <em>n</em>-dimensionaler Vektor mit einem Target Wert (Label) pro Datenpunkt</p>
+</dd>
+</dl>
 </div>
 </div>
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_fehler_3_modell_missbraucht_scheinkorrelationen.html">[Fehler #3] Modell missbraucht Scheinkorrelationen</a> | ↑ Up: <a href="_häufige_fehler_vermeiden.html">Häufige Fehler vermeiden</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_fehler_5_daten_konzept_drifts.html">[Fehler #5] Daten &amp; Konzept Drifts</a> →</p>
+<p>← Previous: <a href="_garbage_in_garbage_out.html">Garbage in, Garbage out!</a> | ↑ Up: <a href="_datenanalyse_preprocessing.html">Datenanalyse &amp; Preprocessing</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_supervised_learning.html">Supervised Learning</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

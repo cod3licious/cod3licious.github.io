@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="generator" content="Asciidoctor 2.0.18">
 <meta name="author" content="Dr. Franziska Horn">
 <meta name="copyright" content="Dr. Franziska Horn">
 <title>A Practitioner&#8217;s Guide to Machine Learning</title>
@@ -920,242 +920,337 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-/*! Stylesheet for CodeRay to loosely match GitHub themes | MIT License */
-pre.CodeRay{background:#f7f7f8}
-.CodeRay .line-numbers{border-right:1px solid;opacity:.35;padding:0 .5em 0 0;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
-.CodeRay span.line-numbers{display:inline-block;margin-right:.75em}
-.CodeRay .line-numbers strong{color:#000}
-table.CodeRay{border-collapse:separate;border:0;margin-bottom:0;background:none}
-table.CodeRay td{vertical-align:top;line-height:inherit}
-table.CodeRay td.line-numbers{text-align:right}
-table.CodeRay td.code{padding:0 0 0 .75em}
-.CodeRay .debug{color:#fff!important;background:navy!important}
-.CodeRay .annotation{color:#007}
-.CodeRay .attribute-name{color:navy}
-.CodeRay .attribute-value{color:#700}
-.CodeRay .binary{color:#509}
-.CodeRay .comment{color:#998;font-style:italic}
-.CodeRay .char{color:#04d}
-.CodeRay .char .content{color:#04d}
-.CodeRay .char .delimiter{color:#039}
-.CodeRay .class{color:#458;font-weight:bold}
-.CodeRay .complex{color:#a08}
-.CodeRay .constant,.CodeRay .predefined-constant{color:teal}
-.CodeRay .color{color:#099}
-.CodeRay .class-variable{color:#369}
-.CodeRay .decorator{color:#b0b}
-.CodeRay .definition{color:#099}
-.CodeRay .delimiter{color:#000}
-.CodeRay .doc{color:#970}
-.CodeRay .doctype{color:#34b}
-.CodeRay .doc-string{color:#d42}
-.CodeRay .escape{color:#666}
-.CodeRay .entity{color:#800}
-.CodeRay .error{color:#808}
-.CodeRay .exception{color:inherit}
-.CodeRay .filename{color:#099}
-.CodeRay .function{color:#900;font-weight:bold}
-.CodeRay .global-variable{color:teal}
-.CodeRay .hex{color:#058}
-.CodeRay .integer,.CodeRay .float{color:#099}
-.CodeRay .include{color:#555}
-.CodeRay .inline{color:#000}
-.CodeRay .inline .inline{background:#ccc}
-.CodeRay .inline .inline .inline{background:#bbb}
-.CodeRay .inline .inline-delimiter{color:#d14}
-.CodeRay .inline-delimiter{color:#d14}
-.CodeRay .important{color:#555;font-weight:bold}
-.CodeRay .interpreted{color:#b2b}
-.CodeRay .instance-variable{color:teal}
-.CodeRay .label{color:#970}
-.CodeRay .local-variable{color:#963}
-.CodeRay .octal{color:#40e}
-.CodeRay .predefined{color:#369}
-.CodeRay .preprocessor{color:#579}
-.CodeRay .pseudo-class{color:#555}
-.CodeRay .directive{font-weight:bold}
-.CodeRay .type{font-weight:bold}
-.CodeRay .predefined-type{color:inherit}
-.CodeRay .reserved,.CodeRay .keyword{color:#000;font-weight:bold}
-.CodeRay .key{color:#808}
-.CodeRay .key .delimiter{color:#606}
-.CodeRay .key .char{color:#80f}
-.CodeRay .value{color:#088}
-.CodeRay .regexp .delimiter{color:#808}
-.CodeRay .regexp .content{color:#808}
-.CodeRay .regexp .modifier{color:#808}
-.CodeRay .regexp .char{color:#d14}
-.CodeRay .regexp .function{color:#404;font-weight:bold}
-.CodeRay .string{color:#d20}
-.CodeRay .string .string .string{background:#ffd0d0}
-.CodeRay .string .content{color:#d14}
-.CodeRay .string .char{color:#d14}
-.CodeRay .string .delimiter{color:#d14}
-.CodeRay .shell{color:#d14}
-.CodeRay .shell .delimiter{color:#d14}
-.CodeRay .symbol{color:#990073}
-.CodeRay .symbol .content{color:#a60}
-.CodeRay .symbol .delimiter{color:#630}
-.CodeRay .tag{color:teal}
-.CodeRay .tag-special{color:#d70}
-.CodeRay .variable{color:#036}
-.CodeRay .insert{background:#afa}
-.CodeRay .delete{background:#faa}
-.CodeRay .change{color:#aaf;background:#007}
-.CodeRay .head{color:#f8f;background:#505}
-.CodeRay .insert .insert{color:#080}
-.CodeRay .delete .delete{color:#800}
-.CodeRay .change .change{color:#66f}
-.CodeRay .head .head{color:#f4f}
-</style>
 
 </head>
-<body id="_computing_similarities" class="book toc2 toc-left">
+<body id="_datenanalyse" class="book toc2 toc-left">
 <div id="header">
 <h1>A Practitioner&#8217;s Guide to Machine Learning</h1>
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.6,</span>
-<span id="revdate">2022-08-28</span>
+<span id="revnumber">version 1.7,</span>
+<span id="revdate">2022-11-06</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <p><span class="toc-root"><a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a></span></p><ul class="sectlevel1">
-<li><a href="_introduction.html">Introduction</a>
+<li><a href="_einleitung.html">Einleitung</a>
 </li>
-<li><a href="_ml_with_python.html">ML with Python</a>
-</li>
-<li><a href="_data_preprocessing.html">Data &amp; Preprocessing</a>
+<li><a href="_datenanalyse_preprocessing.html">Datenanalyse &amp; Preprocessing</a>
 <ul class="sectlevel2">
-<li><a href="_what_constitutes_one_data_point.html">What constitutes one data point?</a>
+<li><a href="_datenanalyse.html"><span class="toc-current">Datenanalyse</span></a>
+<ul class="sectlevel3">
+<li><a href="_datenanalyse.html#_datengestützte_entscheidungen">Datengestützte Entscheidungen</a>
 </li>
-<li><a href="_feature_extraction.html">Feature Extraction</a>
-</li>
-<li><a href="_feature_engineering_transformations.html">Feature Engineering &amp; Transformations</a>
-</li>
-<li><a href="_computing_similarities.html"><span class="toc-current">Computing Similarities</span></a>
-</li>
-<li><a href="_garbage_in_garbage_out.html">Garbage in, garbage out!</a>
+<li><a href="_datenanalyse.html#_erkenntnisse_kommunizieren">Erkenntnisse kommunizieren</a>
 </li>
 </ul>
 </li>
-<li><a href="_unsupervised_learning_2.html">Unsupervised Learning</a>
+<li><a href="_garbage_in_garbage_out.html">Garbage in, Garbage out!</a>
 </li>
-<li><a href="_supervised_learning_basics.html">Supervised Learning Basics</a>
+<li><a href="_preprocessing.html">Preprocessing</a>
 </li>
-<li><a href="_supervised_learning_models.html">Supervised Learning Models</a>
+</ul>
 </li>
-<li><a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a>
+<li><a href="_supervised_learning.html">Supervised Learning</a>
 </li>
-<li><a href="_advanced_topics.html">Advanced Topics</a>
+<li><a href="_häufige_fehler_vermeiden.html">Häufige Fehler vermeiden</a>
 </li>
-<li><a href="_conclusion.html">Conclusion</a>
+<li><a href="_fazit.html">Fazit</a>
 </li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect2">
-<h3 id="_computing_similarities">Computing Similarities</h3>
+<h3 id="_datenanalyse">Datenanalyse</h3>
 <div class="paragraph">
-<p>Many ML algorithms rely on similarities or distances between data points, computed with measures such as:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://en.wikipedia.org/wiki/Euclidean_distance" target="\_blank">Euclidean distance</a></p>
-</li>
-<li>
-<p><a href="https://en.wikipedia.org/wiki/Cosine_similarity" target="\_blank">Cosine similarity</a> (e.g., when working with text data)</p>
-</li>
-<li>
-<p>Similarity coefficients (e.g., <a href="https://en.wikipedia.org/wiki/Jaccard_index" target="\_blank">Jaccard index</a>)</p>
-</li>
-<li>
-<p>&#8230;&#8203; and many more.</p>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="python"><span class="keyword">from</span> <span class="include">sklearn.metrics.pairwise</span> <span class="keyword">import</span> ...</code></pre>
-</div>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-Which feature should have how much influence on the similarity between points? &#8594; Domain knowledge!
-</td>
-</tr>
-</table>
-</div>
-<div class="openblock">
-<div class="content">
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>&#8658; Scale / normalize heterogeneous data: For example, the pressure difference between 1.1 and 1.3 bar might be more dramatic in the process than the temperature difference between 200 and 220 degrees, but if the distance between data points is computed with the unscaled values, then the difference in temperature completely overshadows the difference in pressure.</p>
-</li>
-<li>
-<p>&#8658; Exclude redundant / strongly correlated features, as they otherwise count twice towards the distance.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Example: Computing similarities between texts (represented as TF-IDF vectors) with the <em>cosine similarity</em></dt>
-<dd>
-<p>Scalar product (&#8594; <code>linear_kernel</code>) of length normalized TF-IDF vectors:</p>
-<div class="stemblock">
-<div class="content">
-\[sim(\mathbf{x}_i, \mathbf{x}_j) = \frac{\mathbf{x}_i^\top \mathbf{x}_j}{\|\mathbf{x}_i\| \|\mathbf{x}_j\|} \quad \in [-1, 1]\]
-</div>
+<p>Das Analysieren von Daten ist nicht nur ein wichtiger Schritt, bevor diese Daten für ein Machine Learning Projekt verwendet werden, sondern kann auch wertvolle Erkenntnisse generieren, die zu besseren (datengestützten) Entscheidungen führen.</p>
 </div>
 <div class="paragraph">
-<p>i.e., the cosine of the angle between the length-normalized vectors:</p>
+<p>Normalerweise analysieren wir Daten aus einem von zwei Gründen:</p>
 </div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/07_nlp/cosine_sim.png" alt="image" width="640">
-</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>wir brauchen bestimmte Informationen, um eine (bessere) Entscheidung zu treffen <em>(reaktive Analyse)</em> oder</p>
+</li>
+<li>
+<p>wir sind neugierig auf die Daten und wissen noch nicht, was die Analyse bringen wird <em>(proaktive Analyse)</em>.</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>&#8594; similarity score is between [0, 1] for TF-IDF vectors, since all entries in the vectors are positive.</p>
-</div>
-</dd>
-</dl>
+<p>In beiden Fällen beginnen wir mit einer <strong>explorativen Datenanalyse</strong>, um aus den Daten Erkenntnisse zu gewinnen.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Food for thought: Human vs. TF-IDF + Cosine Similarity understanding</dt>
+<dt class="hdlist1">Was ist sind Erkenntnisse?</dt>
+<dd>
+<p>Der Psychologe Gary Klein definiert eine Erkenntnis als &#8220;eine unerwartete Veränderung in der Art, wie wir Dinge verstehen&#8221;.</p>
+</dd>
 </dl>
 </div>
-<div class="paragraph text-center">
-<p><em>The hotel was great, but the weather was bad.</em><br>
-vs.<br>
-<em>The weather was great, but the hotel was bad.</em><br>
-vs.<br>
-<em>The accommodation was wonderful, but it was raining all day.</em></p>
+</div>
 </div>
 <div class="paragraph">
-<p>For which of the above sentences would you say that they mean something similar?<br>
-Which sentence pairs would be assigned a high or lower similarity score when they are represented as TF-IDF vectors and the similarity is computed with the cosine similarity?</p>
+<p>Eine explorative Analyse ist oft ein &#8216;quick and dirty&#8217; Prozess, bei dem wir viele <strong>Diagramme erstellen, um die Daten besser zu verstehen</strong>. Im Einklang mit Gary Klein suchen wir nach <strong>Dingen, die unerwartet sind</strong>, z.B. ein ungewöhnlicher Anstieg oder Abfall einer Metrik. An dieser Stelle haken wir dann nach, um zu verstehen, woher dieser Unterschied zwischen dem, was wir erwartet haben, und dem, was wir in den Daten sehen, kommt, z.B. indem wir andere korrelierte Variablen untersuchen.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Domänenwissen ist oft hilfreich, um zu wissen, welche Werte unerwartet sind und wo es sich lohnen könnte, tiefer in die Daten einzusteigen. Daher kann es sinnvoll sein, die Ergebnisse <strong>zusammen mit einem Fachexperten</strong> durchzugehen.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_datengestützte_entscheidungen">Datengestützte Entscheidungen</h4>
+<div class="paragraph">
+<p>So spannend es auch sein kann, etwas über die Daten und ihren Kontext zu lernen&#8201;&#8212;&#8201;wir generieren damit noch keinen Wert.
+Erkenntnisse werden erst wertvoll, wenn sie eine Entscheidung beeinflussen und dazu führen, dass jemand anders handelt, als er oder sie es ohne die Analyse getan hätte.</p>
+</div>
+<div class="paragraph">
+<p>Dazu müssen wir zunächst klarstellen, <strong>welche Entscheidung</strong> unsere Erkenntnisse beeinflussen sollen (was bei einer reaktiven Analyse meist einfacher ist als bei einer proaktiven Analyse) und dann unsere Ergebnisse entsprechend kommunizieren.</p>
+</div>
+<div class="paragraph">
+<p>Dafür müssen wir uns im Klaren darüber sein:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Wer sind die relevanten Stakeholder (= die Zielgruppe unserer Analyse)?</p>
+</li>
+<li>
+<p>Was ist ihr Ziel?</p>
+</li>
+<li>
+<p>Welche Fragen müssen beantwortet werden, um diesem Ziel näher zu kommen?</p>
+</li>
+<li>
+<p>Welche Visualisierungen können helfen, diese Fragen zu beantworten?</p>
+</li>
+<li>
+<p>Welche Handlung würden wir basierend auf den Ergebnissen empfehlen?</p>
+</li>
+</ul>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Beispiele für Geschäftsentscheidungen</dt>
+<dd>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><span class="underline">Frage:</span> Erreicht die Kundendienstabteilung ihre Ziele?<br>
+<span class="underline">Antwort:</span> In den letzten 3 Monaten konnte der Kundendienst nur 80% der Anfragen beantworten.<br>
+<span class="underline">Empfohlene Handlung:</span> Wir sollten mehr Leute einstellen.</p>
+</li>
+<li>
+<p><span class="underline">Frage:</span> In welches Land sollen wir als nächstes expandieren?<br>
+<span class="underline">Antwort:</span> Das Marktpotenzial für die Länder A/B/C beträgt jeweils 200/500/300 Millionen Euro.<br>
+<span class="underline">Empfohlene Handlung:</span> Wir sollten als nächstes Land B ins Visier nehmen.</p>
+</li>
+<li>
+<p><span class="underline">Frage:</span> Müssen wir mehr Inventar bestellen?<br>
+<span class="underline">Antwort:</span> Verkaufsprognosen zeigen, dass unser aktueller Lagerbestand bis nach Weihnachten reichen sollte.<br>
+<span class="underline">Empfohlene Handlung:</span> Nein, wir sollten kein weiteres Inventar bestellen.</p>
+</li>
+<li>
+<p><span class="underline">Frage:</span> Müssen wir den Internet Explorer für unsere Webanwendung noch unterstützen?<br>
+<span class="underline">Antwort:</span> Nur noch 10% unserer Nutzer verwenden den IE und unsere Entwickler beschweren sich über den hohen Wartungsaufwand.<br>
+<span class="underline">Empfohlene Handlung:</span> Volle Unterstützung für IE lohnt sich nicht mehr.</p>
+</li>
+</ol>
+</div>
+</dd>
+<dt class="hdlist1">Beispiel für eine Entscheidung in einem ML Projekt</dt>
+<dd>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><span class="underline">Frage:</span> Sind die Vorhersagen unseres ML-Modells genau genug, um es im Live-System zu verwenden?<br>
+<span class="underline">Antwort:</span> Die Modellgenauigkeit ist letzte Woche unter 85% gefallen.<br>
+<span class="underline">Empfohlene Handlung:</span> Wir sollten das Modell mit neuen Daten nach trainieren.</p>
+</li>
+</ol>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Durchsuche die Daten nicht nur nach Erkenntnissen, die das bestätigen, was du dir schon vorher gedacht hast (Bestätigungsfehler / Confirmation Bias)! Sei stattdessen offen und versuche aktiv, deine Hypothese zu widerlegen.
+</td>
+</tr>
+</table>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><span class="underline">Aber:</span> Nicht alle Entscheidungen müssen datengestützt getroffen werden:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Unsere besten Webentwickler haben gedroht zu kündigen, wenn sie den Internet Explorer weiter unterstützen müssen. Egal wie viele Nutzer von der Änderung betroffen wären, wir können es uns nicht leisten, diese Entwickler zu verlieren!</p>
+</li>
+<li>
+<p>Unser ML-Modell wird sowieso jede Woche mit neuen Daten nach trainiert, unabhängig von der Modellgenauigkeit.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>&#8658; Kommuniziere transparent, ob eine Entscheidung überhaupt durch Analyseergebnisse beeinflusst werden kann, und wenn nicht, erspare den Analysten den Aufwand.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_erkenntnisse_kommunizieren">Erkenntnisse kommunizieren</h4>
+<div class="paragraph">
+<p>Die Diagramme, die wir während der explorativen Analyse erstellt haben, sollten nicht die Diagramme sein, die wir unserem Publikum zeigen, um unsere Erkenntnisse zu kommunizieren. Da unsere Zielgruppe mit den Daten viel weniger vertraut ist als wir und wahrscheinlich auch kein Interesse / keine Zeit hat, tiefer in die Daten einzutauchen, müssen wir ihnen die Ergebnisse leichter zugänglich machen&#8201;&#8212;&#8201;ein Prozess, der oft als <em>erklärende Analyse</em> bezeichnet wird.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+&#8220;Einfach alle Daten zeigen&#8221; und hoffen, dass das Publikum schon irgendwas daraus machen wird, ist oft der Anfang vom Ende vieler Dashboards. Es ist wichtig, dass du verstehst, welches Ziel dein Publikum erreichen möchte und welche Fragen dafür beantwortet werden müssen.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_schritt_1_wähle_den_richtigen_diagrammtyp">Schritt 1: Wähle den richtigen Diagrammtyp</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Lass dich von Visualisierungsbibliotheken inspirieren (z.B. <a href="https://github.com/Financial-Times/chart-doctor/blob/main/visual-vocabulary/Visual-vocabulary-en.pdf" target="\_blank">hier</a> oder <a href="https://datavizcatalogue.com/" target="\_blank">hier</a>)</p>
+</li>
+<li>
+<p>Verwende keine 3D-Effekte!</p>
+</li>
+<li>
+<p>Verwende keine Torten- oder Donutdiagramme (Winkel sind schwer zu interpretieren)</p>
+</li>
+<li>
+<p>Verwende Liniendiagramme für Zeitreihendaten</p>
+</li>
+<li>
+<p>Verwende horizontale statt vertikaler Balkendiagramme für Zielgruppen, die von links nach rechts lesen</p>
+</li>
+<li>
+<p>Benutze evtl. &#8216;<a href="https://en.wikipedia.org/wiki/Small_multiple" target="\_blank">Small Multiples</a>&#8217; oder Sparklines, wenn ein einzelnes Diagramm zu vollgestopft wirkt</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_schritt_2_unnötiges_weglassen_daten_zu_tinte_verhältnis_maximieren">Schritt 2: Unnötiges weglassen / Daten-zu-Tinte-Verhältnis maximieren</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Rand entfernen</p>
+</li>
+<li>
+<p>Gitterlinien entfernen</p>
+</li>
+<li>
+<p>Datenmarker entfernen</p>
+</li>
+<li>
+<p>Achsenbeschriftungen aufs Wesentliche reduzieren</p>
+</li>
+<li>
+<p>Linien direkt beschriften</p>
+</li>
+<li>
+<p>Konsistente Farben verwenden</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_schritt_3_aufmerksamkeit_fokussieren">Schritt 3: Aufmerksamkeit fokussieren</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Beginne mit grau, also schiebe erstmal alles in den Hintergrund</p>
+</li>
+<li>
+<p>Verwende präattentive Attribute wie Farben strategisch</p>
+</li>
+<li>
+<p>Verwende Datenmarker und Labels sparsam</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_schritt_4_daten_zugänglich_machen">Schritt 4: Daten zugänglich machen</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Kontext hinzufügen: Welche Werte sind gut (Zielzustand), welche schlecht (Alarmschwelle)?</p>
+</li>
+<li>
+<p>Füge erklärenden Text hinzu, um die wichtigsten Schlussfolgerungen und Handlungsempfehlungen herauszustellen</p>
+</li>
+</ul>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Weiterführende Literatur</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p><em>Better Data Visualizations: A Guide for Scholars, Researchers, and Wonks</em> von Jonathan Schwabish</p>
+</li>
+<li>
+<p><em>Effective Data Storytelling: How to drive change with data, narrative, and visuals</em> von Brent Dykes</p>
+</li>
+<li>
+<p><em>Storytelling with Data: A data visualization guide for business professionals</em> von Cole Nussbaum Knaflic</p>
+</li>
+<li>
+<p><em>Data Visualization: A successful design process</em> von Andy Kirk</p>
+</li>
+<li>
+<p>Verschiedene <a href="https://kozyrkov.medium.com/" target="\_blank">Blogartikel</a> von Cassie Kozyrkov</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_feature_engineering_transformations.html">Feature Engineering &amp; Transformations</a> | ↑ Up: <a href="_data_preprocessing.html">Data &amp; Preprocessing</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_garbage_in_garbage_out.html">Garbage in, garbage out!</a> →</p>
+<p>↑ Up: <a href="_datenanalyse_preprocessing.html">Datenanalyse &amp; Preprocessing</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_garbage_in_garbage_out.html">Garbage in, Garbage out!</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

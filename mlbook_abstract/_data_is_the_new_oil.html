@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="generator" content="Asciidoctor 2.0.18">
 <meta name="author" content="Dr. Franziska Horn">
 <meta name="copyright" content="Dr. Franziska Horn">
 <title>A Practitioner&#8217;s Guide to Machine Learning</title>
@@ -928,8 +928,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.6,</span>
-<span id="revdate">2022-08-28</span>
+<span id="revnumber">version 1.7,</span>
+<span id="revdate">2022-11-06</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -939,6 +939,14 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <li><a href="_ml_is_everywhere.html">ML is everywhere!</a>
 </li>
 <li><a href="_data_is_the_new_oil.html"><span class="toc-current">Data is the new oil!?</span></a>
+<ul class="sectlevel3">
+<li><a href="_data_is_the_new_oil.html#_monitoring">Monitoring</a>
+</li>
+<li><a href="_data_is_the_new_oil.html#_ad_hoc_analysis">Ad Hoc Analysis</a>
+</li>
+<li><a href="_data_is_the_new_oil.html#_automation">Automation</a>
+</li>
+</ul>
 </li>
 <li><a href="_what_is_ml.html">What is ML?</a>
 </li>
@@ -950,7 +958,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </li>
 </ul>
 </li>
-<li><a href="_data_preprocessing.html">Data &amp; Preprocessing</a>
+<li><a href="_data_analysis_preprocessing.html">Data Analysis &amp; Preprocessing</a>
 </li>
 <li><a href="_supervised_learning.html">Supervised Learning</a>
 </li>
@@ -990,49 +998,144 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 The reason why oil is considered valuable is because we have important use cases for it: powering our cars, heating our homes, and producing plastics or fertilizers.
 Similarly, our data is only as valuable as what we make of it. So what can we use data for?</p>
 </div>
+<div class="paragraph">
+<p>The main use cases belong to one of two categories:</p>
+</div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/01b_intro_ml/data_value.png" alt="image" width="440">
 </div>
 </div>
+<div class="sect3">
+<h4 id="_monitoring">Monitoring</h4>
 <div class="paragraph">
-<p>The main use cases fall into these two categories:</p>
+<p>By visualizing important variables or metrics in <strong>reports</strong> or <strong>dashboards</strong>, we increase transparency of the status quo and quantify our progress towards some goal.</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Actionable insights</strong> that enable decision makers to arrive at better, <strong>data-driven decisions</strong> (instead of blindly trusting their instincts).<br>
-<span class="underline">Example:</span> <em>We rely on insights obtained by analyzing data all the time to improve even trivial decisions such as deciding where to eat dinner. You might see a restaurant and your first thought is "I have a bad feeling about this place; the plastic flowers they use as decorations look cheap, let&#8217;s not go in there", however, because you stopped to read some reviews (= data) you discover that this is a hidden gem with really tasty, authentic food.</em></p>
+<div class="paragraph">
+<p>For this purpose, we often devise so called <strong><em>Key Performance Indicators</em> (KPIs)</strong>, i.e., custom metrics that tell us how well things are going. For example, if we&#8217;re working on a web application, one KPI we might want to track could be &#8220;user happiness&#8221;. Unfortunately, true user happiness is difficult to measure, but we can instead check the number of users returning to our site and how long they stay and then somehow combine these and other measurements into a proxy variable that we then call &#8220;user happiness&#8221;.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+A KPI is only a reliable measure, if it is not simultaneously used to control people&#8217;s behavior, as they will otherwise try to game the system (<a href="https://en.wikipedia.org/wiki/Goodhart%27s_law" target="\_blank">Goodhart&#8217;s Law</a>). For example, if our goal is high quality software, counting the number of bugs in our software is not a reliable measure for quality, if we simultaneously <a href="https://dilbert.com/strip/1995-11-13" target="\_blank">reward programmers for every bug they find and fix</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Ideally, these metrics are combined with <strong>thresholds for alerts</strong> to automatically notify us if things go south and a corrective action becomes necessary. For example, we could establish some alert on the health of a system or machine to notify a technician when maintenance is necessary.</p>
+</div>
 <div class="sidebarblock">
 <div class="content">
 <div class="paragraph">
-<p>These insights are generated through an one-off analysis of historical data using mainly &#8220;traditional methods&#8221;:</p>
+<p><span class="underline">For every KPI we should define:</span></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Descriptive Analytics:</strong> By visualizing the data and computing summary statistics we might find something interesting, i.e., <strong>get inspired by the data</strong>.<br>
-<span class="underline">Example:</span> <em>Your company sells a software solution, for which you offer a 14-day free trail version before customers have to pay full price. When analyzing which customers end up buying the software, you notice that a surprisingly high number of your potential customers are students, but they almost never buy the software after the free trial ends. This inspires you to offer special deals for students.</em><br>
-Performing such an exploratory data analysis is also helpful at the start of an ML project to get a better sense of the data we&#8217;re working with (e.g., to check which variables might be relevant).</p>
+<p>the target state, i.e., the value or corridor that indicates that operations are running smoothly</p>
 </li>
 <li>
-<p><strong>Statistical Inference:</strong> While descriptive analytics enables us to ask better questions, statistical inference helps us to get better answers by enabling us to <strong>draw conclusions that reach beyond the data at hand</strong>. Often we would like to make a statement about a whole <em>population</em> (e.g., all humans currently living on this earth), but we only have access to a few (hopefully representative) observations to draw our conclusion from. Statistical inference is about changing our mind under uncertainty: We start with a null hypothesis and then check if what we see in the sample dataset makes this null hypothesis look ridiculous, at which point we reject it and go with our alternative hypothesis instead.<br>
-<span class="underline">Example:</span> <em>Your company has an online store and wants to roll out a new recommendation system, but you are unsure whether customers will find these recommendations helpful and buy more. Therefore, before going live with the new system, you perform an A/B test, where a percentage of randomly selected users see the new recommendations, while the others are routed to the original version of the online store. The null hypothesis is that the new version is no better than the original. But it turns out that the average sales volume of customers seeing the new recommendations is a lot higher than that of the customers browsing the original site. This difference is so large that in a world where the null hypothesis were true, it would be extremely unlikely that a random sample would give us these results. We therefore reject the null hypothesis and go with the alternative hypothesis, that the new recommendations generate higher sales.</em></p>
+<p>the alert threshold, i.e., when a corrective action is necessary</p>
+</li>
+<li>
+<p>what corrective action could be taken by whom and who needs to be informed about it</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>For example, one KPI for a customer service department could be the number of hours it takes for a customer request to be resolved. The target state could be &#8216;less than 48 hours&#8217; and if the average exceeds 96 hours for more than a month, this could be a sign that they need to hire more service agents.<br>
+Unfortunately, what kind of corrective action will get us back on track is often not obvious and usually requires us to dig deeper into the data with an <em>ad hoc analysis</em> to identify the root cause of the problem.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ad_hoc_analysis">Ad Hoc Analysis</h4>
+<div class="paragraph">
+<p>An ad hoc data analysis can help us answer questions such as</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Why are we not reaching our goal?</p>
+</li>
+<li>
+<p>What should we do next?</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p><span class="small">Read <a href="https://towardsdatascience.com/whats-the-difference-between-analytics-and-statistics-cd35d457e17" target="\_blank">this article</a> to learn more about the difference between analysts and statisticians and why they should work on distinct splits of your dataset.</span></p>
+<p>Arriving at satisfactory answers is often more art than science. But we have a multitude of tools and techniques to help us with this.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Exploratory Data Analysis</dt>
+<dd>
+<p>As described in more detail in the chapter on <a href="_data_analysis.html">Data Analysis</a>, in an exploratory analysis we dive deep into the data, e.g., by generating lots of <strong>plots to better understand</strong> the different variables, KPIs, and their relationships.<br>
+<span class="underline">Example:</span> <em>By visualizing the number of customer requests we received over time, we notice a sharp increase around the same time a new feature of our software was released. After further investigation, we conclude that many users are confused by this new functionality and we need to make the user interface more self-explanatory.</em></p>
+</dd>
+<dt class="hdlist1">Statistical Inference</dt>
+<dd>
+<p>Statistical inference enables us to <strong>draw conclusions that reach beyond the data at hand</strong>. Often we would like to make a statement about a whole <em>population</em> (e.g., all humans currently living on this earth), but we only have access to a few (hopefully representative) observations to draw our conclusion from. Statistical inference is about changing our mind under uncertainty: We start with a null hypothesis and then check if what we see in the sample dataset makes this null hypothesis look ridiculous, at which point we reject it and go with our alternative hypothesis instead.<br>
+<span class="underline">Example:</span> <em>Your company has an online store and wants to roll out a new recommendation system, but you are unsure whether customers will find these recommendations helpful and buy more. Therefore, before going live with the new system, you perform an A/B test, where a percentage of randomly selected users see the new recommendations, while the others are routed to the original version of the online store. The null hypothesis is that the new version is no better than the original. But it turns out that the average sales volume of customers seeing the new recommendations is a lot higher than that of the customers browsing the original site. This difference is so large that in a world where the null hypothesis were true, it would be extremely unlikely that a random sample would give us these results. We therefore reject the null hypothesis and go with the alternative hypothesis, that the new recommendations generate higher sales.</em><br>
+<span class="small">Read <a href="https://towardsdatascience.com/whats-the-difference-between-analytics-and-statistics-cd35d457e17" target="\_blank">this article</a> to learn more about the difference between analysts and statisticians and why they should work on distinct splits of your dataset.</span></p>
+</dd>
+<dt class="hdlist1">Predictive Analytics</dt>
+<dd>
+<p>Using historical data, we can generate a <strong>predictive model</strong> that makes predictions about future scenarios. These models are often created using <em>supervised learning</em>, a subfield of machine learning.<br>
+<span class="underline">Example:</span> <em>Use sales forecasts to better plan inventory levels.</em></p>
+</dd>
+<dt class="hdlist1">Interpreting Predictive Models</dt>
+<dd>
+<p>Given a model that makes accurate predictions for new data points, we can <a href="https://franziskahorn.de/mlbook/_explainability_interpretable_ml.html" target="\_blank">interpret this model</a> and explain its predictions to <strong>understand root causes</strong> in a process.<br>
+<span class="underline">Example:</span> <em>Given a model that predicts the quality of a product from the process conditions, identify which conditions result in lower quality products.</em></p>
+</dd>
+<dt class="hdlist1">What-if Analysis</dt>
+<dd>
+<p>Given a model that makes accurate predictions for new data points, we can use this model in a <strong>&#8220;what-if&#8221; forecast</strong> to explore how a system might react to different conditions to make better decisions
+(use with <a href="_pitfall_3_model_abuses_spurious_correlations.html">caution</a>!).<br>
+<span class="underline">Example:</span> <em>Given a model that predicts the remaining lifetime of a machine component under some process conditions, simulate how quickly this component would deteriorate if we changed the process conditions.</em></p>
+<div class="paragraph">
+<p>Going one step further, this model can also be used inside an optimization loop to automatically evaluate different inputs with the model systematically to <strong>find optimal settings</strong>.<br>
+<span class="underline">Example:</span> <em>Given a model that predicts the quality of a product from the process conditions, automatically determine the best production settings for a new type of raw material.</em></p>
+</div>
+</dd>
+</dl>
 </div>
 </div>
 </div>
+</div>
+<div class="sect3">
+<h4 id="_automation">Automation</h4>
+<div class="paragraph">
+<p>As described in the following sections, machine learning models can be used to <strong>automate &#8216;input &#8594; output&#8217; tasks</strong> otherwise requiring a human (expert). These tasks are usually easy for an (appropriately trained) human, for example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Translating texts from one language into another</p>
 </li>
 <li>
-<p><strong>Software</strong> to continuously make predictions for new data points to <strong>automate an &#8216;input &#8594; output&#8217; task</strong> otherwise requiring a human (expert).<br>
-<strong>This is where machine learning algorithms come into play.</strong><br>
-<span class="underline">Example:</span> <em>A computer vision system installed as part of an assembly line automatically recognizes and discards products with defects/scratches. Previously, a human had to sit there all day and inspect each produced part manually.</em></p>
+<p>Sorting out products with scratches when they pass a checkpoint on the assembly line</p>
 </li>
-</ol>
+<li>
+<p>Recommending movies to a friend</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For this to work, the ML models need to be <strong>trained on a lot of historical data</strong> (e.g., texts in both languages, images of products with and without scratches, information about different users and which movies they watched).</p>
+</div>
+<div class="paragraph">
+<p>The resulting software can then either be used to <strong>automate the task completely</strong> or we can keep a <strong>human in the loop</strong> that can intervene and correct the suggestions made by the model.</p>
+</div>
 </div>
 </div>
 <div class="paragraph nav-footer">

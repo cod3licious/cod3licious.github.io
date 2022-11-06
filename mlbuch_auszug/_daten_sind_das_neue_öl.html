@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="generator" content="Asciidoctor 2.0.18">
 <meta name="author" content="Dr. Franziska Horn">
 <meta name="copyright" content="Dr. Franziska Horn">
 <title>A Practitioner&#8217;s Guide to Machine Learning</title>
@@ -928,8 +928,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.6,</span>
-<span id="revdate">2022-08-28</span>
+<span id="revnumber">version 1.7,</span>
+<span id="revdate">2022-11-06</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -939,6 +939,14 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <li><a href="_ml_ist_überall.html">ML ist überall!</a>
 </li>
 <li><a href="_daten_sind_das_neue_öl.html"><span class="toc-current">Daten sind das neue Öl!?</span></a>
+<ul class="sectlevel3">
+<li><a href="_daten_sind_das_neue_öl.html#_monitoring">Monitoring</a>
+</li>
+<li><a href="_daten_sind_das_neue_öl.html#_ad_hoc_analyse">Ad-hoc-Analyse</a>
+</li>
+<li><a href="_daten_sind_das_neue_öl.html#_automatisierung">Automatisierung</a>
+</li>
+</ul>
 </li>
 <li><a href="_was_ist_ml.html">Was ist ML?</a>
 </li>
@@ -950,7 +958,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </li>
 </ul>
 </li>
-<li><a href="_daten_preprocessing.html">Daten &amp; Preprocessing</a>
+<li><a href="_datenanalyse_preprocessing.html">Datenanalyse &amp; Preprocessing</a>
 </li>
 <li><a href="_supervised_learning.html">Supervised Learning</a>
 </li>
@@ -990,49 +998,143 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 Der Grund, warum Öl als wertvoll angesehen wird, liegt darin, dass wir wichtige Anwendungsfälle dafür haben: den Antrieb unserer Autos, die Beheizung unserer Häuser und die Herstellung von Kunststoffen oder Düngemitteln.
 Genauso verhält es sich auch mit Daten: sie sind nur so wertvoll wie das was wir aus ihnen machen. Wofür können wir also Daten verwenden?</p>
 </div>
+<div class="paragraph">
+<p>Die wichtigsten Anwendungsfälle fallen in eine von zwei Kategorien:</p>
+</div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/01b_intro_ml/data_value.png" alt="image" width="440">
 </div>
 </div>
+<div class="sect3">
+<h4 id="_monitoring">Monitoring</h4>
 <div class="paragraph">
-<p>Die wichtigsten Anwendungsfälle fallen in diese beiden Kategorien:</p>
+<p>In dem wir wichtige Variablen oder Metriken in <strong>Berichten</strong> oder <strong>Dashboards</strong> visualisieren, machen wir den Status Quo transparenter und quantifizieren wie nah wir einem bestimmten Ziel schon gekommen sind.</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Verwertbare Erkenntnisse</strong>, die es Entscheidungsträgern ermöglichen, bessere, <strong>datengestützte Entscheidungen</strong> zu treffen (anstatt blind ihrem Bauchgefühl zu vertrauen).<br>
-<span class="underline">Beispiel:</span> <em>Wir benutzen tagtäglich Erkenntnisse, die wir aus der Analyse von Daten gewonnen haben, um selbst triviale Entscheidungen zu treffen, wie z.B. wohin wir zum Abendessen gehen. Der erste Gedanke wenn du ein Restaurant siehst ist vielleicht "Ich hab ein schlechtes Gefühl bei diesem Laden; die Plastikblumendeko sieht billig aus, lass uns da nicht rein gehn", aber nachdem du ein paar Rezessionen (= Daten) gelesen hast, realisierst du, dass dies ein verstecktes Juwel mit wirklich leckerem, authentischem Essen ist.</em></p>
+<div class="paragraph">
+<p>Zu diesem Zweck entwickeln wir oft sogenannte <strong><em>Key Performance Indicators</em> (KPIs)</strong>, d.h. benutzerdefinierte Metriken, die uns anzeigen, wie gut die Dinge laufen. Wenn wir beispielsweise an einer Webanwendung arbeiten, könnte ein interessanter KPI die &#8220;Nutzerzufriedenheit&#8221; sein. Leider kann man die tatsächliche Nutzerzufriedenheit nur schwer messen, aber wir können stattdessen die Anzahl der wiederkehrenden Nutzer und wie lange sie auf unserer Seite bleiben tracken, und diese und andere Messungen dann geschickt zu einer Proxy-Variablen kombinieren, die wir dann &#8220;Nutzerzufriedenheit&#8221; nennen.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Ein KPI ist nur dann eine zuverlässige Metrik, wenn er nicht gleichzeitig dazu verwendet wird, das Verhalten von Personen zu steuern, da diese sonst versuchen, das System auszutricksen (<a href="https://de.wikipedia.org/wiki/Goodharts_Gesetz" target="\_blank">Goodharts Gesetz</a>). Wenn unser Ziel beispielsweise eine qualitativ hochwertige Software ist, ist die Anzahl von Bugs in unserer Software kein zuverlässiges Qualitätsmaß, wenn wir gleichzeitig <a href="https://dilbert.com/strip/1995-11-13" target="\_blank">Programmierer für jeden gefundenen und behobenen Bug belohnen</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Idealerweise werden diese Metriken mit <strong>Schwellenwerten für Warnungen</strong> kombiniert, um uns automatisch zu benachrichtigen, wenn etwas schief geht und eine Korrekturmaßnahme erforderlich wird. Beispielsweise könnten wir eine Warnung zum Zustand eines Systems oder einer Maschine einrichten, um einen Techniker zu benachrichtigen, wenn eine Wartung erforderlich ist.</p>
+</div>
 <div class="sidebarblock">
 <div class="content">
 <div class="paragraph">
-<p>Diese Erkenntnisse werden durch eine einmalige Analyse historischer Daten mit hauptsächlich &#8220;traditionellen Methoden&#8221; generiert:</p>
+<p><span class="underline">Für jeden KPI sollten wir definieren:</span></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Beschreibende Analyse:</strong> Durch die Visualisierung der Daten und die Berechnung zusammenfassender Statistiken finden wir möglicherweise etwas Interessantes, d.h. <strong>lassen uns von den Daten inspirieren</strong>.<br>
-<span class="underline">Beispiel:</span> <em>Euer Unternehmen verkauft eine Softwarelösung, für die ihr eine 14-tägige kostenlose Testversion anbietet, bevor Kunden den vollen Preis zahlen müssen. Bei der Analyse, welche Kunden letztendlich die Software kaufen, stellst du fest, dass eine überraschend hohe Anzahl eurer potenziellen Kunden Studenten sind, die die Software jedoch nach Ablauf der kostenlosen Testversion fast nie kaufen. Dies inspiriert euch dazu, spezielle Angebote für Studenten anzubieten.</em><br>
-Die Durchführung einer solchen explorativen Datenanalyse ist auch zu Beginn eines ML-Projekts hilfreich, um ein besseres Gefühl für die Daten zu bekommen (z.B. um zu überprüfen, welche Variablen relevant sein könnten).</p>
+<p>wie der Zielzustand aussieht, also welcher Wert oder Wertebereich signalisiert, dass unser Prozess planmäßig läuft</p>
 </li>
 <li>
-<p><strong>Statistische Inferenz:</strong> Während deskriptive Analysen es uns ermöglichen, bessere Fragen zu stellen, hilft uns die statistische Inferenz, bessere Antworten zu erhalten, indem sie es uns ermöglicht, <strong>Schlussfolgerungen zu ziehen, die über die vorliegenden Daten hinausgehen</strong>. Oft möchten wir eine Aussage über eine ganze <em>Population</em> treffen (z.B. alle Menschen, die derzeit auf dieser Erde leben), aber wir haben nur Zugriff auf einige (hoffentlich repräsentative) Beobachtungen, aus denen wir unsere Schlussfolgerung ziehen können. Bei der statistischen Inferenz geht es darum, unsere Meinung trotz dieser Unsicherheit zu ändern: Wir nehmen eine Nullhypothese an und prüfen dann, ob das, was wir in unserer Stichprobe beobachten, diese Nullhypothese lächerlich erscheinen lässt. Ist dies der Fall, verwerfen wir sie und nehmen stattdessen die alternative Hypothese an.<br>
-<span class="underline">Beispiel:</span> <em>Euer Unternehmen hat einen Online-Shop und möchte ein neues Empfehlungssystem einführen, aber ihr seid euch nicht sicher, ob Kunden diese Empfehlungen hilfreich finden und mehr kaufen werden. Bevor ihr mit dem neuen System live geht, führt ihr daher einen A/B-Test durch, bei dem ein Prozentsatz zufällig ausgewählter Nutzer die neuen Empfehlungen sieht, während die anderen zur ursprünglichen Version des Online-Shops weitergeleitet werden. Die Nullhypothese lautet, dass die neue Version nicht besser ist als das Original. Aber es stellt sich heraus, dass das durchschnittliche Verkaufsvolumen der Kunden, die die neuen Empfehlungen sehen, viel höher ist als das der Kunden, die die ursprüngliche Website besuchen. Dieser Unterschied ist so groß, dass es in einer Welt, in der die Nullhypothese wahr wäre, äußerst unwahrscheinlich wäre, dass eine zufällige Stichprobe uns diese Ergebnisse liefern würde. Wir verwerfen daher die Nullhypothese und gehen von der Alternativhypothese aus, dass die neuen Empfehlungen höhere Umsätze generieren.</em></p>
+<p>was die Warnschwelle ist, also ab wann eine Korrekturmaßnahme erforderlich ist</p>
+</li>
+<li>
+<p>welche Korrekturmaßnahmen von wem ergriffen werden könnten und wer darüber informiert werden muss</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Ein KPI für eine Kundendienstabteilung könnte beispielsweise die Anzahl der Stunden sein, die für die Lösung einer Kundenanfrage benötigt werden. Der Zielzustand könnte &#8216;weniger als 48 Stunden&#8217; sein, und wenn die durchschnittliche Zeit 96 Stunden über einen Monat lang überschreitet, könnte dies ein Zeichen dafür sein, dass sie mehr Servicemitarbeiter einstellen müssen.<br>
+Leider ist es oft nicht offensichtlich, welche Art von Korrekturmaßnahme uns wieder auf den richtigen Weg bringt. Oft müssen wir dafür mit einer <em>Ad-hoc-Analyse</em> tiefer in die Daten eintauchen, um die Ursache des Problems zu identifizieren.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ad_hoc_analyse">Ad-hoc-Analyse</h4>
+<div class="paragraph">
+<p>Eine Ad-hoc-Datenanalyse kann uns helfen, Fragen wie diese zu beantworten:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Warum erreichen wir unser Ziel nicht?</p>
+</li>
+<li>
+<p>Was sollen wir als nächstes tun?</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p><span class="small">Lies <a href="https://towardsdatascience.com/whats-the-difference-between-analytics-and-statistics-cd35d457e17" target="\_blank">diesen Artikel</a> wenn du mehr über den Unterschied zwischen Analysten und Statistikern erfahren möchtest und warum diese immer mit unterschiedlichen Teilen eines Datensatzes arbeiten sollten.</span></p>
+<p>Zufriedenstellende Antworten zu finden ist allerdings oft mehr Kunst als Wissenschaft. Aber es gibt eine Vielzahl von Werkzeugen und Techniken, die uns dabei helfen.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Explorative Datenanalyse</dt>
+<dd>
+<p>Wie im Kapitel über <a href="_datenanalyse.html">Datenanalyse</a> ausführlicher beschrieben, tauchen wir in einer explorativen Analyse tief in die Daten ein, z.B. indem wir viele <strong>Plots zum besseren Verständnis</strong> der verschiedenen Variablen, KPIs und ihrer Beziehungen erstellen.<br>
+<span class="underline">Beispiel:</span> <em>Indem wir die Anzahl der Kundenanfragen über die Zeit visualisieren, erkennen wir, dass es einen starken Anstieg gab zur gleichen Zeit als eine neue Funktion unserer Software ausgespielt wurde. Nach weiteren Untersuchungen kommen wir zu dem Schluss, dass viele Nutzer von dieser neuen Funktionalität verwirrt sind und wir die Benutzeroberfläche selbsterklärender gestalten müssen.</em></p>
+</dd>
+<dt class="hdlist1">Statistische Inferenz</dt>
+<dd>
+<p>Statistische Inferenz ermöglicht es uns <strong>Schlussfolgerungen zu ziehen, die über die vorliegenden Daten hinausgehen</strong>. Oft möchten wir eine Aussage über eine ganze <em>Population</em> treffen (z.B. alle Menschen, die derzeit auf dieser Erde leben), aber wir haben nur Zugriff auf einige (hoffentlich repräsentative) Beobachtungen, aus denen wir unsere Schlussfolgerung ziehen können. Bei der statistischen Inferenz geht es darum, unsere Meinung trotz dieser Unsicherheit zu ändern: Wir nehmen eine Nullhypothese an und prüfen dann, ob das, was wir in unserer Stichprobe beobachten, diese Nullhypothese lächerlich erscheinen lässt. Ist dies der Fall, verwerfen wir sie und nehmen stattdessen die alternative Hypothese an.<br>
+<span class="underline">Beispiel:</span> <em>Euer Unternehmen hat einen Online-Shop und möchte ein neues Empfehlungssystem einführen, aber ihr seid euch nicht sicher, ob Kunden diese Empfehlungen hilfreich finden und mehr kaufen werden. Bevor ihr mit dem neuen System live geht, führt ihr daher einen A/B-Test durch, bei dem ein Prozentsatz zufällig ausgewählter Nutzer die neuen Empfehlungen sieht, während die anderen zur ursprünglichen Version des Online-Shops weitergeleitet werden. Die Nullhypothese lautet, dass die neue Version nicht besser ist als das Original. Aber es stellt sich heraus, dass das durchschnittliche Verkaufsvolumen der Kunden, die die neuen Empfehlungen sehen, viel höher ist als das der Kunden, die die ursprüngliche Website besuchen. Dieser Unterschied ist so groß, dass es in einer Welt, in der die Nullhypothese wahr wäre, äußerst unwahrscheinlich wäre, dass eine zufällige Stichprobe uns diese Ergebnisse liefern würde. Wir verwerfen daher die Nullhypothese und gehen von der Alternativhypothese aus, dass die neuen Empfehlungen höhere Umsätze generieren.</em><br>
+<span class="small">Lies <a href="https://towardsdatascience.com/whats-the-difference-between-analytics-and-statistics-cd35d457e17" target="\_blank">diesen Artikel</a> wenn du mehr über den Unterschied zwischen Analysten und Statistikern erfahren möchtest und warum diese immer mit unterschiedlichen Teilen eines Datensatzes arbeiten sollten.</span></p>
+</dd>
+<dt class="hdlist1">Prädiktive Analyse</dt>
+<dd>
+<p>Basierend auf historischen Daten können wir ein <strong>Vorhersagemodell</strong> generieren, das Prognosen über zukünftige Szenarien anstellt. Diese Modelle werden oft mithilfe von <em>Supervised Learning</em>, einem Teilbereich des maschinellen Lernens, erstellt.
+<span class="underline">Beispiel:</span> <em>Verkaufsprognosen verwenden, um Lagerbestände besser zu planen.</em></p>
+</dd>
+<dt class="hdlist1">Interpretation Prädiktiver Modelle</dt>
+<dd>
+<p><a href="https://franziskahorn.de/mlbook/_explainability_interpretable_ml.html" target="\_blank">Interpretiere das Vorhersagemodell</a> und seine Prognosen, um <strong>die zugrundeliegenden Ursache-Wirkung Beziehungen des Prozesses besser zu verstehen</strong>.<br>
+<span class="underline">Beispiel:</span> <em>Gegeben ein Modell, welches die Qualität eines Produkts aus den Produktionsbedingungen vorhersagt, verstehe welche Faktoren dazu führen dass Produkte von geringerer Qualität sind.</em></p>
+</dd>
+<dt class="hdlist1">Was-wäre-wenn Analyse</dt>
+<dd>
+<p>Verwende ein Vorhersagemodell für eine <strong>Was-wäre-wenn-Vorhersage</strong>, um zu untersuchen, wie ein System auf unterschiedliche Bedingungen reagieren könnte (aber <a href="_fehler_3_modell_missbraucht_scheinkorrelationen.html">Vorsicht</a>!).<br>
+<span class="underline">Beispiel:</span> <em>Gegeben ein Modell, welches die verbleibende Lebenszeit für eine Maschinenkomponente aus den Prozessbedingungen vorhersagt, wie schnell würde diese Komponente unter anderen Prozessbedingungen verschleißen?</em></p>
+<div class="paragraph">
+<p>Wenn wir noch einen Schritt weiter gehen wollen, können wir auch automatisch verschiedene Inputs mit dem Vorhersagemodell in einer Optimierungsschleife bewerten, um systematisch <strong>optimale Einstellungen zu finden</strong>.<br>
+<span class="underline">Beispiel:</span> <em>Gegeben ein Modell, welches die Qualität eines Produkts aus den Produktionsbedingungen vorhersagt, bestimme automatisch die besten Produktionseinstellungen für einen neuen Rohstofftyp.</em></p>
+</div>
+</dd>
+</dl>
 </div>
 </div>
 </div>
+</div>
+<div class="sect3">
+<h4 id="_automatisierung">Automatisierung</h4>
+<div class="paragraph">
+<p>Wie in den folgenden Unterkapiteln beschrieben, können Machine Learning Modelle dazu verwendet werden, um <strong>eine &#8216;Input &#8594; Output&#8217; Aufgabe zu automatisieren</strong>, welche sonst ein (speziell geschulter) Mensch erledigen müsste. Diese Aufgaben fallen einem (entsprechend geschulten) Menschen in der Regel leicht:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Übersetzen von Texten von einer Sprache in eine andere</p>
 </li>
 <li>
-<p><strong>Software</strong>, welche kontinuierlich Vorhersagen für neue Datenpunkte generiert, um <strong>eine &#8216;Input &#8594; Output&#8217; Aufgabe zu automatisieren</strong>, welche sonst ein (speziell geschulter) Mensche erledigen müsste.<br>
-<strong>Hier kommen die Machine Learning Algorithmen ins Spiel.</strong><br>
-<span class="underline">Beispiel:</span> <em>Ein als Teil einer Montagelinie installiertes Computer-Vision-System erkennt automatisch Produkte mit Defekten/Kratzern und sortiert sie aus. Früher musste dort den ganzen Tag ein Mensch sitzen und jedes produzierte Teil manuell inspizieren.</em></p>
+<p>Produkte mit Kratzern aussortieren, wenn sie einen Kontrollpunkt am Fließband passieren</p>
 </li>
-</ol>
+<li>
+<p>Einem Freund Filme empfehlen</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Die ML-Modelle müssen dafür <strong>mit einer großen Menge historischer Daten trainiert</strong> werden (z.B. Texte in beiden Sprachen, Bilder von Produkten mit und ohne Kratzer, Informationen über verschiedene Nutzer und welche Filme sie gesehen haben).</p>
+</div>
+<div class="paragraph">
+<p>Die resultierende Software kann dann entweder verwendet werden, um die Aufgabe <strong>vollständig zu automatisieren</strong>, oder wir können einen <strong>Menschen dazwischen schalten</strong>, der eingreifen und die Vorschläge des Modells korrigieren kann.</p>
+</div>
 </div>
 </div>
 <div class="paragraph nav-footer">

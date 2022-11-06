@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="generator" content="Asciidoctor 2.0.18">
 <meta name="author" content="Dr. Franziska Horn">
 <meta name="copyright" content="Dr. Franziska Horn">
 <title>A Practitioner&#8217;s Guide to Machine Learning</title>
@@ -927,8 +927,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.6,</span>
-<span id="revdate">2022-08-28</span>
+<span id="revnumber">version 1.7,</span>
+<span id="revdate">2022-11-06</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -943,9 +943,11 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <li><a href="#_mit_ml_probleme_lösen">Mit ML Probleme lösen</a></li>
 </ul>
 </li>
-<li><a href="#_daten_preprocessing">Daten &amp; Preprocessing</a>
+<li><a href="#_datenanalyse_preprocessing">Datenanalyse &amp; Preprocessing</a>
 <ul class="sectlevel2">
+<li><a href="#_datenanalyse">Datenanalyse</a></li>
 <li><a href="#_garbage_in_garbage_out">Garbage in, Garbage out!</a></li>
+<li><a href="#_preprocessing">Preprocessing</a></li>
 </ul>
 </li>
 <li><a href="#_supervised_learning">Supervised Learning</a>
@@ -1290,49 +1292,143 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 Der Grund, warum Öl als wertvoll angesehen wird, liegt darin, dass wir wichtige Anwendungsfälle dafür haben: den Antrieb unserer Autos, die Beheizung unserer Häuser und die Herstellung von Kunststoffen oder Düngemitteln.
 Genauso verhält es sich auch mit Daten: sie sind nur so wertvoll wie das was wir aus ihnen machen. Wofür können wir also Daten verwenden?</p>
 </div>
+<div class="paragraph">
+<p>Die wichtigsten Anwendungsfälle fallen in eine von zwei Kategorien:</p>
+</div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="images/01b_intro_ml/data_value.png" alt="image" width="440">
 </div>
 </div>
+<div class="sect3">
+<h4 id="_monitoring">Monitoring</h4>
 <div class="paragraph">
-<p>Die wichtigsten Anwendungsfälle fallen in diese beiden Kategorien:</p>
+<p>In dem wir wichtige Variablen oder Metriken in <strong>Berichten</strong> oder <strong>Dashboards</strong> visualisieren, machen wir den Status Quo transparenter und quantifizieren wie nah wir einem bestimmten Ziel schon gekommen sind.</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Verwertbare Erkenntnisse</strong>, die es Entscheidungsträgern ermöglichen, bessere, <strong>datengestützte Entscheidungen</strong> zu treffen (anstatt blind ihrem Bauchgefühl zu vertrauen).<br>
-<span class="underline">Beispiel:</span> <em>Wir benutzen tagtäglich Erkenntnisse, die wir aus der Analyse von Daten gewonnen haben, um selbst triviale Entscheidungen zu treffen, wie z.B. wohin wir zum Abendessen gehen. Der erste Gedanke wenn du ein Restaurant siehst ist vielleicht "Ich hab ein schlechtes Gefühl bei diesem Laden; die Plastikblumendeko sieht billig aus, lass uns da nicht rein gehn", aber nachdem du ein paar Rezessionen (= Daten) gelesen hast, realisierst du, dass dies ein verstecktes Juwel mit wirklich leckerem, authentischem Essen ist.</em></p>
+<div class="paragraph">
+<p>Zu diesem Zweck entwickeln wir oft sogenannte <strong><em>Key Performance Indicators</em> (KPIs)</strong>, d.h. benutzerdefinierte Metriken, die uns anzeigen, wie gut die Dinge laufen. Wenn wir beispielsweise an einer Webanwendung arbeiten, könnte ein interessanter KPI die &#8220;Nutzerzufriedenheit&#8221; sein. Leider kann man die tatsächliche Nutzerzufriedenheit nur schwer messen, aber wir können stattdessen die Anzahl der wiederkehrenden Nutzer und wie lange sie auf unserer Seite bleiben tracken, und diese und andere Messungen dann geschickt zu einer Proxy-Variablen kombinieren, die wir dann &#8220;Nutzerzufriedenheit&#8221; nennen.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Ein KPI ist nur dann eine zuverlässige Metrik, wenn er nicht gleichzeitig dazu verwendet wird, das Verhalten von Personen zu steuern, da diese sonst versuchen, das System auszutricksen (<a href="https://de.wikipedia.org/wiki/Goodharts_Gesetz" target="\_blank">Goodharts Gesetz</a>). Wenn unser Ziel beispielsweise eine qualitativ hochwertige Software ist, ist die Anzahl von Bugs in unserer Software kein zuverlässiges Qualitätsmaß, wenn wir gleichzeitig <a href="https://dilbert.com/strip/1995-11-13" target="\_blank">Programmierer für jeden gefundenen und behobenen Bug belohnen</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Idealerweise werden diese Metriken mit <strong>Schwellenwerten für Warnungen</strong> kombiniert, um uns automatisch zu benachrichtigen, wenn etwas schief geht und eine Korrekturmaßnahme erforderlich wird. Beispielsweise könnten wir eine Warnung zum Zustand eines Systems oder einer Maschine einrichten, um einen Techniker zu benachrichtigen, wenn eine Wartung erforderlich ist.</p>
+</div>
 <div class="sidebarblock">
 <div class="content">
 <div class="paragraph">
-<p>Diese Erkenntnisse werden durch eine einmalige Analyse historischer Daten mit hauptsächlich &#8220;traditionellen Methoden&#8221; generiert:</p>
+<p><span class="underline">Für jeden KPI sollten wir definieren:</span></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Beschreibende Analyse:</strong> Durch die Visualisierung der Daten und die Berechnung zusammenfassender Statistiken finden wir möglicherweise etwas Interessantes, d.h. <strong>lassen uns von den Daten inspirieren</strong>.<br>
-<span class="underline">Beispiel:</span> <em>Euer Unternehmen verkauft eine Softwarelösung, für die ihr eine 14-tägige kostenlose Testversion anbietet, bevor Kunden den vollen Preis zahlen müssen. Bei der Analyse, welche Kunden letztendlich die Software kaufen, stellst du fest, dass eine überraschend hohe Anzahl eurer potenziellen Kunden Studenten sind, die die Software jedoch nach Ablauf der kostenlosen Testversion fast nie kaufen. Dies inspiriert euch dazu, spezielle Angebote für Studenten anzubieten.</em><br>
-Die Durchführung einer solchen explorativen Datenanalyse ist auch zu Beginn eines ML-Projekts hilfreich, um ein besseres Gefühl für die Daten zu bekommen (z.B. um zu überprüfen, welche Variablen relevant sein könnten).</p>
+<p>wie der Zielzustand aussieht, also welcher Wert oder Wertebereich signalisiert, dass unser Prozess planmäßig läuft</p>
 </li>
 <li>
-<p><strong>Statistische Inferenz:</strong> Während deskriptive Analysen es uns ermöglichen, bessere Fragen zu stellen, hilft uns die statistische Inferenz, bessere Antworten zu erhalten, indem sie es uns ermöglicht, <strong>Schlussfolgerungen zu ziehen, die über die vorliegenden Daten hinausgehen</strong>. Oft möchten wir eine Aussage über eine ganze <em>Population</em> treffen (z.B. alle Menschen, die derzeit auf dieser Erde leben), aber wir haben nur Zugriff auf einige (hoffentlich repräsentative) Beobachtungen, aus denen wir unsere Schlussfolgerung ziehen können. Bei der statistischen Inferenz geht es darum, unsere Meinung trotz dieser Unsicherheit zu ändern: Wir nehmen eine Nullhypothese an und prüfen dann, ob das, was wir in unserer Stichprobe beobachten, diese Nullhypothese lächerlich erscheinen lässt. Ist dies der Fall, verwerfen wir sie und nehmen stattdessen die alternative Hypothese an.<br>
-<span class="underline">Beispiel:</span> <em>Euer Unternehmen hat einen Online-Shop und möchte ein neues Empfehlungssystem einführen, aber ihr seid euch nicht sicher, ob Kunden diese Empfehlungen hilfreich finden und mehr kaufen werden. Bevor ihr mit dem neuen System live geht, führt ihr daher einen A/B-Test durch, bei dem ein Prozentsatz zufällig ausgewählter Nutzer die neuen Empfehlungen sieht, während die anderen zur ursprünglichen Version des Online-Shops weitergeleitet werden. Die Nullhypothese lautet, dass die neue Version nicht besser ist als das Original. Aber es stellt sich heraus, dass das durchschnittliche Verkaufsvolumen der Kunden, die die neuen Empfehlungen sehen, viel höher ist als das der Kunden, die die ursprüngliche Website besuchen. Dieser Unterschied ist so groß, dass es in einer Welt, in der die Nullhypothese wahr wäre, äußerst unwahrscheinlich wäre, dass eine zufällige Stichprobe uns diese Ergebnisse liefern würde. Wir verwerfen daher die Nullhypothese und gehen von der Alternativhypothese aus, dass die neuen Empfehlungen höhere Umsätze generieren.</em></p>
+<p>was die Warnschwelle ist, also ab wann eine Korrekturmaßnahme erforderlich ist</p>
+</li>
+<li>
+<p>welche Korrekturmaßnahmen von wem ergriffen werden könnten und wer darüber informiert werden muss</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Ein KPI für eine Kundendienstabteilung könnte beispielsweise die Anzahl der Stunden sein, die für die Lösung einer Kundenanfrage benötigt werden. Der Zielzustand könnte &#8216;weniger als 48 Stunden&#8217; sein, und wenn die durchschnittliche Zeit 96 Stunden über einen Monat lang überschreitet, könnte dies ein Zeichen dafür sein, dass sie mehr Servicemitarbeiter einstellen müssen.<br>
+Leider ist es oft nicht offensichtlich, welche Art von Korrekturmaßnahme uns wieder auf den richtigen Weg bringt. Oft müssen wir dafür mit einer <em>Ad-hoc-Analyse</em> tiefer in die Daten eintauchen, um die Ursache des Problems zu identifizieren.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ad_hoc_analyse">Ad-hoc-Analyse</h4>
+<div class="paragraph">
+<p>Eine Ad-hoc-Datenanalyse kann uns helfen, Fragen wie diese zu beantworten:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Warum erreichen wir unser Ziel nicht?</p>
+</li>
+<li>
+<p>Was sollen wir als nächstes tun?</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p><span class="small">Lies <a href="https://towardsdatascience.com/whats-the-difference-between-analytics-and-statistics-cd35d457e17" target="\_blank">diesen Artikel</a> wenn du mehr über den Unterschied zwischen Analysten und Statistikern erfahren möchtest und warum diese immer mit unterschiedlichen Teilen eines Datensatzes arbeiten sollten.</span></p>
+<p>Zufriedenstellende Antworten zu finden ist allerdings oft mehr Kunst als Wissenschaft. Aber es gibt eine Vielzahl von Werkzeugen und Techniken, die uns dabei helfen.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Explorative Datenanalyse</dt>
+<dd>
+<p>Wie im Kapitel über <a href="#_datenanalyse">Datenanalyse</a> ausführlicher beschrieben, tauchen wir in einer explorativen Analyse tief in die Daten ein, z.B. indem wir viele <strong>Plots zum besseren Verständnis</strong> der verschiedenen Variablen, KPIs und ihrer Beziehungen erstellen.<br>
+<span class="underline">Beispiel:</span> <em>Indem wir die Anzahl der Kundenanfragen über die Zeit visualisieren, erkennen wir, dass es einen starken Anstieg gab zur gleichen Zeit als eine neue Funktion unserer Software ausgespielt wurde. Nach weiteren Untersuchungen kommen wir zu dem Schluss, dass viele Nutzer von dieser neuen Funktionalität verwirrt sind und wir die Benutzeroberfläche selbsterklärender gestalten müssen.</em></p>
+</dd>
+<dt class="hdlist1">Statistische Inferenz</dt>
+<dd>
+<p>Statistische Inferenz ermöglicht es uns <strong>Schlussfolgerungen zu ziehen, die über die vorliegenden Daten hinausgehen</strong>. Oft möchten wir eine Aussage über eine ganze <em>Population</em> treffen (z.B. alle Menschen, die derzeit auf dieser Erde leben), aber wir haben nur Zugriff auf einige (hoffentlich repräsentative) Beobachtungen, aus denen wir unsere Schlussfolgerung ziehen können. Bei der statistischen Inferenz geht es darum, unsere Meinung trotz dieser Unsicherheit zu ändern: Wir nehmen eine Nullhypothese an und prüfen dann, ob das, was wir in unserer Stichprobe beobachten, diese Nullhypothese lächerlich erscheinen lässt. Ist dies der Fall, verwerfen wir sie und nehmen stattdessen die alternative Hypothese an.<br>
+<span class="underline">Beispiel:</span> <em>Euer Unternehmen hat einen Online-Shop und möchte ein neues Empfehlungssystem einführen, aber ihr seid euch nicht sicher, ob Kunden diese Empfehlungen hilfreich finden und mehr kaufen werden. Bevor ihr mit dem neuen System live geht, führt ihr daher einen A/B-Test durch, bei dem ein Prozentsatz zufällig ausgewählter Nutzer die neuen Empfehlungen sieht, während die anderen zur ursprünglichen Version des Online-Shops weitergeleitet werden. Die Nullhypothese lautet, dass die neue Version nicht besser ist als das Original. Aber es stellt sich heraus, dass das durchschnittliche Verkaufsvolumen der Kunden, die die neuen Empfehlungen sehen, viel höher ist als das der Kunden, die die ursprüngliche Website besuchen. Dieser Unterschied ist so groß, dass es in einer Welt, in der die Nullhypothese wahr wäre, äußerst unwahrscheinlich wäre, dass eine zufällige Stichprobe uns diese Ergebnisse liefern würde. Wir verwerfen daher die Nullhypothese und gehen von der Alternativhypothese aus, dass die neuen Empfehlungen höhere Umsätze generieren.</em><br>
+<span class="small">Lies <a href="https://towardsdatascience.com/whats-the-difference-between-analytics-and-statistics-cd35d457e17" target="\_blank">diesen Artikel</a> wenn du mehr über den Unterschied zwischen Analysten und Statistikern erfahren möchtest und warum diese immer mit unterschiedlichen Teilen eines Datensatzes arbeiten sollten.</span></p>
+</dd>
+<dt class="hdlist1">Prädiktive Analyse</dt>
+<dd>
+<p>Basierend auf historischen Daten können wir ein <strong>Vorhersagemodell</strong> generieren, das Prognosen über zukünftige Szenarien anstellt. Diese Modelle werden oft mithilfe von <em>Supervised Learning</em>, einem Teilbereich des maschinellen Lernens, erstellt.
+<span class="underline">Beispiel:</span> <em>Verkaufsprognosen verwenden, um Lagerbestände besser zu planen.</em></p>
+</dd>
+<dt class="hdlist1">Interpretation Prädiktiver Modelle</dt>
+<dd>
+<p><a href="https://franziskahorn.de/mlbook/_explainability_interpretable_ml.html" target="\_blank">Interpretiere das Vorhersagemodell</a> und seine Prognosen, um <strong>die zugrundeliegenden Ursache-Wirkung Beziehungen des Prozesses besser zu verstehen</strong>.<br>
+<span class="underline">Beispiel:</span> <em>Gegeben ein Modell, welches die Qualität eines Produkts aus den Produktionsbedingungen vorhersagt, verstehe welche Faktoren dazu führen dass Produkte von geringerer Qualität sind.</em></p>
+</dd>
+<dt class="hdlist1">Was-wäre-wenn Analyse</dt>
+<dd>
+<p>Verwende ein Vorhersagemodell für eine <strong>Was-wäre-wenn-Vorhersage</strong>, um zu untersuchen, wie ein System auf unterschiedliche Bedingungen reagieren könnte (aber <a href="#_fehler_3_modell_missbraucht_scheinkorrelationen">Vorsicht</a>!).<br>
+<span class="underline">Beispiel:</span> <em>Gegeben ein Modell, welches die verbleibende Lebenszeit für eine Maschinenkomponente aus den Prozessbedingungen vorhersagt, wie schnell würde diese Komponente unter anderen Prozessbedingungen verschleißen?</em></p>
+<div class="paragraph">
+<p>Wenn wir noch einen Schritt weiter gehen wollen, können wir auch automatisch verschiedene Inputs mit dem Vorhersagemodell in einer Optimierungsschleife bewerten, um systematisch <strong>optimale Einstellungen zu finden</strong>.<br>
+<span class="underline">Beispiel:</span> <em>Gegeben ein Modell, welches die Qualität eines Produkts aus den Produktionsbedingungen vorhersagt, bestimme automatisch die besten Produktionseinstellungen für einen neuen Rohstofftyp.</em></p>
+</div>
+</dd>
+</dl>
 </div>
 </div>
 </div>
+</div>
+<div class="sect3">
+<h4 id="_automatisierung">Automatisierung</h4>
+<div class="paragraph">
+<p>Wie in den folgenden Unterkapiteln beschrieben, können Machine Learning Modelle dazu verwendet werden, um <strong>eine &#8216;Input &#8594; Output&#8217; Aufgabe zu automatisieren</strong>, welche sonst ein (speziell geschulter) Mensch erledigen müsste. Diese Aufgaben fallen einem (entsprechend geschulten) Menschen in der Regel leicht:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Übersetzen von Texten von einer Sprache in eine andere</p>
 </li>
 <li>
-<p><strong>Software</strong>, welche kontinuierlich Vorhersagen für neue Datenpunkte generiert, um <strong>eine &#8216;Input &#8594; Output&#8217; Aufgabe zu automatisieren</strong>, welche sonst ein (speziell geschulter) Mensche erledigen müsste.<br>
-<strong>Hier kommen die Machine Learning Algorithmen ins Spiel.</strong><br>
-<span class="underline">Beispiel:</span> <em>Ein als Teil einer Montagelinie installiertes Computer-Vision-System erkennt automatisch Produkte mit Defekten/Kratzern und sortiert sie aus. Früher musste dort den ganzen Tag ein Mensch sitzen und jedes produzierte Teil manuell inspizieren.</em></p>
+<p>Produkte mit Kratzern aussortieren, wenn sie einen Kontrollpunkt am Fließband passieren</p>
 </li>
-</ol>
+<li>
+<p>Einem Freund Filme empfehlen</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Die ML-Modelle müssen dafür <strong>mit einer großen Menge historischer Daten trainiert</strong> werden (z.B. Texte in beiden Sprachen, Bilder von Produkten mit und ohne Kratzer, Informationen über verschiedene Nutzer und welche Filme sie gesehen haben).</p>
+</div>
+<div class="paragraph">
+<p>Die resultierende Software kann dann entweder verwendet werden, um die Aufgabe <strong>vollständig zu automatisieren</strong>, oder wir können einen <strong>Menschen dazwischen schalten</strong>, der eingreifen und die Vorschläge des Modells korrigieren kann.</p>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -2038,7 +2134,7 @@ In diesem Buch werden die Begriffe &#8220;ML-Algorithmus&#8221; und &#8220;ML-Mo
 <p><strong><em>Welche Daten werden benötigt?</em></strong> Einen Holzstuhl kann man nicht aus Stoff und Metall oder ein paar im Wald gefundenen Zweigen herstellen. Genauso benötigt man je nachdem, was man mit ML erreichen möchte, auch die richtigen Daten in ausreichender Qualität &amp; Quantität um die Algorithmen überhaupt anwenden zu können. In vielen Anwendungsfällen ist dieser Teil besonders schwierig, da man die benötigten Daten oft nicht einfach kaufen kann, wie Holz im Baumarkt, sondern diese selbst sammeln&#8201;&#8212;&#8201;also quasi einen eigenen Wald anpflanzen muss, was einige Zeit dauern kann.</p>
 </li>
 <li>
-<p><strong><em>Welcher ML-Algorithmus ist das richtige Werkzeug für diese Aufgabe?</em></strong> (Mehr zu den verschiedenen Arten von ML-Algorithmen in den nächsten Abschnitten.)</p>
+<p><strong><em>Welcher ML-Algorithmus ist das richtige Werkzeug für diese Aufgabe?</em></strong> (Welche Kategorie von ML-Algorithmen generiert die Art von Output, die wir benötigen?)</p>
 </li>
 <li>
 <p>Verfüge ich bzw. meine Mitarbeiter über die <strong><em>notwendigen Fähigkeiten und genügend Rechenleistung</em></strong>, um das Vorhaben erfolgreich umzusetzen?</p>
@@ -2205,33 +2301,6 @@ In diesem Buch werden die Begriffe &#8220;ML-Algorithmus&#8221; und &#8220;ML-Mo
 <div class="paragraph">
 <p>Auch wenn es manchmal frustrierend ist, ist die Zeit, die man mit der Bereinigung und Vorverarbeitung der Daten verbringt, nie verschwendet, da die ML-Algorithmen nur mit einer soliden Datengrundlage brauchbare Ergebnisse erzielen können.</p>
 </div>
-<div class="sidebarblock">
-<div class="content">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Du hast ein ML-Modell trainiert? Super&#8201;&#8212;&#8201;aber da geht noch mehr!</dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p>Interpretiere das gelernte Modell und seine Vorhersagen, um <strong>die zugrundeliegenden Ursache-Wirkung Beziehungen des Prozesses besser zu verstehen</strong>.<br>
-<em>Gegeben ein Modell, welches die Qualität eines Produkts aus den Produktionsbedingungen vorhersagt, verstehe welche Faktoren dazu führen dass Produkte von geringerer Qualität sind.</em></p>
-</li>
-<li>
-<p>Verwende das gelernte Modells für eine <strong>Was-wäre-wenn-Vorhersage</strong>, um zu untersuchen, wie ein System auf unterschiedliche Bedingungen reagieren könnte (aber <a href="#_fehler_3_modell_missbraucht_scheinkorrelationen">Vorsicht</a>!).<br>
-<em>Gegeben ein Modell, welches die verbleibende Lebenszeit für eine Maschinenkomponente aus den Prozessbedingungen vorhersagt, wie schnell würde diese Komponente unter anderen Prozessbedingungen verschleißen?</em></p>
-</li>
-<li>
-<p>Bewerte systematisch verschiedene Inputs mit dem gelernten Modell in einer Optimierungsschleife um <strong>optimale Einstellungen zu finden</strong>.<br>
-<em>Gegeben ein Modell, welches die Qualität eines Produkts aus den Produktionsbedingungen vorhersagt, bestimme automatisch die besten Produktionseinstellungen für einen neuen Rohstofftyp.</em></p>
-</li>
-</ul>
-</div>
-</dd>
-</dl>
-</div>
-</div>
-</div>
 </div>
 <div class="sect3">
 <h4 id="_3_setze_die_lösung_ein">3. Setze die Lösung ein</h4>
@@ -2241,10 +2310,10 @@ In diesem Buch werden die Begriffe &#8220;ML-Algorithmus&#8221; und &#8220;ML-Mo
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Das ML-Modell läuft auf einem &#8220;Edge-Gerät&#8221;, d.h. auf jedem einzelnen Gerät (z.B. Smartphone), das Inputdaten erzeugt und die Ergebnisse des Modells im nachfolgenden Prozessschritt verwendet. Dies ist oft die beste Strategie, wenn Ergebnisse in Echtzeit berechnet werden müssen und/oder eine durchgehende Internetverbindung nicht gewährleistet ist, wie z.B. bei selbstfahrenden Autos. Der Nachteil dieser Strategie ist jedoch, dass je nach Art des ML-Modells vergleichsweise teure Rechenressourcen in jedes Gerät eingebaut werden müssen, z.B. GPUs für neuronale Netze.</p>
+<p><strong>Das ML-Modell läuft auf einem &#8220;Edge-Gerät&#8221;</strong>, d.h. auf jedem einzelnen Gerät (z.B. Smartphone), das Inputdaten erzeugt und die Ergebnisse des Modells im nachfolgenden Prozessschritt verwendet. Dies ist oft die beste Strategie, wenn Ergebnisse in Echtzeit berechnet werden müssen und/oder eine durchgehende Internetverbindung nicht gewährleistet ist, wie z.B. bei selbstfahrenden Autos. Der Nachteil dieser Strategie ist jedoch, dass je nach Art des ML-Modells vergleichsweise teure Rechenressourcen in jedes Gerät eingebaut werden müssen, z.B. GPUs für neuronale Netze.</p>
 </li>
 <li>
-<p>Das ML-Modell läuft in der &#8220;Cloud&#8221;, d.h. auf einem zentralen Server, z.B. in Form einer Webanwendung, die Daten einzelner Nutzer entgegennimmt, verarbeitet und die Ergebnisse zurücksendet. Dies ist oft die effizientere Lösung, wenn für den Anwendungsfall eine Antwort innerhalb weniger Sekunden ausreicht. Die Verarbeitung personenbezogener Daten in der &#8220;Cloud&#8221; kann jedoch Datenschutzbedenken mit sich bringen. Einer der Hauptvorteile dieser Lösung besteht darin, dass man das ML-Modell einfacher aktualisieren kann, sobald mehr historische Daten verfügbar werden oder wenn sich der Prozess ändert und das Modell nun mit leicht anderen Eingaben umgehen muss (worauf wir in späteren Kapiteln noch ausführlicher eingehen).</p>
+<p><strong>Das ML-Modell läuft in der &#8220;Cloud&#8221;</strong>, d.h. auf einem zentralen Server, z.B. in Form einer Webanwendung, die Daten einzelner Nutzer entgegennimmt, verarbeitet und die Ergebnisse zurücksendet. Dies ist oft die effizientere Lösung, wenn für den Anwendungsfall eine Antwort innerhalb weniger Sekunden ausreicht. Die Verarbeitung personenbezogener Daten in der &#8220;Cloud&#8221; kann jedoch Datenschutzbedenken mit sich bringen. Einer der Hauptvorteile dieser Lösung besteht darin, dass man das ML-Modell einfacher aktualisieren kann, sobald mehr historische Daten verfügbar werden oder wenn sich der Prozess ändert und das Modell nun mit leicht anderen Eingaben umgehen muss (worauf wir in späteren Kapiteln noch ausführlicher eingehen).</p>
 </li>
 </ol>
 </div>
@@ -2256,69 +2325,300 @@ In diesem Buch werden die Begriffe &#8220;ML-Algorithmus&#8221; und &#8220;ML-Mo
 </div>
 </div>
 <div class="sect1">
-<h2 id="_daten_preprocessing">Daten &amp; Preprocessing</h2>
+<h2 id="_datenanalyse_preprocessing">Datenanalyse &amp; Preprocessing</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Wie wir gesehen haben, lösen ML-Algorithmen Input-Output-Aufgaben. Und um ein ML-Problem zu lösen, müssen wir zunächst Daten sammeln. Das &#8220;Preprocessing&#8221; (Vorverarbeitung) ist der Vorgang, Rohdaten so zu transformieren, dass ML-Algorithmen angewendet werden können:</p>
+<p>Wie wir gesehen haben, lösen ML-Algorithmen Input-Output-Aufgaben. Und um ein ML-Problem zu lösen, müssen wir zunächst Daten sammeln, diese verstehen und dann so transformieren, dass ML-Algorithmen angewendet werden können (=  Daten Vorverarbeitung / &#8220;Preprocessing&#8221;):</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="images/01c_ds_workflow/data_science_workflow_prepr.png" alt="image" width="840">
 </div>
 </div>
+<div class="sect2">
+<h3 id="_datenanalyse">Datenanalyse</h3>
+<div class="paragraph">
+<p>Das Analysieren von Daten ist nicht nur ein wichtiger Schritt, bevor diese Daten für ein Machine Learning Projekt verwendet werden, sondern kann auch wertvolle Erkenntnisse generieren, die zu besseren (datengestützten) Entscheidungen führen.</p>
+</div>
+<div class="paragraph">
+<p>Normalerweise analysieren wir Daten aus einem von zwei Gründen:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>wir brauchen bestimmte Informationen, um eine (bessere) Entscheidung zu treffen <em>(reaktive Analyse)</em> oder</p>
+</li>
+<li>
+<p>wir sind neugierig auf die Daten und wissen noch nicht, was die Analyse bringen wird <em>(proaktive Analyse)</em>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>In beiden Fällen beginnen wir mit einer <strong>explorativen Datenanalyse</strong>, um aus den Daten Erkenntnisse zu gewinnen.</p>
+</div>
 <div class="sidebarblock">
 <div class="content">
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Rohdaten</dt>
+<dt class="hdlist1">Was ist sind Erkenntnisse?</dt>
 <dd>
-<p>können in vielen verschiedenen Formaten vorliegen, z.B. Sensormessungen, Pixelwerte, Text (z.B. HTML-Seite), SAP-Datenbank, &#8230;&#8203;<br>
-&#8594; <em>n</em> Datenpunkte, gespeichert als Zeilen in einem Excel-Spreadsheet, als einzelne Dateien, usw.</p>
+<p>Der Psychologe Gary Klein definiert eine Erkenntnis als &#8220;eine unerwartete Veränderung in der Art, wie wir Dinge verstehen&#8221;.</p>
 </dd>
 </dl>
 </div>
-<div class="admonitionblock important">
+</div>
+</div>
+<div class="paragraph">
+<p>Eine explorative Analyse ist oft ein &#8216;quick and dirty&#8217; Prozess, bei dem wir viele <strong>Diagramme erstellen, um die Daten besser zu verstehen</strong>. Im Einklang mit Gary Klein suchen wir nach <strong>Dingen, die unerwartet sind</strong>, z.B. ein ungewöhnlicher Anstieg oder Abfall einer Metrik. An dieser Stelle haken wir dann nach, um zu verstehen, woher dieser Unterschied zwischen dem, was wir erwartet haben, und dem, was wir in den Daten sehen, kommt, z.B. indem wir andere korrelierte Variablen untersuchen.</p>
+</div>
+<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-important" title="Important"></i>
+<i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-<strong>Was ist ein Datenpunkt?</strong> Es ist äußerst wichtig sich darüber im Klaren zu sein, was eigentlich ein Datenpunkt ist, d.h. wie die Inputs aussehen und welches Ergebnis das Modell für jede Probe/Beobachtung zurückgegeben soll. Um das zu bestimmen, hilft es sich zu überlegen, wie das ML-Modell später in den Rest des Workflows integriert werden soll: Welche Daten werden im vorherigen Schritt erzeugt und können als Input für den ML-Teil verwendet werden, und was für einen Output braucht man für den darauffolgenden Schritt?
+Domänenwissen ist oft hilfreich, um zu wissen, welche Werte unerwartet sind und wo es sich lohnen könnte, tiefer in die Daten einzusteigen. Daher kann es sinnvoll sein, die Ergebnisse <strong>zusammen mit einem Fachexperten</strong> durchzugehen.
 </td>
 </tr>
 </table>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Preprocessing</dt>
-<dd>
-<p>Transformation und Anreicherung der Rohdaten vor der Anwendung von ML, zum Beispiel:</p>
+<div class="sect3">
+<h4 id="_datengestützte_entscheidungen">Datengestützte Entscheidungen</h4>
+<div class="paragraph">
+<p>So spannend es auch sein kann, etwas über die Daten und ihren Kontext zu lernen&#8201;&#8212;&#8201;wir generieren damit noch keinen Wert.
+Erkenntnisse werden erst wertvoll, wenn sie eine Entscheidung beeinflussen und dazu führen, dass jemand anders handelt, als er oder sie es ohne die Analyse getan hätte.</p>
+</div>
+<div class="paragraph">
+<p>Dazu müssen wir zunächst klarstellen, <strong>welche Entscheidung</strong> unsere Erkenntnisse beeinflussen sollen (was bei einer reaktiven Analyse meist einfacher ist als bei einer proaktiven Analyse) und dann unsere Ergebnisse entsprechend kommunizieren.</p>
+</div>
+<div class="paragraph">
+<p>Dafür müssen wir uns im Klaren darüber sein:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>Feature Extraktion: Rohdaten in numerische Werte umwandeln (z.B. Text)</p>
+<p>Wer sind die relevanten Stakeholder (= die Zielgruppe unserer Analyse)?</p>
 </li>
 <li>
-<p>Fehlende oder falsch eingetragene Werte entfernen / korrigieren (z.B. falsch gesetztes Dezimalkomma)</p>
+<p>Was ist ihr Ziel?</p>
 </li>
 <li>
-<p>Null-Varianz-Features (d.h. Variablen mit immer gleichem Wert) und unsinnige Variablen (z.B. IDs) ausschließen</p>
+<p>Welche Fragen müssen beantwortet werden, um diesem Ziel näher zu kommen?</p>
 </li>
 <li>
-<p>Feature Engineering: Berechnen zusätzlicher/besserer Features aus den ursprünglichen Variablen</p>
+<p>Welche Visualisierungen können helfen, diese Fragen zu beantworten?</p>
+</li>
+<li>
+<p>Welche Handlung würden wir basierend auf den Ergebnissen empfehlen?</p>
+</li>
+</ul>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Beispiele für Geschäftsentscheidungen</dt>
+<dd>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><span class="underline">Frage:</span> Erreicht die Kundendienstabteilung ihre Ziele?<br>
+<span class="underline">Antwort:</span> In den letzten 3 Monaten konnte der Kundendienst nur 80% der Anfragen beantworten.<br>
+<span class="underline">Empfohlene Handlung:</span> Wir sollten mehr Leute einstellen.</p>
+</li>
+<li>
+<p><span class="underline">Frage:</span> In welches Land sollen wir als nächstes expandieren?<br>
+<span class="underline">Antwort:</span> Das Marktpotenzial für die Länder A/B/C beträgt jeweils 200/500/300 Millionen Euro.<br>
+<span class="underline">Empfohlene Handlung:</span> Wir sollten als nächstes Land B ins Visier nehmen.</p>
+</li>
+<li>
+<p><span class="underline">Frage:</span> Müssen wir mehr Inventar bestellen?<br>
+<span class="underline">Antwort:</span> Verkaufsprognosen zeigen, dass unser aktueller Lagerbestand bis nach Weihnachten reichen sollte.<br>
+<span class="underline">Empfohlene Handlung:</span> Nein, wir sollten kein weiteres Inventar bestellen.</p>
+</li>
+<li>
+<p><span class="underline">Frage:</span> Müssen wir den Internet Explorer für unsere Webanwendung noch unterstützen?<br>
+<span class="underline">Antwort:</span> Nur noch 10% unserer Nutzer verwenden den IE und unsere Entwickler beschweren sich über den hohen Wartungsaufwand.<br>
+<span class="underline">Empfohlene Handlung:</span> Volle Unterstützung für IE lohnt sich nicht mehr.</p>
+</li>
+</ol>
+</div>
+</dd>
+<dt class="hdlist1">Beispiel für eine Entscheidung in einem ML Projekt</dt>
+<dd>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><span class="underline">Frage:</span> Sind die Vorhersagen unseres ML-Modells genau genug, um es im Live-System zu verwenden?<br>
+<span class="underline">Antwort:</span> Die Modellgenauigkeit ist letzte Woche unter 85% gefallen.<br>
+<span class="underline">Empfohlene Handlung:</span> Wir sollten das Modell mit neuen Daten nach trainieren.</p>
+</li>
+</ol>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Durchsuche die Daten nicht nur nach Erkenntnissen, die das bestätigen, was du dir schon vorher gedacht hast (Bestätigungsfehler / Confirmation Bias)! Sei stattdessen offen und versuche aktiv, deine Hypothese zu widerlegen.
+</td>
+</tr>
+</table>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p><span class="underline">Aber:</span> Nicht alle Entscheidungen müssen datengestützt getroffen werden:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Unsere besten Webentwickler haben gedroht zu kündigen, wenn sie den Internet Explorer weiter unterstützen müssen. Egal wie viele Nutzer von der Änderung betroffen wären, wir können es uns nicht leisten, diese Entwickler zu verlieren!</p>
+</li>
+<li>
+<p>Unser ML-Modell wird sowieso jede Woche mit neuen Daten nach trainiert, unabhängig von der Modellgenauigkeit.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>&#8658; <strong><em>Feature Matrix</em></strong> \(\,X \in \mathbb{R}^{n\times d}\): <em>n</em> Datenpunkte; jeder repräsentiert als ein <em>d</em>-dimensionaler Vektor (d.h. mit <em>d</em> Features)<br></p>
+<p>&#8658; Kommuniziere transparent, ob eine Entscheidung überhaupt durch Analyseergebnisse beeinflusst werden kann, und wenn nicht, erspare den Analysten den Aufwand.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_erkenntnisse_kommunizieren">Erkenntnisse kommunizieren</h4>
+<div class="paragraph">
+<p>Die Diagramme, die wir während der explorativen Analyse erstellt haben, sollten nicht die Diagramme sein, die wir unserem Publikum zeigen, um unsere Erkenntnisse zu kommunizieren. Da unsere Zielgruppe mit den Daten viel weniger vertraut ist als wir und wahrscheinlich auch kein Interesse / keine Zeit hat, tiefer in die Daten einzutauchen, müssen wir ihnen die Ergebnisse leichter zugänglich machen&#8201;&#8212;&#8201;ein Prozess, der oft als <em>erklärende Analyse</em> bezeichnet wird.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+&#8220;Einfach alle Daten zeigen&#8221; und hoffen, dass das Publikum schon irgendwas daraus machen wird, ist oft der Anfang vom Ende vieler Dashboards. Es ist wichtig, dass du verstehst, welches Ziel dein Publikum erreichen möchte und welche Fragen dafür beantwortet werden müssen.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_schritt_1_wähle_den_richtigen_diagrammtyp">Schritt 1: Wähle den richtigen Diagrammtyp</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Lass dich von Visualisierungsbibliotheken inspirieren (z.B. <a href="https://github.com/Financial-Times/chart-doctor/blob/main/visual-vocabulary/Visual-vocabulary-en.pdf" target="\_blank">hier</a> oder <a href="https://datavizcatalogue.com/" target="\_blank">hier</a>)</p>
+</li>
+<li>
+<p>Verwende keine 3D-Effekte!</p>
+</li>
+<li>
+<p>Verwende keine Torten- oder Donutdiagramme (Winkel sind schwer zu interpretieren)</p>
+</li>
+<li>
+<p>Verwende Liniendiagramme für Zeitreihendaten</p>
+</li>
+<li>
+<p>Verwende horizontale statt vertikaler Balkendiagramme für Zielgruppen, die von links nach rechts lesen</p>
+</li>
+<li>
+<p>Benutze evtl. &#8216;<a href="https://en.wikipedia.org/wiki/Small_multiple" target="\_blank">Small Multiples</a>&#8217; oder Sparklines, wenn ein einzelnes Diagramm zu vollgestopft wirkt</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_schritt_2_unnötiges_weglassen_daten_zu_tinte_verhältnis_maximieren">Schritt 2: Unnötiges weglassen / Daten-zu-Tinte-Verhältnis maximieren</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Rand entfernen</p>
+</li>
+<li>
+<p>Gitterlinien entfernen</p>
+</li>
+<li>
+<p>Datenmarker entfernen</p>
+</li>
+<li>
+<p>Achsenbeschriftungen aufs Wesentliche reduzieren</p>
+</li>
+<li>
+<p>Linien direkt beschriften</p>
+</li>
+<li>
+<p>Konsistente Farben verwenden</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_schritt_3_aufmerksamkeit_fokussieren">Schritt 3: Aufmerksamkeit fokussieren</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Beginne mit grau, also schiebe erstmal alles in den Hintergrund</p>
+</li>
+<li>
+<p>Verwende präattentive Attribute wie Farben strategisch</p>
+</li>
+<li>
+<p>Verwende Datenmarker und Labels sparsam</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_schritt_4_daten_zugänglich_machen">Schritt 4: Daten zugänglich machen</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Kontext hinzufügen: Welche Werte sind gut (Zielzustand), welche schlecht (Alarmschwelle)?</p>
+</li>
+<li>
+<p>Füge erklärenden Text hinzu, um die wichtigsten Schlussfolgerungen und Handlungsempfehlungen herauszustellen</p>
+</li>
+</ul>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Weiterführende Literatur</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p><em>Better Data Visualizations: A Guide for Scholars, Researchers, and Wonks</em> von Jonathan Schwabish</p>
+</li>
+<li>
+<p><em>Effective Data Storytelling: How to drive change with data, narrative, and visuals</em> von Brent Dykes</p>
+</li>
+<li>
+<p><em>Storytelling with Data: A data visualization guide for business professionals</em> von Cole Nussbaum Knaflic</p>
+</li>
+<li>
+<p><em>Data Visualization: A successful design process</em> von Andy Kirk</p>
+</li>
+<li>
+<p>Verschiedene <a href="https://kozyrkov.medium.com/" target="\_blank">Blogartikel</a> von Cassie Kozyrkov</p>
+</li>
+</ul>
 </div>
 </dd>
-<dt class="hdlist1">Vorhersage-Targets?</dt>
-<dd>
-<p>&#8594; <strong><em>Label Vektor</em></strong> \(\,\mathbf{y}\) : <em>n</em>-dimensionaler Vektor mit einem Target Wert (Label) pro Datenpunkt</p>
-</dd>
 </dl>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -2506,6 +2806,68 @@ Neben der Dokumentation von Datensätzen als Ganzes ist es auch sehr hilfreich, 
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_preprocessing">Preprocessing</h3>
+<div class="paragraph">
+<p>Jetzt, da wir unsere Daten besser verstehen und sicher gestellt haben, dass sie (hoffentlich) von guter Qualität sind, können wir sie für unsere Machine Learning Algorithmen aufbereiten.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Rohdaten</dt>
+<dd>
+<p>können in vielen verschiedenen Formaten vorliegen, z.B. Sensormessungen, Pixelwerte, Text (z.B. HTML-Seite), SAP-Datenbank, &#8230;&#8203;<br>
+&#8594; <em>n</em> Datenpunkte, gespeichert als Zeilen in einem Excel-Spreadsheet, als einzelne Dateien, usw.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<strong>Was ist ein Datenpunkt?</strong> Es ist äußerst wichtig sich darüber im Klaren zu sein, was eigentlich ein Datenpunkt ist, d.h. wie die Inputs aussehen und welches Ergebnis das Modell für jede Probe/Beobachtung zurückgegeben soll. Um das zu bestimmen, hilft es sich zu überlegen, wie das ML-Modell später in den Rest des Workflows integriert werden soll: Welche Daten werden im vorherigen Schritt erzeugt und können als Input für den ML-Teil verwendet werden, und was für einen Output braucht man für den darauffolgenden Schritt?
+</td>
+</tr>
+</table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Preprocessing</dt>
+<dd>
+<p>Transformation und Anreicherung der Rohdaten vor der Anwendung von ML, zum Beispiel:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Feature Extraktion: Rohdaten in numerische Werte umwandeln (z.B. Text)</p>
+</li>
+<li>
+<p>Fehlende oder falsch eingetragene Werte entfernen / korrigieren (z.B. falsch gesetztes Dezimalkomma)</p>
+</li>
+<li>
+<p>Null-Varianz-Features (d.h. Variablen mit immer gleichem Wert) und unsinnige Variablen (z.B. IDs) ausschließen</p>
+</li>
+<li>
+<p>Feature Engineering: Berechnen zusätzlicher/besserer Features aus den ursprünglichen Variablen</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>&#8658; <strong><em>Feature Matrix</em></strong> \(\,X \in \mathbb{R}^{n\times d}\): <em>n</em> Datenpunkte; jeder repräsentiert als ein <em>d</em>-dimensionaler Vektor (d.h. mit <em>d</em> Features)<br></p>
+</div>
+</dd>
+<dt class="hdlist1">Vorhersage-Targets?</dt>
+<dd>
+<p>&#8594; <strong><em>Label Vektor</em></strong> \(\,\mathbf{y}\) : <em>n</em>-dimensionaler Vektor mit einem Target Wert (Label) pro Datenpunkt</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -2532,6 +2894,8 @@ Neben der Dokumentation von Datensätzen als Ganzes ist es auch sehr hilfreich, 
 </dd>
 </dl>
 </div>
+<div class="sidebarblock">
+<div class="content">
 <div class="paragraph">
 <p>Da geht noch mehr!</p>
 </div>
@@ -2540,6 +2904,8 @@ Neben der Dokumentation von Datensätzen als Ganzes ist es auch sehr hilfreich, 
 <img src="images/04_supervised_intro/supervised_more4.png" alt="image" width="540">
 </div>
 <div class="title"><span class="small">In vielen Anwendungsfällen reicht es nicht aus, einfach &#8220;nur&#8221; die Zielvariable für einen neuen Datenpunkt vorherzusagen; ob beispielsweise ein unter bestimmten Bedingungen hergestelltes Produkt von hoher Qualität sein wird oder nicht. Stattdessen ist es oft notwendig, zusätzlich erklären zu können, <em>warum</em> diese Vorhersage gemacht wurde und welche Features für die Vorhersage entscheidend waren, sowohl um mögliche Ursachen eines Problems besser zu verstehen, aber auch um sicherzustellen, dass die Vorhersagen des Modells auf vernünftigen Annahmen basieren. Darüber hinaus kann ein erlerntes Modell auch innerhalb einer äußeren Optimierungsschleife verwendet werden, um optimale Inputs zu bestimmen. Im einfachsten Fall könnte man z.B. systematisch überprüfen, welche Produktqualität das Modell für verschiedene Prozessbedingungen vorhersagt, um für neue Produkte die Einstellungen mit der am höchsten vorhergesagten Qualität zu wählen. Aber Vorsicht: ML-Modelle sind nur zum Interpolieren, nicht zum Extrapolieren konzipiert, d.h. es muss sichergestellt werden, dass die getesteten Eingaben im gleichen Wertebereich liegen wie in den Daten, die zum Trainieren des Modells verwendet wurden.</span></div>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_deep_learning_neuronale_netze">Deep Learning (Neuronale Netze)</h3>
@@ -3203,7 +3569,7 @@ Außerdem ist es immer sinnvoll, bekannte externe Ereignisse, wie z.B. eine Wart
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Aber es ist machbar! Ein gutes Beispiel kommt von dem Startup alcemy, das ML verwendet, um die Produktion von CO2-armem Zement zu optimieren. Wie sie dabei mit den oben genannten Herausforderungen umgegangen sind, erklären sie in <a href="https://www.youtube.com/watch?v=lt-ABfIWv1M" target="\_blank">diesem Vortrag</a>.
+Aber es ist machbar! Ein gutes Beispiel kommt von dem Startup alcemy, das ML verwendet, um die Produktion von CO2-armen Zementen zu optimieren. Wie sie dabei mit den oben genannten Herausforderungen umgegangen sind, erklären sie in <a href="https://www.youtube.com/watch?v=lt-ABfIWv1M" target="\_blank">diesem Vortrag</a>.
 </td>
 </tr>
 </table>

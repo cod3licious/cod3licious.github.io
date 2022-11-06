@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="generator" content="Asciidoctor 2.0.18">
 <meta name="author" content="Dr. Franziska Horn">
 <meta name="copyright" content="Dr. Franziska Horn">
 <title>A Practitioner&#8217;s Guide to Machine Learning</title>
@@ -922,102 +922,68 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
-<body id="_what_constitutes_one_data_point" class="book toc2 toc-left">
+<body id="_datenanalyse_preprocessing" class="book toc2 toc-left">
 <div id="header">
 <h1>A Practitioner&#8217;s Guide to Machine Learning</h1>
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.6,</span>
-<span id="revdate">2022-08-28</span>
+<span id="revnumber">version 1.7,</span>
+<span id="revdate">2022-11-06</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <p><span class="toc-root"><a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a></span></p><ul class="sectlevel1">
-<li><a href="_introduction.html">Introduction</a>
+<li><a href="_einleitung.html">Einleitung</a>
 </li>
-<li><a href="_ml_with_python.html">ML with Python</a>
-</li>
-<li><a href="_data_preprocessing.html">Data &amp; Preprocessing</a>
+<li><a href="_datenanalyse_preprocessing.html"><span class="toc-current">Datenanalyse &amp; Preprocessing</span></a>
 <ul class="sectlevel2">
-<li><a href="_what_constitutes_one_data_point.html"><span class="toc-current">What constitutes one data point?</span></a>
+<li><a href="_datenanalyse.html">Datenanalyse</a>
 </li>
-<li><a href="_feature_extraction.html">Feature Extraction</a>
+<li><a href="_garbage_in_garbage_out.html">Garbage in, Garbage out!</a>
 </li>
-<li><a href="_feature_engineering_transformations.html">Feature Engineering &amp; Transformations</a>
-</li>
-<li><a href="_computing_similarities.html">Computing Similarities</a>
-</li>
-<li><a href="_garbage_in_garbage_out.html">Garbage in, garbage out!</a>
+<li><a href="_preprocessing.html">Preprocessing</a>
 </li>
 </ul>
 </li>
-<li><a href="_unsupervised_learning_2.html">Unsupervised Learning</a>
+<li><a href="_supervised_learning.html">Supervised Learning</a>
 </li>
-<li><a href="_supervised_learning_basics.html">Supervised Learning Basics</a>
+<li><a href="_häufige_fehler_vermeiden.html">Häufige Fehler vermeiden</a>
 </li>
-<li><a href="_supervised_learning_models.html">Supervised Learning Models</a>
-</li>
-<li><a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a>
-</li>
-<li><a href="_advanced_topics.html">Advanced Topics</a>
-</li>
-<li><a href="_conclusion.html">Conclusion</a>
+<li><a href="_fazit.html">Fazit</a>
 </li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div class="sect2">
-<h3 id="_what_constitutes_one_data_point">What constitutes one data point?</h3>
+<div class="sect1">
+<h2 id="_datenanalyse_preprocessing">Datenanalyse &amp; Preprocessing</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Even given the same raw data, depending on what problem we want to solve, the <strong>definition of &#8216;one data point&#8217;</strong> can be quite different.
-For example, when dealing with time series data, <strong>the raw data is in the form &#8216;<em>n</em> time points with measurements from <em>d</em> sensors&#8217;</strong>, but depending on the type of question we are trying to answer, the actual feature matrix can look quite different:</p>
+<p>Wie wir gesehen haben, lösen ML-Algorithmen Input-Output-Aufgaben. Und um ein ML-Problem zu lösen, müssen wir zunächst Daten sammeln, diese verstehen und dann so transformieren, dass ML-Algorithmen angewendet werden können (=  Daten Vorverarbeitung / &#8220;Preprocessing&#8221;):</p>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">1 Data Point = 1 Time Point</dt>
-<dd>
-<p>e.g., anomaly detection &#8658; determine for each time point if everything is normal or if there is something strange going on:</p>
 <div class="imageblock text-center">
 <div class="content">
-<img src="../images/07_timeseries/timeseries1.png" alt="image" width="660">
+<img src="../images/01c_ds_workflow/data_science_workflow_prepr.png" alt="image" width="840">
 </div>
 </div>
-<div class="paragraph">
-<p>&#8594; \(X\): <em>n</em> time points \(\times\) <em>d</em> sensors, i.e., <em>n</em> data points represented as <em>d</em>-dimensional feature vectors</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="_datenanalyse.html">Datenanalyse</a></p>
+</li>
+<li>
+<p><a href="_garbage_in_garbage_out.html">Garbage in, Garbage out!</a></p>
+</li>
+<li>
+<p><a href="_preprocessing.html">Preprocessing</a></p>
+</li>
+</ul>
 </div>
-</dd>
-<dt class="hdlist1">1 Data Point = 1 Time Series</dt>
-<dd>
-<p>e.g., cluster sensors &#8658; see if some sensors measure related things:</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/07_timeseries/timeseries3.png" alt="image" width="660">
-</div>
-</div>
-<div class="paragraph">
-<p>&#8594; \(X\): <em>d</em> sensors \(\times\) <em>n</em> time points, i.e., <em>d</em> data points represented as <em>n</em>-dimensional feature vectors</p>
-</div>
-</dd>
-<dt class="hdlist1">1 Data Point = 1 Time Interval</dt>
-<dd>
-<p>e.g., classify time segments &#8658; products are being produced one after another, some take longer to produce than others, and the task is to predict whether a product produced during one time window at the end meets the quality standards, i.e., we&#8217;re not interested in the process over time per se, but instead regard each produced product (and therefore each interval) as an independent data point:</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/07_timeseries/timeseries2.png" alt="image" width="660">
-</div>
-</div>
-<div class="paragraph">
-<p>&#8594; Data points always need to be represented as fixed-length feature vectors, where each dimension stands for a specific input variable. Since the intervals here have different lengths, we can&#8217;t just represent one product as the concatenation of all the sensor measurements collected during its production time interval, since these vectors would not be comparable for the different products. Instead, we compute features for each time segment by aggregating the sensor measurements over the interval (e.g., min, max, mean, slope, &#8230;&#8203;).<br>
-&#8594; \(X\): <em>k</em> intervals \(\times\) <em>q</em> features (derived from the <em>d</em> sensors), i.e., <em>k</em> data points represented as <em>q</em>-dimensional feature vectors</p>
-</div>
-</dd>
-</dl>
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>↑ Up: <a href="_data_preprocessing.html">Data &amp; Preprocessing</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_feature_extraction.html">Feature Extraction</a> →</p>
+<p>← Previous: <a href="_mit_ml_probleme_lösen.html">Mit ML Probleme lösen</a> | ↑ Up: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_datenanalyse.html">Datenanalyse</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

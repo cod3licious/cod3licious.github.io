@@ -1001,6 +1001,12 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </dd>
 </dl>
 </div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/02_data/insight.png" alt="image" width="400">
+</div>
+<div class="title"><span class="small">Things get interesting when we find something in the data that we didn&#8217;t expect. [Adapted from: <em>Effective Data Storytelling</em> by Brent Dykes]</span></div>
+</div>
 </div>
 </div>
 <div class="paragraph">
@@ -1027,14 +1033,20 @@ Knowing which values are unexpected and where it might pay off to dig deeper oft
 <div class="ulist">
 <ul>
 <li>
-<p>Examine summary statistics (e.g., mean, standard deviation (std), min/max values, etc.), e.g., by calling <code>df.describe()</code> on a pandas data frame.</p>
+<p>Examine summary statistics (e.g., mean, standard deviation (std), min/max values, etc.), for example, by calling <code>df.describe()</code> on a pandas data frame.</p>
 </li>
 <li>
-<p>Examine the distributions of individual variables (using histograms or violin plots):</p>
+<p>Examine the distributions of individual variables (e.g., using histograms):</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/02_data/exploratory_dist.png" alt="image" width="400">
+</div>
+<div class="title"><span class="small">Histogram, strip plot, violin plot, box plot, and summary statistics of the same data.</span></div>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>Is the variable normally distributed (otherwise it might need to be transformed later)?</p>
+<p>Is the data normally distributed (otherwise we may have to transform the variable later)?</p>
 </li>
 <li>
 <p>Does the distribution have a single or multiple peaks? Is this expected?</p>
@@ -1049,13 +1061,31 @@ Knowing which values are unexpected and where it might pay off to dig deeper oft
 </div>
 </li>
 <li>
-<p>Examine trends over time (by plotting variables over time)</p>
+<p>Examine trends over time (by plotting variables over time):</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/02_data/exploratory_lines.png" alt="image" width="550">
+</div>
+<div class="title"><span class="small">What caused these trends and what are their implications for the future? [Adapted from: <em>Data Visualization: A successful design process</em> by Andy Kirk]</span></div>
+</div>
 </li>
 <li>
-<p>Examine relationships between variables (using scatter plots)</p>
+<p>Examine relationships between variables (using scatter plots):</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/02_data/exploratory_scatter.png" alt="image" width="350">
+</div>
+<div class="title"><span class="small">Not all interesting relations between two variables can be detected through a high <a href="https://en.wikipedia.org/wiki/Correlation" target="\_blank">correlation coefficient</a>. Always check the scatter plot for details. [Adapted from: <em>Data Visualization: A successful design process</em> by Andy Kirk]</span></div>
+</div>
 </li>
 <li>
-<p>Examine patterns in multidimensional data (using parallel coordinate plots)</p>
+<p>Examine patterns in multidimensional data (using parallel coordinate plots):</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/02_data/exploratory_parcoord.png" alt="image" width="750">
+</div>
+<div class="title"><span class="small">Each line in a parallel coordinate plot represents one data point, with the corresponding values for the different variables marked at the respective y-axis. The screenshot here shows an interactive plot created using the <code>plotly</code> library. By selecting value ranges for the different dimensions (indicated by the pink stripes), it is possible to spot interesting patterns resulting from a combination of values across multiple variables.</span></div>
+</div>
 </li>
 </ul>
 </div>
@@ -1069,6 +1099,11 @@ Knowing which values are unexpected and where it might pay off to dig deeper oft
 <div class="paragraph">
 <p>While learning something about the data and its context is often interesting and can feel rewarding in itself, it is not yet valuable.
 Insights become valuable when they influence a decision and inspire a different course of action, better than the default that would have been taken without the analysis.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/02_data/analysis_process.png" alt="image" width="650">
+</div>
 </div>
 <div class="paragraph">
 <p>For this, we first need to determine <strong>which decision</strong> our insights should influence (which is usually easier in the case of a reactive compared to a proactive analysis) and then communicate our results accordingly.</p>
@@ -1222,9 +1257,18 @@ Don&#8217;t &#8220;just show all the data&#8221; and hope that your audience wil
 <p>use horizontal instead of vertical bar charts for audiences that read left to right</p>
 </li>
 <li>
+<p>start the y-axis at 0 for area &amp; bar charts</p>
+</li>
+<li>
 <p>consider using <a href="https://en.wikipedia.org/wiki/Small_multiple" target="\_blank">small multiples</a> or sparklines instead of cramming too much into a single chart</p>
 </li>
 </ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/02_data/explanatory1.png" alt="image" width="900">
+</div>
+<div class="title"><span class="small"><em>Left:</em> Bar charts (especially in 3D) make it hard to compare numbers over a longer period of time. <em>Right:</em> Trends over time can be more easily detected in line charts. [Example adapted from: <em>Storytelling with Data</em> by Cole Nussbaum Knaflic]</span></div>
 </div>
 </div>
 <div class="sect4">
@@ -1251,6 +1295,12 @@ Don&#8217;t &#8220;just show all the data&#8221; and hope that your audience wil
 </li>
 </ul>
 </div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/02_data/explanatory2.gif" alt="image" width="550">
+</div>
+<div class="title"><span class="small">Cut clutter! [Example adapted from: <em>Storytelling with Data</em> by Cole Nussbaum Knaflic]</span></div>
+</div>
 </div>
 <div class="sect4">
 <h5 id="_step_3_focus_attention">Step 3: Focus attention</h5>
@@ -1260,12 +1310,18 @@ Don&#8217;t &#8220;just show all the data&#8221; and hope that your audience wil
 <p>start with gray, i.e., push everything in the background</p>
 </li>
 <li>
-<p>use pre-attentive attributes like color strategically</p>
+<p>use pre-attentive attributes like color strategically to highlight what&#8217;s most important</p>
 </li>
 <li>
 <p>use data labels sparingly</p>
 </li>
 </ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/02_data/explanatory3.gif" alt="image" width="550">
+</div>
+<div class="title"><span class="small">Start with gray and use pre-attentive attributes strategically to focus the audience&#8217;s attention. [Example adapted from: <em>Storytelling with Data</em> by Cole Nussbaum Knaflic]</span></div>
 </div>
 </div>
 <div class="sect4">
@@ -1279,6 +1335,12 @@ Don&#8217;t &#8220;just show all the data&#8221; and hope that your audience wil
 <p>annotate the plot with text explaining the main takeaways</p>
 </li>
 </ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/02_data/explanatory4.png" alt="image" width="550">
+</div>
+<div class="title"><span class="small">Tell a story. [Example adapted from: <em>Storytelling with Data</em> by Cole Nussbaum Knaflic]</span></div>
 </div>
 <div class="sidebarblock">
 <div class="content">

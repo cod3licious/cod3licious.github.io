@@ -922,7 +922,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
-<body id="_pitfall_5_data_concept_drifts" class="book toc2 toc-left">
+<body id="_neural_networks" class="book toc2 toc-left">
 <div id="header">
 <h1>A Practitioner&#8217;s Guide to Machine Learning</h1>
 <div class="details">
@@ -941,20 +941,16 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <li><a href="_data_analysis_preprocessing.html">Data Analysis &amp; Preprocessing</a>
 </li>
 <li><a href="_deep_learning_2.html">Deep Learning</a>
-</li>
-<li><a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a>
 <ul class="sectlevel2">
-<li><a href="_pitfall_1_deceptive_model_evaluation.html">[Pitfall #1] Deceptive model evaluation</a>
-</li>
-<li><a href="_pitfall_2_model_does_not_generalize.html">[Pitfall #2] Model does not generalize</a>
-</li>
-<li><a href="_pitfall_3_model_abuses_spurious_correlations.html">[Pitfall #3] Model abuses spurious correlations</a>
-</li>
-<li><a href="_pitfall_4_model_discriminates.html">[Pitfall #4] Model discriminates</a>
-</li>
-<li><a href="_pitfall_5_data_concept_drifts.html"><span class="toc-current">[Pitfall #5] Data &amp; concept drifts</span></a>
+<li><a href="_neural_networks.html"><span class="toc-current">Neural Networks</span></a>
+<ul class="sectlevel3">
+<li><a href="_neural_networks.html#_nn_architectures">NN architectures</a>
 </li>
 </ul>
+</li>
+</ul>
+</li>
+<li><a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a>
 </li>
 <li><a href="_conclusion.html">Conclusion</a>
 </li>
@@ -963,68 +959,83 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 <div id="content">
 <div class="sect2">
-<h3 id="_pitfall_5_data_concept_drifts">[Pitfall #5] Data &amp; concept drifts</h3>
+<h3 id="_neural_networks">Neural Networks</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Intuitive Explanation of Neural Networks</dt>
+<dd>
+<p><span class="small">[Adapted from: &#8220;AI for everyone&#8221; by Andrew Ng (coursera.org)]</span></p>
 <div class="paragraph">
-<p>We must never forget that the world keeps on changing and that models need to be updated regularly with new data to be able to adapt to these changing circumstances!</p>
+<p>Let&#8217;s say we have an online shop and are trying to predict how much of a product we will sell in the next month. The price we are willing to sell the product for will obviously influence the demand, as people are trying to get a good deal, i.e., the lower the price, the higher the demand; a negative correlation that can be captured by a linear model. However, the demand will never be below zero (i.e., when the price is very high, people wont suddenly return the product), so we need to adapt the model such that the predicted output is never negative. This can be achieved by applying the max function, in this context also called a nonlinear activation function, to the output of the linear model, so that now when the linear model would return a negative value, we instead predict 0.</p>
 </div>
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-caution" title="Caution"></i>
-</td>
-<td class="content">
-<strong>ML fails silently!</strong> I.e., even if all predictions are wrong, the program does not simply crash with some error message.<br>
-&#8594; Need constant monitoring to detect changes that lead to a deteriorating performance!
-</td>
-</tr>
-</table>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/05_supervised_nn/neural_network_intuitive_a4.png" alt="image" width="440">
+</div>
+<div class="title"><span class="small">A very simple linear model with one input and one output variable and a nonlinear activation function (the max function).</span></div>
 </div>
 <div class="paragraph">
-<p><span class="underline">One of the biggest problems in practice: Data and Concept Drifts:</span><br>
-The model performance quickly decays when the distribution of the data used for training is different from the data the model encounters in production. Such a discrepancy can be due to</p>
+<p>This functional relationship can be visualized as a circle with one input <em>(price)</em> and one output <em>(demand)</em>, where the S-curve in the circle indicates that a nonlinear activation function is applied to the result. We will later see these circles as single units or &#8220;neurons&#8221; of a neural network.</p>
 </div>
+<div class="paragraph">
+<p>To get better results, we can extend the model and use multiple input features for the prediction:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/05_supervised_nn/neural_network_intuitive_b2.png" alt="image" width="540">
+</div>
+<div class="title"><span class="small">A linear model with multiple inputs, where the prediction is computed as a weighted sum of the inputs, together with the max function to prevent negative values.</span></div>
+</div>
+<div class="paragraph">
+<p>To improve the performance even further, we could now manually construct more informative features from the original inputs by combining them in meaningful ways (&#8594; feature engineering) before computing the output:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/05_supervised_nn/neural_network_intuitive_b6.png" alt="image" width="540">
+</div>
+<div class="title"><span class="small">Our example is about an online shop, so the customers additionally have to pay shipping fees, which means to reflect the true affordability of the product, we need to combine the product price with the shipping costs. Next, the customers are interested in high quality products. However, not only the actual quality of the raw materials we used to make the product influences how the customers perceive the product, but we can also reinforce the impression that the product is of high quality with a marketing campaign. Furthermore, a high price also suggests that the product is superior. This means by creating these additional features, the price can actually contribute in two ways towards the final prediction: while, on the one hand, a lower price is beneficial for the affordability of the product, a higher price, on the other hand, results in a larger perceived quality.</span></div>
+</div>
+<div class="paragraph">
+<p>While in this toy example, it was possible to construct such features manually, the nice thing about neural networks is that they do exactly that automatically: By using multiple layers, i.e., stacking multiple linear models (with nonlinear activation functions) on top of each other, it is possible to create more and more complex combinations of the original input features, which can improve the performance of the model. The more layers the network uses, i.e., the &#8220;deeper&#8221; it is, the more complex the resulting feature representations.</p>
+</div>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Since different tasks and especially different types of input data benefit from different feature representations, there exist different types of neural network architectures to accommodate this, e.g.</p>
+</div>
+<div class="openblock">
+<div class="content">
 <div class="ulist none">
 <ul class="none">
 <li>
-<p><em>Data drift:</em> distribution of input features \(X\) changes</p>
+<p>&#8594; Feed Forward Neural Networks (FFNNs) for &#8216;normal&#8217; (e.g., structured) data</p>
 </li>
 <li>
-<p><em>Concept drift:</em> input/output relationship \(X \to y\) changes</p>
+<p>&#8594; Convolutional Neural Networks (CNNs) for images</p>
+</li>
+<li>
+<p>&#8594; Recurrent Neural Networks (RNNs) for sequential data like text or time series</p>
 </li>
 </ul>
 </div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_nn_architectures">NN architectures</h4>
 <div class="paragraph">
-<p><span class="underline">Example:</span> From the production settings incl. the size of a produced part (\(X\)) we want to predict whether the part is scrap or okay (\(y\)):</p>
+<p>Similar to how domain-specific feature engineering can result in vastly improved model performances, it pays off to construct a neural network architecture tailored to the task.</p>
 </div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p><em>Data drift:</em> The company used to manufacture only small parts, now they also produce larger parts.</p>
-</li>
-<li>
-<p><em>Concept drift:</em> The company used to produce 10% scrap parts, but after some maintenance was done on the machine, the same production settings now result in only 5% scrap.</p>
-</li>
-</ul>
-</div>
+<div class="sect4">
+<h5 id="_feed_forward_neural_network_ffnn">Feed Forward Neural Network (FFNN)</h5>
 <div class="paragraph">
-<p><span class="underline">Possible reasons for data or concept drifts:</span></p>
+<p>This is the original and most straightforward neural network architecture, which we&#8217;ve already seen in the initial example, only that in practice such a model usually has a few more layers and units per layer:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>New users behave differently: For example, the product is now used by a younger generation or the business recently expanded to a different country.</p>
-</li>
-<li>
-<p>Trends and seasonality: For example, certain products are bought primarily in a specific season (e.g., winter cloths) or new styles result in the same customers now buying different products because they are &#8220;in&#8221;.</p>
-</li>
-<li>
-<p>The process structure / setup changed: For example, in a new version of a device, a sensor has moved to a different location, but still logs values under the same variable name.</p>
-</li>
-<li>
-<p>Feedback loop, where the presence of an ML model alters user behavior: For example, spammers change their strategy to evade the spam filter.</p>
-</li>
-</ul>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/05_supervised_nn/neural_network.png" alt="image" width="840">
+</div>
+<div class="title"><span class="small">Feed Forward Neural Network (FFNN) architecture: The input feature vector \(\mathbf{x}\), representing one data point, is multiplied by the first weight matrix \(W_1\) to create a new vector, which, after applying the nonlinear activation function (e.g., the max function as we&#8217;ve seen in the initial example) results in the first hidden layer representation \(\mathbf{x}'\). This new vector is then multiplied by the second weight matrix \(W_2\) and again a nonlinear activation function is applied to yield the second hidden layer representation of the sample, \(\mathbf{x}''\). Depending on how many layers the network has (i.e., how deep it is), this could be repeated multiple times now until finally the last layer computes the predicted output \(\mathbf{\hat{y}}\). While the network is trained, these predicted outputs gets closer and closer to the true outputs for the training samples.</span></div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1033,19 +1044,43 @@ The model performance quickly decays when the distribution of the data used for 
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-These changes can either be <strong>gradual</strong> (e.g., languages change gradually as new words are coined; a camera lens gets covered with dust over time), or they can come as a <strong>sudden shock</strong> (e.g., someone cleans the camera lens; when the COVID-19 pandemic hit, suddenly a lot of people switched to online shopping, which tripped up the credit card fraud detection systems).
+You can play around with a small neural network <a href="https://playground.tensorflow.org/" target="\_blank">here</a> to see how it behaves when you, for example, add more units or layers.
 </td>
 </tr>
 </table>
 </div>
+</div>
+<div class="sect4">
+<h5 id="_convolutional_neural_network_cnn">Convolutional Neural Network (CNN)</h5>
 <div class="paragraph">
-<p><span class="underline">Mitigation Strategies:</span><br>
-The best way to counteract data and concept drifts is to frequently <strong>retrain the model</strong> on new data. This can either happen on a schedule (e.g., every weekend, depending on how quickly the data changes) or when your monitoring system raises an alert because it detected drifts in the inputs or a deteriorating model performance.<br>
-Additionally, it is always helpful to log known external events, such as maintenance performed on a machine.</p>
+<p>Manual feature engineering for computer vision tasks is incredibly difficult. While humans recognize a multitude of objects in images without effort, it is hard to describe <em>why</em> we can identify what we see, e.g., which features allow us to distinguish a cat from a small dog. Deep learning had its first breakthrough success in this field, because neural networks, in particular CNNs, manage to learn meaningful feature representations of visual information through a hierarchy of layers.</p>
+</div>
+<div class="paragraph">
+<p>Convolutional neural networks are very well suited for processing visual information, because they can operate on the 2D images directly and utilize the fact that images are composed of a lot of local information (e.g., eyes, nose, and mouth are all localized components of a face).</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/05_supervised_nn/cnn.png" alt="image" width="840">
+</div>
+<div class="title"><span class="small">A convolutional neural network architecture to recognize faces: The learned weights of the network are the small filter patches shown below the network, which, for example, in the first step recognize edges in the image. Towards the end of the network, the feature representation is flattened into a vector and given as input to a FFNN (i.e., fully connected layers) to perform the final classification.</span></div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_general_principles_advanced_architectures">General Principles &amp; Advanced Architectures</h5>
+<div class="paragraph">
+<p>When trying to solve a problem with a NN, always consider that the network needs to understand the inputs, as well as generate the desired outputs:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/05_supervised_nn/nn_architectures4.png" alt="image" width="740">
+</div>
+<div class="title"><span class="small">As we&#8217;ve seen in the CNN used for face recognition (image classification) above, the representation generated by the CNN is at some point flattened and a FFNN then computes the final prediction for the classification task. Similarly, the final hidden state of a RNN, representing the information contained in a sentences, can be passed to a FFNN to generate a prediction (e.g., for sentiment analysis). However, some problems do not fall into the category of simple supervised learning tasks (i.e., regression or classification), and require a different output. For example, in machine translation, the output should be the sentence translated into the other language, which can be achieved by coupling two RNNs: the first &#8216;understands&#8217; the sentence in the original language and this representation of the meaning of the sentence is then passed to a second RNN, which generates from it the translated sentence word by word. Another example is the task of image captioning (i.e., generating text describing what can be seen on an image, e.g., to improve the online experience for people with visual impairment), where first the image is &#8216;understood&#8217; by a CNN and then this representation of the input image is passed to a RNN to generate the matching text.</span></div>
+</div>
+</div>
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_pitfall_4_model_discriminates.html">[Pitfall #4] Model discriminates</a> | ↑ Up: <a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_conclusion.html">Conclusion</a> →</p>
+<p>↑ Up: <a href="_deep_learning_2.html">Deep Learning</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

@@ -928,23 +928,23 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.7,</span>
-<span id="revdate">2022-11-06</span>
+<span id="revnumber">version 1.8,</span>
+<span id="revdate">2023-01-06</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <p><span class="toc-root"><a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a></span></p><ul class="sectlevel1">
 <li><a href="_einleitung.html">Einleitung</a>
-<ul class="sectlevel2">
-<li><a href="_ml_ist_überall.html">ML ist überall!</a>
 </li>
+<li><a href="_grundlagen.html">Grundlagen</a>
+<ul class="sectlevel2">
 <li><a href="_daten_sind_das_neue_öl.html">Daten sind das neue Öl!?</a>
 </li>
 <li><a href="_was_ist_ml.html">Was ist ML?</a>
 </li>
-<li><a href="_ml_geschichte_warum_jetzt.html">ML Geschichte: Warum jetzt?</a>
-</li>
 <li><a href="_wie_lernen_maschinen.html">Wie &#8220;lernen&#8221; Maschinen?</a>
+</li>
+<li><a href="_ml_anwendungsfälle.html">ML Anwendungsfälle</a>
 </li>
 <li><a href="_mit_ml_probleme_lösen.html"><span class="toc-current">Mit ML Probleme lösen</span></a>
 <ul class="sectlevel3">
@@ -960,7 +960,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </li>
 <li><a href="_datenanalyse_preprocessing.html">Datenanalyse &amp; Preprocessing</a>
 </li>
-<li><a href="_supervised_learning.html">Supervised Learning</a>
+<li><a href="_deep_learning_2.html">Deep Learning</a>
 </li>
 <li><a href="_häufige_fehler_vermeiden.html">Häufige Fehler vermeiden</a>
 </li>
@@ -972,37 +972,6 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div id="content">
 <div class="sect2">
 <h3 id="_mit_ml_probleme_lösen">Mit ML Probleme lösen</h3>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<p>Analog zu den Werkzeugen, mit denen man etwas in einem traditionellen Produktionsprozess herstellt, kann man sich <strong>ML-Algorithmen als Werkzeuge vorstellen, um Wert aus Daten zu generieren</strong>:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01b_intro_ml/ml_carpentry_analogy2.png" alt="image" width="840">
-</div>
-</div>
-<div class="paragraph">
-<p>Um ML erfolgreich anzuwenden, sollte man sich einige wichtige Fragen stellen:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong><em>Was könnte wertvoll sein?</em></strong> Dies kann beispielsweise ein neues Feature für ein existierendes Produkt sein, z.B. Face ID als neue Möglichkeit um ein Smartphone zu entsperren.</p>
-</li>
-<li>
-<p><strong><em>Welche Daten werden benötigt?</em></strong> Einen Holzstuhl kann man nicht aus Stoff und Metall oder ein paar im Wald gefundenen Zweigen herstellen. Genauso benötigt man je nachdem, was man mit ML erreichen möchte, auch die richtigen Daten in ausreichender Qualität &amp; Quantität um die Algorithmen überhaupt anwenden zu können. In vielen Anwendungsfällen ist dieser Teil besonders schwierig, da man die benötigten Daten oft nicht einfach kaufen kann, wie Holz im Baumarkt, sondern diese selbst sammeln&#8201;&#8212;&#8201;also quasi einen eigenen Wald anpflanzen muss, was einige Zeit dauern kann.</p>
-</li>
-<li>
-<p><strong><em>Welcher ML-Algorithmus ist das richtige Werkzeug für diese Aufgabe?</em></strong> (Welche Kategorie von ML-Algorithmen generiert die Art von Output, die wir benötigen?)</p>
-</li>
-<li>
-<p>Verfüge ich bzw. meine Mitarbeiter über die <strong><em>notwendigen Fähigkeiten und genügend Rechenleistung</em></strong>, um das Vorhaben erfolgreich umzusetzen?</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
 <div class="paragraph">
 <p>Das Lösen von &#8220;Input &#8594; Output&#8221;-Problemen mit ML erfordert drei Hauptschritte:</p>
 </div>
@@ -1018,120 +987,194 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Checkliste für ML-Probleme</dt>
-<dd>
+<div class="paragraph lead">
+<p>ML Projekt Checkliste</p>
+</div>
+<div class="paragraph">
+<p><span class="underline">Motivation</span></p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>Gibt es eine einfachere Lösung ohne ML?<br>
-&#8594; Verwende ML, um <em>unbekannte, komplexe</em> Regeln aus Daten zu lernen</p>
+<p><strong>Welches Problem möchtest du lösen?</strong><br>
+Machine Learning kann dir in verschiedenen Situationen helfen, z.B. indem es Erkenntnisse aus großen Mengen (möglicherweise unstrukturierter) Daten generiert, Entscheidungsfindungs- und Planungsprozesse durch Vorhersagen über zukünftige Ereignisse verbessert, oder mühsame Aufgaben automatisiert, die sonst menschliche Experten erfordern.<br>
+Wo läuft etwas ineffizient, was durch eine effektivere Nutzung von Daten verbessert werden könnte? Du könntest zum Beispiel nach Möglichkeiten suchen, verschwendete Ressourcen/Zeit/Kosten zu reduzieren oder den Umsatz/die Kundenzufriedenheit/usw. zu steigern.</p>
 </li>
 <li>
-<p>Kann das Problem mit einem <a href="_was_ist_ml.html">existierenden ML-Algorithmus</a> gelöst werden?<br>
-&#8594; Eventuell das Input-Output-Problem in Teilschritte zerlegen, für die bekannte Lösungen existieren, statt jahrelang an einem neuen Algorithmus zu forschen</p>
+<p><strong>Auf welche Art und Weise würde dies Wert für eure Organisation generieren?</strong><br>
+Wie könnte eure Organisation damit Geld verdienen oder Kosten senken?<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Könnte dies <em>einen internen Prozess verbessern</em> (z.B. könnte ein Prozess mit den Erkenntnissen aus einer Analyse effizienter gestaltet werden oder eine langwierige Aufgabe, die sonst einen menschlichen Arbeiter erfordern würde, kann mithilfe eines ML-Modells automatisiert werden)?</p>
 </li>
 <li>
-<p>Gibt es <a href="_garbage_in_garbage_out.html">genügend hochwertige Daten</a>?<br>
-&#8594; ML-Modelle brauchen die richtigen Inputs und lernen am besten aus eindeutigen Labels</p>
+<p>Könnte das ML-Modell als <em>neues Feature in ein bestehendes Produkt</em> integriert werden und dadurch z.B. dieses Produkt für Kunden attraktiver machen?</p>
 </li>
 <li>
-<p>Würde die Lösung einen <a href="_ki_transformation_eines_unternehmens.html">strategischen Vorteil</a> schaffen? <br>
-&#8594; Sollte man die Lösung selbst <span class="underline">bauen</span> oder könnte man sie auch <span class="underline">einkaufen</span>?<br>
-&#8594; Können Synergien geschaffen werden zwischen Abteilungen, die mit ähnlichen Daten arbeiten?</p>
+<p>Könnte die ML-Lösung als völlig <em>neues Produkt</em> verkauft werden, z.B. als <em>Software-as-a-Service (SaaS)-Lösung</em> angeboten werden?</p>
 </li>
 </ul>
 </div>
-</dd>
-</dl>
+<div class="paragraph">
+<p><span class="small">Bitte beachte, dass die letztendliche Verwendung der ML-Lösung auch eine strategische Entscheidung sein kann, die für jede Organisation unterschiedlich sein kann. Beispielsweise könnte eine ML-Lösung, die Kratzer auf produzierten Produkten erkennt, von einem Unternehmen verwendet werden, um ihren internen Produktionsprozess zu verbessern, während ein anderes Unternehmen, das die Maschinen herstellt, die die Produkte herstellen, dies als neues Feature in seine Maschinen integrieren könnte, und ein drittes Unternehmen bietet dies möglicherweise als SaaS-Lösung an, die mit verschiedenen Produktionslinien kompatibel ist.</span></p>
+</div>
+</li>
+<li>
+<p><strong>Wann hast du dein Ziel erreicht?</strong><br>
+Wie würde Erfolg aussehen, d.h. was ist deine Definition von &#8216;fertig&#8217;? Kannst du den Fortschritt mit einem KPI quantifizieren?<br>
+Wie ist der Status quo, d.h. wie weit bist du derzeit von deinem Ziel entfernt?</p>
+</li>
+<li>
+<p><strong>Welchen Impact hätte dieses Projekt?</strong><br>
+Überlege dir den Impact im Hinblick auf</p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>Größenordnung:</em> Kleine Verbesserung oder Revolution? Würde die Lösung einen <a href="_ki_transformation_eines_unternehmens.html">strategischen Vorteil</a> schaffen?</p>
+</li>
+<li>
+<p><em>Skalierung:</em> Wie oft wird es verwendet? Wie viele Benutzer/Kunden/Mitarbeiter werden davon profitieren?<br></p>
+<div class="paragraph">
+<p>Zum Beispiel:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Kleine Prozessoptimierung, <em>aber</em> da dieser Prozess täglich in der gesamten Organisation verwendet wird, spart dies unzählige Stunden<br></p>
+</li>
+<li>
+<p>Neue Funktion, die ein Produkt revolutioniert und euch von der Konkurrenz abhebt, <em>aber</em> der Markt dafür ist winzig</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Hätte dies irgendwelche <em>wertvollen Nebenwirkungen</em>? Was wird anders sein? Gibt es zusätzliche Möglichkeiten, die sich daraus ergeben könnten? Können Synergien geschaffen werden zwischen Abteilungen, die mit ähnlichen Daten arbeiten?</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>&#8658; <strong>Frage eine ML-Expertin</strong>, ob ein ähnliches Problem bereits mit einem bewährten Algorithmus gelöst wurde<br>
-&#8658; <strong>Frage einen Fachexperten</strong>, ob er der Meinung ist, dass alle relevanten Inputdaten verfügbar sind, um den gewünschten Output zu berechnen. Dies ist normalerweise bei unstrukturierten Daten wie Bildern leicht zu bestimmen: wenn ein Mensch das Objekt im Bild erkennen kann, sollte ML es auch können. Schwieriger wird dies bei strukturierten Daten, wie Tabellen mit hunderten von Spalten mit Sensormessungen.</p>
+<p><span class="underline">Lösungsskizze</span></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Was sind die Deliverables?</strong><br>
+Besteht die Lösung aus einer <strong>Software</strong>, die irgendwo eingesetzt wird, um kontinuierlich Vorhersagen für neue Datenpunkte zu generieren, oder interessierst du dich für die <strong>Erkenntnisse</strong>, die aus einer einmaligen Analyse gewonnen werden?</p>
+</li>
+<li>
+<p><strong>Gibt es eine einfachere Lösung ohne <a href="_was_ist_ml.html">ML</a>?</strong><br>
+Verwende ML, um <em>unbekannte, komplexe</em> Regeln aus Daten zu lernen</p>
+</li>
+<li>
+<p><strong>Kann das Problem mit einem <a href="_ml_anwendungsfälle.html">existierenden ML-Algorithmus</a> gelöst werden?</strong><br>
+Frage eine ML-Expertin, ob ein ähnliches Problem bereits mit einem bewährten Algorithmus gelöst wurde. Anstatt jahrelang zu forschen, um einen neuartigen Algorithmus zu finden, könnte man das Input-Output-Problem vielleicht auch in einfachere Teilprobleme mit bekannten Lösungen zerlegen.</p>
+</li>
+<li>
+<p><strong>Wie sehen die Input Daten aus?</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Was ist ein Datenpunkt / Beobachtung?</p>
+</li>
+<li>
+<p>Welche Art von Inputs bekommt das ML Modell (z.B. Bild / Text / Sensormessungen / etc.)?</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Wie wird im Falle einer Softwarelösung das ML-Modell in das bestehende Setup integriert?</strong><br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Von welchem System stammen die Inputs für das ML-Modell? Was passiert mit den Outputs des ML-Modells?</p>
+</li>
+<li>
+<p>Wie wird das ML-Modell deployed (z.B. Cloud oder Edge-Gerät – siehe Schritt 3 unten)? Braucht man dafür spezielle Hardware?</p>
+</li>
+<li>
+<p>Was sind die Pläne im Hinblick auf Pipelines für zukünftige Datenerfassung, Modellüberwachung und automatisiertes Nachtrainieren?</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Sollte man die Lösung selbst <span class="underline">bauen</span> oder könnte man sie auch <span class="underline">einkaufen</span>?</strong><br>
+Erfordert die Lösung spezifisches Domänenwissen, das nur in eurer Organisation verfügbar ist, z.B. weil du Daten analysierst, die von euren eigenen speziellen Prozessen/Maschinen generiert werden, und/oder wird die Lösung ein wichtiger Bestandteil eures Geschäfts sein, z.B. ein neues Feature, das euer Produkt attraktiver macht?<br>
+Oder ist dies ein allgemeines (aber komplexes) Problem, für das es bereits eine Lösung gibt (z.B. als Software-as-a-Service (SaaS)-Produkt), die ihr von der Stange kaufen könntet? Beispielsweise ist das Extrahieren der relevanten Informationen aus gescannten Rechnungen zur Automatisierung von Buchhaltungsprozessen eine relativ komplexe Aufgabe, für die es bereits viele gute Lösungen gibt. Wenn du nicht gerade in einem Unternehmen arbeitest, das Buchhaltungssoftware entwickelt, und ihr plant, eine bessere Alternative zu diesen vorhandenen Lösungen zu verkaufen, ist es wahrscheinlich nicht sinnvoll, dies selbst zu implementieren.</p>
+<div class="paragraph">
+<p>Einige allgemeine Punkte, die du bei der Entscheidung, ob du eine ML-Lösung kaufen oder selbst implementieren solltest, berücksichtigen solltest:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Wie aufwändig wäre die Vorverarbeitung eurer Daten um die eingekaufte ML-Lösung zu verwenden?</p>
+</li>
+<li>
+<p>Wie kompliziert wäre es, die Outputs der eingekauften ML-Lösung in euer System zu integrieren? Macht diese Lösung genau das, was ihr braucht, oder wären zusätzliche Nachbearbeitungsschritte erforderlich?</p>
+</li>
+<li>
+<p>Wie zuverlässig ist die eingekaufte ML-Lösung? Gibt es Benchmarks und/oder könnt ihr sie mit einigen gängigen Beispielen und Randfällen selbst testen?</p>
+</li>
+<li>
+<p>Wie schwierig wäre es, die ML-Lösung selbst zu implementieren? Welche Open-Source-Bibliotheken gibt es, die eine solche Aufgabe lösen? Verfügt eure Organisation über das nötige ML-Talent oder müsstet ihr z.B. Freelancer einstellen?</p>
+</li>
+<li>
+<p>Kann die eingekaufte ML-Lösung intern deployed werden oder läuft sie auf einem externen Server und würde dies Datenschutzprobleme mit sich bringen?</p>
+</li>
+<li>
+<p>Wie hoch sind die laufenden Lizenzgebühren und was ist in der Wartung enthalten (z.B. wie oft werden die Modelle nachtrainiert)?</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Sofern die ML-Lösung kein integraler Bestandteil eures Geschäftsmodells sein wird, wird es am Ende wahrscheinlich darauf hinauslaufen, die internen Kosten für die Entwicklung, Implementierung, den Betrieb und die Wartung des Systems mit den Kosten für die Integration der Standardlösung in euren bestehenden Arbeitsablauf (einschließlich der erforderlichen Datenvorverarbeitung) und den laufenden Lizenzgebühren zu vergleichen.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="underline">Herausforderungen &amp; Risiken</span></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Gibt es <a href="_garbage_in_garbage_out.html">genügend hochwertige Daten</a>?</strong><br>
+ML-Modelle brauchen die richtigen Inputs und lernen am besten aus eindeutigen Labels.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Wie viele Daten wurden bereits gesammelt (einschließlich seltener Ereignisse)? Sind dies die richtigen Daten oder werden z.B. zusätzliche Labels benötigt?<br>
+&#8594; Frage einen Fachexperten, ob er der Meinung ist, dass alle relevanten Inputdaten verfügbar sind, um den gewünschten Output zu generieren. Dies ist normalerweise bei unstrukturierten Daten wie Bildern leicht zu bestimmen: wenn ein Mensch das Objekt im Bild erkennen kann, sollte ML das auch können. Schwieriger wird dies bei strukturierten Daten, wie Tabellen mit hunderten von Spalten mit Sensormessungen.</p>
+</li>
+<li>
+<p>Wie schwierig ist es, Zugang zu allen Daten zu bekommen und sie an einem Ort übersichtlich zusammenzuführen? Wer könnte dabei helfen, die Dateninfrastruktur einzurichten/zu verbessern?</p>
+</li>
+<li>
+<p>Wie viel Vorverarbeitung ist notwendig (z.B. Feature Engineering, also die Berechnung neuer Variablen aus den vorhandenen Messungen)? Was könnten nächste Schritte sein, um die Datenqualität und -quantität zu verbessern?</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Was würde im schlimmsten Fall passieren, wenn das Modell falsch liegt?</strong><br>
+Das ML-System wird (wie Menschen auch) Fehler machen. Dies gilt insbesondere, da sich die Inputs wahrscheinlich im Laufe der Zeit ändern werden und die Nutzer vielleicht sogar versuchen könnten, das System absichtlich zu täuschen (z.B. entwickeln Spammer raffiniertere Nachrichten, wenn ihre ursprünglichen Nachrichten vom Spamfilter abgefangen werden).<br>
+Was wäre das Worst-Case-Szenario und wie viel Risiko bist du bereit einzugehen?<br>
+Gibt es eine Möglichkeit, das System erst zu überwachen und trotzdem einen Mehrwert zu generieren, statt vom ersten Tag an voll auf ML zu setzen?</p>
+</li>
+<li>
+<p><strong>Was könnte sonst noch schief gehen (z.B. rechtliche Fragen/ethische Bedenken)?</strong><br>
+Gibt es Bedenken in Bezug auf den Datenschutz? Wie sieht es mit der Rechenschaftspflicht aus, d.h. müssen die Entscheidungen des ML-Modells transparent sein, z.B. wenn jemandem aufgrund einer algorithmisch generierten Kreditwürdigkeit ein Kredit verweigert wird? Warum könnten die Nutzer von der Lösung frustriert sein?</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>Für weitere Informationen lies <a href="https://towardsdatascience.com/the-ultimate-guide-to-starting-ai-d506255d7ea" target="\_blank">diesen Blog Artikel</a>.</p>
-</div>
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<p><span class="underline">Wann man ML (nicht) verwenden sollte:</span></p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">ML ist übertrieben, wenn: </dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p>ein manuell definiertes Regelwerk oder ein mechanistisches (white box) Modell das Problem lösen kann. Wenn beispielsweise in unserer Keks-Fabrik das einzige Qualitätsproblem immer nur zerbrochene Kekse wären, dann würde die Regel &#8220;Keks-Gewicht muss zwischen 14-16g liegen&#8221; ausreichen, um alle fehlerhaften Kekse zuverlässig zu erkennen. Eine solche Regel ist außerdem einfacher zu implementieren, da nicht erst ein großer Datensatz gesammelt werden muss.</p>
-</li>
-</ul>
-</div>
-</dd>
-<dt class="hdlist1">ML hat großes Potenzial, wenn: </dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p>eine exakte Simulation mit einem mechanistischen Modell zu lange dauert (dieses aber verwendet werden kann, um einen qualitativ hochwertigen Datensatz zu generieren). Z.B. wurde das eingangs erwähnte AlphaFold-Modell, mit dem die 3D-Struktur eines Proteins anhand seiner Aminosäuresequenz vorhergesagt werden kann, auf den Daten trainiert, die das ursprüngliche Simulationsmodell zur Lösung dieser Aufgabe zuvor generiert hat, welches allerdings zu langsam ist, um auf eine große Anzahl von Proteinen angewendet zu werden.</p>
-</li>
-<li>
-<p>eine &#8220;einfache&#8221;, aber schwer zu erklärenden Aufgabe gelöst werden soll, die ein (geschulter) Mensch in ~1 Sekunde lösen kann, z.B. etwas auf einem Bild erkennen<br>
-&#8658; Dadurch können repetitive Aufgaben automatisiert und Expertenwissen für alle zugänglich gemacht werden, wie z.B. beim eingangs gezeigten Diagnosemodell für diabetische Retinopathie von Google.<br>
-<span class="underline">Aber:</span> Erfolg hängt von der Datenqualität &amp; -quantität ab!<br>
-&#8594; Menschen können aus wenigen Beispielen viel besser verallgemeinern. Ein Arzt kann beispielsweise eine Krankheit auch dann noch leicht erkennen, wenn die Bilder z.B. mit einer älteren Maschine aufgenommen wurden. Ein ML-Modell muss für dieses geänderte Setup u.U. neu trainiert werden, wofür wieder viele zusätzliche Daten gesammelt werden müssen.</p>
-</li>
-</ul>
-</div>
-</dd>
-<dt class="hdlist1">ML ist deine beste Chance, wenn: </dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p>Menschen von sehr komplexen, hochdimensionalen Daten überfordert sind. Z.B. fällt es einem Menschen schwer, bei einer Excel-Tabelle mit hunderten von Spalten den Durchblick zu behalten. Wir können in so einem Meer von Zahlen oft keine Muster erkennen. Im ungünstigsten Fall gibt es tatsächlich keine Zusammenhänge in den Daten, da vielleicht nicht alle relevanten Faktoren gemessen wurden, aber wenn doch, wird ML die Zusammenhänge höchstwahrscheinlich finden.</p>
-</li>
-</ul>
-</div>
-</dd>
-</dl>
-</div>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Schritte zur Identifizierung eines potenziellen ML-Projekts </dt>
-</dl>
-</div>
-<div class="openblock">
-<div class="content">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Erstelle ein Prozessdiagramm: Welche Schritte werden in einem Geschäftsprozess ausgeführt und welche Daten werden wo gesammelt (Material- &amp; Informationsfluss). Zum Beispiel in einem Produktionsprozess, bei dem einige der produzierten Teile fehlerhaft sind:</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01b_intro_ml/automate_insights7a.png" alt="image" width="700">
-</div>
-</div>
-</li>
-<li>
-<p>Identifiziere Teile des Prozesses, die entweder mit ML automatisiert werden könnten (z.B. einfache, sich wiederholende Aufgaben, die sonst von Menschen erledigt werden) oder die auf andere Weise durch eine Analyse von Daten verbessert werden könnten (z.B. um die Ursachen eines Problems zu verstehen, die Planung mit Was-wäre-wenn-Simulationen zu verbessern, oder die Ressourcennutzung zu optimieren):</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01b_intro_ml/automate_insights7b.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">Die erste Idee besteht darin, die bisher von einem Menschen durchgeführte Qualitätsprüfung zu automatisieren: Da der Mensch die Defekte in den aufgenommenen Produktbildern leicht erkennen kann, sollte ein ML-Modell dies auch schaffen. Die nächste Idee besteht darin, anhand der Zusammensetzung der Rohstoffe und der gegebenen Prozessbedingungen vor der Herstellung vorherzusagen, ob ein Produkt fehlerhaft sein wird oder nicht: Der Erfolg ist hier unklar, da eine menschliche Expertin nicht von vorne herein abschätzen kann, ob alle relevanten Informationen dafür in diesen Daten enthalten sind. Aber dennoch wäre es einen Versuch wert, da man dadurch viele Ressourcen sparen könnte. Während das endgültige ML-Modell, welches das Input-Output-Problem löst, als Software im laufenden Betrieb eingesetzt werden kann, kann ein Data Scientist zusätzlich die Ergebnisse analysieren und das Modell interpretieren und somit Erkenntnisse gewinnen und Handlungsempfehlungen aussprechen.</span></div>
-</div>
-</li>
-<li>
-<p>Priorisieren: Welches Projekt hätte eine große Wirkung und gleichzeitig gute Erfolgsaussichten, hätte also einen hohen Return on Investment (ROI)? Als Beispiel: Die Verwendung von ML zur Automatisierung einer einfachen Aufgabe ist aus technischer Sicht eine vergleichsweise risikoarme Investition, kann jedoch dazu führen, dass einige Fließbandarbeiter ihre Jobs verlieren. Andererseits könnten durch die Ermittlung der Ursachen, warum in einem Produktionsprozess 10% Ausschuss produziert werden, Millionen eingespart werden. Allerdings ist nicht vorhersehbar, ob eine solche Analyse tatsächlich nützliche Ergebnisse liefert, da die gesammelten Daten zu den Prozessbedingungen möglicherweise nicht alle erforderlichen Informationen enthalten.</p>
-</li>
-</ol>
 </div>
 </div>
 </div>
@@ -1183,7 +1226,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_wie_lernen_maschinen.html">Wie &#8220;lernen&#8221; Maschinen?</a> | ↑ Up: <a href="_einleitung.html">Einleitung</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_datenanalyse_preprocessing.html">Datenanalyse &amp; Preprocessing</a> →</p>
+<p>← Previous: <a href="_ml_anwendungsfälle.html">ML Anwendungsfälle</a> | ↑ Up: <a href="_grundlagen.html">Grundlagen</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_datenanalyse_preprocessing.html">Datenanalyse &amp; Preprocessing</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

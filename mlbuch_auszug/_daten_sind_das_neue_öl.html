@@ -928,21 +928,19 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.7,</span>
-<span id="revdate">2022-11-06</span>
+<span id="revnumber">version 1.8,</span>
+<span id="revdate">2023-01-06</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <p><span class="toc-root"><a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a></span></p><ul class="sectlevel1">
 <li><a href="_einleitung.html">Einleitung</a>
-<ul class="sectlevel2">
-<li><a href="_ml_ist_überall.html">ML ist überall!</a>
 </li>
+<li><a href="_grundlagen.html">Grundlagen</a>
+<ul class="sectlevel2">
 <li><a href="_daten_sind_das_neue_öl.html"><span class="toc-current">Daten sind das neue Öl!?</span></a>
 <ul class="sectlevel3">
-<li><a href="_daten_sind_das_neue_öl.html#_monitoring">Monitoring</a>
-</li>
-<li><a href="_daten_sind_das_neue_öl.html#_ad_hoc_analyse">Ad-hoc-Analyse</a>
+<li><a href="_daten_sind_das_neue_öl.html#_insights">Insights</a>
 </li>
 <li><a href="_daten_sind_das_neue_öl.html#_automatisierung">Automatisierung</a>
 </li>
@@ -950,9 +948,9 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </li>
 <li><a href="_was_ist_ml.html">Was ist ML?</a>
 </li>
-<li><a href="_ml_geschichte_warum_jetzt.html">ML Geschichte: Warum jetzt?</a>
-</li>
 <li><a href="_wie_lernen_maschinen.html">Wie &#8220;lernen&#8221; Maschinen?</a>
+</li>
+<li><a href="_ml_anwendungsfälle.html">ML Anwendungsfälle</a>
 </li>
 <li><a href="_mit_ml_probleme_lösen.html">Mit ML Probleme lösen</a>
 </li>
@@ -960,7 +958,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </li>
 <li><a href="_datenanalyse_preprocessing.html">Datenanalyse &amp; Preprocessing</a>
 </li>
-<li><a href="_supervised_learning.html">Supervised Learning</a>
+<li><a href="_deep_learning_2.html">Deep Learning</a>
 </li>
 <li><a href="_häufige_fehler_vermeiden.html">Häufige Fehler vermeiden</a>
 </li>
@@ -973,28 +971,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="sect2">
 <h3 id="_daten_sind_das_neue_öl">Daten sind das neue Öl!?</h3>
 <div class="paragraph">
-<p>Lass uns von vorne anfangen. Alles beginnt mit Daten.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Strukturierte vs. Unstrukturierte Daten</dt>
-<dd>
-<p>Daten können in verschiedenen Formaten vorliegen und während einige Datentypen evtl. zusätzliche Verarbeitungsschritte erfordern, können ML-Algorithmen im Prinzip mit jeder Art von Daten arbeiten.</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/02_data/data_types2.png" alt="image" width="640">
-</div>
-<div class="title"><span class="small">Die wichtigste Unterscheidung bei der Charakterisierung von Daten liegt zwischen <em>strukturierten</em> Daten, das ist jeder Datensatz, der einzelne Messgrößen/Variablen enthält, die eindeutige Größen darstellen, und <em>unstrukturierten</em> Daten, die nicht in sinnvolle Variablen unterteilt werden können. Z.B. in Bildern &#8220;erster Pixel von links&#8221; oder in Texten &#8220;10. Wort im 2. Absatz&#8221; würden wir nicht Variablen nennen, im Gegensatz zu &#8220;Fläche in Quadratmetern&#8221; oder &#8220;Anzahl Schlafzimmern&#8221;, womit man sinnvoll eine Wohnung beschreiben könnte. Strukturierte Daten sind oft <em>heterogen</em>, da die verschiedenen Variablen in einem Datensatz typischerweise für sehr unterschiedliche Dinge stehen. Wenn man beispielsweise mit Sensordaten arbeitet enthält ein Datensatz nicht nur Temperaturmessungen, sondern zusätzlich z.B. Druck und Durchflusswerte, die unterschiedliche Einheiten haben und in sehr unterschiedlichen Skalen gemessen werden können. Unstrukturierte Daten hingegen sind <em>homogen</em>, z.B. gibt es keinen qualitativen Unterschied zwischen dem 10. und dem 100. Pixel in einem Bild.</span></div>
-</div>
-</dd>
-</dl>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Wahrscheinlich hast du diese Behauptung schon einmal gehört: &#8220;Daten sind das neue Öl!&#8221;. Dies legt nahe, dass Daten wertvoll sind. Aber sind sie das?<br>
+<p>Lass uns von vorne anfangen. Alles beginnt mit Daten.
+Wahrscheinlich hast du diese Behauptung schon einmal gehört: &#8220;Daten sind das neue Öl!&#8221;. Dies legt nahe, dass Daten wertvoll sind. Aber sind sie das?<br>
 Der Grund, warum Öl als wertvoll angesehen wird, liegt darin, dass wir wichtige Anwendungsfälle dafür haben: den Antrieb unserer Autos, die Beheizung unserer Häuser und die Herstellung von Kunststoffen oder Düngemitteln.
 Genauso verhält es sich auch mit Daten: sie sind nur so wertvoll wie das was wir aus ihnen machen. Wofür können wir also Daten verwenden?</p>
 </div>
@@ -1007,7 +985,12 @@ Genauso verhält es sich auch mit Daten: sie sind nur so wertvoll wie das was wi
 </div>
 </div>
 <div class="sect3">
-<h4 id="_monitoring">Monitoring</h4>
+<h4 id="_insights">Insights</h4>
+<div class="paragraph">
+<p>Erkenntnisse können wir entweder durch kontinuierliches Monitoring (&#8220;Sind wir auf Kurs?&#8221;) oder eine gezielte Analyse (&#8220;Was läuft falsch?&#8221;) generieren.</p>
+</div>
+<div class="sect4">
+<h5 id="_monitoring">Monitoring</h5>
 <div class="paragraph">
 <p>In dem wir wichtige Variablen oder Metriken in <strong>Berichten</strong> oder <strong>Dashboards</strong> visualisieren, machen wir den Status Quo transparenter und quantifizieren wie nah wir einem bestimmten Ziel schon gekommen sind.</p>
 </div>
@@ -1054,8 +1037,8 @@ Ein KPI ist nur dann eine zuverlässige Metrik, wenn er nicht gleichzeitig dazu 
 Leider ist es oft nicht offensichtlich, welche Art von Korrekturmaßnahme uns wieder auf den richtigen Weg bringt. Oft müssen wir dafür mit einer <em>Ad-hoc-Analyse</em> tiefer in die Daten eintauchen, um die Ursache des Problems zu identifizieren.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_ad_hoc_analyse">Ad-hoc-Analyse</h4>
+<div class="sect4">
+<h5 id="_ad_hoc_analyse">Ad-hoc-Analyse</h5>
 <div class="paragraph">
 <p>Eine Ad-hoc-Datenanalyse kann uns helfen, Fragen wie diese zu beantworten:</p>
 </div>
@@ -1089,7 +1072,7 @@ Leider ist es oft nicht offensichtlich, welche Art von Korrekturmaßnahme uns wi
 </dd>
 <dt class="hdlist1">Prädiktive Analyse</dt>
 <dd>
-<p>Basierend auf historischen Daten können wir ein <strong>Vorhersagemodell</strong> generieren, das Prognosen über zukünftige Szenarien anstellt. Diese Modelle werden oft mithilfe von <em>Supervised Learning</em>, einem Teilbereich des maschinellen Lernens, erstellt.
+<p>Basierend auf historischen Daten können wir ein <strong>Vorhersagemodell</strong> generieren, das Prognosen über zukünftige Szenarien anstellt um uns bei Plannungen zu unterstützen. Diese Modelle werden oft mithilfe von <em>Supervised Learning</em>, einem Teilbereich des maschinellen Lernens, erstellt.
 <span class="underline">Beispiel:</span> <em>Verkaufsprognosen verwenden, um Lagerbestände besser zu planen.</em></p>
 </dd>
 <dt class="hdlist1">Interpretation Prädiktiver Modelle</dt>
@@ -1107,6 +1090,7 @@ Leider ist es oft nicht offensichtlich, welche Art von Korrekturmaßnahme uns wi
 </div>
 </dd>
 </dl>
+</div>
 </div>
 </div>
 </div>
@@ -1138,7 +1122,7 @@ Leider ist es oft nicht offensichtlich, welche Art von Korrekturmaßnahme uns wi
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_ml_ist_überall.html">ML ist überall!</a> | ↑ Up: <a href="_einleitung.html">Einleitung</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_was_ist_ml.html">Was ist ML?</a> →</p>
+<p>↑ Up: <a href="_grundlagen.html">Grundlagen</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_was_ist_ml.html">Was ist ML?</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

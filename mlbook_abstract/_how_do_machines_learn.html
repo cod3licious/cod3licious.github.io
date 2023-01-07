@@ -928,27 +928,27 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.7,</span>
-<span id="revdate">2022-11-06</span>
+<span id="revnumber">version 1.8,</span>
+<span id="revdate">2023-01-06</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <p><span class="toc-root"><a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a></span></p><ul class="sectlevel1">
 <li><a href="_introduction.html">Introduction</a>
-<ul class="sectlevel2">
-<li><a href="_ml_is_everywhere.html">ML is everywhere!</a>
 </li>
+<li><a href="_the_basics.html">The Basics</a>
+<ul class="sectlevel2">
 <li><a href="_data_is_the_new_oil.html">Data is the new oil!?</a>
 </li>
 <li><a href="_what_is_ml.html">What is ML?</a>
 </li>
-<li><a href="_ml_history_why_now.html">ML history: Why now?</a>
-</li>
 <li><a href="_how_do_machines_learn.html"><span class="toc-current">How do machines &#8220;learn&#8221;?</span></a>
 <ul class="sectlevel3">
-<li><a href="_how_do_machines_learn.html#_unsupervised_learning">(Un)Supervised Learning</a>
+<li><a href="_how_do_machines_learn.html#_supervised_learning">Supervised Learning</a>
 </li>
 </ul>
+</li>
+<li><a href="_ml_use_cases.html">ML use cases</a>
 </li>
 <li><a href="_solving_problems_with_ml.html">Solving problems with ML</a>
 </li>
@@ -956,7 +956,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </li>
 <li><a href="_data_analysis_preprocessing.html">Data Analysis &amp; Preprocessing</a>
 </li>
-<li><a href="_supervised_learning.html">Supervised Learning</a>
+<li><a href="_deep_learning_2.html">Deep Learning</a>
 </li>
 <li><a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a>
 </li>
@@ -991,7 +991,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Requirements for learning according to these strategies: </dt>
+<dt class="hdlist1">Data requirements for learning according to these strategies: </dt>
 </dl>
 </div>
 <div class="ulist none">
@@ -1019,11 +1019,31 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <img src="../images/01b_intro_ml/requirements_learning_reinforce.png" alt="image" width="460">
 </div>
 </div>
+<div class="paragraph">
+<p>With its reliance on a data-generating environment, reinforcement learning is a bit of a special case. Furthermore, as of now it&#8217;s still really hard to get reinforcement learning algorithms to work correctly, which means they&#8217;re currently mostly used in research and not so much for practical applications.</p>
+</div>
 </li>
 </ul>
 </div>
+<div class="sect3">
+<h4 id="_supervised_learning">Supervised Learning</h4>
 <div class="paragraph">
-<p>With its reliance on a data-generating environment, reinforcement learning is a bit of a special case. Furthermore, as of now it&#8217;s still really hard to get reinforcement learning algorithms to work correctly, which means they&#8217;re currently mostly used in research and not so much for practical applications. For this reason we&#8217;ll focus on unsupervised and supervised learning for now.</p>
+<p>Supervised learning is the most common type of machine learning used in today&#8217;s applications.<br>
+The goal here is to learn a <strong>model (= a mathematical function)</strong> \(f(x)\) that describes the relationship between some <strong>input(s)</strong> \(x\) (e.g., different process conditions like temperature, type of material, etc.) and <strong>output</strong> \(y\) (e.g., resulting product quality).<br>
+This model can then be used to <strong>make predictions for new data points</strong>, i.e., compute \(f(x') = y\) for some new \(x'\) (e.g., predict for a new set of process conditions whether the produced product will be of high quality or if the process should be stopped to not waste resources).</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Supervised Learning in a nutshell: </dt>
+<dd>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/04_supervised_intro/sl_steps5.png" alt="image" width="440">
+</div>
+<div class="title"><span class="small">Before we start, we need to be very clear on what we want, i.e., what should be predicted, how will predicting this variable help us achieve our overall goals and create value, and how do we measure success, i.e., what is the Key Performance Indicator (KPI) of our process. Then, we need to collect data&#8201;&#8212;&#8201;and since we&#8217;re using supervised learning, this needs to be <em>labeled</em> data, with the labels corresponding to the target variable that we want to predict. Next, we &#8220;learn&#8221; (or &#8220;train&#8221; or &#8220;fit&#8221;) a model on this data and finally use it to generate predictions for new data points.</span></div>
+</div>
+</dd>
+</dl>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -1050,245 +1070,14 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_unsupervised_learning">(Un)Supervised Learning</h4>
-<div class="paragraph">
-<p>Let&#8217;s start with a more detailed look at the different unsupervised &amp; supervised learning algorithms and what they are good for:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01c_ml_overview/ml_algorithms_12.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">To apply unsupervised learning algorithms, we only need a feature matrix \(X\), while learning a prediction model with supervised learning algorithms additionally requires the corresponding labels \(\mathbf{y}\). Even if our ultimate goal is to predict something (i.e., use supervised learning), it can still be helpful to first use unsupervised learning to get a better understanding of the dataset, for example, by visualizing the data with dimensionality reduction methods to see all samples and their diversity at a glance, by identifying outliers to clean the dataset, or, for classification problems, by first clustering the samples to check whether the given class labels match the naturally occurring groups in the data or if, e.g., two very similar classes could be combined to simplify the problem.</span></div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Same dataset, different use cases</dt>
-<dd>
-<p>To illustrate the usefulness of the five different types of unsupervised and supervised learning algorithms, lets apply them to this example dataset:</p>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2858%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-center valign-top">m<sup>2</sup></th>
-<th class="tableblock halign-center valign-top"># Bedr</th>
-<th class="tableblock halign-center valign-top"># Bath</th>
-<th class="tableblock halign-center valign-top">Renovated</th>
-<th class="tableblock halign-center valign-top">&#8230;&#8203;</th>
-<th class="tableblock halign-center valign-top">Price</th>
-<th class="tableblock halign-center valign-top">Sold</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock">125</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">4</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">2000</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">500k</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock">75</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">1990</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">350k</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock">150</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">6</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">2010</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">750k</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">0</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock">35</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">5</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">1999</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">620k</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">0</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock">65</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">3</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">2015</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">220k</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock">100</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">3</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">2003</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">450k</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">0</p></td>
-</tr>
-</tbody>
-</table>
-</dd>
-</dl>
-</div>
-<div class="paragraph text-justify">
-<p><span class="small">This is a small toy dataset with structured data about different apartments, which someone might have gathered from a real estate website. It includes the size of the apartment in square meters, the number of bedrooms, the number of bathrooms, the year it was last renovated, and finally the price of the listing and whether it was sold for this price (1) or not (0).</span></p>
-</div>
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Example Unsupervised Learning: Dimensionality Reduction</dt>
-<dd>
-<p><strong>Goal:</strong> Visualize the dataset</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01b_housing_example/dimred.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">The first step when working with a new dataset is usually to visualize it, to get a better overview of all the samples and their diversity. This is done with a dimensionality reduction algorithm, which takes the original high dimensional data as input, where each column (= feature) in the table is one dimension, and outputs a lower dimensional representation of the samples, i.e., a new matrix with fewer columns (usually two for a visualization). With these two new features, here called \(z_1\) and \(z_2\), we can create a scatter plot of the dataset, where each sample / row (in this case each apartment) is represented as one point in this new 2D coordinate system. We can think of this plot as a map of our dataset that enables us to view all data points at a glance. This plot often shows interesting patterns, for example, groups of similar points, which would be located close to each other in this 2D map. Please note that for most dimensionality reduction methods, it is not possible to describe what is behind this new coordinate system. Specifically, these are not just the two most informative original features, but completely new dimensions that summarize the information of the original inputs. To better interpret these plots, it is helpful to color the dots afterwards by some variable, which can then reveal the driving factors behind the most salient patterns in the dataset. In this example, we could have used the price of each apartment to color the respective dot in the map, which might then reveal that similarly priced apartments are arranged next to each other.</span></div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Example Unsupervised Learning: Anomaly Detection</dt>
-<dd>
-<p><strong>Goal:</strong> Find outliers in the dataset</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01b_housing_example/anomaly.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">Next, we can check the dataset for outliers and then subsequently correct or remove these samples. An outlier detection algorithm outputs for each sample an anomaly score, which indicates whether this data point deviates from the norm. We can use these scores to colorize the 2D map of the dataset generated in the previous step to see the anomalies in context. One drawback is that an anomaly detection algorithm does not tell us <em>why</em> it considers an individual point an outlier. A data scientist needs to examine the points identified as outlier to see, e.g., if these should be removed due to flawed measurements or if they constitute some interesting edge cases. In this example, the sample identified as an anomaly is an apartment that supposedly has a size of only 35 \(m^2\), but at the same time 5 bedrooms, i.e., most likely the person that originally entered the data made a mistake and the size of the listing should actually be 135 \(m^2\).</span></div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Example Unsupervised Learning: Clustering</dt>
-<dd>
-<p><strong>Goal:</strong> Find naturally occurring groups in the dataset</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01b_housing_example/clustering.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">We can also check if the dataset contains naturally occurring groups. This is accomplished with a clustering algorithm, which returns a cluster index for each sample, where points with the same index are in the same cluster. Please note that these cluster indices are not ordered and when running the algorithm again, the samples might be assigned different numbers, however, the groups of samples that were assigned the same number should still be in a cluster together, i.e., this cluster might now just be called &#8216;5&#8217; instead of &#8216;3&#8217;. These cluster indices can again be used to colorize the 2D map of the dataset to see the clusters in context. While a clustering algorithm groups similar points together, it does not tell us <em>why</em> the points were assigned to a cluster and what this cluster means. Therefore, the data scientist again needs to examine the results to try to describe the different clusters. In our example, the clusters might be &#8220;cheap studio apartments&#8221;, &#8220;large family apartments&#8221;, and &#8220;luxurious penthouses&#8221;. In unsupervised learning, there is no correct solution and a different algorithm might return different results. Just use the solution that is most helpful for your use case.</span></div>
-</div>
-</div>
-</div>
 <div class="sidebarblock">
 <div class="content">
 <div class="paragraph">
-<p><strong>Unsupervised learning has no ground truth</strong></p>
+<p><strong>&#8220;Learning&#8221; a model from the data</strong></p>
 </div>
 <div class="paragraph">
-<p>It is important to keep in mind that unsupervised learning problems have no right or wrong answers. Unsupervised learning algorithms simply recognize patterns in the data, which may or may not be meaningful for us humans.</p>
-</div>
-<div class="paragraph">
-<p>For example, there exist a bunch of different unsupervised learning algorithms that group data points into clusters, each with a slightly different strategy and definition of what it means for two samples to be similar enough that they can be put into the same cluster.</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01b_intro_ml/clustering_ambiguous3.png" alt="image" width="640">
-</div>
-<div class="title"><span class="small">The first instinct of a human is to group these images according to the fruit displayed on them, however, there is nothing inherently wrong with clustering the images based on a different characteristic, such as their background color, whether or not the fruit has a leaf attached, in which direction the stem is pointing, etc.</span></div>
-</div>
-<div class="paragraph">
-<p>It is up to the data scientist to examine the results of an unsupervised learning algorithm and make sense of them. And if they don&#8217;t match our expectations, we can simply try a different algorithm.</p>
-</div>
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Example Supervised Learning: Classification</dt>
-<dd>
-<p><strong>Goal:</strong> Predict a discrete value for each data point</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01b_housing_example/classification.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">Next, we can predict whether an apartment will be sold for the listed price. Since the variable &#8220;sold&#8221; only takes on the discrete values &#8216;yes&#8217; (1) or &#8216;no&#8217; (0), this is a binary classification problem. A classification model uses the attributes of an apartment together with the listing&#8217;s price as inputs and predicts whether the apartment will be sold for this price. Since we have the true labels available for the initially collected dataset, we can evaluate how well the model performed by computing the number of wrong predictions it generated. This is the nice thing about supervised learning: We can objectively determine how good a solution is and benchmark different models against each other, while in unsupervised learning the data scientist needs to manually examine the results to make sense of them.</span></div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Example Supervised Learning: Regression</dt>
-<dd>
-<p><strong>Goal:</strong> Predict a continuous value for each data point</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01b_housing_example/regression.png" alt="image" width="760">
-</div>
-<div class="title"><span class="small">Finally, we can predict a reasonable price for a listing. Since prices are continuous values, this is a regression problem, where the model uses as inputs the attributes of the apartments and predicts a suitable price. Again we have the true prices available and can compute the deviation of the regression model&#8217;s estimates from the original price set by a real estate agent.</span></div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>In supervised learning, the goal is to learn a <strong>model (= a mathematical function)</strong> \(f(x)\) that describes the relationship between some <strong>input(s)</strong> \(x\) (e.g., different process conditions like temperature, type of material, etc.) and <strong>output</strong> \(y\) (e.g., resulting product quality). This model can then be used to <strong>make predictions for new data points</strong>, i.e., compute \(f(x') = y\) for some new \(x'\) (e.g., predict for a new set of process conditions whether the produced product will be of high quality or if the process should be stopped to not waste resources).</p>
-</div>
-<div class="paragraph">
-<p>The available supervised learning algorithms differ in the <strong>type of \(x \to y\) relationship</strong> they can describe (e.g., linear or nonlinear) and what kind of <strong>objective</strong> they minimize (also called loss function; an error computed on the training data, quantifying the mismatch between true and predicted labels). The task of a data scientist is to select a type of model that can optimally fit the given data. The rest is then taken care of by an <strong>optimization method, which finds the parameters of the model that minimize the model&#8217;s objective</strong>, i.e., such that the model&#8217;s prediction error on the given data is as small as possible.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Video Recommendation: <strong>If you&#8217;re not familiar with linear regression</strong>, the most basic supervised learning algorithm, please watch the explanation from Google decision scientist Cassie Kozyrkov on how linear regression works: [<a href="https://youtu.be/j8VjRnaHRBM" target="\_blank">Part 1</a>] [<a href="https://youtu.be/VqhafjGTDI8" target="\_blank">Part 2</a>] [<a href="https://youtu.be/sxZDZVN0JAg" target="\_blank">Part 3</a>]
-</td>
-</tr>
-</table>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<div class="title"><span class="underline">How a (supervised learning) algorithm &#8220;learns&#8221; from the data:</span></div>
-<p></p>
-</div>
-<div class="paragraph">
-<p><strong>Goal:</strong> Describe the relationship between input(s) \(x\) and output \(y\) with a model, i.e., a mathematical function \(f(x)\)</p>
+<p><span class="underline">Goal:</span>
+Describe the relationship between input(s) \(x\) and output \(y\) with a model, i.e., a mathematical function \(f(x)\)</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -1313,6 +1102,21 @@ Video Recommendation: <strong>If you&#8217;re not familiar with linear regressio
 </div>
 </div>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Video Recommendation: <strong>If you&#8217;re not familiar with linear regression</strong>, the most basic supervised learning algorithm, please watch the explanation from Google decision scientist Cassie Kozyrkov on how linear regression works: [<a href="https://youtu.be/j8VjRnaHRBM" target="\_blank">Part 1</a>] [<a href="https://youtu.be/VqhafjGTDI8" target="\_blank">Part 2</a>] [<a href="https://youtu.be/sxZDZVN0JAg" target="\_blank">Part 3</a>]
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The available supervised learning algorithms differ in the <strong>type of \(x \to y\) relationship</strong> they can describe (e.g., linear or nonlinear) and what kind of <strong>objective</strong> they minimize (also called loss function; an error computed on the training data, quantifying the mismatch between true and predicted labels). The task of a data scientist is to select a type of model that can optimally fit the given data. The rest is then taken care of by an <strong>optimization method, which finds the parameters of the model that minimize the model&#8217;s objective</strong>, i.e., such that the model&#8217;s prediction error on the given data is as small as possible.</p>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -1325,10 +1129,23 @@ In most of the book, the terms &#8220;ML algorithm&#8221; and &#8220;ML model&#8
 </tr>
 </table>
 </div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>Don&#8217;t stop there!</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/04_supervised_intro/supervised_more4.png" alt="image" width="540">
+</div>
+<div class="title"><span class="small">In many use cases, it is not enough to &#8220;only&#8221; predict the target for a new data point, e.g., predict whether a product produced under certain conditions will be of high quality or not. Instead, it is often necessary to additionally be able to explain <em>why</em> this prediction was made, e.g., which input feature values were the deciding factors, both to better understand possible root causes of a problem, but also to be assured that the model is basing its predictions on reasonable assumptions. Furthermore, a learned model can also be used within an outer optimization loop, i.e., in the simplest case one could systematically check what product quality the model predicts for different process conditions and then select the settings with the highest predicted quality to produce new products. But keep in mind that ML models are only built to interpolate, not extrapolate, i.e., make sure the settings that are tested are withing the training domain.</span></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_ml_history_why_now.html">ML history: Why now?</a> | ↑ Up: <a href="_introduction.html">Introduction</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_solving_problems_with_ml.html">Solving problems with ML</a> →</p>
+<p>← Previous: <a href="_what_is_ml.html">What is ML?</a> | ↑ Up: <a href="_the_basics.html">The Basics</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_ml_use_cases.html">ML use cases</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

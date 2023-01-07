@@ -922,463 +922,75 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
-<body id="_taxonomy_of_ml_problems_solutions" class="book toc2 toc-left">
+<body id="_grundlagen" class="book toc2 toc-left">
 <div id="header">
 <h1>A Practitioner&#8217;s Guide to Machine Learning</h1>
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.7,</span>
-<span id="revdate">2022-11-06</span>
+<span id="revnumber">version 1.8,</span>
+<span id="revdate">2023-01-06</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <p><span class="toc-root"><a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a></span></p><ul class="sectlevel1">
-<li><a href="_introduction.html">Introduction</a>
+<li><a href="_einleitung.html">Einleitung</a>
 </li>
-<li><a href="_ml_with_python.html">ML with Python</a>
-</li>
-<li><a href="_data_analysis_preprocessing.html">Data Analysis &amp; Preprocessing</a>
-</li>
-<li><a href="_unsupervised_learning_2.html">Unsupervised Learning</a>
-</li>
-<li><a href="_supervised_learning_basics.html">Supervised Learning Basics</a>
-</li>
-<li><a href="_supervised_learning_models.html">Supervised Learning Models</a>
-</li>
-<li><a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a>
-</li>
-<li><a href="_advanced_topics.html">Advanced Topics</a>
-</li>
-<li><a href="_conclusion.html">Conclusion</a>
+<li><a href="_grundlagen.html"><span class="toc-current">Grundlagen</span></a>
 <ul class="sectlevel2">
-<li><a href="_ai_transformation_of_a_company.html">AI Transformation of a Company</a>
+<li><a href="_daten_sind_das_neue_öl.html">Daten sind das neue Öl!?</a>
 </li>
-<li><a href="_additional_resources.html">Additional Resources</a>
+<li><a href="_was_ist_ml.html">Was ist ML?</a>
 </li>
-<li><a href="_taxonomy_of_ml_problems_solutions.html"><span class="toc-current">Taxonomy of ML problems &amp; solutions</span></a>
+<li><a href="_wie_lernen_maschinen.html">Wie &#8220;lernen&#8221; Maschinen?</a>
+</li>
+<li><a href="_ml_anwendungsfälle.html">ML Anwendungsfälle</a>
+</li>
+<li><a href="_mit_ml_probleme_lösen.html">Mit ML Probleme lösen</a>
 </li>
 </ul>
+</li>
+<li><a href="_datenanalyse_preprocessing.html">Datenanalyse &amp; Preprocessing</a>
+</li>
+<li><a href="_deep_learning_2.html">Deep Learning</a>
+</li>
+<li><a href="_häufige_fehler_vermeiden.html">Häufige Fehler vermeiden</a>
+</li>
+<li><a href="_fazit.html">Fazit</a>
 </li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div class="sect2">
-<h3 id="_taxonomy_of_ml_problems_solutions">Taxonomy of ML problems &amp; solutions</h3>
+<div class="sect1">
+<h2 id="_grundlagen">Grundlagen</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Machine learning algorithms can solve a wide variety of problems involving different kinds of inputs data. But different problem types require different approaches and come with their own unique set of challenges (see also: <a href="https://franziskahorn.de/mlws_resources/algorithm_cheatsheet.pdf">ML algorithm categories overview table as PDF</a>).</p>
+<p>Dieses Kapitel gibt eine allgemeine Einführung in das Thema Machine Learning (ML) und zeigt auf in welchen Bereichen der Einsatz von ML sinnvoll ist und welche Probleme man lieber mit einfacheren Mitteln lösen sollte.</p>
 </div>
-<div class="paragraph">
-<p>The following is by no means an exhaustive list of all the different areas where machine learning is applied, but should cover the most important cases where ML currently adds value and why it might fail.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph lead">
-<p><strong>[Supervised Learning] automate &#8216;input &#8594; output&#8217; problems with unstructured data</strong></p>
-</div>
-<div class="ulist none">
-<div class="title"><span class="underline">Goal:</span></div>
-<ul class="none">
-<li>
-<p>Automate tedious, repetitive tasks otherwise done by humans.</p>
-</li>
-</ul>
-</div>
-<div class="ulist">
-<div class="title"><span class="underline">Examples:</span></div>
-<ul>
-<li>
-<p>text classification (e.g., identify spam / hate speech / fake news)</p>
-</li>
-<li>
-<p>sentiment analysis (subtask of text classification: identify if text is positive or negative, e.g., for product reviews)</p>
-</li>
-<li>
-<p>speech recognition (e.g., transcribe dictated notes or add subtitles to videos)</p>
-</li>
-<li>
-<p>machine translation (translate texts from one language into another)</p>
-</li>
-<li>
-<p>image classification / object recognition (e.g., identify problematic content (like child pornography) or detect street signs and pedestrians in autonomous driving)</p>
-</li>
-<li>
-<p>image captioning (generate text that describes what&#8217;s shown in an image, e.g., to improve the online experience for for people with visual impairment)</p>
-</li>
-<li>
-<p>data generation (e.g., generate new photos/images of specific objects or scenes)</p>
-</li>
-<li>
-<p>style transfer (transform a given image into another style, e.g., make photos look like van Gogh paintings)</p>
-</li>
-<li>
-<p>separate individual sources of an audio signal (e.g., unmix a song, i.e., separate vocals and instruments into individual tracks)</p>
-</li>
-</ul>
-</div>
-<div class="ulist none">
-<div class="title"><span class="underline">Approach:</span></div>
-<ul class="none">
-<li>
-<p>Usually deep learning, i.e., a task-specific neural network (NN) architecture.</p>
-</li>
-</ul>
-</div>
-<div class="ulist none">
-<div class="title"><span class="underline">Chance of success:</span></div>
-<ul class="none">
-<li>
-<p>High: Since humans can solve the task, it is at least in principle possible to generate the right output given the input.</p>
-</li>
-</ul>
-</div>
-<div class="ulist">
-<div class="title"><span class="underline">Possible challenges:</span></div>
-<ul>
-<li>
-<p>selecting a suitable neural network architecture &amp; getting it to work properly</p>
-</li>
-<li>
-<p>computational resources (don&#8217;t train a NN without a GPU!)</p>
-</li>
-<li>
-<p>data quality and quantity: need a lot of <em>consistently</em> labeled data, i.e., many training instances labeled by human annotators who have to follow the same guidelines (but can be mitigated in some cases by pre-training the network using self-supervised learning)</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph lead">
-<p><strong>[Supervised Learning] &#8216;input &#8594; output&#8217; problems previously solved with classical simulation models</strong></p>
-</div>
-<div class="ulist none">
-<div class="title"><span class="underline">Goal:</span></div>
-<ul class="none">
-<li>
-<p>Exact simulation models are often slow; to speed up the estimation for new samples, we instead predict the results with an ML model.</p>
-</li>
-</ul>
-</div>
-<div class="ulist">
-<div class="title"><span class="underline">Examples:</span></div>
-<ul>
-<li>
-<p>AlphaFold: generate 3D protein structure from amino acid sequence (to facilitate drug development)</p>
-</li>
-<li>
-<p>SchNet: predict energy and other properties of molecules given their configuration of atoms (to speed up materials research)</p>
-</li>
-</ul>
-</div>
-<div class="ulist none">
-<div class="title"><span class="underline">Approach:</span></div>
-<ul class="none">
-<li>
-<p>Usually deep learning, i.e., a task-specific neural network architecture.</p>
-</li>
-</ul>
-</div>
-<div class="ulist none">
-<div class="title"><span class="underline">Chance of success:</span></div>
-<ul class="none">
-<li>
-<p>High: Since the original simulation model can solve the task, it is at least in principle possible to generate the right output given the input. Furthermore, the original simulation model can be used to generate a sufficient amount of high quality training data.</p>
-</li>
-</ul>
-</div>
-<div class="ulist">
-<div class="title"><span class="underline">Possible challenges:</span></div>
-<ul>
-<li>
-<p>often necessary to develop a completely new type of neural network architecture specifically designed for this task and inputs / outputs, which requires a lot of ML &amp; domain knowledge, intuition, and creativity</p>
-</li>
-<li>
-<p>computational resources (don&#8217;t train a NN without a GPU!)</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph lead">
-<p><strong>[Supervised Learning] &#8216;input &#8594; output&#8217; problems with structured data</strong></p>
-</div>
-<div class="ulist none">
-<div class="title"><span class="underline">Goal:</span></div>
-<ul class="none">
-<li>
-<p>Describe (and subsequently better understand and optimize) input-output relationships in some real world process.<br>
-For example, a manufacturing process may have some Key Performance Indicators (KPIs, i.e., metrics based on which the current performance of the process can be judged), but no one truly understands how all the different process conditions, settings, and other (possibly external) factors really influence these KPIs, under which conditions the process performs better or worse, or how it could be improved.</p>
-</li>
-</ul>
-</div>
-<div class="ulist">
-<div class="title"><span class="underline">Examples:</span></div>
-<ul>
-<li>
-<p>determine the price that should be set for a new apartment listing and tell home owners what they can do to sell their house at a higher price (e.g., a freshly renovated bathroom may have a higher influence on what potential buyers are willing to pay than a new coat of paint on the outside)</p>
-</li>
-<li>
-<p>predict in advance whether a product produced under the proposed process conditions will be of high quality or would be a waste of resources</p>
-</li>
-<li>
-<p>identify which process conditions have the most influence on the quality of the product and which settings generally lead to the best results</p>
-</li>
-<li>
-<p>given some external conditions (e.g., outside temperature, composition of raw input materials from a new vendor), automatically determine the best process settings to produce high quality products</p>
-</li>
-</ul>
-</div>
-<div class="ulist none">
-<div class="title"><span class="underline">Approach:</span></div>
-<ul class="none">
-<li>
-<p>Traditional statistical or ML regression or classification models that describe the functional relationship between inputs and outputs, e.g., linear models, decision trees / random forests, kernel methods, or (feed forward) neural networks, as well as possibly additional methods for optimization (classical or reinforcement learning (RL)).<br>
-<span class="underline">Steps:</span></p>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>[Optional] Create a dashboard where the KPI(s) can be monitored.</p>
-</li>
-<li>
-<p>Build a model that reliably captures the input-output relationship between the process variables and KPIs.</p>
-</li>
-<li>
-<p>Interpret the model to identify root causes, i.e., determine which inputs have the most influence on the KPIs and investigate how they are related.</p>
-</li>
-<li>
-<p>Use the model in a what-if forecast to facilitate planning.</p>
-</li>
-<li>
-<p>Use the model in an outer control loop to automatically find optimal inputs (either with classical optimization techniques or RL for longer time horizons).</p>
-</li>
-</ol>
-</div>
-</li>
-</ul>
-</div>
-<div class="ulist none">
-<div class="title"><span class="underline">Chance of success:</span></div>
-<ul class="none">
-<li>
-<p>Uncertain: while it is fairly straightforward to apply the models, it is difficult to determine in advance whether there even exists any relation between the measured inputs and KPIs (&#8594; beware of garbage in, garbage out! Also: <a href="_model_abuses_spurious_correlations.html">correlation does not imply causation</a>!).</p>
-</li>
-</ul>
-</div>
-<div class="ulist">
-<div class="title"><span class="underline">Possible challenges:</span></div>
-<ul>
-<li>
-<p>appropriate definition of the output/target/KPI that should be modeled, i.e., what does it actually mean for a process to run well and how might external factors influence this definition (e.g., can we expect the same performance on an exceptionally hot summer day?)</p>
-</li>
-<li>
-<p>missing important input variables, e.g., if there exist other influencing factors that we haven&#8217;t considered or couldn&#8217;t measure, which means not all of the target variable&#8217;s variance can be explained</p>
-</li>
-<li>
-<p>lots of possibly irrelevant input variables that require careful feature selection to avoid <a href="https://www.tylervigen.com/spurious-correlations" target="\_blank">spurious correlations</a>, which would result in incorrect &#8216;what-if&#8217; forecasts since the true causal relationship between the inputs and outputs isn&#8217;t captured</p>
-</li>
-<li>
-<p>often very time intensive data preprocessing necessary, e.g., when combining data from different sources and engineering additional features</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph lead">
-<p><strong>[Information Retrieval / Recommender Systems] improve search results / personalized suggestions</strong></p>
-</div>
-<div class="ulist">
-<div class="title"><span class="underline">Goal/Examples/Approach:</span></div>
-<ul>
-<li>
-<p><strong>information retrieval</strong> / similarity search (with a single type of data): given a query, rank results, e.g.,</p>
 <div class="ulist">
 <ul>
 <li>
-<p>return matching documents / websites given a search query</p>
+<p><a href="_daten_sind_das_neue_öl.html">Daten sind das neue Öl!?</a></p>
 </li>
 <li>
-<p>show similar movies given the movie a user is currently looking at (e.g., same genre, director, etc.)</p>
+<p><a href="_was_ist_ml.html">Was ist ML?</a></p>
+</li>
+<li>
+<p><a href="_wie_lernen_maschinen.html">Wie &#8220;lernen&#8221; Maschinen?</a></p>
+</li>
+<li>
+<p><a href="_ml_anwendungsfälle.html">ML Anwendungsfälle</a></p>
+</li>
+<li>
+<p><a href="_mit_ml_probleme_lösen.html">Mit ML Probleme lösen</a></p>
 </li>
 </ul>
-</div>
-</li>
-<li>
-<p><strong>recommender systems</strong> (on pairwise data): given a sample from one type of data (e.g., user, protein structure), identify the most relevant samples from another type of data (e.g., movie, drug composition), e.g.,</p>
-<div class="ulist">
-<ul>
-<li>
-<p>show a user movies that other users with a similar taste also liked</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="ulist none">
-<div class="title"><span class="underline">Chance of success:</span></div>
-<ul class="none">
-<li>
-<p>Worth a try: usually these suggestions are better than not showing anything.</p>
-</li>
-</ul>
-</div>
-<div class="ulist">
-<div class="title"><span class="underline">Possible challenges:</span></div>
-<ul>
-<li>
-<p>little / incomplete data: different users might like the same item for different reasons and it is unclear whether, e.g., a user didn&#8217;t watch a movie because he&#8217;s not interested in it or because he just didn&#8217;t notice it yet</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph lead">
-<p><strong>[Unsupervised Learning] data preprocessing to improve performance in the following analysis steps</strong></p>
-</div>
-<div class="ulist none">
-<div class="title"><span class="underline">Goal/Examples/Approach:</span></div>
-<ul class="none">
-<li>
-<p><strong>dimensionality reduction</strong> (e.g., with (Kernel) PCA): noise reduction / feature engineering</p>
-</li>
-<li>
-<p><strong>outlier detection</strong> (e.g., with \(\gamma\)-index, Isolation Forest, or One-Class SVM): clean up the data, e.g., by removing samples with wrongly entered values</p>
-</li>
-</ul>
-</div>
-<div class="ulist none">
-<div class="title"><span class="underline">Chance of success:</span></div>
-<ul class="none">
-<li>
-<p>Worth a try: whether these measures help or not depends on the dataset as well as the algorithms applied to the preprocessed data afterwards, but investing time in data cleaning is usually well spent.</p>
-</li>
-</ul>
-</div>
-<div class="ulist">
-<div class="title"><span class="underline">Possible challenges:</span></div>
-<ul>
-<li>
-<p>transforming the data with (Kernel) PCA constructs new features as a (non)linear combination of the original features, which decreases the interpretability of the analysis results</p>
-</li>
-<li>
-<p>you should always have a good reason for throwing away data points&#8201;&#8212;&#8201;outliers are seldom random, sometimes they reveal interesting edge cases that should not be ignored</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph lead">
-<p><strong>[Unsupervised Learning] identify patterns: samples that can be grouped together or that don&#8217;t belong</strong></p>
-</div>
-<div class="ulist none">
-<div class="title"><span class="underline">Goal/Examples/Approach:</span></div>
-<ul class="none">
-<li>
-<p><strong>dimensionality reduction</strong> (e.g., with t-SNE): create a 2D visualization to explore the dataset as a whole, where we can often already see some clusters or outliers</p>
-</li>
-<li>
-<p><strong>clustering</strong> (e.g., with <em>k</em>-means or DBSCAN): identify groups of related data points, e.g., customer segmentation for targeted marketing campaign</p>
-</li>
-<li>
-<p><strong>anomaly detection</strong> (e.g., with \(\gamma\)-index, Isolation Forest, or One-Class SVM): identify fraudulent transaction in e-commerce; monitor a machine to see when something out of the ordinary happens</p>
-</li>
-</ul>
-</div>
-<div class="ulist none">
-<div class="title"><span class="underline">Chance of success:</span></div>
-<ul class="none">
-<li>
-<p>Worth a try: the algorithms will always find something, but whether this is useful (i.e., what the identified patterns mean) can only be determined by a human in a post-processing step.</p>
-</li>
-</ul>
-</div>
-<div class="ulist">
-<div class="title"><span class="underline">Possible challenges:</span></div>
-<ul>
-<li>
-<p>no ground truth: difficult to choose between different models and hyperparameter settings</p>
-</li>
-<li>
-<p>many of the algorithms rely on similarities or distances between data points, and it can be difficult to define an appropriate measure for this or know in advance which features should be compared (e.g., what makes two customers similar?)</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph lead">
-<p><strong>[Reinforcement Learning] optimize sequences of actions in changing environments</strong></p>
-</div>
-<div class="ulist none">
-<div class="title"><span class="underline">Goal:</span></div>
-<ul class="none">
-<li>
-<p>Determine an optimal sequence of actions given changing environmental conditions.<br>
-Unlike in regular optimization, where the optimal inputs given a single specific external condition are determined, here an &#8220;agent&#8221; (= the RL algorithm) tries to learn an optimal <em>sequence</em> of inputs to maximize the cumulative reward received over multiple time steps, where there can be a significant time delay between the inputs and the rewards that they generate (e.g., in a video game we might need to pick up a key in the beginning of a level, but the door that can be opened with it only comes several frames later).</p>
-</li>
-</ul>
-</div>
-<div class="ulist">
-<div class="title"><span class="underline">Examples:</span></div>
-<ul>
-<li>
-<p>virtual agent playing a (video) game</p>
-</li>
-<li>
-<p>robot with complex movement patterns, e.g., picking up differently shaped objects from a box</p>
-</li>
-</ul>
-</div>
-<div class="ulist none">
-<div class="title"><span class="underline">Approach:</span></div>
-<ul class="none">
-<li>
-<p>Lots of options, many nowadays based on neural networks (e.g., AlphaGo / MuZero).</p>
-</li>
-</ul>
-</div>
-<div class="ulist none">
-<div class="title"><span class="underline">Chance of success:</span></div>
-<ul class="none">
-<li>
-<p>Depends on the task; works well in many video games, since here the true environment is itself a simulation and the rewards are clearly defined (see challenges).</p>
-</li>
-</ul>
-</div>
-<div class="ulist">
-<div class="title"><span class="underline">Possible challenges:</span></div>
-<ul>
-<li>
-<p>usually requires a simulation environment for the agent to learn in before it starts acting in the real world, but developing an accurate simulation model isn&#8217;t easy and the agent will exploit any bugs if that results in higher rewards</p>
-</li>
-<li>
-<p>can be tricky to define a clear reward function that should be optimized (imitation learning is often a better option, where the agent instead tries to mimic the decisions made by a human in some situation)</p>
-</li>
-<li>
-<p>difficult to learn correct associations when there are long delays between critical actions and the received rewards</p>
-</li>
-<li>
-<p>agent generates its own data: if it starts off with a bad policy, it will be tricky to escape from this (e.g., in a video game, if the agent always falls down a gap instead of jumping over it, it never sees the rewards that await on the other side and therefore can&#8217;t learn that it would be beneficial to jump over the gap)</p>
-</li>
-</ul>
-</div>
 </div>
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_additional_resources.html">Additional Resources</a> | ↑ Up: <a href="_conclusion.html">Conclusion</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a></p>
+<p>← Previous: <a href="_ml_geschichte_warum_jetzt.html">ML Geschichte: Warum jetzt?</a> | ↑ Up: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_daten_sind_das_neue_öl.html">Daten sind das neue Öl!?</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

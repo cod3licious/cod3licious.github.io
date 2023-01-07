@@ -922,79 +922,165 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
-<body id="_unsupervised_learning_2" class="book toc2 toc-left">
+<body id="_neuronale_netze" class="book toc2 toc-left">
 <div id="header">
 <h1>A Practitioner&#8217;s Guide to Machine Learning</h1>
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.7,</span>
-<span id="revdate">2022-11-06</span>
+<span id="revnumber">version 1.8,</span>
+<span id="revdate">2023-01-06</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <p><span class="toc-root"><a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a></span></p><ul class="sectlevel1">
-<li><a href="_introduction.html">Introduction</a>
+<li><a href="_einleitung.html">Einleitung</a>
 </li>
-<li><a href="_ml_with_python.html">ML with Python</a>
+<li><a href="_grundlagen.html">Grundlagen</a>
 </li>
-<li><a href="_data_analysis_preprocessing.html">Data Analysis &amp; Preprocessing</a>
+<li><a href="_datenanalyse_preprocessing.html">Datenanalyse &amp; Preprocessing</a>
 </li>
-<li><a href="_unsupervised_learning_2.html"><span class="toc-current">Unsupervised Learning</span></a>
+<li><a href="_deep_learning_2.html">Deep Learning</a>
 <ul class="sectlevel2">
-<li><a href="_dimensionality_reduction.html">Dimensionality Reduction</a>
-</li>
-<li><a href="_outlier_anomaly_detection.html">Outlier / Anomaly Detection</a>
-</li>
-<li><a href="_clustering.html">Clustering</a>
+<li><a href="_neuronale_netze.html"><span class="toc-current">Neuronale Netze</span></a>
+<ul class="sectlevel3">
+<li><a href="_neuronale_netze.html#_nn_architekturen">NN Architekturen</a>
 </li>
 </ul>
 </li>
-<li><a href="_supervised_learning_basics.html">Supervised Learning Basics</a>
+</ul>
 </li>
-<li><a href="_supervised_learning_models.html">Supervised Learning Models</a>
+<li><a href="_häufige_fehler_vermeiden.html">Häufige Fehler vermeiden</a>
 </li>
-<li><a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a>
-</li>
-<li><a href="_advanced_topics.html">Advanced Topics</a>
-</li>
-<li><a href="_conclusion.html">Conclusion</a>
+<li><a href="_fazit.html">Fazit</a>
 </li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="_unsupervised_learning_2">Unsupervised Learning</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_neuronale_netze">Neuronale Netze</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Intuitive Erklärung Neuronaler Netze</dt>
+<dd>
+<p><span class="small">[Adaptiert von: &#8220;AI for everyone&#8221; von Andrew Ng (coursera.org)]</span></p>
 <div class="paragraph">
-<p>The first algorithms we look at in more detail are from the area of unsupervised learning:</p>
+<p>Angenommen, wir haben einen Online-Shop und versuchen vorherzusagen, wie viel wir von einem Produkt im nächsten Monat verkaufen werden. Der Preis, zu dem wir bereit sind, das Produkt anzubieten, beeinflusst offensichtlich die Nachfrage, da die Leute versuchen, ein gutes Geschäft zu machen, d.h. je niedriger der Preis, desto höher die Nachfrage. Es handelt sich um eine negative Korrelation, die durch ein lineares Modell beschrieben werden kann. Die Nachfrage ist jedoch nie kleiner als Null (d.h. wenn der Preis sehr hoch ist, werden die Kunden das Produkt nicht plötzlich zurückgeben), also müssen wir das Modell so anpassen, dass der vorhergesagte Output nie negativ ist. Dies erreichen wir durch eine Max-Funktion (in diesem Zusammenhang auch nichtlineare Aktivierungsfunktion genannt), die auf das Ergebnis des linearen Modells angewendet wird, sodass wenn das lineare Modell einen negativen Wert berechnet stattdessen 0 vorhergesagt wird.</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="../images/01c_ml_overview/ml_algorithms_unsupervised.png" alt="image" width="840">
+<img src="../images/05_supervised_nn/neural_network_intuitive_a4.png" alt="image" width="440">
 </div>
+<div class="title"><span class="small">Ein sehr einfaches lineares Modell mit einer Input und einer Output Variablen und einer nichtlinearen Aktivierungsfunktion (der Max-Funktion).</span></div>
 </div>
 <div class="paragraph">
-<p>While the subfields of unsupervised learning all include lots of different algorithms that can be used for the respective purpose, we&#8217;ll always just examine a few example algorithms with different underlying ideas in more detail. But feel free to, e.g., have a look at the <a href="https://scikit-learn.org/stable/unsupervised_learning.html" target="\_blank">sklearn user guide</a> for more information about other methods.</p>
+<p>Diese funktionale Beziehung kann auch als Kreis mit einem Input <em>(Preis)</em> und einem Output <em>(Nachfrage)</em> visualisiert werden, wobei die S-Kurve im Kreis anzeigt, dass auf das Ergebnis eine nichtlineare Aktivierungsfunktion angewendet wird. Wir werden dieses Symbol später als einzelne Einheit oder &#8220;Neuron&#8221; eines neuronalen Netzes (NN) sehen.</p>
 </div>
-<div class="ulist">
-<ul>
+<div class="paragraph">
+<p>Um die Vorhersage zu verbessern, können wir das Modell erweitern und mehrere Input Features für die Vorhersage verwenden:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/05_supervised_nn/neural_network_intuitive_b2.png" alt="image" width="540">
+</div>
+<div class="title"><span class="small">Ein einfaches lineares Modell mit mehreren Inputs, bei dem die Vorhersage als gewichtete Summe der Inputs berechnet wird, zusammen mit der Max-Funktion um negative Werte zu vermeiden.</span></div>
+</div>
+<div class="paragraph">
+<p>Um die Performance des Modells noch weiter zu verbessern, können wir aus den ursprünglichen Inputs manuell informativere Features generieren, indem wir sie sinnvoll kombinieren (&#8594; Feature Engineering), bevor wir den Output berechnen:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/05_supervised_nn/neural_network_intuitive_b6.png" alt="image" width="540">
+</div>
+<div class="title"><span class="small">In diesem Beispiel geht es um einen Online-Shop und die Kunden müssen Versandkosten bezahlen, d.h. die tatsächliche Erschwinglichkeit des Produkts ergibt sich aus der Summe des Produktpreises und den Versandkosten. Außerdem interessieren sich die Kunden für qualitativ hochwertige Produkte, doch die Produktwahrnehmung ergibt sich nicht nur aus der tatsächlichen Rohstoffqualität. Dass unser Produkt hochwertiger ist als andere wird auch durch eine entsprechende Marketingkampagne und einen hohen Preis vermittelt. Durch die Berechnung dieser zusätzlichen Zwischenfeatures kann der Preis somit in zweierlei Hinsicht zur endgültigen Vorhersage beitragen: Während einerseits ein niedrigerer Preis für die Erschwinglichkeit des Produkts von Vorteil ist, führt andererseits ein höherer Preis zu der Wahrnehmung einer höheren Qualität.</span></div>
+</div>
+<div class="paragraph">
+<p>Während es in diesem Anschauungsbeispiel möglich war, solche Features manuell zu konstruieren, ist das Vorteilhafte an neuronalen Netzen, dass sie genau das automatisch tun: Indem wir mehrere Zwischenschichten (Layers) verwenden, d.h. mehrere lineare Modelle (mit nichtlinearen Aktivierungsfunktionen) verbinden, werden immer komplexere Kombinationen der ursprünglichen Input Features generiert, die die Performance des Modells verbessern können. Je mehr Layers das Netzwerk verwendet, d.h. je &#8220;tiefer&#8221; es ist, desto komplexer sind die resultierenden Feature Repräsentationen.</p>
+</div>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Da verschiedene Problemstellungen und insbesondere verschiedene Arten von Input Daten von unterschiedlichen Feature Repräsentationen profitieren, gibt es verschiedene Arten neuronaler Netzarchitekturen, um diese aussagekräftigeren Zwischenfeatures zu berechnen, z.B.</p>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="ulist none">
+<ul class="none">
 <li>
-<p><a href="_dimensionality_reduction.html">Dimensionality Reduction</a></p>
+<p>&#8594; Feed Forward Neural Networks (FFNNs) für &#8216;normale&#8217; (z.B. strukturierte) Daten</p>
 </li>
 <li>
-<p><a href="_outlier_anomaly_detection.html">Outlier / Anomaly Detection</a></p>
+<p>&#8594; Convolutional Neural Networks (CNNs) für Bilder</p>
 </li>
 <li>
-<p><a href="_clustering.html">Clustering</a></p>
+<p>&#8594; Recurrent Neural Networks (RNNs) für sequenzielle Daten wie Text oder Zeitreihen</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_nn_architekturen">NN Architekturen</h4>
+<div class="paragraph">
+<p>Ähnlich wie domänenspezifisches Feature Engineering zu erheblich verbesserten Modellvorhersagen beitragen kann, lohnt es sich gleichermaßen, eine auf die jeweilige Aufgabe zugeschnittene neuronale Netzwerkarchitektur zu konstruieren.</p>
+</div>
+<div class="sect4">
+<h5 id="_feed_forward_neural_network_ffnn">Feed Forward Neural Network (FFNN)</h5>
+<div class="paragraph">
+<p>Das FFNN ist die ursprüngliche und einfachste neuronale Netzwerkarchitektur, die auch im ersten Beispiel verwendet wurde. Allerdings bestehen diese Modelle in der Praxis normalerweise aus mehr Layers und Neuronen pro Layer:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/05_supervised_nn/neural_network.png" alt="image" width="840">
+</div>
+<div class="title"><span class="small">Feed Forward Neural Network (FFNN) Architektur: Der Input-Feature-Vektor \(\mathbf{x}\), der einen Datenpunkt darstellt, wird mit der ersten Gewichtungsmatrix \(W_1\) multipliziert, um einen neuen Vektor zu erzeugen, der nach Anwendung der nichtlinearen Aktivierungsfunktion (z.B. der Max-Funktion wie im ersten Beispiel) zur ersten Hidden-Layer-Repräsentation \(\mathbf{x}'\) wird. Dieser neue Vektor wird dann mit der zweiten Gewichtungsmatrix \(W_2\) multipliziert und wieder wird eine nichtlineare Aktivierungsfunktion angewandt, um die zweite Hidden-Layer-Repräsentation des Datenpunkts, \(\mathbf{x}''\), zu erzeugen. Je nachdem, wie viele Schichten das Netzwerk hat (d.h. wie tief es ist), wiederholt sich dies nun mehrmals, bis schließlich die letzte Schicht den vorhergesagten Output \(\mathbf{\hat{y}}\) berechnet. Während das Netzwerk trainiert wird, nähern sich diese vorhergesagten Outputs immer mehr den wahren Labels der Trainingsdaten an in dem die Gewichtsmatrizen entsprechend angepasst werden.</span></div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Du kannst <a href="https://playground.tensorflow.org/" target="\_blank">hier</a> auch selbst mit einem kleinen neuronalen Netz herumspielen um z.B. zu schauen wie es sich verhält wenn du mehr Neuronen oder Layers verwendest.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_convolutional_neural_network_cnn">Convolutional Neural Network (CNN)</h5>
+<div class="paragraph">
+<p>Manuelles Feature Engineering für Computer Vision Aufgaben ist sehr schwierig. Während der Mensch mühelos eine Vielzahl von Objekten in Bildern erkennt, ist es schwer zu beschreiben, <em>warum</em> wir erkennen was wir sehen, z.B. anhand welcher Merkmale wir eine Katze von einem kleinen Hund unterscheiden. Das Deep Learning hatte seinen ersten bahnbrechenden Erfolg auf diesem Gebiet, da neuronale Netze, insbesondere CNNs, es durch eine Hierarchie von Layern schaffen, sinnvolle Feature Repräsentationen aus visuellen Informationen zu lernen.</p>
+</div>
+<div class="paragraph">
+<p>Convolutional Neural Networks eignen sich sehr gut für die Verarbeitung visueller Informationen, da sie direkt mit 2D-Bildern arbeiten können und die Tatsache nutzen, dass Bilder viele lokale Informationen beinhalten (z.B. sind Augen, Nase und Mund lokalisierte Komponenten eines Gesichts).</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/05_supervised_nn/cnn.png" alt="image" width="840">
+</div>
+<div class="title"><span class="small">Eine convolutional neuronale Netzarchitektur zur Gesichtserkennung: Die gelernten Gewichte des Netzes sind die unterhalb des Netzes angezeigten kleinen Filterpatches, die beispielsweise im ersten Schritt Kanten im Bild erkennen. Gegen Ende des Netzwerks werden die Feature Repräsentation zu einem Vektor zusammengefasst und als Input an ein FFNN (hier &#8220;Fully Connected Layer&#8221;) gegeben, um die endgültige Klassifizierung durchzuführen.</span></div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_allgemeine_prinzipien_fortgeschrittene_architekturen">Allgemeine Prinzipien &amp; fortgeschrittene Architekturen</h5>
+<div class="paragraph">
+<p>Bei der Lösung eines Problems mit einem NN muss man immer berücksichtigen, dass das Netzwerk sowohl die Input Daten verstehen als auch die gewünschten Ausgaben generieren muss:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/05_supervised_nn/nn_architectures4.png" alt="image" width="740">
+</div>
+<div class="title"><span class="small">Wie wir oben beim CNN für Gesichtserkennung (Bildklassifizierung) gesehen haben, wird die vom CNN generierte Repräsentation irgendwann zusammengeführt und ein FFNN berechnet daraus die endgültige Vorhersage für die Klassifikation. Genauso kann auch der letzte Hidden State eines RNN, der die in einem Satz enthaltenen Informationen repräsentiert, an ein FFNN übergeben werden, um die finale Klassifikation zu generieren (z.B. für eine Sentimentanalyse). Einige Probleme fallen jedoch nicht in die Kategorie einfacher Supervised Learning Aufgaben (also Regression oder Klassifikation) und erfordern eine andere Art von Output. Bei der maschinellen Übersetzung ist der Output beispielsweise ein in eine andere Sprache übersetzter Satz. Dies kann durch die Kopplung zweier RNNs erreicht werden: Das erste &#8216;versteht&#8217; den Satz in der Originalsprache und diese Repräsentation der Bedeutung des Satzes wird an ein zweites RNN übergeben, das daraus Wort für Wort den übersetzten Satz generiert. Ein weiteres Beispiel ist Image Captioning (d.h. das Generieren einer Bildbeschreibung, z.B. um das Online-Erlebnis für Menschen mit Sehbehinderung zu verbessern), wobei das Bild zuerst von einem CNN &#8216;verstanden&#8217; wird und dann diese Repräsentation des Eingabebildes an ein RNN übergeben wird, um den passenden Text zu erzeugen.</span></div>
+</div>
+</div>
+</div>
+</div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_data_preprocessing.html">Data Preprocessing</a> | ↑ Up: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_dimensionality_reduction.html">Dimensionality Reduction</a> →</p>
+<p>↑ Up: <a href="_deep_learning_2.html">Deep Learning</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_häufige_fehler_vermeiden.html">Häufige Fehler vermeiden</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

@@ -928,19 +928,21 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.7,</span>
-<span id="revdate">2022-11-06</span>
+<span id="revnumber">version 1.8,</span>
+<span id="revdate">2023-01-06</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <p><span class="toc-root"><a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a></span></p><ul class="sectlevel1">
 <li><a href="_introduction.html">Introduction</a>
 </li>
+<li><a href="_the_basics.html">The Basics</a>
+</li>
 <li><a href="_ml_with_python.html">ML with Python</a>
 </li>
 <li><a href="_data_analysis_preprocessing.html">Data Analysis &amp; Preprocessing</a>
 </li>
-<li><a href="_unsupervised_learning_2.html">Unsupervised Learning</a>
+<li><a href="_unsupervised_learning.html">Unsupervised Learning</a>
 </li>
 <li><a href="_supervised_learning_basics.html"><span class="toc-current">Supervised Learning Basics</span></a>
 <ul class="sectlevel2">
@@ -975,38 +977,16 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Supervised learning in a nutshell</dt>
+<dt class="hdlist1">Supervised learning in a nutshell (with scikit-learn): </dt>
 <dd>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/04_supervised_intro/sl_steps5.png" alt="image" width="440">
-</div>
-<div class="title"><span class="small">Before we start, we need to be very clear on what we want, i.e., what should be predicted, how will predicting this variable help us achieve our overall goals and create value, and how do we measure success, i.e., what is the Key Performance Indicator (KPI) of our process. Then, we need to collect data&#8201;&#8212;&#8201;and since we&#8217;re using supervised learning, this needs to be <em>labeled</em> data, with the labels corresponding to the target variable that we want to predict. Next, we &#8220;learn&#8221; (or &#8220;train&#8221; or &#8220;fit&#8221;) a model on this data and finally use it to generate predictions for new data points.</span></div>
-</div>
-</dd>
-</dl>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<p>Don&#8217;t stop there!</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/04_supervised_intro/supervised_more4.png" alt="image" width="540">
-</div>
-<div class="title"><span class="small">In many use cases, it is not enough to &#8220;only&#8221; predict the target for a new data point, e.g., predict whether a product produced under certain conditions will be of high quality or not. Instead, it is often necessary to additionally be able to explain <em>why</em> this prediction was made, e.g., which input feature values were the deciding factors, both to better understand possible root causes of a problem, but also to be assured that the model is basing its predictions on reasonable assumptions. Furthermore, a learned model can also be used within an outer optimization loop, i.e., in the simplest case one could systematically check what product quality the model predicts for different process conditions and then select the settings with the highest predicted quality to produce new products. But keep in mind that ML models are only built to interpolate, not extrapolate, i.e., make sure the settings that are tested are withing the training domain.</span></div>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Supervised learning in a nutshell – more formally, with scikit-learn:</p>
-</div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="../images/04_supervised_intro/supervised_learning_14.png" alt="image" width="840">
 </div>
 <div class="title"><span class="small">First, the available data needs to be split into a training and test part, where we&#8217;re assigning the majority of the data points to the training set and the rest to the test set. (Please note that, as an exception, in this graphic, \(X\) and \(\mathbf{y}\) are rotated by 90 degrees, i.e., the features are in the rows and the data points are in the columns.) Next, we need to decide on the type of model that we want to use to describe the relationship between the inputs \(X\) and the outputs \(\mathbf{y}\) and this model also comes with some hyperparameters that we need to set (which are passed as arguments when instantiating the respective sklearn class). Then we can call the <code>.fit(X_train, y_train)</code> method on the model to learn the internal model parameters by minimizing some model-specific objective function on the training data. Now the model is ready to generate predictions for new data points, i.e., by calling <code>.predict(X_test)</code>, we obtain the predicted values \(\mathbf{\hat{y}}\) for the test points. Finally, to get an estimate of how useful the model will be in practice, we evaluate it by comparing the predicted target values of the test set to the corresponding true labels.</span></div>
+</div>
+</dd>
+</dl>
 </div>
 <div class="paragraph">
 <p>In the following sections, we introduce the different approaches to supervised learning and explain when to use which kind of model, then discuss how to evaluate and select the hyperparameters of a supervised learning model.</p>
@@ -1024,7 +1004,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_clustering.html">Clustering</a> | ↑ Up: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_different_types_of_models.html">Different types of models</a> →</p>
+<p>← Previous: <a href="_clustering_2.html">Clustering</a> | ↑ Up: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_different_types_of_models.html">Different types of models</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

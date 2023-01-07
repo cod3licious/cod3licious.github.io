@@ -928,21 +928,19 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.7,</span>
-<span id="revdate">2022-11-06</span>
+<span id="revnumber">version 1.8,</span>
+<span id="revdate">2023-01-06</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <p><span class="toc-root"><a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a></span></p><ul class="sectlevel1">
 <li><a href="_introduction.html">Introduction</a>
-<ul class="sectlevel2">
-<li><a href="_ml_is_everywhere.html">ML is everywhere!</a>
 </li>
+<li><a href="_the_basics.html">The Basics</a>
+<ul class="sectlevel2">
 <li><a href="_data_is_the_new_oil.html"><span class="toc-current">Data is the new oil!?</span></a>
 <ul class="sectlevel3">
-<li><a href="_data_is_the_new_oil.html#_monitoring">Monitoring</a>
-</li>
-<li><a href="_data_is_the_new_oil.html#_ad_hoc_analysis">Ad Hoc Analysis</a>
+<li><a href="_data_is_the_new_oil.html#_insights">Insights</a>
 </li>
 <li><a href="_data_is_the_new_oil.html#_automation">Automation</a>
 </li>
@@ -950,9 +948,9 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </li>
 <li><a href="_what_is_ml.html">What is ML?</a>
 </li>
-<li><a href="_ml_history_why_now.html">ML history: Why now?</a>
-</li>
 <li><a href="_how_do_machines_learn.html">How do machines &#8220;learn&#8221;?</a>
+</li>
+<li><a href="_ml_use_cases.html">ML use cases</a>
 </li>
 <li><a href="_solving_problems_with_ml.html">Solving problems with ML</a>
 </li>
@@ -960,7 +958,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </li>
 <li><a href="_data_analysis_preprocessing.html">Data Analysis &amp; Preprocessing</a>
 </li>
-<li><a href="_supervised_learning.html">Supervised Learning</a>
+<li><a href="_deep_learning_2.html">Deep Learning</a>
 </li>
 <li><a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a>
 </li>
@@ -973,28 +971,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="sect2">
 <h3 id="_data_is_the_new_oil">Data is the new oil!?</h3>
 <div class="paragraph">
-<p>Let&#8217;s take a step back. Because it all begins with data.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Structured vs. unstructured data</dt>
-<dd>
-<p>Data can come in various forms and while some data types require additional preprocessing steps, in principle ML algorithms can be used with all kinds of data.</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/02_data/data_types2.png" alt="image" width="640">
-</div>
-<div class="title"><span class="small">The main distinction when characterizing data is made between <em>structured</em> data, which is any dataset that contains individual measurements/variables that represent unique quantities, and <em>unstructured</em> data, which can not be subdivided into meaningful variables. For example, in images &#8220;first pixel from the left&#8221; or in texts &#8220;10th word in the second paragraph&#8221; is not what we would call a variable, while &#8220;size in square meters&#8221; and &#8220;number of bedrooms&#8221; are useful quantities to describe an apartment. Structured data is often <em>heterogeneous</em>, since the different variables in a dataset typically stand for very different things. For example, when working with sensor data, a dataset normally does not consist of only temperature measurements, but additionally it could contain, e.g., pressure and flow values, which have different units and measurement scales. Unstructured data, on the other hand, is <em>homogeneous</em>, e.g., there is no qualitative difference between the 10th and the 100th pixel in an image.</span></div>
-</div>
-</dd>
-</dl>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>You&#8217;ve probably heard this claim before: &#8220;Data is the new oil!&#8221;. This suggests that data is valuable. But is it?<br>
+<p>Let&#8217;s take a step back. Because it all begins with data.
+You&#8217;ve probably heard this claim before: &#8220;Data is the new oil!&#8221;. This suggests that data is valuable. But is it?<br>
 The reason why oil is considered valuable is because we have important use cases for it: powering our cars, heating our homes, and producing plastics or fertilizers.
 Similarly, our data is only as valuable as what we make of it. So what can we use data for?</p>
 </div>
@@ -1007,7 +985,12 @@ Similarly, our data is only as valuable as what we make of it. So what can we us
 </div>
 </div>
 <div class="sect3">
-<h4 id="_monitoring">Monitoring</h4>
+<h4 id="_insights">Insights</h4>
+<div class="paragraph">
+<p>We can generate insights either through continuous monitoring (&#8220;Are we on track?&#8221;) or a targeted analysis (&#8220;What&#8217;s wrong?&#8221;).</p>
+</div>
+<div class="sect4">
+<h5 id="_monitoring">Monitoring</h5>
 <div class="paragraph">
 <p>By visualizing important variables or metrics in <strong>reports</strong> or <strong>dashboards</strong>, we increase transparency of the status quo and quantify our progress towards some goal.</p>
 </div>
@@ -1054,8 +1037,8 @@ A KPI is only a reliable measure, if it is not simultaneously used to control pe
 Unfortunately, what kind of corrective action will get us back on track is often not obvious and usually requires us to dig deeper into the data with an <em>ad hoc analysis</em> to identify the root cause of the problem.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_ad_hoc_analysis">Ad Hoc Analysis</h4>
+<div class="sect4">
+<h5 id="_ad_hoc_analysis">Ad Hoc Analysis</h5>
 <div class="paragraph">
 <p>An ad hoc data analysis can help us answer questions such as</p>
 </div>
@@ -1084,12 +1067,12 @@ Unfortunately, what kind of corrective action will get us back on track is often
 <dt class="hdlist1">Statistical Inference</dt>
 <dd>
 <p>Statistical inference enables us to <strong>draw conclusions that reach beyond the data at hand</strong>. Often we would like to make a statement about a whole <em>population</em> (e.g., all humans currently living on this earth), but we only have access to a few (hopefully representative) observations to draw our conclusion from. Statistical inference is about changing our mind under uncertainty: We start with a null hypothesis and then check if what we see in the sample dataset makes this null hypothesis look ridiculous, at which point we reject it and go with our alternative hypothesis instead.<br>
-<span class="underline">Example:</span> <em>Your company has an online store and wants to roll out a new recommendation system, but you are unsure whether customers will find these recommendations helpful and buy more. Therefore, before going live with the new system, you perform an A/B test, where a percentage of randomly selected users see the new recommendations, while the others are routed to the original version of the online store. The null hypothesis is that the new version is no better than the original. But it turns out that the average sales volume of customers seeing the new recommendations is a lot higher than that of the customers browsing the original site. This difference is so large that in a world where the null hypothesis were true, it would be extremely unlikely that a random sample would give us these results. We therefore reject the null hypothesis and go with the alternative hypothesis, that the new recommendations generate higher sales.</em><br>
+<span class="underline">Example:</span> <em>Your company has an online store and wants to roll out a new recommendation system, but you are unsure whether customers will find these recommendations helpful and buy more. Therefore, before going live with the new system, you perform an A/B test, where a percentage of randomly selected users see the new recommendations, while the others are routed to the original version of the online store. The null hypothesis is that the new version is no better than the original. But it turns out that the average sales volume of customers seeing the new recommendations is a lot higher than that of the customers browsing the original site. This difference is so large that in a world where the null hypothesis was true, it would be extremely unlikely that a random sample would give us these results. We therefore reject the null hypothesis and go with the alternative hypothesis, that the new recommendations generate higher sales.</em><br>
 <span class="small">Read <a href="https://towardsdatascience.com/whats-the-difference-between-analytics-and-statistics-cd35d457e17" target="\_blank">this article</a> to learn more about the difference between analysts and statisticians and why they should work on distinct splits of your dataset.</span></p>
 </dd>
 <dt class="hdlist1">Predictive Analytics</dt>
 <dd>
-<p>Using historical data, we can generate a <strong>predictive model</strong> that makes predictions about future scenarios. These models are often created using <em>supervised learning</em>, a subfield of machine learning.<br>
+<p>Using historical data, we can generate a <strong>predictive model</strong> that makes predictions about future scenarios to aid with planning. These models are often created using <em>supervised learning</em>, a subfield of machine learning.<br>
 <span class="underline">Example:</span> <em>Use sales forecasts to better plan inventory levels.</em></p>
 </dd>
 <dt class="hdlist1">Interpreting Predictive Models</dt>
@@ -1108,6 +1091,7 @@ Unfortunately, what kind of corrective action will get us back on track is often
 </div>
 </dd>
 </dl>
+</div>
 </div>
 </div>
 </div>
@@ -1139,7 +1123,7 @@ Unfortunately, what kind of corrective action will get us back on track is often
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_ml_is_everywhere.html">ML is everywhere!</a> | ↑ Up: <a href="_introduction.html">Introduction</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_what_is_ml.html">What is ML?</a> →</p>
+<p>↑ Up: <a href="_the_basics.html">The Basics</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_what_is_ml.html">What is ML?</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

@@ -922,7 +922,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
-<body id="_pitfall_5_data_concept_drifts" class="book toc2 toc-left">
+<body id="_deep_learning_2" class="book toc2 toc-left">
 <div id="header">
 <h1>A Practitioner&#8217;s Guide to Machine Learning</h1>
 <div class="details">
@@ -940,21 +940,13 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </li>
 <li><a href="_data_analysis_preprocessing.html">Data Analysis &amp; Preprocessing</a>
 </li>
-<li><a href="_deep_learning_2.html">Deep Learning</a>
-</li>
-<li><a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a>
+<li><a href="_deep_learning_2.html"><span class="toc-current">Deep Learning</span></a>
 <ul class="sectlevel2">
-<li><a href="_pitfall_1_deceptive_model_evaluation.html">[Pitfall #1] Deceptive model evaluation</a>
-</li>
-<li><a href="_pitfall_2_model_does_not_generalize.html">[Pitfall #2] Model does not generalize</a>
-</li>
-<li><a href="_pitfall_3_model_abuses_spurious_correlations.html">[Pitfall #3] Model abuses spurious correlations</a>
-</li>
-<li><a href="_pitfall_4_model_discriminates.html">[Pitfall #4] Model discriminates</a>
-</li>
-<li><a href="_pitfall_5_data_concept_drifts.html"><span class="toc-current">[Pitfall #5] Data &amp; concept drifts</span></a>
+<li><a href="_neural_networks.html">Neural Networks</a>
 </li>
 </ul>
+</li>
+<li><a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a>
 </li>
 <li><a href="_conclusion.html">Conclusion</a>
 </li>
@@ -962,90 +954,78 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 </div>
 <div id="content">
-<div class="sect2">
-<h3 id="_pitfall_5_data_concept_drifts">[Pitfall #5] Data &amp; concept drifts</h3>
+<div class="sect1">
+<h2 id="_deep_learning_2">Deep Learning</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>We must never forget that the world keeps on changing and that models need to be updated regularly with new data to be able to adapt to these changing circumstances!</p>
+<p>&#8220;Deep Learning&#8221; describes the subfield of machine learning concerned with neural network models.</p>
 </div>
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-caution" title="Caution"></i>
-</td>
-<td class="content">
-<strong>ML fails silently!</strong> I.e., even if all predictions are wrong, the program does not simply crash with some error message.<br>
-&#8594; Need constant monitoring to detect changes that lead to a deteriorating performance!
-</td>
-</tr>
-</table>
-</div>
+<div class="sidebarblock text-center">
+<div class="content">
 <div class="paragraph">
-<p><span class="underline">One of the biggest problems in practice: Data and Concept Drifts:</span><br>
-The model performance quickly decays when the distribution of the data used for training is different from the data the model encounters in production. Such a discrepancy can be due to</p>
+<p><strong>Basic Math</strong></p>
 </div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p><em>Data drift:</em> distribution of input features \(X\) changes</p>
-</li>
-<li>
-<p><em>Concept drift:</em> input/output relationship \(X \to y\) changes</p>
-</li>
-</ul>
+<div class="stemblock">
+<div class="content">
+\[\begin{aligned}
+\begin{pmatrix}
+W_{11} &amp; W_{12} &amp; \cdots &amp; W_{1j}\\
+W_{21} &amp; W_{22} &amp; \cdots &amp; W_{2j}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+W_{i1} &amp; W_{i2} &amp; \cdots &amp; W_{ij}\\
+\end{pmatrix}
+\end{aligned}\]
+</div>
 </div>
 <div class="paragraph">
-<p><span class="underline">Example:</span> From the production settings incl. the size of a produced part (\(X\)) we want to predict whether the part is scrap or okay (\(y\)):</p>
+<p><strong>Dangerous Artificial Intelligence</strong></p>
 </div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p><em>Data drift:</em> The company used to manufacture only small parts, now they also produce larger parts.</p>
-</li>
-<li>
-<p><em>Concept drift:</em> The company used to produce 10% scrap parts, but after some maintenance was done on the machine, the same production settings now result in only 5% scrap.</p>
-</li>
-</ul>
+<div class="stemblock">
+<div class="content">
+\[\begin{aligned}
+\begin{pmatrix}
+W_{11} &amp; W_{12} &amp; \cdots &amp; W_{1j}\\
+W_{21} &amp; W_{22} &amp; \cdots &amp; W_{2j}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+W_{i1} &amp; W_{i2} &amp; \cdots &amp; W_{ij}\\
+\end{pmatrix} \cdot
+\begin{pmatrix}
+W_{11} &amp; W_{12} &amp; \cdots &amp; W_{1k}\\
+W_{21} &amp; W_{22} &amp; \cdots &amp; W_{2k}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+W_{j1} &amp; W_{j2} &amp; \cdots &amp; W_{jk}\\
+\end{pmatrix} \cdot
+\begin{pmatrix}
+W_{11} &amp; W_{12} &amp; \cdots &amp; W_{1l}\\
+W_{21} &amp; W_{22} &amp; \cdots &amp; W_{2l}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+W_{k1} &amp; W_{k2} &amp; \cdots &amp; W_{kl}\\
+\end{pmatrix} \cdot
+\begin{pmatrix}
+W_{11} &amp; W_{12} &amp; \cdots &amp; W_{1m}\\
+W_{21} &amp; W_{22} &amp; \cdots &amp; W_{2m}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
+\end{pmatrix}
+\end{aligned}\]
+</div>
 </div>
 <div class="paragraph">
-<p><span class="underline">Possible reasons for data or concept drifts:</span></p>
+<p><span class="small">Read on if you&#8217;re comfortable with a bit of math 🤓</span></p>
+</div>
+</div>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>New users behave differently: For example, the product is now used by a younger generation or the business recently expanded to a different country.</p>
-</li>
-<li>
-<p>Trends and seasonality: For example, certain products are bought primarily in a specific season (e.g., winter cloths) or new styles result in the same customers now buying different products because they are &#8220;in&#8221;.</p>
-</li>
-<li>
-<p>The process structure / setup changed: For example, in a new version of a device, a sensor has moved to a different location, but still logs values under the same variable name.</p>
-</li>
-<li>
-<p>Feedback loop, where the presence of an ML model alters user behavior: For example, spammers change their strategy to evade the spam filter.</p>
+<p><a href="_neural_networks.html">Neural Networks</a></p>
 </li>
 </ul>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-These changes can either be <strong>gradual</strong> (e.g., languages change gradually as new words are coined; a camera lens gets covered with dust over time), or they can come as a <strong>sudden shock</strong> (e.g., someone cleans the camera lens; when the COVID-19 pandemic hit, suddenly a lot of people switched to online shopping, which tripped up the credit card fraud detection systems).
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p><span class="underline">Mitigation Strategies:</span><br>
-The best way to counteract data and concept drifts is to frequently <strong>retrain the model</strong> on new data. This can either happen on a schedule (e.g., every weekend, depending on how quickly the data changes) or when your monitoring system raises an alert because it detected drifts in the inputs or a deteriorating model performance.<br>
-Additionally, it is always helpful to log known external events, such as maintenance performed on a machine.</p>
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_pitfall_4_model_discriminates.html">[Pitfall #4] Model discriminates</a> | ↑ Up: <a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_conclusion.html">Conclusion</a> →</p>
+<p>← Previous: <a href="_data_preprocessing.html">Data Preprocessing</a> | ↑ Up: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_neural_networks.html">Neural Networks</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

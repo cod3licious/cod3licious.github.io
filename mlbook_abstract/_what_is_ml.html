@@ -928,23 +928,23 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.7,</span>
-<span id="revdate">2022-11-06</span>
+<span id="revnumber">version 1.8,</span>
+<span id="revdate">2023-01-06</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <p><span class="toc-root"><a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a></span></p><ul class="sectlevel1">
 <li><a href="_introduction.html">Introduction</a>
-<ul class="sectlevel2">
-<li><a href="_ml_is_everywhere.html">ML is everywhere!</a>
 </li>
+<li><a href="_the_basics.html">The Basics</a>
+<ul class="sectlevel2">
 <li><a href="_data_is_the_new_oil.html">Data is the new oil!?</a>
 </li>
 <li><a href="_what_is_ml.html"><span class="toc-current">What is ML?</span></a>
 </li>
-<li><a href="_ml_history_why_now.html">ML history: Why now?</a>
-</li>
 <li><a href="_how_do_machines_learn.html">How do machines &#8220;learn&#8221;?</a>
+</li>
+<li><a href="_ml_use_cases.html">ML use cases</a>
 </li>
 <li><a href="_solving_problems_with_ml.html">Solving problems with ML</a>
 </li>
@@ -952,7 +952,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </li>
 <li><a href="_data_analysis_preprocessing.html">Data Analysis &amp; Preprocessing</a>
 </li>
-<li><a href="_supervised_learning.html">Supervised Learning</a>
+<li><a href="_deep_learning_2.html">Deep Learning</a>
 </li>
 <li><a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a>
 </li>
@@ -989,6 +989,46 @@ Simply speaking, an <strong>algorithm</strong> can be thought of as a <strong>st
 </td>
 </tr>
 </table>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>Analogous to the tools used in a traditional manufacturing process to build something, you can think of <strong>ML algorithms as tools to generate value from data</strong>:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/01b_intro_ml/ml_carpentry_analogy2.png" alt="image" width="840">
+</div>
+</div>
+<div class="paragraph">
+<p>In order to successfully apply ML, you should ask yourself some important questions:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><em>What could be valuable?</em></strong> For example, this could be a new feature for an existing product, like Face ID as a new way to unlock your phone.</p>
+</li>
+<li>
+<p><strong><em>What raw inputs are needed?</em></strong> We can&#8217;t build a wooden chair using only fabric and metal or a few twigs we found in the woods. Similarly, depending on what we want to achieve with ML, we also need the right data (quality &amp; quantity) to apply the algorithms in the first place. This can be especially tricky since in most cases we can&#8217;t just buy the data we need like wood at a hardware store, but we have to collect it ourselves, i.e., grow our own trees, which can take some time.</p>
+</li>
+<li>
+<p><strong><em>Which ML algorithm is the right tool for the task?</em></strong> (I.e., which category of ML algorithms produces the type of output we want?)</p>
+</li>
+<li>
+<p>Do I or my employees have the <strong><em>necessary skills and enough compute power</em></strong> to accomplish this in practice?</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>We can think of the different ML algorithms as our <strong>ML toolbox</strong>:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/01b_intro_ml/ml_toolset6.png" alt="image" width="640">
+</div>
+<div class="title"><span class="small">ML itself is a subfield of AI, which is currently the more frequently used buzzword, but all the cool applications (e.g., the examples we&#8217;ve seen in the beginning) actually use ML. Besides ML, AI includes, for example, some search algorithms that were used for building the first chess computers. ML can be divided into three main subfields, unsupervised, supervised, and reinforcement learning. Additionally, the subfield &#8220;deep learning&#8221; is a buzzword for neural network models. Some of the simplest algorithms used in ML, like linear regression or PCA (very similar to factor analysis), are also used by statisticians, who additionally use other tools, like hypothesis tests, which do not learn rules or patterns from data. Finally, most data scientists use many tools from ML and statistics, but they as well use some additional tools like A/B tests, e.g., for collecting data on whether a red or green &#8220;buy&#8221; button on a website generates more sales, which do not fall into any of the other categories.</span></div>
 </div>
 <div class="dlist">
 <dl>
@@ -1028,195 +1068,87 @@ Simply speaking, an <strong>algorithm</strong> can be thought of as a <strong>st
 </div>
 </div>
 </div>
-<div class="paragraph">
-<p>We can think of the different ML algorithms as our <strong>ML toolbox</strong>:</p>
-</div>
-<div class="imageblock text-center">
+<div class="sidebarblock">
 <div class="content">
-<img src="../images/01b_intro_ml/ml_toolset6.png" alt="image" width="640">
-</div>
-<div class="title"><span class="small">ML itself is a subfield of AI, which is currently the more frequently used buzzword, but all the cool applications (e.g., the examples we&#8217;ve seen in the beginning) actually use ML. Besides ML, AI includes, for example, some search algorithms that were used for building the first chess computers. ML can be divided into three main subfields, unsupervised, supervised, and reinforcement learning. Additionally, the subfield &#8220;deep learning&#8221; is a buzzword for neural network models. Some of the simplest algorithms used in ML, like linear regression or PCA (very similar to factor analysis), are also used by statisticians, who additionally use other tools, like hypothesis tests, which do not learn rules or patterns from data. Finally, most data scientists use many tools from ML and statistics, but they as well use some additional tools like A/B tests, e.g., for collecting data on whether a red or green &#8220;buy&#8221; button on a website generates more sales, which do not fall into any of the other categories.</span></div>
-</div>
 <div class="paragraph">
-<p>The inputs that the ML algorithms operate on can come in many forms, but our goal, i.e., the desired outputs, determines the <strong>type of algorithm</strong> we should use for the task:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/01b_intro_ml/ml_goals3.png" alt="image" width="840">
-</div>
-<div class="title"><span class="small">If our goal is to simply understand the dataset a bit better and get an overview of it, then a dimensionality reduction algorithm from the area of unsupervised learning can be used to visualize it. If we want to discover patterns in the data, then we would also choose an algorithm from the field of unsupervised learning, but here it depends on which kinds of patterns we want to find: Anomaly detection algorithms identify individual data points that deviate from the rest (e.g., a malfunctioning machine or a fraudulent credit card transaction). Clustering algorithms identify groups of similar data points (e.g., for customer segmentation). If our goal is to make specific predictions, i.e., given an input get a corresponding output (e.g., predict whether a product will be faulty if it is produced under certain conditions), then we need to use an algorithm from the area of supervised learning. Here the main distinction is between regression and classification models: in regression tasks, the target variable that should be predicted is continuous (e.g., number of users, price, etc.), while in classification tasks the target variable is discrete, i.e., can only take on one distinct value and there is no continuum between the different values (e.g., an animal in a picture can either be a cat or a dog, but not something in between). While unsupervised and supervised learning cover most general use cases, other algorithms exist for more specific applications, e.g., recommender systems.</span></div>
-</div>
-<div class="paragraph">
-<p>Some example input &#8594; output tasks and what type of ML algorithm solves them:</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Input \(X\)</th>
-<th class="tableblock halign-left valign-top">Output \(Y\)</th>
-<th class="tableblock halign-left valign-top">ML Algorithm Category</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">questionnaire answers</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">customer segmentation</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">clustering</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">sensor measurements</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">everything normal?</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">anomaly detection</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">past usage of a machine</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">remaining lifetime</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">regression</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">email</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">spam (yes/no)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">classification (binary)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">image</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">which animal?</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">classification (multi-class)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user&#8217;s purchases</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">products to show</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">recommender systems</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">search query</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">relevant documents</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">information retrieval</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">audio</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">speech recognition</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">text in English</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">text in French</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">machine translation</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>To summarize (see also: <a href="https://franziskahorn.de/mlws_resources/algorithm_cheatsheet.pdf">overview table as PDF</a>):</p>
+<p><span class="underline">When (not) to use ML:</span></p>
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Existing ML solutions &amp; corresponding output (for one data point): </dt>
+<dt class="hdlist1">ML is overkill if: </dt>
 <dd>
 <div class="ulist">
 <ul>
 <li>
-<p><span class="underline">Dimensionality Reduction:</span> (usually) <strong>2D coordinates</strong> (to create a visualization of the dataset)</p>
+<p>a manually defined set of rules or mechanistic (white box) model can solve the problem. For example, if in our example cookie factory broken cookies were the only quality problem that ever occurred, then the rule &#8220;cookie weight needs to be between 14-16g&#8221; would suffice to detect defective cookies. And such a rule is easier to implement as there is no need to collect a large dataset.</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">ML has great potential when: </dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>an exact simulation with a mechanistic model takes too long (but can be used to generate a high quality dataset). For example, the AlphaFold model shown in the introduction, which is used to predict the 3D structure of a protein from its amino acid sequence, can be trained on the data generated by the original simulation model used to solve this task before, which is too slow to be applied to a large number of proteins.</p>
 </li>
 <li>
-<p><span class="underline">Outlier/Anomaly Detection:</span> <strong>anomaly score</strong> (usually a value between 0 and 1 indicating how likely it is that this point is an outlier)</p>
+<p>solving a &#8220;simple&#8221; but hard to explain task that takes a human ~1 second, like recognizing something in an image.<br>
+&#8658; Use ML to automate repetitive tasks &amp; make expert knowledge available to everyone, e.g., Google&#8217;s diabetic retinopathy diagnostic model shown in the first section.<br>
+<span class="underline">But:</span> success depends on data quality &amp; quantity!<br>
+&#8594; Humans are much better at generalizing from a few examples. For example, a doctor can still easily recognize the disease even if the pictures were taken with a slightly different setup that might result, for example, in noisier images. The ML model, on the other hand, needs to be specifically trained for these cases, which means that in the worst case we might need to collect a lot of additional data for this new setup.</p>
 </li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">ML is your best chance when: </dt>
+<dd>
+<div class="ulist">
+<ul>
 <li>
-<p><span class="underline">Clustering:</span> <strong>cluster index</strong> (a number between 0 and <em>k-1</em> indicating to which of the <em>k</em> clusters a data point belongs (or -1 for outliers))</p>
-</li>
-<li>
-<p><span class="underline">Regression:</span> a <strong>continuous value</strong> (any kind of numeric quantity that should be predicted)</p>
-</li>
-<li>
-<p><span class="underline">Classification:</span> a <strong>discrete value</strong> (one of several mutually exclusive categories)</p>
-</li>
-<li>
-<p><span class="underline">Recommender Systems &amp; Information Retrieval:</span> <strong>ranking of a set of items</strong> (recommender systems, for example, rank the products that a specific user might be most interested in; information retrieval systems rank other items based on their similarity to a given query item)</p>
-</li>
-<li>
-<p>other <span class="underline">Deep Learning</span> solutions: <strong>unstructured output like a text or image</strong> (e.g., speech recognition, machine translation, image generation, or neural style transfer)</p>
+<p>humans are overwhelmed by very complex, high dimensional data. For example, given an excel spreadsheet with hundreds of columns, a human can&#8217;t easily recognize any patterns in this sea of numbers. In the worst case, there actually aren&#8217;t any relationships in the data that could be discovered (maybe we didn&#8217;t measure all the relevant factors), but if there are, ML will most likely find them.</p>
 </li>
 </ul>
 </div>
 </dd>
 </dl>
 </div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-ML algorithms are categorized by the output they generate for each input. If you want to solve an &#8216;input &#8594; output&#8217; problem with a different output than the ones listed above, you&#8217;ll likely have to settle in for a multi-year research project&#8201;&#8212;&#8201;if the problem can be solved with ML at all!
-</td>
-</tr>
-</table>
 </div>
-<div class="sidebarblock">
-<div class="content">
+</div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">To solve complex problems, we might need multiple algorithms</dt>
+<dt class="hdlist1">Steps to identify a potential ML project</dt>
 <dd>
-<p>Example: virtual assistant (e.g., Siri or Alexa): &#8220;<em>Hey &lt;smart speaker&gt;, tell me a joke!</em>&#8221; &#8594; a random joke</p>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<div class="title"><span class="small">This might look like an input-output problem, but it would be very difficult and inefficient to solve it directly. Instead, we break the problem down into smaller subtasks that can be solved with existing algorithms:</span></div>
-<p></p>
-</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><strong>Trigger word detection:</strong><br>
-audio &#8594; &#8220;Hey &lt;smart speaker&gt;&#8221; (yes/no)?</p>
+<p>Create a process map: which steps are executed in the business process (flow of materials &amp; information) and what data is collected where. For example, in a production process where some of the produced parts are defective:</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/01b_intro_ml/automate_insights7a.png" alt="image" width="700">
+</div>
+</div>
 </li>
 <li>
-<p><strong>Speech recognition:</strong><br>
-audio &#8594; text</p>
+<p>Identify parts of the process that could either be automated with ML (e.g., straightforward, repetitive tasks otherwise done by humans) or in other ways improved by analyzing data (e.g., to understand root causes of a problem, improve planning with what-if simulations, or optimize the use of resources):</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/01b_intro_ml/automate_insights7b.png" alt="image" width="840">
+</div>
+<div class="title"><span class="small">The first idea is to automate the quality check that was so far done by a human: since the human can easily recognize the defects in the pictures taken of the products, an ML model should be able to do this, too. The next idea is to try to predict in advance whether a product will be faulty or not based on the composition of raw materials and the proposed process conditions: success here is unclear, since the human experts are not sure whether all of the information necessary to determine if the product will be fine is contained in this data&#8201;&#8212;&#8201;but nevertheless it&#8217;s worth a try since this could save lots of resources. While the final ML model that solves the input-output problem can be deployed as software in the ongoing process, when a data scientist analyzes the results and interprets the model, she can additionally generate insights that can be translated into action recommendations.</span></div>
+</div>
 </li>
 <li>
-<p><strong>Intent classification:</strong><br>
-text &#8594; (joke/timer/weather/&#8230;&#8203;)?</p>
-</li>
-<li>
-<p><strong>Request-specific program (e.g., select random joke)</strong></p>
-</li>
-<li>
-<p><strong>Speech generation:</strong><br>
-text &#8594; audio</p>
+<p>Prioritize: which project will have a high impact, but at the same time also a good chance of success, i.e., should yield a high return on investment (ROI)? For example, using ML to automate a simple task is a comparatively low risk investment, but might cause some assembly-line workers to loose their jobs. In contrast, identifying the root causes of why a production process results in 10% scrap could save millions, but it is not clear from the start that such an analysis will yield useful results, since the collected data on the process conditions might not contain all the needed information.</p>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<div class="title"><span class="small">First, the smart speaker needs to know whether it was activated with a specific trigger word (e.g., &#8220;Hey Siri&#8221;). This is a simple binary classification task (trigger word: yes/no), which is usually performed on the device itself, since we don&#8217;t want that everything we say is continuously streamed into the cloud. Next, the spoken words that follow the trigger word are transcribed into text. Text is easier to handle, because, for example, variations due to different accents are removed. Based on this text, the intent is recognized, i.e., which of the different functionalities of the virtual assistant should be used (e.g., tell a joke, play music, set an alarm, etc.). This is a multi-class classification problem. The next step is to execute the request, which is not done with ML, but instead some task-specific program is run, e.g., to select a joke from a database or set a timer, etc., based on the apps installed on the device. Finally, the output of the program needs to be converted back into an audio signal. For this again an ML model can help to get smoothly spoken text&#8201;&#8212;&#8201;and in the near future maybe with the voice of Morgan Freeman or some other famous person like in "Deep Fake" applications.</span></div>
-<p><br>
-&#8658; It is generally advisable to first think about how a problem could be decomposed into easier-to-solve subproblems, especially since there might already be a large dataset or pre-trained ML model available for one of these subtasks. For example, speech recognition models can be trained on audio books and transcribed political speeches in addition to the data collected from the smart speaker users.</p>
-</div>
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-caution" title="Caution"></i>
-</td>
-<td class="content">
-When one ML model receives as input the output of another ML model, this means as soon as we roll out a new version of the ML model at the beginning of the chain, we should also retrain the models following this one, since they might now receive slightly different inputs, i.e., experience a
-<a href="_pitfall_5_data_concept_drifts.html">data drift</a>.
-</td>
-</tr>
-</table>
-</div>
-</div>
+</dd>
+</dl>
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_data_is_the_new_oil.html">Data is the new oil!?</a> | ↑ Up: <a href="_introduction.html">Introduction</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_ml_history_why_now.html">ML history: Why now?</a> →</p>
+<p>← Previous: <a href="_data_is_the_new_oil.html">Data is the new oil!?</a> | ↑ Up: <a href="_the_basics.html">The Basics</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_how_do_machines_learn.html">How do machines &#8220;learn&#8221;?</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

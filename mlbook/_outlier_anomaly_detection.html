@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.18">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <meta name="author" content="Dr. Franziska Horn">
 <meta name="copyright" content="Dr. Franziska Horn">
 <title>A Practitioner&#8217;s Guide to Machine Learning</title>
@@ -1017,8 +1017,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.8,</span>
-<span id="revdate">2023-01-06</span>
+<span id="revnumber">version 1.9,</span>
+<span id="revdate">2024-01-01</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -1108,7 +1108,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </div>
 </li>
 <li>
-<p>Are you expecting a few <strong>individual outliers</strong> or <strong>clusters of outliers</strong>? The latter is especially common in time series data, where, e.g., a machine might experience an issue for several minutes or even hours before the signals look normal again. Clusters of outliers are more tricky to detect, especially if the data also contains other &#8216;legitimate&#8217; clusters of normal points. Domain expertise is key here!</p>
+<p>Are you expecting a few <strong>individual outliers</strong> or <strong>clusters of outliers</strong>? The latter is especially common in time series data, where, e.g., a machine might experience an issue for several minutes or even hours before the signals look normal again. Clusters of outliers are more tricky to detect, especially if the data also contains other &#8216;legitimate&#8217; clusters of normal points. Subject matter expertise is key here!</p>
 </li>
 <li>
 <p>Do you have any <strong>labels</strong> available? While we might not know what the different kinds of (future) anomalies look like, maybe we <em>do</em> know what normal data points look like, which is important information that we can use to check how far new points deviate from these normal points, also called novelty detection.</p>
@@ -1122,7 +1122,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
-Know your data&#8201;&#8212;&#8201;are missing values marked as NaNs (&#8220;Not a Number&#8221;)?
+Know your data&#8201;&#8212;&#8201;are missing values marked as NaNs (&#8220;Not a Number&#8221;) or set to some &#8216;unreasonable&#8217; high or low value?
 </td>
 </tr>
 </table>
@@ -1134,7 +1134,7 @@ Know your data&#8201;&#8212;&#8201;are missing values marked as NaNs (&#8220;Not
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-Removing outlier points from a dataset is often a necessary cleaning step, e.g., to obtain better prediction models. However, we should always be able to explain <em>why</em> we removed these points, as they could also be interesting edge cases.<br>
+Removing outlier samples from a dataset is often a necessary cleaning step, e.g., to obtain better prediction models. However, we should always be able to explain <em>why</em> we removed these points, as they could also be interesting edge cases.<br>
 Try to remove as many outliers as possible with manually crafted rules (e.g., &#8220;when this sensor is 0, the machine is off and the points can be disregarded&#8221;), especially when the dataset contains clusters of outliers, which are harder to detect with data-driven methods.
 </td>
 </tr>

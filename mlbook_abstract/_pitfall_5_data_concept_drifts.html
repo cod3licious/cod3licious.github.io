@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.18">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <meta name="author" content="Dr. Franziska Horn">
 <meta name="copyright" content="Dr. Franziska Horn">
 <title>A Practitioner&#8217;s Guide to Machine Learning</title>
@@ -928,8 +928,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.8,</span>
-<span id="revdate">2023-01-06</span>
+<span id="revnumber">version 1.9,</span>
+<span id="revdate">2024-01-01</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -952,7 +952,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </li>
 <li><a href="_pitfall_4_model_discriminates.html">[Pitfall #4] Model discriminates</a>
 </li>
-<li><a href="_pitfall_5_data_concept_drifts.html"><span class="toc-current">[Pitfall #5] Data &amp; concept drifts</span></a>
+<li><a href="_pitfall_5_data_concept_drifts.html"><span class="toc-current">[Pitfall #5] Data &amp; Concept Drifts</span></a>
 </li>
 </ul>
 </li>
@@ -963,7 +963,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 <div id="content">
 <div class="sect2">
-<h3 id="_pitfall_5_data_concept_drifts">[Pitfall #5] Data &amp; concept drifts</h3>
+<h3 id="_pitfall_5_data_concept_drifts">[Pitfall #5] Data &amp; Concept Drifts</h3>
 <div class="paragraph">
 <p>We must never forget that the world keeps on changing and that models need to be updated regularly with new data to be able to adapt to these changing circumstances!</p>
 </div>
@@ -982,17 +982,21 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 <div class="paragraph">
 <p><span class="underline">One of the biggest problems in practice: Data and Concept Drifts:</span><br>
-The model performance quickly decays when the distribution of the data used for training is different from the data the model encounters in production. Such a discrepancy can be due to</p>
+The model performance quickly decays when the distribution of the <strong>data used for training</strong> \(P_{train}(X, y)\) is <strong>different from the data the model encounters when deployed in production</strong> \(P_{prod}(X, y)\), where  \(P(X, y) = P(y|X)P(X) = P(X|y)P(y)\).<br>
+Such a discrepancy can be due to</p>
 </div>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p><em>Data drift:</em> distribution of input features \(X\) changes</p>
+<p><strong><em>Data drift:</em></strong> the distribution of one or more variables changes. This is called a <em>covariate shift</em> if the distribution of input features \(X\) changes, i.e., \(P_{train}(X) \neq P_{prod}(X)\), and a <em>label shift</em> if the distribution of the target variable \(y\) changes.</p>
 </li>
 <li>
-<p><em>Concept drift:</em> input/output relationship \(X \to y\) changes</p>
+<p><strong><em>Concept drift:</em></strong> input/output relationship \(X \to y\) changes, i.e., \(P_{train}(y|X) \neq P_{prod}(y|X)\). This means with exactly the same inputs \(X\) we now get a different output \(y\) than before the drift.</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>In both cases, something important for our machine learning task changes in the world. If our collected data reflects this change, it is called data drift. If we can&#8217;t see this change in our input data, we&#8217;re dealing with a concept drift.</p>
 </div>
 <div class="paragraph">
 <p><span class="underline">Example:</span> From the production settings incl. the size of a produced part (\(X\)) we want to predict whether the part is scrap or okay (\(y\)):</p>
@@ -1003,28 +1007,25 @@ The model performance quickly decays when the distribution of the data used for 
 <p><em>Data drift:</em> The company used to manufacture only small parts, now they also produce larger parts.</p>
 </li>
 <li>
-<p><em>Concept drift:</em> The company used to produce 10% scrap parts, but after some maintenance was done on the machine, the same production settings now result in only 5% scrap.</p>
+<p><em>Concept drift:</em> The company used to produce 10% scrap parts, but after some maintenance on the machine, the same production settings (\(X\)) now result in only 5% scrap (\(y\)).</p>
 </li>
 </ul>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Covariate shifts, without concept drift, can lead to label shifts when the input variable is causally related to the target. For example, a model predicting cancer (\(y\)) in patients based on age (\(x\)) was trained on a dataset consisting of mostly older people, who naturally also have a higher cancer incidence. In production, the model is used on patients of all ages (<em>covariate shift</em>), i.e., including more young people that have cancer less frequently (<em>label shift</em>).
+</td>
+</tr>
+</table>
+</div>
+<h4 id="_drift_origins_mitigation_strategies" class="discrete">Drift Origins &amp; Mitigation Strategies</h4>
 <div class="paragraph">
-<p><span class="underline">Possible reasons for data or concept drifts:</span></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>New users behave differently: For example, the product is now used by a younger generation or the business recently expanded to a different country.</p>
-</li>
-<li>
-<p>Trends and seasonality: For example, certain products are bought primarily in a specific season (e.g., winter cloths) or new styles result in the same customers now buying different products because they are &#8220;in&#8221;.</p>
-</li>
-<li>
-<p>The process structure / setup changed: For example, in a new version of a device, a sensor has moved to a different location, but still logs values under the same variable name.</p>
-</li>
-<li>
-<p>Feedback loop, where the presence of an ML model alters user behavior: For example, spammers change their strategy to evade the spam filter.</p>
-</li>
-</ul>
+<p>There are various reasons for data and concepts drifts, both related to how the data is collected as well as external events outside our control.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1033,15 +1034,106 @@ The model performance quickly decays when the distribution of the data used for 
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-These changes can either be <strong>gradual</strong> (e.g., languages change gradually as new words are coined; a camera lens gets covered with dust over time), or they can come as a <strong>sudden shock</strong> (e.g., someone cleans the camera lens; when the COVID-19 pandemic hit, suddenly a lot of people switched to online shopping, which tripped up the credit card fraud detection systems).
+These drifts can either be <strong>gradual</strong> (e.g., languages change gradually as new words are coined; a camera lens gets covered with dust over time), or they can come as a <strong>sudden shock</strong> (e.g., someone cleans the camera lens; when the COVID-19 pandemic hit, suddenly a lot of people switched to online shopping, which tripped up the credit card fraud detection systems).
 </td>
 </tr>
 </table>
 </div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Changed data schema: </dt>
+<dd>
+<p>Many problems are created in-house and could be avoided, for example</p>
+<div class="ulist">
+<ul>
+<li>
+<p>the user interface used to collect the data changes, e.g., a height was previously recorded in meters, now in cm</p>
+</li>
+<li>
+<p>the sensor configuration changed, e.g., in a new version of a device, a different sensor is used, but still logs values under the same variable name as the old sensor</p>
+</li>
+<li>
+<p>the features used as input for the model are changed, e.g., to include additional engineered features, but the feature transformation pipeline was only changed in the training code, not yet in the production code.</p>
+</li>
+</ul>
+</div>
 <div class="paragraph">
-<p><span class="underline">Mitigation Strategies:</span><br>
-The best way to counteract data and concept drifts is to frequently <strong>retrain the model</strong> on new data. This can either happen on a schedule (e.g., every weekend, depending on how quickly the data changes) or when your monitoring system raises an alert because it detected drifts in the inputs or a deteriorating model performance.<br>
-Additionally, it is always helpful to log known external events, such as maintenance performed on a machine.</p>
+<p>&#8658; These cases should ideally result in an error, e.g., we could include some <strong>checks before applying the model</strong> to make sure we received the expected number of features, their data types (e.g., text or numbers) is as expected, and the values are roughly in the expected range for the respective feature. Furthermore, other teams in the company need to be made aware that an ML model is relying on their data so they can notify the data science team ahead of time in case of changes.</p>
+</div>
+</dd>
+<dt class="hdlist1">Data drifts: </dt>
+<dd>
+<p>Data drifts occur when our model has to make predictions for samples that are different from the data it encountered during training, e.g., because certain regimes of the training domain were undersampled, or in the extreme case the model might even be forced to extrapolate beyond the training domain, for example, due to</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>changed sample selection</strong>, e.g., the business recently expanded to a different country or after a targeted marketing campaign the website is now visited by a new user group</p>
+</li>
+<li>
+<p><strong>adversarial behavior</strong>, e.g., spammers continuously adapt their messages in an effort to circumvent spam filters (i.e., ten years ago a human would have also recognized a spam message from today as spam (i.e., the meaning of what is or isn&#8217;t spam didn&#8217;t change), but these more sophisticated messages weren&#8217;t included in the training set yet, making it hard for ML models to pick up on these patterns)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>&#8658; Data drifts can be seen as an opportunity to extend our training set and <strong>retrain the model with more data from underrepresented subgroups</strong>. Yet, as highlighted in the earlier section on model-based discrimination, this often implies that these undersampled subgroups could initially experience a less effective model, such as a speech recognition function performing less accurately for women than for men. Therefore, it&#8217;s crucial to identify subgroups where the model might exhibit poor performance, ideally gathering more data from these groups or, at the very least, giving greater consideration to these samples during model training and evaluation.</p>
+</div>
+</dd>
+<dt class="hdlist1">Concept drifts: </dt>
+<dd>
+<p>Concept drifts happen when external changes or events occur that we did not record in our data or that change the meaning of our data. This means that the exact same input features suddenly result in a different output. One reason can be that we&#8217;re <strong>missing a variable that has a direct influence on the target</strong>, for example</p>
+<div class="ulist">
+<ul>
+<li>
+<p>our process is sensitive to temperature and humidity, but we only recorded the temperature not the humidity, so as the humidity changes, the same temperature values result in different output values &#8658; additionally include humidity as an input feature in the model</p>
+</li>
+<li>
+<p>seasonal trends result in changes in the popularity of summer vs. winder clothes &#8658; include month / outside temperature as an additional input feature</p>
+</li>
+<li>
+<p>special events, e.g., a celebrity mentioned our product on social media or people changed their behavior because of the lockdown during a pandemic &#8658; while it can be hard to predict these events in advance, when they happen we could include an additional feature, e.g., &#8216;during lockdown&#8217;, to distinguish data collected during this time period from the rest of the data</p>
+</li>
+<li>
+<p>degenerate feedback loops, i.e., the existence of the model changes users' behavior, e.g., a recommender system causes users to click on videos just because they were recommended &#8658; include as an additional feature whether the video was recommended or not to learn how much of &#8220;user clicked on item&#8221; was due to the item being recommended and how much was due to the user&#8217;s natural behavior</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Another cause of concept drifts are events that <strong>change the meaning of the recorded data</strong>, for example</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>inflation: 1 Euro in 1990 was worth more than 1 Euro now &#8658; adjust the data for inflation or include the inflation rate as an additional input feature</p>
+</li>
+<li>
+<p>a temperature sensor immersed in water amasses limescale and after a while the temperature reading is not accurate anymore, e.g., if the true temperature is 90 degrees, a clean senor measures the true 90 degrees, but after it has accumulated some layers of limescale, it only measures 89 degrees under the same circumstances. While our output is influenced by the true temperature, we only have access to the sensor reading for the temperature, which is additionally influenced by the state of the sensor itself &#8658; try to estimate the amount of accumulated limescale, e.g., based on the number of days since the sensor was cleaned the last time (which also means that these kinds of maintenance events need to be recorded somewhere!)</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/07_data_issues/concept_drift.png" alt="image" width="420">
+</div>
+<div class="title"><span class="small">Causal diagram showing how our observed input \(x\) (temperature measurement) and output \(y\) are related through and influenced by hidden variables (which we can not access directly), namely, the state of the temperature sensor (i.e., how much limescale has accumulated), the actual temperature, and the humidity (for which we have not installed a sensor yet). If the sensor state and humidity stay constant, we are able to predict the output from the temperature measurement, however, if either of these values change, we experience a concept drift. Therefore, we should try to include estimates of these hidden variables in our model to account for these changes.</span></div>
+</div>
+<div class="paragraph">
+<p>
+&#8658; Before training a model, examine the data to <strong>identify instances where identical inputs yield different outputs</strong>. If possible, <strong>include additional input features to account for these variations</strong>. Subpar model performance on the test set often indicates missing relevant inputs, heightening vulnerability to future concept drifts. Even when the correct variables are incorporated to capture a concept drift, frequent model retraining may still be necessary. For instance, different states of the concept might be sampled unevenly, leading to data drifts (e.g., more data collected during winter than in the early summer months). If it is not possible to include variables that account for the concept drift, it might be necessary to <strong>remove samples from the original training set that do not conform to the novel input/output relation before retraining the model</strong>.</p>
+</div>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The best way to counteract data and concept drifts is to frequently <strong>retrain the model</strong> on new data. This can either happen on a schedule (e.g., every weekend, depending on how quickly the data changes) or when your monitoring system raises an alert because it detected drifts in the inputs or a deteriorating model performance.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="paragraph nav-footer">

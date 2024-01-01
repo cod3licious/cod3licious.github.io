@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.18">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <meta name="author" content="Dr. Franziska Horn">
 <meta name="copyright" content="Dr. Franziska Horn">
 <title>A Practitioner&#8217;s Guide to Machine Learning</title>
@@ -928,8 +928,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.8,</span>
-<span id="revdate">2023-01-06</span>
+<span id="revnumber">version 1.9,</span>
+<span id="revdate">2024-01-01</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -992,8 +992,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Daten-Voraussetzungen für das Lernen mit diesen Strategien: </dt>
-</dl>
-</div>
+<dd>
 <div class="ulist none">
 <ul class="none">
 <li>
@@ -1025,12 +1024,15 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </li>
 </ul>
 </div>
+</dd>
+</dl>
+</div>
 <div class="sect3">
 <h4 id="_supervised_learning">Supervised Learning</h4>
 <div class="paragraph">
 <p>Supervised Learning ist die verbreitetste Art des maschinellen Lernens in heutigen Anwendungen.<br>
 Beim Supervised Learning möchten wir ein <strong>Modell (= eine mathematische Funktion)</strong> \(f(x)\) lernen, um den Zusammenhang zwischen einem oder mehreren <strong>Input(s)</strong> \(x\) (z.B. Produktionsbedingungen wie Temperatur, Material, etc.) und einem <strong>Output</strong> \(y\) (z.B. resultierende Produktqualität) zu beschreiben.<br>
-Dieses Modell kann dann verwendet werden, um <strong>Vorhersagen für neue Datenpunkte zu machen</strong>, also \(f(x') = y\) für ein neues \(x'\) zu berechnen (z.B. für einen neuen Satz von Produktionsbedingungen vorhersagen, ob das Produkt von hoher Qualität sein wird, oder ob man den Vorgang lieber gleich abbrechen sollte).</p>
+Dieses Modell kann dann verwendet werden, um <strong>Vorhersagen für neue Datenpunkte zu machen</strong>, also \(f(x') = y'\) für ein neues \(x'\) zu berechnen (z.B. für einen neuen Satz von Produktionsbedingungen vorhersagen, ob das Produkt von hoher Qualität sein wird, oder ob man den Vorgang lieber gleich abbrechen sollte).</p>
 </div>
 <div class="dlist">
 <dl>
@@ -1141,6 +1143,29 @@ In diesem Buch werden die Begriffe &#8220;ML-Algorithmus&#8221; und &#8220;ML-Mo
 <div class="title"><span class="small">In vielen Anwendungsfällen reicht es nicht aus, einfach &#8220;nur&#8221; die Zielvariable für einen neuen Datenpunkt vorherzusagen; ob beispielsweise ein unter bestimmten Bedingungen hergestelltes Produkt von hoher Qualität sein wird oder nicht. Stattdessen ist es oft notwendig, zusätzlich erklären zu können, <em>warum</em> diese Vorhersage gemacht wurde und welche Features für die Vorhersage entscheidend waren, sowohl um mögliche Ursachen eines Problems besser zu verstehen, aber auch um sicherzustellen, dass die Vorhersagen des Modells auf vernünftigen Annahmen basieren. Darüber hinaus kann ein erlerntes Modell auch innerhalb einer äußeren Optimierungsschleife verwendet werden, um optimale Inputs zu bestimmen. Im einfachsten Fall könnte man z.B. systematisch überprüfen, welche Produktqualität das Modell für verschiedene Prozessbedingungen vorhersagt, um für neue Produkte die Einstellungen mit der am höchsten vorhergesagten Qualität zu wählen. Aber Vorsicht: ML-Modelle sind nur zum Interpolieren, nicht zum Extrapolieren konzipiert, d.h. es muss sichergestellt werden, dass die getesteten Eingaben im gleichen Wertebereich liegen wie in den Daten, die zum Trainieren des Modells verwendet wurden.</span></div>
 </div>
 </div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Prädiktive Analyse</dt>
+<dd>
+<p>Mit Supervised Learning Algorithmen können wir basierend auf historischen Daten ein <strong>Vorhersagemodell</strong> generieren, das Prognosen über zukünftige Szenarien anstellt um uns bei Plannungen zu unterstützen.
+<span class="underline">Beispiel:</span> <em>Verkaufsprognosen verwenden, um Lagerbestände besser zu planen.</em></p>
+</dd>
+<dt class="hdlist1">Interpretation Prädiktiver Modelle</dt>
+<dd>
+<p><a href="https://franziskahorn.de/mlbook/_explainability_interpretable_ml.html" target="\_blank">Interpretiere das Vorhersagemodell</a> und seine Prognosen, um <strong>die zugrundeliegenden Ursache-Wirkung Beziehungen des Prozesses besser zu verstehen</strong>.<br>
+<span class="underline">Beispiel:</span> <em>Gegeben ein Modell, welches die Qualität eines Produkts aus den Produktionsbedingungen vorhersagt, verstehe welche Faktoren dazu führen dass Produkte von geringerer Qualität sind.</em></p>
+</dd>
+<dt class="hdlist1">Was-wäre-wenn Analyse &amp; Optimierung</dt>
+<dd>
+<p>Verwende ein Vorhersagemodell für eine <strong>Was-wäre-wenn-Vorhersage</strong>, um zu untersuchen, wie ein System auf unterschiedliche Bedingungen reagieren könnte (aber <a href="_fehler_3_modell_missbraucht_scheinkorrelationen.html">Vorsicht</a>!).<br>
+<span class="underline">Beispiel:</span> <em>Gegeben ein Modell, welches die verbleibende Lebenszeit für eine Maschinenkomponente aus den Prozessbedingungen vorhersagt, wie schnell würde diese Komponente unter anderen Prozessbedingungen verschleißen?</em></p>
+<div class="paragraph">
+<p>Wenn wir noch einen Schritt weiter gehen wollen, können wir auch automatisch verschiedene Inputs mit dem Vorhersagemodell in einer Optimierungsschleife bewerten, um systematisch <strong>optimale Einstellungen zu finden</strong>.<br>
+<span class="underline">Beispiel:</span> <em>Gegeben ein Modell, welches die Qualität eines Produkts aus den Produktionsbedingungen vorhersagt, bestimme automatisch die besten Produktionseinstellungen für einen neuen Rohstofftyp.</em></p>
+</div>
+</dd>
+</dl>
 </div>
 </div>
 </div>

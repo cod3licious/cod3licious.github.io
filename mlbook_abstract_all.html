@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.18">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <meta name="author" content="Dr. Franziska Horn">
 <meta name="copyright" content="Dr. Franziska Horn">
 <title>A Practitioner&#8217;s Guide to Machine Learning</title>
@@ -927,8 +927,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.8,</span>
-<span id="revdate">2023-01-06</span>
+<span id="revnumber">version 1.9,</span>
+<span id="revdate">2024-01-01</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -966,7 +966,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <li><a href="#_pitfall_2_model_does_not_generalize">[Pitfall #2] Model does not generalize</a></li>
 <li><a href="#_pitfall_3_model_abuses_spurious_correlations">[Pitfall #3] Model abuses spurious correlations</a></li>
 <li><a href="#_pitfall_4_model_discriminates">[Pitfall #4] Model discriminates</a></li>
-<li><a href="#_pitfall_5_data_concept_drifts">[Pitfall #5] Data &amp; concept drifts</a></li>
+<li><a href="#_pitfall_5_data_concept_drifts">[Pitfall #5] Data &amp; Concept Drifts</a></li>
 </ul>
 </li>
 <li><a href="#_conclusion">Conclusion</a>
@@ -1339,7 +1339,7 @@ While these libraries democratize the use of ML, unfortunately, this also brings
 <p>An AGI is a computer program that, just like a human, excels at a wide variety of different tasks at once and can learn to <strong>master new skills by itself</strong>.</p>
 </div>
 <div class="paragraph">
-<p>What is used in practice instead is <strong>Artificial <em>Narrow</em> Intelligence</strong> (ANI): models <strong>explicitly programmed to solve a specific task(s)</strong>, e.g., translate texts from one language to another. But they <strong>can&#8217;t generalize (on their own) to different tasks</strong>, i.e., the machine translation model will not tomorrow decide that it now also wants to recognize faces in images. Of course, one can combine several individual ANIs into one big program that <a href="https://www.deepmind.com/publications/a-generalist-agent">solves multiple different tasks</a>, but this collection of ANIs is still not able to learn (on its own) any new skills beyond these capabilities. Many AI researchers currently believe that we might never produce a true human-like AGI.</p>
+<p>What is used in practice instead is <strong>Artificial <em>Narrow</em> Intelligence</strong> (ANI): models <strong>explicitly programmed to solve a specific task(s)</strong>, e.g., translate texts from one language to another. But they <strong>can&#8217;t generalize (on their own) to different tasks</strong>, i.e., the machine translation model will not tomorrow decide that it now also wants to recognize faces in images. Of course, one can combine several individual ANIs into one big program that <a href="https://www.deepmind.com/publications/a-generalist-agent">solves multiple different tasks</a>, but this collection of ANIs is still not able to learn (on its own) any new skills beyond these capabilities. Many AI researchers currently believe that with the approaches to AI that we currently use, we might never produce a true human-like AGI.</p>
 </div>
 </div>
 </div>
@@ -1371,60 +1371,11 @@ Similarly, our data is only as valuable as what we make of it. So what can we us
 <div class="sect3">
 <h4 id="_insights">Insights</h4>
 <div class="paragraph">
-<p>We can generate insights either through continuous monitoring (&#8220;Are we on track?&#8221;) or a targeted analysis (&#8220;What&#8217;s wrong?&#8221;).</p>
-</div>
-<div class="sect4">
-<h5 id="_monitoring">Monitoring</h5>
-<div class="paragraph">
-<p>By visualizing important variables or metrics in <strong>reports</strong> or <strong>dashboards</strong>, we increase transparency of the status quo and quantify our progress towards some goal.</p>
+<p>We can generate insights either through continuous monitoring (&#8220;Are we on track?&#8221;) or a deeper analysis (&#8220;What&#8217;s wrong?&#8221;).</p>
 </div>
 <div class="paragraph">
-<p>For this purpose, we often devise so called <strong><em>Key Performance Indicators</em> (KPIs)</strong>, i.e., custom metrics that tell us how well things are going. For example, if we&#8217;re working on a web application, one KPI we might want to track could be &#8220;user happiness&#8221;. Unfortunately, true user happiness is difficult to measure, but we can instead check the number of users returning to our site and how long they stay and then somehow combine these and other measurements into a proxy variable that we then call &#8220;user happiness&#8221;.</p>
-</div>
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-caution" title="Caution"></i>
-</td>
-<td class="content">
-A KPI is only a reliable measure, if it is not simultaneously used to control people&#8217;s behavior, as they will otherwise try to game the system (<a href="https://en.wikipedia.org/wiki/Goodhart%27s_law" target="\_blank">Goodhart&#8217;s Law</a>). For example, if our goal is high quality software, counting the number of bugs in our software is not a reliable measure for quality, if we simultaneously <a href="https://dilbert.com/strip/1995-11-13" target="\_blank">reward programmers for every bug they find and fix</a>.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Ideally, these metrics are combined with <strong>thresholds for alerts</strong> to automatically notify us if things go south and a corrective action becomes necessary. For example, we could establish some alert on the health of a system or machine to notify a technician when maintenance is necessary.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<p><span class="underline">For every KPI we should define:</span></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>the target state, i.e., the value or corridor that indicates that operations are running smoothly</p>
-</li>
-<li>
-<p>the alert threshold, i.e., when a corrective action is necessary</p>
-</li>
-<li>
-<p>what corrective action could be taken by whom and who needs to be informed about it</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>For example, one KPI for a customer service department could be the number of hours it takes for a customer request to be resolved. The target state could be &#8216;less than 48 hours&#8217; and if the average exceeds 96 hours for more than a month, this could be a sign that they need to hire more service agents.<br>
-Unfortunately, what kind of corrective action will get us back on track is often not obvious and usually requires us to dig deeper into the data with an <em>ad hoc analysis</em> to identify the root cause of the problem.</p>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_ad_hoc_analysis">Ad Hoc Analysis</h5>
-<div class="paragraph">
-<p>An ad hoc data analysis can help us answer questions such as</p>
+<p>By visualizing important variables or <em>Key Performance Indicators</em> (KPIs) in <strong>reports</strong> or <strong>dashboards</strong>, we increase transparency of the status quo and quantify our progress towards some goal.
+When a KPI is far from its target value, we can dig deeper into the data with an exploratory data analysis to identify the root cause of the problem and answer questions such as</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1437,47 +1388,7 @@ Unfortunately, what kind of corrective action will get us back on track is often
 </ul>
 </div>
 <div class="paragraph">
-<p>Arriving at satisfactory answers is often more art than science. But we have a multitude of tools and techniques to help us with this.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Exploratory Data Analysis</dt>
-<dd>
-<p>As described in more detail in the chapter on <a href="#_data_analysis">Data Analysis</a>, in an exploratory analysis we dive deep into the data, e.g., by generating lots of <strong>plots to better understand</strong> the different variables, KPIs, and their relationships.<br>
-<span class="underline">Example:</span> <em>By visualizing the number of customer requests we received over time, we notice a sharp increase around the same time a new feature of our software was released. After further investigation, we conclude that many users are confused by this new functionality and we need to make the user interface more self-explanatory.</em></p>
-</dd>
-<dt class="hdlist1">Statistical Inference</dt>
-<dd>
-<p>Statistical inference enables us to <strong>draw conclusions that reach beyond the data at hand</strong>. Often we would like to make a statement about a whole <em>population</em> (e.g., all humans currently living on this earth), but we only have access to a few (hopefully representative) observations to draw our conclusion from. Statistical inference is about changing our mind under uncertainty: We start with a null hypothesis and then check if what we see in the sample dataset makes this null hypothesis look ridiculous, at which point we reject it and go with our alternative hypothesis instead.<br>
-<span class="underline">Example:</span> <em>Your company has an online store and wants to roll out a new recommendation system, but you are unsure whether customers will find these recommendations helpful and buy more. Therefore, before going live with the new system, you perform an A/B test, where a percentage of randomly selected users see the new recommendations, while the others are routed to the original version of the online store. The null hypothesis is that the new version is no better than the original. But it turns out that the average sales volume of customers seeing the new recommendations is a lot higher than that of the customers browsing the original site. This difference is so large that in a world where the null hypothesis was true, it would be extremely unlikely that a random sample would give us these results. We therefore reject the null hypothesis and go with the alternative hypothesis, that the new recommendations generate higher sales.</em><br>
-<span class="small">Read <a href="https://towardsdatascience.com/whats-the-difference-between-analytics-and-statistics-cd35d457e17" target="\_blank">this article</a> to learn more about the difference between analysts and statisticians and why they should work on distinct splits of your dataset.</span></p>
-</dd>
-<dt class="hdlist1">Predictive Analytics</dt>
-<dd>
-<p>Using historical data, we can generate a <strong>predictive model</strong> that makes predictions about future scenarios to aid with planning. These models are often created using <em>supervised learning</em>, a subfield of machine learning.<br>
-<span class="underline">Example:</span> <em>Use sales forecasts to better plan inventory levels.</em></p>
-</dd>
-<dt class="hdlist1">Interpreting Predictive Models</dt>
-<dd>
-<p>Given a model that makes accurate predictions for new data points, we can <a href="https://franziskahorn.de/mlbook/_explainability_interpretable_ml.html" target="\_blank">interpret this model</a> and explain its predictions to <strong>understand root causes</strong> in a process.<br>
-<span class="underline">Example:</span> <em>Given a model that predicts the quality of a product from the process conditions, identify which conditions result in lower quality products.</em></p>
-</dd>
-<dt class="hdlist1">What-if Analysis</dt>
-<dd>
-<p>Given a model that makes accurate predictions for new data points, we can use this model in a <strong>&#8220;what-if&#8221; forecast</strong> to explore how a system might react to different conditions to make better decisions
-(use with <a href="#_pitfall_3_model_abuses_spurious_correlations">caution</a>!).<br>
-<span class="underline">Example:</span> <em>Given a model that predicts the remaining lifetime of a machine component under some process conditions, simulate how quickly this component would deteriorate if we changed the process conditions.</em></p>
-<div class="paragraph">
-<p>Going one step further, this model can also be used inside an optimization loop to automatically evaluate different inputs with the model systematically to <strong>find optimal settings</strong>.<br>
-<span class="underline">Example:</span> <em>Given a model that predicts the quality of a product from the process conditions, automatically determine the best production settings for a new type of raw material.</em></p>
-</div>
-</dd>
-</dl>
-</div>
-</div>
-</div>
+<p>However, as we&#8217;ll discuss in more detail in the section on <a href="#_data_analysis">data analysis</a>, arriving at satisfactory answers is often more art than science 😉.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1657,6 +1568,18 @@ Simply speaking, an <strong>algorithm</strong> can be thought of as a <strong>st
 </dd>
 </dl>
 </div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Use ML only when occasional errors are acceptable. ML models are typically trained on human-generated data, which is prone to noise since even experts may disagree on certain cases. Additionally, ML models may need to extrapolate, predicting outcomes for new data points that differ from the training data, leading to potential inaccuracies. To minimize errors, keeping a human in the loop to periodically review the predictions made by the ML model can be beneficial.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="dlist">
@@ -1674,7 +1597,7 @@ Simply speaking, an <strong>algorithm</strong> can be thought of as a <strong>st
 </div>
 </li>
 <li>
-<p>Identify parts of the process that could either be automated with ML (e.g., straightforward, repetitive tasks otherwise done by humans) or in other ways improved by analyzing data (e.g., to understand root causes of a problem, improve planning with what-if simulations, or optimize the use of resources):</p>
+<p>Identify parts of the process that could either be automated with ML (e.g., straightforward, repetitive tasks otherwise done by humans) or in other ways improved by analyzing data (e.g., to understand root causes of a problem, to improve planning with what-if simulations, or to optimize the use of resources):</p>
 <div class="imageblock text-center">
 <div class="content">
 <img src="images/01b_intro_ml/automate_insights7b.png" alt="image" width="840">
@@ -1717,8 +1640,7 @@ Simply speaking, an <strong>algorithm</strong> can be thought of as a <strong>st
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Data requirements for learning according to these strategies: </dt>
-</dl>
-</div>
+<dd>
 <div class="ulist none">
 <ul class="none">
 <li>
@@ -1750,12 +1672,15 @@ Simply speaking, an <strong>algorithm</strong> can be thought of as a <strong>st
 </li>
 </ul>
 </div>
+</dd>
+</dl>
+</div>
 <div class="sect3">
 <h4 id="_supervised_learning">Supervised Learning</h4>
 <div class="paragraph">
 <p>Supervised learning is the most common type of machine learning used in today&#8217;s applications.<br>
 The goal here is to learn a <strong>model (= a mathematical function)</strong> \(f(x)\) that describes the relationship between some <strong>input(s)</strong> \(x\) (e.g., different process conditions like temperature, type of material, etc.) and <strong>output</strong> \(y\) (e.g., resulting product quality).<br>
-This model can then be used to <strong>make predictions for new data points</strong>, i.e., compute \(f(x') = y\) for some new \(x'\) (e.g., predict for a new set of process conditions whether the produced product will be of high quality or if the process should be stopped to not waste resources).</p>
+This model can then be used to <strong>make predictions for new data points</strong>, i.e., compute \(f(x') = y'\) for some new \(x'\) (e.g., predict for a new set of process conditions whether the produced product will be of high quality or if the process should be stopped to not waste resources).</p>
 </div>
 <div class="dlist">
 <dl>
@@ -1866,6 +1791,30 @@ In most of the book, the terms &#8220;ML algorithm&#8221; and &#8220;ML model&#8
 <div class="title"><span class="small">In many use cases, it is not enough to &#8220;only&#8221; predict the target for a new data point, e.g., predict whether a product produced under certain conditions will be of high quality or not. Instead, it is often necessary to additionally be able to explain <em>why</em> this prediction was made, e.g., which input feature values were the deciding factors, both to better understand possible root causes of a problem, but also to be assured that the model is basing its predictions on reasonable assumptions. Furthermore, a learned model can also be used within an outer optimization loop, i.e., in the simplest case one could systematically check what product quality the model predicts for different process conditions and then select the settings with the highest predicted quality to produce new products. But keep in mind that ML models are only built to interpolate, not extrapolate, i.e., make sure the settings that are tested are withing the training domain.</span></div>
 </div>
 </div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Predictive Analytics</dt>
+<dd>
+<p>By feeding historical data to a supervised learning algorithm, we can generate a <strong>predictive model</strong> that makes predictions about future scenarios to aid with planning.<br>
+<span class="underline">Example:</span> <em>Use sales forecasts to better plan inventory levels.</em></p>
+</dd>
+<dt class="hdlist1">Interpreting Predictive Models</dt>
+<dd>
+<p>Given a model that makes accurate predictions for new data points, we can <a href="https://franziskahorn.de/mlbook/_explainability_interpretable_ml.html" target="\_blank">interpret this model</a> and explain its predictions to <strong>understand root causes</strong> in a process.<br>
+<span class="underline">Example:</span> <em>Given a model that predicts the quality of a product from the process conditions, identify which conditions result in lower quality products.</em></p>
+</dd>
+<dt class="hdlist1">What-if Analysis &amp; Optimization</dt>
+<dd>
+<p>Given a model that makes accurate predictions for new data points, we can use this model in a <strong>&#8220;what-if&#8221; forecast</strong> to explore how a system might react to different conditions to make better decisions
+(use with <a href="#_pitfall_3_model_abuses_spurious_correlations">caution</a>!).<br>
+<span class="underline">Example:</span> <em>Given a model that predicts the remaining lifetime of a machine component under some process conditions, simulate how quickly this component would deteriorate if we changed the process conditions.</em></p>
+<div class="paragraph">
+<p>Going one step further, this model can also be used inside an optimization loop to automatically evaluate different inputs with the model systematically to <strong>find optimal settings</strong>.<br>
+<span class="underline">Example:</span> <em>Given a model that predicts the quality of a product from the process conditions, automatically determine the best production settings for a new type of raw material.</em></p>
+</div>
+</dd>
+</dl>
 </div>
 </div>
 </div>
@@ -2010,7 +1959,19 @@ In most of the book, the terms &#8220;ML algorithm&#8221; and &#8220;ML model&#8
 <div class="content">
 <img src="images/01c_ml_overview/ml_algorithms_12.png" alt="image" width="840">
 </div>
-<div class="title"><span class="small">To apply unsupervised learning algorithms, we only need a feature matrix \(X\), while learning a prediction model with supervised learning algorithms additionally requires the corresponding labels \(\mathbf{y}\). Even if our ultimate goal is to predict something (i.e., use supervised learning), it can still be helpful to first use unsupervised learning to get a better understanding of the dataset, for example, by visualizing the data with dimensionality reduction methods to see all samples and their diversity at a glance, by identifying outliers to clean the dataset, or, for classification problems, by first clustering the samples to check whether the given class labels match the naturally occurring groups in the data or if, e.g., two very similar classes could be combined to simplify the problem.</span></div>
+<div class="title"><span class="small">To apply unsupervised learning algorithms, we only need a feature matrix \(X\), while learning a prediction model with supervised learning algorithms additionally requires the corresponding labels \(\mathbf{y}\).</span></div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Even if our ultimate goal is to predict something (i.e., use supervised learning), it can still be helpful to first use unsupervised learning to get a better understanding of the dataset, for example, by visualizing the data with dimensionality reduction methods to see all samples and their diversity at a glance, by identifying outliers to clean the dataset, or, for classification problems, by first clustering the samples to check whether the given class labels match the naturally occurring groups in the data or if, e.g., two very similar classes could be combined to simplify the problem.
+</td>
+</tr>
+</table>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -2109,7 +2070,7 @@ In most of the book, the terms &#8220;ML algorithm&#8221; and &#8220;ML model&#8
 </dd>
 </dl>
 </div>
-<div class="paragraph text-justify">
+<div class="paragraph text-justify text-justify">
 <p><span class="small">This is a small toy dataset with structured data about different apartments, which someone might have gathered from a real estate website. It includes the size of the apartment in square meters, the number of bedrooms, the number of bathrooms, the year it was last renovated, and finally the price of the listing and whether it was sold for this price (1) or not (0).</span></p>
 </div>
 </div>
@@ -2120,7 +2081,7 @@ In most of the book, the terms &#8220;ML algorithm&#8221; and &#8220;ML model&#8
 <div class="title"><span class="underline">Use Cases:</span></div>
 <ul>
 <li>
-<p>create a 2D visualization to explore the dataset as a whole, where we can often already identify patterns like samples that can be grouped together (clusters) or that don&#8217;t belong (outliers)</p>
+<p>create a 2D visualization to explore the dataset as a whole, where we can often already visually identify patterns like samples that can be grouped together (clusters) or that don&#8217;t belong (outliers)</p>
 </li>
 <li>
 <p>noise reduction and/or feature engineering as a data preprocessing step to improve the performance in the following prediction task</p>
@@ -2279,69 +2240,29 @@ In most of the book, the terms &#8220;ML algorithm&#8221; and &#8220;ML model&#8
 <div class="title"><span class="underline">Use Cases:</span></div>
 <ul>
 <li>
-<p>Describe (and subsequently better understand and optimize) input-output relationships in some real world process, for example:</p>
+<p>Learn a model to describe an input-output relationship and make predictions for new data points, for example:</p>
 <div class="ulist">
 <ul>
-<li>
-<p>determine the price that should be set for a new apartment listing and tell home owners what they can do to sell their house at a higher price (e.g., a freshly renovated bathroom may have a higher influence on what potential buyers are willing to pay than a new coat of paint on the outside)</p>
-</li>
 <li>
 <p>predict in advance whether a product produced under the proposed process conditions will be of high quality or would be a waste of resources</p>
 </li>
 <li>
-<p>identify which process conditions have the most influence on the quality of the product and which settings generally lead to the best results</p>
+<p>fraud detection: identify fraudulent credit card transactions</p>
 </li>
 <li>
-<p>given some external conditions (e.g., outside temperature, composition of raw input materials from a new vendor), automatically determine the best process settings to produce high quality products</p>
+<p>churn prediction: identify customers that are about to cancel their contract (or employees that are about to quit) so you can reach out to them and convince them to stay</p>
+</li>
+<li>
+<p>price optimization: determine the optimal price for a product (often used for dynamic pricing, e.g., to adapt prices based on the device a customer uses (e.g., new iPhone vs old Android phone) when accessing a website)</p>
+</li>
+<li>
+<p>predictive maintenance: predict how long a machine component will last</p>
+</li>
+<li>
+<p>sales forecasts: predict revenue in the coming weeks and how much inventory will be required to satisfy the demand</p>
 </li>
 </ul>
 </div>
-</li>
-</ul>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<p><span class="underline">Steps:</span></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>[optional] create a dashboard where the KPI(s) can be monitored</p>
-</li>
-<li>
-<p>build a model that reliably captures the input-output relationship between the process variables and KPIs</p>
-</li>
-<li>
-<p>interpret the model to identify root causes, i.e., determine which inputs have the most influence on the KPIs and investigate how they are related</p>
-</li>
-<li>
-<p>use the model to make predictions for new data points or in a what-if forecast to facilitate planning</p>
-</li>
-<li>
-<p>use the model within an outer control loop to automatically find optimal inputs (either with classical optimization techniques or reinforcement learning for longer time horizons)</p>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="ulist">
-<div class="title"><span class="underline">Possible challenges:</span></div>
-<ul>
-<li>
-<p>success is uncertain: while it is fairly straightforward to apply the models, it is difficult to determine in advance whether there even exists any relation between the measured inputs and KPIs (&#8594; beware of garbage in, garbage out!)</p>
-</li>
-<li>
-<p>appropriate definition of the output/target/KPI that should be modeled, i.e., what does it actually mean for a process to run well and how might external factors influence this definition (e.g., can we expect the same performance on an exceptionally hot summer day?)</p>
-</li>
-<li>
-<p>missing important input variables, e.g., if there exist other influencing factors that we haven&#8217;t considered or couldn&#8217;t measure, which means not all of the target variable&#8217;s variance can be explained</p>
-</li>
-<li>
-<p>lots of possibly irrelevant input variables that require careful feature selection to avoid <a href="https://www.tylervigen.com/spurious-correlations" target="\_blank">spurious correlations</a>, which would result in incorrect &#8216;what-if&#8217; forecasts since the true causal relationship between the inputs and outputs isn&#8217;t captured</p>
-</li>
-<li>
-<p>often very time intensive data preprocessing necessary, e.g., when combining data from different sources and engineering additional features</p>
 </li>
 </ul>
 </div>
@@ -2381,6 +2302,26 @@ In most of the book, the terms &#8220;ML algorithm&#8221; and &#8220;ML model&#8
 </div>
 </div>
 </div>
+<div class="ulist">
+<div class="title"><span class="underline">Possible challenges:</span></div>
+<ul>
+<li>
+<p>success is uncertain: while it is fairly straightforward to apply the models, it is difficult to determine in advance whether there even exists any relation between the measured inputs and targets (&#8594; beware of garbage in, garbage out!)</p>
+</li>
+<li>
+<p>appropriate definition of the output/target/KPI that should be modeled, i.e., what does it actually mean for a process to run well and how might external factors influence this definition (e.g., can we expect the same performance on an exceptionally hot summer day?)</p>
+</li>
+<li>
+<p>missing important input variables, e.g., if there exist other influencing factors that we haven&#8217;t considered or couldn&#8217;t measure, which means not all of the target variable&#8217;s variance can be explained</p>
+</li>
+<li>
+<p>lots of possibly irrelevant input variables that require careful feature selection to avoid <a href="https://www.tylervigen.com/spurious-correlations" target="\_blank">spurious correlations</a>, which would result in incorrect &#8216;what-if&#8217; forecasts since the true causal relationship between the inputs and outputs isn&#8217;t captured</p>
+</li>
+<li>
+<p>often very time intensive data preprocessing necessary, e.g., when combining data from different sources and engineering additional features</p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_deep_learning">Deep Learning</h4>
@@ -2392,10 +2333,10 @@ In most of the book, the terms &#8220;ML algorithm&#8221; and &#8220;ML model&#8
 <div class="ulist">
 <ul>
 <li>
-<p>text classification (e.g., identify spam / hate speech / fake news)</p>
+<p>text classification (e.g., identify spam / hate speech / fake news; forward customer support request to the appropriate department)</p>
 </li>
 <li>
-<p>sentiment analysis (subtask of text classification: identify if text is positive or negative, e.g., for product reviews)</p>
+<p>sentiment analysis (subtask of text classification: identify if text is positive or negative, e.g., to monitor product reviews or what social media users are saying about your company)</p>
 </li>
 <li>
 <p>speech recognition (e.g., transcribe dictated notes or add subtitles to videos)</p>
@@ -2408,6 +2349,9 @@ In most of the book, the terms &#8220;ML algorithm&#8221; and &#8220;ML model&#8
 </li>
 <li>
 <p>image captioning (generate text that describes what&#8217;s shown in an image, e.g., to improve the online experience for for people with visual impairment)</p>
+</li>
+<li>
+<p>predictive typing (e.g., suggest possible next words when typing on a smartphone)</p>
 </li>
 <li>
 <p>data generation (e.g., generate new photos/images of specific objects or scenes)</p>
@@ -2758,7 +2702,7 @@ Ask an ML expert whether a similar problem has already been solved before. Inste
 </li>
 <li>
 <p><strong>Should you <span class="underline">build</span> this yourself or can you <span class="underline">buy</span> it?</strong><br>
-Does the solution require unique domain knowledge only available at your organization, e.g., because you&#8217;re analyzing data generated by your own specific processes/machines and/or will the solution be a key part of your business, e.g., a new feature that makes your product more attractive?<br>
+Does the solution require unique subject matter expertise only available at your organization, e.g., because you&#8217;re analyzing data generated by your own specific processes/machines and/or will the solution be a key part of your business, e.g., a new feature that makes your product more attractive?<br>
 Or is this a common (but complex) problem, for which a solution already exists (e.g., offered as a Software-as-a-Service (SaaS) product), that you could buy off the shelf? For example, extracting the relevant information from scanned invoices to automate bookkeeping processes is a relatively complex task for which many good solutions already exist, so unless you are working in a company building bookkeeping software and plan to sell a better alternative to these existing solutions, it probably doesn&#8217;t make sense to implement this yourself.</p>
 <div class="paragraph">
 <p>Some general points you might want to consider when deciding whether to buy an ML solution or build it yourself:</p>
@@ -2874,7 +2818,7 @@ Are there any concerns w.r.t. data privacy? What about accountability, i.e., do 
 </ol>
 </div>
 <div class="paragraph">
-<p>&#8594; As these decisions heavily depend on your specific use case, they go beyond the scope of this book. Search online for &#8220;MLOps&#8221; to find out more about these topics and hire a machine learning or data engineer to set up the required infrastructure in your company.</p>
+<p>&#8594; As these decisions heavily depend on your specific use case, they go beyond the scope of this book. Search online for &#8220;MLOps&#8221; or read the book <a href="https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/">Designing Machine Learning Systems</a> to find out more about these topics and hire a machine learning or data engineer to set up the required infrastructure in your company.</p>
 </div>
 </div>
 </div>
@@ -2894,23 +2838,53 @@ Are there any concerns w.r.t. data privacy? What about accountability, i.e., do 
 <div class="sect2">
 <h3 id="_data_analysis">Data Analysis</h3>
 <div class="paragraph">
-<p>Analyzing data is not only an important step before using this data for a machine learning project, but can also generate valuable insights that result in better (data-driven) decisions.</p>
-</div>
-<div class="paragraph">
-<p>We usually analyze data for one of two reasons:</p>
+<p>Analyzing data is not only an important step before using this data for a machine learning project, but can also generate valuable insights that result in better (data-driven) decisions.
+We usually analyze data for one of two reasons:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>we need some specific information to make a (better) decision <em>(reactive analysis)</em> or</p>
+<p>We need some specific information to make a (better) decision (<em>reactive analysis</em>, e.g., when something went wrong and we don&#8217;t know why).</p>
 </li>
 <li>
-<p>we&#8217;re curious about the data and don&#8217;t know yet what the analysis will bring <em>(proactive analysis)</em>.</p>
+<p>We&#8217;re curious about the data and don&#8217;t know yet what the analysis will bring (<em>proactive analysis</em>, e.g., to better understand the data at the beginning of an ML project).</p>
 </li>
 </ol>
 </div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Data analysis results can be obtained and communicated in different formats</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>A <strong>custom analysis</strong> with results presented, e.g., in a power point <strong>presentation</strong></p>
+</li>
+<li>
+<p>A <strong>standardized report</strong>, e.g., in form of a PDF document, showing static data visualizations of historical data</p>
+</li>
+<li>
+<p>A <strong>dashboard</strong>, i.e., a web app showing (near) real-time data, usually with some interactive elements (e.g., options to filter the data)</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/02_data/analysis_methods.png" alt="image" width="450">
+</div>
+</div>
+</li>
+</ul>
+</div>
 <div class="paragraph">
-<p>In both cases we start with an <strong>exploratory data analysis</strong> to turn data into insights.</p>
+<p>While the data story that is told in a presentation is usually fixed, users have more opportunities to interpret the data and analyze it for themselves in an interactive dashboard.</p>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>What all forms of data analyses have in common is that we&#8217;re after &#8220;(actionable) insights&#8221;.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -2928,10 +2902,21 @@ Are there any concerns w.r.t. data privacy? What about accountability, i.e., do 
 </div>
 <div class="title"><span class="small">Things get interesting when we find something in the data that we didn&#8217;t expect. [Adapted from: <em>Effective Data Storytelling</em> by Brent Dykes]</span></div>
 </div>
+<div class="paragraph">
+<p>Arriving at an insight requires two steps:</p>
 </div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Notice something unexpected</strong>, e.g., a sudden drop or increase in some metric.</p>
+</li>
+<li>
+<p><strong>Understand why this happened</strong>, i.e., dig deeper into the data to identify the root cause.</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>An exploratory analysis is often a quick and dirty process where we <strong>generate lots of plots to better understand the data</strong>. In accordance with Gary Klein, we&#8217;re <strong>looking for things that are unexpected</strong>, e.g., an unusual increase or decrease in some metric. Then we dig deeper to understand where this difference between what we expected and what we saw in the data is coming from, e.g., by examining other correlated variables.</p>
+<p>When we understand why something happened, we can often also <strong>identify a potential action that could get us back on track</strong>, thereby making this an <em>actionable insight</em>.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -2941,6 +2926,28 @@ Are there any concerns w.r.t. data privacy? What about accountability, i.e., do 
 </td>
 <td class="content">
 Knowing which values are unexpected and where it might pay off to dig deeper often requires some domain knowledge, so you might want to examine the results <strong>together with a subject matter expert</strong>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Ideally, we should continuously <strong>monitor important metrics in dashboards or reports</strong> to spot deviations from the norm as quickly as possible, while <strong>identifying the root cause often requires a custom analysis</strong>.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/02_data/analysis_monitoring.png" alt="image" width="450">
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+As a data analyst you are sometimes approached with <strong>more specific questions or requests</strong> such as &#8220;We&#8217;re deciding where to launch a new marketing campaign. Can you show me the number of users for all European countries?&#8221;. In these cases it can be helpful to <strong>ask &#8220;why?&#8221; to understand where the person noticed something unexpected</strong> that prompted this analysis request. If the answer is &#8220;Oh, we just have some marketing budget left over and need to spend the money somewhere&#8221; then just give them the results. But if the answer is &#8220;Our revenue for this quarter was lower than expected&#8221; it might be worth <strong>exploring other possible root causes</strong> for this, as maybe the problem is not the number of users that visit the website, but that many users drop out before they reach the checkout page and the money might be better invested in a usability study to understand why users don&#8217;t complete the sale.
 </td>
 </tr>
 </table>
@@ -2957,76 +2964,111 @@ Insights become valuable when they influence a decision and inspire a different 
 </div>
 </div>
 <div class="paragraph">
-<p>For this, we first need to determine <strong>which decision</strong> our insights should influence (which is usually easier in the case of a reactive compared to a proactive analysis) and then communicate our results accordingly.</p>
+<p>This means we need to understand <strong>which decision(s)</strong> the insights from our data analysis should influence.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Not all decisions need to be made in a data-driven way. But decision makers should be transparent and upfront about whether a decision can be influenced by analysis results, i.e., what data would make them change their mind and choose a different course of action. If data is only requested to support a decision that in reality has already been made, save the analysts the time and effort!
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>For this we need to be clear on:</p>
+<p>Before we conduct a data analysis we need to be clear on:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Who are the relevant stakeholders (= our audience)?</p>
+<p>Who are the <strong>relevant stakeholders</strong>, i.e., who will consume the data analysis results (= our audience / dashboard users)?</p>
 </li>
 <li>
-<p>What is their goal?</p>
-</li>
-<li>
-<p>What questions need to be answered to make progress towards this goal?</p>
-</li>
-<li>
-<p>What visualizations can help answer these questions?</p>
-</li>
-<li>
-<p>What action would we recommend based on the answer?</p>
+<p>What is <strong>their goal</strong>?</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>In business contexts, the users' goals are usually in some way related to making a profit for the company, i.e., increasing revenue (e.g., by solving a customer problem more effectively than the competition) or reducing costs.</p>
+</div>
+<div class="paragraph">
+<p>The progress towards these goals is tracked with so called <strong><em>Key Performance Indicators</em> (KPIs)</strong>, i.e., custom metrics that tell us how well things are going. For example, if we&#8217;re working on a web application, one KPI we might want to track could be &#8220;user happiness&#8221;. Unfortunately, true user happiness is difficult to measure, but we can instead check the number of users returning to our site and how long they stay and then somehow combine these and other measurements into a proxy variable that we then call &#8220;user happiness&#8221;.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+A KPI is only a reliable measure, if it is not simultaneously used to control people&#8217;s behavior, as they will otherwise try to game the system (<a href="https://en.wikipedia.org/wiki/Goodhart%27s_law" target="\_blank">Goodhart&#8217;s Law</a>). For example, if our goal is high quality software, counting the number of bugs in our software is not a reliable measure for quality, if we simultaneously <a href="https://dilbert.com/strip/1995-11-13" target="\_blank">reward programmers for every bug they find and fix</a>.
+</td>
+</tr>
+</table>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Example business decisions</dt>
+<dt class="hdlist1">Lagging vs. Leading KPIs</dt>
 <dd>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><span class="underline">Question:</span> Is the customer service department reaching its goals?<br>
-<span class="underline">Answer:</span> In the last 3 months, customer service only managed to resolve 80% of requests.<br>
-<span class="underline">Recommended Action:</span> We should hire more people.</p>
-</li>
-<li>
-<p><span class="underline">Question:</span> What country should we expand to next?<br>
-<span class="underline">Answer:</span> The market potential for countries A/B/C is 200/500/300 million euros respectively.<br>
-<span class="underline">Recommended Action:</span> We should target country B next.</p>
-</li>
-<li>
-<p><span class="underline">Question:</span> Do we need to order more inventory?<br>
-<span class="underline">Answer:</span> Sales forecasts show that our current inventory should last until after Christmas.<br>
-<span class="underline">Recommended Action:</span> No, we should not order more inventory.</p>
-</li>
-<li>
-<p><span class="underline">Question:</span> Can we drop support for Internet Explorer for our web application?<br>
-<span class="underline">Answer:</span> Only 10% of our users still use IE while our developers complain about the high maintenance effort.<br>
-<span class="underline">Recommended Action:</span> Full support for IE is not worth it anymore.</p>
-</li>
-</ol>
-</div>
-</dd>
-<dt class="hdlist1">Example ML-related decisions</dt>
-<dd>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><span class="underline">Question:</span> Are the predictions of our ML model accurate enough such that we can use it in the live system?<br>
-<span class="underline">Answer:</span> Model accuracy dropped below 85% last week.<br>
-<span class="underline">Recommended Action:</span> We should retrain the model on more recent data.</p>
-</li>
-</ol>
+<p>Unfortunately, the things we really care about can often only be <strong>measured after the fact, i.e., when it is too late to take corrective action</strong>. For example, in sales we care about &#8220;realized revenue&#8221;, i.e., money in the bank, but if the revenue at the end of the quarter is less than what we hoped for, we can only try to do better next quarter. These metrics are called <strong>lagging KPIs</strong>.<br>
+<strong>Leading KPIs</strong> instead tell us when we should <strong>act before it&#8217;s too late</strong>. For example, in sales this could be the volume of deals in the sales pipeline, i.e., while not all of these deals might eventually go through and result in realized revenue, if the pipeline is empty we know for certain that we wont reach our revenue goals.</p>
+<div class="paragraph">
+<p>If the causal relationships between variables are too complex to identify leading KPIs directly, we can instead try to <strong>use a machine learning model to predict lagging KPIs</strong>. For example, in a polymer production process, an important quality metric may be the tensile strength measured 24 hours after the polymer hardens. Waiting for these results could lead to discarding the last 24 hours of production if the quality is subpar.
+If the relationships between the process parameters (such as production temperature) and the resulting quality are too complex to identify a leading KPI, we could instead train an ML model on the past process parameters (inputs) and corresponding quality measurements (outputs) to then continuously predict the quality during production. When the model predicts that the quality is off-target, the operators can intervene and fix issues before significant production time is wasted.<br>
+However, relying on an ML model introduces the need to monitor its predictions for trustworthiness. In our example, the <strong>prediction accuracy on new data serves as a lagging KPI</strong>, as we only know whether the predictions are correct after real measurements arrive 24 hours later. As a <strong>leading KPI</strong>, we can measure the discrepancy between process parameter values used in model training and those received in production to identify <strong>dataset drifts</strong>. These drifts, such as changes in values due to sensor malfunctions, can lead to inaccurate predictions for affected samples.</p>
 </div>
 </dd>
 </dl>
 </div>
 </div>
+</div>
+<div class="paragraph">
+<p>The first step when making a data-driven decision is to <strong>realize that we should act by monitoring our KPIs</strong> to see whether we&#8217;re on track to achieve our goals.</p>
+</div>
+<div class="paragraph">
+<p>Ideally, this is achieved by combining these metrics with <strong>thresholds for alerts</strong> to automatically notify us if things go south and a corrective action becomes necessary. For example, we could establish some alert on the health of a system or machine to notify a technician when maintenance is necessary. To <strong>avoid alert fatigue</strong>, it is important to reduce false alarms, i.e., configure the alert such that the responsible person tells you &#8220;when this threshold is reached, I will drop everything else and go fix the problem&#8221; (<em>not</em> &#8220;at this point we should probably keep an eye on it&#8221;).</p>
+</div>
+<div class="paragraph">
+<p>Depending on how frequently the value of the KPI changes and how quickly corrective actions show effects, we want to check for the alert condition either every few minutes to alert someone in real time or, for example, every morning, every Monday, or once per month if the values change more slowly.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Is this significant?</dt>
+<dd>
+<p>Small variations in KPIs are normal and we should not overreact to noise. Statistics can tell us <strong>whether the observed deviation from what we expected is significant</strong>.</p>
+<div class="paragraph">
+<p>Statistical inference enables us to <strong>draw conclusions that reach beyond the data at hand</strong>. Often we would like to make a statement about a whole <em>population</em> (e.g., all humans currently living on this earth), but we only have access to a few (hopefully representative) observations to draw our conclusion from. Statistical inference is about changing our mind under uncertainty: We start with a null hypothesis (i.e., what we expected before looking at the data) and then check if what we see in the sample dataset makes this null hypothesis look ridiculous, at which point we reject it and go with our alternative hypothesis instead.<br>
+<span class="underline">Example:</span> <em>Your company has an online store and wants to roll out a new recommendation system, but you are unsure whether customers will find these recommendations helpful and buy more. Therefore, before going live with the new system, you perform an A/B test, where a percentage of randomly selected users see the new recommendations, while the others are routed to the original version of the online store. The null hypothesis is that the new version is no better than the original. But it turns out that the average sales volume of customers seeing the new recommendations is a lot higher than that of the customers browsing the original site. This difference is so large that in a world where the null hypothesis was true, it would be extremely unlikely that a random sample would give us these results. We therefore reject the null hypothesis and go with the alternative hypothesis, that the new recommendations generate higher sales.</em></p>
+</div>
+<div class="paragraph">
+<p>In addition to rigorous statistical tests, there are also some rules of thumb to determine whether changes in the data warrant our attention: If a single sample lies three standard deviations (\(\sigma\)) above or below the mean or seven consecutive points fall above or below the average value, this is cause for further investigation.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/02_data/control_chart.png" alt="image" width="550">
+</div>
+<div class="title"><span class="small">A control chart showing measurements taken over time that fluctuate around their mean value with points of interest marked in red.</span></div>
+</div>
+<div class="paragraph">
+<p><span class="small">Read <a href="https://towardsdatascience.com/whats-the-difference-between-analytics-and-statistics-cd35d457e17" target="\_blank">this article</a> to learn more about the difference between analysts and statisticians and why they should work on distinct splits of your dataset.</span></p>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>For every alert that is created, i.e., every time it is clear that a corrective action is needed, it is worth considering whether this action can be automated and to directly <strong>trigger this automated action together with the alert</strong> (e.g., if the performance of an ML model drops below a certain threshold, instead of just notifying the data scientist we could automatically trigger a retraining with the most recent data). If this is not possible, e.g., because it is not clear what exactly happened and therefore which action should be taken, we need a deeper analysis.</p>
+</div>
+<div class="paragraph">
+<p>Digging deeper into the data can help us answer questions such as &#8220;Why did we not reach this goal and how can we do better?&#8221; (or, in rarer cases, &#8220;Why did we exceeded this goal and how can we do it again?&#8221;) to <strong>decide on the specific action</strong> to take.</p>
 </div>
 <div class="admonitionblock caution">
 <table>
@@ -3040,31 +3082,26 @@ Don&#8217;t just look for data that confirms the story you want to tell and supp
 </tr>
 </table>
 </div>
-<div class="sidebarblock">
-<div class="content">
 <div class="paragraph">
-<p><span class="underline">But:</span> Not all decisions need to be made in a data-driven way:</p>
+<p>Such an exploratory analysis is often a quick and dirty process where we <strong>generate lots of plots to better understand the data</strong> and where the difference between what we expected and what we saw in the data is coming from, e.g., by examining other correlated variables. However, arriving at satisfactory answers is often more art than science.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Our best web developers threatened to quit, if they have to keep supporting Internet Explorer. No matter how many users would be affected by the change, we can&#8217;t lose these developers!</p>
-</li>
-<li>
-<p>Our ML model is retrained on new data every week anyways, no matter the performance.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>&#8658; Be transparent and upfront about whether a decision can be influenced by analysis results and if not, save the analysts the effort.</p>
-</div>
-</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+When using an ML model to predict a KPI, we can interpret this model and its predictions to better understand which variables might influence the KPI. <strong>Focusing on the features deemed important by the ML model</strong> can be helpful if our dataset contains hundreds of variables and we don&#8217;t have time to look at all of them in detail. But use with caution&#8201;&#8212;&#8201;the model only learned from correlations in the data; these do not necessarily represent true causal relationships between the variables.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_communicating_insights">Communicating Insights</h4>
 <div class="paragraph">
-<p>The plots that were created during the exploratory analysis should not be the plots we show our audience when we&#8217;re trying to communicate our findings. Since our audience is far less familiar with the data than us and probably also not interested / doesn&#8217;t have the time to dive deeper into the data, we need to make the results more accessible, a process often called <em>explanatory analysis</em>.</p>
+<p>The plots that were created during an exploratory analysis should not be the plots we show our audience when we&#8217;re trying to communicate our findings. Since our audience is far less familiar with the data than us and probably also not interested / doesn&#8217;t have the time to dive deeper into the data, we need to make the results more accessible, a process often called <em>explanatory analysis</em>.</p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -3083,13 +3120,13 @@ Don&#8217;t &#8220;just show all the data&#8221; and hope that your audience wil
 <div class="ulist">
 <ul>
 <li>
-<p>get inspired by visualization libraries (e.g., <a href="https://github.com/Financial-Times/chart-doctor/blob/main/visual-vocabulary/Visual-vocabulary-en.pdf" target="\_blank">here</a> or <a href="https://datavizcatalogue.com/" target="\_blank">here</a>)</p>
+<p>get inspired by visualization libraries (e.g., <a href="https://github.com/Financial-Times/chart-doctor/blob/main/visual-vocabulary/Visual-vocabulary-en.pdf" target="\_blank">here</a> or <a href="https://datavizcatalogue.com/" target="\_blank">here</a>), but avoid the urge to create fancy graphics; sticking with common visualizations makes it easier for the audience to correctly decode the presented information</p>
 </li>
 <li>
 <p>don&#8217;t use 3D effects!</p>
 </li>
 <li>
-<p>don&#8217;t use pie or donut charts (angles are hard to interpret)</p>
+<p>avoid pie or donut charts (angles are hard to interpret)</p>
 </li>
 <li>
 <p>use line plots for time series data</p>
@@ -3131,9 +3168,6 @@ Don&#8217;t &#8220;just show all the data&#8221; and hope that your audience wil
 <li>
 <p>label data directly</p>
 </li>
-<li>
-<p>leverage consistent color</p>
-</li>
 </ul>
 </div>
 <div class="imageblock text-center">
@@ -3170,10 +3204,13 @@ Don&#8217;t &#8220;just show all the data&#8221; and hope that your audience wil
 <div class="ulist">
 <ul>
 <li>
-<p>add context: which values are good (target state), which are bad (alert threshold)?</p>
+<p>add context: Which values are good (goal state), which are bad (alert threshold)? Should the value be compared to another variable (e.g., actual vs. forecast)?</p>
 </li>
 <li>
-<p>annotate the plot with text explaining the main takeaways</p>
+<p>leverage consistent colors when information is spread across multiple plots (e.g., data from a certain country is always drawn in the same color)</p>
+</li>
+<li>
+<p>annotate the plot with text explaining the main takeaways (if this is not possible, e.g., in dashboards where the data keeps changing, the title can instead include the question that the plot should answer, e.g., &#8220;Does our revenue follow the projections?&#8221;)</p>
 </li>
 </ul>
 </div>
@@ -3191,6 +3228,9 @@ Don&#8217;t &#8220;just show all the data&#8221; and hope that your audience wil
 <dd>
 <div class="ulist">
 <ul>
+<li>
+<p><em>Show Me the Numbers: Designing Tables and Graphs to Enlighten</em> by Stephen Few</p>
+</li>
 <li>
 <p><em>Better Data Visualizations: A Guide for Scholars, Researchers, and Wonks</em> by Jonathan Schwabish</p>
 </li>
@@ -3285,7 +3325,7 @@ This can have two reasons:</p>
 </li>
 <li>
 <p>Relevant input features are missing: While it is relatively easy for humans to assess if all the relevant information is present in unstructured data (e.g., images: either we see a cat or we don&#8217;t), structured data often has too many different variables and complex interactions to know right away whether all the relevant features were included.<br>
-&#8658; Talk to a domain expert about which additional input features might be helpful and include these in the dataset. <em>Worst case:</em> Need to install a new sensor in the machine and collect this data, i.e., all the data collected in the past is basically useless. BUT: using the right sensor can simplify the problem immensely and installing it will be worth it!<br>
+&#8658; Talk to a subject matter expert about which additional input features might be helpful and include these in the dataset. <em>Worst case:</em> Need to install a new sensor in the machine and collect this data, i.e., all the data collected in the past is basically useless. BUT: using the right sensor can simplify the problem immensely and installing it will be worth it!<br>
 <span class="small">In many applications, our first instinct is to use a camera to generate the input data, since we humans rely primarily on our visual system to solve many tasks. However, even though image recognition algorithms have come a long way, using such a setup instead of a more specialized sensor can make the solution more error prone.<br>
 Trying to detect mushy strawberries? Use a near infrared (NIR) sensor instead of a regular camera like <a href="https://www.aboutamazon.co.uk/innovation/machine-learning-using-algorithms-to-sort-fruit" target="\_blank">Amazon Fresh</a> did. They still use machine learning to analyze the resulting data, but in the NIR images the rotting parts of fruits are more easily visible than in normal photos.<br>
 Trying to detect if a door is closed? With a simple <a href="https://www.deeplearning.ai/the-batch/issue-92/" target="\_blank">magnet</a> and detector, this task can be solved without any complex analysis or training data! (You probably know the saying: &#8220;When you have a hammer, everything looks like a nail&#8221;. &#8594; Don&#8217;t forget to also consider solutions outside your ML toolbox! ;-))</span></p>
@@ -3578,7 +3618,7 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>&#8594; Feed Forward Neural Networks (FFNNs) for &#8216;normal&#8217; (e.g., structured) data</p>
+<p>&#8594; Feed Forward Neural Networks (FFNNs), also called Multi-Layer Perceptrons (MLPs), for &#8216;normal&#8217; (e.g., structured) data</p>
 </li>
 <li>
 <p>&#8594; Convolutional Neural Networks (CNNs) for images</p>
@@ -3598,7 +3638,7 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 <div class="sect4">
 <h5 id="_feed_forward_neural_network_ffnn">Feed Forward Neural Network (FFNN)</h5>
 <div class="paragraph">
-<p>This is the original and most straightforward neural network architecture, which we&#8217;ve already seen in the initial example, only that in practice such a model usually has a few more layers and units per layer:</p>
+<p>This is the original and most straightforward neural network architecture, which we&#8217;ve already seen in the initial example, only that in practice such a model usually has a few more layers and units per layer.</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -3670,16 +3710,13 @@ All models are wrong, but some are useful.
 </div>
 </div>
 <div class="paragraph">
-<p>A supervised learning model tries to infer the relationship between some inputs and outputs from the given exemplary data points. What kind of relation will be found is largely determined by the chosen model type and its internal optimization algorithm, however, there is a lot that can (and should) be done to make sure what the algorithm comes up with is not blatantly wrong.</p>
+<p>A supervised learning model tries to infer the relationship between some inputs and outputs from the given exemplary data points. What kind of relation will be found is largely determined by the chosen model type and its internal optimization algorithm, however, there is a lot we can (and should) do to make sure what the algorithm comes up with is not blatantly wrong.</p>
 </div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">What do we want?</dt>
 <dd>
 <p>A model that &#8230;&#8203;</p>
-</dd>
-</dl>
-</div>
 <div class="ulist none">
 <ul class="none">
 <li>
@@ -3695,6 +3732,9 @@ All models are wrong, but some are useful.
 <p>&#8230;&#8203; even when the world keeps on changing.</p>
 </li>
 </ul>
+</div>
+</dd>
+</dl>
 </div>
 <div class="paragraph">
 <p>In the following, we&#8217;ll discuss several common pitfalls and how to avoid them.</p>
@@ -3838,7 +3878,7 @@ ML models love to cheat &amp; take shortcuts! They will often pick up on <a href
 <p><strong>A correct prediction is not always made for the right reasons!</strong></p>
 </div>
 <div class="paragraph">
-<p>The graphic below is taken from a paper where the authors noticed that a fairly simple ML model trained on a standard image classification dataset performed poorly for all ten classes in the dataset except one, horses. When they examined the dataset more closely and analyzed <em>why</em> the model predicted a certain class, i.e., which image features were used in the prediction (displayed as the heatmap on the right), they noticed that most of the pictures of horses in the dataset were taken by the same photographer and they all had a characteristic copyright notice in the lower left corner.</p>
+<p>The graphic below is taken from a paper where the authors noticed that a fairly simple ML model (not a neural network) trained on a standard image classification dataset performed poorly for all ten classes in the dataset except one, horses. When they examined the dataset more closely and analyzed <em>why</em> the model predicted a certain class, i.e., which image features were used in the prediction (displayed as the heatmap on the right), they noticed that most of the pictures of horses in the dataset were taken by the same photographer and they all had a characteristic copyright notice in the lower left corner.</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
@@ -3856,7 +3896,17 @@ Or, equally problematic, one could add such a copyright notice to a picture of a
 <p>This is by far not the only example where a model has &#8220;cheated&#8221; by exploiting spurious correlations in the training set. Another popular example: A dataset with images of dogs and wolves, where all wolves were photographed on snowy backgrounds and the dogs on grass or other non-white backgrounds. Models trained on such a dataset can show a good predictive performance without having learned the true causal relationship between the features and labels.</p>
 </div>
 <div class="paragraph">
-<p>To catch these kinds of mishaps, it is important to <strong>interpret the model and explain its predictions</strong> to see if it has focused on the features you (or a domain expert) would have expected (as they did in the paper above).</p>
+<p>To catch these kinds of mishaps, it is important to</p>
+</div>
+<div class="ulist none">
+<ul class="none">
+<li>
+<p>a) critically examine the test set and hopefully notice any problematic patterns that could result in an overly optimistic performance estimate, and</p>
+</li>
+<li>
+<p>b) <a href="https://franziskahorn.de/mlbook/_explainability_interpretable_ml.html" target="\_blank"><strong>interpret the model and explain its predictions</strong></a> to see if it has focused on the features you (or a subject matter expert) would have expected (as they did in the paper above).</p>
+</li>
+</ul>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -3974,13 +4024,27 @@ Or, equally problematic, one could add such a copyright notice to a picture of a
 </li>
 </ul>
 </div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Retraining models on data shaped by predictions from a biased predecessor model can intensify existing biases. For instance, if a resume screening tool recognizes a common trait (e.g., &#8220;attended Stanford University&#8221;) among current employees, it may consistently recommend resumes with this trait. Consequently, more individuals with this characteristic will be invited for interviews and hired, further reinforcing the dominance of the trait in subsequent models trained on these employee profiles.
+</td>
+</tr>
+</table>
+</div>
 <h5 id="_towards_fair_models" class="discrete">Towards fair models</h5>
 <div class="paragraph">
 <p>The first step to mitigating these problems is to become aware of them. Therefore, it is important to always assess the model&#8217;s performance for each (known) subgroup individually to verify that the prediction errors of the model are random and the model is not systematically worse for some subgroups.</p>
 </div>
 <div class="paragraph">
-<p>Furthermore, we should also be careful when including variables in the model that encode attributes such as gender or ethnicity. For example, the performance of a model that diagnoses heart attacks will most likely be improved by including &#8216;gender&#8217; as a feature, since men and women present different symptoms when they have a heart attack. On the other hand, a model that assigns someone a credit score should probably not rely on the gender of the person for this decision, since, even though this might have been the case in the historical data because the humans that generated the data relied on their own stereotypes, women should not get a lower score just because they are female.<br>
-However, a person&#8217;s gender or ethnicity, for example, is often correlated with other variables such as income or neighborhood, so even inconspicuous features can still leak problematic information to the model and require some extra steps to ensure the model does not discriminate.</p>
+<p>We should also <strong>be careful when including variables in the model that encode attributes such as gender or ethnicity</strong>. For example, the performance of a model that diagnoses heart attacks will most likely be improved by including &#8216;gender&#8217; as a feature, since men and women present different symptoms when they have a heart attack. On the other hand, a model that assigns someone a credit score should probably not rely on the gender of the person for this decision, since, even though this might have been the case in the historical data because the humans that generated the data relied on their own stereotypes, women should not get a lower score just because they are female.</p>
+</div>
+<div class="paragraph">
+<p>However, a person&#8217;s gender or ethnicity, for example, is often correlated with other variables such as income or neighborhood, so even inconspicuous features can still leak problematic information to the model and require some extra steps to ensure the model does not discriminate.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -3994,7 +4058,7 @@ However, a person&#8217;s gender or ethnicity, for example, is often correlated 
 </div>
 <div class="paragraph">
 <p>Book recommendation:<br>
-<strong>Weapons of Math Destruction</strong> by Cathy O&#8217;Neil (2016)</p>
+<strong>Weapons of Math Destruction</strong> by Cathy O’Neil (2016)</p>
 </div>
 </div>
 </div>
@@ -4002,7 +4066,7 @@ However, a person&#8217;s gender or ethnicity, for example, is often correlated 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_pitfall_5_data_concept_drifts">[Pitfall #5] Data &amp; concept drifts</h3>
+<h3 id="_pitfall_5_data_concept_drifts">[Pitfall #5] Data &amp; Concept Drifts</h3>
 <div class="paragraph">
 <p>We must never forget that the world keeps on changing and that models need to be updated regularly with new data to be able to adapt to these changing circumstances!</p>
 </div>
@@ -4021,17 +4085,21 @@ However, a person&#8217;s gender or ethnicity, for example, is often correlated 
 </div>
 <div class="paragraph">
 <p><span class="underline">One of the biggest problems in practice: Data and Concept Drifts:</span><br>
-The model performance quickly decays when the distribution of the data used for training is different from the data the model encounters in production. Such a discrepancy can be due to</p>
+The model performance quickly decays when the distribution of the <strong>data used for training</strong> \(P_{train}(X, y)\) is <strong>different from the data the model encounters when deployed in production</strong> \(P_{prod}(X, y)\), where  \(P(X, y) = P(y|X)P(X) = P(X|y)P(y)\).<br>
+Such a discrepancy can be due to</p>
 </div>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p><em>Data drift:</em> distribution of input features \(X\) changes</p>
+<p><strong><em>Data drift:</em></strong> the distribution of one or more variables changes. This is called a <em>covariate shift</em> if the distribution of input features \(X\) changes, i.e., \(P_{train}(X) \neq P_{prod}(X)\), and a <em>label shift</em> if the distribution of the target variable \(y\) changes.</p>
 </li>
 <li>
-<p><em>Concept drift:</em> input/output relationship \(X \to y\) changes</p>
+<p><strong><em>Concept drift:</em></strong> input/output relationship \(X \to y\) changes, i.e., \(P_{train}(y|X) \neq P_{prod}(y|X)\). This means with exactly the same inputs \(X\) we now get a different output \(y\) than before the drift.</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>In both cases, something important for our machine learning task changes in the world. If our collected data reflects this change, it is called data drift. If we can&#8217;t see this change in our input data, we&#8217;re dealing with a concept drift.</p>
 </div>
 <div class="paragraph">
 <p><span class="underline">Example:</span> From the production settings incl. the size of a produced part (\(X\)) we want to predict whether the part is scrap or okay (\(y\)):</p>
@@ -4042,28 +4110,25 @@ The model performance quickly decays when the distribution of the data used for 
 <p><em>Data drift:</em> The company used to manufacture only small parts, now they also produce larger parts.</p>
 </li>
 <li>
-<p><em>Concept drift:</em> The company used to produce 10% scrap parts, but after some maintenance was done on the machine, the same production settings now result in only 5% scrap.</p>
+<p><em>Concept drift:</em> The company used to produce 10% scrap parts, but after some maintenance on the machine, the same production settings (\(X\)) now result in only 5% scrap (\(y\)).</p>
 </li>
 </ul>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Covariate shifts, without concept drift, can lead to label shifts when the input variable is causally related to the target. For example, a model predicting cancer (\(y\)) in patients based on age (\(x\)) was trained on a dataset consisting of mostly older people, who naturally also have a higher cancer incidence. In production, the model is used on patients of all ages (<em>covariate shift</em>), i.e., including more young people that have cancer less frequently (<em>label shift</em>).
+</td>
+</tr>
+</table>
+</div>
+<h4 id="_drift_origins_mitigation_strategies" class="discrete">Drift Origins &amp; Mitigation Strategies</h4>
 <div class="paragraph">
-<p><span class="underline">Possible reasons for data or concept drifts:</span></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>New users behave differently: For example, the product is now used by a younger generation or the business recently expanded to a different country.</p>
-</li>
-<li>
-<p>Trends and seasonality: For example, certain products are bought primarily in a specific season (e.g., winter cloths) or new styles result in the same customers now buying different products because they are &#8220;in&#8221;.</p>
-</li>
-<li>
-<p>The process structure / setup changed: For example, in a new version of a device, a sensor has moved to a different location, but still logs values under the same variable name.</p>
-</li>
-<li>
-<p>Feedback loop, where the presence of an ML model alters user behavior: For example, spammers change their strategy to evade the spam filter.</p>
-</li>
-</ul>
+<p>There are various reasons for data and concepts drifts, both related to how the data is collected as well as external events outside our control.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -4072,15 +4137,106 @@ The model performance quickly decays when the distribution of the data used for 
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-These changes can either be <strong>gradual</strong> (e.g., languages change gradually as new words are coined; a camera lens gets covered with dust over time), or they can come as a <strong>sudden shock</strong> (e.g., someone cleans the camera lens; when the COVID-19 pandemic hit, suddenly a lot of people switched to online shopping, which tripped up the credit card fraud detection systems).
+These drifts can either be <strong>gradual</strong> (e.g., languages change gradually as new words are coined; a camera lens gets covered with dust over time), or they can come as a <strong>sudden shock</strong> (e.g., someone cleans the camera lens; when the COVID-19 pandemic hit, suddenly a lot of people switched to online shopping, which tripped up the credit card fraud detection systems).
 </td>
 </tr>
 </table>
 </div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Changed data schema: </dt>
+<dd>
+<p>Many problems are created in-house and could be avoided, for example</p>
+<div class="ulist">
+<ul>
+<li>
+<p>the user interface used to collect the data changes, e.g., a height was previously recorded in meters, now in cm</p>
+</li>
+<li>
+<p>the sensor configuration changed, e.g., in a new version of a device, a different sensor is used, but still logs values under the same variable name as the old sensor</p>
+</li>
+<li>
+<p>the features used as input for the model are changed, e.g., to include additional engineered features, but the feature transformation pipeline was only changed in the training code, not yet in the production code.</p>
+</li>
+</ul>
+</div>
 <div class="paragraph">
-<p><span class="underline">Mitigation Strategies:</span><br>
-The best way to counteract data and concept drifts is to frequently <strong>retrain the model</strong> on new data. This can either happen on a schedule (e.g., every weekend, depending on how quickly the data changes) or when your monitoring system raises an alert because it detected drifts in the inputs or a deteriorating model performance.<br>
-Additionally, it is always helpful to log known external events, such as maintenance performed on a machine.</p>
+<p>&#8658; These cases should ideally result in an error, e.g., we could include some <strong>checks before applying the model</strong> to make sure we received the expected number of features, their data types (e.g., text or numbers) is as expected, and the values are roughly in the expected range for the respective feature. Furthermore, other teams in the company need to be made aware that an ML model is relying on their data so they can notify the data science team ahead of time in case of changes.</p>
+</div>
+</dd>
+<dt class="hdlist1">Data drifts: </dt>
+<dd>
+<p>Data drifts occur when our model has to make predictions for samples that are different from the data it encountered during training, e.g., because certain regimes of the training domain were undersampled, or in the extreme case the model might even be forced to extrapolate beyond the training domain, for example, due to</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>changed sample selection</strong>, e.g., the business recently expanded to a different country or after a targeted marketing campaign the website is now visited by a new user group</p>
+</li>
+<li>
+<p><strong>adversarial behavior</strong>, e.g., spammers continuously adapt their messages in an effort to circumvent spam filters (i.e., ten years ago a human would have also recognized a spam message from today as spam (i.e., the meaning of what is or isn&#8217;t spam didn&#8217;t change), but these more sophisticated messages weren&#8217;t included in the training set yet, making it hard for ML models to pick up on these patterns)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>&#8658; Data drifts can be seen as an opportunity to extend our training set and <strong>retrain the model with more data from underrepresented subgroups</strong>. Yet, as highlighted in the earlier section on model-based discrimination, this often implies that these undersampled subgroups could initially experience a less effective model, such as a speech recognition function performing less accurately for women than for men. Therefore, it&#8217;s crucial to identify subgroups where the model might exhibit poor performance, ideally gathering more data from these groups or, at the very least, giving greater consideration to these samples during model training and evaluation.</p>
+</div>
+</dd>
+<dt class="hdlist1">Concept drifts: </dt>
+<dd>
+<p>Concept drifts happen when external changes or events occur that we did not record in our data or that change the meaning of our data. This means that the exact same input features suddenly result in a different output. One reason can be that we&#8217;re <strong>missing a variable that has a direct influence on the target</strong>, for example</p>
+<div class="ulist">
+<ul>
+<li>
+<p>our process is sensitive to temperature and humidity, but we only recorded the temperature not the humidity, so as the humidity changes, the same temperature values result in different output values &#8658; additionally include humidity as an input feature in the model</p>
+</li>
+<li>
+<p>seasonal trends result in changes in the popularity of summer vs. winder clothes &#8658; include month / outside temperature as an additional input feature</p>
+</li>
+<li>
+<p>special events, e.g., a celebrity mentioned our product on social media or people changed their behavior because of the lockdown during a pandemic &#8658; while it can be hard to predict these events in advance, when they happen we could include an additional feature, e.g., &#8216;during lockdown&#8217;, to distinguish data collected during this time period from the rest of the data</p>
+</li>
+<li>
+<p>degenerate feedback loops, i.e., the existence of the model changes users' behavior, e.g., a recommender system causes users to click on videos just because they were recommended &#8658; include as an additional feature whether the video was recommended or not to learn how much of &#8220;user clicked on item&#8221; was due to the item being recommended and how much was due to the user&#8217;s natural behavior</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Another cause of concept drifts are events that <strong>change the meaning of the recorded data</strong>, for example</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>inflation: 1 Euro in 1990 was worth more than 1 Euro now &#8658; adjust the data for inflation or include the inflation rate as an additional input feature</p>
+</li>
+<li>
+<p>a temperature sensor immersed in water amasses limescale and after a while the temperature reading is not accurate anymore, e.g., if the true temperature is 90 degrees, a clean senor measures the true 90 degrees, but after it has accumulated some layers of limescale, it only measures 89 degrees under the same circumstances. While our output is influenced by the true temperature, we only have access to the sensor reading for the temperature, which is additionally influenced by the state of the sensor itself &#8658; try to estimate the amount of accumulated limescale, e.g., based on the number of days since the sensor was cleaned the last time (which also means that these kinds of maintenance events need to be recorded somewhere!)</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/07_data_issues/concept_drift.png" alt="image" width="420">
+</div>
+<div class="title"><span class="small">Causal diagram showing how our observed input \(x\) (temperature measurement) and output \(y\) are related through and influenced by hidden variables (which we can not access directly), namely, the state of the temperature sensor (i.e., how much limescale has accumulated), the actual temperature, and the humidity (for which we have not installed a sensor yet). If the sensor state and humidity stay constant, we are able to predict the output from the temperature measurement, however, if either of these values change, we experience a concept drift. Therefore, we should try to include estimates of these hidden variables in our model to account for these changes.</span></div>
+</div>
+<div class="paragraph">
+<p>
+&#8658; Before training a model, examine the data to <strong>identify instances where identical inputs yield different outputs</strong>. If possible, <strong>include additional input features to account for these variations</strong>. Subpar model performance on the test set often indicates missing relevant inputs, heightening vulnerability to future concept drifts. Even when the correct variables are incorporated to capture a concept drift, frequent model retraining may still be necessary. For instance, different states of the concept might be sampled unevenly, leading to data drifts (e.g., more data collected during winter than in the early summer months). If it is not possible to include variables that account for the concept drift, it might be necessary to <strong>remove samples from the original training set that do not conform to the novel input/output relation before retraining the model</strong>.</p>
+</div>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The best way to counteract data and concept drifts is to frequently <strong>retrain the model</strong> on new data. This can either happen on a schedule (e.g., every weekend, depending on how quickly the data changes) or when your monitoring system raises an alert because it detected drifts in the inputs or a deteriorating model performance.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -4193,7 +4349,7 @@ But it can be done! A good example comes from the startup alcemy, which uses ML 
 </div>
 </li>
 <li>
-<p>Combine ML with domain expertise!</p>
+<p>Combine ML with subject matter expertise!</p>
 </li>
 <li>
 <p>It&#8217;s an iterative process:</p>
@@ -4256,7 +4412,7 @@ But it can be done! A good example comes from the startup alcemy, which uses ML 
 </dd>
 </dl>
 </div>
-<div class="paragraph text-center">
+<div class="paragraph text-center text-center">
 <p><span class="image"><img src="images/09_ml_in_practice/01_Andrew_Ng.jpg" alt="image" width="140"></span><br>
 <strong>Prof. Dr. Andrew Ng</strong><br>
 <span class="small">Co-Founder Google Brain</span><br>
@@ -4273,7 +4429,7 @@ But it can be done! A good example comes from the startup alcemy, which uses ML 
 <p>Machine learning projects are unlike traditional software projects, where you&#8217;re usually certain that a solution at least exists and you only need to figure out an efficient way to get there. Instead, ML heavily relies on the available data. Even though it might theoretically be possible to solve your problem with ML, this might not be the case with the data you have at hand.
 Before implementing some big AI initiative spanning the whole company, it is therefore strongly recommended that you start with several smaller pilot projects in order to get a better feeling for what it means to rely on an AI to solve your problems.<br>
 When choosing a pilot project, the most important factor is not the Return on Investment (ROI) of the project, since here the experience with ML gained along the way should be the priority. However, it is important to choose a project that is <strong>technically feasible</strong>, i.e., which can be solved with existing ML algorithms and you don&#8217;t need years of research to develop your own fancy neural network architecture. Furthermore, you should have enough high-quality <strong>data available</strong> to get started, so you don&#8217;t spend months just on data preprocessing, e.g., due to the need to combine data from different sources within a poor data infrastructure.<br>
-If you do not yet have the necessary AI talent in-house to tackle such a project, you can also partner with external consultants, which provide the ML expertise, while you supply the domain knowledge to ensure the pilot project is a success.</p>
+If you do not yet have the necessary AI talent in-house to tackle such a project, you can also partner with external consultants, which provide the ML expertise, while you supply the subject matter expertise to ensure the pilot project is a success.</p>
 </dd>
 <dt class="hdlist1">[Step 2] Set up a centralized AI team and data infrastructure to carry out bigger projects efficiently and effectively</dt>
 <dd>
@@ -4282,7 +4438,7 @@ If you do not yet have the necessary AI talent in-house to tackle such a project
 <div class="content">
 <img src="images/01b_intro_ml/venn7.png" alt="image" width="680">
 </div>
-<div class="title"><span class="small">While Data Strategists work in their respective departments to identify suitable problems that can benefit from ML, Data Scientist can experiment and develop prototypical solutions to these problems, which Data Engineers then get ready for production.</span></div>
+<div class="title"><span class="small">While Data Strategists work in their respective departments to identify suitable problems that can benefit from ML, Data Scientist can experiment and develop prototypical solutions to these problems, which Data &amp; ML Engineers then get ready for production.</span></div>
 </div>
 <div class="paragraph">
 <p>Ideally, data scientists and engineers should be in their own separate team (i.e., the &#8220;AI Team&#8221;) and work on projects from different departments like an in-house consultancy:</p>
@@ -4352,7 +4508,7 @@ If you do not yet have the necessary AI talent in-house to tackle such a project
 <div class="ulist">
 <ul>
 <li>
-<p>Don&#8217;t try to recreate some off-the-shelf service that could be easily procured from an outside vendor, but use ML together with your unique domain knowledge and data to build new features for your existing products to make them more appealing to your customers or open up new market segments.</p>
+<p>Don&#8217;t try to recreate some off-the-shelf service that could be easily procured from an outside vendor, but use ML together with your unique subject matter expertise and data to build new features for your existing products to make them more appealing to your customers or open up new market segments.</p>
 </li>
 <li>
 <p>How can you establish a virtuous cycle, where your AI attracts more users, which in turn generate more data, which can then be used to train the AI to become even better and thereby attracts even more users?</p>

@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.18">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <meta name="author" content="Dr. Franziska Horn">
 <meta name="copyright" content="Dr. Franziska Horn">
 <title>A Practitioner&#8217;s Guide to Machine Learning</title>
@@ -928,8 +928,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.8,</span>
-<span id="revdate">2023-01-06</span>
+<span id="revnumber">version 1.9,</span>
+<span id="revdate">2024-01-01</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -1123,7 +1123,19 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="content">
 <img src="../images/01c_ml_overview/ml_algorithms_12.png" alt="image" width="840">
 </div>
-<div class="title"><span class="small">Für die Anwendung von Unsupervised Learning Algorithmen braucht man nur eine Feature Matrix \(X\), während man zum Erlernen eines Vorhersagemodells mit Supervised Learning Algorithmen auch die dazugehörigen Labels \(\mathbf{y}\) benötigt. Auch wenn unser eigentliches Ziel darin besteht, etwas vorherzusagen (also Supervised Learning zu verwenden), kann es dennoch sehr hilfreich sein, zunächst Unsupervised Learning Algorithmen anzuwenden, um den Datensatz besser zu verstehen. Beispielsweise kann man die Daten im Vorfeld mit Dimensionsreduktionsmethoden visualisieren, um alle Datenpunkte und ihre Vielfalt auf einen Blick zu sehen. Anschließend kann man den Datensatz bereinigen, in dem man Ausreißer identifiziert. Bei einem Klassifikationsproblem ist es häufig sinnvoll, die Datenpunkte zuerst zu clustern, um zu überprüfen, in wie weit die angegebenen Klassenlabels mit den natürlich vorkommenden Gruppen in den Daten übereinstimmen. Beispielsweise sieht man dann vielleicht, dass man das Problem vereinfachen kann, in dem man zwei sehr ähnliche Klassen kombiniert.</span></div>
+<div class="title"><span class="small">Für die Anwendung von Unsupervised Learning Algorithmen braucht man nur eine Feature Matrix \(X\), während man zum Erlernen eines Vorhersagemodells mit Supervised Learning Algorithmen auch die dazugehörigen Labels \(\mathbf{y}\) benötigt.</span></div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Auch wenn unser eigentliches Ziel darin besteht, etwas vorherzusagen (also Supervised Learning zu verwenden), kann es dennoch sehr hilfreich sein, zunächst Unsupervised Learning Algorithmen anzuwenden, um den Datensatz besser zu verstehen. Beispielsweise kann man die Daten im Vorfeld mit Dimensionsreduktionsmethoden visualisieren, um alle Datenpunkte und ihre Vielfalt auf einen Blick zu sehen. Anschließend kann man den Datensatz bereinigen, in dem man Ausreißer identifiziert. Bei einem Klassifikationsproblem ist es häufig sinnvoll, die Datenpunkte zuerst zu clustern, um zu überprüfen, in wie weit die angegebenen Klassenlabels mit den natürlich vorkommenden Gruppen in den Daten übereinstimmen. Beispielsweise sieht man dann vielleicht, dass man das Problem vereinfachen kann, in dem man zwei sehr ähnliche Klassen kombiniert.
+</td>
+</tr>
+</table>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -1222,7 +1234,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </dd>
 </dl>
 </div>
-<div class="paragraph text-justify">
+<div class="paragraph text-justify text-justify">
 <p><span class="small">Dies ist ein kleiner Musterdatensatz mit strukturierten Daten über verschiedene Wohnungen, wie sie jemand über eine Immobilienwebsite gesammelt haben könnte, z.B. die Größe der Wohnung in Quadratmetern, die Anzahl der Schlafzimmer, die Anzahl der Badezimmer, das Jahr der letzten Renovierung und schließlich den Preis der Wohnung und ob sie zu diesem Preis verkauft wurde (1) oder nicht (0).</span></p>
 </div>
 </div>
@@ -1233,7 +1245,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="title"><span class="underline">Anwendungsfälle:</span></div>
 <ul>
 <li>
-<p>Erstellen einer 2D-Visualisierung, um den Datensatz im Ganzen zu überblicken, wobei wir oft bereits Muster identifizieren können, wie Datenpunkte, die zusammen gruppiert werden können (Cluster) oder die nicht ins Bild passen (Ausreißer)</p>
+<p>Erstellen einer 2D-Visualisierung, um den Datensatz im Ganzen zu überblicken, wobei wir oft bereits beim Draufschauen Muster identifizieren können, wie Datenpunkte, die zusammen gruppiert werden können (Cluster) oder die nicht ins Bild passen (Ausreißer)</p>
 </li>
 <li>
 <p>Rauschunterdrückung und/oder Feature-Engineering als Datenvorverarbeitungsschritt zur Verbesserung der Ergebnisse eines Vorhersagemodells</p>
@@ -1392,69 +1404,29 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="title"><span class="underline">Anwendungsfälle:</span></div>
 <ul>
 <li>
-<p>Input-Output-Beziehungen in realen Prozessen beschreiben (und anschließend besser verstehen und optimieren), zum Beispiel:</p>
+<p>Lerne ein Modell, um eine Input-Output-Beziehung zu beschreiben und Vorhersagen für neue Datenpunkte zu treffen, zum Beispiel:</p>
 <div class="ulist">
 <ul>
-<li>
-<p>den Preis für ein zum Verkauf stehendes Haus bestimmen und den Hausbesitzern erklären, was sie tun können, um ihr Haus zu einem höheren Preis zu verkaufen (z.B. kann ein frisch renoviertes Badezimmer einen größeren Einfluss darauf haben, was potenzielle Käufer zu zahlen bereit sind als ein neuer Außenanstrich)</p>
-</li>
 <li>
 <p>vor der Produktion vorhersagen, ob ein unter den vorgeschlagenen Prozessbedingungen hergestelltes Produkt von hoher Qualität oder Ressourcenverschwendung sein wird</p>
 </li>
 <li>
-<p>identifizieren, welche Prozessbedingungen den größten Einfluss auf die Qualität des Produkts haben</p>
+<p>Betrugserkennung: Identifiziere betrügerische Kreditkartentransaktionen im Voraus</p>
 </li>
 <li>
-<p>gegeben bestimmter äußerer Bedingungen (z.B. Außentemperatur, Zusammensetzung der Rohstoffe von einem neuen Lieferanten) automatisch die besten Prozesseinstellungen bestimmen, um qualitativ hochwertige Produkte herzustellen</p>
+<p>Churn Prediction: Erkenne Kunden, die kurz davor stehen, ihren Vertrag zu kündigen (oder Mitarbeiter, die kurz davor stehen zu kündigen), damit du sie kontaktieren und überzeugen kannst zu bleiben</p>
+</li>
+<li>
+<p>Preisoptimierung: Bestimme den optimalen Preis für ein Produkt (oft für dynamische Preisgestaltung verwendet, z.B. um Preise basierend auf dem Gerät anzupassen, das ein Kunde verwendet, wenn er auf eine Website zugreift, wie z. B. ein neues iPhone gegenüber einem alten Android-Handy)</p>
+</li>
+<li>
+<p>Predictive Maintenance: Sage voraus, wie lange ein Maschinenbauteil halten wird</p>
+</li>
+<li>
+<p>Umsatzprognosen: Sag den Umsatz in den kommenden Wochen und den erforderlichen Lagerbestand voraus, um die Nachfrage zu befriedigen</p>
 </li>
 </ul>
 </div>
-</li>
-</ul>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<p><span class="underline">Schritte:</span></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>[optional] ein Dashboard erstellen, um die KPIs zu überwachen</p>
-</li>
-<li>
-<p>ein Modell lernen, das die Input-Output-Beziehung zwischen den Prozessvariablen und KPIs zuverlässig erfasst</p>
-</li>
-<li>
-<p>das Modell interpretieren, um zu verstehen, welche Inputs den größten Einfluss auf die KPIs haben und wie diese zusammenhängen (Ursachen Analyse)</p>
-</li>
-<li>
-<p>mit dem Modell Vorhersagen für neue Datenpunkte generieren oder eine Was-wäre-wenn-Prognose erstellen, um besser zu Planen</p>
-</li>
-<li>
-<p>das Modell innerhalb eines äußeren Regelkreises verwenden, um automatisch optimale Inputs zu finden (entweder mit klassischen Optimierungstechniken oder Reinforcement Learning für längere Zeithorizonte)</p>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="ulist">
-<div class="title"><span class="underline">Mögliche Herausforderungen:</span></div>
-<ul>
-<li>
-<p>Erfolg ungewiss: die Anwendung der Algorithmen ist zwar relativ einfach, aber es ist schwierig, im Voraus festzustellen, ob überhaupt ein Zusammenhang zwischen den gemessenen Inputs und KPIs besteht (&#8594; Achtung: Garbage in, Garbage out!)</p>
-</li>
-<li>
-<p>angemessene Definition des Ergebnisses/Ziels/KPI, das modelliert werden soll, d.h. was bedeutet es eigentlich, dass ein Prozess gut läuft, und wie könnten externe Faktoren diese Definition beeinflussen (können wir z.B. die gleiche Leistung in einem außergewöhnlich heißen Sommertag erwarten?)</p>
-</li>
-<li>
-<p>wichtige Inputs fehlen, z.B. wenn es andere Einflussfaktoren gibt, die wir nicht berücksichtigt haben oder nicht messen konnten, wodurch nicht die gesamte Varianz der Zielgröße erklärt werden kann</p>
-</li>
-<li>
-<p>viele möglicherweise irrelevante Inputs, die eine sorgfältige Feature Selektion erfordern, um <a href="https://www.tylervigen.com/spurious-correlations" target="\_blank">Scheinkorrelationen</a> zu vermeiden, die zu falschen &#8220;Was-wäre-wenn&#8221;-Prognosen führen würden, da die wahre kausale Beziehung zwischen den Inputs und Outputs nicht erfasst wird</p>
-</li>
-<li>
-<p>oft sehr zeitintensive Datenvorverarbeitung notwendig, z.B. bei der Zusammenführung von Daten aus unterschiedlichen Quellen und manuellem Feature Engineering</p>
 </li>
 </ul>
 </div>
@@ -1494,6 +1466,26 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 </div>
 </div>
+<div class="ulist">
+<div class="title"><span class="underline">Mögliche Herausforderungen:</span></div>
+<ul>
+<li>
+<p>Erfolg ungewiss: die Anwendung der Algorithmen ist zwar relativ einfach, aber es ist schwierig, im Voraus festzustellen, ob überhaupt ein Zusammenhang zwischen den gemessenen Inputs und Outputs besteht (&#8594; Achtung: Garbage in, Garbage out!)</p>
+</li>
+<li>
+<p>angemessene Definition des Ergebnisses/Ziels/KPI, das modelliert werden soll, d.h. was bedeutet es eigentlich, dass ein Prozess gut läuft, und wie könnten externe Faktoren diese Definition beeinflussen (können wir z.B. die gleiche Leistung in einem außergewöhnlich heißen Sommertag erwarten?)</p>
+</li>
+<li>
+<p>wichtige Inputs fehlen, z.B. wenn es andere Einflussfaktoren gibt, die wir nicht berücksichtigt haben oder nicht messen konnten, wodurch nicht die gesamte Varianz der Zielgröße erklärt werden kann</p>
+</li>
+<li>
+<p>viele möglicherweise irrelevante Inputs, die eine sorgfältige Feature Selektion erfordern, um <a href="https://www.tylervigen.com/spurious-correlations" target="\_blank">Scheinkorrelationen</a> zu vermeiden, die zu falschen &#8220;Was-wäre-wenn&#8221;-Prognosen führen würden, da die wahre kausale Beziehung zwischen den Inputs und Outputs nicht erfasst wird</p>
+</li>
+<li>
+<p>oft sehr zeitintensive Datenvorverarbeitung notwendig, z.B. bei der Zusammenführung von Daten aus unterschiedlichen Quellen und manuellem Feature Engineering</p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_deep_learning">Deep Learning</h4>
@@ -1505,10 +1497,10 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="ulist">
 <ul>
 <li>
-<p>Textklassifizierung (z.B. Spam / Hate Speech / Fake News erkennen)</p>
+<p>Textklassifizierung (z.B. Spam / Hate Speech / Fake News erkennen; Kundensupportanfragen an die passende Abteilung weiterleiten)</p>
 </li>
 <li>
-<p>Sentimentanalyse (Teilaufgabe der Textklassifikation: Positive oder negative Texte erkennen, z.B. bei Produktbewertungen)</p>
+<p>Sentimentanalyse (Teilaufgabe der Textklassifikation: Positive oder negative Texte erkennen, z.B. um Produktbewertungen oder das, was Social-Media-Nutzer über ein Unternehmen sagen, zu überwachen)</p>
 </li>
 <li>
 <p>Spracherkennung (z.B. diktierte Notizen transkribieren oder Videos mit Untertiteln versehen)</p>
@@ -1521,6 +1513,9 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </li>
 <li>
 <p>Bildbeschreibungen generieren (z.B. um das Online-Erlebnis für Menschen mit Sehbehinderung zu verbessern)</p>
+</li>
+<li>
+<p>Predictive Typing (z.B. bei der Texteingabe auf dem Smartphone mögliche nächste Wörter vorschlagen)</p>
 </li>
 <li>
 <p>Datengenerierung (z.B. neue Fotos/Bilder von bestimmten Objekten oder Szenen generieren)</p>

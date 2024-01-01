@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.18">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <meta name="author" content="Dr. Franziska Horn">
 <meta name="copyright" content="Dr. Franziska Horn">
 <title>A Practitioner&#8217;s Guide to Machine Learning</title>
@@ -928,8 +928,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.8,</span>
-<span id="revdate">2023-01-06</span>
+<span id="revnumber">version 1.9,</span>
+<span id="revdate">2024-01-01</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -952,7 +952,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </li>
 <li><a href="_pitfall_4_model_discriminates.html"><span class="toc-current">[Pitfall #4] Model discriminates</span></a>
 </li>
-<li><a href="_pitfall_5_data_concept_drifts.html">[Pitfall #5] Data &amp; concept drifts</a>
+<li><a href="_pitfall_5_data_concept_drifts.html">[Pitfall #5] Data &amp; Concept Drifts</a>
 </li>
 </ul>
 </li>
@@ -1050,13 +1050,27 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </li>
 </ul>
 </div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Retraining models on data shaped by predictions from a biased predecessor model can intensify existing biases. For instance, if a resume screening tool recognizes a common trait (e.g., &#8220;attended Stanford University&#8221;) among current employees, it may consistently recommend resumes with this trait. Consequently, more individuals with this characteristic will be invited for interviews and hired, further reinforcing the dominance of the trait in subsequent models trained on these employee profiles.
+</td>
+</tr>
+</table>
+</div>
 <h5 id="_towards_fair_models" class="discrete">Towards fair models</h5>
 <div class="paragraph">
 <p>The first step to mitigating these problems is to become aware of them. Therefore, it is important to always assess the model&#8217;s performance for each (known) subgroup individually to verify that the prediction errors of the model are random and the model is not systematically worse for some subgroups.</p>
 </div>
 <div class="paragraph">
-<p>Furthermore, we should also be careful when including variables in the model that encode attributes such as gender or ethnicity. For example, the performance of a model that diagnoses heart attacks will most likely be improved by including &#8216;gender&#8217; as a feature, since men and women present different symptoms when they have a heart attack. On the other hand, a model that assigns someone a credit score should probably not rely on the gender of the person for this decision, since, even though this might have been the case in the historical data because the humans that generated the data relied on their own stereotypes, women should not get a lower score just because they are female.<br>
-However, a person&#8217;s gender or ethnicity, for example, is often correlated with other variables such as income or neighborhood, so even inconspicuous features can still leak problematic information to the model and require some extra steps to ensure the model does not discriminate.</p>
+<p>We should also <strong>be careful when including variables in the model that encode attributes such as gender or ethnicity</strong>. For example, the performance of a model that diagnoses heart attacks will most likely be improved by including &#8216;gender&#8217; as a feature, since men and women present different symptoms when they have a heart attack. On the other hand, a model that assigns someone a credit score should probably not rely on the gender of the person for this decision, since, even though this might have been the case in the historical data because the humans that generated the data relied on their own stereotypes, women should not get a lower score just because they are female.</p>
+</div>
+<div class="paragraph">
+<p>However, a person&#8217;s gender or ethnicity, for example, is often correlated with other variables such as income or neighborhood, so even inconspicuous features can still leak problematic information to the model and require some extra steps to ensure the model does not discriminate.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -1070,7 +1084,7 @@ However, a person&#8217;s gender or ethnicity, for example, is often correlated 
 </div>
 <div class="paragraph">
 <p>Book recommendation:<br>
-<strong>Weapons of Math Destruction</strong> by Cathy O&#8217;Neil (2016)</p>
+<strong>Weapons of Math Destruction</strong> by Cathy O’Neil (2016)</p>
 </div>
 </div>
 </div>
@@ -1078,7 +1092,7 @@ However, a person&#8217;s gender or ethnicity, for example, is often correlated 
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_pitfall_3_model_abuses_spurious_correlations.html">[Pitfall #3] Model abuses spurious correlations</a> | ↑ Up: <a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_pitfall_5_data_concept_drifts.html">[Pitfall #5] Data &amp; concept drifts</a> →</p>
+<p>← Previous: <a href="_pitfall_3_model_abuses_spurious_correlations.html">[Pitfall #3] Model abuses spurious correlations</a> | ↑ Up: <a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_pitfall_5_data_concept_drifts.html">[Pitfall #5] Data &amp; Concept Drifts</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

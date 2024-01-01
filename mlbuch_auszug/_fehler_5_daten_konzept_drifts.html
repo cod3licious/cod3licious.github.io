@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.18">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <meta name="author" content="Dr. Franziska Horn">
 <meta name="copyright" content="Dr. Franziska Horn">
 <title>A Practitioner&#8217;s Guide to Machine Learning</title>
@@ -928,8 +928,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.8,</span>
-<span id="revdate">2023-01-06</span>
+<span id="revnumber">version 1.9,</span>
+<span id="revdate">2024-01-01</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -981,18 +981,21 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </table>
 </div>
 <div class="paragraph">
-<p><span class="underline">Eins der größten Probleme in der Praxis: Daten und Konzept Drifts:</span><br>
-Die Vorhersagegenauigkeit eines Modells lässt schnell nach, wenn die Daten im Produktivbetrieb von den Trainingsdaten abweichen. Dabei unterscheiden wir zwischen:</p>
+<p><span class="underline">Eins der größten Probleme in der Praxis: Daten und Konzept-Drifts:</span><br>
+Die Vorhersagegenauigkeit eines Modells lässt schnell nach, wenn die <strong>Daten im Produktivbetrieb von den Trainingsdaten abweichen</strong>. Dabei unterscheiden wir zwischen:</p>
 </div>
 <div class="ulist none">
 <ul class="none">
 <li>
-<p><em>Daten Drift:</em> Verteilung der Inputs \(X\) ändert sich</p>
+<p><strong><em>Daten-Drift:</em></strong> Verteilung der gemessenen Werte einer oder mehrerer Variablen verändert sich. Dies kann entweder die Inputs \(X\) betreffen, dann nennt sich das <em>Covariate Shift</em> oder die Outputs \(y\), dann sprechen wir von <em>Label Shift</em>.</p>
 </li>
 <li>
-<p><em>Konzept Drift:</em> Input/Output Zusammenhang \(X \to y\) ändert sich</p>
+<p><strong><em>Konzept-Drift:</em></strong> Input/Output Zusammenhang \(X \to y\) ändert sich, d.h. exakt die gleichen Inputs \(X\) resultieren plötzlich in einem anderen Output \(y\).</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>In beiden Fällen ändert sich etwas, das für unsere ML Anwendung wichtig ist, in der Welt. Wenn unsere gesammelten Daten diese Veränderung abbilden, spricht man von Daten-Drift. Wenn wir diese Veränderung nicht in unseren Inputdaten sehen können, handelt es sich um einen Konzept-Drift.</p>
 </div>
 <div class="paragraph">
 <p><span class="underline">Beispiel:</span> Anhand der Produktionsbedingungen inkl. der Größe des produzierten Teils (\(X\)) möchten wir vorhersagen ob das jeweilige Produkt in Ordnung oder Ausschuss ist (\(y\)):</p>
@@ -1000,31 +1003,28 @@ Die Vorhersagegenauigkeit eines Modells lässt schnell nach, wenn die Daten im P
 <div class="ulist none">
 <ul class="none">
 <li>
-<p><em>Daten Drift:</em> Der Hersteller produzierte früher nur kleine Teile, nun aber auch größere Teile.</p>
+<p><em>Daten-Drift:</em> Der Hersteller produzierte früher nur kleine Teile, nun aber auch größere Teile.</p>
 </li>
 <li>
-<p><em>Konzept Drift:</em> Während früher 10% Ausschuss produziert wurden, wird nach einer Reparatur der Maschine bei gleichen Produktionsbedingungen nur noch 5% Ausschuss produziert.</p>
+<p><em>Konzept-Drift:</em> Während früher 10% Ausschuss produziert wurden, wird nach einer Reparatur der Maschine bei gleichen Produktionsbedingungen (\(X\)) nur noch 5% Ausschuss (\(y\)) produziert.</p>
 </li>
 </ul>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Covarite Shifts können, ohne dass es einen Konzept-Drift gibt, zu Label Shifts führen, wenn die Inputvariable kausal mit der Outputvariable verbunden ist. Zum Beispiel wurde ein Modell, das Krebs (\(y\)) bei Patienten basierend auf dem Alter (\(x\)) vorhersagt, mit einem Datensatz trainiert, der größtenteils aus älteren Menschen besteht, die naturgemäß auch häufiger an Krebs erkranken. In der Praxis wird das Modell dann auf Patienten jeden Alters angewendet (<em>Covariate Shift</em>), also auch auf mehr junge Menschen, die seltener an Krebs erkranken (<em>Label Shift</em>).
+</td>
+</tr>
+</table>
+</div>
+<h4 id="_gründe_für_drifts_vorbeugende_maßnahmen" class="discrete">Gründe für Drifts &amp; Vorbeugende Maßnahmen</h4>
 <div class="paragraph">
-<p><span class="underline">Mögliche Gründe für Daten oder Konzept Drifts:</span></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Neue Nutzer verhalten sich anders: Beispielsweise wird das Produkt jetzt von einer jüngeren Generation verwendet oder das Unternehmen expandierte vor kurzem in ein anderes Land.</p>
-</li>
-<li>
-<p>Trends und Saisonalität: Beispielsweise werden bestimmte Produkte hauptsächlich in einer bestimmten Saison gekauft (z.B. Winterkleidung) oder neue Modeerscheinungen führen dazu, dass dieselben Kunden nun andere Produkte kaufen, weil diese jetzt &#8220;in&#8221; sind.</p>
-</li>
-<li>
-<p>Die Prozessstruktur / das Setup hat sich geändert: Beispielsweise ist in einer neuen Version eines Geräts ein Sensor an eine anderen Stelle, loggt aber immer noch Werte unter demselben Variablennamen.</p>
-</li>
-<li>
-<p>Feedback-Schleife, bei der das Vorhandensein des ML-Modells das Nutzerverhalten verändert: Beispielsweise ändern Spammer ihre Strategie, um den Spamfilter zu umgehen.</p>
-</li>
-</ul>
+<p>Daten- und Konzeptdrifts entstehen sowohl durch die Art wie die Daten gesammelt werden, als auch durch externe Ereignisse außerhalb unserer Kontrolle.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1038,10 +1038,101 @@ Diese Veränderungen können entweder <strong>graduell</strong> sein (z.B. Sprac
 </tr>
 </table>
 </div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Geändertes Datenschema: </dt>
+<dd>
+<p>Viele Probleme entstehen intern und könnten vermieden werden, zum Beispiel:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Die Benutzeroberfläche zur Datensammlung ändert sich, zum Beispiel wurde eine Größe zuvor in Metern erfasst und wird jetzt in Zentimetern erfasst.</p>
+</li>
+<li>
+<p>Die Sensor-Konfiguration ändert sich, beispielsweise wird in einer neuen Version eines Geräts ein anderer Sensor verwendet, der jedoch weiterhin Werte unter dem gleichen Variablennamen wie der alte Sensor aufzeichnet.</p>
+</li>
+<li>
+<p>Die als Inputs für das Modell verwendeten Features ändern sich, zum Beispiel werden zusätzliche erstellte Features eingeführt, jedoch wurde die Feature-Transformations-Pipeline nur im Trainingscode geändert, noch nicht im Produktionscode.</p>
+</li>
+</ul>
+</div>
 <div class="paragraph">
-<p><span class="underline">Vorbeugende Maßnahmen:</span><br>
-Der beste Weg, Daten und Konzept Drifts entgegenzuwirken, besteht darin, das <strong>Modell häufig mit neuen Daten zu trainieren</strong>. Dies kann entweder nach einem fixen Zeitplan erfolgen (z.B. jedes Wochenende, je nachdem, wie schnell sich die Daten ändern) oder wenn das Monitoringsystem Alarm schlägt, weil es Drifts in den Inputs oder eine verschlechterte Modellperformance festgestellt hat.<br>
-Außerdem ist es immer sinnvoll, bekannte externe Ereignisse, wie z.B. eine Wartung an einer Maschine, zu protokollieren.</p>
+<p>&#8658; In diesen Fällen sollte idealerweise ein Fehler geworfen werden, zum Beispiel könnten wir einige <strong>Tests vor der Anwendung des Modells</strong> einbauen, um sicherzustellen, dass wir die erwartete Anzahl von Features erhalten, deren Datentypen (z.B. Text oder Zahlen) wie erwartet sind und die Werte grob im erwarteten Bereich für das jeweilige Feature liegen. Darüber hinaus müssen andere Teams im Unternehmen darüber informiert werden, dass ein ML-Modell auf ihren Daten basiert, damit sie das Data-Science-Team rechtzeitig über Änderungen informieren können.</p>
+</div>
+</dd>
+<dt class="hdlist1">Daten-Drifts: </dt>
+<dd>
+<p>Daten-Drifts treten auf, wenn unser Modell Vorhersagen für Stichproben treffen muss, die sich von den Trainingsdaten unterscheiden. Das kann zum Beispiel daran liegen, dass bestimmte Bereiche der Trainingsdomäne unterrepräsentiert waren. Im Extremfall könnte das Modell sogar gezwungen sein, über die Trainingsdomäne hinaus zu extrapolieren. Dies könnte beispielsweise durch folgende Gründe verursacht werden:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Veränderte Stichprobenauswahl</strong>, zum Beispiel wenn das Unternehmen kürzlich in ein anderes Land expandiert ist oder nach einer gezielten Marketingkampagne die Website von einer neuen Nutzergruppe besucht wird.</p>
+</li>
+<li>
+<p><strong>Feindseliges Verhalten</strong>, zum Beispiel wenn Spammer ständig ihre Nachrichten anzupassen, um Spam-Filter zu umgehen. Vor zehn Jahren hätte ein Mensch eine Spam-Nachricht von heute auch als Spam erkannt (die Bedeutung von Spam hat sich also nicht geändert), aber diese ausgefeilteren Nachrichten waren damals nicht im Trainingsdatensatz enthalten. Das macht es für ML-Modelle schwierig, diese Muster zu erkennen.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>&#8658; Daten-Drifts können als Gelegenheit betrachtet werden, unseren Trainingsdatensatz zu erweitern und das <strong>Modell mit mehr Daten von unterrepräsentierten Untergruppen neu zu trainieren</strong>. Wie jedoch im vorherigen Abschnitt zu modellbasierter Diskriminierung erläutert wurde, bedeutet dies oft, dass diese unterrepräsentierten Untergruppen zunächst mit einem weniger effektiven Modell arbeiten müssen, beispielsweise eine Spracherkennungsfunktion, die bei Frauen schlechter funktioniert als bei Männern. Daher ist es wichtig, Untergruppen zu identifizieren, bei denen das Modell möglicherweise schlechtere Ergebnisse liefert, idealerweise mehr Daten aus diesen Gruppen zu sammeln oder zumindest beim Modelltraining und -evaluierung diesen Datenpunkten größere Beachtung zu schenken.</p>
+</div>
+</dd>
+<dt class="hdlist1">Konzept-Drifts: </dt>
+<dd>
+<p>Konzept-Drifts treten auf, wenn externe Veränderungen oder Ereignisse eintreten, die wir nicht in unseren Daten erfasst haben oder die die Bedeutung unserer Daten verändern. Das bedeutet, dass genau dieselben Input Features plötzlich zu unterschiedlichen Outputs führen. Ein Grund kann sein, dass uns <strong>eine Variable fehlt</strong>, die einen direkten Einfluss auf den Output hat, zum Beispiel:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Unser Prozess reagiert auf Temperatur und Luftfeuchtigkeit, aber wir haben nur die Temperatur aufgezeichnet und nicht die Luftfeuchtigkeit. Wenn sich also die Luftfeuchtigkeit ändert, führen dieselben Temperaturwerte zu unterschiedlichen Outputs. &#8658; Luftfeuchtigkeit zusätzlich als Input Feature im Modell aufnehmen.</p>
+</li>
+<li>
+<p>Saisonale Trends führen zu Veränderungen in der Beliebtheit von Sommer- gegenüber Winterkleidung. &#8658; Monat / Außentemperatur als zusätzliches Input Feature hinzufügen.</p>
+</li>
+<li>
+<p>Besondere Ereignisse, wie zum Beispiel wenn ein Prominenter unser Produkt in den sozialen Medien erwähnt oder Menschen aufgrund von Lockdowns während einer Pandemie ihr Verhalten ändern. &#8658; Obwohl es schwer sein kann, diese Ereignisse im Voraus zu prognostizieren, können wir, wenn sie eintreten, ein zusätzliches Feature wie &#8216;während des Lockdowns&#8217; aufnehmen, um die in diesem Zeitraum gesammelten Daten von den übrigen zu unterscheiden.</p>
+</li>
+<li>
+<p>Degenerative Feedbackschleifen, d.h., die Existenz des Modells ändert das Verhalten der Benutzer, zum Beispiel veranlasst ein Empfehlungssystem Benutzer dazu, auf Videos zu klicken, nur weil sie empfohlen wurden. &#8658; Als zusätzliches Feature aufnehmen, ob das Video empfohlen wurde oder nicht, um herauszufinden, wie viel von &#8220;Benutzer hat auf Element geklickt&#8221; auf die Empfehlung zurückzuführen ist und wie viel auf das natürliche Verhalten des Benutzers.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Zusätzlich können Konzept-Drifts durch Ereignisse verursacht werden, die die <strong>Bedeutung der aufgezeichneten Daten ändern</strong>, zum Beispiel:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Inflation: 1 Euro im Jahr 1990 hatte einen höheren Wert als 1 Euro heute. &#8658; Daten Inflationsbereinigen oder die Inflationsrate als zusätzliches Input Feature aufnehmen.</p>
+</li>
+<li>
+<p>Ein in Wasser getauchter Temperatursensor sammelt Kalkablagerungen, und nach einer Weile ist die Temperaturmessung nicht mehr genau. Zum Beispiel misst ein sauberer Sensor bei einer tatsächlichen Temperatur von 90 Grad die exakten 90 Grad, aber nachdem er einige Schichten Kalk angesammelt hat, misst er unter denselben Bedingungen nur noch 89 Grad. Während unser Output von der wahren Temperatur beeinflusst wird, haben wir nur Zugriff auf die Sensormessung für die Temperatur, die auch durch den Zustand des Sensors selbst bestimmt wird. &#8658; Versuche, die Kalkablagerung zu schätzen, zum Beispiel basierend auf der Anzahl der Tage seit der letzten Reinigung des Sensors (was auch bedeutet, dass solche Wartungsereignisse irgendwo erfasst werden müssen!).</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/07_data_issues/concept_drift.png" alt="image" width="420">
+</div>
+<div class="title"><span class="small">Kausaldiagramm, das zeigt, wie unser beobachteter Input \(x\) (Temperaturmessung) und Output \(y\) durch versteckte Variablen beeinflusst werden (auf die wir keinen direkten Zugriff haben). Diese versteckten Variablen sind der Zustand des Temperatursensors (d.h. wie viel Kalk sich angesammelt hat), die tatsächliche Temperatur und die Luftfeuchtigkeit (für die wir noch keinen Sensor installiert haben). Wenn der Sensorzustand und die Luftfeuchtigkeit konstant bleiben, können wir den Output aus der Temperaturmessung vorhersagen. Wenn sich jedoch einer dieser Werte ändert, treten Konzept-Drifts auf. Daher sollten wir versuchen, Schätzungen dieser versteckten Variablen in unser Modell aufzunehmen, um diese Veränderungen zu berücksichtigen.</span></div>
+</div>
+<div class="paragraph">
+<p>
+&#8658; Vor dem Training eines Modells sollten die Daten untersucht werden, um <strong>Fälle zu identifizieren, bei denen identische Inputs unterschiedliche Outputs ergeben</strong>. Wenn möglich, sollten <strong>zusätzliche Input Features aufgenommen werden, um diese Variationen zu berücksichtigen</strong>. Eine schlechte Performance des Modells auf dem Testdatensatz deutet häufig darauf hin, dass relevante Inputs fehlen, was die Anfälligkeit für zukünftige Konzept-Drifts erhöht. Selbst wenn die richtigen Variablen verwendet werden, um einen Konzept-Drift zu erfassen, kann häufiges Nachtrainieren der Modelle dennoch notwendig sein. Zum Beispiel können unterschiedliche Zustände des Konzepts ungleichmäßig in den Trainingsdaten vorhanden sein, was zu Daten-Drifts führen kann (z.B. mehr Daten, die im Winter gesammelt wurden als in den frühen Sommermonaten). Wenn es nicht möglich ist, Variablen einzubeziehen, die den Konzept-Drift abbilden, könnte es notwendig sein, <strong>Datenpunkte aus dem ursprünglichen Trainingsdatensatz zu entfernen, die nicht der neuen Input/Output-Beziehung entsprechen, bevor das Modell erneut trainiert wird</strong>.</p>
+</div>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Der beste Weg, Daten und Konzept-Drifts entgegenzuwirken, besteht darin, das <strong>Modell häufig mit neuen Daten zu trainieren</strong>. Dies kann entweder nach einem fixen Zeitplan erfolgen (z.B. jedes Wochenende, je nachdem, wie schnell sich die Daten ändern) oder wenn das Monitoringsystem Alarm schlägt, weil es Drifts in den Inputs oder eine verschlechterte Modellperformance festgestellt hat.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="paragraph nav-footer">

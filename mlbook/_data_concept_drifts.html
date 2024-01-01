@@ -922,7 +922,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
-<body id="_garbage_in_garbage_out" class="book toc2 toc-left">
+<body id="_data_concept_drifts" class="book toc2 toc-left">
 <div id="header">
 <h1>A Practitioner&#8217;s Guide to Machine Learning</h1>
 <div class="details">
@@ -934,116 +934,90 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <p><span class="toc-root"><a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a></span></p><ul class="sectlevel1">
-<li><a href="_einleitung.html">Einleitung</a>
+<li><a href="_introduction.html">Introduction</a>
 </li>
-<li><a href="_grundlagen.html">Grundlagen</a>
+<li><a href="_the_basics.html">The Basics</a>
 </li>
-<li><a href="_datenanalyse_preprocessing.html">Datenanalyse &amp; Preprocessing</a>
+<li><a href="_ml_with_python.html">ML with Python</a>
+</li>
+<li><a href="_data_analysis_preprocessing.html">Data Analysis &amp; Preprocessing</a>
+</li>
+<li><a href="_unsupervised_learning.html">Unsupervised Learning</a>
+</li>
+<li><a href="_supervised_learning_basics.html">Supervised Learning Basics</a>
+</li>
+<li><a href="_supervised_learning_models.html">Supervised Learning Models</a>
+</li>
+<li><a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a>
 <ul class="sectlevel2">
-<li><a href="_datenanalyse.html">Datenanalyse</a>
+<li><a href="_model_does_not_generalize.html">Model does not generalize</a>
 </li>
-<li><a href="_garbage_in_garbage_out.html"><span class="toc-current">Garbage in, Garbage out!</span></a>
+<li><a href="_model_abuses_spurious_correlations.html">Model abuses spurious correlations</a>
 </li>
-<li><a href="_preprocessing.html">Preprocessing</a>
+<li><a href="_model_discriminates.html">Model discriminates</a>
+</li>
+<li><a href="_explainability_interpretable_ml.html">Explainability &amp; Interpretable ML</a>
+</li>
+<li><a href="_data_concept_drifts.html"><span class="toc-current">Data &amp; Concept Drifts</span></a>
 </li>
 </ul>
 </li>
-<li><a href="_deep_learning_2.html">Deep Learning</a>
+<li><a href="_advanced_topics.html">Advanced Topics</a>
 </li>
-<li><a href="_häufige_fehler_vermeiden.html">Häufige Fehler vermeiden</a>
-</li>
-<li><a href="_fazit.html">Fazit</a>
+<li><a href="_conclusion.html">Conclusion</a>
 </li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect2">
-<h3 id="_garbage_in_garbage_out">Garbage in, Garbage out!</h3>
+<h3 id="_data_concept_drifts">Data &amp; Concept Drifts</h3>
 <div class="paragraph">
-<p>Vergiss nie: Daten sind unser Rohstoff, um mit ML etwas Wertvolles zu schaffen. Ist die Qualität oder Quantität der Daten nicht ausreichend, haben wir ein &#8220;Garbage in, Garbage out&#8221;-Szenario und egal welche Art von ausgefallenem ML-Algorithmus wir verwenden, wir werden kein zufriedenstellendes Ergebnis erreichen. Im Gegenteil, je aufwändiger die Algorithmen (z.B. Deep Learning), desto mehr Daten werden benötigt.</p>
+<p>We must never forget that the world keeps on changing and that models need to be updated regularly with new data to be able to adapt to these changing circumstances!</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<strong>ML fails silently!</strong> I.e., even if all predictions are wrong, the program does not simply crash with some error message.<br>
+&#8594; Need constant monitoring to detect changes that lead to a deteriorating performance!
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>Nachfolgend findest du eine Zusammenfassung einiger allgemeiner Risiken im Zusammenhang mit Daten, die die Anwendung von ML erschweren oder sogar unmöglich machen:</p>
+<p><span class="underline">One of the biggest problems in practice: Data and Concept Drifts:</span><br>
+The model performance quickly decays when the distribution of the <strong>data used for training</strong> \(P_{train}(X, y)\) is <strong>different from the data the model encounters when deployed in production</strong> \(P_{prod}(X, y)\), where  \(P(X, y) = P(y|X)P(X) = P(X|y)P(y)\).<br>
+Such a discrepancy can be due to</p>
 </div>
-<div class="sidebarblock">
-<div class="content">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Rohdaten können sehr chaotisch sein: </dt>
-<dd>
-<div class="ulist">
-<ul>
+<div class="ulist none">
+<ul class="none">
 <li>
-<p>Relevante Daten sind auf mehrere Datenbanken/Excel-Tabellen verteilt, die zusammengeführt werden müssen. <em>Worst Case:</em> Datenpunkte haben keine eindeutige ID, anhand derer sich die verschiedenen Einträge verknüpfen lassen. Stattdessen muss man auf eine fehleranfällige Strategie zurückgreifen, wie den Datenabgleich anhand von Zeitstempeln.</p>
+<p><strong><em>Data drift:</em></strong> the distribution of one or more variables changes. This is called a <em>covariate shift</em> if the distribution of input features \(X\) changes, i.e., \(P_{train}(X) \neq P_{prod}(X)\), and a <em>label shift</em> if the distribution of the target variable \(y\) changes.</p>
 </li>
 <li>
-<p>Manuell eingegebene Werte enthalten Fehler, z.B. falsch platzierte Dezimalkommas.</p>
-</li>
-<li>
-<p>Fehlende Werte können nicht korrigiert werden. <em>Worst Case:</em> Fehlende Werte sind nicht zufällig. Beispielsweise versagen Sensoren genau dann, wenn während des Produktionsprozesses etwas schief geht. Oder im Rahmen einer Umfrage zum Einkommen verweigern reiche Personen im Vergleich zu armen oder mittelständischen Personen häufiger die Antwort. Dies kann zu systematischen Verzerrungen im Datensatz führen.</p>
-</li>
-<li>
-<p>Der Datensatz besteht aus verschiedenen Datentypen (strukturiert und/oder unstrukturiert) mit unterschiedlichen Skalierungen.</p>
-</li>
-<li>
-<p>Der Prozess ändert sich im Laufe der Zeit, z.B. aufgrund externer Bedingungen wie dem Austausch eines Sensors oder einem anderen Wartungsereignis, was bedeutet, dass die über verschiedene Zeiträume gesammelten Daten nicht kompatibel sind. <em>Worst Case:</em> Diese externen Veränderungen wurden nirgends dokumentiert und wir bemerken erst am Ende der Analyse, dass die verwendeten Daten unsere Annahmen verletzten.</p>
+<p><strong><em>Concept drift:</em></strong> input/output relationship \(X \to y\) changes, i.e., \(P_{train}(y|X) \neq P_{prod}(y|X)\). This means with exactly the same inputs \(X\) we now get a different output \(y\) than before the drift.</p>
 </li>
 </ul>
 </div>
-</dd>
-</dl>
+<div class="paragraph">
+<p>In both cases, something important for our machine learning task changes in the world. If our collected data reflects this change, it is called data drift. If we can&#8217;t see this change in our input data, we&#8217;re dealing with a concept drift.</p>
 </div>
 <div class="paragraph">
-<p>&#8594; Preprocessing von Daten dauert sehr lange.<br>
-&#8594; Der resultierende Datensatz (nach der Bereinigung) ist viel kleiner als erwartet&#8201;&#8212;&#8201;möglicherweise zu klein, um eine sinnvolle Analyse durchzuführen.</p>
+<p><span class="underline">Example:</span> From the production settings incl. the size of a produced part (\(X\)) we want to predict whether the part is scrap or okay (\(y\)):</p>
 </div>
-<div class="paragraph">
-<p>&#8658; Bevor du mit ML anfängst, überlege erst, ob du die Datenerfassungspipeline und Infrastruktur verbessern kannst!</p>
-</div>
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Nicht genug / nicht die richtigen Daten für ML: </dt>
-<dd>
-<div class="ulist">
-<ul>
+<div class="ulist none">
+<ul class="none">
 <li>
-<p>Ein kleiner Datensatz und/oder zu wenig Variation, z.B. werden nur sehr wenige defekte Produkte produziert oder ein Prozess läuft die meiste Zeit im stationären Zustand, d.h. es gibt nur wenig oder keine Variation bei den Inputs.<br>
-&#8594; Auswirkung verschiedener Eingangsgrößen auf die Zielvariable kann aus wenigen Beobachtungen nicht zuverlässig abgeschätzt werden.<br>
-&#8658; Führe gezielt Experimente durch, bei denen verschiedene Inputs systematisch variiert werden, um einen aussagekräftigeren Datensatz zu generieren.</p>
+<p><em>Data drift:</em> The company used to manufacture only small parts, now they also produce larger parts.</p>
 </li>
 <li>
-<p>Daten sind inkonsistent / unvollständig, also es gibt Datenpunkte mit gleichen Inputs aber unterschiedlichen Labels, z.B. zwei Produkte wurden unter den gleichen (gemessenen) Bedingungen produziert, eins ist in Ordnung, eins fehlerhaft.<br>
-Dies kann zwei Gründe haben:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Die Labels sind sehr verrauscht, z.B. weil die menschlichen Annotatoren nicht dieselben klaren Regeln befolgten oder einige Beispiele mehrdeutig waren (z.B. ein QA-Experte sagt ein kleiner Kratzer ist noch in Ordnung, der andere sortiert das Produkt aus).<br>
-&#8658; Etablierung klarer Regeln nach welchen Kriterien Daten gelabelt werden sollen und Daten durch Neuannotation bereinigen. Dies kann einige Zeit dauern, lohnt sich aber! Siehe auch dieser tolle <a href="https://youtu.be/06-AZXmwHjo" target="\_blank">MLOps / data-centric AI Vortrag von Andrew Ng</a> darüber, wie ein kleiner sauberer Datensatz wertvoller sein kann als ein großer verrauschter Datensatz.</p>
-</li>
-<li>
-<p>Relevante Input Features fehlen: Menschen können zwar relativ einfach beurteilen, ob alle relevanten Informationen in unstrukturierten Daten enthalten sind (z.B. Bilder: entweder sehen wir eine Katze oder nicht), strukturierte Daten haben dagegen oft zu viele verschiedene Variablen und komplexe Interaktionen, um sofort zu erkennen, ob alle relevanten Eingangsgrößen gemessen wurden.<br>
-&#8658; Sprich mit einem Fachexperten darüber, welche zusätzlichen Features hilfreich sein könnten und nimm diese in den Datensatz mit auf. <em>Worst Case:</em> Es muss ein neuer Sensor in die Maschine eingebaut werden um diese Daten zu sammeln, d.h. alle in der Vergangenheit gesammelten Daten sind im Grunde nutzlos. ABER: Der Einsatz des richtigen Sensors kann das Problem immens vereinfachen und der Einbau lohnt sich!<br>
-<span class="small">Bei vielen Anwendungen ist unser erster Gedanke oft, die Eingabedaten mithilfe einer Kamera zu generieren, da wir Menschen hauptsächlich auf unser visuelles System angewiesen sind, um viele Aufgaben zu lösen. Auch wenn Bilderkennungsalgorithmen mittlerweile sehr ausgereift sind, kann die Verwendung eines solchen Setups anstelle eines spezialisierteren Sensors die Lösung komplizierter machen.<br>
-Willst du überreife Erdbeeren erkennen? Machs wie <a href="https://www.aboutamazon.co.uk/innovation/machine-learning-using-algorithms-to-sort-fruit" target="\_blank">Amazon Fresh</a> und verwende einen Nahinfrarotsensor (NIR) anstelle einer normalen Kamera. Dabei wird immer noch maschinelles Lernen verwendet um die resultierenden Daten zu analysieren, aber in den NIR-Bildern sind die vergammelten Teile der Früchte viel besser sichtbar als auf normalen Fotos.<br>
-Versuchst du zu erkennen, ob eine Tür geschlossen ist? Mit einem einfachen <a href="https://www.deeplearning.ai/the-batch/issue-92/" target="\_blank">Magneten</a> und Detektor lässt sich diese Aufgabe ohne aufwändige Analyse oder Trainingsdaten lösen! (Du kennst bestimmt das Sprichwort: &#8220;Wenn du einen Hammer hast, sieht alles aus wie ein Nagel&#8221;. &#8594; Vergiss nicht, auch Lösungen außerhalb deiner ML-Toolbox in Betracht zu ziehen! ;-))</span></p>
+<p><em>Concept drift:</em> The company used to produce 10% scrap parts, but after some maintenance on the machine, the same production settings (\(X\)) now result in only 5% scrap (\(y\)).</p>
 </li>
 </ul>
-</div>
-</li>
-</ul>
-</div>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>&#8594; Wenn der Datensatz nicht entsprechend aufgewertet wird, wird kein ML-Modell eine gute Performance liefern!</p>
-</div>
-</div>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -1052,50 +1026,14 @@ Versuchst du zu erkennen, ob eine Tür geschlossen ist? Mit einem einfachen <a h
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Beobachte wenn möglich wie die Daten erfasst werden, im Sinne von: Stehe tatsächlich physisch da und beobachte, wie jemand die Werte in ein Programm eingibt oder wie die Maschine arbeitet, wenn die Sensoren etwas messen. Sicherlich werden dir einige Dinge auffallen, die man direkt bei der Datenerhebung optimieren könnte. Dies erspart in Zukunft viel Preprocessing Arbeit.
+Covariate shifts, without concept drift, can lead to label shifts when the input variable is causally related to the target. For example, a model predicting cancer (\(y\)) in patients based on age (\(x\)) was trained on a dataset consisting of mostly older people, who naturally also have a higher cancer incidence. In production, the model is used on patients of all ages (<em>covariate shift</em>), i.e., including more young people that have cancer less frequently (<em>label shift</em>).
 </td>
 </tr>
 </table>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Best Practice: Datenkatalog</dt>
-<dd>
-<p>Um Datensätze leichter zugänglich zu machen, sollten diese dokumentiert werden.
-Für strukturierte Datensätze sollte es für jede Variable Zusatzinformationen geben wie:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Name der Variable</p>
-</li>
-<li>
-<p>Beschreibung</p>
-</li>
-<li>
-<p>Einheit</p>
-</li>
-<li>
-<p>Datentyp (z.B. numerische oder kategorische Werte)</p>
-</li>
-<li>
-<p>Datum der ersten Messung (z.B. falls ein Sensor erst später eingebaut wurde)</p>
-</li>
-<li>
-<p>Normaler/erwarteter Wertebereich (&#8594; &#8220;Wenn die Variable unter diesem Schwellwert liegt, dann ist die Maschine ausgeschaltet und die Datenpunkte können ignoriert werden&#8221;)</p>
-</li>
-<li>
-<p>Wie werden fehlende Werte aufgezeichnet, d.h. werden sie tatsächlich als fehlende Werte aufgezeichnet oder stattdessen durch einen unrealistischen Wert ersetzt, was passieren kann, da einige Sensoren kein Signal für &#8220;Not a Number&#8221; (NaN) senden können oder die Datenbank es nicht zulässt, dass das Feld leer bleibt.</p>
-</li>
-<li>
-<p>Anmerkungen zu sonstigen Vorfällen oder Ereignissen, z.B. eine Fehlfunktion des Sensors während eines bestimmten Zeitraums oder ein anderer Fehler, der zu falschen Daten geführt hat. Diese sind sonst oft schwer zu erkennen, z.B. wenn jemand stattdessen manuell Werte eingibt oder kopiert hat, die auf den ersten Blick normal aussehen.</p>
-</li>
-</ul>
-</div>
-</dd>
-</dl>
-</div>
+<h4 id="_drift_origins_mitigation_strategies" class="discrete">Drift Origins &amp; Mitigation Strategies</h4>
 <div class="paragraph">
-<p>Weitere Empfehlungen, was bei der Dokumentation von Datensätzen speziell für Machine Learning Anwendungen wichtig ist, findest du im <a href="https://pair-code.github.io/datacardsplaybook/" target="\_blank">Data Cards Playbook</a>.</p>
+<p>There are various reasons for data and concepts drifts, both related to how the data is collected as well as external events outside our control.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1104,49 +1042,205 @@ Für strukturierte Datensätze sollte es für jede Variable Zusatzinformationen 
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Neben der Dokumentation von Datensätzen als Ganzes ist es auch sehr hilfreich, Metadaten für einzelne Proben zu speichern. Bei Bilddaten können dies beispielsweise der Zeitstempel der Bildaufnahme, die Geolokalisierung (oder wenn die Kamera in einer Fertigungsmaschine verbaut ist, dann die ID dieser Maschine), Informationen zu den Kameraeinstellungen etc. sein. Dies kann bei der Analyse von Modellvorhersagefehlern sehr hilfreich sein, da sich beispielsweise herausstellen kann, dass Bilder, die mit einer bestimmten Kameraeinstellung aufgenommen wurden, besonders schwer zu klassifizieren sind, was uns wiederum Hinweise liefert, wie wir den Datenerfassungsprozesses verbessern könnten.
+These drifts can either be <strong>gradual</strong> (e.g., languages change gradually as new words are coined; a camera lens gets covered with dust over time), or they can come as a <strong>sudden shock</strong> (e.g., someone cleans the camera lens; when the COVID-19 pandemic hit, suddenly a lot of people switched to online shopping, which tripped up the credit card fraud detection systems).
 </td>
 </tr>
 </table>
 </div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Changed data schema: </dt>
+<dd>
+<p>Many problems are created in-house and could be avoided, for example</p>
+<div class="ulist">
+<ul>
+<li>
+<p>the user interface used to collect the data changes, e.g., a height was previously recorded in meters, now in cm</p>
+</li>
+<li>
+<p>the sensor configuration changed, e.g., in a new version of a device, a different sensor is used, but still logs values under the same variable name as the old sensor</p>
+</li>
+<li>
+<p>the features used as input for the model are changed, e.g., to include additional engineered features, but the feature transformation pipeline was only changed in the training code, not yet in the production code.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>&#8658; These cases should ideally result in an error, e.g., we could include some <strong>checks before applying the model</strong> to make sure we received the expected number of features, their data types (e.g., text or numbers) is as expected, and the values are roughly in the expected range for the respective feature. Furthermore, other teams in the company need to be made aware that an ML model is relying on their data so they can notify the data science team ahead of time in case of changes.</p>
+</div>
+</dd>
+<dt class="hdlist1">Data drifts: </dt>
+<dd>
+<p>Data drifts occur when our model has to make predictions for samples that are different from the data it encountered during training, e.g., because certain regimes of the training domain were undersampled, or in the extreme case the model might even be forced to extrapolate beyond the training domain, for example, due to</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>changed sample selection</strong>, e.g., the business recently expanded to a different country or after a targeted marketing campaign the website is now visited by a new user group</p>
+</li>
+<li>
+<p><strong>adversarial behavior</strong>, e.g., spammers continuously adapt their messages in an effort to circumvent spam filters (i.e., ten years ago a human would have also recognized a spam message from today as spam (i.e., the meaning of what is or isn&#8217;t spam didn&#8217;t change), but these more sophisticated messages weren&#8217;t included in the training set yet, making it hard for ML models to pick up on these patterns)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>&#8658; Data drifts can be seen as an opportunity to extend our training set and <strong>retrain the model with more data from underrepresented subgroups</strong>. Yet, as highlighted in the earlier section on model-based discrimination, this often implies that these undersampled subgroups could initially experience a less effective model, such as a speech recognition function performing less accurately for women than for men. Therefore, it&#8217;s crucial to identify subgroups where the model might exhibit poor performance, ideally gathering more data from these groups or, at the very least, giving greater consideration to these samples during model training and evaluation.</p>
+</div>
+</dd>
+<dt class="hdlist1">Concept drifts: </dt>
+<dd>
+<p>Concept drifts happen when external changes or events occur that we did not record in our data or that change the meaning of our data. This means that the exact same input features suddenly result in a different output. One reason can be that we&#8217;re <strong>missing a variable that has a direct influence on the target</strong>, for example</p>
+<div class="ulist">
+<ul>
+<li>
+<p>our process is sensitive to temperature and humidity, but we only recorded the temperature not the humidity, so as the humidity changes, the same temperature values result in different output values &#8658; additionally include humidity as an input feature in the model</p>
+</li>
+<li>
+<p>seasonal trends result in changes in the popularity of summer vs. winder clothes &#8658; include month / outside temperature as an additional input feature</p>
+</li>
+<li>
+<p>special events, e.g., a celebrity mentioned our product on social media or people changed their behavior because of the lockdown during a pandemic &#8658; while it can be hard to predict these events in advance, when they happen we could include an additional feature, e.g., &#8216;during lockdown&#8217;, to distinguish data collected during this time period from the rest of the data</p>
+</li>
+<li>
+<p>degenerate feedback loops, i.e., the existence of the model changes users' behavior, e.g., a recommender system causes users to click on videos just because they were recommended &#8658; include as an additional feature whether the video was recommended or not to learn how much of &#8220;user clicked on item&#8221; was due to the item being recommended and how much was due to the user&#8217;s natural behavior</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Another cause of concept drifts are events that <strong>change the meaning of the recorded data</strong>, for example</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>inflation: 1 Euro in 1990 was worth more than 1 Euro now &#8658; adjust the data for inflation or include the inflation rate as an additional input feature</p>
+</li>
+<li>
+<p>a temperature sensor immersed in water amasses limescale and after a while the temperature reading is not accurate anymore, e.g., if the true temperature is 90 degrees, a clean senor measures the true 90 degrees, but after it has accumulated some layers of limescale, it only measures 89 degrees under the same circumstances. While our output is influenced by the true temperature, we only have access to the sensor reading for the temperature, which is additionally influenced by the state of the sensor itself &#8658; try to estimate the amount of accumulated limescale, e.g., based on the number of days since the sensor was cleaned the last time (which also means that these kinds of maintenance events need to be recorded somewhere!)</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/07_data_issues/concept_drift.png" alt="image" width="420">
+</div>
+<div class="title"><span class="small">Causal diagram showing how our observed input \(x\) (temperature measurement) and output \(y\) are related through and influenced by hidden variables (which we can not access directly), namely, the state of the temperature sensor (i.e., how much limescale has accumulated), the actual temperature, and the humidity (for which we have not installed a sensor yet). If the sensor state and humidity stay constant, we are able to predict the output from the temperature measurement, however, if either of these values change, we experience a concept drift. Therefore, we should try to include estimates of these hidden variables in our model to account for these changes.</span></div>
+</div>
+<div class="paragraph">
+<p>
+&#8658; Before training a model, examine the data to <strong>identify instances where identical inputs yield different outputs</strong>. If possible, <strong>include additional input features to account for these variations</strong>. Subpar model performance on the test set often indicates missing relevant inputs, heightening vulnerability to future concept drifts. Even when the correct variables are incorporated to capture a concept drift, frequent model retraining may still be necessary. For instance, different states of the concept might be sampled unevenly, leading to data drifts (e.g., more data collected during winter than in the early summer months). If it is not possible to include variables that account for the concept drift, it might be necessary to <strong>remove samples from the original training set that do not conform to the novel input/output relation before retraining the model</strong>.</p>
+</div>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The best way to counteract data and concept drifts is to frequently <strong>retrain the model</strong> on new data. This can either happen on a schedule (e.g., every weekend, depending on how quickly the data changes) or when your monitoring system raises an alert because it detected drifts in the inputs or a deteriorating model performance.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>While traditional ML models typically need to be retrained from scratch, neural network models can also be fine-tuned on newly collected data, however, this is only useful when faced with minor data drifts, not drastic concept drifts.</p>
+</div>
+<div class="paragraph">
+<p>To get a better understanding of how often it might be necessary to retrain the model, we can train the model on data from different periods in the past and then compare the performance on the most recent data (e.g., train the model on data from Jan-June, April-Sept, and June-Nov and then compare the performances on the data from December&#8201;&#8212;&#8201;if the model trained on the most recent data performs much better, it probably makes sense to retrain the model more frequently). Of course, in the presence of sudden events, it might be necessary to train the model outside of the regular schedule.</p>
+</div>
 <div class="sidebarblock">
 <div class="content">
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Daten als Asset</dt>
+<dt class="hdlist1">Monitoring for data &amp; concept drifts</dt>
 <dd>
-<p>Mit den richtigen Prozessen (z.B. Etablierung von Rollen wie &#8220;Data Owner&#8221; und &#8220;Data Controller&#8221;, die für die Datenqualität verantwortlich sind, und Aufbau einer konsistenten Dateninfrastruktur, inkl. eines Monitoring-Prozesses zur Validierung neuer Daten) ist es für eine Organisation möglich, von &#8220;Garbage in, Garbage out&#8221; zu &#8220;Daten sind das neue Öl&#8221; zu kommen:<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Use statistical tests to detect changes in the distributions of individual features:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Kullback-Leibler divergence</p>
+</li>
+<li>
+<p>Jensen-Shannon divergence</p>
+</li>
+<li>
+<p>Kolmogorov-Smirnov (K-S) test</p>
+</li>
+<li>
+<p>Wasserstein / Earth Movers distance</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Use novelty detection or clustering to identify data points that are different from the training samples. Even if a sample&#8217;s individual feature values are still in a normal range, this particular combination of feature values can be far from what the model encountered during training.</p>
+</li>
+<li>
+<p>Check if there is a difference between the predicted and true (training) label frequencies. For example, if in reality usually about 10% of our produced products are faulty, but the model suddenly predicts that 50% of the products are faulty, then something is probably off.</p>
+</li>
+<li>
+<p>Check whether the confidence scores of the model predictions (i.e., the probability for a class, not the predicted class label) get lower, which indicates that new samples are closer to the model&#8217;s decision boundary than the training samples.</p>
+</li>
+<li>
+<p>Check the error metrics of the model on new data (only possibly if you continuously collected new <em>labeled</em> data).</p>
+</li>
+<li>
+<p>After retraining the model on new data, check if the feature importances changed, which indicates that it might be time to select different features for the prediction.</p>
+</li>
+</ul>
+</div>
 </dd>
 </dl>
 </div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/02_data/data_asset.png" alt="image" width="600">
+<div class="paragraph">
+<p>These checks can be combined with a sliding window approach, for example, every hour the data collected in the last 48 hours is compared to the training data. If any of the monitoring values exceeds some predefined threshold, the system triggers an alert and possibly automatically retrains the model on new data.</p>
+</div>
+<div class="paragraph">
+<p>Additionally:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Validate the input data schema, i.e., check that data types and value ranges (incl. missing values / NaNs) match those encountered in the training data.</p>
+</li>
+<li>
+<p>Log known external events (!!), e.g., maintenance on a machine.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+The "ML fails silently" part also applies to bugs in your code: Especially when you just started with ML it often happens that your results seem fine (maybe just a little too good), but you have a subtle bug somewhere that doesn&#8217;t cause your program to crash, but just calculates something slightly wrong somewhere. These issues can be very hard to notice, so always triple-check your code and if you can, write <a href="https://realpython.com/python-testing/" target="\_blank">unit tests</a> for individual functions to make sure they do what you expect them to do.
+</td>
+</tr>
+</table>
 </div>
-<div class="sidebarblock">
-<div class="content">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Mit (Big) Data kommt große Verantwortung!</dt>
-<dd>
-<p>Einige Daten erscheinen auf den ersten Blick manchmal nicht sehr wertvoll, können aber für andere (d.h. mit einem anderen Anwendungsfall) von großem Nutzen sein!</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/09_ml_in_practice/data_responsibility.png" alt="image" width="540">
-</div>
-<div class="title"><span class="small">Ein Fitness-Tracker-Startup hielt es für eine coole Idee, beliebte Joggingrouten basierend auf den von ihren Nutzern generierten Daten zu veröffentlichen. Da aber auch viele US-Soldaten den Tracker benutzten und häufig um ihre Militärstützpunkte joggten, hat dieses Startup dadurch versehentlich einen geheimen US-Armeestützpunkt in Afghanistan geoutet, der auf ihrer interaktiven Karte als heller Punkt in einem Gebiet auftauchte, wo sonst nur wenige andere Nutzer joggten. Auch wenn deine Daten erstmal harmlos erscheinen, denk bitte darüber nach, was bei einer Veröffentlichung (auch in aggregierter, anonymisierter Form) schief gehen könnte!</span></div>
-</div>
-</dd>
-</dl>
-</div>
-</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You might also want to have a look at Google&#8217;s <a href="https://developers.google.com/machine-learning/guides/rules-of-ml" target="\_blank">rules of machine learning</a> (the first one being: <em>"Don&#8217;t be afraid to launch a product without machine learning."</em>)
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_datenanalyse.html">Datenanalyse</a> | ↑ Up: <a href="_datenanalyse_preprocessing.html">Datenanalyse &amp; Preprocessing</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_preprocessing.html">Preprocessing</a> →</p>
+<p>← Previous: <a href="_explainability_interpretable_ml.html">Explainability &amp; Interpretable ML</a> | ↑ Up: <a href="_avoiding_common_pitfalls.html">Avoiding Common Pitfalls</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_advanced_topics.html">Advanced Topics</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

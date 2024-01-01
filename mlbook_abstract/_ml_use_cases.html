@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.18">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <meta name="author" content="Dr. Franziska Horn">
 <meta name="copyright" content="Dr. Franziska Horn">
 <title>A Practitioner&#8217;s Guide to Machine Learning</title>
@@ -928,8 +928,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.8,</span>
-<span id="revdate">2023-01-06</span>
+<span id="revnumber">version 1.9,</span>
+<span id="revdate">2024-01-01</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -1123,7 +1123,19 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="content">
 <img src="../images/01c_ml_overview/ml_algorithms_12.png" alt="image" width="840">
 </div>
-<div class="title"><span class="small">To apply unsupervised learning algorithms, we only need a feature matrix \(X\), while learning a prediction model with supervised learning algorithms additionally requires the corresponding labels \(\mathbf{y}\). Even if our ultimate goal is to predict something (i.e., use supervised learning), it can still be helpful to first use unsupervised learning to get a better understanding of the dataset, for example, by visualizing the data with dimensionality reduction methods to see all samples and their diversity at a glance, by identifying outliers to clean the dataset, or, for classification problems, by first clustering the samples to check whether the given class labels match the naturally occurring groups in the data or if, e.g., two very similar classes could be combined to simplify the problem.</span></div>
+<div class="title"><span class="small">To apply unsupervised learning algorithms, we only need a feature matrix \(X\), while learning a prediction model with supervised learning algorithms additionally requires the corresponding labels \(\mathbf{y}\).</span></div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Even if our ultimate goal is to predict something (i.e., use supervised learning), it can still be helpful to first use unsupervised learning to get a better understanding of the dataset, for example, by visualizing the data with dimensionality reduction methods to see all samples and their diversity at a glance, by identifying outliers to clean the dataset, or, for classification problems, by first clustering the samples to check whether the given class labels match the naturally occurring groups in the data or if, e.g., two very similar classes could be combined to simplify the problem.
+</td>
+</tr>
+</table>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -1222,7 +1234,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </dd>
 </dl>
 </div>
-<div class="paragraph text-justify">
+<div class="paragraph text-justify text-justify">
 <p><span class="small">This is a small toy dataset with structured data about different apartments, which someone might have gathered from a real estate website. It includes the size of the apartment in square meters, the number of bedrooms, the number of bathrooms, the year it was last renovated, and finally the price of the listing and whether it was sold for this price (1) or not (0).</span></p>
 </div>
 </div>
@@ -1233,7 +1245,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="title"><span class="underline">Use Cases:</span></div>
 <ul>
 <li>
-<p>create a 2D visualization to explore the dataset as a whole, where we can often already identify patterns like samples that can be grouped together (clusters) or that don&#8217;t belong (outliers)</p>
+<p>create a 2D visualization to explore the dataset as a whole, where we can often already visually identify patterns like samples that can be grouped together (clusters) or that don&#8217;t belong (outliers)</p>
 </li>
 <li>
 <p>noise reduction and/or feature engineering as a data preprocessing step to improve the performance in the following prediction task</p>
@@ -1392,69 +1404,29 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="title"><span class="underline">Use Cases:</span></div>
 <ul>
 <li>
-<p>Describe (and subsequently better understand and optimize) input-output relationships in some real world process, for example:</p>
+<p>Learn a model to describe an input-output relationship and make predictions for new data points, for example:</p>
 <div class="ulist">
 <ul>
-<li>
-<p>determine the price that should be set for a new apartment listing and tell home owners what they can do to sell their house at a higher price (e.g., a freshly renovated bathroom may have a higher influence on what potential buyers are willing to pay than a new coat of paint on the outside)</p>
-</li>
 <li>
 <p>predict in advance whether a product produced under the proposed process conditions will be of high quality or would be a waste of resources</p>
 </li>
 <li>
-<p>identify which process conditions have the most influence on the quality of the product and which settings generally lead to the best results</p>
+<p>fraud detection: identify fraudulent credit card transactions</p>
 </li>
 <li>
-<p>given some external conditions (e.g., outside temperature, composition of raw input materials from a new vendor), automatically determine the best process settings to produce high quality products</p>
+<p>churn prediction: identify customers that are about to cancel their contract (or employees that are about to quit) so you can reach out to them and convince them to stay</p>
+</li>
+<li>
+<p>price optimization: determine the optimal price for a product (often used for dynamic pricing, e.g., to adapt prices based on the device a customer uses (e.g., new iPhone vs old Android phone) when accessing a website)</p>
+</li>
+<li>
+<p>predictive maintenance: predict how long a machine component will last</p>
+</li>
+<li>
+<p>sales forecasts: predict revenue in the coming weeks and how much inventory will be required to satisfy the demand</p>
 </li>
 </ul>
 </div>
-</li>
-</ul>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="paragraph">
-<p><span class="underline">Steps:</span></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>[optional] create a dashboard where the KPI(s) can be monitored</p>
-</li>
-<li>
-<p>build a model that reliably captures the input-output relationship between the process variables and KPIs</p>
-</li>
-<li>
-<p>interpret the model to identify root causes, i.e., determine which inputs have the most influence on the KPIs and investigate how they are related</p>
-</li>
-<li>
-<p>use the model to make predictions for new data points or in a what-if forecast to facilitate planning</p>
-</li>
-<li>
-<p>use the model within an outer control loop to automatically find optimal inputs (either with classical optimization techniques or reinforcement learning for longer time horizons)</p>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="ulist">
-<div class="title"><span class="underline">Possible challenges:</span></div>
-<ul>
-<li>
-<p>success is uncertain: while it is fairly straightforward to apply the models, it is difficult to determine in advance whether there even exists any relation between the measured inputs and KPIs (&#8594; beware of garbage in, garbage out!)</p>
-</li>
-<li>
-<p>appropriate definition of the output/target/KPI that should be modeled, i.e., what does it actually mean for a process to run well and how might external factors influence this definition (e.g., can we expect the same performance on an exceptionally hot summer day?)</p>
-</li>
-<li>
-<p>missing important input variables, e.g., if there exist other influencing factors that we haven&#8217;t considered or couldn&#8217;t measure, which means not all of the target variable&#8217;s variance can be explained</p>
-</li>
-<li>
-<p>lots of possibly irrelevant input variables that require careful feature selection to avoid <a href="https://www.tylervigen.com/spurious-correlations" target="\_blank">spurious correlations</a>, which would result in incorrect &#8216;what-if&#8217; forecasts since the true causal relationship between the inputs and outputs isn&#8217;t captured</p>
-</li>
-<li>
-<p>often very time intensive data preprocessing necessary, e.g., when combining data from different sources and engineering additional features</p>
 </li>
 </ul>
 </div>
@@ -1494,6 +1466,26 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 </div>
 </div>
+<div class="ulist">
+<div class="title"><span class="underline">Possible challenges:</span></div>
+<ul>
+<li>
+<p>success is uncertain: while it is fairly straightforward to apply the models, it is difficult to determine in advance whether there even exists any relation between the measured inputs and targets (&#8594; beware of garbage in, garbage out!)</p>
+</li>
+<li>
+<p>appropriate definition of the output/target/KPI that should be modeled, i.e., what does it actually mean for a process to run well and how might external factors influence this definition (e.g., can we expect the same performance on an exceptionally hot summer day?)</p>
+</li>
+<li>
+<p>missing important input variables, e.g., if there exist other influencing factors that we haven&#8217;t considered or couldn&#8217;t measure, which means not all of the target variable&#8217;s variance can be explained</p>
+</li>
+<li>
+<p>lots of possibly irrelevant input variables that require careful feature selection to avoid <a href="https://www.tylervigen.com/spurious-correlations" target="\_blank">spurious correlations</a>, which would result in incorrect &#8216;what-if&#8217; forecasts since the true causal relationship between the inputs and outputs isn&#8217;t captured</p>
+</li>
+<li>
+<p>often very time intensive data preprocessing necessary, e.g., when combining data from different sources and engineering additional features</p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_deep_learning">Deep Learning</h4>
@@ -1505,10 +1497,10 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="ulist">
 <ul>
 <li>
-<p>text classification (e.g., identify spam / hate speech / fake news)</p>
+<p>text classification (e.g., identify spam / hate speech / fake news; forward customer support request to the appropriate department)</p>
 </li>
 <li>
-<p>sentiment analysis (subtask of text classification: identify if text is positive or negative, e.g., for product reviews)</p>
+<p>sentiment analysis (subtask of text classification: identify if text is positive or negative, e.g., to monitor product reviews or what social media users are saying about your company)</p>
 </li>
 <li>
 <p>speech recognition (e.g., transcribe dictated notes or add subtitles to videos)</p>
@@ -1521,6 +1513,9 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </li>
 <li>
 <p>image captioning (generate text that describes what&#8217;s shown in an image, e.g., to improve the online experience for for people with visual impairment)</p>
+</li>
+<li>
+<p>predictive typing (e.g., suggest possible next words when typing on a smartphone)</p>
 </li>
 <li>
 <p>data generation (e.g., generate new photos/images of specific objects or scenes)</p>

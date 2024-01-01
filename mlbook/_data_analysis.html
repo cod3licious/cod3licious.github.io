@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.18">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <meta name="author" content="Dr. Franziska Horn">
 <meta name="copyright" content="Dr. Franziska Horn">
 <title>A Practitioner&#8217;s Guide to Machine Learning</title>
@@ -928,8 +928,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.8,</span>
-<span id="revdate">2023-01-06</span>
+<span id="revnumber">version 1.9,</span>
+<span id="revdate">2024-01-01</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -975,23 +975,53 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="sect2">
 <h3 id="_data_analysis">Data Analysis</h3>
 <div class="paragraph">
-<p>Analyzing data is not only an important step before using this data for a machine learning project, but can also generate valuable insights that result in better (data-driven) decisions.</p>
-</div>
-<div class="paragraph">
-<p>We usually analyze data for one of two reasons:</p>
+<p>Analyzing data is not only an important step before using this data for a machine learning project, but can also generate valuable insights that result in better (data-driven) decisions.
+We usually analyze data for one of two reasons:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>we need some specific information to make a (better) decision <em>(reactive analysis)</em> or</p>
+<p>We need some specific information to make a (better) decision (<em>reactive analysis</em>, e.g., when something went wrong and we don&#8217;t know why).</p>
 </li>
 <li>
-<p>we&#8217;re curious about the data and don&#8217;t know yet what the analysis will bring <em>(proactive analysis)</em>.</p>
+<p>We&#8217;re curious about the data and don&#8217;t know yet what the analysis will bring (<em>proactive analysis</em>, e.g., to better understand the data at the beginning of an ML project).</p>
 </li>
 </ol>
 </div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Data analysis results can be obtained and communicated in different formats</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>A <strong>custom analysis</strong> with results presented, e.g., in a power point <strong>presentation</strong></p>
+</li>
+<li>
+<p>A <strong>standardized report</strong>, e.g., in form of a PDF document, showing static data visualizations of historical data</p>
+</li>
+<li>
+<p>A <strong>dashboard</strong>, i.e., a web app showing (near) real-time data, usually with some interactive elements (e.g., options to filter the data)</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/02_data/analysis_methods.png" alt="image" width="450">
+</div>
+</div>
+</li>
+</ul>
+</div>
 <div class="paragraph">
-<p>In both cases we start with an <strong>exploratory data analysis</strong> to turn data into insights.</p>
+<p>While the data story that is told in a presentation is usually fixed, users have more opportunities to interpret the data and analyze it for themselves in an interactive dashboard.</p>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>What all forms of data analyses have in common is that we&#8217;re after &#8220;(actionable) insights&#8221;.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -1009,10 +1039,21 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 <div class="title"><span class="small">Things get interesting when we find something in the data that we didn&#8217;t expect. [Adapted from: <em>Effective Data Storytelling</em> by Brent Dykes]</span></div>
 </div>
+<div class="paragraph">
+<p>Arriving at an insight requires two steps:</p>
 </div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Notice something unexpected</strong>, e.g., a sudden drop or increase in some metric.</p>
+</li>
+<li>
+<p><strong>Understand why this happened</strong>, i.e., dig deeper into the data to identify the root cause.</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>An exploratory analysis is often a quick and dirty process where we <strong>generate lots of plots to better understand the data</strong>. In accordance with Gary Klein, we&#8217;re <strong>looking for things that are unexpected</strong>, e.g., an unusual increase or decrease in some metric. Then we dig deeper to understand where this difference between what we expected and what we saw in the data is coming from, e.g., by examining other correlated variables.</p>
+<p>When we understand why something happened, we can often also <strong>identify a potential action that could get us back on track</strong>, thereby making this an <em>actionable insight</em>.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -1026,75 +1067,27 @@ Knowing which values are unexpected and where it might pay off to dig deeper oft
 </tr>
 </table>
 </div>
-<div class="sidebarblock">
-<div class="content">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">The Art of Exploratory Data Analysis</dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p>Examine summary statistics (e.g., mean, standard deviation (std), min/max values, etc.), for example, by calling <code>df.describe()</code> on a pandas data frame.</p>
-</li>
-<li>
-<p>Examine the distributions of individual variables (e.g., using histograms):</p>
+</div>
+</div>
+<div class="paragraph">
+<p>Ideally, we should continuously <strong>monitor important metrics in dashboards or reports</strong> to spot deviations from the norm as quickly as possible, while <strong>identifying the root cause often requires a custom analysis</strong>.</p>
+</div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="../images/02_data/exploratory_dist.png" alt="image" width="400">
-</div>
-<div class="title"><span class="small">Histogram, strip plot, violin plot, box plot, and summary statistics of the same data.</span></div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Is the data normally distributed (otherwise we may have to transform the variable later)?</p>
-</li>
-<li>
-<p>Does the distribution have a single or multiple peaks? Is this expected?</p>
-</li>
-<li>
-<p>Is the range of values broad or narrow? Any (unexpected) gaps?</p>
-</li>
-<li>
-<p>Are there any outliers (e.g., due to measurement errors or wrongly encoded data)?</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Examine trends over time (by plotting variables over time):</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/02_data/exploratory_lines.png" alt="image" width="550">
-</div>
-<div class="title"><span class="small">What caused these trends and what are their implications for the future? [Adapted from: <em>Data Visualization: A successful design process</em> by Andy Kirk]</span></div>
-</div>
-</li>
-<li>
-<p>Examine relationships between variables (using scatter plots):</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/02_data/exploratory_scatter.png" alt="image" width="350">
-</div>
-<div class="title"><span class="small">Not all interesting relations between two variables can be detected through a high <a href="https://en.wikipedia.org/wiki/Correlation" target="\_blank">correlation coefficient</a>. Always check the scatter plot for details. [Adapted from: <em>Data Visualization: A successful design process</em> by Andy Kirk]</span></div>
-</div>
-</li>
-<li>
-<p>Examine patterns in multidimensional data (using parallel coordinate plots):</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="../images/02_data/exploratory_parcoord.png" alt="image" width="750">
-</div>
-<div class="title"><span class="small">Each line in a parallel coordinate plot represents one data point, with the corresponding values for the different variables marked at the respective y-axis. The screenshot here shows an interactive plot created using the <code>plotly</code> library. By selecting value ranges for the different dimensions (indicated by the pink stripes), it is possible to spot interesting patterns resulting from a combination of values across multiple variables.</span></div>
-</div>
-</li>
-</ul>
-</div>
-</dd>
-</dl>
+<img src="../images/02_data/analysis_monitoring.png" alt="image" width="450">
 </div>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+As a data analyst you are sometimes approached with <strong>more specific questions or requests</strong> such as &#8220;We&#8217;re deciding where to launch a new marketing campaign. Can you show me the number of users for all European countries?&#8221;. In these cases it can be helpful to <strong>ask &#8220;why?&#8221; to understand where the person noticed something unexpected</strong> that prompted this analysis request. If the answer is &#8220;Oh, we just have some marketing budget left over and need to spend the money somewhere&#8221; then just give them the results. But if the answer is &#8220;Our revenue for this quarter was lower than expected&#8221; it might be worth <strong>exploring other possible root causes</strong> for this, as maybe the problem is not the number of users that visit the website, but that many users drop out before they reach the checkout page and the money might be better invested in a usability study to understand why users don&#8217;t complete the sale.
+</td>
+</tr>
+</table>
 </div>
 <div class="sect3">
 <h4 id="_data_driven_decisions">Data-driven Decisions</h4>
@@ -1108,86 +1101,111 @@ Insights become valuable when they influence a decision and inspire a different 
 </div>
 </div>
 <div class="paragraph">
-<p>For this, we first need to determine <strong>which decision</strong> our insights should influence (which is usually easier in the case of a reactive compared to a proactive analysis) and then communicate our results accordingly.</p>
+<p>This means we need to understand <strong>which decision(s)</strong> the insights from our data analysis should influence.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Not all decisions need to be made in a data-driven way. But decision makers should be transparent and upfront about whether a decision can be influenced by analysis results, i.e., what data would make them change their mind and choose a different course of action. If data is only requested to support a decision that in reality has already been made, save the analysts the time and effort!
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>For this we need to be clear on:</p>
+<p>Before we conduct a data analysis we need to be clear on:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Who are the relevant stakeholders (= our audience)?</p>
+<p>Who are the <strong>relevant stakeholders</strong>, i.e., who will consume the data analysis results (= our audience / dashboard users)?</p>
 </li>
 <li>
-<p>What is their goal?</p>
-</li>
-<li>
-<p>What questions need to be answered to make progress towards this goal?</p>
-</li>
-<li>
-<p>What visualizations can help answer these questions?</p>
-</li>
-<li>
-<p>What action would we recommend based on the answer?</p>
+<p>What is <strong>their goal</strong>?</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>In business contexts, the users' goals are usually in some way related to making a profit for the company, i.e., increasing revenue (e.g., by solving a customer problem more effectively than the competition) or reducing costs.</p>
+</div>
+<div class="paragraph">
+<p>The progress towards these goals is tracked with so called <strong><em>Key Performance Indicators</em> (KPIs)</strong>, i.e., custom metrics that tell us how well things are going. For example, if we&#8217;re working on a web application, one KPI we might want to track could be &#8220;user happiness&#8221;. Unfortunately, true user happiness is difficult to measure, but we can instead check the number of users returning to our site and how long they stay and then somehow combine these and other measurements into a proxy variable that we then call &#8220;user happiness&#8221;.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+A KPI is only a reliable measure, if it is not simultaneously used to control people&#8217;s behavior, as they will otherwise try to game the system (<a href="https://en.wikipedia.org/wiki/Goodhart%27s_law" target="\_blank">Goodhart&#8217;s Law</a>). For example, if our goal is high quality software, counting the number of bugs in our software is not a reliable measure for quality, if we simultaneously <a href="https://dilbert.com/strip/1995-11-13" target="\_blank">reward programmers for every bug they find and fix</a>.
+</td>
+</tr>
+</table>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Example business decisions</dt>
+<dt class="hdlist1">Lagging vs. Leading KPIs</dt>
 <dd>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><span class="underline">Question:</span> Is the customer service department reaching its goals?<br>
-<span class="underline">Answer:</span> In the last 3 months, customer service only managed to resolve 80% of requests.<br>
-<span class="underline">Recommended Action:</span> We should hire more people.</p>
-</li>
-<li>
-<p><span class="underline">Question:</span> What country should we expand to next?<br>
-<span class="underline">Answer:</span> The market potential for countries A/B/C is 200/500/300 million euros respectively.<br>
-<span class="underline">Recommended Action:</span> We should target country B next.</p>
-</li>
-<li>
-<p><span class="underline">Question:</span> Do we need to order more inventory?<br>
-<span class="underline">Answer:</span> Sales forecasts show that our current inventory should last until after Christmas.<br>
-<span class="underline">Recommended Action:</span> No, we should not order more inventory.</p>
-</li>
-<li>
-<p><span class="underline">Question:</span> Can we drop support for Internet Explorer for our web application?<br>
-<span class="underline">Answer:</span> Only 10% of our users still use IE while our developers complain about the high maintenance effort.<br>
-<span class="underline">Recommended Action:</span> Full support for IE is not worth it anymore.</p>
-</li>
-</ol>
-</div>
-</dd>
-<dt class="hdlist1">Example ML-related decisions</dt>
-<dd>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><span class="underline">Question:</span> Should this data point be excluded from the training set because it is an outlier?<br>
-<span class="underline">Answer:</span> Outlier score of the data point is greater than the threshold.<br>
-<span class="underline">Recommended Action:</span> Exclude the data point.</p>
-</li>
-<li>
-<p><span class="underline">Question:</span> Do we need extra preprocessing steps for this variable (e.g., because it is not normally distributed)?<br>
-<span class="underline">Answer:</span> A statistical test confirms the variable is not normally distributed with p=0.02.<br>
-<span class="underline">Recommended Action:</span> Apply a transformation to the data point as described in the chapter on <a href="_data_preprocessing.html">Data Preprocessing</a>.</p>
-</li>
-<li>
-<p><span class="underline">Question:</span> Are the predictions of our ML model accurate enough such that we can use it in the live system?<br>
-<span class="underline">Answer:</span> Model accuracy dropped below 85% last week.<br>
-<span class="underline">Recommended Action:</span> We should retrain the model on more recent data.</p>
-</li>
-</ol>
+<p>Unfortunately, the things we really care about can often only be <strong>measured after the fact, i.e., when it is too late to take corrective action</strong>. For example, in sales we care about &#8220;realized revenue&#8221;, i.e., money in the bank, but if the revenue at the end of the quarter is less than what we hoped for, we can only try to do better next quarter. These metrics are called <strong>lagging KPIs</strong>.<br>
+<strong>Leading KPIs</strong> instead tell us when we should <strong>act before it&#8217;s too late</strong>. For example, in sales this could be the volume of deals in the sales pipeline, i.e., while not all of these deals might eventually go through and result in realized revenue, if the pipeline is empty we know for certain that we wont reach our revenue goals.</p>
+<div class="paragraph">
+<p>If the causal relationships between variables are too complex to identify leading KPIs directly, we can instead try to <strong>use a machine learning model to predict lagging KPIs</strong>. For example, in a polymer production process, an important quality metric may be the tensile strength measured 24 hours after the polymer hardens. Waiting for these results could lead to discarding the last 24 hours of production if the quality is subpar.
+If the relationships between the process parameters (such as production temperature) and the resulting quality are too complex to identify a leading KPI, we could instead train an ML model on the past process parameters (inputs) and corresponding quality measurements (outputs) to then continuously predict the quality during production. When the model predicts that the quality is off-target, the operators can intervene and fix issues before significant production time is wasted.<br>
+However, relying on an ML model introduces the need to monitor its predictions for trustworthiness. In our example, the <strong>prediction accuracy on new data serves as a lagging KPI</strong>, as we only know whether the predictions are correct after real measurements arrive 24 hours later. As a <strong>leading KPI</strong>, we can measure the discrepancy between process parameter values used in model training and those received in production to identify <strong>dataset drifts</strong>. These drifts, such as changes in values due to sensor malfunctions, can lead to inaccurate predictions for affected samples.</p>
 </div>
 </dd>
 </dl>
 </div>
 </div>
+</div>
+<div class="paragraph">
+<p>The first step when making a data-driven decision is to <strong>realize that we should act by monitoring our KPIs</strong> to see whether we&#8217;re on track to achieve our goals.</p>
+</div>
+<div class="paragraph">
+<p>Ideally, this is achieved by combining these metrics with <strong>thresholds for alerts</strong> to automatically notify us if things go south and a corrective action becomes necessary. For example, we could establish some alert on the health of a system or machine to notify a technician when maintenance is necessary. To <strong>avoid alert fatigue</strong>, it is important to reduce false alarms, i.e., configure the alert such that the responsible person tells you &#8220;when this threshold is reached, I will drop everything else and go fix the problem&#8221; (<em>not</em> &#8220;at this point we should probably keep an eye on it&#8221;).</p>
+</div>
+<div class="paragraph">
+<p>Depending on how frequently the value of the KPI changes and how quickly corrective actions show effects, we want to check for the alert condition either every few minutes to alert someone in real time or, for example, every morning, every Monday, or once per month if the values change more slowly.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Is this significant?</dt>
+<dd>
+<p>Small variations in KPIs are normal and we should not overreact to noise. Statistics can tell us <strong>whether the observed deviation from what we expected is significant</strong>.</p>
+<div class="paragraph">
+<p>Statistical inference enables us to <strong>draw conclusions that reach beyond the data at hand</strong>. Often we would like to make a statement about a whole <em>population</em> (e.g., all humans currently living on this earth), but we only have access to a few (hopefully representative) observations to draw our conclusion from. Statistical inference is about changing our mind under uncertainty: We start with a null hypothesis (i.e., what we expected before looking at the data) and then check if what we see in the sample dataset makes this null hypothesis look ridiculous, at which point we reject it and go with our alternative hypothesis instead.<br>
+<span class="underline">Example:</span> <em>Your company has an online store and wants to roll out a new recommendation system, but you are unsure whether customers will find these recommendations helpful and buy more. Therefore, before going live with the new system, you perform an A/B test, where a percentage of randomly selected users see the new recommendations, while the others are routed to the original version of the online store. The null hypothesis is that the new version is no better than the original. But it turns out that the average sales volume of customers seeing the new recommendations is a lot higher than that of the customers browsing the original site. This difference is so large that in a world where the null hypothesis was true, it would be extremely unlikely that a random sample would give us these results. We therefore reject the null hypothesis and go with the alternative hypothesis, that the new recommendations generate higher sales.</em></p>
+</div>
+<div class="paragraph">
+<p>In addition to rigorous statistical tests, there are also some rules of thumb to determine whether changes in the data warrant our attention: If a single sample lies three standard deviations (\(\sigma\)) above or below the mean or seven consecutive points fall above or below the average value, this is cause for further investigation.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/02_data/control_chart.png" alt="image" width="550">
+</div>
+<div class="title"><span class="small">A control chart showing measurements taken over time that fluctuate around their mean value with points of interest marked in red.</span></div>
+</div>
+<div class="paragraph">
+<p><span class="small">Read <a href="https://towardsdatascience.com/whats-the-difference-between-analytics-and-statistics-cd35d457e17" target="\_blank">this article</a> to learn more about the difference between analysts and statisticians and why they should work on distinct splits of your dataset.</span></p>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>For every alert that is created, i.e., every time it is clear that a corrective action is needed, it is worth considering whether this action can be automated and to directly <strong>trigger this automated action together with the alert</strong> (e.g., if the performance of an ML model drops below a certain threshold, instead of just notifying the data scientist we could automatically trigger a retraining with the most recent data). If this is not possible, e.g., because it is not clear what exactly happened and therefore which action should be taken, we need a deeper analysis.</p>
+</div>
+<div class="paragraph">
+<p>Digging deeper into the data can help us answer questions such as &#8220;Why did we not reach this goal and how can we do better?&#8221; (or, in rarer cases, &#8220;Why did we exceeded this goal and how can we do it again?&#8221;) to <strong>decide on the specific action</strong> to take.</p>
 </div>
 <div class="admonitionblock caution">
 <table>
@@ -1201,23 +1219,141 @@ Don&#8217;t just look for data that confirms the story you want to tell and supp
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>Such an exploratory analysis is often a quick and dirty process where we <strong>generate lots of plots to better understand the data</strong> and where the difference between what we expected and what we saw in the data is coming from, e.g., by examining other correlated variables. However, arriving at satisfactory answers is often more art than science.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+When using an ML model to predict a KPI, we can interpret this model and its predictions to better understand which variables might influence the KPI. <strong>Focusing on the features deemed important by the ML model</strong> can be helpful if our dataset contains hundreds of variables and we don&#8217;t have time to look at all of them in detail. But use with caution&#8201;&#8212;&#8201;the model only learned from correlations in the data; these do not necessarily represent true causal relationships between the variables.
+</td>
+</tr>
+</table>
+</div>
 <div class="sidebarblock">
 <div class="content">
-<div class="paragraph">
-<p><span class="underline">But:</span> Not all decisions need to be made in a data-driven way:</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Analysis questions to answer before an ML project</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>Examine the raw data:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Is the dataset complete, i.e., does it contain all the variables and samples we expected to get?</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Examine summary statistics (e.g., mean, standard deviation (std), min/max values, missing value count, etc.), for example, by calling <code>df.describe()</code> on a pandas data frame:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>What does each variable mean? Given our understanding of the variable, are its values in a reasonable range?</p>
+</li>
+<li>
+<p>Are missing values encoded as NaN (Not a Number) or as &#8216;unrealistic&#8217; numeric values (e.g., -1 while normal values are between 0 and 100)?</p>
+</li>
+<li>
+<p>Are missing values random or systematic (e.g., in a survey rich people are less likely to answer questions about their income or specific measurements are only collected under certain conditions)? &#8594; This can influence how missing values should be handled during preprocessing, e.g., whether it makes sense to impute them with the mean or some other specific value (e.g., zero).</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Examine the distributions of individual variables (e.g., using histograms):</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/02_data/exploratory_dist.png" alt="image" width="400">
+</div>
+<div class="title"><span class="small">Histogram, strip plot, violin plot, box plot, and summary statistics of the same data.</span></div>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Our best web developers threatened to quit, if they have to keep supporting Internet Explorer. No matter how many users would be affected by the change, we can&#8217;t lose these developers!</p>
+<p>Are there any outliers? Are these genuine edge cases or can they be ignored (e.g., due to measurement errors or wrongly encoded data)?</p>
 </li>
 <li>
-<p>Our ML model is retrained on new data every week anyways, no matter the performance.</p>
+<p>Is the data normally distributed (otherwise we may have to transform the variable later)?</p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>&#8658; Be transparent and upfront about whether a decision can be influenced by analysis results and if not, save the analysts the effort.</p>
+</li>
+<li>
+<p>Examine trends over time (by plotting variables over time):</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/02_data/exploratory_lines.png" alt="image" width="550">
+</div>
+<div class="title"><span class="small">What caused these trends and what are their implications for the future? [Adapted from: <em>Data Visualization: A successful design process</em> by Andy Kirk]</span></div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Are there time periods where the data was sampled irregularly or samples are missing? Why?</p>
+</li>
+<li>
+<p>Are there any (gradual or sudden) <a href="_data_concept_drifts.html">data drifts</a> over time? Are these genuine changes (e.g., due to changes in the raw materials used for production) or artifacts (e.g., due to a malfunctioning sensor recording wrong values)?</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Examine relationships between variables (using scatter plots):</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/02_data/exploratory_scatter.png" alt="image" width="350">
+</div>
+<div class="title"><span class="small">Not all interesting relations between two variables can be detected through a high <a href="https://en.wikipedia.org/wiki/Correlation" target="\_blank">correlation coefficient</a>. Always check the scatter plot for details. [Adapted from: <em>Data Visualization: A successful design process</em> by Andy Kirk]</span></div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Are the observed correlations between variables expected?</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Examine patterns in multidimensional data (using parallel coordinate plots):</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/02_data/exploratory_parcoord.png" alt="image" width="750">
+</div>
+<div class="title"><span class="small">Each line in a parallel coordinate plot represents one data point, with the corresponding values for the different variables marked at the respective y-axis. The screenshot here shows an interactive plot created using the <code>plotly</code> library. By selecting value ranges for the different dimensions (indicated by the pink stripes), it is possible to spot interesting patterns resulting from a combination of values across multiple variables.</span></div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Do the observed patterns in the data match our understanding of the problem and dataset?</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The data should not only be examined at the outset of an ML project, but also monitored continuously throughout the lifetime of the application, e.g., by regularly checking how many samples we received per hour, that the values for each variable are in the expected range, and that there are no unexpected missing values.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -1225,7 +1361,7 @@ Don&#8217;t just look for data that confirms the story you want to tell and supp
 <div class="sect3">
 <h4 id="_communicating_insights">Communicating Insights</h4>
 <div class="paragraph">
-<p>The plots that were created during the exploratory analysis should not be the plots we show our audience when we&#8217;re trying to communicate our findings. Since our audience is far less familiar with the data than us and probably also not interested / doesn&#8217;t have the time to dive deeper into the data, we need to make the results more accessible, a process often called <em>explanatory analysis</em>.</p>
+<p>The plots that were created during an exploratory analysis should not be the plots we show our audience when we&#8217;re trying to communicate our findings. Since our audience is far less familiar with the data than us and probably also not interested / doesn&#8217;t have the time to dive deeper into the data, we need to make the results more accessible, a process often called <em>explanatory analysis</em>.</p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -1244,13 +1380,13 @@ Don&#8217;t &#8220;just show all the data&#8221; and hope that your audience wil
 <div class="ulist">
 <ul>
 <li>
-<p>get inspired by visualization libraries (e.g., <a href="https://github.com/Financial-Times/chart-doctor/blob/main/visual-vocabulary/Visual-vocabulary-en.pdf" target="\_blank">here</a> or <a href="https://datavizcatalogue.com/" target="\_blank">here</a>)</p>
+<p>get inspired by visualization libraries (e.g., <a href="https://github.com/Financial-Times/chart-doctor/blob/main/visual-vocabulary/Visual-vocabulary-en.pdf" target="\_blank">here</a> or <a href="https://datavizcatalogue.com/" target="\_blank">here</a>), but avoid the urge to create fancy graphics; sticking with common visualizations makes it easier for the audience to correctly decode the presented information</p>
 </li>
 <li>
 <p>don&#8217;t use 3D effects!</p>
 </li>
 <li>
-<p>don&#8217;t use pie or donut charts (angles are hard to interpret)</p>
+<p>avoid pie or donut charts (angles are hard to interpret)</p>
 </li>
 <li>
 <p>use line plots for time series data</p>
@@ -1292,9 +1428,6 @@ Don&#8217;t &#8220;just show all the data&#8221; and hope that your audience wil
 <li>
 <p>label data directly</p>
 </li>
-<li>
-<p>leverage consistent color</p>
-</li>
 </ul>
 </div>
 <div class="imageblock text-center">
@@ -1331,10 +1464,13 @@ Don&#8217;t &#8220;just show all the data&#8221; and hope that your audience wil
 <div class="ulist">
 <ul>
 <li>
-<p>add context: which values are good (target state), which are bad (alert threshold)?</p>
+<p>add context: Which values are good (goal state), which are bad (alert threshold)? Should the value be compared to another variable (e.g., actual vs. forecast)?</p>
 </li>
 <li>
-<p>annotate the plot with text explaining the main takeaways</p>
+<p>leverage consistent colors when information is spread across multiple plots (e.g., data from a certain country is always drawn in the same color)</p>
+</li>
+<li>
+<p>annotate the plot with text explaining the main takeaways (if this is not possible, e.g., in dashboards where the data keeps changing, the title can instead include the question that the plot should answer, e.g., &#8220;Does our revenue follow the projections?&#8221;)</p>
 </li>
 </ul>
 </div>
@@ -1352,6 +1488,9 @@ Don&#8217;t &#8220;just show all the data&#8221; and hope that your audience wil
 <dd>
 <div class="ulist">
 <ul>
+<li>
+<p><em>Show Me the Numbers: Designing Tables and Graphs to Enlighten</em> by Stephen Few</p>
+</li>
 <li>
 <p><em>Better Data Visualizations: A Guide for Scholars, Researchers, and Wonks</em> by Jonathan Schwabish</p>
 </li>

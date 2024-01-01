@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.18">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <meta name="author" content="Dr. Franziska Horn">
 <meta name="copyright" content="Dr. Franziska Horn">
 <title>A Practitioner&#8217;s Guide to Machine Learning</title>
@@ -928,8 +928,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.8,</span>
-<span id="revdate">2023-01-06</span>
+<span id="revnumber">version 1.9,</span>
+<span id="revdate">2024-01-01</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -967,23 +967,53 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="sect2">
 <h3 id="_datenanalyse">Datenanalyse</h3>
 <div class="paragraph">
-<p>Das Analysieren von Daten ist nicht nur ein wichtiger Schritt, bevor diese Daten für ein Machine Learning Projekt verwendet werden, sondern kann auch wertvolle Erkenntnisse generieren, die zu besseren (datengestützten) Entscheidungen führen.</p>
-</div>
-<div class="paragraph">
-<p>Normalerweise analysieren wir Daten aus einem von zwei Gründen:</p>
+<p>Das Analysieren von Daten ist nicht nur ein wichtiger Schritt, bevor diese Daten für ein Machine Learning Projekt verwendet werden, sondern kann auch wertvolle Erkenntnisse generieren, die zu besseren (datengestützten) Entscheidungen führen.
+Normalerweise analysieren wir Daten aus einem von zwei Gründen:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>wir brauchen bestimmte Informationen, um eine (bessere) Entscheidung zu treffen <em>(reaktive Analyse)</em> oder</p>
+<p>Wir benötigen bestimmte Informationen, um eine (bessere) Entscheidung zu treffen (<em>reaktive Analyse</em>, zum Beispiel wenn etwas schief gelaufen ist und wir nicht wissen, warum).</p>
 </li>
 <li>
-<p>wir sind neugierig auf die Daten und wissen noch nicht, was die Analyse bringen wird <em>(proaktive Analyse)</em>.</p>
+<p>Wir sind neugierig auf die Daten und wissen noch nicht, was die Analyse bringen wird (<em>proaktive Analyse</em>, zum Beispiel um die Daten zu Beginn eines ML-Projekts besser zu verstehen).</p>
 </li>
 </ol>
 </div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ergebnisse einer Datenanalyse können auf verschiedene Arten generiert und kommuniziert werden</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>Eine <strong>maßgeschneiderte Analyse</strong>, deren Ergebnissen zum Beispiel in einer PowerPoint-<strong>Präsentation</strong> präsentiert werden</p>
+</li>
+<li>
+<p>Ein <strong>standardisierter Bericht</strong>, zum Beispiel in Form eines PDF-Dokuments, der statische Visualisierungen historischer Daten zeigt</p>
+</li>
+<li>
+<p>Ein <strong>Dashboard</strong>, also eine Webanwendung, die (fast) Echtzeitdaten zeigt, normalerweise mit interaktiven Elementen (z.B. Optionen zum Filtern der Daten)</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/02_data/analysis_methods.png" alt="image" width="450">
+</div>
+</div>
+</li>
+</ul>
+</div>
 <div class="paragraph">
-<p>In beiden Fällen beginnen wir mit einer <strong>explorativen Datenanalyse</strong>, um aus den Daten Erkenntnisse zu gewinnen.</p>
+<p>Während die Datenstory in einer Präsentation in der Regel vorgegeben ist, haben Nutzer in einem interaktiven Dashboard mehr Möglichkeiten, die Daten zu interpretieren und selbst zu analysieren.</p>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Was alle Arten der Datenanalyse gemein haben, ist, dass wir nach &#8220;(umsetzbaren) Erkenntnissen&#8221; suchen.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -1001,10 +1031,21 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </div>
 <div class="title"><span class="small">Spannend wird es, wenn wir in den Daten etwas unerwartetes finden. [Adaptiert von: <em>Effective Data Storytelling</em> von Brent Dykes]</span></div>
 </div>
+<div class="paragraph">
+<p>Zu einer Erkenntnis kommen wir somit in zwei Schritten:</p>
 </div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Etwas Unerwartetes entdecken</strong>, zum Beispiel einen plötzlichen Rückgang oder Anstieg in einer Metrik.</p>
+</li>
+<li>
+<p><strong>Verstehen, warum dies passiert ist</strong>, also tiefer in die Daten eintauchen, um die Ursache (Root Cause) zu identifizieren.</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>Eine explorative Analyse ist oft ein &#8216;quick and dirty&#8217; Prozess, bei dem wir viele <strong>Diagramme erstellen, um die Daten besser zu verstehen</strong>. Im Einklang mit Gary Klein suchen wir nach <strong>Dingen, die unerwartet sind</strong>, z.B. ein ungewöhnlicher Anstieg oder Abfall einer Metrik. An dieser Stelle haken wir dann nach, um zu verstehen, woher dieser Unterschied zwischen dem, was wir erwartet haben, und dem, was wir in den Daten sehen, kommt, z.B. indem wir andere korrelierte Variablen untersuchen.</p>
+<p>Wenn wir verstehen, warum etwas passiert ist, können wir oft auch <strong>eine potenzielle Maßnahme identifizieren, die uns wieder auf Kurs bringen könnte</strong>, wodurch dies zu einer <em>umsetzbaren Erkenntnis</em> (actionable insight) wird.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -1014,6 +1055,28 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </td>
 <td class="content">
 Domänenwissen ist oft hilfreich, um zu wissen, welche Werte unerwartet sind und wo es sich lohnen könnte, tiefer in die Daten einzusteigen. Daher kann es sinnvoll sein, die Ergebnisse <strong>zusammen mit einem Fachexperten</strong> durchzugehen.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Im besten Fall werden <strong>wichtige Kennzahlen kontinuierlich in Dashboards oder Berichten überwacht</strong>, um Abweichungen von der Norm so schnell wie möglich zu erkennen, während <strong>die Identifizierung der Ursache oft eine maßgeschneiderte Analyse erfordert</strong>.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/02_data/analysis_monitoring.png" alt="image" width="450">
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Als Datenanalyst wird man manchmal mit <strong>spezifischeren Fragen</strong> konfrontiert, wie zum Beispiel &#8220;Wir überlegen, wo wir eine neue Marketingkampagne starten sollen. Kannst du mir die Anzahl der Nutzer für alle europäischen Länder zeigen?&#8221;. In solchen Fällen kann es hilfreich sein, <strong>nach dem Warum zu fragen, um zu verstehen, wo die Person etwas Unerwartetes bemerkt hat</strong>, das diese Analyseanfrage ausgelöst hat. Wenn die Antwort lautet &#8220;Oh, wir haben noch etwas Marketingbudget übrig und müssen das Geld irgendwo ausgeben&#8221;, dann gib ihnen einfach die Ergebnisse. Wenn die Antwort jedoch lautet &#8220;Unser Umsatz für dieses Quartal war niedriger als erwartet&#8221;, könnte es sich lohnen, <strong>andere mögliche Ursachen zu untersuchen</strong>, denn vielleicht liegt das Problem nicht in der Anzahl der Nutzer, die die Website besuchen, sondern darin, dass viele Nutzer vor Erreichen der Checkout-Seite aussteigen. Das Geld könnte möglicherweise besser in eine Usability-Studie investiert werden, um zu verstehen, warum Nutzer den Verkaufsprozess nicht abschließen.
 </td>
 </tr>
 </table>
@@ -1030,76 +1093,111 @@ Erkenntnisse werden erst wertvoll, wenn sie eine Entscheidung beeinflussen und d
 </div>
 </div>
 <div class="paragraph">
-<p>Dazu müssen wir zunächst klarstellen, <strong>welche Entscheidung</strong> unsere Erkenntnisse beeinflussen sollen (was bei einer reaktiven Analyse meist einfacher ist als bei einer proaktiven Analyse) und dann unsere Ergebnisse entsprechend kommunizieren.</p>
+<p>Dazu müssen wir zunächst klarstellen, <strong>welche Entscheidung</strong> unsere Erkenntnisse beeinflussen sollen.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Nicht alle Entscheidungen müssen datengestützt getroffen werden. Entscheidungsträger sollten aber ehrlich sein, ob eine Entscheidung von den Ergebnissen der Analyse beeinflusst werden kann und welche Daten sie dazu bringen würden, ihre Meinung zu ändern und einen anderen Handlungsweg zu wählen. Wenn Daten nur angefordert werden, um eine Entscheidung zu untermauern, die in Wirklichkeit bereits getroffen wurde, erspare den Analysten den Aufwand!
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>Dafür müssen wir uns im Klaren darüber sein:</p>
+<p>Bevor wir mit einer Datenanalyse beginnen müssen wir uns im Klaren darüber sein:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Wer sind die relevanten Stakeholder (= die Zielgruppe unserer Analyse)?</p>
+<p>Wer sind die <strong>relevanten Stakeholder</strong>, also wer wird die Ergebnisse unserer Analyse sehen (= die Zielgruppe / Dashboardnutzer)?</p>
 </li>
 <li>
-<p>Was ist ihr Ziel?</p>
-</li>
-<li>
-<p>Welche Fragen müssen beantwortet werden, um diesem Ziel näher zu kommen?</p>
-</li>
-<li>
-<p>Welche Visualisierungen können helfen, diese Fragen zu beantworten?</p>
-</li>
-<li>
-<p>Welche Handlung würden wir basierend auf den Ergebnissen empfehlen?</p>
+<p>Was ist ihr <strong>Ziel</strong>?</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>Im geschäftlichen Kontext hängen die Ziele der Nutzer in der Regel irgendwie mit der Gewinnerzielung für das Unternehmen zusammen, zum Beispiel durch Umsatzsteigerung (z.B. durch effektivere Lösung von Kundenproblemen im Vergleich zur Konkurrenz) oder Kostenreduzierung.</p>
+</div>
+<div class="paragraph">
+<p>Um das Erreichen dieser Ziele zu tracken verwenden wir sogenannte <strong><em>Key Performance Indicators</em> (KPIs)</strong>, d.h. benutzerdefinierte Metriken, die uns anzeigen, wie gut die Dinge laufen. Wenn wir beispielsweise an einer Webanwendung arbeiten, könnte ein interessanter KPI die &#8220;Nutzerzufriedenheit&#8221; sein. Leider kann man die tatsächliche Nutzerzufriedenheit nur schwer messen, aber wir können stattdessen die Anzahl der wiederkehrenden Nutzer und wie lange sie auf unserer Seite bleiben tracken, und diese und andere Messungen dann geschickt zu einer Proxy-Variablen kombinieren, die wir dann &#8220;Nutzerzufriedenheit&#8221; nennen.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Ein KPI ist nur dann eine zuverlässige Metrik, wenn er nicht gleichzeitig dazu verwendet wird, das Verhalten von Personen zu steuern, da diese sonst versuchen, das System auszutricksen (<a href="https://de.wikipedia.org/wiki/Goodharts_Gesetz" target="\_blank">Goodharts Gesetz</a>). Wenn unser Ziel beispielsweise eine qualitativ hochwertige Software ist, ist die Anzahl von Bugs in unserer Software kein zuverlässiges Qualitätsmaß, wenn wir gleichzeitig <a href="https://dilbert.com/strip/1995-11-13" target="\_blank">Programmierer für jeden gefundenen und behobenen Bug belohnen</a>.
+</td>
+</tr>
+</table>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Beispiele für Geschäftsentscheidungen</dt>
+<dt class="hdlist1">Lagging vs. Leading KPIs</dt>
 <dd>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><span class="underline">Frage:</span> Erreicht die Kundendienstabteilung ihre Ziele?<br>
-<span class="underline">Antwort:</span> In den letzten 3 Monaten konnte der Kundendienst nur 80% der Anfragen beantworten.<br>
-<span class="underline">Empfohlene Handlung:</span> Wir sollten mehr Leute einstellen.</p>
-</li>
-<li>
-<p><span class="underline">Frage:</span> In welches Land sollen wir als nächstes expandieren?<br>
-<span class="underline">Antwort:</span> Das Marktpotenzial für die Länder A/B/C beträgt jeweils 200/500/300 Millionen Euro.<br>
-<span class="underline">Empfohlene Handlung:</span> Wir sollten als nächstes Land B ins Visier nehmen.</p>
-</li>
-<li>
-<p><span class="underline">Frage:</span> Müssen wir mehr Inventar bestellen?<br>
-<span class="underline">Antwort:</span> Verkaufsprognosen zeigen, dass unser aktueller Lagerbestand bis nach Weihnachten reichen sollte.<br>
-<span class="underline">Empfohlene Handlung:</span> Nein, wir sollten kein weiteres Inventar bestellen.</p>
-</li>
-<li>
-<p><span class="underline">Frage:</span> Müssen wir den Internet Explorer für unsere Webanwendung noch unterstützen?<br>
-<span class="underline">Antwort:</span> Nur noch 10% unserer Nutzer verwenden den IE und unsere Entwickler beschweren sich über den hohen Wartungsaufwand.<br>
-<span class="underline">Empfohlene Handlung:</span> Volle Unterstützung für IE lohnt sich nicht mehr.</p>
-</li>
-</ol>
-</div>
-</dd>
-<dt class="hdlist1">Beispiel für eine Entscheidung in einem ML Projekt</dt>
-<dd>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><span class="underline">Frage:</span> Sind die Vorhersagen unseres ML-Modells genau genug, um es im Live-System zu verwenden?<br>
-<span class="underline">Antwort:</span> Die Modellgenauigkeit ist letzte Woche unter 85% gefallen.<br>
-<span class="underline">Empfohlene Handlung:</span> Wir sollten das Modell mit neuen Daten nach trainieren.</p>
-</li>
-</ol>
+<p>Leider können die Dinge, die uns wirklich interessieren, oft nur <strong>nachträglich gemessen werden, also wenn es schon zu spät ist, um korrigierend einzugreifen</strong>. Zum Beispiel interessieren uns im Vertrieb die &#8220;realisierten Umsätze&#8221;, also das auf der Bank eingegangene Geld. Aber wenn die Einnahmen am Ende des Quartals geringer sind als erhofft, können wir nur versuchen, im nächsten Quartal besser zu sein. Diese Kennzahlen nennt man <strong>lagging (nachlaufende) KPIs</strong>.<br>
+<strong>Leading (führende) KPIs</strong> hingegen sagen uns, <strong>wann wir handeln sollten, bevor es zu spät ist</strong>. Im Vertrieb könnte das zum Beispiel das Volumen der Deals in der Vertriebspipeline sein. Auch wenn nicht alle diese Deals letztendlich zu realisierten Umsätzen führen, wissen wir sicher, dass wir unsere Umsatzziele nicht erreichen werden, wenn die Pipeline leer ist.</p>
+<div class="paragraph">
+<p>Wenn die Ursache-Wirkung-Beziehungen zwischen Variablen zu komplex sind, um direkt leading KPIs zu identifizieren, können wir stattdessen versuchen, <strong>lagging KPIs mit einem Machine Learning Modell vorherzusagen</strong>. Zum Beispiel könnte in einem Produktionsprozess für Kunststoff ein wichtiges Qualitätsmaß die Zugfestigkeit sein, die 24 Stunden nach dem Aushärten gemessen wird. Falls wir nach 24 Stunden feststellen, dass die Qualität nicht ausreichend ist, kann es sein, dass wir die komplette Produktion verwerfen müssen.
+Wenn die Beziehungen zwischen den Prozessparametern (wie Produktionstemperatur) und der resultierenden Qualität zu komplex sind, um ein leading KPI zu identifizieren, könnten wir stattdessen ein ML-Modell mit vergangenen Prozessparametern (Inputs) und dazugehörigen Qualitätsmessungen (Outputs) trainieren, um dann kontinuierlich die Qualität während der Produktion vorherzusagen. Wenn das Modell vorhersagt, dass die Qualität nicht im Zielbereich liegt, können die Bediener sofort eingreifen und das Problem beheben, bevor weitere Produktionszeit verschwendet wird.<br>
+Damit wir uns auf die Vorhersagen verlassen können, müssen wir nun allerdings zusätzlich die Performance des Modells überwachen. Die <strong>Vorhersagegenauigkeit auf neuen Daten dient hier als lagging KPI</strong>, da wir erst 24h später, also nachdem die echten Messungen eingetroffen sind, wissen, ob die Vorhersagen korrekt waren. Als <strong>leading KPI</strong> können wir die Diskrepanz zwischen den für das Modelltraining verwendeten Prozessparameterwerten und den in der Produktion gemessenen Werten berechnen, um <strong>Datendrifts</strong> zu identifizieren. Solche Drifts, wie z.B. Änderungen in den Werten aufgrund von Sensorstörungen, können zu falschen Vorhersagen für betroffenen Proben führen.</p>
 </div>
 </dd>
 </dl>
 </div>
 </div>
+</div>
+<div class="paragraph">
+<p>Der erste Schritt bei einer datengestützen Entscheidung ist zu <strong>erkennen, dass wir handeln sollten, indem wir unsere KPIs überwachen</strong>, um festzustellen, ob wir dabei sind, unsere Ziele zu verfehlen.</p>
+</div>
+<div class="paragraph">
+<p>Idealerweise werden diese Metriken mit <strong>Schwellwerten für Warnungen</strong> kombiniert, um uns automatisch zu benachrichtigen, wenn etwas schief geht und eine Korrekturmaßnahme erforderlich ist. Beispielsweise könnten wir eine Warnung zum Zustand eines Systems oder einer Maschine einrichten, um einen Techniker zu benachrichtigen, wenn eine Wartung erforderlich ist. Um <strong>Alarmmüdigkeit zu vermeiden</strong>, ist es wichtig, falsche Alarme zu reduzieren, also die Warnung so zu konfigurieren, dass die verantwortliche Person sagt: &#8220;Wenn dieser Schwellwert erreicht ist, lasse ich alles stehen und liegen und behebe das Problem&#8221; (<em>nicht</em> &#8220;an diesem Punkt sollten wir es wahrscheinlich im Auge behalten&#8221;).</p>
+</div>
+<div class="paragraph">
+<p>Je nachdem, wie häufig sich der Wert des KPI ändert und wie schnell Korrekturmaßnahmen Wirkung zeigen, möchten wir die Alarmbedingung entweder alle paar Minuten überprüfen, um jemanden in Echtzeit zu benachrichtigen, oder zum Beispiel jeden Morgen, jeden Montag oder einmal im Monat, wenn sich die Werte langsamer ändern.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Ist das signifikant?</dt>
+<dd>
+<p>Kleine Schwankungen in den KPIs sind normal, und wir sollten nicht überreagieren, wenn es sich um zufälliges Rauschen handelt. Statistik kann uns sagen, <strong>ob die beobachtete Abweichung von dem, was wir erwartet haben, signifikant ist</strong>.</p>
+<div class="paragraph">
+<p>Statistische Inferenz ermöglicht es uns <strong>Schlussfolgerungen zu ziehen, die über die vorliegenden Daten hinausgehen</strong>. Oft möchten wir eine Aussage über eine ganze <em>Population</em> treffen (z.B. alle Menschen, die derzeit auf dieser Erde leben), aber wir haben nur Zugriff auf einige (hoffentlich repräsentative) Beobachtungen, aus denen wir unsere Schlussfolgerung ziehen können. Bei der statistischen Inferenz geht es darum, unsere Meinung trotz dieser Unsicherheit zu ändern: Wir nehmen eine Nullhypothese (= unsere Erwartung bevor wir in die Daten geschaut haben) an und prüfen dann, ob das, was wir in unserer Stichprobe beobachten, diese Nullhypothese lächerlich erscheinen lässt. Ist dies der Fall, verwerfen wir sie und nehmen stattdessen die alternative Hypothese an.<br>
+<span class="underline">Beispiel:</span> <em>Euer Unternehmen hat einen Online-Shop und möchte ein neues Empfehlungssystem einführen, aber ihr seid euch nicht sicher, ob Kunden diese Empfehlungen hilfreich finden und mehr kaufen werden. Bevor ihr mit dem neuen System live geht, führt ihr daher einen A/B-Test durch, bei dem ein Prozentsatz zufällig ausgewählter Nutzer die neuen Empfehlungen sieht, während die anderen zur ursprünglichen Version des Online-Shops weitergeleitet werden. Die Nullhypothese lautet, dass die neue Version nicht besser ist als das Original. Aber es stellt sich heraus, dass das durchschnittliche Verkaufsvolumen der Kunden, die die neuen Empfehlungen sehen, viel höher ist als das der Kunden, die die ursprüngliche Website besuchen. Dieser Unterschied ist so groß, dass es in einer Welt, in der die Nullhypothese wahr wäre, äußerst unwahrscheinlich wäre, dass eine zufällige Stichprobe uns diese Ergebnisse liefern würde. Wir verwerfen daher die Nullhypothese und gehen von der Alternativhypothese aus, dass die neuen Empfehlungen höhere Umsätze generieren.</em></p>
+</div>
+<div class="paragraph">
+<p>Neben strengen statistischen Tests gibt es auch einige Faustregeln, um zu bestimmen, ob Veränderungen in den Daten unsere Aufmerksamkeit erfordern: Wenn eine einzelne Stichprobe drei Standardabweichungen (\(\sigma\)) über oder unter dem Mittelwert liegt oder sieben aufeinanderfolgende Punkte über oder unter dem Durchschnittswert liegen, ist dies ein Grund für weitere Untersuchungen.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="../images/02_data/control_chart.png" alt="image" width="550">
+</div>
+<div class="title"><span class="small">Ein Kontrollchart zeigt Messungen über die Zeit, die um ihren Mittelwert schwanken, wobei interessante Punkte in Rot markiert sind.</span></div>
+</div>
+<div class="paragraph">
+<p><span class="small">Lies <a href="https://towardsdatascience.com/whats-the-difference-between-analytics-and-statistics-cd35d457e17" target="\_blank">diesen Artikel</a> wenn du mehr über den Unterschied zwischen Analysten und Statistikern erfahren möchtest und warum diese immer mit unterschiedlichen Teilen eines Datensatzes arbeiten sollten.</span></p>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Für jede eingerichtete Alarmbedingung, also immer wenn klar ist, dass eine Korrekturmaßnahme erforderlich ist, sollten wir uns überlegen, ob diese Maßnahme automatisiert werden kann und die <strong>automatisierte Aktion direkt zusammen mit dem Alarm auslösen</strong> (zum Beispiel wenn die Genauigkeit eines ML-Modells unter einen bestimmten Schwellwert fällt, könnten wir das Modell automatisch mit den neusten Daten nachtrainieren anstatt nur den Data Scientist zu benachrichtigen). Wenn dies nicht möglich ist, zum Beispiel, weil nicht klar ist, was genau passiert ist und welche Maßnahme ergriffen werden sollte, benötigen wir eine tiefere Analyse.</p>
+</div>
+<div class="paragraph">
+<p>Ein tieferes Eintauchen in die Daten kann uns helfen, Fragen wie &#8220;Warum haben wir dieses Ziel nicht erreicht und was können wir besser machen?&#8221; (oder, in selteneren Fällen, &#8220;Warum haben wir dieses Ziel übertroffen und wie können wir das wiederholen?&#8221;) zu beantworten, um zu entscheiden <strong>welche Korrekturmaßnahme</strong> ergriffen werden soll.</p>
 </div>
 <div class="admonitionblock caution">
 <table>
@@ -1113,25 +1211,20 @@ Durchsuche die Daten nicht nur nach Erkenntnissen, die das bestätigen, was du d
 </tr>
 </table>
 </div>
-<div class="sidebarblock">
-<div class="content">
 <div class="paragraph">
-<p><span class="underline">Aber:</span> Nicht alle Entscheidungen müssen datengestützt getroffen werden:</p>
+<p>Solch eine explorative Analyse ist oft ein &#8216;quick and dirty&#8217; Prozess, bei dem wir viele <strong>Diagramme erstellen, um die Daten besser zu verstehen</strong> und um zu erkennen, woher der Unterschied zwischen dem, was wir erwartet haben, und dem, was wir in den Daten sehen, kommt, z.B. indem wir andere korrelierte Variablen untersuchen. Zufriedenstellende Antworten zu finden ist allerdings oft mehr Kunst als Wissenschaft.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>Unsere besten Webentwickler haben gedroht zu kündigen, wenn sie den Internet Explorer weiter unterstützen müssen. Egal wie viele Nutzer von der Änderung betroffen wären, wir können es uns nicht leisten, diese Entwickler zu verlieren!</p>
-</li>
-<li>
-<p>Unser ML-Modell wird sowieso jede Woche mit neuen Daten nach trainiert, unabhängig von der Modellgenauigkeit.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>&#8658; Kommuniziere transparent, ob eine Entscheidung überhaupt durch Analyseergebnisse beeinflusst werden kann, und wenn nicht, erspare den Analysten den Aufwand.</p>
-</div>
-</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Wenn wir ein ML-Modell verwenden, um KPIs vorherzusagen, können wir dieses Modell und seine Vorhersagen interpretieren, um besser zu verstehen, welche Variablen die KPIs beeinflussen könnten. In dem wir zuerst die <strong>vom ML-Modell als wichtig erachteten Features</strong> untersuchen, können wir Zeit sparen, wenn unser Datensatz Hunderte von Variablen enthält. Aber Achtung&#8201;&#8212;&#8201;das Modell hat nur aus Korrelationen in den Daten gelernt; diese repräsentieren nicht unbedingt wahre kausale Zusammenhänge zwischen den Variablen.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect3">
@@ -1156,13 +1249,13 @@ Durchsuche die Daten nicht nur nach Erkenntnissen, die das bestätigen, was du d
 <div class="ulist">
 <ul>
 <li>
-<p>Lass dich von Visualisierungsbibliotheken inspirieren (z.B. <a href="https://github.com/Financial-Times/chart-doctor/blob/main/visual-vocabulary/Visual-vocabulary-en.pdf" target="\_blank">hier</a> oder <a href="https://datavizcatalogue.com/" target="\_blank">hier</a>)</p>
+<p>Lass dich von Visualisierungsbibliotheken inspirieren (z.B. <a href="https://github.com/Financial-Times/chart-doctor/blob/main/visual-vocabulary/Visual-vocabulary-en.pdf" target="\_blank">hier</a> oder <a href="https://datavizcatalogue.com/" target="\_blank">hier</a>), aber vermeide den Drang, ausgefallene Grafiken zu erstellen; gängigen Visualisierungen machen es dem Publikum einfacher, die Informationen korrekt zu entschlüsseln</p>
 </li>
 <li>
 <p>Verwende keine 3D-Effekte!</p>
 </li>
 <li>
-<p>Verwende keine Torten- oder Donutdiagramme (Winkel sind schwer zu interpretieren)</p>
+<p>Vermeide Torten- oder Donutdiagramme (Winkel sind schwer zu interpretieren)</p>
 </li>
 <li>
 <p>Verwende Liniendiagramme für Zeitreihendaten</p>
@@ -1204,9 +1297,6 @@ Durchsuche die Daten nicht nur nach Erkenntnissen, die das bestätigen, was du d
 <li>
 <p>Linien direkt beschriften</p>
 </li>
-<li>
-<p>Konsistente Farben verwenden</p>
-</li>
 </ul>
 </div>
 <div class="imageblock text-center">
@@ -1235,7 +1325,7 @@ Durchsuche die Daten nicht nur nach Erkenntnissen, die das bestätigen, was du d
 <div class="content">
 <img src="../images/02_data/explanatory3.gif" alt="image" width="550">
 </div>
-<div class="title"><span class="small">Beginne mit grau und verwende prä-aufmerksame Attribute strategisch, um die Aufmerksamkeit des Publikums zu lenken. [Beispiel adaptiert von: <em>Storytelling with Data</em> von Cole Nussbaum Knaflic]</span></div>
+<div class="title"><span class="small">Beginne mit grau und verwende präattentive Attribute strategisch, um die Aufmerksamkeit des Publikums zu lenken. [Beispiel adaptiert von: <em>Storytelling with Data</em> von Cole Nussbaum Knaflic]</span></div>
 </div>
 </div>
 <div class="sect4">
@@ -1243,10 +1333,13 @@ Durchsuche die Daten nicht nur nach Erkenntnissen, die das bestätigen, was du d
 <div class="ulist">
 <ul>
 <li>
-<p>Kontext hinzufügen: Welche Werte sind gut (Zielzustand), welche schlecht (Alarmschwelle)?</p>
+<p>Kontext hinzufügen: Welche Werte sind gut (Zielzustand), welche schlecht (Alarmschwelle)? Sollten die Daten mit einer anderen Variable vergleichen werden (z.B. gemessene Werte und Vorhersagen)?</p>
 </li>
 <li>
-<p>Füge erklärenden Text hinzu, um die wichtigsten Schlussfolgerungen und Handlungsempfehlungen herauszustellen</p>
+<p>Verwende konsistente Farben, wenn Informationen über mehrere Diagramme verteilt sind (z.B. Daten von einem Land immer in derselben Farbe darstellen)</p>
+</li>
+<li>
+<p>Füge erklärenden Text hinzu, um die wichtigsten Schlussfolgerungen und Handlungsempfehlungen herauszustellen (falls dies nicht möglich ist, z.B. in Dashboards, in denen sich die Daten ständig ändern, kann der Titel stattdessen die Frage enthalten, die das Diagramm beantworten soll, z.B. &#8220;Folgt unser Umsatz den Prognosen?&#8221;)</p>
 </li>
 </ul>
 </div>
@@ -1264,6 +1357,9 @@ Durchsuche die Daten nicht nur nach Erkenntnissen, die das bestätigen, was du d
 <dd>
 <div class="ulist">
 <ul>
+<li>
+<p><em>Show Me the Numbers: Designing Tables and Graphs to Enlighten</em> von Stephen Few</p>
+</li>
 <li>
 <p><em>Better Data Visualizations: A Guide for Scholars, Researchers, and Wonks</em> von Jonathan Schwabish</p>
 </li>

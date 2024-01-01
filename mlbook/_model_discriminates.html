@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.18">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <meta name="author" content="Dr. Franziska Horn">
 <meta name="copyright" content="Dr. Franziska Horn">
 <title>A Practitioner&#8217;s Guide to Machine Learning</title>
@@ -928,8 +928,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.8,</span>
-<span id="revdate">2023-01-06</span>
+<span id="revnumber">version 1.9,</span>
+<span id="revdate">2024-01-01</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -957,6 +957,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <li><a href="_model_discriminates.html"><span class="toc-current">Model discriminates</span></a>
 </li>
 <li><a href="_explainability_interpretable_ml.html">Explainability &amp; Interpretable ML</a>
+</li>
+<li><a href="_data_concept_drifts.html">Data &amp; Concept Drifts</a>
 </li>
 </ul>
 </li>
@@ -1069,10 +1071,24 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </li>
 </ul>
 </div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Retraining models on data shaped by predictions from a biased predecessor model can intensify existing biases. For instance, if a resume screening tool recognizes a common trait (e.g., &#8220;attended Stanford University&#8221;) among current employees, it may consistently recommend resumes with this trait. Consequently, more individuals with this characteristic will be invited for interviews and hired, further reinforcing the dominance of the trait in subsequent models trained on these employee profiles.
+</td>
+</tr>
+</table>
+</div>
 <h5 id="_towards_fair_models" class="discrete">Towards fair models</h5>
 <div class="paragraph">
-<p><span class="underline">1.) Know you have a problem</span><br>
-The first step to mitigating these problems is to become aware of them. We often don&#8217;t notice a poor performance for an undersampled subgroup, because the model performance overall looks fine:</p>
+<p><span class="underline">1.) Know you have a problem</span></p>
+</div>
+<div class="paragraph">
+<p>The first step to mitigating these problems is to become aware of them. We often don&#8217;t notice a poor performance for an undersampled subgroup, because the model performance overall looks fine:</p>
 </div>
 <div class="paragraph text-center">
 <p><span class="image"><img src="../images/07_data_issues/bias_unequal_lr.png" alt="image" width="420"></span>
@@ -1101,8 +1117,10 @@ The first step to mitigating these problems is to become aware of them. We often
 </ul>
 </div>
 <div class="paragraph">
-<p><span class="underline">2.) Learn a fair model</span><br>
-In general, we should also <strong>be careful when including variables in the model that encode attributes such as gender or ethnicity</strong>. For example, the performance of a model that diagnoses heart attacks will most likely be improved by including &#8216;gender&#8217; as a feature, since men and women present different symptoms when they have a heart attack.</p>
+<p><span class="underline">2.) Learn a fair model</span></p>
+</div>
+<div class="paragraph">
+<p>We should also <strong>be careful when including variables in the model that encode attributes such as gender or ethnicity</strong>. For example, the performance of a model that diagnoses heart attacks will most likely be improved by including &#8216;gender&#8217; as a feature, since men and women present different symptoms when they have a heart attack. On the other hand, a model that assigns someone a credit score should probably not rely on the gender of the person for this decision, since, even though this might have been the case in the historical data because the humans that generated the data relied on their own stereotypes, women should not get a lower score just because they are female.</p>
 </div>
 <div class="paragraph text-center">
 <p><span class="image"><img src="../images/07_data_issues/bias_simpson_lr.png" alt="image" width="420"></span>
@@ -1112,10 +1130,7 @@ In general, we should also <strong>be careful when including variables in the mo
 <p><span class="small">In the plot on the right, additional dummy variables to represent the different subgroups in the data are included in the model and improve its predictive performance. While this can make the bias of a model explicit, should this information be included at all? (By the way, this is also an example of <a href="https://en.wikipedia.org/wiki/Simpson&#8217;s_paradox" target="\_blank">Simpson&#8217;s paradox</a>, where the model&#8217;s coefficients reverse their sign when additional features are included.)</span></p>
 </div>
 <div class="paragraph">
-<p>A model that assigns someone a credit score should probably not rely on the gender of the person for this decision, since, even though this might have been the case in the historical data because the humans that generated the data relied on their own stereotypes, women should not get a lower score just because they are female.</p>
-</div>
-<div class="paragraph">
-<p>However, a person&#8217;s gender or ethnicity, for example, is often correlated with other variables such as income or neighborhood, so even inconspicuous features can still leak problematic information to the model. Therefore, in those cases one should take some extra steps to ensure the model does not discriminate based on these features.</p>
+<p>However, a person&#8217;s gender or ethnicity, for example, is often correlated with other variables such as income or neighborhood, so even inconspicuous features can still leak problematic information to the model and require some extra steps to ensure the model does not discriminate.</p>
 </div>
 <div class="paragraph">
 <p>This can, for example, be achieved by setting up a neural network that learns <strong>subgroup-invariant feature representations</strong>:</p>

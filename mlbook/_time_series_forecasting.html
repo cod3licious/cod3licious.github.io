@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.18">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <meta name="author" content="Dr. Franziska Horn">
 <meta name="copyright" content="Dr. Franziska Horn">
 <title>A Practitioner&#8217;s Guide to Machine Learning</title>
@@ -928,8 +928,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.8,</span>
-<span id="revdate">2023-01-06</span>
+<span id="revnumber">version 1.9,</span>
+<span id="revdate">2024-01-01</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -952,9 +952,11 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </li>
 <li><a href="_advanced_topics.html">Advanced Topics</a>
 <ul class="sectlevel2">
+<li><a href="_deep_learning_2.html">Deep Learning</a>
+</li>
 <li><a href="_information_retrieval_similarity_search.html">Information Retrieval (Similarity Search)</a>
 </li>
-<li><a href="_deep_learning_2.html">Deep Learning</a>
+<li><a href="_recommender_systems_pairwise_data.html">Recommender Systems (Pairwise Data)</a>
 </li>
 <li><a href="_time_series_forecasting.html"><span class="toc-current">Time Series Forecasting</span></a>
 <ul class="sectlevel3">
@@ -963,8 +965,6 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <li><a href="_time_series_forecasting.html#_stateless_vs_stateful_models">Stateless vs. Stateful Models</a>
 </li>
 </ul>
-</li>
-<li><a href="_recommender_systems_pairwise_data.html">Recommender Systems (Pairwise Data)</a>
 </li>
 <li><a href="_reinforcement_learning_2.html">Reinforcement Learning</a>
 </li>
@@ -1080,7 +1080,7 @@ Bogojeski, M., et al. &#8220;Forecasting industrial aging processes with machine
 <p>When dealing with time series data, one should always think carefully about how complex the dependencies between the past and future process values in the respective forecasting task are.<br>
 For example, when trying to predict <strong>spontaneous events</strong>, like a sudden increase in the emissions produced in the process, then the relevant time window into the past, when the process conditions might have had an influence on this target variable, would be very short, i.e., only the process values from time \(t\) need to be included in the input feature vector to predict the anomalous event at time \(t+1\).<br>
 For other prediction tasks, what happened over a <strong>longer (but uniquely determined) interval</strong> might be relevant, but can be <strong>summarized with simple features</strong>. For example, in a production process, one might want to predict the quality of the final product that is produced within a fixed time interval. In this case, the process conditions during the time interval where the respective product is produced will be important for the prediction, but the process conditions during the time where the previous product was produced are most likely not relevant. Additionally, it would be enough to compute only some summary statistics (like mean/max/min values of the process conditions during the time interval of interest) and use these as input features to capture all the relevant information.<br>
-The third case are prediction tasks for which it is necessary to consider <strong>very long time windows</strong>, often of varying lengths, with some <strong>complex long-ranging dependencies</strong> between the process conditions at different time points. For example, in some predictive maintenance tasks, the decay of the critical process component might not happen in some linear fashion (unlike, for example, a light bulb, which might have some fixed life expectancy and one only needs to count the number of hours it was turned on up to now to estimate when it needs to be replaced. Instead, there exist more complex dependencies, for example, the component might decay faster if it is already in a poor state. Therefore, if some unfortunate combination of process conditions lead to a strain on the component early on, it might have to be replaced a lot sooner then under otherwise identical conditions without this initial mishap, i.e., <strong>the order of events matters</strong> a lot, too.</p>
+The third case are prediction tasks for which it is necessary to consider <strong>very long time windows</strong>, often of varying lengths, with some <strong>complex long-ranging dependencies</strong> between the process conditions at different time points. For example, in some predictive maintenance tasks, the decay of the critical process component might not happen in some linear fashion (unlike, for example, a light bulb, which might have some fixed life expectancy and one only needs to count the number of hours it was turned on up to now to estimate when it needs to be replaced). Instead, there exist more complex dependencies, for example, the component might decay faster if it is already in a poor state. Therefore, if some unfortunate combination of process conditions lead to a strain on the component early on, it might have to be replaced a lot sooner than under otherwise identical conditions without this initial mishap, i.e., <strong>the order of events matters</strong> a lot, too.</p>
 </div>
 <div class="paragraph">
 <p>Depending on how complex the dependencies are between the process values over time, it will be more or less complicated to construct feature vectors that capture all the relevant information to make accurate predictions. In general, one should always try to come up with <strong>features that contain all the relevant information about the past</strong>, i.e., that fulfill the <a href="https://en.wikipedia.org/wiki/Markov_property" target="\_blank">Markov assumption</a> that given this information the future is otherwise independent of the history of the process: For example, if we knew the number of hours a light bulb was turned on up to now, we would have a complete picture about the state the light bulb is currently in; everything else that happened in the past, like how many people were in the room while the light was on, is irrelevant for the state of the light bulb. Another example is the current position of pieces on a chess board: To plan our next move, we don&#8217;t need to know the exact order in which the pieces were moved before, but only the position of all the pieces right now.</p>
@@ -1097,7 +1097,7 @@ The third case are prediction tasks for which it is necessary to consider <stron
 <p><strong>Spontaneous event:</strong> Trigger word detection for smart speakers: A simple classification task for which only the last 1-2 spoken words, i.e., the audio signal from a time window of a few seconds, are relevant.</p>
 </li>
 <li>
-<p><strong>Fixed interval &amp; summary features:</strong> Text classification, e.g., determining the category of a newspaper article (e.g., &#8216;sports&#8217; or &#8216;politics&#8217;): While here a longer span of text needs to be considered to make the prediction, a simple TF-IDF vector is usually sufficient to represent the contents of the whole document, since such categories can easily be identified by simply checking whether the terms &#8220;soccer&#8221; or &#8220;politician&#8221; occur more often in the current article.</p>
+<p><strong>Fixed interval &amp; summary features:</strong> Text classification, e.g., determining the category of a newspaper article (e.g., &#8216;sports&#8217; or &#8216;politics&#8217;): While here a longer span of text needs to be considered to make the prediction, a simple TF-IDF vector is usually sufficient to represent the contents of the whole document, since such categories can easily be identified by simply checking whether the terms &#8220;soccer&#8221; or &#8220;politician&#8221; occur more often in the current article. Furthermore, the span of text that is relevant for the task is fixed: we only need to consider the current article and it can be considered independent of the articles written before it.</p>
 </li>
 <li>
 <p><strong>Complex long-ranging dependencies:</strong> For some tasks like sentiment analysis or machine translation, it doesn&#8217;t just matter which words occurred in a text, but also in which order and what their larger surrounding context was.</p>
@@ -1138,6 +1138,18 @@ If <strong>any b)</strong>:<br>
 </div>
 </div>
 </div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+When working with time series data, the train, validation, and test data splits should always be in chronological order, i.e., the model is trained on the oldest time points and evaluated on more recent samples to get a realistic performance estimate, especially in cases where the data changes over time, e.g., due to smaller changes in the underlying process.
+</td>
+</tr>
+</table>
+</div>
 <div class="openblock">
 <div class="content">
 <div class="dlist">
@@ -1145,9 +1157,6 @@ If <strong>any b)</strong>:<br>
 <dt class="hdlist1">Output prediction with <em>stateless</em> models (e.g., linear regression, FFNN)</dt>
 <dd>
 <p>Only predict for a fixed time window of 1 or <em>k</em> steps:<br></p>
-</dd>
-</dl>
-</div>
 <div class="ulist none">
 <ul class="none">
 <li>
@@ -1176,6 +1185,9 @@ If <strong>any b)</strong>:<br>
 </li>
 </ul>
 </div>
+</dd>
+</dl>
+</div>
 </div>
 </div>
 <div class="dlist">
@@ -1203,22 +1215,10 @@ t+k:\quad [\, x_1 \, | \,  x_2 \,]\; &amp;\to \; [\, y_1  \, | \, y_2 \,]
 \end{aligned}\]
 </div>
 </div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-When working with time series data, the train, validation, and test data splits should be in chronological order, i.e., the model is trained on the oldest time points and evaluated on more recent samples to get a realistic performance estimate, especially in cases where the data changes over time, e.g., due to smaller changes in the underlying process.
-</td>
-</tr>
-</table>
-</div>
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_deep_learning_2.html">Deep Learning</a> | ↑ Up: <a href="_advanced_topics.html">Advanced Topics</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_recommender_systems_pairwise_data.html">Recommender Systems (Pairwise Data)</a> →</p>
+<p>← Previous: <a href="_recommender_systems_pairwise_data.html">Recommender Systems (Pairwise Data)</a> | ↑ Up: <a href="_advanced_topics.html">Advanced Topics</a> | ⌂ Home: <a href="index.html">A Practitioner&#8217;s Guide to Machine Learning</a> | Next: <a href="_reinforcement_learning_2.html">Reinforcement Learning</a> →</p>
 </div>
 </div>
 <script type="text/x-mathjax-config">

@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.18">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <meta name="author" content="Dr. Franziska Horn">
 <meta name="copyright" content="Dr. Franziska Horn">
 <title>A Practitioner&#8217;s Guide to Machine Learning</title>
@@ -928,8 +928,8 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.8,</span>
-<span id="revdate">2023-01-06</span>
+<span id="revnumber">version 1.9,</span>
+<span id="revdate">2024-01-01</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -992,8 +992,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Data requirements for learning according to these strategies: </dt>
-</dl>
-</div>
+<dd>
 <div class="ulist none">
 <ul class="none">
 <li>
@@ -1025,12 +1024,15 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 </li>
 </ul>
 </div>
+</dd>
+</dl>
+</div>
 <div class="sect3">
 <h4 id="_supervised_learning">Supervised Learning</h4>
 <div class="paragraph">
 <p>Supervised learning is the most common type of machine learning used in today&#8217;s applications.<br>
 The goal here is to learn a <strong>model (= a mathematical function)</strong> \(f(x)\) that describes the relationship between some <strong>input(s)</strong> \(x\) (e.g., different process conditions like temperature, type of material, etc.) and <strong>output</strong> \(y\) (e.g., resulting product quality).<br>
-This model can then be used to <strong>make predictions for new data points</strong>, i.e., compute \(f(x') = y\) for some new \(x'\) (e.g., predict for a new set of process conditions whether the produced product will be of high quality or if the process should be stopped to not waste resources).</p>
+This model can then be used to <strong>make predictions for new data points</strong>, i.e., compute \(f(x') = y'\) for some new \(x'\) (e.g., predict for a new set of process conditions whether the produced product will be of high quality or if the process should be stopped to not waste resources).</p>
 </div>
 <div class="dlist">
 <dl>
@@ -1141,6 +1143,30 @@ In most of the book, the terms &#8220;ML algorithm&#8221; and &#8220;ML model&#8
 <div class="title"><span class="small">In many use cases, it is not enough to &#8220;only&#8221; predict the target for a new data point, e.g., predict whether a product produced under certain conditions will be of high quality or not. Instead, it is often necessary to additionally be able to explain <em>why</em> this prediction was made, e.g., which input feature values were the deciding factors, both to better understand possible root causes of a problem, but also to be assured that the model is basing its predictions on reasonable assumptions. Furthermore, a learned model can also be used within an outer optimization loop, i.e., in the simplest case one could systematically check what product quality the model predicts for different process conditions and then select the settings with the highest predicted quality to produce new products. But keep in mind that ML models are only built to interpolate, not extrapolate, i.e., make sure the settings that are tested are withing the training domain.</span></div>
 </div>
 </div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Predictive Analytics</dt>
+<dd>
+<p>By feeding historical data to a supervised learning algorithm, we can generate a <strong>predictive model</strong> that makes predictions about future scenarios to aid with planning.<br>
+<span class="underline">Example:</span> <em>Use sales forecasts to better plan inventory levels.</em></p>
+</dd>
+<dt class="hdlist1">Interpreting Predictive Models</dt>
+<dd>
+<p>Given a model that makes accurate predictions for new data points, we can <a href="https://franziskahorn.de/mlbook/_explainability_interpretable_ml.html" target="\_blank">interpret this model</a> and explain its predictions to <strong>understand root causes</strong> in a process.<br>
+<span class="underline">Example:</span> <em>Given a model that predicts the quality of a product from the process conditions, identify which conditions result in lower quality products.</em></p>
+</dd>
+<dt class="hdlist1">What-if Analysis &amp; Optimization</dt>
+<dd>
+<p>Given a model that makes accurate predictions for new data points, we can use this model in a <strong>&#8220;what-if&#8221; forecast</strong> to explore how a system might react to different conditions to make better decisions
+(use with <a href="_pitfall_3_model_abuses_spurious_correlations.html">caution</a>!).<br>
+<span class="underline">Example:</span> <em>Given a model that predicts the remaining lifetime of a machine component under some process conditions, simulate how quickly this component would deteriorate if we changed the process conditions.</em></p>
+<div class="paragraph">
+<p>Going one step further, this model can also be used inside an optimization loop to automatically evaluate different inputs with the model systematically to <strong>find optimal settings</strong>.<br>
+<span class="underline">Example:</span> <em>Given a model that predicts the quality of a product from the process conditions, automatically determine the best production settings for a new type of raw material.</em></p>
+</div>
+</dd>
+</dl>
 </div>
 </div>
 </div>

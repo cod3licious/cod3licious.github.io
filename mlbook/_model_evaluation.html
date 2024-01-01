@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.18">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <meta name="author" content="Dr. Franziska Horn">
 <meta name="copyright" content="Dr. Franziska Horn">
 <title>A Practitioner&#8217;s Guide to Machine Learning</title>
@@ -1017,8 +1017,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="details">
 <span id="author" class="author">Dr. Franziska Horn</span><br>
 <span id="email" class="email"><a href="mailto:hey@franziskahorn.de">hey@franziskahorn.de</a></span><br>
-<span id="revnumber">version 1.8,</span>
-<span id="revdate">2023-01-06</span>
+<span id="revnumber">version 1.9,</span>
+<span id="revdate">2024-01-01</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -1339,6 +1339,18 @@ Especially when working with small datasets, it is important that these splits a
 </div>
 </div>
 </div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Most datasets are collected over longer time periods. Often, the <strong>samples are correlated over time</strong>, i.e., samples collected around the same time are more similar to each other than samples collected weeks or months apart. This is often very apparent in time series data (e.g., seasonality effects in sales data), but it can also true for other types of data (e.g., the topics discussed in newspaper articles change over time; a camera lens might slowly accumulate dust). To get a realistic estimate of how well the model will perform on new data, it is usually best to <strong>use the most recent samples as the test set</strong>. Additionally, it might be necessary to use a <a href="https://scikit-learn.org/stable/modules/cross_validation.html#time-series-split">time series split</a> for the cross-validation, where the model is always trained on past data and evaluated on newer data. If there is a big difference between the model performance on random vs. chronological train/validation splits, this is a strong indication that the samples are correlated over time!
+</td>
+</tr>
+</table>
+</div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Hyperparameter Tuning</dt>
@@ -1357,7 +1369,7 @@ Especially when working with small datasets, it is important that these splits a
 It is generally a good idea to first start with a large range of values and then zoom in to the area that seems most promising. And of course knowledge about the different algorithms helps a lot in choosing reasonable settings as well.<br></p>
 </div>
 <div class="paragraph">
-<p>Besides the basic grid search, there also exist other, more advanced hyperparameter tuning routines. For example, sklearn additionally implements a randomized search, and other dedicated libraries provide even fancier approaches, such as <a href="https://machinelearningmastery.com/what-is-bayesian-optimization/" target="\_blank">Bayesian optimization</a>.<br></p>
+<p>Besides the basic grid search, there also exist other, more advanced hyperparameter tuning routines. For example, sklearn additionally implements a <strong>randomized search</strong>, and other dedicated libraries provide even fancier approaches, such as <a href="https://machinelearningmastery.com/what-is-bayesian-optimization/" target="\_blank">Bayesian optimization</a>.<br></p>
 </div>
 <div class="listingblock">
 <div class="content">

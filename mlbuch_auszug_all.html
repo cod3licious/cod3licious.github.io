@@ -3916,12 +3916,25 @@ Andersrum könnte man nun auch ein Bild von einem anderen Tier mit einem solchen
 </div>
 </div>
 <div class="paragraph">
-<p>Der Grund dafür ist, dass das Modell nicht die wahren Merkmale gelernt hat, anhand derer Menschen ein Stoppschild als solches identifizieren, z.B. die achteckige Form und die vier weißen Buchstaben &#8216;STOP&#8217; vor rotem Hintergrund. Stattdessen verlässt sich das Modell auf bedeutungslose Korrelationen, um das Stoppschild von anderen Schildern zu unterscheiden.</p>
-</div>
-</div>
+<p>Der Grund dafür ist, dass das Modell nicht die wahren Merkmale gelernt hat, anhand derer Menschen ein Stoppschild als solches identifizieren, z.B. die achteckige Form und die vier weißen Buchstaben &#8216;STOP&#8217; vor rotem Hintergrund. Stattdessen verlässt sich das Modell auf bedeutungslose Korrelationen, um das Stoppschild von anderen Schildern zu unterscheiden.<br>
+Da ein Convolutional Neural Network (CNN), die neuronale Netzarchitektur, die typischerweise für Bildklassifizierungsaufgaben verwendet wird, sich sehr auf lokale Muster fokussiert, lässt es sich leicht <a href="https://www.sciencemag.org/news/2018/07/turtle-or-rifle-hackers-easily-fool-ais-seeing-wrong-thing" target="\_blank">täuschen</a>. Dies geschieht, indem man die globale Form von Objekten, welche Menschen zur Identifikation verwenden, intakt lässt, und die Bilder mit bestimmten Texturen oder anderen Hochfrequenzmustern überlagert, wodurch das Modell eine andere Klasse vorhersagt.</p>
 </div>
 <div class="paragraph">
-<p>Da ein Convolutional Neural Network (CNN), die neuronale Netzarchitektur, die typischerweise für Bildklassifizierungsaufgaben verwendet wird, sich sehr auf lokale Muster fokussiert, lässt es sich leicht <a href="https://www.sciencemag.org/news/2018/07/turtle-or-rifle-hackers-easily-fool-ais-seeing-wrong-thing" target="\_blank">täuschen</a>. Dies geschieht, indem man die globale Form von Objekten, welche Menschen zur Identifikation verwenden, intakt lässt, und die Bilder mit bestimmten Texturen oder anderen Hochfrequenzmustern überlagert, wodurch das Modell eine andere Klasse vorhersagt.</p>
+<p><strong>GenAI &amp; Adversarial Prompts</strong></p>
+</div>
+<div class="paragraph">
+<p>Wegen ihrer Komplexität ist es besonders schwierig, den Output von generativen KI-Modellen (GenAI) wie ChatGPT zu kontrollieren. Diese Modelle können zwar in &#8220;Human-in-the-Loop&#8221; Szenarien sehr nützlich sein (z.B. um eine E-Mail oder Code-Schnipsel zu schreiben, die dann nochmal von einem Menschen überprüft werden), doch es ist schwer, die notwendigen Sicherheitsvorkehrungen zu treffen, damit der Chatbot nicht missbraucht werden kann.</p>
+</div>
+<div class="paragraph">
+<p>Der ChatGPT-basierte Kundensupport-Chat eines Chevrolet-Autohändlers ist nur ein Beispiel von vielen frühen GenAI Anwendungen, die bestenfalls gemischte Ergebnisse lieferten:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/07_explainability/adversarial_chatgpt.png" alt="medical images" width="640">
+</div>
+<div class="title"><span class="small">Screenshot: https://twitter.com/ChrisJBakke/status/1736533308849443121 (12.1.2024)</span></div>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p>Wie man robuste Kausalmodelle, die den wahren &#8216;Input &#8594; Output&#8217;-Zusammenhang in den Daten erfassen, findet, wird nach wie vor <a href="https://bdtechtalks.com/2021/03/15/machine-learning-causality/" target="\_blank">aktiv erforscht</a> und ist weitaus schwieriger als ein Modell zu finden, das &#8220;nur&#8221; verallgemeinert und gute Vorhersagen für die Testdaten generiert.</p>

@@ -1079,7 +1079,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </li>
 <li><a href="#_advanced_topics">Advanced Topics</a>
 <ul class="sectlevel2">
-<li><a href="#_deep_learning_2">Deep Learning</a></li>
+<li><a href="#_deep_learning">Deep Learning</a></li>
 <li><a href="#_information_retrieval_similarity_search">Information Retrieval (Similarity Search)</a></li>
 <li><a href="#_recommender_systems_pairwise_data">Recommender Systems (Pairwise Data)</a></li>
 <li><a href="#_time_series_forecasting">Time Series Forecasting</a></li>
@@ -1463,7 +1463,7 @@ While these libraries democratize the use of ML, unfortunately, this also brings
 <p>Instead, what is used in practice today is <strong>Artificial <em>Narrow</em> Intelligence</strong> (ANI): models <strong>explicitly programmed to solve a specific task(s)</strong>, e.g., translate texts from one language to another. But they <strong>can&#8217;t generalize (on their own) to handle novel tasks</strong>, i.e., a machine translation model will not tomorrow decide that it now also wants to recognize faces in images. Of course, one can combine several individual ANIs into one big program trained to <a href="https://deepmind.google/discover/blog/a-generalist-agent/" target="\_blank">solve multiple different tasks</a>, but this collection of ANIs is still not able to learn (on its own) any new skills beyond these capabilities.</p>
 </div>
 <div class="paragraph">
-<p>Many AI researchers believe that at least with the currently used approaches to AI (e.g., models created by OpenAI like ChatGPT), we might never produce a true human-like AGI. Specifically, these AI systems still <strong>lack a general understanding of causality and physical laws like object permanence</strong>&#8201;&#8212;&#8201;something that even many pets understand.<br>
+<p>Many AI researchers believe that at least with the currently used approaches to AI (e.g., large language models (LLMs) like ChatGPT from OpenAI), we might never produce a true human-like AGI. Specifically, these AI systems still <strong>lack a general understanding of causality and physical laws like object permanence</strong>&#8201;&#8212;&#8201;something that even many pets understand.<br>
 If you&#8217;re interested to learn more about the faults of current AI systems, the <a href="https://garymarcus.substack.com/" target="\_blank">blog articles by Gary Marcus</a> are highly recommended!</p>
 </div>
 </div>
@@ -1973,7 +1973,7 @@ In most of the book, the terms &#8220;ML algorithm&#8221; and &#8220;ML model&#8
 <div class="content">
 <img src="images/01b_intro_ml/ml_goals3.png" alt="image" width="840">
 </div>
-<div class="title"><span class="small">If our goal is to simply understand the dataset a bit better and get an overview of it, then a dimensionality reduction algorithm from the area of unsupervised learning can be used to visualize it. If we want to discover patterns in the data, then we would also choose an algorithm from the field of unsupervised learning, but here it depends on which kinds of patterns we want to find: Anomaly detection algorithms identify individual data points that deviate from the rest (e.g., a malfunctioning machine or a fraudulent credit card transaction). Clustering algorithms identify groups of similar data points (e.g., for customer segmentation). If our goal is to make specific predictions, i.e., given an input get a corresponding output (e.g., predict whether a product will be faulty if it is produced under certain conditions), then we need to use an algorithm from the area of supervised learning. Here the main distinction is between regression and classification models: in regression tasks, the target variable that should be predicted is continuous (e.g., number of users, price, etc.), while in classification tasks the target variable is discrete, i.e., can only take on one distinct value and there is no continuum between the different values (e.g., an animal in a picture can either be a cat or a dog, but not something in between). While unsupervised and supervised learning cover most general use cases, other algorithms exist for more specific applications, e.g., recommender systems.</span></div>
+<div class="title"><span class="small">If our goal is to simply understand the dataset a bit better and get an overview of it, then a dimensionality reduction algorithm from the area of unsupervised learning can be used to visualize it. If we want to discover patterns in the data, then we would also choose an algorithm from the field of unsupervised learning, but here it depends on which kinds of patterns we want to find: Anomaly detection algorithms identify individual data points that deviate from the rest (e.g., a malfunctioning machine or a fraudulent credit card transaction). Clustering algorithms identify groups of similar data points (e.g., for customer segmentation). If our goal is to make specific predictions, i.e., given an input get a corresponding output (e.g., predict whether a product will be faulty if it is produced under certain conditions), then we need to use an algorithm from the area of supervised learning. Here the main distinction is between regression and classification models: in regression tasks, the target variable that should be predicted is continuous (e.g., number of users, price, etc.), while in classification tasks the target variable is discrete, i.e., can only take on one distinct value and there is no continuum between the different values (e.g., an animal in a picture can either be a cat or a dog, but not something in between). While unsupervised and supervised learning cover most general use cases, other algorithms exist for more specific applications, e.g., recommender systems or generative AI.</span></div>
 </div>
 <div class="paragraph">
 <p>Some example input &#8594; output tasks and what type of ML algorithm solves them:</p>
@@ -2064,7 +2064,7 @@ In most of the book, the terms &#8220;ML algorithm&#8221; and &#8220;ML model&#8
 <p><span class="underline">Classification:</span> a <strong>discrete value</strong> (one of several mutually exclusive categories)</p>
 </li>
 <li>
-<p><span class="underline">Deep Learning:</span> <strong>unstructured output like a text or image</strong> (e.g., speech recognition, machine translation, image generation, or neural style transfer)</p>
+<p><span class="underline">Generative AI:</span> <strong>unstructured output like a text or image</strong> (e.g., speech recognition, machine translation, image generation, or neural style transfer)</p>
 </li>
 <li>
 <p><span class="underline">Recommender Systems &amp; Information Retrieval:</span> <strong>ranking of a set of items</strong> (recommender systems, for example, rank the products that a specific user might be most interested in; information retrieval systems rank other items based on their similarity to a given query item)</p>
@@ -2446,7 +2446,7 @@ Even if our ultimate goal is to predict something (i.e., use supervised learning
 </div>
 </div>
 <div class="sect3">
-<h4 id="_deep_learning">Deep Learning</h4>
+<h4 id="_deep_learning_generative_ai">Deep Learning &amp; Generative AI</h4>
 <div class="ulist">
 <div class="title"><span class="underline">Use Cases:</span></div>
 <ul>
@@ -5824,7 +5824,7 @@ Regularization is also used in many other <code>sklearn</code> models. Depending
 </div>
 <div class="paragraph">
 <p>Next up are neural networks (NN), which can be used to solve extremely complex problems (besides regular supervised learning tasks), but that are also rather data hungry (depending on the size of the network).<br>
-We&#8217;ll only cover the basics here; more advanced NN architectures, like those used to process image and text data, are discussed in the chapter on <a href="#_deep_learning_2">Deep Learning</a>.</p>
+We&#8217;ll only cover the basics here; more advanced NN architectures, like those used to process image and text data, are discussed in the chapter on <a href="#_deep_learning">Deep Learning</a>.</p>
 </div>
 </div>
 </div>
@@ -5967,7 +5967,7 @@ W_{l1} &amp; W_{l2} &amp; \cdots &amp; W_{lm}\\
 </div>
 </div>
 <div class="paragraph">
-<p>We&#8217;ll only cover FFNNs here; the other architectures are discussed in the chapter on <a href="#_deep_learning_2">Deep Learning</a>.</p>
+<p>We&#8217;ll only cover FFNNs here; the other architectures are discussed in the chapter on <a href="#_deep_learning">Deep Learning</a>.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -8017,7 +8017,7 @@ You might also want to have a look at Google&#8217;s <a href="https://developers
 </div>
 </div>
 <div class="sect2">
-<h3 id="_deep_learning_2">Deep Learning</h3>
+<h3 id="_deep_learning">Deep Learning</h3>
 <div class="paragraph">
 <p>We&#8217;ve already covered the general principles behind neural networks in a <a href="#_neural_networks">previous chapter</a>. Now we&#8217;ll have a look at more complex architectures to work with, for example, image or text data, as well as some advanced training techniques and special-purpose Python libraries for implementing custom neural network architectures.</p>
 </div>

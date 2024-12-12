@@ -229,9 +229,15 @@ ul.checkboxes {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px; /* Adjust the space between the images */
+  gap: 10px; /* Space between the images */
+  flex-wrap: wrap; /* Allow images to wrap on smaller screens */
+  padding: 10px; /* Optional: add padding around the container */
+  max-width: 100%; /* Prevent overflow */
+  box-sizing: border-box; /* Include padding in the container's dimensions */
 }
+
 .image-container img {
-  height: 340px; /* Set the desired height */
-  object-fit: cover; /* Ensures the image scales properly */
+  height: 340px; /* Set a uniform height for all images */
+  width: auto; /* Maintain aspect ratio by adjusting width */
+  object-fit: cover; /* Ensures images fill the space while cropping if necessary */
 }

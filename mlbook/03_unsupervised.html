@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.39">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Unsupervised Learning – A Practitioner's Guide to Machine Learning</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./04_supervised.html" rel="next">
+<link href="./02_data.html" rel="prev">
+<link href="./favicon.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-37b241f53b32a5ad598e4053e71b073f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03_unsupervised.html"><span class="chapter-title">Unsupervised Learning</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">A Practitioner’s Guide to Machine Learning</a> 
+        <div class="sidebar-tools-main">
+    <a href="./A-Practitioner-s-Guide-to-Machine-Learning.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01a_intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01b_basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">The Basics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01c_python.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">ML with Python</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Analysis &amp; Preprocessing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_unsupervised.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Unsupervised Learning</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_supervised.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Supervised Learning Basics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_supervised_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Supervised Learning Models</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_pitfalls.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Avoiding Common Pitfalls</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07_advanced_topics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Advanced Topics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08_conclusion.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Conclusion</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-dimred" id="toc-sec-dimred" class="nav-link active" data-scroll-target="#sec-dimred">Dimensionality Reduction</a>
+  <ul class="collapse">
+  <li><a href="#principal-component-analysis-pca" id="toc-principal-component-analysis-pca" class="nav-link" data-scroll-target="#principal-component-analysis-pca">Principal Component Analysis (PCA)</a></li>
+  <li><a href="#sec-t-sne" id="toc-sec-t-sne" class="nav-link" data-scroll-target="#sec-t-sne">t-SNE</a></li>
+  </ul></li>
+  <li><a href="#sec-outliers" id="toc-sec-outliers" class="nav-link" data-scroll-target="#sec-outliers">Outlier / Anomaly Detection</a>
+  <ul class="collapse">
+  <li><a href="#gamma-index" id="toc-gamma-index" class="nav-link" data-scroll-target="#gamma-index"><span class="math inline">\(\gamma\)</span>-index</a></li>
+  </ul></li>
+  <li><a href="#sec-clustering" id="toc-sec-clustering" class="nav-link" data-scroll-target="#sec-clustering">Clustering</a>
+  <ul class="collapse">
+  <li><a href="#k-means-clustering" id="toc-k-means-clustering" class="nav-link" data-scroll-target="#k-means-clustering"><em>k</em>-means clustering</a></li>
+  <li><a href="#dbscan" id="toc-dbscan" class="nav-link" data-scroll-target="#dbscan">DBSCAN</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-unsupervised" class="quarto-section-identifier"><span class="chapter-title">Unsupervised Learning</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>The first algorithms we look at in more detail are from the area of unsupervised learning:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_ml_overview/ml_algorithms_unsupervised.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+<p>While the subfields of unsupervised learning all include lots of different algorithms that can be used for the respective purpose, we’ll always just examine a few example algorithms with different underlying ideas in more detail. But feel free to, e.g., have a look at the <a href="https://scikit-learn.org/stable/unsupervised_learning.html">sklearn user guide</a> for more information about other methods.</p>
+<section id="sec-dimred" class="level2">
+<h2 class="anchored" data-anchor-id="sec-dimred">Dimensionality Reduction</h2>
+<p>The first subfield of unsupervised learning that we look at is dimensionality reduction:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_ml_overview/ml_algorithms_dimred.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+<p><strong>Goal:</strong> Reduce the number of features without loosing relevant information.</p>
+<p><strong>Advantages:</strong></p>
+<ul>
+<li>Reduced data needs less memory (usually not that important anymore today)</li>
+<li>Noise reduction (by focusing on the most relevant signals)</li>
+<li>Create a visualization of the dataset (what we are mostly using these algorithms for)</li>
+</ul>
+<p><strong><u>Example:</u> Embed images of hand written digits in 2 dimensions:</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/03_unsupervised/dimred_problem.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption>The dataset in this small example consists of a set of 8 x 8 pixel images of handwritten digits, i.e., each data point can be represented as a 64-dimensional input feature vector containing the gray-scale pixel values. Usually, this dataset is used for classification, i.e., where a model should predict which number is shown on the image. We instead only want to get an overview of the dataset, i.e., our goal is to reduce the dimensionality of this dataset to two coordinates, which we can then use to visualize all samples in a 2D scatter plot. Please note that the algorithms only use the original image pixel values as input to compute the 2D coordinates, but afterwards we additionally use the labels of the images (i.e., the digit shown in the image) to give the dots in the plot some color to better interpret the results.</figcaption>
+</figure>
+</div>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="../images/03_unsupervised/dimred_pca.png" class="img-fluid"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="../images/03_unsupervised/dimred_tsne.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
+<div class="fake-figcaption">
+<p>The two plots show the results, i.e., the 2-dimensional representation of the dataset created with two different dimensionality reduction algorithms, PCA and t-SNE. Each point or thumbnail in the plot represents one data point (i.e., one image) and the colors, numbers, and example images were added after reducing the dimensionality so the plot is easier to interpret.</p>
+</div>
+<p>There is no right or wrong way to represent the data in 2D – it’s an unsupervised learning problem, which by definition has no ground truth answer. The algorithms arrive at two very different solutions, since they follow different strategies and have a different definition of what it means to preserve the relevant information. While PCA created a plot that preserves the global relationship between the samples, t-SNE arranged the samples in localized clusters.</p>
+<p>The remarkable thing here is that these methods did not know about the fact that the images displayed different, distinct digits (i.e., they did not use the label information), yet t-SNE grouped images showing the same number closer together. From such a plot we can already see that if we were to solve the corresponding classification problem (i.e., predict which digit is shown in an image), this task should be fairly easy, since even an unsupervised learning algorithm that did not use the label information showed that images displaying the same number are very similar to each other and can easily be distinguished from images showing different numbers. Or conversely, if our classification model performed poorly on this task, we would know that we have a bug somewhere, since apparently the relevant information is present in the features to solve this task.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Please note that even though t-SNE seems to create clusters here, it is <em>not a clustering algorithm</em>. As a dimensionality reduction algorithm, t-SNE produces a set of new 2D coordinates for our samples and when plotting the samples at these coordinates, they happen to be arranged in clusters. However, a clustering algorithm instead outputs cluster indices, that state which samples were assigned to the same group (which could then be used to color the points in the 2D coordinate plot).</p>
+</div>
+</div>
+<section id="principal-component-analysis-pca" class="level3">
+<h3 class="anchored" data-anchor-id="principal-component-analysis-pca">Principal Component Analysis (PCA)</h3>
+<p><strong>Useful for:</strong></p>
+<ul>
+<li>General dimensionality reduction &amp; noise reduction.<br>
+⇒ The transformed data is sometimes used as input for other algorithms instead of the original features.</li>
+</ul>
+<p><strong>Main idea:</strong><br>
+Compute the eigendecomposition of the dataset’s covariance matrix, a symmetric matrix of size <span class="math inline">\(d \times d\)</span> (with <em>d</em> = number of original input features), which states how strongly any two features co-vary, i.e., how related they are, similar to the linear correlation between two features.<br>
+By computing the eigenvalues and -vectors of this matrix, the main directions of variance in the data are identified. These are the principle components and can be expressed as linear combinations of the original features. We then reorient the data along these new axis.<br>
+Have a look at <a href="https://www.youtube.com/watch?v=5HNr_j6LmPc">this video</a> for a more detailed explanation.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/03_unsupervised/pca.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>In this example the original data only has two features anyways, so a dimensionality reduction does not make much sense, but it nicely illustrates how the PCA algorithm works: The main direction of variance is selected as the first new dimension, while the direction with the next strongest variation (orthogonal to the first) is the second new dimension. These new dimensions are the principle components. The data is then be rotated accordingly, such that the amount of variance in the data, i.e., the information content and therefore also the eigenvalue associated with the principle components, decreases from the first to the last of these new dimensions.</figcaption>
+</figure>
+</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><u>Important Parameters:</u></p>
+<ul>
+<li><code>n_components</code>: New dimensionality of data; this can be as many as the original features (or the rank of the feature matrix).</li>
+</ul>
+<p><strong>Pros:</strong></p>
+<ul>
+<li><p>Linear algebra based: solution is a global optima, i.e., when we compute PCA multiple times on the same dataset we’ll always get the same results.</p></li>
+<li><p>Know how much information is retained in the low dimensional representation; stored in the attributes <code>explained_variance_ratio_</code> or <code>singular_values_</code> / <code>eigenvalues_</code> (= eigenvalues of the respective PCs):<br>
+The principle components are always ordered by the magnitude of their corresponding eigenvalues (largest first);<br>
+When using the first <em>k</em> components with eigenvalues <span class="math inline">\(\lambda_i\)</span>, the amount of variance that is preserved is: <span class="math inline">\(\frac{\sum_{i=1}^k \lambda_i}{\sum_{i=1}^d \lambda_i}\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If the intrinsic dimensionality of the dataset is lower than the original number features, e.g., because some features were strongly correlated, then the last few eigenvalues will be zeros. You can also plot the <a href="https://en.wikipedia.org/wiki/Scree_plot">eigenvalue spectrum</a>, i.e., the eigenvalues ordered by their magnitude, to see how many dimensions you might want to keep, i.e., where this curve starts to flatten out.</p>
+</div>
+</div></li>
+</ul>
+<p><strong>Careful:</strong></p>
+<ul>
+<li><p>Computationally expensive for many (&gt; 10k) features.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you have fewer data points than features, consider using Kernel PCA instead: This variant of the PCA algorithm computes the eigendecomposition of a similarity matrix, which is <span class="math inline">\(n \times n\)</span> (with <em>n</em> = number of data points), i.e., when <em>n</em> &lt; <em>d</em> this matrix will be smaller than the covariance matrix and therefore computing its eigendecomposition will be faster.</p>
+</div>
+</div></li>
+<li><p>Outliers can heavily skew the results, because a few points away from the center can introduce a large variance in that direction.</p></li>
+</ul>
+</section>
+<section id="sec-t-sne" class="level3">
+<h3 class="anchored" data-anchor-id="sec-t-sne">t-SNE</h3>
+<p><strong>Useful for:</strong></p>
+<ul>
+<li>Visualizing data in 2D – but please do not use the transformed data as input for other algorithms.</li>
+</ul>
+<p><strong>Main idea:</strong><br>
+Randomly initialize the points in 2D and move them around until their distances in 2D match the original distances in the high dimensional input space, i.e., until the points that were similar to each other in the original high dimensional space are located close together in the new 2D map of the dataset.<br>
+→ Have a look at the animations in this great blog article to see <a href="https://distill.pub/2016/misread-tsne/">t-SNE in action</a>!</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.manifold <span class="im">import</span> TSNE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><u>Important Parameters:</u></p>
+<ul>
+<li><code>perplexity</code>: Roughly: how many nearest neighbors a point is expected to have. Have a look at the corresponding section in the blog article linked above for an example. However, what an appropriate value for this parameter is depends on the size and diversity of the dataset, e.g., if a dataset consists of 1000 images with 10 classes, then a perplexity of 5 might be a reasonable choice, while for a dataset with 1 million samples, 500 could be a better value.<br>
+<span class="small-text">The original paper says values up to 50 work well, but in 2003 “big data” also wasn’t a buzzword yet ;-)</span></li>
+<li><code>metric</code>: How to compute the distances in the original high dimensional input space, which tells the model which points should be close together in the 2D map.</li>
+</ul>
+<p><strong>Pros:</strong></p>
+<ul>
+<li>Very nice visualizations.</li>
+</ul>
+<p><strong>Careful:</strong></p>
+<ul>
+<li>Algorithm can get stuck in a local optimum, e.g., with some points trapped between clusters.</li>
+<li>Selection of distance metric for heterogeneous data ⇒ normalize!</li>
+</ul>
+<p>→ Also check out the <a href="https://umap-learn.readthedocs.io/en/latest/"><code>umap</code></a> and <a href="https://github.com/YingfanWang/PaCMAP"><code>pacmap</code></a> libraries!</p>
+</section>
+</section>
+<section id="sec-outliers" class="level2">
+<h2 class="anchored" data-anchor-id="sec-outliers">Outlier / Anomaly Detection</h2>
+<p>Next up on our list of ML tools is anomaly or outlier detection:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_ml_overview/ml_algorithms_outliers.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+<p><strong>Useful for:</strong></p>
+<ul>
+<li>Detecting anomalies for monitoring purposes, e.g., machine failures or fraudulent credit card transactions.</li>
+<li>Removing outliers from the dataset to improve the performance of other algorithms.</li>
+</ul>
+<p><u>Things to consider when trying to remove outliers or detect anomalies:</u></p>
+<ul>
+<li>Does the dataset consist of <strong>independent data points</strong> or <strong>time series data</strong> with dependencies?</li>
+<li>Are you trying to detect
+<ul>
+<li><strong>outliers in individual dimensions</strong>? For example, in time series data we might not see a failure in all sensors simultaneously, but only one sensor acts up spontaneously, i.e., shows a value very different from the previous time point, which would be enough to rule this time point an anomaly irrespective of the values of the other sensors.</li>
+<li><strong>multidimensional outlier patterns</strong>? Individual feature values of independent data points might not seem anomalous by themselves, only when considered in combination with the data point’s other feature values. For example, a 35<span class="math inline">\(m^2\)</span> apartment could be a nice studio, but if this apartment supposedly has 5 bedrooms, then something is off.</li>
+</ul></li>
+<li>Are you expecting a few <strong>individual outliers</strong> or <strong>clusters of outliers</strong>? The latter is especially common in time series data, where, e.g., a machine might experience an issue for several minutes or even hours before the signals look normal again. Clusters of outliers are more tricky to detect, especially if the data also contains other ‘legitimate’ clusters of normal points. Subject matter expertise is key here!</li>
+<li>Do you have any <strong>labels</strong> available? While we might not know what the different kinds of (future) anomalies look like, maybe we <em>do</em> know what normal data points look like, which is important information that we can use to check how far new points deviate from these normal points, also called novelty detection.</li>
+</ul>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Know your data – are missing values marked as NaNs (“Not a Number”) or set to some ‘unreasonable’ high or low value?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Removing outlier samples from a dataset is often a necessary cleaning step, e.g., to obtain better prediction models. However, we should always be able to explain <em>why</em> we removed these points, as they could also be interesting edge cases.<br>
+Try to remove as many outliers as possible with manually crafted rules (e.g., “when this sensor is 0, the machine is off and the points can be disregarded”), especially when the dataset contains clusters of outliers, which are harder to detect with data-driven methods.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Please note that some of the data points a prediction model encounters in production might be outliers as well. Therefore, new data needs to be screened for outliers as well, as otherwise these points would force the model to extrapolate beyond the training domain.</p>
+</div>
+</div>
+<section id="different-methods-for-outlieranomaly-detection" class="level4 custom-gray-block">
+<h4 class="anchored" data-anchor-id="different-methods-for-outlieranomaly-detection">Different methods for outlier/anomaly detection</h4>
+<p>There is no one-size-fits-all solution, but depending on the characteristics of the dataset you might want to experiment with some of these approaches:</p>
+<ul>
+<li>Detect outliers in individual feature dimensions:
+<ul>
+<li>Compute the <a href="https://en.wikipedia.org/wiki/Interquartile_range">interquartile range (IQR)</a>, i.e., the difference between the 75th and 25th percentiles of the data, as <span class="math inline">\(\text{IQR} = Q_3 - Q_1\)</span>, where <span class="math inline">\(Q_1\)</span> and <span class="math inline">\(Q_3\)</span> are the lower and upper quartiles. All data points with values outside of the range <span class="math inline">\([Q_1-1.5\cdot \text{IQR},\; Q_3+1.5\cdot \text{IQR}]\)</span> are considered outliers.</li>
+</ul></li>
+<li>Detect multidimensional outlier patterns, especially in datasets with independent data points (see also <a href="https://scikit-learn.org/stable/modules/outlier_detection.html">sklearn user guide</a>):
+<ul>
+<li><span class="math inline">\(\gamma\)</span>-index (see below)</li>
+<li>Local Outlier Factor (from <code>sklearn</code>; similar to the <span class="math inline">\(\gamma\)</span>-index)</li>
+<li>Isolation Forest (from <code>sklearn</code>; read about <a href="05_supervised_models.html#sec-decision-trees">decision trees</a> and <a href="05_supervised_models.html#sec-ensemble-methods">random forests</a> first)</li>
+<li>One-class SVM (from <code>sklearn</code>; read about <a href="05_supervised_models.html#sec-kernel-methods">kernel methods</a> and normal SVMs first)</li>
+<li>DBSCAN (a <a href="#sec-clustering">clustering</a> algorithm that allows for noise, which would be considered outliers)</li>
+</ul></li>
+<li>Compare actual data points to denoised samples or predicted values:
+<ul>
+<li>Use (kernel) PCA or an auto-encoder neural network architecture to first compress a sample and then reconstruct it in order to remove noise. If the denoised data point deviates a lot from the original sample, it is probably an anomaly.</li>
+<li>For time series data: model the expected course of an individual time series, e.g., using a moving window average or an ARIMA model (see section on <a href="07_advanced_topics.html#sec-time-series-forecasting">time series forecasting</a> for more details), and then compare how much a time point deviates from this predicted value.</li>
+</ul></li>
+<li>Get creative: you know your data best – define rules and custom anomaly KPIs based on your domain knowledge, e.g., set thresholds for what would be considered unrealistic feature values etc.</li>
+</ul>
+</section>
+<section id="gamma-index" class="level3">
+<h3 class="anchored" data-anchor-id="gamma-index"><span class="math inline">\(\gamma\)</span>-index</h3>
+<div class="small-text">
+<p>Harmeling, Stefan, et al.&nbsp;“From outliers to prototypes: ordering data.” <em>Neurocomputing</em> 69.13-15 (2006): 1608-1618.</p>
+</div>
+<p><strong>Main idea:</strong><br>
+Compute the average distance of a point to its <em>k</em> nearest neighbors:<br>
+→ Points with a large average distance are more likely to be outliers.<br>
+⇒ Set a threshold for the average distance when a point is considered an outlier.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/03_unsupervised/outliers.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption>This toy example in 2D, but of course the Euclidean distance between the points can also be computed in higher dimensional features spaces.</figcaption>
+</figure>
+</div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> pairwise_distances</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> gammaidx(X, k):</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">    Inputs:</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">        - X [np.array]: n samples x d features input matrix</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">        - k [int]: number of nearest neighbors to consider</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">        - gamma_index [np.array]: vector of length n with gamma index for each sample</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># compute n x n Euclidean distance matrix</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    D <span class="op">=</span> pairwise_distances(X, metric<span class="op">=</span><span class="st">'euclidean'</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># sort the entries of each row, such that the 1st column is 0 (distance of point to itself),</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># the following columns are distances to the closest nearest neighbors (i.e., smallest values first)</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    Ds <span class="op">=</span> np.sort(D, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># compute mean distance to the k nearest neighbors of every point</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    gamma_index <span class="op">=</span> np.mean(Ds[:, <span class="dv">1</span>:(k<span class="op">+</span><span class="dv">1</span>)], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> gamma_index</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co"># or more efficiantly with the NearestNeighbors class</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> NearestNeighbors</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> gammaidx_fast(X, k):</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co">    Inputs:</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co">        - X [np.array]: n samples x d features input matrix</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="co">        - k [int]: number of nearest neighbors to consider</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="co">        - gamma_index [np.array]: vector of length n with gamma index for each sample</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># initialize and fit nearest neighbors search</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    nn <span class="op">=</span> NearestNeighbors(n_neighbors<span class="op">=</span>k).fit(X)</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># compute mean distance to the k nearest neighbors of every point (ignoring the point itself)</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># (nn.kneighbors returns a tuple of distances and indices of nearest neighbors)</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    gamma_index <span class="op">=</span> np.mean(nn.kneighbors()[<span class="dv">0</span>], axis<span class="op">=</span><span class="dv">1</span>)  <span class="co"># for new points: nn.kneighbors(X_test)</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> gamma_index</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Pros:</strong></p>
+<ul>
+<li>Conceptually very simple and easy to interpret.</li>
+</ul>
+<p><strong>Careful:</strong></p>
+<ul>
+<li>Computationally expensive for large datasets (distance matrix: <span class="math inline">\(\mathcal{O}(n^2)\)</span>) → compute distances to a random subsample of the dataset or to a smaller set of known non-anomalous points instead.</li>
+<li>Normalize heterogeneous datasets before computing distances!</li>
+<li>Know your data: does the dataset contain larger clusters of outliers? → <em>k</em> needs to be large enough such that a tight cluster of outliers is not mistaken as prototypical data points.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Extension for time series data: don’t identify the <em>k</em> nearest neighbors of a sample based on the distance of the data points in the feature space, but take the neighboring time points instead.</p>
+</div>
+</div>
+<div class="custom-gray-block">
+<p><strong>You’ve found an outlier – now what?</strong></p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/OYwq0MlY11g" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+</section>
+</section>
+<section id="sec-clustering" class="level2">
+<h2 class="anchored" data-anchor-id="sec-clustering">Clustering</h2>
+<p>The last category of unsupervised learning algorithms is clustering:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_ml_overview/ml_algorithms_clustering.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+<p><strong>Useful for:</strong></p>
+<ul>
+<li>Identifying naturally occurring groups in the data (e.g., for customer segmentation).</li>
+</ul>
+<p>There exist <a href="https://scikit-learn.org/stable/modules/clustering.html">quite a lot of different clustering algorithms</a> and we’ll only present two with different ideas here.</p>
+<div class="small-text">
+<p>When you look at the linked sklearn examples, please note that even though other clustering algorithms might seem to perform very well on fancy toy datasets, data in reality is seldom arranged in two concentric circles, and on real-world datasets the k-means clustering algorithm is often a robust choice.</p>
+</div>
+<section id="k-means-clustering" class="level3">
+<h3 class="anchored" data-anchor-id="k-means-clustering"><em>k</em>-means clustering</h3>
+<p><strong>Main idea:</strong></p>
+<ol type="1">
+<li>Randomly place <em>k</em> cluster centers (where <em>k</em> is a hyperparameter set by the user);</li>
+<li>Assign each data point to its closest cluster center;</li>
+<li>Update cluster centers as the mean of the assigned data points;</li>
+<li>Repeat steps 2-3 until convergence.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/03_unsupervised/kmeans.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Please note that even though in these pictures the data is depicted in 2D, of course all these methods also work in high dimensional spaces!</figcaption>
+</figure>
+</div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><u>Important Parameters:</u></p>
+<ul>
+<li><code>n_clusters</code>: How many clusters (<em>k</em>) the algorithm should find.</li>
+</ul>
+<p><strong>Pros:</strong></p>
+<ul>
+<li>Fast.</li>
+<li>Usually good results on real world datasets.</li>
+</ul>
+<p><strong>Careful:</strong></p>
+<ul>
+<li>Depends on random initialization → solution is local optimum, but usually not problematic in practice due to multiple restarts.</li>
+<li>Assumes spherical clusters.</li>
+<li>Need to guess the number of clusters. But this can be done with a heuristic and sometimes we also need to find a fixed number of clusters, e.g., if we only have the budged for three different marketing initiatives, we want to assign our customers to exactly three groups.</li>
+</ul>
+</section>
+<section id="dbscan" class="level3">
+<h3 class="anchored" data-anchor-id="dbscan">DBSCAN</h3>
+<p><strong>Main idea:</strong><br>
+Find ‘core samples’ in dense areas of the data and then expand the clusters by iteratively including points with a distance &lt; <code>eps</code>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/03_unsupervised/dbscan.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> DBSCAN</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><u>Important Parameters:</u></p>
+<ul>
+<li><code>eps</code>: Maximum neighborhood distance of two samples.</li>
+<li><code>metric</code>: How to compute the distance in the input feature space.</li>
+</ul>
+<p><strong>Pros:</strong></p>
+<ul>
+<li>Allows for noise ⇒ can also be used to detect outliers.</li>
+<li>No need to guess the number of clusters.</li>
+</ul>
+<p><strong>Careful:</strong></p>
+<ul>
+<li>Very dependent on distance measure: may be tricky to get good results for heterogeneous data even after normalization (but: try on text data).</li>
+</ul>
+<p>→ Also check out the <a href="https://hdbscan.readthedocs.io/en/latest/"><code>hdbscan</code></a> library!</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script type="text/javascript"> // go once over all images and transform the percentage width into pixels relative to original body size
+  const bodyWidth = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--custom-body-width')); // Get CSS variable
+  document.querySelectorAll('.quarto-figure img').forEach((img) => {
+    const styleWidth = img.getAttribute('style').match(/width:\s*([\d.]+)%/); // Extract percentage
+    if (styleWidth) {
+      const percentage = parseFloat(styleWidth[1]) / 100;
+      img.style.width = `${bodyWidth * percentage}px`; // Apply calculated width
+    }
+  });
+</script>
+
+<style type="text/css">
+#footer {
+  font-size: 80%; /* Makes the font 70% smaller */
+  border-top: 1px solid #ccc; /* Adds a horizontal line above the footer */
+  padding-top: 10px; /* Adds some spacing above the footer content */
+}
+</style>
+
+<!-- FOOTER  -->
+<div id="footer" class="outer">
+  <footer class="inner">
+    <p><b>Book/Course Feedback: </b> <a href="https://forms.gle/Ccv5h5zQxwPjWtCS7" target="_blank" rel="nofollow">Full Feedback Survey</a> or <a href="https://forms.gle/qK8T5ALzgpiZaxd49" target="_blank" rel="nofollow">Short Comment</a><br></p>
+
+    <p>Find me on <a href="https://github.com/cod3licious/" target="_blank" rel="nofollow">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/" target="_blank" rel="nofollow">LinkedIn</a><br>
+      <a href="https://franziskahorn.de/">Home</a> ~ <a href="mailto:hey@franziskahorn.de?Subject=Book%20Feedback" target="_blank" rel="nofollow">Contact</a> ~ <a href="https://franziskahorn.de/impressum.html">Impressum</a></p>
+
+      <!-- CC license -->
+   <p xmlns:cc="http://creativecommons.org/ns#">This work is licensed under <a href="https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY 4.0<img style="height:16px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:16px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""></a></p>
+  </footer>
+</div>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./02_data.html" class="pagination-link" aria-label="Data Analysis &amp; Preprocessing">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Data Analysis &amp; Preprocessing</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./04_supervised.html" class="pagination-link" aria-label="Supervised Learning Basics">
+        <span class="nav-page-text"><span class="chapter-title">Supervised Learning Basics</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

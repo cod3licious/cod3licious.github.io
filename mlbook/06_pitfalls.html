@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.39">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Avoiding Common Pitfalls – A Practitioner's Guide to Machine Learning</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./07_advanced_topics.html" rel="next">
+<link href="./05_supervised_models.html" rel="prev">
+<link href="./favicon.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-37b241f53b32a5ad598e4053e71b073f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06_pitfalls.html"><span class="chapter-title">Avoiding Common Pitfalls</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">A Practitioner’s Guide to Machine Learning</a> 
+        <div class="sidebar-tools-main">
+    <a href="./A-Practitioner-s-Guide-to-Machine-Learning.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01a_intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01b_basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">The Basics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01c_python.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">ML with Python</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Analysis &amp; Preprocessing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_unsupervised.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Unsupervised Learning</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_supervised.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Supervised Learning Basics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_supervised_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Supervised Learning Models</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_pitfalls.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Avoiding Common Pitfalls</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07_advanced_topics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Advanced Topics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08_conclusion.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Conclusion</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-pitfall-generalize" id="toc-sec-pitfall-generalize" class="nav-link active" data-scroll-target="#sec-pitfall-generalize">Model does not generalize</a></li>
+  <li><a href="#sec-pitfall-spurious" id="toc-sec-pitfall-spurious" class="nav-link" data-scroll-target="#sec-pitfall-spurious">Model abuses spurious correlations</a>
+  <ul class="collapse">
+  <li><a href="#learning-causal-models" id="toc-learning-causal-models" class="nav-link" data-scroll-target="#learning-causal-models">Learning causal models</a></li>
+  </ul></li>
+  <li><a href="#sec-pitfall-biased" id="toc-sec-pitfall-biased" class="nav-link" data-scroll-target="#sec-pitfall-biased">Model discriminates</a></li>
+  <li><a href="#sec-interpretability" id="toc-sec-interpretability" class="nav-link" data-scroll-target="#sec-interpretability">Explainability &amp; Interpretable ML</a>
+  <ul class="collapse">
+  <li><a href="#explaining-decision-trees-random-forests" id="toc-explaining-decision-trees-random-forests" class="nav-link" data-scroll-target="#explaining-decision-trees-random-forests">Explaining Decision Trees (&amp; Random Forests)</a></li>
+  <li><a href="#explaining-linear-models-neural-networks" id="toc-explaining-linear-models-neural-networks" class="nav-link" data-scroll-target="#explaining-linear-models-neural-networks">Explaining Linear Models (&amp; Neural Networks)</a></li>
+  <li><a href="#global-model-agnostic-permutation-feature-importance" id="toc-global-model-agnostic-permutation-feature-importance" class="nav-link" data-scroll-target="#global-model-agnostic-permutation-feature-importance">[Global] Model-agnostic: permutation feature importance</a></li>
+  <li><a href="#global-model-agnostic-influence-of-individual-features-on-prediction" id="toc-global-model-agnostic-influence-of-individual-features-on-prediction" class="nav-link" data-scroll-target="#global-model-agnostic-influence-of-individual-features-on-prediction">[Global] Model-agnostic: influence of individual features on prediction</a></li>
+  <li><a href="#local-model-agnostic-local-interpretable-model-agnostic-explanations-lime" id="toc-local-model-agnostic-local-interpretable-model-agnostic-explanations-lime" class="nav-link" data-scroll-target="#local-model-agnostic-local-interpretable-model-agnostic-explanations-lime">[Local] Model-agnostic: <em>Local Interpretable Model-agnostic Explanations</em> (LIME)</a></li>
+  <li><a href="#example-based-explanations" id="toc-example-based-explanations" class="nav-link" data-scroll-target="#example-based-explanations">Example-Based Explanations</a></li>
+  </ul></li>
+  <li><a href="#sec-pitfall-drifts" id="toc-sec-pitfall-drifts" class="nav-link" data-scroll-target="#sec-pitfall-drifts">Data &amp; Concept Drifts</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-pitfalls" class="quarto-section-identifier"><span class="chapter-title">Avoiding Common Pitfalls</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<blockquote class="blockquote">
+<p>All models are wrong, but some are useful.<br>
+– <em>George E. P. Box</em></p>
+</blockquote>
+<p>The above quote is also nicely exemplified by <a href="https://xkcd.com/2048/">this xkcd comic</a>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_causality/xkcd_curve_fitting.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+<p>A supervised learning model tries to infer the relationship between some inputs and outputs from the given exemplary data points. What kind of relation will be found is largely determined by the chosen model type and its internal optimization algorithm, however, there is a lot we can (and should) do to make sure what the algorithm comes up with is not blatantly wrong.</p>
+<p><strong>What do we want?</strong><br>
+A model that …</p>
+<ul>
+<li>… makes accurate predictions</li>
+<li>… for new data points</li>
+<li>… for the right reasons</li>
+<li>… even when the world keeps on changing.</li>
+</ul>
+<p><strong>What can go wrong?</strong><br>
+</p>
+<ul>
+<li>Evaluating the model with an inappropriate evaluation metric (e.g., accuracy instead of balanced accuracy for a classification problem with an unequal class distribution), thereby not noticing the subpar performance of a model (e.g., compared to a simple baseline).</li>
+<li>Using a model that can not capture the ‘input → output’ relationship (due to underfitting) and does not generate useful predictions.</li>
+<li>Using a model that overfit on the training data and therefore does not generalize to new data points.</li>
+<li>Using a model that abuses spurious correlations.</li>
+<li>Using a model that discriminates.</li>
+<li>Not monitoring and retraining the model regularly on new data.</li>
+</ul>
+<p>Below you find a quick summary of what you can do to avoid these pitfalls and we’ll discuss most these points in more detail in the following sections.</p>
+<div class="custom-gray-block">
+<section id="before-training-a-model" class="level4">
+<h4 class="anchored" data-anchor-id="before-training-a-model">Before training a model</h4>
+<ul>
+<li>Select the right inputs: ask a subject matter expert which variables could have a causal influence on the output; possibly compute additional, more informative features from the original measurements (→ <a href="02_data.html#sec-feat-eng">feature engineering</a>).</li>
+<li>Sanity check: Does the dataset contain samples with the same inputs but different outputs? ⇒ Some important features might be missing or the targets are very noisy, e.g., due to inconsistent annotations – <a href="02_data.html#sec-data-garbage">fix this first!</a></li>
+<li>Try a simple model (linear model or decision tree) – this can serve as a reasonable baseline when experimenting with more complex models.</li>
+<li>Think about the structure of the problem and what type of model might be appropriate to learn the presumed ‘input → output’ relationship. For example, if the problem is clearly nonlinear, the chosen model type also needs to be complex enough to at least in principle be able to pick up on this relation (i.e., such that the model does not underfit, see below). A lot of domain knowledge can also be put into the design of neural network architectures.</li>
+<li>Make sure the data satisfies the model’s assumptions ⇒ for pretty much all models except decision trees and models based on decision trees, like random forests, the data should be approximately normally distributed.</li>
+<li>Make sure you’ve set aside a representative test set to evaluate the final model and possibly a validation set for model selection and hyperparameter tuning.</li>
+</ul>
+</section>
+<section id="after-the-model-was-trained" class="level4">
+<h4 class="anchored" data-anchor-id="after-the-model-was-trained">After the model was trained</h4>
+<ul>
+<li>Evaluate the model with a meaningful <a href="04_supervised.html#sec-model-eval">evaluation metric</a>, especially when the classes in the dataset are not distributed evenly (→ balanced accuracy).</li>
+<li>Check that the model can interpolate, i.e., that it generalizes to unseen data points <em>from the same distribution as the training set</em> and does not <a href="#sec-pitfall-generalize">over- or underfit</a>. Please note that this does <em>not</em> ensure that it can also extrapolate, i.e., that it has learned the true <a href="#sec-pitfall-spurious">causal relation</a> between inputs and outputs and can generate correct predictions for data points outside of the training domain!</li>
+<li>Carefully analyze the model’s prediction errors to check for systematic errors, which can indicate that the data violates your initial assumptions. For example, in a classification task the performance for all classes should be approximately the same, while in a regression task the <a href="https://statisticsbyjim.com/regression/check-residual-plots-regression-analysis/">residuals</a> should be <a href="https://www4.stat.ncsu.edu/~stefanski/NSF_Supported/Hidden_Images/Residual_Surrealism_TAS_2007.pdf">independent</a>.</li>
+<li>Verify that the model does not <a href="#sec-pitfall-biased">discriminate</a>. Due to the large quantities of data used to train ML models, it is not always possible to ensure that the training data does not contain any systematic biases (e.g., ethnicity/gender stereotypes) that a model might pick up on, but it is important to test the model on a controlled test set and individual data slices to catch any discrimination before the model is deployed in production.</li>
+<li>Interpret the model and <a href="#sec-interpretability">explain its predictions</a>: Does it use the features you or a subject matter expert expected it to use or does it make predictions based on any spurious correlations?</li>
+<li>If necessary, use model editing or assertions to fix incorrect model predictions. For example, you can manually alter the rules learned by a decision tree or implement additional business rules that override model predictions or act as sanity checks (e.g., a predicted age should never be negative).</li>
+<li>Monitor the model’s performance as it is running in production and watch out for <a href="#sec-pitfall-drifts">data &amp; concept drifts</a>.</li>
+</ul>
+<p><em>Please note that these steps represent an iterative workflow, i.e., after training some model and analyzing its performance one often goes back to the beginning and, e.g., selects different features or tries a more complex model to improve the performance.</em></p>
+</section>
+</div>
+<section id="sec-pitfall-generalize" class="level2">
+<h2 class="anchored" data-anchor-id="sec-pitfall-generalize">Model does not generalize</h2>
+<p>We want a model that captures the ‘input → output’ relationship in the data and is capable of interpolating, i.e., we need to check:<br>
+<strong>Does the model generate reliable predictions for new data points from the same distribution as the training set?</strong></p>
+<p>While this does not ensure that the model has actually learned any true causal relationship between inputs and outputs and can extrapolate beyond the training domain (we’ll discuss this in the next section), at least we can be reasonably sure that the model will generate reliable predictions for data points similar to those used for training the model. If this isn’t given, the model is not only wrong, it’s also useless.</p>
+<section id="over--underfitting" class="level4">
+<h4 class="anchored" data-anchor-id="over--underfitting">Over- &amp; Underfitting</h4>
+<p>So, why does a model make mistakes on new data points? A poor performance on the test set can have two reasons: overfitting or underfitting.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_evaluation/overunderfitting.png" class="img-fluid figure-img" style="width:85.0%"></p>
+<figcaption>If we only looked at the test errors for the different models shown here, we could conclude that the model on the left (overfitting) and the one on the right (underfitting) are equally wrong. While this is true in some sense, the test error alone does not tell us <em>why</em> the models are wrong or how we could improve their performance. As we can see, the two models make mistakes on the test set for completely different reasons: The model that overfits, memorized the training samples and is not able to generalize to new data points, while the model that underfits is too simple to capture the relationship between the inputs and outputs in general.</figcaption>
+</figure>
+</div>
+<p>These two scenarios require vastly different approaches to improve the model’s performance.</p>
+<p>Since most datasets have lots of input variables, we can’t just plot the model like we did above to see if it is over- or underfitting. Instead we need to compute the model’s prediction error with a meaningful evaluation metric for both the training and the test set and compare the two to see if we’re dealing with over- or underfitting:</p>
+<p><strong>Overfitting:</strong> great training performance, bad on test set<br>
+<strong>Underfitting:</strong> poor training AND test performance</p>
+<p>Depending on whether a model over- or underfits, different measures can be taken to improve its performance:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_evaluation/overunderfitting_errors4.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:65.0%"></p>
+</figure>
+</div>
+<p>However, it is unrealistic to expect a model to have a perfect performance, as some tasks are just hard, for example, because the data is very noisy.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Always look at the data! Is there a pattern among wrong predictions, e.g., is there a discrepancy between the performance for different classes or do the wrongly predicted points have something else in common? Could some additional preprocessing steps help to fix errors for some type of data points (e.g., blurry images)?</p>
+</div>
+</div>
+<p>Over- or underfitting is (partly) due to the model’s complexity:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_evaluation/modelcomplex3.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption>While a simple model (e.g., a linear model) has a high bias and might therefore underfit the data, a more complex model (e.g., a deep neural network) has high variance and is therefore at risk of overfitting the training set. Often, it makes sense to use a more complex model, but then reduce its variance through explicit (e.g., L2-regularization) and/or implicit regularization (e.g., data augmentation). Also, please note the <a href="https://openai.com/blog/deep-double-descent/">double descent phenomenon</a> for neural networks, which often show a good generalization performance even if they are vastly over-parametrized.</figcaption>
+</figure>
+</div>
+<p>In general, one should first try to decrease the model’s bias, i.e., find a model that is complex enough and at least in principle capable of solving the task, since the error on the training data is the lower limit for the error on the test set. Then make sure the model doesn’t overfit, i.e., generalizes to new data points (what we ultimately care about).</p>
+</section>
+<section id="will-more-data-help" class="level4 custom-gray-block">
+<h4 class="anchored" data-anchor-id="will-more-data-help">Will more data help?</h4>
+<p>With little data, we risk overfitting. But is it worth getting more data?<br>
+→ check <em>learning curves</em>, i.e., how the performance improves when using more training samples:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_evaluation/learning_curve.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%"></p>
+</figure>
+</div>
+<p>Instead of <em>more</em>, it might also be helpful to get <em>cleaner</em> data, i.e., with less ambiguous labels! (See <a href="https://youtu.be/06-AZXmwHjo">talk by Andrew Ng</a>.)</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For some tasks it is also possible to generate additional training samples programmatically through <strong>data augmentation</strong>, i.e., by modifying the original data points. For example, an image of an animal can be rotated or flipped without affecting its label. In this way we can easily increase the size of the training set without the need for human labeling. Furthermore, this makes our model more robust to realistic variations in the data. However, we need to be careful to not create garbage samples, i.e., a human must still be able of recognizing the objects in the images, for example.</p>
+</div>
+</div>
+</section>
+<section id="feature-selection" class="level4">
+<h4 class="anchored" data-anchor-id="feature-selection">Feature Selection</h4>
+<p>In small datasets, some patterns can occur simply by chance (= <a href="https://www.tylervigen.com/spurious-correlations">spurious correlations</a>).<br>
+⇒ Exclude irrelevant features to avoid overfitting on the training data. This is especially important if the number of samples in the dataset is close to the number of features.</p>
+<p>Feature selection techniques are either</p>
+<ul>
+<li><strong>unsupervised</strong>, which means they only look at the features themselves, e.g., removing highly correlated/redundant features, or</li>
+<li><strong>supervised</strong>, which means they take into account the relationship between the features and target variable.</li>
+</ul>
+<p><u>Supervised Feature Selection Strategies:</u></p>
+<p><strong>1.) Univariate feature selection</strong><br>
+e.g., correlation between feature &amp; target</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.feature_selection <span class="im">import</span> SelectKBest</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Careful:</strong> This can lead to the inclusion of redundant features or the exclusion of features that might seem useless by themselves, but can be very informative when taken together with other features:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_explainability/features_informative4.png" class="img-fluid figure-img" style="width:65.0%"></p>
+<figcaption>Adapted from: Guyon, Isabelle, and André Elisseeff. “An introduction to variable and feature selection.” <em>Journal of Machine Learning Research</em> 3.Mar (2003): 1157-1182.</figcaption>
+</figure>
+</div>
+<p>Also, please note: if we were to reduce the dimensionality with PCA on these two datasets, for the plot on the right, the main direction of variance does not capture the class differences, i.e., while the second PC captures less variance overall, it capture the class-discriminative information that we care about.</p>
+<p>⇒ Better:</p>
+<p><strong>2.) Model-based feature selection</strong><br>
+select features based on <code>coef_</code> or <code>feature_importances_</code> attribute of trained model</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.feature_selection <span class="im">import</span> SelectFromModel</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>3.) Sequential feature selection</strong><br>
+greedy algorithm that iteratively includes/removes one feature at a time:</p>
+<ul>
+<li><u>forward selection:</u> start with no features, iteratively add best feature until the performance stops improving</li>
+<li><u>backward elimination:</u> start with all features, iteratively eliminate worst feature until the performance starts to deteriorate</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.feature_selection <span class="im">import</span> SequentialFeatureSelector</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><u>General rule</u>: Always remove truly redundant (i.e., 100% correlated) features, but otherwise if in doubt: keep all features.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>While feature selection can improve the performance, these automatic feature selection techniques will only select a subset of features that are good predictors of the target, i.e., highly correlated, not necessary variables that correspond to the true underlying causes, as we will discuss in the next section.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-pitfall-spurious" class="level2">
+<h2 class="anchored" data-anchor-id="sec-pitfall-spurious">Model abuses spurious correlations</h2>
+<p>By following the strategies outlined in the previous section, we can find a model that is good at interpolating, i.e., generating reliable predictions for new data points from the same distribution as the training set. However, this does not mean that the model actually picked up on the true causal relationship between the inputs and outputs!</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>ML models love to cheat &amp; take shortcuts! They will often pick up on <a href="https://www.tylervigen.com/spurious-correlations">spurious correlations</a> instead of learning the true causal relationships. This makes them vulnerable to adversarial attacks and data/domain shifts, which force the model to extrapolate instead of interpolate.</p>
+</div>
+</div>
+<p>Specifically, models that neither over- nor underfit, i.e., that perfectly capture the relation between inputs and outputs in the given samples, often still fail to extrapolate:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_causality/extrapolating_nn10.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption>These ten curves were generated by initializing the weights of a FFNN with one hidden layer of 20 units with a ReLU activation with ten different random seeds and then training the network on the data samples. While all these models generalize well on the known data distribution, they can’t produce correct predictions for data points outside of the training domain.</figcaption>
+</figure>
+</div>
+<section id="extrapolation-on-feature-combinations" class="level4 custom-gray-block">
+<h4 class="anchored" data-anchor-id="extrapolation-on-feature-combinations">Extrapolation on feature combinations</h4>
+<p>Please note that only because we might have sampled a large range of values for each individual feature, this does not necessary entail that we’ve also covered all relevant combinations of feature values:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_causality/extrapolate_sampling.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:25.0%"></p>
+</figure>
+</div>
+<p>If the two features and their effect on the target are independent of each other (e.g., <span class="math inline">\(y = ax_1 + bx_2\)</span>), this is not too dramatic, however, if these variables interact in some complicated nonlinear way, this might not be modeled correctly when relevant combinations of feature values weren’t sampled.</p>
+</section>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When deploying an ML system in production, you also need to replicate the preprocessing steps that were used to clean the training data. For example, if you removed outliers from the initial training set, you need to apply the same rules to sort out anomalies in the production data as well, since otherwise the ML model would be forced to extrapolate on these samples.</p>
+</div>
+</div>
+<p>When setting up a model, we always have to be clear about whether it is enough that the model is capable of interpolating or whether it might also need to extrapolate every once in a while.</p>
+<p>If the model will only be used to generate predictions for new data points from the same distribution as the original training samples and it is unlikely that any data drifts will occur, then a model that has a decent performance on a representative hold-out test set will be sufficient for the task. This might be the case when building a softsensor that just needs to construct a new signal from other fixed inputs in a tightly controlled loop.</p>
+<p>However, this assumption seldomly holds in practice and especially in safety-critical situations, such as image recognition in self-driving cars or at security checkpoints, it is vital that the model is robust and can not easily be fooled. Other use cases where it is important that the model picks up on meaningful causal relationships include using a model to identify root causes or generating counterfactual “what-if” forecasts, which also require extrapolation, e.g., when trying to simulate under which conditions a catastrophic event might occur without having observed one in the historical data.</p>
+<section id="a-correct-prediction-is-not-always-made-for-the-right-reasons" class="level4 custom-gray-block">
+<h4 class="anchored" data-anchor-id="a-correct-prediction-is-not-always-made-for-the-right-reasons">A correct prediction is not always made for the right reasons!</h4>
+<p>The graphic below is taken from a paper where the authors noticed that a fairly simple ML model (not a neural network) trained on a standard image classification dataset performed poorly for all ten classes in the dataset except one, horses. When they examined the dataset more closely and analyzed <em>why</em> the model predicted a certain class, i.e., which image features were used in the prediction (displayed as the heatmap on the right), they noticed that most of the pictures of horses in the dataset were taken by the same photographer and they all had a characteristic copyright notice in the lower left corner.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_explainability/analyzing_classifiers.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Lapuschkin, Sebastian, et al.&nbsp;“Analyzing classifiers: Fisher vectors and deep neural networks.” <em>IEEE Conference on Computer Vision and Pattern Recognition.</em> 2016.</figcaption>
+</figure>
+</div>
+<p>By relying on this artifact, the model could identify what it perceives as “horses” in this dataset with high accuracy – both in the training and the test set, which includes pictures from the same photographer. However, of course the model failed to learn what actually defines a horse and would not be able to extrapolate and achieve the same accuracy on other horse pictures without this copyright notice. Or, equally problematic, one could add such a copyright notice to a picture of another animal and suddenly the model would mistakenly classify this as a horse, too. This means, it is possible to purposefully trick the model, which is also called an “adversarial attack”.</p>
+</section>
+<p>This is by far not the only example where a model has “cheated” by exploiting spurious correlations in the training set. Another popular example: A dataset with images of dogs and wolves, where all wolves were photographed on snowy backgrounds and the dogs on grass or other non-white backgrounds. Models trained on such a dataset can show a good predictive performance without having learned the true causal relationship between the features and labels.</p>
+<p>To catch these kinds of mishaps, it is important to</p>
+<ol type="1">
+<li>critically examine the test set and hopefully notice any problematic patterns that could result in an overly optimistic performance estimate, and</li>
+<li><a href="#sec-interpretability"><strong>interpret the model and explain its predictions</strong></a> to see if it has focused on the features you (or a subject matter expert) would have expected (as they did in the paper above).</li>
+</ol>
+<div class="custom-gray-block">
+<section id="adversarial-attacks-fooling-ml-models-on-purpose" class="level4">
+<h4 class="anchored" data-anchor-id="adversarial-attacks-fooling-ml-models-on-purpose">Adversarial Attacks: Fooling ML models on purpose</h4>
+<p>An adversarial attack on an ML model is performed by asking the model to make a prediction for an input that was modified in such a way that a human is unaware of the change and would still arrive at a correct result, but the ML model changes its prediction to something else.</p>
+<p>For example, while an ML model can easily recognize the ‘Stop’ sign from the image on the left, the sign on the right is mistaken as a speed limit sign due to the strategically placed, inconspicuous stickers, which humans would just ignore:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_explainability/adversarial_attack2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:55.0%"></p>
+</figure>
+</div>
+<p>This happened because the model didn’t pick up on the true reasons humans identify a Stop sign as such, e.g., the octagonal form and the four white letters spelling ‘STOP’ on a red background. Instead it relied on less meaningful correlations to distinguish it from other traffic signs.<br>
+Convolutional neural networks (CNN), the type of neural net typically used for image classification tasks, rely a lot on local patterns. This is why they are often easily <a href="https://www.sciencemag.org/news/2018/07/turtle-or-rifle-hackers-easily-fool-ais-seeing-wrong-thing">fooled</a> by leaving the global shape of objects, which humans rely on for identification, intact and overlaying the images with specific textures or other high-frequency patterns to trick the model into predicting a different class.</p>
+</section>
+<section id="genai-adversarial-prompts" class="level4">
+<h4 class="anchored" data-anchor-id="genai-adversarial-prompts">GenAI &amp; Adversarial Prompts</h4>
+<p>Due to their complexity, it is particularly difficult to control the output of generative AI (GenAI) models such as ChatGPT. While they can be a useful tool in human-in-the-loop scenarios (e.g., to draft an email or write code snippets that are then checked by a human before they see the light of day), it is difficult to put the necessary guardrails in place to ensure the chatbot can’t be abused in the wild.</p>
+<p>A Chevrolet car dealer that tried to use ChatGPT in their customer support chat is just one of many examples where early GenAI applications yielded mixed results at best:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_explainability/adversarial_chatgpt.png" class="img-fluid figure-img" style="width:65.0%"></p>
+<figcaption>Screenshot: https://twitter.com/ChrisJBakke/status/1736533308849443121 (12.1.2024)</figcaption>
+</figure>
+</div>
+</section>
+</div>
+<section id="learning-causal-models" class="level3">
+<h3 class="anchored" data-anchor-id="learning-causal-models">Learning causal models</h3>
+<p>Finding robust causal models that capture the true ‘input → output’ relationship in the data is still <a href="https://bdtechtalks.com/2021/03/15/machine-learning-causality/">an active research area</a> and a lot harder than learning a model that “only” generalizes well to the test set.</p>
+<p>Specifically, this requires knowledge of two things:</p>
+<ul>
+<li><strong>Which input features should be included in the model</strong>, i.e., which variables have a causal impact on the target. In practice, this can be complicated by the fact that we might not be able to measure all of these variables directly and have to rely on proxy values.</li>
+<li><strong>What kind of model best captures the true causal relationship</strong>, e.g., if the relationship between inputs and target is nonlinear, then a linear model wont be enough. One possibility here is to introduce domain knowledge into the design of a neural network architecture.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_causality/extrapolating_nn10_sin.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption>Like in the initial example, these ten curves were generated by initializing the weights of a FFNN with one hidden layer of 20 units with a ReLU activation with ten different random seeds and then training the network on the data samples, only this time after the last layer a <span class="math inline">\(sin()\)</span> activation was applied to the output. By including domain knowledge, we get much closer to the true causal relationship and can extrapolate beyond the training domain (to some extent).</figcaption>
+</figure>
+</div>
+<div class="custom-gray-block">
+<div class="small-text">
+<p>The following example is adapted from: “Elements of Causal Inference” by Jonas Peters, Dominik Janzig, and Bernhard Schölkopf (2017).<br>
+See also Jonas Peters’ great <a href="https://www.youtube.com/watch?v=zvrcyqcN9Wo">lecture series on causality</a>. You can also play around with this example yourself in the <a href="https://github.com/cod3licious/ml_exercises/blob/main/notebooks/causal_model.ipynb">causal model notebook</a>.</p>
+</div>
+<section id="example-learning-a-causal-model" class="level4">
+<h4 class="anchored" data-anchor-id="example-learning-a-causal-model">Example: Learning a causal model</h4>
+<p>Assume this is the true <em>causal graph</em> of some process, where the nodes represent different variables and the edges specify their (linear) influence on one another:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_causality/causality_network.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:35.0%"></p>
+</figure>
+</div>
+<p>Please note that individual nodes in a causal graph can also represent hidden variables, i.e., process conditions that can not be directly observed, e.g., for which one might want to build a softsensor.</p>
+<p>Based on the above stated relationships, we can generate a dataset, where each variable additionally depends on an independent (w.r.t. the other variables) normally distributed noise component. This means for each sample some process conditions are set independently (<code>C</code> and <code>A</code>) while for others the value partially depends on the values already set for the other variables.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">20000</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span>              <span class="fl">1.0</span> <span class="op">*</span> np.random.randn(n)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span>              <span class="fl">0.8</span> <span class="op">*</span> np.random.randn(n)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> A          <span class="op">+</span> <span class="fl">0.1</span> <span class="op">*</span> np.random.randn(n)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> C <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> A  <span class="op">+</span> <span class="fl">0.2</span> <span class="op">*</span> np.random.randn(n)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>F <span class="op">=</span> <span class="dv">3</span> <span class="op">*</span> X      <span class="op">+</span> <span class="fl">0.8</span> <span class="op">*</span> np.random.randn(n)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span> <span class="op">-</span><span class="dv">2</span> <span class="op">*</span> X     <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> np.random.randn(n)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> D          <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> np.random.randn(n)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> K <span class="op">-</span> D  <span class="op">+</span> <span class="fl">0.2</span> <span class="op">*</span> np.random.randn(n)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>H <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> Y    <span class="op">+</span> <span class="fl">0.1</span> <span class="op">*</span> np.random.randn(n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Since the dependencies between the variables are linear, the optimal model type to learn any ‘input → output’ relation on this dataset is a linear regression model. The true coefficients that this model should find for one input variable are the values on the edges on the way from this variable’s node to the target node multiplied with each other, e.g., for <code>X</code> (input) on <code>Y</code> (target) this would be <code>-2</code> (from <code>X</code> to <code>D</code>) times <code>-1</code> (from <code>D</code> to <code>Y</code>), i.e., <code>2</code>.</p>
+<p>Depending on which variables we include as input features, the models is or isn’t able to learn the correct coefficients:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (1) missing relevant input feature K → wrong coefficient for X</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>R<span class="op">^</span><span class="dv">2</span> (train): <span class="fl">0.844</span><span class="op">;</span> (test): <span class="fl">0.848</span> ⇒ Y <span class="op">~</span>  <span class="fl">0.001</span> <span class="op">+</span> <span class="fl">1.285</span> <span class="op">*</span> X</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># (2) all the right input features → correct coefficients</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>R<span class="op">^</span><span class="dv">2</span> (train): <span class="fl">0.958</span><span class="op">;</span> (test): <span class="fl">0.959</span> ⇒ Y <span class="op">~</span>  <span class="fl">0.003</span> <span class="op">+</span> <span class="fl">2.003</span> <span class="op">*</span> X <span class="op">+</span> <span class="fl">2.010</span> <span class="op">*</span> K</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># (3) additional input feature D, which has a more direct influence on Y than X</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>R<span class="op">^</span><span class="dv">2</span> (train): <span class="fl">0.994</span><span class="op">;</span> (test): <span class="fl">0.994</span> ⇒ Y <span class="op">~</span> <span class="op">-</span><span class="fl">0.002</span> <span class="op">-</span> <span class="fl">0.015</span> <span class="op">*</span> X <span class="op">+</span> <span class="fl">1.998</span> <span class="op">*</span> K <span class="op">-</span> <span class="fl">1.007</span> <span class="op">*</span> D</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># (4) additional input feature H, which is dependent on (i.e., highly correlated with) Y</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>R<span class="op">^</span><span class="dv">2</span> (train): <span class="fl">0.995</span><span class="op">;</span> (test): <span class="fl">0.995</span> ⇒ Y <span class="op">~</span>  <span class="fl">0.001</span> <span class="op">+</span> <span class="fl">0.242</span> <span class="op">*</span> X <span class="op">+</span> <span class="fl">0.245</span> <span class="op">*</span> K <span class="op">+</span> <span class="fl">1.759</span> <span class="op">*</span> H</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># (5) additional input feature G that is not directly causal of Y, but dependent on D</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>R<span class="op">^</span><span class="dv">2</span> (train): <span class="fl">0.977</span><span class="op">;</span> (test): <span class="fl">0.976</span> ⇒ Y <span class="op">~</span>  <span class="fl">0.004</span> <span class="op">+</span> <span class="fl">0.978</span> <span class="op">*</span> X <span class="op">+</span> <span class="fl">2.002</span> <span class="op">*</span> K <span class="op">-</span> <span class="fl">0.510</span> <span class="op">*</span> G</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Often the best predictive model is not the true causal model (e.g., (4)) and especially regularized models, which try to explain the target with as few variables as possible, often choose variables dependent on the target (such as <code>H</code>) as the single best predictor instead of relying on multiple true causal influences (e.g., notice how <code>K</code> and <code>X</code> already have much lower coefficients in (4)).<br>
+But only the causal models are robust to data drifts and can extrapolate:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Changed equations to generate test data (notice larger noise component)</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> C <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> A  <span class="op">+</span> <span class="fl">2.0</span> <span class="op">*</span> np.random.randn(n)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>H <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> Y    <span class="op">+</span> <span class="fl">1.0</span> <span class="op">*</span> np.random.randn(n)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># model (2): true relationship between X and Y → test performance equally good</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>R<span class="op">^</span><span class="dv">2</span> (train): <span class="fl">0.958</span><span class="op">;</span> (test): <span class="fl">0.987</span> ⇒ Y <span class="op">~</span> <span class="fl">0.003</span> <span class="op">+</span> <span class="fl">2.003</span> <span class="op">*</span> X <span class="op">+</span> <span class="fl">2.010</span> <span class="op">*</span> K</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># model (4): variable dependent on but not causal of Y → test performance a lot worse</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>R<span class="op">^</span><span class="dv">2</span> (train): <span class="fl">0.995</span><span class="op">;</span> (test): <span class="fl">0.866</span> ⇒ Y <span class="op">~</span> <span class="fl">0.001</span> <span class="op">+</span> <span class="fl">0.242</span> <span class="op">*</span> X <span class="op">+</span> <span class="fl">0.245</span> <span class="op">*</span> K <span class="op">+</span> <span class="fl">1.759</span> <span class="op">*</span> H</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>But unfortunately none of the models can handle a <em>concept</em> drift, i.e., when the underlying process, from which the data is sampled, changes:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Changed equation to generate test data (notice the reversed sign for X on the way to Y)</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span>  <span class="dv">2</span> <span class="op">*</span> X     <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> np.random.randn(n)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># model (2): causal relationship between X and Y changed → test performance catastrophic</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>R<span class="op">^</span><span class="dv">2</span> (train): <span class="fl">0.958</span><span class="op">;</span> (test): <span class="op">-</span><span class="fl">1.797</span> ⇒ Y <span class="op">~</span> <span class="fl">0.003</span> <span class="op">+</span> <span class="fl">2.003</span> <span class="op">*</span> X <span class="op">+</span> <span class="fl">2.010</span> <span class="op">*</span> K</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In this case only retraining the model on new data helps to recover the performance.</p>
+</section>
+</div>
+<p>⇒ If the goal is to find a <strong>good predictive model</strong>, use as input variables the <a href="https://en.wikipedia.org/wiki/Markov_blanket">Markov blanket</a> of the target variable, i.e., its parent nodes, child nodes, and the other parent nodes of these child nodes (in the above example, to predict <code>Y</code> this would be <code>D</code> and <code>K</code> (parent nodes) and <code>H</code> (child node that has no other parents)).<br>
+⇒ If the goal is to find a <strong>causal model</strong> that can extrapolate, use as input variables only the parent nodes of the target variable.</p>
+<section id="residual-plots" class="level4 custom-gray-block">
+<h4 class="anchored" data-anchor-id="residual-plots">Residual Plots</h4>
+<p>Residual plots can give us a hint as to whether or not we might be missing important input variables in the model.</p>
+<p>In regression problems we assume that the input variables explain all important external influences on the target and what remains is just random noise. I.e., as we predict the target as:</p>
+<p><span class="math display">\[
+\hat{y} = b + w_1x_1 + w_2x_2 + ... + w_dx_d
+\]</span></p>
+<p>we assume that the true process that generated <span class="math inline">\(y\)</span> looked like this:</p>
+<p><span class="math display">\[
+y = b + w_1x_1 + w_2x_2 + ... + w_dx_d + \epsilon
+\]</span></p>
+<p>where <span class="math inline">\(\epsilon \in \mathcal{N}(0, \sigma)\)</span> is the unexplained random noise with mean 0 and standard deviation <span class="math inline">\(\sigma\)</span>, which is assumed to be independent of all other factors.</p>
+<p>By plotting the residuals (i.e., prediction errors) <span class="math inline">\(y_i - \hat{y}_i\)</span> against the predicted targets <span class="math inline">\(\hat{y}_i\)</span> and other variables and observing whether or not these residuals show distinctive patterns or really look like random noise, we can check whether the model is missing important additional input variables.</p>
+<p>For example, from the example above for model (1), i.e., when using only <code>X</code> as an input to predict <code>Y</code>, the residuals plots looks like this:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_causality/residuals_dependent.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%"></p>
+</figure>
+</div>
+<p>The residuals here are correlated with several other variables, which means we should probably include one of them as an additional input feature.</p>
+<p>The residuals plots for model (2), i.e., when using both <code>X</code> and <code>K</code> as features, on the other hand, show randomly distributed residuals, which means, we’re at least not missing some obvious influencing factors:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_causality/residuals_independent.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%"></p>
+</figure>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When working with time series data, you should also check for autocorrelation between the residuals, i.e., it should not be possible to use the residual at time point <em>t</em> to predict the next residual at <em>t+1</em>.</p>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="sec-pitfall-biased" class="level2">
+<h2 class="anchored" data-anchor-id="sec-pitfall-biased">Model discriminates</h2>
+<p>As we ponder the true causal relations between variables in the data, we also need to consider whether there are some causal relationships encoded in the historical data that we <em>don’t</em> want a model to pick up on. For example, discrimination based on gender or ethnicity can leak into the training data and we need to take extra measures to make sure that these patterns, although they might have been true causal relationships in the past, are not present in our model now.</p>
+<section id="biased-data-leads-to-strongly-biased-models" class="level4">
+<h4 class="anchored" data-anchor-id="biased-data-leads-to-strongly-biased-models">Biased data leads to (strongly) biased models</h4>
+<p>Below are some examples where people with the best of intentions have set up an ML model that has learned problematic things from real world data.</p>
+<div class="custom-gray-block">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_data_issues/bias_microsoft_tay.png" class="img-fluid figure-img" style="width:55.0%"></p>
+<figcaption>What started as a research project to see how humans would interact with an AI-based chatbot, ended as a PR-nightmare for Microsoft. The chatbot was supposed to learn from the messages written to it, but since the developers apparently thought more about their natural language models instead of human behavior on the internet, Tay mainly repeated all the racist, sexists things others tweeted.</figcaption>
+</figure>
+</div>
+</div>
+<div class="custom-gray-block">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_data_issues/bias_gender_stereotypes_we.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption>In the chapter on deep learning we’ll discuss how neural network language models learn word embeddings through self-supervised learning. As it turns out, a lot of the texts these models are trained on include, e.g., gender stereotypes, which are then also encoded in the word embeddings. So while the analogy question “<em>man</em> is to <em>king</em> as <em>women</em> is to <em>XXX</em>” might be answered correctly with “<em>queen</em>”, “<em>man</em> is to <em>doctor</em> as <em>women</em> is to <em>XXX</em>” is more likely to be answered with “<em>nurse</em>” instead of “<em>doctor</em>”, since this role allocation was typical in the past and is therefore also present in many texts used as training data for these models.</figcaption>
+</figure>
+</div>
+</div>
+<div class="custom-gray-block">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_data_issues/bias_twitter_imagecrop.png" class="img-fluid figure-img" style="width:55.0%"></p>
+<figcaption>Since many of the images posted on Twitter are larger than the available space for the preview image, Twitter decided to train a model to select “the most relevant part” of an image to be displayed as a preview. Unfortunately, as they had trained this model on a dataset with more pictures of white people than people of color, the model became racist and, for example, given a picture of Barack Obama and some random unimportant white politician, it always selected the white politician for the preview image. Similarly, such cropping algorithms were also reported to more often select faces as preview images for men and the body (specifically, you’ve guessed it, boobs) as preview images for women.</figcaption>
+</figure>
+</div>
+</div>
+<div class="custom-gray-block">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_data_issues/bias_household_lowerincome.png" class="img-fluid figure-img" style="width:65.0%"></p>
+<figcaption>Most computer vision models are (pre-)trained on the ImageNet dataset, which contains over 14 million hand-annotated pictures, organized in more than 20k categories. However, since these pictures are sourced from the internet and more people from developed instead of developing nations tend to post pictures online, the variety of common household items, for example, is highly skewed towards products found in richer countries. Subsequently, these models mistake, e.g., bars of soap found in a poorer country as food (e.g., one could argue that these do indeed bear some resemblance to a plate of food that might be found in a fancy restaurant).<br>
+de Vries, Terrance, et al.&nbsp;“Does object recognition work for everyone?” <em>IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops.</em> 2019.</figcaption>
+</figure>
+</div>
+</div>
+<p>The above problems all arose because the data was not sampled uniformly:</p>
+<ul>
+<li>Tay has seen many more racist and hateful comments and tweets than ‘normal’ ones.</li>
+<li>In historical texts, women were underrepresented in professions such as doctors, engineers, carpenters, etc.</li>
+<li>The image dataset Twitter trained its model on included more pictures of white people compared to people of color.</li>
+<li>Similarly, given a random collection of photos from the internet, these images will have mostly been uploaded by people from developed countries, i.e., pictures displaying the status quo in developing nations are underrepresented.</li>
+</ul>
+<p>Even more problematic than a mere underrepresentation of certain subgroups (i.e., a skewed input distribution) is a pattern of systematic discrimination against them in historical data (i.e., a discriminatory shift in the assigned labels).</p>
+<div class="custom-gray-block">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_data_issues/bias_apple_card.png" class="img-fluid figure-img" style="width:55.0%"></p>
+<figcaption>A lot of explicit discrimination is often encoded in datasets used to train models for assigning credit scores or determine interest rates for mortgages or loans. Since these application areas have a direct and severe influence on humans’ lives, here we have to be especially careful and, for example, check that the model predicts the same score for a man and a woman if all the features of a data point are equal except those encoding a person’s gender.</figcaption>
+</figure>
+</div>
+</div>
+<p><u>To summarize:</u> A biased model can negatively affect users in two ways:</p>
+<ul>
+<li>Disproportionate product failures, due to skewed sampling. For example, speech recognition models are often less accurate for women, because they were trained on more data collected from men (e.g., transcribed political speeches).</li>
+<li>Harm by disadvantage / opportunity denial, due to stereotypes encoded in historical data. For example, women are assigned higher credit interest rates than men or people born in foreign countries are deemed less qualified for a job when their resumes are assessed by an automated screening tool.</li>
+</ul>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Retraining models on data shaped by predictions from a biased predecessor model can intensify existing biases. For instance, if a resume screening tool recognizes a common trait (e.g., “attended Stanford University”) among current employees, it may consistently recommend resumes with this trait. Consequently, more individuals with this characteristic will be invited for interviews and hired, further reinforcing the dominance of the trait in subsequent models trained on these employee profiles.</p>
+</div>
+</div>
+</section>
+<section id="towards-fair-models" class="level4">
+<h4 class="anchored" data-anchor-id="towards-fair-models">Towards fair models</h4>
+<p><u>1.) Know you have a problem</u></p>
+<p>The first step to mitigating these problems is to become aware of them. We often don’t notice a poor performance for an undersampled subgroup, because the model performance overall looks fine:</p>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout="[ 50, 50 ]">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="../images/06_data_issues/bias_unequal_lr.png" class="img-fluid"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="../images/06_data_issues/bias_equal_lr.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
+<div class="fake-figcaption">
+<p>These two plots show a simple linear regression model trained on data with three subgroups (e.g., subgroups could be based on gender and/or ethnicity). In both cases, the model performs well for the subgroup in the middle, but poorly for the marginalized subgroups. However, if we only consider at the overall <span class="math inline">\(R^2\)</span> value of the model, the performance of the model on the left seems fine, since here the good performance on the ‘main’ subgroup drowns out the poor performance on the undersampled marginalized subgroups. The poor performance of the model is only apparent when the subgroups are sampled equally.</p>
+</div>
+<p>Therefore:</p>
+<ul>
+<li>Assess the model’s performance for each (known) subgroup individually by slicing the data accordingly to verify that the prediction errors of the model are random and the model is not systematically worse for some subgroups / data slices.</li>
+<li>If it is not possible to obtain a well balanced training and/or test set, assign higher sample weights to data points from undersampled subgroups to make sure the algorithm pays enough attention to them during training and they are given more weight when evaluating the model (similar to using the balanced accuracy).</li>
+<li>Check if/how the model’s prediction changes when everything about a data point is the same except attributes encoding gender / age / ethnicity / etc.</li>
+<li>Interpret the model to see whether features encoding subgroup-specific information have an unexpectedly high influence on the prediction.</li>
+</ul>
+<p><u>2.) Learn a fair model</u></p>
+<p>We should also <strong>be careful when including variables in the model that encode attributes such as gender or ethnicity</strong>. For example, the performance of a model that diagnoses heart attacks will most likely be improved by including ‘gender’ as a feature, since men and women present different symptoms when they have a heart attack. On the other hand, a model that assigns someone a credit score should probably not rely on the gender of the person for this decision, since, even though this might have been the case in the historical data because the humans that generated the data relied on their own stereotypes, women should not get a lower score just because they are female.</p>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout="[ 50, 50 ]">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="../images/06_data_issues/bias_simpson_lr.png" class="img-fluid"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="../images/06_data_issues/bias_simpson_lrd.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
+<div class="fake-figcaption">
+<p>In the plot on the right, additional dummy variables to represent the different subgroups in the data are included in the model and improve its predictive performance. While this can make the bias of a model explicit, should this information be included at all? (By the way, this is also an example of <a href="https://en.wikipedia.org/wiki/Simpson's_paradox">Simpson’s paradox</a>, where the model’s coefficients reverse their sign when additional features are included.)</p>
+</div>
+<p>However, a person’s gender or ethnicity, for example, is often correlated with other variables such as income or neighborhood, so even inconspicuous features can still leak problematic information to the model and require some extra steps to ensure the model does not discriminate.</p>
+<p>This can, for example, be achieved by setting up a neural network that learns <strong>subgroup-invariant feature representations</strong>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_data_issues/invariant_rep.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
+</figure>
+</div>
+<p>This architecture works similar to a <a href="https://en.wikipedia.org/wiki/Generative_adversarial_network">Generative Adversarial Network (GAN)</a> in that there are two parts of the network, one that tries to predict the target from the intermediate feature representation and the other (i.e., the adversary) that tries to predict the subgroup label (e.g., gender) from the same representation. The goal here is to find an intermediate feature representation that still includes all the necessary information such that the first network can predict the target, but from which the adversarial network can not predict the subgroup anymore, which can be achieved by training both networks together.</p>
+<div class="custom-gray-block">
+<p>For other examples of what not to do, check out the <a href="https://incidentdatabase.ai/">AI Incidence Database</a> and</p>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout="[ 20, 80 ]">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 20.0%;justify-content: center;">
+<p><img src="../images/08_ml_in_practice/book_weapons_2016.jpg" class="img-fluid"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 80.0%;justify-content: flex-start;">
+<p>Book recommendation:<br>
+<strong>Weapons of Math Destruction</strong> by Cathy O’Neil (2016)</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-interpretability" class="level2">
+<h2 class="anchored" data-anchor-id="sec-interpretability">Explainability &amp; Interpretable ML</h2>
+<p>Explainability is essential to trust a model’s predictions, especially in performance-critical areas like medicine (e.g., diagnosis from x-ray images).</p>
+<section id="explainableinterpretable-ml-distinguish-between" class="level4 custom-gray-block">
+<h4 class="anchored" data-anchor-id="explainableinterpretable-ml-distinguish-between">Explainable/Interpretable ML – distinguish between:</h4>
+<ul>
+<li><u>Local</u> Explainability: explain individual predictions.<br>
+→ Which features from one particular sample swayed the model to make a certain prediction? This can, for example, be visualized as a heatmap like that over the image of a horse, where the classification decision was made mostly <a href="#sec-pitfall-spurious">because of the copyright notice</a>.</li>
+<li><u>Global</u> Explainability: explain the model behavior in general.<br>
+→ Which features are most important over all?</li>
+</ul>
+<p>→ Some models are <em>intrinsically interpretable</em> (e.g., linear models, decision trees), others require <em>model-agnostic methods</em> to make them explainable, i.e., for these models the interpretability does not come for free.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Explaining a model and its predictions helps to understand what it learned from the data and why it makes certain mistakes. But only when the model has a good predictive performance <em>and</em> there is reason to believe that the model actually captured the true causal relationship between the inputs and targets, then these explanations might shed light on the <a href="https://towardsdatascience.com/e68626e664b6">true root causes</a> of the underlying process as well. Always discuss the results with a subject matter expert!</p>
+</div>
+</div>
+<p><strong>Careful:</strong></p>
+<ul>
+<li>Correlated features can lead to misrepresented feature importances! For example, when using a random forest, one decision tree might use one feature in the root node, while another decision tree uses a second feature that is correlated with the first, which means that overall it seems that both features are only somewhat important, while in fact they are just interchangeable and therefore their true feature importance would be the sum of the two individual feature importances.</li>
+<li>Beware of <a href="https://en.wikipedia.org/wiki/Simpson%27s_paradox">Simpson’s paradox</a>.</li>
+<li>Possibly look at results for different subsamples of the data.</li>
+<li>Compare feature importances obtained for different models to get a better feeling for which features truly matter for the problem, e.g., investigate why a linear model and a decision tree might base their decisions on different features.</li>
+</ul>
+<p><u>Recommended Reading:</u> <a href="https://christophm.github.io/interpretable-ml-book/">Interpretable ML Book</a>, which additionally covers some more advanced methods. However, please keep in mind that explainable AI is about understanding better what happens – if you use a complex method to explain a model (e.g., the popular SHAP values) where it is difficult to understand how the explanations were derived, then this might instead result in further uncertainty.</p>
+</section>
+<section id="explaining-decision-trees-random-forests" class="level3">
+<h3 class="anchored" data-anchor-id="explaining-decision-trees-random-forests">Explaining Decision Trees (&amp; Random Forests)</h3>
+<p><strong>Explaining individual predictions</strong>: retrace decision path (in a single tree).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_explainability/expl_dt.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption>This is an example of a decision tree plot generated with <code>sklearn</code>. The decision tree has its root at the top (where we start when predicting for a new sample) and the leaves (i.e., those nodes that don’t branch off anymore) at the bottom (where we stop and make the final prediction). Each node in the tree shows in the first line the variable based on which the next split is made incl.&nbsp;the threshold value (except for leaf nodes), then the current Gini impurity (i.e., how homogeneous the labels of all the samples that ended up in this node are; this is what the decision tree internally optimizes, i.e., notice how the value gets smaller on at least one side after a split), then the fraction of samples that ended up in this node, and the distribution of samples for the different classes (for a classification problem), as well as the label that would be predicted for a sample at this point. So when making a prediction for a new sample with a decision tree, we start at the root node of the tree and then follow the branches down depending on the sample’s feature values until we reach a leaf node and would then know exactly based on which feature thresholds the prediction for the sample was made.</figcaption>
+</figure>
+</div>
+<p><strong>Global interpretation</strong>: a trained decision tree or random forest has an attribute <code>feature_importances_</code>, which indicates how much each feature contributed to reducing the (Gini) impurity. This is related to the position of the feature in the tree and how many samples pass through the respective node.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_explainability/expl_dt_featimp.png" class="img-fluid figure-img" style="width:45.0%"></p>
+<figcaption>This is just a bar plot of the values from the <code>feature_importances_</code> attribute of the decision tree shown above. When we’re using a random forest instead of a single decision tree, it would be impractical to plot all of the individual trees contained in the forest to explain individual predictions, but a random forest at least also has the <code>feature_importances_</code> attribute to examine the global importance of the different features.</figcaption>
+</figure>
+</div>
+</section>
+<section id="explaining-linear-models-neural-networks" class="level3">
+<h3 class="anchored" data-anchor-id="explaining-linear-models-neural-networks">Explaining Linear Models (&amp; Neural Networks)</h3>
+<p>Since the formula used to make predictions with a linear model is very simple, we can easily understand what is going on. To assess the importance of individual features, either for a single sample or overall, the sum can be decomposed into its individual components:<br>
+<span class="math inline">\(\hat{y} = b + \sum_{k=1}^d w_k \cdot x_k\)</span> ⇒ effect of feature <em>k</em> for ith data point: <span class="math inline">\(w_k \cdot x_k^{(i)}\)</span>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_explainability/expl_lm_effects.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>The feature effects for a single sample are indicated by the red crosses, i.e., these show whether each feature contributed positively or negatively (or not at all) to the final prediction for this one sample. By computing the feature effects for all samples, we can generate the box plots shown below the red crosses, which display the distribution of feature effects for all samples and therefore indicate which features are overall important for the prediction (= those with the largest absolute values). For example, in this plot we can see that the feature ‘AveOccup’ has an effect of around zero for all but one sample, which indicates that the model might have overfit on one outlier point and it might be best to exclude this feature altogether.</figcaption>
+</figure>
+</div>
+<p>→ It is easier to understand and validate the results if only a few features are considered important. Use an L1-regularized model (e.g., <code>linear_model.LassoLarsCV</code>) to get sparse weights.</p>
+<p><u>Generalization for neural networks:</u> <strong>Layer-wise Relevance Propagation (LRP)</strong>: Similar to how the prediction of the linear model was split up into the contributions of the individual input features, by keeping track of the gradients in a neural network, the decision can be decomposed as well to obtain the influence of each feature on the final prediction. This is similar to what happens in the backpropagation procedure when training the network, only that with LRP not the prediction error, but the prediction itself is propagated backwards layer by layer (hence the name) until we arrive at the input layer and get the individual contributions of the features.</p>
+<div class="small-text">
+<p>For <code>torch</code> networks, this approach is implemented in the <a href="https://captum.ai/"><code>captum</code> library</a> as the ‘Input X Gradient’ method. The library also contains many other methods for interpreting neural networks, however, I find this the most natural approach, since it is a direct extension of the intuitive feature effects approach used to interpret linear models.</p>
+</div>
+</section>
+<section id="global-model-agnostic-permutation-feature-importance" class="level3">
+<h3 class="anchored" data-anchor-id="global-model-agnostic-permutation-feature-importance">[Global] Model-agnostic: permutation feature importance</h3>
+<p>The first question when it comes to global explainability is always “Which features are important?”, i.e., how much does the model rely on each feature when making its predictions? We can shed light on this using the permutation importance, which, for each feature, is computed like this:</p>
+<p><em>‘Feature importance’</em> = <em>‘performance of trained model on original dataset’</em> minus <em>‘performance when values for this feature are shuffled’</em>.</p>
+<p>I.e., first, a trained model is normally evaluated on the original dataset (either training or test set), then for one feature the values from all samples are permuted and the performance of the trained model on this modified dataset is computed again. If there is a big discrepancy between the performance on the original and permuted dataset, this means the model heavily relies on this feature to make correct predictions, while if there is no difference, then this feature is not relevant. For example, a linear model that has a coefficient of zero for one feature would not change its predictions if this feature was shuffled.</p>
+<p>Since a single permutation of a feature might by chance shuffle the values in a way that is close to the original ordering, this process is performed multiple times, i.e., we get a distribution of the permutation importance scores for each feature, which can again be visualized as a box plot:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_explainability/expl_perm_imp.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.inspection <span class="im">import</span> permutation_importance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="global-model-agnostic-influence-of-individual-features-on-prediction" class="level3">
+<h3 class="anchored" data-anchor-id="global-model-agnostic-influence-of-individual-features-on-prediction">[Global] Model-agnostic: influence of individual features on prediction</h3>
+<p>After we’ve identified which features are important for a model in general, we can dig deeper to see <em>how</em> each of these features influences the final prediction. A simple way to accomplish this is with <strong>Individual Conditional Expectation (ICE) &amp; Partial Dependence (PD) Plots</strong>.</p>
+<p>To generate these plots, we take some samples and systematically vary the feature in question for each sample, i.e., set it to many different values within the normal range of values for this feature while keeping everything else about the data points the same. We then observe by how much and in which direction the predictions for these samples change in response to the different values set for the feature.</p>
+<p>The ICE plot shows the results for individual samples (thin lines), while the PD plot shows the averaged values (thick line), where the ICE plot can be used to verify that some opposite changes in individual samples are not averaged out in the PD plot:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_explainability/expl_pdp.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>One big drawback of this approach is that it assumes that the features are independent of each other, i.e., since the features are varied individually, this could otherwise result in unrealistic feature combinations. For example, if one feature is the height of a person (in the range of 60-200cm) and another feature is the weight (30-120kg), then when these features are varied independently, at some point we would evaluate a data point with height: 200cm and weight: 30kg, which seems like a very unhealthy combination.<br>
+However, by examining the ICE plot for possibly erratic changes for individual samples, this can usually be spotted. And in general – this goes for all explainability methods – the results should not be over-interpreted, i.e., they are good for showing rough trends, but remember that the plots might also look completely different for a different type of model trained on the same dataset, i.e., be careful before concluding anything about the root causes of a problem based on these results.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Usually, we want a model that reacts smoothly to changes in the input data. Drastic changes in the decision function as a result of minor changes to the input data suggest that a model might be vulnerable to an adversarial attack. Data augmentation can help decrease the model’s sensitivity to noise and other minor variations in the input data.</p>
+</div>
+</div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.inspection <span class="im">import</span> partial_dependence</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="local-model-agnostic-local-interpretable-model-agnostic-explanations-lime" class="level3">
+<h3 class="anchored" data-anchor-id="local-model-agnostic-local-interpretable-model-agnostic-explanations-lime">[Local] Model-agnostic: <em>Local Interpretable Model-agnostic Explanations</em> (LIME)</h3>
+<p>To generate an explanation for a single sample of interest:</p>
+<ol type="1">
+<li>Generate a local neighborhood dataset through small perturbations of the sample’s feature vector.</li>
+<li>Use the original model to predict labels for these new points, i.e., generate an artificial labeled training set for the local surrogate model.</li>
+<li>Train an intrinsically interpretable model (e.g., a linear model) on the neighborhood dataset.<br>
+⇒ The decision surface of the original model is very complex, but we assume that it can be approximated locally with a linear function.</li>
+<li>Interpret the local surrogate model’s prediction for the sample of interest.</li>
+</ol>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Explaining ML with more ML…</p>
+</div>
+</div>
+<p>→ <a href="https://github.com/marcotcr/lime"><code>lime</code> Python library</a></p>
+</section>
+<section id="example-based-explanations" class="level3">
+<h3 class="anchored" data-anchor-id="example-based-explanations">Example-Based Explanations</h3>
+<p>Manually examine some of the data points for which the model predicted a certain target &amp; hopefully notice a pattern…</p>
+<ul>
+<li><p><strong>Prototypes</strong>: Representative samples, e.g., cluster centroids.</p></li>
+<li><p><strong>Optimal inputs</strong>: Optimized samples that result in a strong prediction of the given target. For example, in a neural network we can also optimize the input instead of the weights:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_explainability/optimal_inputs.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption>Optimal inputs generated with <a href="https://distill.pub/2017/feature-visualization/">Google’s ‘DeepDream’</a></figcaption>
+</figure>
+</div></li>
+<li><p><strong>Counterfactual examples</strong>: Samples with minor modifications that change the prediction. For example, similar to how the optimal inputs are generated, we can also start with an image from a different class (instead of random noise) and adapt it until the network changes its prediction for it.</p></li>
+<li><p><strong>Adversarial examples</strong>: Counterfactual examples where a human doesn’t notice the change.</p></li>
+</ul>
+</section>
+</section>
+<section id="sec-pitfall-drifts" class="level2">
+<h2 class="anchored" data-anchor-id="sec-pitfall-drifts">Data &amp; Concept Drifts</h2>
+<p>We must never forget that the world keeps on changing and that models need to be updated regularly with new data to be able to adapt to these changing circumstances!</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>ML fails silently!</strong> I.e., even if all predictions are wrong, the program does not simply crash with some error message.<br>
+→ Need constant monitoring to detect changes that lead to a deteriorating performance!</p>
+</div>
+</div>
+<p><u>One of the biggest problems in practice: Data and Concept Drifts:</u><br>
+The model performance quickly decays when the distribution of the <strong>data used for training</strong> <span class="math inline">\(P_{train}(X, y)\)</span> is <strong>different from the data the model encounters when deployed in production</strong> <span class="math inline">\(P_{prod}(X, y)\)</span>, where <span class="math inline">\(P(X, y) = P(y|X)P(X) = P(X|y)P(y)\)</span>.<br>
+Such a discrepancy can be due to</p>
+<ul>
+<li><strong><em>Data drift:</em></strong> the distribution of one or more variables changes. This is called a <em>covariate shift</em> if the distribution of input features <span class="math inline">\(X\)</span> changes, i.e., <span class="math inline">\(P_{train}(X) \neq P_{prod}(X)\)</span>, and a <em>label shift</em> if the distribution of the target variable <span class="math inline">\(y\)</span> changes.</li>
+<li><strong><em>Concept drift:</em></strong> input/output relationship <span class="math inline">\(X \to y\)</span> changes, i.e., <span class="math inline">\(P_{train}(y|X) \neq P_{prod}(y|X)\)</span>. This means with exactly the same inputs <span class="math inline">\(X\)</span> we now get a different output <span class="math inline">\(y\)</span> than before the drift.</li>
+</ul>
+<p>In both cases, something important for our machine learning task changes in the world. If our collected data reflects this change, it is called data drift. If we can’t see this change in our input data, we’re dealing with a concept drift.</p>
+<p><u>Example:</u> From the production settings incl.&nbsp;the size of a produced part (<span class="math inline">\(X\)</span>) we want to predict whether the part is scrap or okay (<span class="math inline">\(y\)</span>):</p>
+<ul>
+<li><em>Data drift:</em> The company used to manufacture only small parts, now they also produce larger parts.</li>
+<li><em>Concept drift:</em> The company used to produce 10% scrap parts, but after some maintenance on the machine, the same production settings (<span class="math inline">\(X\)</span>) now result in only 5% scrap (<span class="math inline">\(y\)</span>).</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Covariate shifts, without concept drift, can lead to label shifts when the input variable is causally related to the target. For example, a model predicting cancer (<span class="math inline">\(y\)</span>) in patients based on age (<span class="math inline">\(x\)</span>) was trained on a dataset consisting of mostly older people, who naturally also have a higher cancer incidence. In production, the model is used on patients of all ages (<em>covariate shift</em>), i.e., including more young people that have cancer less frequently (<em>label shift</em>).</p>
+</div>
+</div>
+<section id="drift-origins-mitigation-strategies" class="level4">
+<h4 class="anchored" data-anchor-id="drift-origins-mitigation-strategies">Drift Origins &amp; Mitigation Strategies</h4>
+<p>There are various reasons for data and concepts drifts, both related to how the data is collected as well as external events outside our control.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>These drifts can either be <strong>gradual</strong> (e.g., languages change gradually as new words are coined; a camera lens gets covered with dust over time), or they can come as a <strong>sudden shock</strong> (e.g., someone cleans the camera lens; when the COVID-19 pandemic hit, suddenly a lot of people switched to online shopping, which tripped up the credit card fraud detection systems).</p>
+</div>
+</div>
+<p><strong><em>Changed data schema</em></strong></p>
+<p>Many problems are created in-house and could be avoided, for example</p>
+<ul>
+<li>the user interface used to collect the data changes, e.g., a height was previously recorded in meters, now in cm</li>
+<li>the sensor configuration changed, e.g., in a new version of a device, a different sensor is used, but still logs values under the same variable name as the old sensor</li>
+<li>the features used as input for the model are changed, e.g., to include additional engineered features, but the feature transformation pipeline was only changed in the training code, not yet in the production code.</li>
+</ul>
+<p>⇒ These cases should ideally result in an error, e.g., we could include some <strong>checks before applying the model</strong> to make sure we received the expected number of features, their data types (e.g., text or numbers) is as expected, and the values are roughly in the expected range for the respective feature. Furthermore, other teams in the company need to be made aware that an ML model is relying on their data so they can notify the data science team ahead of time in case of changes.</p>
+<p><strong><em>Data drifts</em></strong></p>
+<p>Data drifts occur when our model has to make predictions for samples that are different from the data it encountered during training, e.g., because certain regimes of the training domain were undersampled, or in the extreme case the model might even be forced to extrapolate beyond the training domain, for example, due to</p>
+<ul>
+<li><strong>changed sample selection</strong>, e.g., the business recently expanded to a different country or after a targeted marketing campaign the website is now visited by a new user group</li>
+<li><strong>adversarial behavior</strong>, e.g., spammers continuously adapt their messages in an effort to circumvent spam filters (i.e., ten years ago a human would have also recognized a spam message from today as spam (i.e., the meaning of what is or isn’t spam didn’t change), but these more sophisticated messages weren’t included in the training set yet, making it hard for ML models to pick up on these patterns)</li>
+</ul>
+<p>⇒ Data drifts can be seen as an opportunity to extend our training set and <strong>retrain the model with more data from underrepresented subgroups</strong>. Yet, as highlighted in the earlier section on model-based discrimination, this often implies that these undersampled subgroups could initially experience a less effective model, such as a speech recognition function performing less accurately for women than for men. Therefore, it’s crucial to identify subgroups where the model might exhibit poor performance, ideally gathering more data from these groups or, at the very least, giving greater consideration to these samples during model training and evaluation.</p>
+<p><strong><em>Concept drifts</em></strong></p>
+<p>Concept drifts happen when external changes or events occur that we did not record in our data or that change the meaning of our data. This means that the exact same input features suddenly result in a different output. One reason can be that we’re <strong>missing a variable that has a direct influence on the target</strong>, for example</p>
+<ul>
+<li>our process is sensitive to temperature and humidity, but we only recorded the temperature not the humidity, so as the humidity changes, the same temperature values result in different output values ⇒ additionally include humidity as an input feature in the model</li>
+<li>seasonal trends result in changes in the popularity of summer vs.&nbsp;winder clothes ⇒ include month / outside temperature as an additional input feature</li>
+<li>special events, e.g., a celebrity mentioned our product on social media or people changed their behavior because of the lockdown during a pandemic ⇒ while it can be hard to predict these events in advance, when they happen we could include an additional feature, e.g., ‘during lockdown’, to distinguish data collected during this time period from the rest of the data</li>
+<li>degenerate feedback loops, i.e., the existence of the model changes users’ behavior, e.g., a recommender system causes users to click on videos just because they were recommended ⇒ include as an additional feature whether the video was recommended or not to learn how much of “user clicked on item” was due to the item being recommended and how much was due to the user’s natural behavior</li>
+</ul>
+<p>Another cause of concept drifts are events that <strong>change the meaning of the recorded data</strong>, for example</p>
+<ul>
+<li>inflation: 1 Euro in 1990 was worth more than 1 Euro now ⇒ adjust the data for inflation or include the inflation rate as an additional input feature</li>
+<li>a temperature sensor immersed in water amasses limescale and after a while the temperature reading is not accurate anymore, e.g., if the true temperature is 90 degrees, a clean senor measures the true 90 degrees, but after it has accumulated some layers of limescale, it only measures 89 degrees under the same circumstances. While our output is influenced by the true temperature, we only have access to the sensor reading for the temperature, which is additionally influenced by the state of the sensor itself ⇒ try to estimate the amount of accumulated limescale, e.g., based on the number of days since the sensor was cleaned the last time (which also means that these kinds of maintenance events need to be recorded somewhere!)</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_data_issues/concept_drift.png" class="img-fluid figure-img" style="width:40.0%"></p>
+<figcaption>Causal diagram showing how our observed input <span class="math inline">\(x\)</span> (temperature measurement) and output <span class="math inline">\(y\)</span> are related through and influenced by hidden variables (which we can not access directly), namely, the state of the temperature sensor (i.e., how much limescale has accumulated), the actual temperature, and the humidity (for which we have not installed a sensor yet). If the sensor state and humidity stay constant, we are able to predict the output from the temperature measurement, however, if either of these values change, we experience a concept drift. Therefore, we should try to include estimates of these hidden variables in our model to account for these changes.</figcaption>
+</figure>
+</div>
+<p>⇒ Before training a model, examine the data to <strong>identify instances where identical inputs yield different outputs</strong>. If possible, <strong>include additional input features to account for these variations</strong>. Subpar model performance on the test set often indicates missing relevant inputs, heightening vulnerability to future concept drifts. Even when the correct variables are incorporated to capture a concept drift, frequent model retraining may still be necessary. For instance, different states of the concept might be sampled unevenly, leading to data drifts (e.g., more data collected during winter than in the early summer months). If it is not possible to include variables that account for the concept drift, it might be necessary to <strong>remove samples from the original training set that do not conform to the novel input/output relation before retraining the model</strong>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The best way to counteract data and concept drifts is to frequently <strong>retrain the model</strong> on new data. This can either happen on a schedule (e.g., every weekend, depending on how quickly the data changes) or when your monitoring system raises an alert because it detected drifts in the inputs or a deteriorating model performance.</p>
+</div>
+</div>
+<p>While traditional ML models typically need to be retrained from scratch, neural network models can also be fine-tuned on newly collected data, however, this is only useful when faced with minor data drifts, not drastic concept drifts.</p>
+<p>To get a better understanding of how often it might be necessary to retrain the model, we can train the model on data from different periods in the past and then compare the performance on the most recent data (e.g., train the model on data from Jan-June, April-Sept, and June-Nov and then compare the performances on the data from December – if the model trained on the most recent data performs much better, it probably makes sense to retrain the model more frequently). Of course, in the presence of sudden events, it might be necessary to train the model outside of the regular schedule.</p>
+</section>
+<section id="monitoring-for-data-concept-drifts" class="level4 custom-gray-block">
+<h4 class="anchored" data-anchor-id="monitoring-for-data-concept-drifts">Monitoring for data &amp; concept drifts</h4>
+<ul>
+<li>Use statistical tests to detect changes in the distributions of individual features:
+<ul>
+<li>Kullback-Leibler divergence</li>
+<li>Jensen-Shannon divergence</li>
+<li>Kolmogorov-Smirnov (K-S) test</li>
+<li>Wasserstein / Earth Movers distance</li>
+</ul></li>
+<li>Use novelty detection or clustering to identify data points that are different from the training samples. Even if a sample’s individual feature values are still in a normal range, this particular combination of feature values can be far from what the model encountered during training.</li>
+<li>Check if there is a difference between the predicted and true (training) label frequencies. For example, if in reality usually about 10% of our produced products are faulty, but the model suddenly predicts that 50% of the products are faulty, then something is probably off.</li>
+<li>Check whether the confidence scores of the model predictions (i.e., the probability for a class, not the predicted class label) get lower, which indicates that new samples are closer to the model’s decision boundary than the training samples.</li>
+<li>Check the error metrics of the model on new data (only possibly if you continuously collected new <em>labeled</em> data).</li>
+<li>After retraining the model on new data, check if the feature importances changed, which indicates that it might be time to select different features for the prediction.</li>
+</ul>
+<p>These checks can be combined with a sliding window approach, for example, every hour the data collected in the last 48 hours is compared to the training data. If any of the monitoring values exceeds some predefined threshold, the system triggers an alert and possibly automatically retrains the model on new data.</p>
+<p><u>Additionally:</u></p>
+<ul>
+<li>Validate the input data schema, i.e., check that data types and value ranges (incl.&nbsp;missing values / NaNs) match those encountered in the training data.</li>
+<li>Log known external events (!!), e.g., maintenance on a machine.</li>
+</ul>
+</section>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The “ML fails silently” part also applies to bugs in your code: Especially when you just started with ML it often happens that your results seem fine (maybe just a little too good), but you have a subtle bug somewhere that doesn’t cause your program to crash, but just calculates something slightly wrong somewhere. These issues can be very hard to notice, so always triple-check your code and if you can, write <a href="https://realpython.com/python-testing/">unit tests</a> for individual functions to make sure they do what you expect them to do.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You might also want to have a look at Google’s <a href="https://developers.google.com/machine-learning/guides/rules-of-ml">rules of machine learning</a> (the first one being: <em>“Don’t be afraid to launch a product without machine learning.”</em>)</p>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script type="text/javascript"> // go once over all images and transform the percentage width into pixels relative to original body size
+  const bodyWidth = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--custom-body-width')); // Get CSS variable
+  document.querySelectorAll('.quarto-figure img').forEach((img) => {
+    const styleWidth = img.getAttribute('style').match(/width:\s*([\d.]+)%/); // Extract percentage
+    if (styleWidth) {
+      const percentage = parseFloat(styleWidth[1]) / 100;
+      img.style.width = `${bodyWidth * percentage}px`; // Apply calculated width
+    }
+  });
+</script>
+
+<style type="text/css">
+#footer {
+  font-size: 80%; /* Makes the font 70% smaller */
+  border-top: 1px solid #ccc; /* Adds a horizontal line above the footer */
+  padding-top: 10px; /* Adds some spacing above the footer content */
+}
+</style>
+
+<!-- FOOTER  -->
+<div id="footer" class="outer">
+  <footer class="inner">
+    <p><b>Book/Course Feedback: </b> <a href="https://forms.gle/Ccv5h5zQxwPjWtCS7" target="_blank" rel="nofollow">Full Feedback Survey</a> or <a href="https://forms.gle/qK8T5ALzgpiZaxd49" target="_blank" rel="nofollow">Short Comment</a><br></p>
+
+    <p>Find me on <a href="https://github.com/cod3licious/" target="_blank" rel="nofollow">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/" target="_blank" rel="nofollow">LinkedIn</a><br>
+      <a href="https://franziskahorn.de/">Home</a> ~ <a href="mailto:hey@franziskahorn.de?Subject=Book%20Feedback" target="_blank" rel="nofollow">Contact</a> ~ <a href="https://franziskahorn.de/impressum.html">Impressum</a></p>
+
+      <!-- CC license -->
+   <p xmlns:cc="http://creativecommons.org/ns#">This work is licensed under <a href="https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY 4.0<img style="height:16px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:16px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""></a></p>
+  </footer>
+</div>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./05_supervised_models.html" class="pagination-link" aria-label="Supervised Learning Models">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Supervised Learning Models</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./07_advanced_topics.html" class="pagination-link" aria-label="Advanced Topics">
+        <span class="nav-page-text"><span class="chapter-title">Advanced Topics</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

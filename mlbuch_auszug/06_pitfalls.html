@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.39">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Häufige Fehler vermeiden – A Practitioner's Guide to Machine Learning</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./08_conclusion.html" rel="next">
+<link href="./05_supervised_models.html" rel="prev">
+<link href="./favicon.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-37b241f53b32a5ad598e4053e71b073f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Keine Treffer",
+    "search-matching-documents-text": "Treffer",
+    "search-copy-link-title": "Link in die Suche kopieren",
+    "search-hide-matches-text": "Zusätzliche Treffer verbergen",
+    "search-more-match-text": "weitere Treffer in diesem Dokument",
+    "search-more-matches-text": "weitere Treffer in diesem Dokument",
+    "search-clear-button-title": "Zurücksetzen",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Abbrechen",
+    "search-submit-button-title": "Abschicken",
+    "search-label": "Suchen"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06_pitfalls.html"><span class="chapter-title">Häufige Fehler vermeiden</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">A Practitioner’s Guide to Machine Learning</a> 
+        <div class="sidebar-tools-main">
+    <a href="./A-Practitioner-s-Guide-to-Machine-Learning.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Suchen"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Vorwort</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01a_intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Einleitung</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01b_basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Grundlagen</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Datenanalyse &amp; Preprocessing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_supervised_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Deep Learning</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_pitfalls.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Häufige Fehler vermeiden</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08_conclusion.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Fazit</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Inhaltsverzeichnis</h2>
+   
+  <ul>
+  <li><a href="#sec-pitfall-evaluation" id="toc-sec-pitfall-evaluation" class="nav-link active" data-scroll-target="#sec-pitfall-evaluation">[Fehler #1] Irreführende Modellevaluierung</a></li>
+  <li><a href="#sec-pitfall-generalize" id="toc-sec-pitfall-generalize" class="nav-link" data-scroll-target="#sec-pitfall-generalize">[Fehler #2] Modell generalisiert nicht</a></li>
+  <li><a href="#sec-pitfall-spurious" id="toc-sec-pitfall-spurious" class="nav-link" data-scroll-target="#sec-pitfall-spurious">[Fehler #3] Modell missbraucht Scheinkorrelationen</a></li>
+  <li><a href="#sec-pitfall-biased" id="toc-sec-pitfall-biased" class="nav-link" data-scroll-target="#sec-pitfall-biased">[Fehler #4] Modell diskriminiert</a></li>
+  <li><a href="#sec-pitfall-drifts" id="toc-sec-pitfall-drifts" class="nav-link" data-scroll-target="#sec-pitfall-drifts">[Fehler #5] Daten &amp; Konzept Drifts</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-pitfalls" class="quarto-section-identifier"><span class="chapter-title">Häufige Fehler vermeiden</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<blockquote class="blockquote">
+<p>Alle Modelle sind falsch, aber manche Modelle sind nützlich.<br>
+– <em>George E. P. Box</em></p>
+</blockquote>
+<p>Das obige Zitat wird auch in <a href="https://xkcd.com/2048/">diesem xkcd Comic</a> schön veranschaulicht:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_causality/xkcd_curve_fitting.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+<p>Ein Supervised Learning Modell versucht, den Zusammenhang zwischen Inputs und Outputs aus den gegebenen Datenpunkten abzuleiten. Was für ein Zusammenhang gelernt wird, wird vor allem durch den gewählten Modelltyp und seinen internen Optimierungsalgorithmus bestimmt. Man kann (und sollte) jedoch einiges tun, um sicherzustellen, dass das Ergebnis nicht offensichtlich falsch ist.</p>
+<p><strong>Was wollen wir?</strong><br>
+Ein Modell, das …</p>
+<ul>
+<li>… genaue Vorhersagen trifft</li>
+<li>… für neue Datenpunkte</li>
+<li>… aus den richtigen Gründen</li>
+<li>… auch wenn sich die Welt ständig verändert.</li>
+</ul>
+<p>Im Folgenden besprechen wir einige häufige Fallstricke und wie wir sie vermeiden können.</p>
+<section id="sec-pitfall-evaluation" class="level2">
+<h2 class="anchored" data-anchor-id="sec-pitfall-evaluation">[Fehler #1] Irreführende Modellevaluierung</h2>
+<p>Vorhersagemodelle müssen evaluiert werden, d.h. ihre Performance muss mit einer geeigneten Evaluierungsmetrik quantifiziert werden. Dies ist notwendig, um realistisch abzuschätzen, wie nützlich ein Modell in der Praxis sein wird und mit wie vielen Vorhersagefehlern wir rechnen müssen.</p>
+<p>Da man bei Supervised Learning Problemen die Ground Truth, also die echten Labels, kennt, kann man verschiedene Modelle objektiv bewerten und miteinander vergleichen.</p>
+<section id="ist-das-modell-für-die-aufgabe-geeignet" class="level4 custom-gray-block">
+<h4 class="anchored" data-anchor-id="ist-das-modell-für-die-aufgabe-geeignet">Ist das Modell für die Aufgabe geeignet?</h4>
+<p>D.h. generiert das Modell <em>zuverlässige Vorhersagen</em> für <em>neue Datenpunkte</em>?</p>
+<ul>
+<li>Teile die verfügbaren Daten in einen Trainings- und einen Testteil auf, um abschätzen zu können, wie gut die Vorhersagen des Modells sein werden, wenn es später auf neue Datenpunkte angewendet wird, auf denen es nicht trainiert wurde.</li>
+<li>Quantifiziere die Güte der Modellvorhersagen auf dem Testset mit einer geeigneten Evaluierungsmetrik (je nach Problemtyp).</li>
+</ul>
+<p>⇒ Sind manche Fehler schwerwiegender als andere (z.B. bei medizinischen Tests falsch positive vs.&nbsp;falsch negative Ergebnisse)?<br>
+⇒ Lege dich auf <em>eine</em> Metrik/KPI fest, anhand derer du unterschiedliche Modelle vergleichst und auswählst (evtl. unter Berücksichtigung zusätzlicher Einschränkungen wie Laufzeit).</p>
+</section>
+<p>Beim Evaluieren eines Modells kann man allerdings leicht ein zu optimistisches Bild zeichnen, weshalb man die Ergebnisse immer kritisch hinterfragen und <strong>die Performance eines Modells mit der einer Baseline vergleichen</strong> sollte. Der einfachste Vergleich wäre mit einem sehr dummen Modell, das immer den Mittelwert (→ Regression) bzw. die häufigste Klasse (→ Klassifikation) vorhersagt.</p>
+<section id="evaluierungsmetriken-bei-unausgeglichenen-klassenverteilungen" class="level4 custom-gray-block">
+<h4 class="anchored" data-anchor-id="evaluierungsmetriken-bei-unausgeglichenen-klassenverteilungen">Evaluierungsmetriken bei unausgeglichenen Klassenverteilungen</h4>
+<p>Die Accuracy (Genauigkeit) ist ein sehr häufig verwendetes Evaluierungsmaß für Klassifikationsprobleme:<br>
+<strong>Accuracy:</strong> Anteil der Proben, die richtig klassifiziert wurden.</p>
+<p>Unten sind die Entscheidungsgrenzen von zwei Modellen in einem Beispieldatensatz eingezeichnet, wobei die Farbe des Hintergrunds angibt, ob das Modell die blaue oder rote Klasse für einen Datenpunkt in diesem Bereich vorhersagt. Welches Modell hältst du für sinnvoller?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_evaluation/balanced_acc4a.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+<p>Bei unausgeglichenen Klassenverteilungen, wie in diesem Fall mit viel mehr Datenpunkten aus der blauen im Vergleich zur roten Klasse, ist die Accuracy eines Modells, das einfach immer die häufigste Klasse vorhersagt, schon sehr groß. Eine Accuracy von 90% mag zwar beeindruckend klingen, wenn man den Stakeholdern des Projekts von der Performance seines Modells berichtet, bedeutet jedoch nicht automatisch, dass das Modell tatsächlich in der Praxis nützlich ist, zumal uns bei realen Problemen oft die seltenere Klasse mehr interessiert, z.B. Menschen mit einer seltenen Krankheit oder Produkte, die einen Defekt aufweisen.</p>
+<p>Eine aussagekräftigere Evaluierungsmetrik für Klassifikationsmodelle ist die Balanced Accuracy, mit der wir zwischen einem Modell, das tatsächlich etwas gelernt hat, und der ‘dummen Baseline’ unterscheiden können:<br>
+<strong>Balanced Accuracy:</strong> Zuerst wird für jede Klasse einzeln der Anteil der richtig klassifizierten Stichproben berechnet und dann der Durchschnitt dieser Werte gebildet.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_evaluation/balanced_acc4b.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="sec-pitfall-generalize" class="level2">
+<h2 class="anchored" data-anchor-id="sec-pitfall-generalize">[Fehler #2] Modell generalisiert nicht</h2>
+<p>Wir wollen ein Modell, das den ‘Input → Output’-Zusammenhang in den Daten erfasst und interpolieren kann, d.h. wir müssen prüfen:<br>
+<strong>Generiert das Modell zuverlässige Vorhersagen für neue Datenpunkte aus derselben Verteilung wie die der Trainingsdaten?</strong></p>
+<p>Wenn ja, garantiert dies zwar noch nicht, dass das Modell tatsächlich den echten kausalen Zusammenhang zwischen Inputs und Outputs gelernt hat und über den Trainingsbereich hinaus extrapolieren kann (dazu kommen wir im nächsten Abschnitt). Zumindest generiert das Modell aber zuverlässige Vorhersagen für neue Datenpunkte, die den Trainingsdaten ähnlich sind. Ist dies nicht gegeben, ist das Modell nicht nur falsch, sondern auch nutzlos.</p>
+<p>Aber warum macht ein Modell überhaupt Fehler? Eine schlechte Performance auf dem Testset kann zwei Gründe haben: Overfitting oder Underfitting.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_evaluation/overunderfitting.png" class="img-fluid figure-img" style="width:85.0%"></p>
+<figcaption>Wenn man bei den verschiedenen Modellen hier nur den Fehler auf den Testdaten betrachtet, könnte man schlussfolgern, dass die Modelle links (overfitting) und rechts (underfitting) gleichermaßen falsch sind. Das stimmt zwar in gewisser Weise, aber der Testfehler allein sagt uns nicht, <em>warum</em> die Modelle falsch liegen oder wie wir ihre Performance verbessern können. Offensichtlich machen die beiden Modelle auf dem Testset aus völlig unterschiedlichen Gründen Fehler: Das overfittete Modell hat die Trainingsdaten quasi auswendig gelernt und kann nicht auf neue Datenpunkte verallgemeinert werden, während das underfittete Modell zu einfach ist, um den Zusammenhang zwischen den Inputs und Outputs überhaupt abzubilden.</figcaption>
+</figure>
+</div>
+<p>Diese beiden Fälle erfordern sehr unterschiedliche Ansätze, um die Modellperformance zu verbessern.</p>
+<p>Da die meisten Datensätze sehr viele Inputvariablen haben, kann man das Modell in der Regel nicht einfach wie oben aufmalen, um zu sehen, ob es over- oder underfittet. Stattdessen muss man sich den mit einer aussagekräftigen Evaluierungsmetrik berechneten Fehler sowohl auf dem Trainings- als auch dem Testset anschauen um zu bestimmen, ob man es mit Overfitting oder Underfitting zu tun hat:</p>
+<p><strong>Overfitting:</strong> super Trainingsperformance, inakzeptabel auf den Testdaten<br>
+<strong>Underfitting:</strong> schlechte Trainings- UND Testperformance</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_evaluation/overunderfitting_errors_simple4.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:65.0%"></p>
+</figure>
+</div>
+<p>Je nachdem, ob ein Modell over- oder underfittet, gibt es verschiedene Möglichkeiten die Performance zu verbessern. Eine perfekte Modellperformance ist jedoch unrealistisch, da manche Aufgaben einfach schwierig sind, zum Beispiel weil die Daten sehr verrauscht sind.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tipp
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Schaue dir immer die Daten an! Gibt es ein Muster unter den falschen Vorhersagen, z.B. eine Diskrepanz zwischen der Performance für verschiedene Klassen?</p>
+</div>
+</div>
+</section>
+<section id="sec-pitfall-spurious" class="level2">
+<h2 class="anchored" data-anchor-id="sec-pitfall-spurious">[Fehler #3] Modell missbraucht Scheinkorrelationen</h2>
+<p>Selbst wenn ein Modell in der Lage ist, richtige Vorhersagen für neue Datenpunkte zu generieren, die den Trainingsdaten ähnlich sind, bedeutet dies nicht, dass das Modell tatsächlich den wahren kausalen Zusammenhang zwischen den Inputs und Outputs gelernt hat!</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warnung
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>ML-Modelle machen es sich oft leicht und schummeln! Sie nutzen häufig <a href="https://www.tylervigen.com/spurious-correlations">Scheinkorrelationen</a>, statt die wahren kausalen Zusammenhänge zu lernen. Dies macht sie anfällig für Adverserial Attacks und Daten-Drifts, die das Modell zwingen, zu extrapolieren statt zu interpolieren.</p>
+</div>
+</div>
+<section id="eine-richtige-vorhersage-wird-nicht-immer-aus-den-richtigen-gründen-gemacht" class="level4 custom-gray-block">
+<h4 class="anchored" data-anchor-id="eine-richtige-vorhersage-wird-nicht-immer-aus-den-richtigen-gründen-gemacht">Eine richtige Vorhersage wird nicht immer aus den richtigen Gründen gemacht!</h4>
+<p>Die Grafik unten stammt aus einem Paper, in dem die Autoren festgestellt haben, dass ein vergleichsweise einfaches ML-Modell, das auf einem Standard-Bildklassifizierungsdatensatz trainiert wurde, für alle zehn Klassen im Datensatz schlecht abschnitt – bis auf die Klasse ‘Pferd’! Als sie den Datensatz genauer untersuchten und analysierten, <em>warum</em> das Modell eine bestimmte Klasse vorhersagt, d.h. welche Bildmerkmale in der Vorhersage verwendet wurden (angezeigt als Heatmap auf der rechten Seite), machten sie folgende Feststellung: Die meisten Bilder von Pferden im Datensatz stammten vom selben Fotografen und enthielten alle einen charakteristischen Copyright-Vermerk in der linken unteren Ecke.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_explainability/analyzing_classifiers.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Lapuschkin, Sebastian, et al.&nbsp;“Analyzing classifiers: Fisher vectors and deep neural networks.” <em>IEEE Conference on Computer Vision and Pattern Recognition.</em> 2016.</figcaption>
+</figure>
+</div>
+<p>Anhand dieses Artefaktes konnte das Modell mit hoher Genauigkeit Pferdebilder in diesem Datensatz identifizieren – und zwar sowohl im Trainings- als auch im Testset, das auch Bilder desselben Fotografen enthielt. Trotzdem hat das Modell natürlich nicht gelernt, was ein Pferd eigentlich ausmacht, und es kann nicht extrapolieren und andere Fotos von Pferden ohne diesen Copyright-Hinweis korrekt identifizieren. Andersrum könnte man nun auch ein Bild von einem anderen Tier mit einem solchen Copyright-Vermerk versehen und das Modell würde darauf dann irrtümlich ein Pferd erkennen. Man kann das Modell so also absichtlich austricksen, was man auch als “Adverserial Attack” bezeichnet.</p>
+</section>
+<p>Dies ist bei weitem nicht das einzige Beispiel, bei dem ein Modell “geschummelt” hat, indem es Scheinkorrelationen in den Trainingsdaten ausnutzte. Ein weiteres beliebtes Beispiel: Ein Datensatz mit Bildern von Hunden und Wölfen, bei dem alle Wölfe auf verschneitem Hintergrund und die Hunde auf Gras oder anderen nicht-weißen Hintergründen fotografiert wurden. Modelle, die auf so einem Datensatz trainiert werden, können eine gute Vorhersagegenauigkeit aufweisen, ohne dass sie die wahren kausalen Zusammenhang zwischen den Features und Labels erkannt haben.</p>
+<p>Um solche Pannen rechtzeitig zu erkennen, ist es wichtig, <strong>das Modell zu interpretieren und seine Vorhersagen zu erklären</strong> (wie im oben genannten Paper), um zu sehen, ob das Modell zur Vorhersage die Features verwendet, die wir (oder ein Domänenexperte) erwartet hätten.</p>
+<div class="custom-gray-block">
+<section id="adversarial-attacks-ml-modelle-absichtlich-täuschen" class="level4">
+<h4 class="anchored" data-anchor-id="adversarial-attacks-ml-modelle-absichtlich-täuschen">Adversarial Attacks: ML-Modelle absichtlich täuschen</h4>
+<p>Bei einem ‘feindlichen Angriff’ auf ein ML-Modell werden die Inputdaten subtil verändert, sodass ein Mensch diese Änderungen nicht bemerkt und immer noch zum richtigen Ergebnis kommt, aber das Modell seine Vorhersage ändert.</p>
+<p>Während zum Beispiel ein ML-Modell das ‘Stop’-Schild auf dem linken Bild leicht erkennen kann, wird das Schild rechts aufgrund der strategisch platzierten, unscheinbar aussehenden Aufkleber (die ein Mensch einfach ignorieren würde) mit einem Geschwindigkeitsbegrenzungsschild verwechselt:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_explainability/adversarial_attack2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:55.0%"></p>
+</figure>
+</div>
+<p>Der Grund dafür ist, dass das Modell nicht die wahren Merkmale gelernt hat, anhand derer Menschen ein Stoppschild als solches identifizieren, z.B. die achteckige Form und die vier weißen Buchstaben ‘STOP’ vor rotem Hintergrund. Stattdessen verlässt sich das Modell auf bedeutungslose Korrelationen, um das Stoppschild von anderen Schildern zu unterscheiden.<br>
+Da ein Convolutional Neural Network (CNN), die neuronale Netzarchitektur, die typischerweise für Bildklassifizierungsaufgaben verwendet wird, sich sehr auf lokale Muster fokussiert, lässt es sich leicht <a href="https://www.sciencemag.org/news/2018/07/turtle-or-rifle-hackers-easily-fool-ais-seeing-wrong-thing">täuschen</a>. Dies geschieht, indem man die globale Form von Objekten, welche Menschen zur Identifikation verwenden, intakt lässt, und die Bilder mit bestimmten Texturen oder anderen Hochfrequenzmustern überlagert, wodurch das Modell eine andere Klasse vorhersagt.</p>
+</section>
+<section id="genai-adversarial-prompts" class="level4">
+<h4 class="anchored" data-anchor-id="genai-adversarial-prompts">GenAI &amp; Adversarial Prompts</h4>
+<p>Wegen ihrer Komplexität ist es besonders schwierig, den Output von generativen KI-Modellen (GenAI) wie ChatGPT zu kontrollieren. Diese Modelle können zwar in “Human-in-the-Loop” Szenarien sehr nützlich sein (z.B. um eine E-Mail oder Code-Schnipsel zu schreiben, die dann nochmal von einem Menschen überprüft werden), doch es ist schwer, die notwendigen Sicherheitsvorkehrungen zu treffen, damit der Chatbot nicht missbraucht werden kann.</p>
+<p>Der ChatGPT-basierte Kundensupport-Chat eines Chevrolet-Autohändlers ist nur ein Beispiel von vielen frühen GenAI Anwendungen, die bestenfalls gemischte Ergebnisse lieferten:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_explainability/adversarial_chatgpt.png" class="img-fluid figure-img" style="width:65.0%"></p>
+<figcaption>Screenshot: https://twitter.com/ChrisJBakke/status/1736533308849443121 (12.1.2024)</figcaption>
+</figure>
+</div>
+</section>
+</div>
+<p>Wie man robuste Kausalmodelle, die den wahren ‘Input → Output’-Zusammenhang in den Daten erfassen, findet, wird nach wie vor <a href="https://bdtechtalks.com/2021/03/15/machine-learning-causality/">aktiv erforscht</a> und ist weitaus schwieriger als ein Modell zu finden, das “nur” verallgemeinert und gute Vorhersagen für die Testdaten generiert.</p>
+</section>
+<section id="sec-pitfall-biased" class="level2">
+<h2 class="anchored" data-anchor-id="sec-pitfall-biased">[Fehler #4] Modell diskriminiert</h2>
+<p>Ein Modell, welches echte kausale Zusammenhänge zwischen den Variablen aufgegriffen hat, generiert zwar robustere Vorhersagen, doch es kann auch kausale Zusammenhänge in den historischen Daten geben, die ein Modell besser <em>nicht</em> lernen sollte. Wenn in der Vergangenheit Menschen aufgrund ihres Geschlechts oder ihrer Hautfarbe diskriminiert wurden, kann sich dies auch in den Trainingsdaten widerspiegeln und wir müssen zusätzliche Maßnahmen ergreifen, damit diese Muster nicht in unserem Modell weiterbestehen – obwohl es in der Vergangenheit vielleicht echte kausale Zusammenhänge waren.</p>
+<section id="systematisch-verzerrte-daten-führen-zu-stark-verzerrten-modellen" class="level4">
+<h4 class="anchored" data-anchor-id="systematisch-verzerrte-daten-führen-zu-stark-verzerrten-modellen">Systematisch verzerrte Daten führen zu (stark) verzerrten Modellen</h4>
+<p>Im Folgenden sind einige Beispiele aufgeführt, bei denen Menschen mit den besten Absichten ein ML-Modell entwickelt haben, das problematische Dinge aus realen Daten gelernt hat.</p>
+<div class="custom-gray-block">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_data_issues/bias_microsoft_tay.png" class="img-fluid figure-img" style="width:55.0%"></p>
+<figcaption>Was als Forschungsprojekt begann, um herauszufinden, wie Menschen mit einem KI-basierten Chatbot interagieren, endete für Microsoft als PR-Albtraum. Der Chatbot ‘Tay’ sollte aus den an sie geschriebenen Nachrichten lernen. Aber da die Entwickler offenbar mehr über ihre ML-Modelle als über menschliches Verhalten im Internet nachdachten, wiederholte Tay vor allem rassistische und sexistische Aussagen, die andere ihr gegenüber twitterten.</figcaption>
+</figure>
+</div>
+</div>
+<div class="custom-gray-block">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_data_issues/bias_twitter_imagecrop.png" class="img-fluid figure-img" style="width:55.0%"></p>
+<figcaption>Da viele auf Twitter gepostete Bilder größer sind als der verfügbare Platz für das Vorschaubild, wollte Twitter “den relevantesten Teil” eines Bildes für die Vorschau mit einem ML-Modell auswählen. Da sie dieses Modell leider auf einem Datensatz trainierten, der mehr Bilder von Menschen mit weißer als dunkler Hautfarbe enthielt, wurde das Modell rassistisch und wählte beispielsweise bei einem Bild von Barack Obama und einem zufälligen unwichtigen weißen Politiker immer den weißen Politiker für das Vorschaubild. Des weiteren fiel auf, dass diese Zuschneide-Algorithmen häufiger Gesichter als Vorschaubilder für Männer und den Körper (insbesondere – wer hätte es gedacht – Brüste) als Vorschaubilder für Frauen auswählten.</figcaption>
+</figure>
+</div>
+</div>
+<div class="custom-gray-block">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_data_issues/bias_household_lowerincome.png" class="img-fluid figure-img" style="width:65.0%"></p>
+<figcaption>Die meisten Computer Vision Modelle werden auf dem ImageNet-Datensatz (vor-)trainiert, der über 14 Millionen handgelabelte Bilder enthält, die in mehr als 20.000 Kategorien organisiert sind. Da diese Bilder jedoch aus dem Internet stammen und mehr Menschen aus Industrieländern als aus Entwicklungsländern dazu neigen, Bilder online zu stellen, sind beispielsweise gängige Haushaltsgegenstände aus reicheren Ländern stark überrepräsentiert. Als Folge verwechseln diese Modelle z.B. Seifenstücke, wie sie in einem ärmeren Land verwendet werden, mit Lebensmitteln (z.B. könnte man argumentieren, dass diese tatsächlich eine gewisse Ähnlichkeit haben mit einem Teller mit Essen in einem Sterne-Restaurant).<br>
+de Vries, Terrance, et al.&nbsp;“Does object recognition work for everyone?” <em>IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops.</em> 2019.</figcaption>
+</figure>
+</div>
+</div>
+<p>Die oben genannten Probleme traten alle auf, weil die Daten nicht gleichmäßig verteilt waren:</p>
+<ul>
+<li>Tay hat viel mehr rassistische und hasserfüllte Kommentare und Tweets gesehen als neutrale oder wertschätzende Äußerungen.</li>
+<li>Der Bilddatensatz, auf dem Twitter sein Modell trainierte, enthielt mehr Bilder von weißen als von nicht-weißen Personen.</li>
+<li>Bei einer zufälligen Stichprobe von Fotos aus dem Internet wurden diese Bilder meist von Menschen aus Industrieländern hochgeladen, d.h. Bilder, die den Status Quo in Entwicklungsländern zeigen, sind unterrepräsentiert.</li>
+</ul>
+<p>Noch problematischer als eine bloße Unterrepräsentation bestimmter Untergruppen (verzerrte Eingabeverteilung) ist ein Muster der systematischen Diskriminierung dieser Untergruppen in historischen Daten (diskriminierende Verschiebung der zugewiesenen Labels).</p>
+<div class="custom-gray-block">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_data_issues/bias_apple_card.png" class="img-fluid figure-img" style="width:55.0%"></p>
+<figcaption>In vielen Datensätzen, die zum Trainieren von Modellen für die Vergabe von Kreditscores oder zur Bestimmung von Zinssätzen für Hypotheken oder Kredite verwendet werden, ist oft eine Menge expliziter Diskriminierung kodiert. Da diese Anwendungsbereiche einen direkten und starken Einfluss auf das Leben der Menschen haben, muss man hier besonders vorsichtig sein. Beispielsweise sollte man überprüfen, ob ein Modell für einen Mann und eine Frau den gleichen Score vorhersagt, wenn alle Merkmale mit Ausnahme des Geschlechts bei einem Datenpunkt übereinstimmen.</figcaption>
+</figure>
+</div>
+</div>
+<p><u>Zusammenfassend:</u> Ein verzerrtes Modell kann sich auf zwei Arten negativ auf die Nutzer auswirken:</p>
+<ul>
+<li>Unverhältnismäßige Produktausfälle aufgrund unterrepräsentierter Stichproben. Beispielsweise funktionieren Spracherkennungsmodelle für Frauen oft weniger zuverlässig, weil sie mit mehr Daten von Männern trainiert wurden (z.B. transkribierte politische Reden).</li>
+<li>Schaden durch Benachteiligung / Verweigerung von Chancen aufgrund von in historischen Daten kodierten Stereotypen. Beispielsweise müssen Frauen höhere Kreditzinsen zahlen als Männer oder im Ausland geborene Personen gelten als weniger qualifiziert für eine Stelle, wenn ihre Lebensläufe von einem automatisierten Screening-Tool bewertet werden.</li>
+</ul>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Vorsicht
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Wenn man Modelle mit Daten neu trainiert, die von Vorhersagen eines verzerrten Vorgängermodells beeinflusst wurden, können bestehende Vorurteile noch verstärkt werden. Wenn beispielsweise ein Lebenslauf-Screeningtool ein häufiges Merkmal (z.B. “hat die Stanford University besucht”) bei aktuellen Mitarbeitern erkennt, könnte es konsequent Lebensläufe mit diesem Merkmal empfehlen. Daraus resultiert, dass noch mehr Leute mit diesem Merkmal zu Vorstellungsgesprächen eingeladen und eingestellt werden, was die Dominanz dieses Merkmals in nachfolgenden Modellen, die auf diesen Mitarbeiterprofilen trainiert werden, weiter verstärkt.</p>
+</div>
+</div>
+</section>
+<section id="auf-dem-weg-zu-fairen-modellen" class="level4">
+<h4 class="anchored" data-anchor-id="auf-dem-weg-zu-fairen-modellen">Auf dem Weg zu fairen Modellen</h4>
+<p>Bevor wir diese Probleme beheben können, müssen wir uns ihrer erstmal bewusst werden. Daher ist es wichtig, die Performance eines Modells immer für jede (bekannte) Untergruppe in den Daten einzeln zu bewerten, um sicherzustellen, dass die Vorhersagefehler des Modells zufällig sind und das Modell nicht für einige Untergruppen (z.B. Frauen) systematisch schlechter funktioniert.</p>
+<p>Außerdem ist grundsätzlich Vorsicht geboten, wenn wir Variablen in das Modell aufnehmen, die Attribute wie Geschlecht oder Herkunft kodieren. Zum Beispiel wird die Performance eines Modells zur Diagnose von Herzinfarkten durch die Einbeziehung von ‘Geschlecht’ als Merkmal höchstwahrscheinlich verbessert, da Männer und Frauen bei einem Herzinfarkt unterschiedliche Symptome zeigen. Andererseits sollte ein Modell, das jemandem eine Kreditwürdigkeit zuweist, bei dieser Entscheidung das Geschlecht der Person eher nicht berücksichtigen, da ansonsten die in historischen Daten kodierten Stereotypen weiterleben.<br>
+Das Geschlecht oder die Hautfarbe einer Person kann jedoch auch mit anderen Variablen wie beispielsweise Einkommen oder Wohngegend korreliert sein, sodass selbst Features, die auf den ersten Blick harmlos erscheinen, problematische Informationen an das Modell weitergeben können. In solchen Fällen sind zusätzliche Maßnahmen nötig, um zu vermeiden, dass das Modell diskriminiert.</p>
+<div class="custom-gray-block">
+<p>Weitere Negativbeispiele findest du auf der Seite <a href="https://incidentdatabase.ai/">AI Incidence Database</a> und in</p>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout="[ 20, 80 ]">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 20.0%;justify-content: center;">
+<p><img src="../images/08_ml_in_practice/book_weapons_2016.jpg" class="img-fluid"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 80.0%;justify-content: flex-start;">
+<p>Buch Empfehlung:<br>
+<strong>Weapons of Math Destruction</strong> von Cathy O’Neil (2016)</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-pitfall-drifts" class="level2">
+<h2 class="anchored" data-anchor-id="sec-pitfall-drifts">[Fehler #5] Daten &amp; Konzept Drifts</h2>
+<p>Wir dürfen nie vergessen, dass sich die Welt permanent verändert und Modelle regelmäßig mit neuen Daten nachtrainiert werden müssen. Nur so können sie sich an diese geänderten Umstände anpassen.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Vorsicht
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>ML versagt leise!</strong> D.h. auch wenn alle Vorhersagen falsch sind, stürzt das Programm nicht einfach mit einer Fehlermeldung ab.<br>
+→ Wir brauchen ein konstantes Monitoring, um Veränderungen zu erkennen, die zu einer Verschlechterung der Modellperformance führen!</p>
+</div>
+</div>
+<p><u>Eins der größten Probleme in der Praxis: Daten und Konzept-Drifts:</u><br>
+Die Vorhersagegenauigkeit eines Modells lässt schnell nach, wenn die <strong>Daten im Produktivbetrieb von den Trainingsdaten abweichen</strong>. Dabei unterscheiden wir zwischen:</p>
+<ul>
+<li><strong><em>Daten-Drift:</em></strong> Verteilung der gemessenen Werte einer oder mehrerer Variablen verändert sich. Dies kann entweder die Inputs <span class="math inline">\(X\)</span> betreffen, dann nennt sich das <em>Covariate Shift</em> oder die Outputs <span class="math inline">\(y\)</span>, dann sprechen wir von <em>Label Shift</em>.</li>
+<li><strong><em>Konzept-Drift:</em></strong> Input/Output Zusammenhang <span class="math inline">\(X \to y\)</span> ändert sich, d.h. exakt die gleichen Inputs <span class="math inline">\(X\)</span> resultieren plötzlich in einem anderen Output <span class="math inline">\(y\)</span>.</li>
+</ul>
+<p>In beiden Fällen ändert sich etwas, das für unsere ML Anwendung wichtig ist, in der Welt. Wenn unsere gesammelten Daten diese Veränderung abbilden, spricht man von Daten-Drift. Wenn wir diese Veränderung nicht in unseren Inputdaten sehen können, handelt es sich um einen Konzept-Drift.</p>
+<p><u>Beispiel:</u> Anhand der Produktionsbedingungen inkl. der Größe des produzierten Teils (<span class="math inline">\(X\)</span>) möchten wir vorhersagen ob das jeweilige Produkt in Ordnung oder Ausschuss ist (<span class="math inline">\(y\)</span>):</p>
+<ul>
+<li><em>Daten-Drift:</em> Der Hersteller produzierte früher nur kleine Teile, nun aber auch größere Teile.</li>
+<li><em>Konzept-Drift:</em> Während früher 10% Ausschuss produziert wurden, wird nach einer Reparatur der Maschine bei gleichen Produktionsbedingungen (<span class="math inline">\(X\)</span>) nur noch 5% Ausschuss (<span class="math inline">\(y\)</span>) produziert.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tipp
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Covarite Shifts können, ohne dass es einen Konzept-Drift gibt, zu Label Shifts führen, wenn die Inputvariable kausal mit der Outputvariable verbunden ist. Zum Beispiel wurde ein Modell, das Krebs (<span class="math inline">\(y\)</span>) bei Patienten basierend auf dem Alter (<span class="math inline">\(x\)</span>) vorhersagt, mit einem Datensatz trainiert, der größtenteils aus älteren Menschen besteht, die naturgemäß auch häufiger an Krebs erkranken. In der Praxis wird das Modell dann auf Patienten jeden Alters angewendet (<em>Covariate Shift</em>), also auch auf mehr junge Menschen, die seltener an Krebs erkranken (<em>Label Shift</em>).</p>
+</div>
+</div>
+<section id="gründe-für-drifts-vorbeugende-maßnahmen" class="level4">
+<h4 class="anchored" data-anchor-id="gründe-für-drifts-vorbeugende-maßnahmen">Gründe für Drifts &amp; Vorbeugende Maßnahmen</h4>
+<p>Daten- und Konzeptdrifts entstehen sowohl durch die Art wie die Daten gesammelt werden, als auch durch externe Ereignisse außerhalb unserer Kontrolle.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hinweis
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Diese Veränderungen können entweder <strong>graduell</strong> sein (z.B. Sprachen ändern sich schrittweise wenn neue Wörter geprägt werden; ein Kameraobjektiv staubt mit der Zeit ein), oder sie können als <strong>plötzlicher Schock</strong> auftreten (z.B. jemand reinigt das Kameraobjektiv; als die COVID-19-Pandemie ausbrach, wechselten plötzlich viele Menschen zum Online-Shopping, wodurch Systeme zur Erkennung von Kreditkartenbetrug erstmal irrtümlich Alarm schlugen).</p>
+</div>
+</div>
+<p><strong><em>Geändertes Datenschema</em></strong></p>
+<p>Viele Probleme entstehen intern und könnten vermieden werden, zum Beispiel:</p>
+<ul>
+<li>Die Benutzeroberfläche zur Datensammlung ändert sich, zum Beispiel wurde eine Größe zuvor in Metern erfasst und wird jetzt in Zentimetern erfasst.</li>
+<li>Die Sensor-Konfiguration ändert sich, beispielsweise wird in einer neuen Version eines Geräts ein anderer Sensor verwendet, der jedoch weiterhin Werte unter dem gleichen Variablennamen wie der alte Sensor aufzeichnet.</li>
+<li>Die als Inputs für das Modell verwendeten Features ändern sich, zum Beispiel werden zusätzliche erstellte Features eingeführt, jedoch wurde die Feature-Transformations-Pipeline nur im Trainingscode geändert, noch nicht im Produktionscode.</li>
+</ul>
+<p>⇒ In diesen Fällen sollte idealerweise ein Fehler geworfen werden, zum Beispiel könnten wir einige <strong>Tests vor der Anwendung des Modells</strong> einbauen, um sicherzustellen, dass wir die erwartete Anzahl von Features erhalten, deren Datentypen (z.B. Text oder Zahlen) wie erwartet sind und die Werte grob im erwarteten Bereich für das jeweilige Feature liegen. Darüber hinaus müssen andere Teams im Unternehmen darüber informiert werden, dass ein ML-Modell auf ihren Daten basiert, damit sie das Data-Science-Team rechtzeitig über Änderungen informieren können.</p>
+<p><strong><em>Daten-Drifts</em></strong></p>
+<p>Daten-Drifts treten auf, wenn unser Modell Vorhersagen für Stichproben treffen muss, die sich von den Trainingsdaten unterscheiden. Das kann zum Beispiel daran liegen, dass bestimmte Bereiche der Trainingsdomäne unterrepräsentiert waren. Im Extremfall könnte das Modell sogar gezwungen sein, über die Trainingsdomäne hinaus zu extrapolieren. Dies könnte beispielsweise durch folgende Gründe verursacht werden:</p>
+<ul>
+<li><strong>Veränderte Stichprobenauswahl</strong>, zum Beispiel wenn das Unternehmen kürzlich in ein anderes Land expandiert ist oder nach einer gezielten Marketingkampagne die Website von einer neuen Nutzergruppe besucht wird.</li>
+<li><strong>Feindseliges Verhalten</strong>, zum Beispiel wenn Spammer ständig ihre Nachrichten anzupassen, um Spam-Filter zu umgehen. Vor zehn Jahren hätte ein Mensch eine Spam-Nachricht von heute auch als Spam erkannt (die Bedeutung von Spam hat sich also nicht geändert), aber diese ausgefeilteren Nachrichten waren damals nicht im Trainingsdatensatz enthalten. Das macht es für ML-Modelle schwierig, diese Muster zu erkennen.</li>
+</ul>
+<p>⇒ Daten-Drifts können als Gelegenheit betrachtet werden, unseren Trainingsdatensatz zu erweitern und das <strong>Modell mit mehr Daten von unterrepräsentierten Untergruppen neu zu trainieren</strong>. Wie jedoch im vorherigen Abschnitt zu modellbasierter Diskriminierung erläutert wurde, bedeutet dies oft, dass diese unterrepräsentierten Untergruppen zunächst mit einem weniger effektiven Modell arbeiten müssen, beispielsweise eine Spracherkennungsfunktion, die bei Frauen schlechter funktioniert als bei Männern. Daher ist es wichtig, Untergruppen zu identifizieren, bei denen das Modell möglicherweise schlechtere Ergebnisse liefert, idealerweise mehr Daten aus diesen Gruppen zu sammeln oder zumindest beim Modelltraining und -evaluierung diesen Datenpunkten größere Beachtung zu schenken.</p>
+<p><strong><em>Konzept-Drifts</em></strong></p>
+<p>Konzept-Drifts treten auf, wenn externe Veränderungen oder Ereignisse eintreten, die wir nicht in unseren Daten erfasst haben oder die die Bedeutung unserer Daten verändern. Das bedeutet, dass genau dieselben Input Features plötzlich zu unterschiedlichen Outputs führen. Ein Grund kann sein, dass uns <strong>eine Variable fehlt</strong>, die einen direkten Einfluss auf den Output hat, zum Beispiel:</p>
+<ul>
+<li>Unser Prozess reagiert auf Temperatur und Luftfeuchtigkeit, aber wir haben nur die Temperatur aufgezeichnet und nicht die Luftfeuchtigkeit. Wenn sich also die Luftfeuchtigkeit ändert, führen dieselben Temperaturwerte zu unterschiedlichen Outputs. ⇒ Luftfeuchtigkeit zusätzlich als Input Feature im Modell aufnehmen.</li>
+<li>Saisonale Trends führen zu Veränderungen in der Beliebtheit von Sommer- gegenüber Winterkleidung. ⇒ Monat / Außentemperatur als zusätzliches Input Feature hinzufügen.</li>
+<li>Besondere Ereignisse, wie zum Beispiel wenn ein Prominenter unser Produkt in den sozialen Medien erwähnt oder Menschen aufgrund von Lockdowns während einer Pandemie ihr Verhalten ändern. ⇒ Obwohl es schwer sein kann, diese Ereignisse im Voraus zu prognostizieren, können wir, wenn sie eintreten, ein zusätzliches Feature wie ‘während des Lockdowns’ aufnehmen, um die in diesem Zeitraum gesammelten Daten von den übrigen zu unterscheiden.</li>
+<li>Degenerative Feedbackschleifen, d.h., die Existenz des Modells ändert das Verhalten der Benutzer, zum Beispiel veranlasst ein Empfehlungssystem Benutzer dazu, auf Videos zu klicken, nur weil sie empfohlen wurden. ⇒ Als zusätzliches Feature aufnehmen, ob das Video empfohlen wurde oder nicht, um herauszufinden, wie viel von “Benutzer hat auf Element geklickt” auf die Empfehlung zurückzuführen ist und wie viel auf das natürliche Verhalten des Benutzers.</li>
+</ul>
+<p>Zusätzlich können Konzept-Drifts durch Ereignisse verursacht werden, die die <strong>Bedeutung der aufgezeichneten Daten ändern</strong>, zum Beispiel:</p>
+<ul>
+<li>Inflation: 1 Euro im Jahr 1990 hatte einen höheren Wert als 1 Euro heute. ⇒ Daten Inflationsbereinigen oder die Inflationsrate als zusätzliches Input Feature aufnehmen.</li>
+<li>Ein in Wasser getauchter Temperatursensor sammelt Kalkablagerungen, und nach einer Weile ist die Temperaturmessung nicht mehr genau. Zum Beispiel misst ein sauberer Sensor bei einer tatsächlichen Temperatur von 90 Grad die exakten 90 Grad, aber nachdem er einige Schichten Kalk angesammelt hat, misst er unter denselben Bedingungen nur noch 89 Grad. Während unser Output von der wahren Temperatur beeinflusst wird, haben wir nur Zugriff auf die Sensormessung für die Temperatur, die auch durch den Zustand des Sensors selbst bestimmt wird. ⇒ Versuche, die Kalkablagerung zu schätzen, zum Beispiel basierend auf der Anzahl der Tage seit der letzten Reinigung des Sensors (was auch bedeutet, dass solche Wartungsereignisse irgendwo erfasst werden müssen!).</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_data_issues/concept_drift.png" class="img-fluid figure-img" style="width:40.0%"></p>
+<figcaption>Kausaldiagramm, das zeigt, wie unser beobachteter Input <span class="math inline">\(x\)</span> (Temperaturmessung) und Output <span class="math inline">\(y\)</span> durch versteckte Variablen beeinflusst werden (auf die wir keinen direkten Zugriff haben). Diese versteckten Variablen sind der Zustand des Temperatursensors (d.h. wie viel Kalk sich angesammelt hat), die tatsächliche Temperatur und die Luftfeuchtigkeit (für die wir noch keinen Sensor installiert haben). Wenn der Sensorzustand und die Luftfeuchtigkeit konstant bleiben, können wir den Output aus der Temperaturmessung vorhersagen. Wenn sich jedoch einer dieser Werte ändert, treten Konzept-Drifts auf. Daher sollten wir versuchen, Schätzungen dieser versteckten Variablen in unser Modell aufzunehmen, um diese Veränderungen zu berücksichtigen.</figcaption>
+</figure>
+</div>
+<p>⇒ Vor dem Training eines Modells sollten die Daten untersucht werden, um <strong>Fälle zu identifizieren, bei denen identische Inputs unterschiedliche Outputs ergeben</strong>. Wenn möglich, sollten <strong>zusätzliche Input Features aufgenommen werden, um diese Variationen zu berücksichtigen</strong>. Eine schlechte Performance des Modells auf dem Testdatensatz deutet häufig darauf hin, dass relevante Inputs fehlen, was die Anfälligkeit für zukünftige Konzept-Drifts erhöht. Selbst wenn die richtigen Variablen verwendet werden, um einen Konzept-Drift zu erfassen, kann häufiges Nachtrainieren der Modelle dennoch notwendig sein. Zum Beispiel können unterschiedliche Zustände des Konzepts ungleichmäßig in den Trainingsdaten vorhanden sein, was zu Daten-Drifts führen kann (z.B. mehr Daten, die im Winter gesammelt wurden als in den frühen Sommermonaten). Wenn es nicht möglich ist, Variablen einzubeziehen, die den Konzept-Drift abbilden, könnte es notwendig sein, <strong>Datenpunkte aus dem ursprünglichen Trainingsdatensatz zu entfernen, die nicht der neuen Input/Output-Beziehung entsprechen, bevor das Modell erneut trainiert wird</strong>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tipp
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Der beste Weg, Daten und Konzept-Drifts entgegenzuwirken, besteht darin, das <strong>Modell häufig mit neuen Daten zu trainieren</strong>. Dies kann entweder nach einem fixen Zeitplan erfolgen (z.B. jedes Wochenende, je nachdem, wie schnell sich die Daten ändern) oder wenn das Monitoringsystem Alarm schlägt, weil es Drifts in den Inputs oder eine verschlechterte Modellperformance festgestellt hat.</p>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script type="text/javascript"> // go once over all images and transform the percentage width into pixels relative to original body size
+  const bodyWidth = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--custom-body-width')); // Get CSS variable
+  document.querySelectorAll('.quarto-figure img').forEach((img) => {
+    const styleWidth = img.getAttribute('style').match(/width:\s*([\d.]+)%/); // Extract percentage
+    if (styleWidth) {
+      const percentage = parseFloat(styleWidth[1]) / 100;
+      img.style.width = `${bodyWidth * percentage}px`; // Apply calculated width
+    }
+  });
+</script>
+
+<style type="text/css">
+#footer {
+  font-size: 80%; /* Makes the font 70% smaller */
+  border-top: 1px solid #ccc; /* Adds a horizontal line above the footer */
+  padding-top: 10px; /* Adds some spacing above the footer content */
+}
+</style>
+
+<!-- FOOTER  -->
+<div id="footer" class="outer">
+  <footer class="inner">
+    <p><b>Book/Course Feedback: </b> <a href="https://forms.gle/Ccv5h5zQxwPjWtCS7" target="_blank" rel="nofollow">Full Feedback Survey</a> or <a href="https://forms.gle/qK8T5ALzgpiZaxd49" target="_blank" rel="nofollow">Short Comment</a><br></p>
+
+    <p>Find me on <a href="https://github.com/cod3licious/" target="_blank" rel="nofollow">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/" target="_blank" rel="nofollow">LinkedIn</a><br>
+      <a href="https://franziskahorn.de/">Home</a> ~ <a href="mailto:hey@franziskahorn.de?Subject=Book%20Feedback" target="_blank" rel="nofollow">Contact</a> ~ <a href="https://franziskahorn.de/impressum.html">Impressum</a></p>
+
+      <!-- CC license -->
+   <p xmlns:cc="http://creativecommons.org/ns#">This work is licensed under <a href="https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY 4.0<img style="height:16px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:16px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""></a></p>
+  </footer>
+</div>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Kopiert");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Kopiert");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./05_supervised_models.html" class="pagination-link" aria-label="Deep Learning">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Deep Learning</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./08_conclusion.html" class="pagination-link" aria-label="Fazit">
+        <span class="nav-page-text"><span class="chapter-title">Fazit</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

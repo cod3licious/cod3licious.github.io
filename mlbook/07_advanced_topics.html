@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.39">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Advanced Topics – A Practitioner's Guide to Machine Learning</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./08_conclusion.html" rel="next">
+<link href="./06_pitfalls.html" rel="prev">
+<link href="./favicon.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-37b241f53b32a5ad598e4053e71b073f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07_advanced_topics.html"><span class="chapter-title">Advanced Topics</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">A Practitioner’s Guide to Machine Learning</a> 
+        <div class="sidebar-tools-main">
+    <a href="./A-Practitioner-s-Guide-to-Machine-Learning.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01a_intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01b_basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">The Basics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01c_python.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">ML with Python</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Analysis &amp; Preprocessing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_unsupervised.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Unsupervised Learning</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_supervised.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Supervised Learning Basics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_supervised_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Supervised Learning Models</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_pitfalls.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Avoiding Common Pitfalls</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07_advanced_topics.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Advanced Topics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08_conclusion.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Conclusion</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-deep-learning" id="toc-sec-deep-learning" class="nav-link active" data-scroll-target="#sec-deep-learning">Deep Learning</a>
+  <ul class="collapse">
+  <li><a href="#advanced-nn-architectures" id="toc-advanced-nn-architectures" class="nav-link" data-scroll-target="#advanced-nn-architectures">Advanced NN architectures</a></li>
+  <li><a href="#self-supervised-transfer-learning" id="toc-self-supervised-transfer-learning" class="nav-link" data-scroll-target="#self-supervised-transfer-learning">Self-Supervised &amp; Transfer Learning</a></li>
+  <li><a href="#neural-networks-in-python" id="toc-neural-networks-in-python" class="nav-link" data-scroll-target="#neural-networks-in-python">Neural Networks in Python</a></li>
+  </ul></li>
+  <li><a href="#sec-inforet" id="toc-sec-inforet" class="nav-link" data-scroll-target="#sec-inforet">Information Retrieval (Similarity Search)</a></li>
+  <li><a href="#sec-recsys" id="toc-sec-recsys" class="nav-link" data-scroll-target="#sec-recsys">Recommender Systems (Pairwise Data)</a></li>
+  <li><a href="#sec-time-series-forecasting" id="toc-sec-time-series-forecasting" class="nav-link" data-scroll-target="#sec-time-series-forecasting">Time Series Forecasting</a>
+  <ul class="collapse">
+  <li><a href="#input-and-target-variables" id="toc-input-and-target-variables" class="nav-link" data-scroll-target="#input-and-target-variables">Input and Target Variables</a></li>
+  <li><a href="#stateless-vs.-stateful-models" id="toc-stateless-vs.-stateful-models" class="nav-link" data-scroll-target="#stateless-vs.-stateful-models">Stateless vs.&nbsp;Stateful Models</a></li>
+  </ul></li>
+  <li><a href="#sec-rl" id="toc-sec-rl" class="nav-link" data-scroll-target="#sec-rl">Reinforcement Learning</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-advanced-topics" class="quarto-section-identifier"><span class="chapter-title">Advanced Topics</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Now that we’ve discussed different unsupervised and supervised learning methods, we explore some other special-purpose methods, which can be used to solve somewhat less straightforward problems:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_intro_ml/ml_goals_other.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+<section id="sec-deep-learning" class="level2">
+<h2 class="anchored" data-anchor-id="sec-deep-learning">Deep Learning</h2>
+<p>We’ve already covered the general principles behind <a href="05_supervised_models.html#sec-neural-networks">neural networks</a>. Now we’ll have a look at more complex architectures to work with, for example, image or text data, as well as some advanced training techniques and special-purpose Python libraries for implementing custom neural network architectures.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you want to learn more about deep learning, there are many great free resources available online, such as the introductory videos from <a href="https://www.3blue1brown.com/topics/neural-networks">3blue1brown</a>, which nicely illustrate what neural networks are actually computing and how backpropagation works; the <a href="https://www.coursera.org/specializations/deep-learning">Coursera Deep Learning Specialization (by Andrew Ng)</a>, which provides a good general introduction with many practical tips and also covers application areas like computer vision and NLP; or the <a href="https://atcold.github.io/pytorch-Deep-Learning/">Deep Learning with PyTorch course (by Yann LeCun)</a>, which is a bit more advanced and discusses state-of-the-art architectures.</p>
+</div>
+</div>
+<section id="advanced-nn-architectures" class="level3">
+<h3 class="anchored" data-anchor-id="advanced-nn-architectures">Advanced NN architectures</h3>
+<p>Similar to how domain-specific feature engineering can result in vastly improved model performances, it pays off to construct a neural network architecture tailored to the task.</p>
+<section id="recurrent-neural-network-rnn" class="level4">
+<h4 class="anchored" data-anchor-id="recurrent-neural-network-rnn">Recurrent Neural Network (RNN)</h4>
+<p>Recurrent neural networks are great for sequential data such as time series data or text (i.e., a sequence of words).</p>
+<p>In its simplest form, a RNN is like a FFNN, but with additional recurrent connections <span class="math inline">\(W_h\)</span> in the hidden layer to create a memory of the past:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/05_supervised_nn/rnn2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:45.0%"></p>
+</figure>
+</div>
+<p>It’s easiest when thinking about the RNN unrolled in time:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/05_supervised_nn/rnn_unrolled2.png" class="img-fluid figure-img" style="width:45.0%"></p>
+<figcaption>At the beginning of a new sequence, the hidden state <span class="math inline">\(\mathbf{x}'_0\)</span> is initialized with zeros. Then for each new sample <span class="math inline">\(\mathbf{x}_t\)</span> (with <span class="math inline">\(t \in \{1, ..., T\}\)</span>) in the sequence, the hidden state is updated based on this new input (after multiplying <span class="math inline">\(\mathbf{x}_t\)</span> with <span class="math inline">\(W_1\)</span>), as well as the previous hidden state at <span class="math inline">\(t-1\)</span> (by multiplying <span class="math inline">\(\mathbf{x}'_{t-1}\)</span> with <span class="math inline">\(W_h\)</span>). From this new hidden state <span class="math inline">\(\mathbf{x}'_t\)</span>, the output for this time step can then be predicted (by multiplying <span class="math inline">\(\mathbf{x}'_t\)</span> with <span class="math inline">\(W_2\)</span>). While this network only includes a single recurrent layer, a more complex architecture could also contain multiple such layers.</figcaption>
+</figure>
+</div>
+<p>The original RNN layer uses a very simple update rule for the hidden state, but there also exist more advanced <a href="https://towardsdatascience.com/44e9eb85bf21">types of RNNs</a>, like the Long Short Term Memory (LSTM) network or Gated Recurrent Units (GRU), which define more complex rules for how to combine the new input with the existing hidden state, i.e., they learn in more detail what to remember and which parts to forget, which can be beneficial when the data consists of longer sequences.</p>
+<p>The cool thing about RNNs is that they can process input sequences of varying length (where one sequence represents one data point, e.g., a text document), whereas all methods that we’ve discussed so far always expected the feature vectors that represent one data point to have a fixed dimensionality. For RNNs, while the input at a single time step (i.e., <span class="math inline">\(\mathbf{x}_t\)</span> with <span class="math inline">\(t \in \{1, ..., T\}\)</span>) is also a feature vector of a fixed dimensionality, the sequences themselves do not need to be of the same length <span class="math inline">\(T\)</span> (e.g., text documents can consist of different numbers of words). This comes in especially handy for time series analysis, as we’ll see in the next chapter.</p>
+<div class="custom-gray-block">
+<p>Useful in Natural Language Processing (NLP):</p>
+<p><strong>RNNs can take word order into account, which is ignored in TF-IDF vectors</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/05_supervised_nn/rnn_wordemb.png" class="img-fluid figure-img" style="width:45.0%"></p>
+<figcaption>This is an example architecture for a sentence classification task (e.g., sentiment analysis, i.e., deciding whether the text is positive or negative). The individual words in the sentence are represented as so-called word embeddings, which are just <em>d</em>-dimensional vectors that contain some (learned) information about the individual words (e.g., whether the word is more male or female; how these embeddings are created is discussed in the section on self-supervised learning below). The RNN is then fed the sentence word by word and at the end of the sentence, the final hidden state, which contains the accumulated information of the whole sentence, is used to make the prediction. Since the RNN processes the words in the sentence sequentially, the order of the words is taken into account (e.g., whether a “not” occurred before an adjective), and since we use word embeddings as inputs, which capture semantic and syntactic information about the words, similarity between individual words (e.g., synonyms) is captured, thereby creating more meaningful representations of text documents compared to TF-IDF vectors (at the expense of greater computational complexity).</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="convolutional-neural-network-cnn" class="level4">
+<h4 class="anchored" data-anchor-id="convolutional-neural-network-cnn">Convolutional Neural Network (CNN)</h4>
+<p>Manual feature engineering for computer vision tasks is incredibly difficult. While humans recognize a multitude of objects in images without effort, it is hard to describe <em>why</em> we can identify what we see, e.g., which features allow us to distinguish a cat from a small dog. Deep learning had its first breakthrough success in this field, because neural networks, in particular CNNs, manage to learn meaningful feature representations of visual information through a hierarchy of layers.</p>
+<p>Convolutional neural networks are very well suited for processing visual information, because they can operate on the 2D images directly and do not need the input to be flattened into a vector. Furthermore, they utilize the fact that images are composed of a lot of local information (e.g., eyes, nose, and mouth are all localized components of a face).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/05_supervised_nn/cnn.png" class="img-fluid figure-img" style="width:85.0%"></p>
+<figcaption>CNNs utilize two important operations, convolutions and pooling layers, to generate meaningful feature representations: A <a href="https://en.m.wikipedia.org/wiki/Convolution">convolution</a> is computed by taking a small filter patch (e.g., a <span class="math inline">\(5 \times 5\)</span> matrix) and moving it over the image pixel by pixel and row by row, at each position multiplying the filter with the image (see also <a href="https://youtu.be/Oqm9vsf_hvU?t=275">this animation</a>). This results in a feature map of the same size as the original image, where a high value at some position indicates that the respective feature in the filter (e.g., an edge with a specific orientation) was detected at this position in the original image. Since this is done for multiple filters, the output after a convolutional layer consists of as many new feature maps as the layer had filters. The filter patches (i.e., multiple small matrices) are the learned weights of the CNN, and after training they can look something like the small tiles shown below the network architecture. The pooling layers then perform a subsampling of the individual feature maps by taking the max (or sometimes mean) value of multiple pixels in a small area. This reduces the dimensionality of the hidden layer representation, thereby improving the computational efficiency. Additionally, the pooling introduces some positional invariance, since it is not important anymore where exactly in some area a detected feature was, e.g., a face can be recognized even if the eyes of one person are further apart than usual or they have a longer nose, etc. Usually, the convolutional and pooling layers are interleaved, however, there is no strict rule saying that a pooling layer always has to follow a convolutional layer. With more layers, more and more complex features can be detected as a composition of the features identified in the lower layers (notice how the filters first detect edges, then individual components of a face, then full faces), i.e., by making the network deeper, we can solve more complex tasks. Finally, after multiple convolution and pooling layers, the feature representation is flattened into a vector and fed to a FFNN (i.e., fully connected layers) to perform the classification.</figcaption>
+</figure>
+</div>
+<p>Compared to the dense / fully-connected layers in FFNNs, which consist of one huge matrix mapping from one layer to the next, the filter patches used in convolutional layers are very small, i.e., there are less parameters that need to be learned. Furthermore, the fact that the filters are applied at every position in the image has a regularizing effect, since the filters need to be general enough capture relevant information in multiple areas of the images.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>By the way, the edge filters typically learned in the first layer of a CNN nicely match the <a href="https://en.wikipedia.org/wiki/Gabor_filter">Gabor filters</a> used in early computer vision feature engineering attempts. Combined with the subsequent pooling operation, they compute something similar as the <a href="https://towardsdatascience.com/45afa1046f7f">simple and complex cells</a> in the human primary visual cortex.</p>
+</div>
+</div>
+</section>
+<section id="general-principles" class="level4">
+<h4 class="anchored" data-anchor-id="general-principles">General Principles</h4>
+<p>When trying to solve a problem with a NN, always consider that the network needs to understand the inputs, as well as generate the desired outputs:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/05_supervised_nn/nn_architectures4.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>As we’ve seen in the CNN used for image classification in the previous section, the representation generated by the CNN is at some point flattened and a FFNN then computes the final prediction for the classification task. Similarly, the final hidden state of a RNN, representing the information contained in a sentences, can be passed to a FFNN to generate a prediction (e.g., for sentiment analysis). However, some problems do not fall into the category of simple supervised learning tasks (i.e., regression or classification), and require a different output. For example, in machine translation, the output should be the sentence translated into the other language, which can be achieved by coupling two RNNs: the first ‘understands’ the sentence in the original language and this representation of the meaning of the sentence is then passed to a second RNN, which generates from it the translated sentence word by word. (If we need to translate texts from and to multiple languages, this can be done very efficiently by using just one input and one output network for each language and have them operate on the same meaning representations, i.e., instead of learning multiple pairs of networks for each language combination individually, we only learn for each language one network to understand this language and one network to generate output sentences in this language.) Another example is the task of image captioning (i.e., generating text describing what can be seen on an image, e.g., to improve the online experience for people with visual impairment), where first the image is ‘understood’ by a CNN and then this representation of the input image is passed to a RNN to generate the matching text.</figcaption>
+</figure>
+</div>
+<div class="custom-gray-block">
+<p>Below are two examples of neural network architectures that deal with somewhat unusual inputs and outputs and incorporate a lot of domain knowledge, which enables them to achieve state-of-the-art performance on the respective tasks:</p>
+<p><strong>Predicting the 3D structure of a protein from its amino acid sequence with AlphaFold</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/05_supervised_nn/01_alphafold_nn.png" class="img-fluid figure-img" style="width:85.0%"></p>
+<figcaption>https://deepmind.google/discover/blog/alphafold-a-solution-to-a-50-year-old-grand-challenge-in-biology/ (30.11.2020)</figcaption>
+</figure>
+</div>
+<p><strong>Predicting properties of molecules with SchNet (which is an example of a <a href="https://www.youtube.com/watch?v=uF53xsT7mjc">Graph Neural Network (GNN)</a>)</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/05_supervised_nn/schnet.png" class="img-fluid figure-img" style="width:85.0%"></p>
+<figcaption>Original Paper: Schütt, Kristof T., et al.&nbsp;“Quantum-chemical insights from deep tensor neural networks.” <em>Nature communications</em> 8.1 (2017): 1-8.</figcaption>
+</figure>
+</div>
+</div>
+</section>
+</section>
+<section id="self-supervised-transfer-learning" class="level3">
+<h3 class="anchored" data-anchor-id="self-supervised-transfer-learning">Self-Supervised &amp; Transfer Learning</h3>
+<p><a href="https://ai.facebook.com/blog/self-supervised-learning-the-dark-matter-of-intelligence/"><strong>Self-supervised learning</strong></a> is a very powerful technique with which neural networks can learn meaningful feature representations from unlabeled data. Using this technique is cheap since, like in unsupervised learning, it does not require any labels generated by human annotators. Instead, pseudo-labels are generated from the inputs themselves by masking parts of it. For example, a network can be trained by giving it the first five words of a sentence as input and then asking it to predict what the next word should be. This way, the network learns some general statistics and knowledge about the world, similar to how human brains interpolate from the given information (e.g., with the <a href="https://en.wikipedia.org/wiki/Blind_spot_(vision)">blind spot test</a> you can nicely observe how your brain predicts missing information from the given context). Self-supervised learning is often used to “pretrain” a neural network before using it on a supervised learning task (see transfer learning below).</p>
+<div class="custom-gray-block">
+<p><u>NLP Example:</u> <strong>Neural Network Language Models</strong> (e.g., <code>word2vec</code> → have a look at <a href="https://jalammar.github.io/illustrated-word2vec/">this blog article</a> for more details) use self-supervised learning to generate word embeddings that capture semantic &amp; syntactic relationships between the words (which is ignored in TF-IDF vectors, where each word dimension has the same distance to all other words):</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/05_supervised_nn/word2vec.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption>The learned word embeddings can be used to solve analogy questions like those posed in an IQ test, e.g., “<em>man</em> is to <em>king</em> as <em>women</em> is to <em>XXX</em>”, where the correct answer is <em>queen</em>. This can be solved with vector arithmetic, i.e., by taking the word embedding for <em>king</em>, subtracting from it the embedding for <em>man</em>, adding the embedding for <em>women</em> and then checking which word embedding is closest to this new vector (which should be the embedding for <em>queen</em>).</figcaption>
+</figure>
+</div>
+<p>⇒ These word embedding vectors can then be used as input to a RNN and are also utilized by large language models (LLMs).</p>
+</div>
+<p><strong>Transfer learning</strong> is the idea of using what a network has learned before on a different task (e.g., a self-supervised learning task) as a starting point when tackling a new task. In practice, this means the weights of our network are initialized with (some of) the weights of a network trained on another task, before training our network on the new task. We also say that the network was pretrained on a source task before it is fine-tuned on the target task.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/05_supervised_nn/transfer_learning_nn.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>From an old project, we have a network that was trained on a large dataset to recognize dogs in images (= source task). Now we’re working on a new project, where we want to recognize cats in images (= target task). Since the two tasks are very similar (cats and dogs share a lot of the same features) and we only have a small dataset available for the new task, transfer learning could improve the prediction performance on the target task.</figcaption>
+</figure>
+</div>
+<p>Typically, not all the weights of a target network are initialized with weights from a source network, but only those from the earlier layers, where the source network has learned some general principles that are not task specific (e.g., observe how the first layer of the CNN in the previous section had learned to detect edges, which seems like a relevant skill for pretty much all computer vision tasks). Often, using a pretrained network will give us a more robust solution and boost the prediction performance, especially if we only have a very small dataset for the target task available to train the network. However, since when training a neural network we’re trying to find weights that minimize the loss function by iteratively improving the weights starting with some initialization, if this initialization is unfavorable because it is very far away from a good minimum (i.e., further away than a random initialization), e.g., because we’ve initialized the weights with those from a source network trained on a very different task, then this can hurt the performance, since the network first has to unlearn a lot of things from this unrelated task before it can learn the actual task. Therefore, transfer learning should only be used if the source and target tasks are “related enough”. Pretraining a network on a self-supervised learning task (i.e., a task that is just about understanding the world in general, not solving a different kind of specific task) usually works quite well though.</p>
+<p>When using transfer learning, one question is whether to “freeze” the weights that were copied from the source network, i.e., to use the pretrained part of the network as a fixed feature extractor and only train the later layers that generate the final prediction. This is basically the same as first transforming the whole dataset once by pushing it through the first layers of a network trained on a similar task and then using these new feature representations to train a different model. While we often get good results when training a traditional model (e.g., a SVM) on these new feature representations, it is generally not recommended for neural networks. In some cases, we might want to keep the pretrained weights fixed for the first few epochs, but in most cases the performance will be best if all weights are eventually fine-tuned on the target task.</p>
+<p>In cases where transfer learning is not beneficial, because the source and target tasks are not similar enough, it can nevertheless be helpful to copy the network architecture in general (i.e., number and shape of the hidden layers). Using an appropriate architecture is often more crucial than initializing the weights themselves.</p>
+</section>
+<section id="neural-networks-in-python" class="level3">
+<h3 class="anchored" data-anchor-id="neural-networks-in-python">Neural Networks in Python</h3>
+<p>There are several libraries available for working efficiently with neural networks (especially since many of the big firms doing machine learning decided to develop their own library): <code>theano</code> was the first major deep learning Python framework, developed by the MILA institute at the university of Montreal (founded by Yoshua Bengio), then came <code>TensorFlow</code>, developed by the Google Brain team, <code>MXNet</code> (pushed by Amazon), and finally <code>PyTorch</code>, developed by the Facebook/Meta AI Research team (lead by Yann LeCun). PyTorch is currently preferred by most ML researchers, while TensorFlow is still found in many (older) applications used in production.</p>
+<p>Below you can find some example code for how to construct a neural network using PyTorch or Keras (which is a wrapper for TensorFlow to simplify model creation and training). Further details can be found in the example notebooks on GitHub, which also use the (Fashion) MNIST datasets described below to benchmark different architectures.</p>
+<p>[Recommended:] <a href="https://pytorch.org/"><code>torch</code> library</a> (→ to simplify model training, combine with <a href="https://skorch.readthedocs.io/en/stable/"><code>skorch</code> library</a>!)</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn.functional <span class="im">as</span> F</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MyNeuralNet(torch.nn.Module):</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, n_in, n_hl1, n_hl2, n_out<span class="op">=</span><span class="dv">10</span>):</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="co"># neural networks are always a subclass of torch modules, which makes it possible</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="co"># to use backpropagation and gradient descent to learn the weights</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="co"># the call to the super() constructor is vital for this to work!</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>(MyNeuralNet, <span class="va">self</span>).<span class="fu">__init__</span>()</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="co"># initialize the layers of the network with random weights</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># a Linear layer is the basic layer in a FFNN with a weight matrix,</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="co"># in this case with shape (n_in, n_hl1), and a bias vector</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.l1 <span class="op">=</span> torch.nn.Linear(n_in, n_hl1)  <span class="co"># maps from dimensionality n_in to n_hl1</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># we need to make sure that the shape of the weights matches up</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># with that from the previous layer</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.l2 <span class="op">=</span> torch.nn.Linear(n_hl1, n_hl2)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.lout <span class="op">=</span> torch.nn.Linear(n_hl2, n_out)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> forward(<span class="va">self</span>, x):</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        <span class="co"># this defines what the network is actually doing, i.e.,</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        <span class="co"># how the layers are connected to each other</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>        <span class="co"># they are now applied in order to transform the input into the hidden layer representations</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        h <span class="op">=</span> F.relu(<span class="va">self</span>.l1(x))       <span class="co"># 784 → 512 [relu]</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        h <span class="op">=</span> F.relu(<span class="va">self</span>.l2(h))       <span class="co"># 512 → 256 [relu]</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        <span class="co"># and finally to predict the probabilities for the different classes</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> F.softmax(<span class="va">self</span>.lout(h))  <span class="co"># 256 → 10 [softmax]</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> y</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co"># this initializes a new network</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>my_nn <span class="op">=</span> MyNeuralNet(<span class="dv">784</span>, <span class="dv">512</span>, <span class="dv">256</span>)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="co"># this calls the forward function on a batch of training samples</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> my_nn(X_batch)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co"># (btw: using an object like a function also works for other classes if you implement a __call__ method)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><a href="https://keras.io/"><code>keras</code> framework</a> (which simplifies the construction and training of <a href="https://www.tensorflow.org/">TensorFlow</a> networks)</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tensorflow <span class="im">import</span> keras</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># construct a feed forward network:</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 784 → 512 [relu] → 256 [relu] → 10 [softmax]</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> keras.Sequential()</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># we need to tell the first layer the shape of our input features</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>model.add(keras.layers.Dense(<span class="dv">512</span>, activation<span class="op">=</span><span class="st">'relu'</span>, input_shape<span class="op">=</span>(<span class="dv">784</span>,)))</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># the following layers know their input shape from the previous layer</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>model.add(keras.layers.Dense(<span class="dv">256</span>, activation<span class="op">=</span><span class="st">'relu'</span>))</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>model.add(keras.layers.Dense(<span class="dv">10</span>, activation<span class="op">=</span><span class="st">'softmax'</span>))</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># compile &amp; train the model (for a classification task)</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">compile</span>(loss<span class="op">=</span>keras.losses.categorical_crossentropy,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>              optimizer<span class="op">=</span>keras.optimizers.Adam(), metrics<span class="op">=</span>[<span class="st">'accuracy'</span>])</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>model.fit(X, y)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># predict() gives probabilities for all classes; with argmax we get the actual labels</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> np.argmax(model.predict(X_test), axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># evaluate the model (returns loss and whatever was specified for metrics in .compile())</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"The model is this good:"</span>, model.evaluate(X_test, y_test)[<span class="dv">1</span>])</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># but of course we can also use the evaluation functions from sklearn</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Equivalently:"</span>, accuracy_score(y_test, y_pred))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Standard ML Benchmarking Datasets:</strong><br>
+<u>The MNIST handwritten digits dataset</u> is very old and super easy even for traditional models.<br>
+→ <span class="math inline">\(28 \times 28\)</span> pixel gray-scale images with 10 different classes:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/05_supervised_nn/MnistExamples.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+<p><u>The new MNIST dataset: Fashion</u><br>
+⇒ Same format (i.e., also 10 classes and images of the same shape), but more useful for benchmarks since the task is harder.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/05_supervised_nn/mnist_fashion.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="sec-inforet" class="level2">
+<h2 class="anchored" data-anchor-id="sec-inforet">Information Retrieval (Similarity Search)</h2>
+<p>The goal of information retrieval is to identify similar items given some query:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/07_recsys/inforetr.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption>Just like in the reverse Google image search, we here use as input a query image and get as a result the <em>k</em> images that are most similar to it.</figcaption>
+</figure>
+</div>
+<p>This can be accomplished by building a nearest neighbors search tree (i.e., just like for the k-nearest neighbors algorithm, only that here we return the neighbors directly instead of using them to predict the label for the new data point).</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> NearestNeighbors</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>But of course, the success of this approach is again highly dependent on being able to compute meaningful similarities between the data points. For text datasets, information retrieval often works quite well by using simple TF-IDF feature vectors together with a cosine similarity, however, for images, for example, out-of-the-box similarity measures that operate directly on the original input features (i.e., pixel values) are only able to identify images with similar colors, not necessarily similar content (e.g., an image showing a black cat would be more similar to an image showing a black dog than a white cat). To get around this problem, we could use neural networks to obtain a more informative feature representation, with which it is then easier to compute meaningful semantic similarities.</p>
+</section>
+<section id="sec-recsys" class="level2">
+<h2 class="anchored" data-anchor-id="sec-recsys">Recommender Systems (Pairwise Data)</h2>
+<p>Recommender systems can be found on many websites to promote products, content, or ads that a specific user might be interested in (e.g., on Amazon, Netflix, Facebook, YouTube, etc.).</p>
+<p>What is special about them is that here we’re not really dealing with single data points, but instead with pairwise data, i.e., we have samples from two groups (e.g., users and movies), where each combination of samples (e.g., each (user, movie)-tuple) is assigned a label (e.g., the rating the user gave to the movie).</p>
+<p>Typically, the training set contains only very few labels (e.g., since there are many users and many movies, but every user has only rated a handful of movies) and the task is to predict all the missing labels, based on which then, for example, a user would be recommended the movie with the highest predicted rating.</p>
+<section id="recommender-systems-overview" class="level4 custom-gray-block">
+<h4 class="anchored" data-anchor-id="recommender-systems-overview">Recommender Systems Overview</h4>
+<p><strong>Pairwise data:</strong></p>
+<ul>
+<li>(user, movie) → rating (1 - 5 stars)</li>
+<li>(drug, protein) → bind (yes / no)</li>
+</ul>
+<p><strong>Idea:</strong> Similar users watch similar movies.<br>
+<strong>Given:</strong> Very sparse matrix with known interactions:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/07_recsys/rec_sys_pairwise.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:25.0%"></p>
+</figure>
+</div>
+<p><strong>Task:</strong> Fill in the missing values.</p>
+</section>
+<p>There are lots of different approaches for how to accomplish this, and we’ll only look at two here, the traditional method of collaborative filtering, and a more modern approach relying on neural networks that falls under the category of triplet learning.</p>
+<p>→ One possible Python library: <a href="http://surpriselib.com/"><code>surprise</code></a></p>
+<section id="collaborative-filtering" class="level4">
+<h4 class="anchored" data-anchor-id="collaborative-filtering">Collaborative Filtering</h4>
+<p>Using a <a href="https://en.wikipedia.org/wiki/Singular_value_decomposition">singular value decomposition</a> (SVD; basically the big sister of the eigendecomposition, e.g., from <code>scipy.sparse.linalg.svds</code>), the matrix with the known interactions can be decomposed into two smaller matrices of shapes (number of movies <span class="math inline">\(\times\, d\)</span>) and (<span class="math inline">\(d \,\times\)</span> number of users) and by multiplying these matrices together, the missing values from the original matrix are approximated:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/07_recsys/rec_sys_svd3.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption>The two matrices we obtain from the SVD contain <em>d</em>-dimensional latent variable representations of movies and users respectively, where <em>d</em> denotes the number of eigenvectors we decided to keep (corresponding to the <em>d</em> largest eigenvalues of the original matrix). You can think of these as feature vectors, where, for example, one of the <em>d</em> dimensions in the vector representing a movie might correspond to how much this movie is considered a horror movie, while the same dimension in a user vector indicates how much this user likes horror movies. If both entries for some dimension in the vectors point in the same direction (e.g., the movie is a horror movie and the user likes horror movies), then the product of the two entries will contribute positively to the overall scalar product of the vectors and therefore the approximated rating. However, please note that just like with the new feature dimensions we got from PCA, it is very difficult to determine exactly what is actually encoded in each dimension.</figcaption>
+</figure>
+</div>
+<p>One big problem with this approach is that we always need some initial ratings for each user and movie, otherwise we can’t generate any useful personalized recommendations. This is also referred to as the “cold start problem”, which can be addressed with triplet learning.</p>
+</section>
+<section id="triplet-learning-content-based-filtering" class="level4">
+<h4 class="anchored" data-anchor-id="triplet-learning-content-based-filtering">Triplet Learning / Content-based Filtering</h4>
+<p>In triplet learning, we don’t directly work with the full matrix of known interactions, but instead the training dataset consists of triplets for the existing labels (e.g., (user <em>i</em>, movie <em>j</em>, 4 stars), which can also be a more memory-friendly representation). Additionally, we assume that we have feature vectors available for the users and movies (e.g., the users might have filled out a short survey when they set up an account and for the movies we know the genres, directors, and plot keywords; if all fails, this could also just be a one-hot encoding).<br>
+Given the two feature vectors of a user and a movie, we predict the interaction value directly:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/07_recsys/rec_sys_triplet2.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>These are two possible neural network architectures for predicting the rating a user might give to a movie. The architecture on the left first processes the user and movie feature vectors individually (in case they require a certain type of network to be understood, e.g., for the movie plot description or poster), and then the representations are concatenated into a single vector, which is then passed to a FFNN to predict the rating (= a regression task). A different approach is shown on the right, where instead the two original feature representations for users and movies are projected into the same vector space, where then the cosine similarity of these two vectors is computed to predict the interaction between them (similar as with the <em>d</em>-dimensional latent variable representations in the collaborative filtering approach).</figcaption>
+</figure>
+</div>
+<p>→ Given the feature vector of a new user who has not rated any movies yet, we are now able to generate useful predictions.</p>
+</section>
+</section>
+<section id="sec-time-series-forecasting" class="level2">
+<h2 class="anchored" data-anchor-id="sec-time-series-forecasting">Time Series Forecasting</h2>
+<p>In the chapter on data, where we discussed what can be considered ‘<a href="sec-one-data-point">one data point</a>’, you’ve already encountered some tasks that involve time series data. Now we’re looking into possibly the most difficult question that one can try to solve with time series data, namely predicting the future.</p>
+<p>In time series forecasting, sometimes also called “predictive analytics”, the goal is to predict the future time course of a variable (i.e., its values for <span class="math inline">\(t' &gt; t\)</span>) from its past values (and possibly some additional information). This is, for example, used in <strong>Predictive Maintenance</strong>, where the remaining life span or degradation of important process components is forecast based on their past usage and possibly some future process conditions:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/07_timeseries/timeseries4.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption>One predictive maintenance problem coming up over and over again in the chemical production industry is trying to predict the remaining activity or lifetime of a catalyst (a critical component in a chemical plant that facilitates the reaction; visualized as the purple line) under different process conditions (which are planned for the future; blue and green lines). For example, the catalyst might decay faster, if the process is run at a higher temperature. If the weekend is coming up, a predictive maintenance model could be used to estimate the temperature at which the process should be run such that the catalyst lasts until the next Monday, when the crew to replace it is back.</figcaption>
+</figure>
+</div>
+<div class="small-text">
+<p><strong>Predictive Maintenance Example Paper:</strong><br>
+Bogojeski, M., et al.&nbsp;“Forecasting industrial aging processes with machine learning methods.” <em>Computers and Chemical Engineering</em> 144 (2021): 107123. <a href="https://arxiv.org/abs/2002.01768">(arXiv:2002.01768)</a></p>
+</div>
+<section id="input-and-target-variables" class="level3">
+<h3 class="anchored" data-anchor-id="input-and-target-variables">Input and Target Variables</h3>
+<p>Basically, we can think of time series forecasting as a supervised learning problem with more complicated inputs &amp; outputs:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/07_timeseries/tsf_inout8.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Depending on the task (i.e., what we want to forecast), we either have a <strong>univariate</strong> forecasting problem (if we only need to predict the development of a single variable) or a <strong>multivariate</strong> problem (i.e., with multiple target variables). Additionally, it is important to note for <strong>how many time steps into the future</strong> the variables need to be forecast: In the easiest case, only the next time step needs to be predicted, but it might also be necessary to predict a fixed window of <span class="math inline">\(k\)</span> time steps into the future, and sometimes the prediction horizons might even be of varying lengths. In any case, we should always try to make use of as much (relevant) information as possible when making forecasts. In principle, <strong>all values from the past can be used as input features</strong>, especially those from the target variable(s) (→ see also auto-regressive models, e.g., <a href="https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average">ARIMA</a>). What is often overlooked, however, is all the additional <strong>information about the future</strong> that can be used as inputs as well, provided that these values are independent of the targets, i.e., <strong>exogenous variables</strong> outside of the system.</figcaption>
+</figure>
+</div>
+<p>For example, let’s say we own a small cafe and want to predict how much ice cream we are likely to sell tomorrow. Certainly, the amount of ice cream we’ve sold yesterday or on the same day last week will be useful input features, but additionally, for example, the weather forecast for tomorrow or whether or not there is a holiday or some special event happening would be useful predictive information that should not be ignored and that can be used since these are independent variables.</p>
+<section id="know-your-data-beware-of-hidden-feedback-loops" class="level4 custom-gray-block">
+<h4 class="anchored" data-anchor-id="know-your-data-beware-of-hidden-feedback-loops">Know your data: Beware of hidden feedback loops!</h4>
+<p>In this predictive maintenance example, the pressure in some pipes indicates how much residual material has built up on the walls of the pipes (→ <a href="https://en.wikipedia.org/wiki/Fouling">fouling</a>) and the task is to predict when these pipes need to be cleaned again, i.e., when the next maintenance event is due.</p>
+<p><strong>What are input features, what are targets?</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/07_timeseries/input_target_leak4.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+<p>While in general many future process conditions (e.g., the planned amount of product that should be produced in the next weeks), can be used as input variables at <span class="math inline">\(t' &gt; t\)</span>, this does not hold for the process condition ‘temperature’ in this example, since it is not a true exogenous variable, even though it could theoretically be set independently. In the historical data, the value of the temperature at <span class="math inline">\(t+1\)</span> is dependent on the target variable (pressure) at <span class="math inline">\(t\)</span>, therefore, if we want to forecast the target for more than one time step, only the past values of temperature can be used as input features.</p>
+</section>
+<p>We need a feature vector for every time point we want to make a prediction about. Think about what it is we’re trying to predict and what values could influence this target variable, i.e., what inputs are needed such that we have all the required information to make the prediction. Especially when using stateless models (see below), the feature vectors need to capture all the relevant information about the past.</p>
+<section id="possible-input-features" class="level4 custom-gray-block">
+<h4 class="anchored" data-anchor-id="possible-input-features">Possible Input Features</h4>
+<ul>
+<li>Known information about future (e.g., weather forecast, planned process conditions).</li>
+<li>Auto-regressive: Lagged (target) variable (i.e.&nbsp;values at <span class="math inline">\(t' \leq t\)</span>).<br>
+❗️ Don’t use the <em>predicted</em> target value for this (in a multi-step forecast) – errors accumulate!</li>
+<li>Account for cyclical (e.g., seasonal) trends → check auto-correlation or spectral analysis.<br>
+<span class="small-text">For example, a cafe might sell more ice cream during the summer or it could be located next to a school and therefore sell more on days the kids come by in their lunch break:</span><br>
+<img src="../images/07_timeseries/ts_months.png" class="img-fluid" style="width:25.0%"> <img src="../images/07_timeseries/ts_week.png" class="img-fluid" style="width:25.0%"><br>
+→ Include categorical variables <code>month</code> and <code>day_of_week</code>.</li>
+<li>For predictive maintenance: hours / integral of input variable since last maintenance event (maybe take log).<br>
+<img src="../images/07_timeseries/ts_integralfeat.png" class="img-fluid" style="width:60.0%"></li>
+</ul>
+<p>→ For more ideas: <a href="https://tsfresh.readthedocs.io/en/latest/">tsfresh library</a>, <a href="https://machinelearningmastery.com/category/deep-learning-time-series/">time series analysis blog posts</a></p>
+</section>
+</section>
+<section id="stateless-vs.-stateful-models" class="level3">
+<h3 class="anchored" data-anchor-id="stateless-vs.-stateful-models">Stateless vs.&nbsp;Stateful Models</h3>
+<p>When dealing with time series data, one should always think carefully about how complex the dependencies between the past and future process values in the respective forecasting task are.<br>
+For example, when trying to predict <strong>spontaneous events</strong>, like a sudden increase in the emissions produced in the process, then the relevant time window into the past, when the process conditions might have had an influence on this target variable, would be very short, i.e., only the process values from time <span class="math inline">\(t\)</span> need to be included in the input feature vector to predict the anomalous event at time <span class="math inline">\(t+1\)</span>.<br>
+For other prediction tasks, what happened over a <strong>longer (but uniquely determined) interval</strong> might be relevant, but can be <strong>summarized with simple features</strong>. For example, in a production process, one might want to predict the quality of the final product that is produced within a fixed time interval. In this case, the process conditions during the time interval where the respective product is produced will be important for the prediction, but the process conditions during the time where the previous product was produced are most likely not relevant. Additionally, it would be enough to compute only some summary statistics (like mean/max/min values of the process conditions during the time interval of interest) and use these as input features to capture all the relevant information.<br>
+The third case are prediction tasks for which it is necessary to consider <strong>very long time windows</strong>, often of varying lengths, with some <strong>complex long-ranging dependencies</strong> between the process conditions at different time points. For example, in some predictive maintenance tasks, the decay of the critical process component might not happen in some linear fashion (unlike, for example, a light bulb, which might have some fixed life expectancy and one only needs to count the number of hours it was turned on up to now to estimate when it needs to be replaced). Instead, there exist more complex dependencies, for example, the component might decay faster if it is already in a poor state. Therefore, if some unfortunate combination of process conditions lead to a strain on the component early on, it might have to be replaced a lot sooner than under otherwise identical conditions without this initial mishap, i.e., <strong>the order of events matters</strong> a lot, too.</p>
+<p>Depending on how complex the dependencies are between the process values over time, it will be more or less complicated to construct feature vectors that capture all the relevant information to make accurate predictions. In general, one should always try to come up with <strong>features that contain all the relevant information about the past</strong>, i.e., that fulfill the <a href="https://en.wikipedia.org/wiki/Markov_property">Markov assumption</a> that given this information the future is otherwise independent of the history of the process: For example, if we knew the number of hours a light bulb was turned on up to now, we would have a complete picture about the state the light bulb is currently in; everything else that happened in the past, like how many people were in the room while the light was on, is irrelevant for the state of the light bulb. Another example is the current position of pieces on a chess board: To plan our next move, we don’t need to know the exact order in which the pieces were moved before, but only the position of all the pieces right now.</p>
+<p>If we are able to derive such input features, we can use a <strong>stateless model</strong> for the prediction (e.g., any of the supervised learning models we’ve discussed so far except RNNs), i.e., treat all data points as independent regardless of where in time they occurred. If it is not possible to construct such an informative feature vector that captures all the relevant information about the past, e.g., because of complex long-ranging dependencies that can not be adequately captured by simple summary statistics, then we have to use a <strong>stateful model</strong> (e.g., a form of Recurrent Neural Network (RNN)), which internally constructs a full memory of the history of the process, i.e., it keeps track of the current state of the process.</p>
+<p>Whether to use a stateless or stateful model is also an important consideration when dealing with other kinds of sequential data such as text. Analogous to the three scenarios described above, we can also find similar cases for natural language processing (NLP) problems that either benefit from the use of stateful models or where a simple stateless model is enough:</p>
+<ol type="1">
+<li><strong>Spontaneous event:</strong> Trigger word detection for smart speakers: A simple classification task for which only the last 1-2 spoken words, i.e., the audio signal from a time window of a few seconds, are relevant.</li>
+<li><strong>Fixed interval &amp; summary features:</strong> Text classification, e.g., determining the category of a newspaper article (e.g., ‘sports’ or ‘politics’): While here a longer span of text needs to be considered to make the prediction, a simple TF-IDF vector is usually sufficient to represent the contents of the whole document, since such categories can easily be identified by simply checking whether the terms “soccer” or “politician” occur more often in the current article. Furthermore, the span of text that is relevant for the task is fixed: we only need to consider the current article and it can be considered independent of the articles written before it.</li>
+<li><strong>Complex long-ranging dependencies:</strong> For some tasks like sentiment analysis or machine translation, it doesn’t just matter which words occurred in a text, but also in which order and what their larger surrounding context was.</li>
+</ol>
+<p>→ While for 1. and 2. a stateless model will do just fine, for 3. the best performance is achieved with a stateful model that can keep track of the more complex dependencies.</p>
+<section id="tldr-which-type-of-model-should-we-use" class="level4 custom-gray-block">
+<h4 class="anchored" data-anchor-id="tldr-which-type-of-model-should-we-use">TL;DR: Which type of model should we use?</h4>
+<ul>
+<li>How much does the future depend on the past?<br>
+
+<ol type="a">
+<li>Values at <span class="math inline">\(t\)</span> or simple summary statistics are sufficient as input features to predict <span class="math inline">\(t' &gt; t\)</span>.<br>
+</li>
+<li>There exist complex long-ranging dependencies between past and future values and the order of events matters.</li>
+</ol></li>
+<li>How many time steps into the future do we need to predict?<br>
+
+<ol type="a">
+<li>A fixed, small window of <span class="math inline">\(1\)</span> or <span class="math inline">\(k\)</span> steps.<br>
+</li>
+<li>Arbitrarily long prediction horizons.</li>
+</ol></li>
+</ul>
+<p>If <strong>only a)</strong>:<br>
+→ <em>Stateless</em> model, e.g., linear model, FFNN, random forest, …<br>
+If <strong>any b)</strong>:<br>
+→ <em>Stateful</em> model, e.g., recurrent neural network (RNN)</p>
+</section>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When working with time series data, the train, validation, and test data splits should always be in chronological order, i.e., the model is trained on the oldest time points and evaluated on more recent samples to get a realistic performance estimate, especially in cases where the data changes over time, e.g., due to smaller changes in the underlying process.</p>
+</div>
+</div>
+<p><strong>Output prediction with <em>stateless</em> models (e.g., linear regression, FFNN)</strong></p>
+<p>Only predict for a fixed time window of 1 or <em>k</em> steps:</p>
+<ul>
+<li><p>Univariate, single-step prediction:</p>
+<p><span class="math display">\[
+  [\underbrace{\quad y_1 \quad}_{t' \,\leq\, t} | \underbrace{\, x_1 \, | \,  x_2 \, }_{t+1} ] \; \to \; [\underbrace{y_1}_{t+1}]
+  \]</span></p></li>
+<li><p>Multivariate, single-step prediction:</p>
+<p><span class="math display">\[
+  [\underbrace{\quad y_1  \quad | \quad y_2 \quad}_{t' \,\leq\, t} | \underbrace{\, x_1 \, | \,  x_2 \, }_{t+1} ] \; \to \; [\underbrace{\, y_1  \, | \, y_2 \, }_{t+1}]
+  \]</span></p></li>
+<li><p>Multivariate, multi-step prediction: <span class="math display">\[
+  [\underbrace{\quad y_1  \quad | \quad y_2 \quad}_{t' \,\leq\, t} | \underbrace{\quad\quad x_1 \quad\quad | \quad\quad  x_2 \quad\quad }_{t+1\, ...\, t+k} ] \; \to \; [\underbrace{\quad\quad y_1 \quad\quad | \quad\quad  y_2 \quad\quad }_{t+1\, ...\, t+k}]
+  \]</span></p></li>
+</ul>
+<p><strong>Output prediction with <em>stateful</em> models (e.g., RNN, LSTM, GRU, Echo State Network)</strong></p>
+<p>The model builds up a memory of the past by mirroring the actual process, i.e., even if we don’t need the prediction at some time step <span class="math inline">\(t-5\)</span>, we still need to feed the model the inputs from this time step so that it can build up the appropriate hidden state.</p>
+<ul>
+<li><p>Multivariate, multi-step prediction:</p>
+<p><span class="math display">\[
+  \begin{aligned}
+  ...\\
+  t-1:\quad [\, x_1 \, | \,  x_2 \,]\; &amp;\to \; [\, y_1  \, | \, y_2 \,]\\
+  \text{memory state buildup} \quad\quad\quad\quad t:\quad [\, x_1 \, | \,  x_2 \,]\; &amp;\to \; [\, y_1  \, | \, y_2 \,]\\
+  ---------------------&amp;------\\
+  \text{prediction} \quad\quad\quad\quad\quad t+1:\quad [\, x_1 \, | \,  x_2 \,]\; &amp;\to \; [\, y_1  \, | \, y_2 \,]\\
+  t+2:\quad [\, x_1 \, | \,  x_2 \,]\; &amp;\to \; [\, y_1  \, | \, y_2 \,]\\
+  ...\\
+  t+k:\quad [\, x_1 \, | \,  x_2 \,]\; &amp;\to \; [\, y_1  \, | \, y_2 \,]
+  \end{aligned}
+  \]</span></p></li>
+</ul>
+</section>
+</section>
+<section id="sec-rl" class="level2">
+<h2 class="anchored" data-anchor-id="sec-rl">Reinforcement Learning</h2>
+<p>Finally, we come to the last main category of ML algorithms besides unsupervised and supervised learning: reinforcement learning.</p>
+<p><strong>Main idea:</strong><br>
+Agent performs actions in some environment and learns their (state-specific) consequences by receiving rewards.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/07_rl/reinforcement_learning4.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption>he environment lets the agent know in which state it currently is. Then the agent selects some action, i.e., how it responds to this state, according to its internal policy function <span class="math inline">\(\pi\)</span> (the main thing that is learned in RL). The environment evaluates the consequences of this action and returns an immediate reward (e.g., “game over” or “collected a coin”), as well as the next state, at which point the cycle repeats.</figcaption>
+</figure>
+</div>
+<p><strong>Goal:</strong> Maximize the <em>cumulative</em> reward (also called <em>return</em>), i.e., the sum of the immediate rewards received from the environment over all time steps in an episode (e.g., one level in a video game).<br>
+The difficult thing here is that sometimes an action might not result in a big immediate reward, but is still crucial for the agent’s long-term success (e.g., finding a key at the beginning of a level and the door for which we need the key comes much later). This means the agent needs to learn to perform an optimal <em>sequence of actions</em> from <em>delayed labels</em>.</p>
+<p>The agent’s decision trajectory basically defines one path among a bunch of different possible parallel universes, which is then judged in the end by the collected return:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/07_rl/rl_trajectory2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%"></p>
+</figure>
+</div>
+<section id="reinforcement-learning-vs.-normal-optimization" class="level4 custom-gray-block">
+<h4 class="anchored" data-anchor-id="reinforcement-learning-vs.-normal-optimization">Reinforcement Learning vs.&nbsp;‘normal’ Optimization</h4>
+<p>In regular mathematical optimization, we are given some fixed function <span class="math inline">\(f: \mathbb{R}^d \to \mathbb{R}\)</span> and try to find the inputs <span class="math inline">\(\mathbf{x} \in  \mathbb{R}^d\)</span> that maximize (or minimize) the value of <span class="math inline">\(f(\mathbf{x})\)</span>. Since each evaluation of <span class="math inline">\(f(\mathbf{x})\)</span> is independent of the next, we could theoretically try as many different values for <span class="math inline">\(\mathbf{x}\)</span> as we wanted, until we’ve found some combination of inputs that results in an optimal value for <span class="math inline">\(f\)</span>.</p>
+<div class="small-text">
+<p>If <span class="math inline">\(f\)</span> is easily differentiable, the solution to the optimization problem can be found analytically by setting the first derivative of <span class="math inline">\(f\)</span> to zero to obtain the local extrema or saddle points of <span class="math inline">\(f\)</span>, which can then be examined further to determine the (global) maximum or minimum. If <span class="math inline">\(f\)</span> is not differentiable (or very complicated), there exist other methods to find optimal values (for example, the gradient descent procedure used to tune the weights of neural networks is one method for obtaining a (local) optimum without calculating the derivative of the network’s error function directly, while a naive grid search, where we just try many different input combinations and then select the values with the best outcome, or more fancy approaches such as <a href="https://en.wikipedia.org/wiki/Particle_swarm_optimization">particle swarm optimization</a>, can also be applied to functions that are non-differentiable).</p>
+</div>
+<p>Translated to RL terms, <span class="math inline">\(f\)</span> would be the environment <em>in one particular state</em>, <span class="math inline">\(\mathbf{x}\)</span> would be the action, and <span class="math inline">\(f(\mathbf{x})\)</span> would be the immediate reward as a result of taking this action in the current state. However, since in RL setups the state of the environment changes with each action that is taken, this means the function <span class="math inline">\(f\)</span> also changes in each step and an action that might have resulted in a high reward in the previous step could now mean “game over”. Furthermore, in RL we’re not too concerned about every single immediate reward, but instead we want to achieve long-term success, measured by the return (i.e., cumulative rewards), and an action with a low immediate reward might still pay off later.</p>
+</section>
+<section id="immediate-rewards-vs.-long-term-value-of-states" class="level4">
+<h4 class="anchored" data-anchor-id="immediate-rewards-vs.-long-term-value-of-states">Immediate rewards vs.&nbsp;long-term value of states</h4>
+<p>To make decisions that are good in the long run, we’re more interested in what being in a state means w.r.t. reaching the final goal instead of receiving immediate rewards:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/07_rl/rl_value3.png" class="img-fluid figure-img" style="width:65.0%"></p>
+<figcaption><em>Left:</em> This is a simple “grid world”, where an agent can move up, down, left, or right through the states. This small environment contains three terminal states (i.e., when the agent reaches one of them, the episode ends): Two states mean “game over” with an infinite negative reward, while reaching the state in the lower right corner means receiving a large positive immediate reward. When the agent resides in any of the other (reachable) states, it receives a small negative reward, which is meant to “motivate” the agent to go to the goal state as quickly as possible. However, knowing only the immediate reward for each state is not very helpful to decide which action to take next, since in most states, the reward for moving to any of the surrounding states or staying in place would be the same. Therefore, what the agent needs to learn in order to be able to choose an action in each state that has the potential of bringing it closer to the goal state, is the value of being in each state. <em>Right:</em> The value of a state is the expected return when starting from this state. Of course, the expected return is highly dependent on the agent’s policy <span class="math inline">\(\pi\)</span> (i.e., the actions it takes), e.g., if the agent would always move to the left, then it would never be able to reach the goal, i.e., the expected return starting from any state (except the goal state itself) would always be negative. If we assume an optimal policy (i.e., the agent always takes the quickest way to the goal), then the value of each state corresponds to the ones shown in the graphic, i.e., for each state “100 minus the number of steps to reach the goal from here”. Knowing these values, the agent can now very easily select the best next action in each state, by simply choosing the action that brings it to the next reachable state with the highest value.</figcaption>
+</figure>
+</div>
+<p>The value of a state <span class="math inline">\(s\)</span> corresponds to the expected return <span class="math inline">\(G_t\)</span> when starting from state <span class="math inline">\(s\)</span>:</p>
+<p><span class="math display">\[
+V^\pi(s) = \mathbb{E} [G_t | S_t = s]
+\]</span></p>
+<p>The most naive way to calculate <span class="math inline">\(V^\pi(s)\)</span> would be to let the agent start from this state several times (depending on how complex the environment is usually several thousand times), observe how each of the episodes play out, and then compute the average return that the agent had received in all these runs starting from state <span class="math inline">\(s\)</span>.</p>
+<p>Similarly, we can calculate the expected return when executing action <span class="math inline">\(a\)</span> in state <span class="math inline">\(s\)</span>: <span class="math display">\[
+Q^\pi(s, a) = \mathbb{E} [G_t | S_t = s, A_t = a]
+\]</span></p>
+<p>I.e., here again we could let the agent start from the state <span class="math inline">\(s\)</span> many times, but this time the first action it takes in this state is always <span class="math inline">\(a\)</span>.</p>
+</section>
+<section id="explorationexploitation-trade-off" class="level4">
+<h4 class="anchored" data-anchor-id="explorationexploitation-trade-off">Exploration/Exploitation trade-off</h4>
+<p>Of course, it would be very inefficient to always just randomly try out actions in any given state and thereby risk a lot of predictable “game over”. Instead, we want to balance exploration and exploitation to keep updating our knowledge about the environment, but at the same time also maximize the rewards collected along the way. This is again inspired by human behavior:</p>
+<ul>
+<li><strong><em>Exploration:</em></strong> Learn something about the environment (e.g., try a new restaurant).</li>
+<li><strong><em>Exploitation:</em></strong> Use the collected knowledge to maximize your reward (e.g., eat somewhere you know you like the food).</li>
+</ul>
+<p>A very simple strategy to accomplish this is the <u><em>Epsilon-Greedy Policy:</em></u></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>initialize eps <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> step <span class="kw">in</span> <span class="bu">range</span>(max_steps):</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> random(<span class="dv">0</span>, <span class="dv">1</span>) <span class="op">&gt;</span> eps:</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        pick best action (<span class="op">=</span> exploitation)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        pick random action (<span class="op">=</span> exploration)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">reduce</span> eps</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="tabular-rl-q-learning" class="level4">
+<h4 class="anchored" data-anchor-id="tabular-rl-q-learning">Tabular RL: Q-Learning</h4>
+<p>This brings us to the simplest form of RL, tabular RL, where an agent has a finite set of actions to choose from and operates in an environment with a finite set of states (like the grid world from above). Here, we could simply compute the Q-value for each (state, action)-combination as described above, and save these values in a big table. This so-called Q-table then acts as a cheat sheet, since for each state the agent is in, it can just look up the Q-values for all of the available actions and then choose the action with the highest Q-value (when in exploitation-mode):</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/07_rl/rl_tabular3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:65.0%"></p>
+</figure>
+</div>
+</section>
+<section id="function-approximation-deep-q-learning" class="level4">
+<h4 class="anchored" data-anchor-id="function-approximation-deep-q-learning">Function Approximation: Deep Q-Learning</h4>
+<p>Unfortunately, almost no practical RL application operates in an environment consisting of a finite set of discrete states (and sometimes even the agent’s actions are not discrete, e.g., the steering wheel positions in a self-driving car – but this goes too far here). In video games, for example, each frame is a new state and depending on the complexity of the game, no two frames might be exactly alike. This is where Deep Q-Learning comes in:</p>
+<p>Given a state <span class="math inline">\(s\)</span> (represented by a feature vector <span class="math inline">\(\mathbf{x}_s\)</span>), predict the Q-value of each action <span class="math inline">\(a_1 ... a_k\)</span> with a neural network:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/07_rl/rl_dqn.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+<p>This can be seen as a direct extension of the tabular Q-learning: If we represented our states as one-hot encoded vectors and used a linear network with a single weight matrix that consisted of the Q-table we had constructed before, by multiplying the one-hot encoded vector with the Q-table, the network would “predict” the row containing the Q-values for all actions in this state.<br>
+By using a more complex network together with meaningful feature representations for the states, deep Q-learning enables the agent to generalize to unseen states. However, just like in time series forecasting tasks, here again the feature representation of a state needs to include all the relevant information about the past, e.g., in video games (think: old pong game) the feature vector could contain the last four frames to additionally capture the direction of movement.</p>
+<div class="custom-gray-block">
+<p><strong>Pros:</strong></p>
+<ul>
+<li>RL works well for games:<br>
+→ Environment = Game = Simulation (i.e., no discrepancy between “real world” and simulation model).<br>
+→ Well defined reward function.<br>
+→ Utilize “self-play” for multi-player games, i.e., two RL agents playing against each other.</li>
+</ul>
+<p><strong>Careful:</strong></p>
+<ul>
+<li>Acting in the real world is too expensive → need accurate (simulation) model of the environment.</li>
+<li>AIs love to cheat and exploit bugs in the simulation.</li>
+<li>Difficult to design appropriate reward function (and RL will overfit it, resulting in unintended consequences).</li>
+<li>Model-free RL is very sample inefficient (i.e., needs millions of iterations, which takes too long in real-time).</li>
+<li>Agent is responsible for collecting its own experiences: bad policy ⇒ bad data ⇒ no improvement.</li>
+<li>Deep RL: complex network architectures, very sensitive to hyperparameter choices<br>
+⇒ Hard to train &amp; get robust results → requires lots of tricks.</li>
+</ul>
+<p>→ <em>Imitation learning</em> is often used instead of RL, which just means using supervised learning to train an agent to react similar to a human in some situation. Often, it is also easier to collect data from humans than to define a complicated reward function, e.g., humans drive around all the time, however, it is hard to define what would be considered “good driving” under lots of different circumstances. After the agent was pretrained on the human behavior, its policy can still be fine-tuned with an RL approach (e.g., this is how AlphaGo became better than a human Go master).</p>
+</div>
+</section>
+<section id="rl-further-reading-videos" class="level4">
+<h4 class="anchored" data-anchor-id="rl-further-reading-videos">RL further reading + videos</h4>
+<p><u>General theory:</u></p>
+<ul>
+<li><a href="https://medium.com/emergent-future/d195264329d0">Simple Blog Series</a></li>
+<li><a href="https://simoninithomas.github.io/deep-rl-course/">Free RL course incl.&nbsp;programming examples</a></li>
+<li><a href="https://mlstory.org/">Chapters 11+12</a> from the book Patterns, Predictions, and Actions</li>
+<li><a href="https://www.davidsilver.uk/teaching/">Lectures by David Silver</a> (from DeepMind)</li>
+<li><a href="https://cs234.stanford.edu/">Stanford RL course</a> (with <a href="https://www.youtube.com/playlist?list=PLoROMvodv4rOSOPzutgyCTapiGlY2Nd8u">video lectures</a>)</li>
+<li><a href="http://incompleteideas.net/book/RLbook2020.pdf">Book about RL</a> (with lots of math)</li>
+</ul>
+<p><u>Words of caution (recommended for everyone):</u></p>
+<ul>
+<li><a href="https://www.alexirpan.com/2018/02/14/rl-hard.html">RL doesn’t work (yet)</a></li>
+<li><a href="https://deepmind.google/discover/blog/specification-gaming-the-flip-side-of-ai-ingenuity/">Unintended rewards</a></li>
+</ul>
+<p><u>RL in action:</u></p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=5GMDbStRgoc">Playing Super Mario</a></li>
+<li><a href="https://www.youtube.com/watch?v=rhNxt0VccsE">Learning to walk</a></li>
+<li><a href="https://www.youtube.com/watch?v=wL7tSgUpy8w">Learning to drive a car</a></li>
+<li><a href="https://www.youtube.com/watch?v=iaF43Ze1oeI">Robot arm data collection</a> (by Google)</li>
+<li><a href="https://youtu.be/wRCAl9m3ce8?t=1493">Playing video games</a> with Layer-wise Relevance Propagation (LRP) to show the evolution of strategy</li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script type="text/javascript"> // go once over all images and transform the percentage width into pixels relative to original body size
+  const bodyWidth = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--custom-body-width')); // Get CSS variable
+  document.querySelectorAll('.quarto-figure img').forEach((img) => {
+    const styleWidth = img.getAttribute('style').match(/width:\s*([\d.]+)%/); // Extract percentage
+    if (styleWidth) {
+      const percentage = parseFloat(styleWidth[1]) / 100;
+      img.style.width = `${bodyWidth * percentage}px`; // Apply calculated width
+    }
+  });
+</script>
+
+<style type="text/css">
+#footer {
+  font-size: 80%; /* Makes the font 70% smaller */
+  border-top: 1px solid #ccc; /* Adds a horizontal line above the footer */
+  padding-top: 10px; /* Adds some spacing above the footer content */
+}
+</style>
+
+<!-- FOOTER  -->
+<div id="footer" class="outer">
+  <footer class="inner">
+    <p><b>Book/Course Feedback: </b> <a href="https://forms.gle/Ccv5h5zQxwPjWtCS7" target="_blank" rel="nofollow">Full Feedback Survey</a> or <a href="https://forms.gle/qK8T5ALzgpiZaxd49" target="_blank" rel="nofollow">Short Comment</a><br></p>
+
+    <p>Find me on <a href="https://github.com/cod3licious/" target="_blank" rel="nofollow">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/" target="_blank" rel="nofollow">LinkedIn</a><br>
+      <a href="https://franziskahorn.de/">Home</a> ~ <a href="mailto:hey@franziskahorn.de?Subject=Book%20Feedback" target="_blank" rel="nofollow">Contact</a> ~ <a href="https://franziskahorn.de/impressum.html">Impressum</a></p>
+
+      <!-- CC license -->
+   <p xmlns:cc="http://creativecommons.org/ns#">This work is licensed under <a href="https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY 4.0<img style="height:16px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:16px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""></a></p>
+  </footer>
+</div>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./06_pitfalls.html" class="pagination-link" aria-label="Avoiding Common Pitfalls">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Avoiding Common Pitfalls</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./08_conclusion.html" class="pagination-link" aria-label="Conclusion">
+        <span class="nav-page-text"><span class="chapter-title">Conclusion</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

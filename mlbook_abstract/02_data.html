@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.39">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Data Analysis &amp; Preprocessing – A Practitioner's Guide to Machine Learning</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./05_supervised_models.html" rel="next">
+<link href="./01b_basics.html" rel="prev">
+<link href="./favicon.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-37b241f53b32a5ad598e4053e71b073f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_data.html"><span class="chapter-title">Data Analysis &amp; Preprocessing</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">A Practitioner’s Guide to Machine Learning</a> 
+        <div class="sidebar-tools-main">
+    <a href="./A-Practitioner-s-Guide-to-Machine-Learning.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01a_intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01b_basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">The Basics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_data.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Data Analysis &amp; Preprocessing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_supervised_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Deep Learning</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_pitfalls.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Avoiding Common Pitfalls</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08_conclusion.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Conclusion</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-data-analysis" id="toc-sec-data-analysis" class="nav-link active" data-scroll-target="#sec-data-analysis">Data Analysis</a>
+  <ul class="collapse">
+  <li><a href="#data-driven-decisions" id="toc-data-driven-decisions" class="nav-link" data-scroll-target="#data-driven-decisions">Data-driven Decisions</a></li>
+  <li><a href="#communicating-insights" id="toc-communicating-insights" class="nav-link" data-scroll-target="#communicating-insights">Communicating Insights</a></li>
+  </ul></li>
+  <li><a href="#sec-data-garbage" id="toc-sec-data-garbage" class="nav-link" data-scroll-target="#sec-data-garbage">Garbage in, Garbage out!</a></li>
+  <li><a href="#sec-preprocessing" id="toc-sec-preprocessing" class="nav-link" data-scroll-target="#sec-preprocessing">Data Preprocessing</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-data" class="quarto-section-identifier"><span class="chapter-title">Data Analysis &amp; Preprocessing</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>As we’ve seen, ML algorithms solve input-output tasks. And to solve an ML problem, we first need to collect data, understand it, and then transform (“preprocess”) it in such a way that ML algorithms can be applied:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_ds_workflow/data_science_workflow_prepr.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+<section id="sec-data-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="sec-data-analysis">Data Analysis</h2>
+<p>Analyzing data is not only an important step before using this data for a machine learning project, but can also generate valuable insights that result in better (data-driven) decisions. We usually analyze data for one of two reasons:</p>
+<ol type="1">
+<li>We need some specific information to make a (better) decision (<em>reactive analysis</em>, e.g., when something went wrong and we don’t know why).</li>
+<li>We’re curious about the data and don’t know yet what the analysis will bring (<em>proactive analysis</em>, e.g., to better understand the data at the beginning of an ML project).</li>
+</ol>
+<div class="custom-gray-block">
+<p><strong>Data analysis results can be obtained and communicated in different formats</strong></p>
+<ul>
+<li>A <strong>custom analysis</strong> with results presented, e.g., in a power point <strong>presentation</strong></li>
+<li>A <strong>standardized report</strong>, e.g., in form of a PDF document, showing static data visualizations of historical data</li>
+<li>A <strong>dashboard</strong>, i.e., a web app showing (near) real-time data, usually with some interactive elements (e.g., options to filter the data)</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/02_data/analysis_methods.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+<p>While the data story that is told in a presentation is usually fixed, users have more opportunities to interpret the data and analyze it for themselves in an interactive dashboard.</p>
+</div>
+<p>What all forms of data analyses have in common is that we’re after “(actionable) insights”.</p>
+<section id="what-is-an-insight" class="level4 custom-gray-block">
+<h4 class="anchored" data-anchor-id="what-is-an-insight">What is an insight?</h4>
+<p>Psychologist Gary Klein defines an insight as “an unexpected shift in the way we understand things”.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/02_data/insight.png" class="img-fluid figure-img" style="width:45.0%"></p>
+<figcaption>Things get interesting when we find something in the data that we didn’t expect. [Adapted from: <em>Effective Data Storytelling</em> by Brent Dykes]</figcaption>
+</figure>
+</div>
+<p>Arriving at an insight requires two steps:</p>
+<ol type="1">
+<li><strong>Notice something unexpected</strong>, e.g., a sudden drop or increase in some metric.</li>
+<li><strong>Understand why this happened</strong>, i.e., dig deeper into the data to identify the root cause.</li>
+</ol>
+<p>When we understand why something happened, we can often also <strong>identify a potential action that could get us back on track</strong>, thereby making this an <em>actionable insight</em>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Knowing which values are unexpected and where it might pay off to dig deeper often requires some domain knowledge, so you might want to examine the results <strong>together with a subject matter expert</strong>.</p>
+</div>
+</div>
+</section>
+<p>Ideally, we should continuously <strong>monitor important metrics in dashboards or reports</strong> to spot deviations from the norm as quickly as possible, while <strong>identifying the root cause often requires a custom analysis</strong>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/02_data/analysis_monitoring.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+<!-- As Stephen Few points out in his book _Information Dashboard Design_: "The dashboard does its primary job if it tells you with no more than a glance that you should act. It serves you superbly if it directly opens the door to any additional information that you need to take that action." -->
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As a data analyst you are sometimes approached with <strong>more specific questions or requests</strong> such as “We’re deciding where to launch a new marketing campaign. Can you show me the number of users for all European countries?”. In these cases it can be helpful to <strong>ask “why?” to understand where the person noticed something unexpected</strong> that prompted this analysis request. If the answer is “Oh, we just have some marketing budget left over and need to spend the money somewhere” then just give them the results. But if the answer is “Our revenue for this quarter was lower than expected” it might be worth <strong>exploring other possible root causes</strong> for this, as maybe the problem is not the number of users that visit the website, but that many users drop out before they reach the checkout page and the money might be better invested in a usability study to understand why users don’t complete the sale.</p>
+</div>
+</div>
+<section id="data-driven-decisions" class="level3">
+<h3 class="anchored" data-anchor-id="data-driven-decisions">Data-driven Decisions</h3>
+<p>While learning something about the data and its context is often interesting and can feel rewarding by itself, it is not yet valuable. Insights become valuable when they influence a decision and inspire a different course of action, better than the default that would have been taken without the analysis.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/02_data/analysis_process.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
+</figure>
+</div>
+<p>This means we need to understand <strong>which decision(s)</strong> the insights from our data analysis should influence.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Not all decisions need to be made in a data-driven way. But decision makers should be transparent and upfront about whether a decision can be influenced by analysis results, i.e., what data would make them change their mind and choose a different course of action. If data is only requested to support a decision that in reality has already been made, save the analysts the time and effort!</p>
+</div>
+</div>
+<p>Before we conduct a data analysis we need to be clear on:</p>
+<ul>
+<li>Who are the <strong>relevant stakeholders</strong>, i.e., who will consume the data analysis results (= our audience / dashboard users)?</li>
+<li>What is <strong>their goal</strong>?</li>
+</ul>
+<!-- - What questions need to be answered to make progress towards this goal?
+- What visualizations can help answer these questions?
+- What action would we recommend based on the answer? -->
+<p>In business contexts, the users’ goals are usually in some way related to making a profit for the company, i.e., increasing revenue (e.g., by solving a customer problem more effectively than the competition) or reducing costs.</p>
+<p>The progress towards these goals is tracked with so called <strong><em>Key Performance Indicators</em> (KPIs)</strong>, i.e., custom metrics that tell us how well things are going. For example, if we’re working on a web application, one KPI we might want to track could be “user happiness”. Unfortunately, true user happiness is difficult to measure, but we can instead check the number of users returning to our site and how long they stay and then somehow combine these and other measurements into a proxy variable that we then call “user happiness”.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A KPI is only a reliable measure, if it is not simultaneously used to control people’s behavior, as they will otherwise try to game the system (<a href="https://en.wikipedia.org/wiki/Goodhart%27s_law">Goodhart’s Law</a>). For example, if our goal is high quality software, counting the number of bugs in our software is not a reliable measure for quality, if we simultaneously <a href="https://dilbert.com/strip/1995-11-13">reward programmers for every bug they find and fix</a>.</p>
+</div>
+</div>
+<section id="lagging-vs.-leading-kpis" class="level4 custom-gray-block">
+<h4 class="anchored" data-anchor-id="lagging-vs.-leading-kpis">Lagging vs.&nbsp;Leading KPIs</h4>
+<p>Unfortunately, the things we really care about can often only be <strong>measured after the fact, i.e., when it is too late to take corrective action</strong>. For example, in sales we care about “realized revenue”, i.e., money in the bank, but if the revenue at the end of the quarter is less than what we hoped for, we can only try to do better next quarter. These metrics are called <strong>lagging KPIs</strong>.<br>
+<strong>Leading KPIs</strong> instead tell us when we should <strong>act before it’s too late</strong>. For example, in sales this could be the volume of deals in the sales pipeline, i.e., while not all of these deals might eventually go through and result in realized revenue, if the pipeline is empty we know for certain that we wont reach our revenue goals.</p>
+<p>If the causal relationships between variables are too complex to identify leading KPIs directly, we can instead try to <strong>use a machine learning model to predict lagging KPIs</strong>. For example, in a polymer production process, an important quality metric may be the tensile strength measured 24 hours after the polymer hardens. Waiting for these results could lead to discarding the last 24 hours of production if the quality is subpar. If the relationships between the process parameters (such as production temperature) and the resulting quality are too complex to identify a leading KPI, we could instead train an ML model on the past process parameters (inputs) and corresponding quality measurements (outputs) to then continuously predict the quality during production. When the model predicts that the quality is off-target, the operators can intervene and fix issues before significant production time is wasted.<br>
+However, relying on an ML model introduces the need to monitor its predictions for trustworthiness. In our example, the <strong>prediction accuracy on new data serves as a lagging KPI</strong>, as we only know whether the predictions are correct after real measurements arrive 24 hours later. As a <strong>leading KPI</strong>, we can measure the discrepancy between process parameter values used in model training and those received in production to identify <strong>dataset drifts</strong>. These drifts, such as changes in values due to sensor malfunctions, can lead to inaccurate predictions for affected samples.</p>
+</section>
+<p>The first step when making a data-driven decision is to <strong>realize that we should act by monitoring our KPIs</strong> to see whether we’re on track to achieve our goals.</p>
+<p>Ideally, this is achieved by combining these metrics with <strong>thresholds for alerts</strong> to automatically notify us if things go south and a corrective action becomes necessary. For example, we could establish some alert on the health of a system or machine to notify a technician when maintenance is necessary. To <strong>avoid alert fatigue</strong>, it is important to reduce false alarms, i.e., configure the alert such that the responsible person tells you “when this threshold is reached, I will drop everything else and go fix the problem” (<em>not</em> “at this point we should probably keep an eye on it”).</p>
+<p>Depending on how frequently the value of the KPI changes and how quickly corrective actions show effects, we want to check for the alert condition either every few minutes to alert someone in real time or, for example, every morning, every Monday, or once per month if the values change more slowly.</p>
+<section id="is-this-significant" class="level4 custom-gray-block">
+<h4 class="anchored" data-anchor-id="is-this-significant">Is this significant?</h4>
+<p>Small variations in KPIs are normal and we should not overreact to noise. Statistics can tell us <strong>whether the observed deviation from what we expected is significant</strong>.</p>
+<p>Statistical inference enables us to <strong>draw conclusions that reach beyond the data at hand</strong>. Often we would like to make a statement about a whole <em>population</em> (e.g., all humans currently living on this earth), but we only have access to a few (hopefully representative) observations to draw our conclusion from. Statistical inference is about changing our mind under uncertainty: We start with a null hypothesis (i.e., what we expected before looking at the data) and then check if what we see in the sample dataset makes this null hypothesis look ridiculous, at which point we reject it and go with our alternative hypothesis instead.<br>
+<u>Example:</u> <em>Your company has an online store and wants to roll out a new recommendation system, but you are unsure whether customers will find these recommendations helpful and buy more. Therefore, before going live with the new system, you perform an A/B test, where a percentage of randomly selected users see the new recommendations, while the others are routed to the original version of the online store. The null hypothesis is that the new version is no better than the original. But it turns out that the average sales volume of customers seeing the new recommendations is a lot higher than that of the customers browsing the original site. This difference is so large that in a world where the null hypothesis was true, it would be extremely unlikely that a random sample would give us these results. We therefore reject the null hypothesis and go with the alternative hypothesis, that the new recommendations generate higher sales.</em></p>
+<p>In addition to rigorous statistical tests, there are also some rules of thumb to determine whether changes in the data warrant our attention: If a single sample lies three standard deviations (<span class="math inline">\(\sigma\)</span>) above or below the mean or seven consecutive points fall above or below the average value, this is cause for further investigation.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/02_data/control_chart.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption>A control chart showing measurements taken over time that fluctuate around their mean value with points of interest marked in red.</figcaption>
+</figure>
+</div>
+<div class="small-text">
+<p>Read <a href="https://towardsdatascience.com/whats-the-difference-between-analytics-and-statistics-cd35d457e17">this article</a> to learn more about the difference between analysts and statisticians and why they should work on distinct splits of your dataset.</p>
+</div>
+</section>
+<!-- Example business decisions::
+
+. [.underline]#Question:# Is the customer service department reaching its goals? \
+[.underline]#Answer:# In the last 3 months, customer service only managed to resolve 80% of requests. \
+[.underline]#Recommended Action:# We should hire more people.
+. [.underline]#Question:# What country should we expand to next? \
+[.underline]#Answer:# The market potential for countries A/B/C is 200/500/300 million euros respectively. \
+[.underline]#Recommended Action:# We should target country B next.
+. [.underline]#Question:# Do we need to order more inventory? \
+[.underline]#Answer:# Sales forecasts show that our current inventory should last until after Christmas. \
+[.underline]#Recommended Action:# No, we should not order more inventory.
+. [.underline]#Question:# Can we drop support for Internet Explorer for our web application? \
+[.underline]#Answer:# Only 10% of our users still use IE while our developers complain about the high maintenance effort. \
+[.underline]#Recommended Action:# Full support for IE is not worth it anymore.
+
+Example ML-related decisions::
+
+. [.underline]#Question:# Should this data point be excluded from the training set because it is an outlier? \
+[.underline]#Answer:# Outlier score of the data point is greater than the threshold. \
+[.underline]#Recommended Action:# Exclude the data point.
+. [.underline]#Question:# Do we need extra preprocessing steps for this variable (e.g., because it is not normally distributed)? \
+[.underline]#Answer:# A statistical test confirms the variable is not normally distributed with p=0.02. \
+[.underline]#Recommended Action:# Apply a transformation to the data point as described in the chapter on [Data Preprocessing].
+. [.underline]#Question:# Are the predictions of our ML model accurate enough such that we can use it in the live system? \
+[.underline]#Answer:# Model accuracy dropped below 85% last week. \
+[.underline]#Recommended Action:# We should retrain the model on more recent data. -->
+<p>For every alert that is created, i.e., every time it is clear that a corrective action is needed, it is worth considering whether this action can be automated and to directly <strong>trigger this automated action together with the alert</strong> (e.g., if the performance of an ML model drops below a certain threshold, instead of just notifying the data scientist we could automatically trigger a retraining with the most recent data). If this is not possible, e.g., because it is not clear what exactly happened and therefore which action should be taken, we need a deeper analysis.</p>
+<p>Digging deeper into the data can help us answer questions such as “Why did we not reach this goal and how can we do better?” (or, in rarer cases, “Why did we exceeded this goal and how can we do it again?”) to <strong>decide on the specific action</strong> to take.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Don’t just look for data that confirms the story you want to tell and supports the action you wanted to take from the start (i.e., beware of confirmation bias)! Instead be open and actively try to disprove your hypothesis.</p>
+</div>
+</div>
+<p>Such an exploratory analysis is often a quick and dirty process where we <strong>generate lots of plots to better understand the data</strong> and where the difference between what we expected and what we saw in the data is coming from, e.g., by examining other correlated variables. However, arriving at satisfactory answers is often more art than science. <!-- [.underline]#Example:# _By visualizing the number of customer requests we received over time, we notice a sharp increase around the same time a new feature of our software was released. After further investigation, we conclude that many users are confused by this new functionality and we need to make the user interface more self-explanatory._ --></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When using an ML model to predict a KPI, we can interpret this model and its predictions to better understand which variables might influence the KPI. <strong>Focusing on the features deemed important by the ML model</strong> can be helpful if our dataset contains hundreds of variables and we don’t have time to look at all of them in detail. But use with caution – the model only learned from correlations in the data; these do not necessarily represent true causal relationships between the variables.</p>
+</div>
+</div>
+</section>
+<section id="communicating-insights" class="level3">
+<h3 class="anchored" data-anchor-id="communicating-insights">Communicating Insights</h3>
+<p>The plots that were created during an exploratory analysis should not be the plots we show our audience when we’re trying to communicate our findings. Since our audience is far less familiar with the data than us and probably also not interested / doesn’t have the time to dive deeper into the data, we need to make the results more accessible, a process often called <em>explanatory analysis</em>.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Don’t “just show all the data” and hope that your audience will make something of it – this is the downfall of many dashboards. It is essential, that you understand what goal your audience is trying to achieve and what questions they need answers to.</p>
+</div>
+</div>
+<section id="step-1-choose-the-right-plot-type" class="level4">
+<h4 class="anchored" data-anchor-id="step-1-choose-the-right-plot-type">Step 1: Choose the right plot type</h4>
+<ul>
+<li>Get inspired by visualization libraries (e.g., <a href="https://github.com/Financial-Times/chart-doctor/blob/main/visual-vocabulary/Visual-vocabulary-en.pdf">here</a> or <a href="https://datavizcatalogue.com/">here</a>), but avoid the urge to create fancy graphics; sticking with common visualizations makes it easier for the audience to correctly decode the presented information</li>
+<li>Don’t use 3D effects!</li>
+<li>Avoid pie or donut charts (angles are hard to interpret)</li>
+<li>Use line plots for time series data</li>
+<li>Use horizontal instead of vertical bar charts for audiences that read left to right</li>
+<li>Start the y-axis at 0 for area &amp; bar charts</li>
+<li>Consider using <a href="https://en.wikipedia.org/wiki/Small_multiple">small multiples</a> or sparklines instead of cramming too much into a single chart</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/02_data/explanatory1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption><em>Left:</em> Bar charts (especially in 3D) make it hard to compare numbers over a longer period of time. <em>Right:</em> Trends over time can be more easily detected in line charts. [Example adapted from: <em>Storytelling with Data</em> by Cole Nussbaum Knaflic]</figcaption>
+</figure>
+</div>
+</section>
+<section id="step-2-cut-clutter-maximize-data-to-ink-ratio" class="level4">
+<h4 class="anchored" data-anchor-id="step-2-cut-clutter-maximize-data-to-ink-ratio">Step 2: Cut clutter / maximize data-to-ink ratio</h4>
+<ul>
+<li>Remove border</li>
+<li>Remove gridlines</li>
+<li>Remove data markers</li>
+<li>Clean up axis labels</li>
+<li>Label data directly</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/02_data/explanatory2.gif" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption>Cut clutter! [Example adapted from: <em>Storytelling with Data</em> by Cole Nussbaum Knaflic]</figcaption>
+</figure>
+</div>
+</section>
+<section id="step-3-focus-attention" class="level4">
+<h4 class="anchored" data-anchor-id="step-3-focus-attention">Step 3: Focus attention</h4>
+<ul>
+<li>Start with gray, i.e., push everything in the background</li>
+<li>Use pre-attentive attributes like color strategically to highlight what’s most important</li>
+<li>Use data labels sparingly</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/02_data/explanatory3.gif" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption>Start with gray and use pre-attentive attributes strategically to focus the audience’s attention. [Example adapted from: <em>Storytelling with Data</em> by Cole Nussbaum Knaflic]</figcaption>
+</figure>
+</div>
+</section>
+<section id="step-4-make-data-accessible" class="level4">
+<h4 class="anchored" data-anchor-id="step-4-make-data-accessible">Step 4: Make data accessible</h4>
+<ul>
+<li>Add context: Which values are good (goal state), which are bad (alert threshold)? Should the value be compared to another variable (e.g., actual vs.&nbsp;forecast)?</li>
+<li>Leverage consistent colors when information is spread across multiple plots (e.g., data from a certain country is always drawn in the same color)</li>
+<li>Annotate the plot with text explaining the main takeaways (if this is not possible, e.g., in dashboards where the data keeps changing, the title can instead include the question that the plot should answer, e.g., “Does our revenue follow the projections?”)</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/02_data/explanatory4.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption>Tell a story. [Example adapted from: <em>Storytelling with Data</em> by Cole Nussbaum Knaflic]</figcaption>
+</figure>
+</div>
+<div class="custom-gray-block">
+<p><strong>Further reading</strong></p>
+<ul>
+<li><em>Show Me the Numbers: Designing Tables and Graphs to Enlighten</em> by Stephen Few</li>
+<li><em>Better Data Visualizations: A Guide for Scholars, Researchers, and Wonks</em> by Jonathan Schwabish</li>
+<li><em>Effective Data Storytelling: How to drive change with data, narrative, and visuals</em> by Brent Dykes</li>
+<li><em>Storytelling with Data: A data visualization guide for business professionals</em> by Cole Nussbaum Knaflic</li>
+<li><em>Data Visualization: A successful design process</em> by Andy Kirk</li>
+<li>Various <a href="https://kozyrkov.medium.com/">blog posts</a> by Cassie Kozyrkov</li>
+</ul>
+</div>
+</section>
+</section>
+</section>
+<section id="sec-data-garbage" class="level2">
+<h2 class="anchored" data-anchor-id="sec-data-garbage">Garbage in, Garbage out!</h2>
+<p>Remember: data is our raw material when producing something valuable with ML. If the quality or quantity of the data is insufficient, we are facing a “garbage in, garbage out” scenario and no matter what kind of fancy ML algorithm we try, we wont get a satisfactory result. In fact, the fancier the algorithm (e.g., deep learning), the more data we need.</p>
+<p>Below you find a summary of some common risks associated with data that can make it complicated or even impossible to apply ML:</p>
+<section id="raw-data-can-be-very-messy" class="level4 custom-gray-block">
+<h4 class="anchored" data-anchor-id="raw-data-can-be-very-messy">Raw data can be very messy:</h4>
+<ul>
+<li>Relevant data is spread across multiple databases / excel sheets that need to be joined. <em>Worst case:</em> Data points don’t have a unique ID based on which the different entries can be linked. Instead one has to fall back on some error prone strategy like matching data based on time stamps.</li>
+<li>Manually entered values contains errors, e.g., misplaced decimal points.</li>
+<li>It is not possible to correct missing values. <em>Worst case:</em> Missing values are not random. For example, sensors fail only right before something goes wrong during the production process. Or in surveys, rich people more often decline to answer questions regarding their income compared to poor or middle class people. This introduces a systematic bias in the dataset.</li>
+<li>The dataset consists of different data types (structured and/or unstructured) with different scales.</li>
+<li>The process setup changes over time, e.g., due to some external conditions like replacing a sensor or some other maintenance event, which means the data collected from different time periods are incompatible. <em>Worst case:</em> These external changes were not recorded anywhere and we only notice at the end of the analysis that the data we were working with violated our assumptions.</li>
+</ul>
+<p>→ Data preprocessing takes a very long time.<br>
+→ Resulting dataset (after cleaning) is a lot smaller than expected – possibly too small to do any meaningful analysis.</p>
+<p>⇒ Before wanting to do ML, first think about how your data collection pipeline &amp; infrastructure could be improved!</p>
+</section>
+<section id="not-enough-not-the-right-data-to-do-ml" class="level4 custom-gray-block">
+<h4 class="anchored" data-anchor-id="not-enough-not-the-right-data-to-do-ml">Not enough / not the right data to do ML:</h4>
+<ul>
+<li><p>Small dataset and/or too little variation, e.g., we produced only a few defective products or a process runs in a steady state most of the time, i.e., there is little or no variation in the inputs.<br>
+→ Effect of different input variables on the target can’t be estimated reliably from only a few observations.<br>
+⇒ Do some experiments where you systematically vary different inputs to collect a more diverse dataset.</p></li>
+<li><p>Data is inconsistent / incomplete, i.e., same inputs with different outputs, e.g., two products were produced under the same (measured) conditions, one is fine, the other is faulty.<br>
+This can have two reasons:</p>
+<ul>
+<li>The labels are very noisy, for example, because the human annotators didn’t follow the same set of clear rules or some examples were ambiguous, e.g., one QA-expert deems a product with a small scratch as still OK, while another labels it as defective.<br>
+⇒ Clean up the data by relabeling, which can take some time but will pay off! See also this great <a href="https://youtu.be/06-AZXmwHjo">MLOps / data-centric AI talk by Andrew Ng</a> on how a small high-quality dataset can be more valuable than a larger noisy dataset.</li>
+<li>Relevant input features are missing: While it is relatively easy for humans to assess if all the relevant information is present in unstructured data (e.g., images: either we see a cat or we don’t), structured data often has too many different variables and complex interactions to know right away whether all the relevant features were included.<br>
+⇒ Talk to a subject matter expert about which additional input features might be helpful and include these in the dataset. <em>Worst case:</em> Need to install a new sensor in the machine and collect this data, i.e., all the data collected in the past is basically useless. BUT: using the right sensor can simplify the problem immensely and installing it will be worth it!</li>
+</ul></li>
+</ul>
+<div class="small-text">
+<p>In many applications, our first instinct is to use a camera to generate the input data, since we humans rely primarily on our visual system to solve many tasks. However, even though image recognition algorithms have come a long way, using such a setup instead of a more specialized sensor can make the solution more error prone.<br>
+Trying to detect mushy strawberries? Use a near infrared (NIR) sensor instead of a regular camera like <a href="https://www.aboutamazon.co.uk/innovation/machine-learning-using-algorithms-to-sort-fruit">Amazon Fresh</a> did. They still use machine learning to analyze the resulting data, but in the NIR images the rotting parts of fruits are more easily visible than in normal photos.<br>
+Trying to detect if a door is closed? With a simple <a href="https://www.deeplearning.ai/the-batch/issue-92/">magnet</a> and detector, this task can be solved without any complex analysis or training data! (You probably know the saying: “When you have a hammer, everything looks like a nail”. → Don’t forget to also consider solutions outside your ML toolbox! ;-))</p>
+</div>
+<p>→ Unless the dataset is amended accordingly, any ML model has a poor performance!</p>
+</section>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you can, observe how the data is collected. As in: actually physically stand there and watch how someone enters the values in some program or how the machine operates as the sensors measure something. You will probably notice some things that can be optimized in the data collection process directly, which will save you lots of preprocessing work in the future.</p>
+</div>
+</div>
+<section id="best-practice-data-catalog" class="level4">
+<h4 class="anchored" data-anchor-id="best-practice-data-catalog">Best Practice: Data Catalog</h4>
+<p>To make datasets more accessible, especially in larger organizations, they should be documented. For example, in structured datasets, there should be information available on each variable like:</p>
+<ul>
+<li>Name of the variable</li>
+<li>Description</li>
+<li>Units</li>
+<li>Data type (e.g., numerical or categorical values)</li>
+<li>Date of first measurement (e.g., in case a sensor was installed later than the others)</li>
+<li>Normal/expected range of values (→ “If this variable is below this threshold, then the machine is off and the data points can be ignored.”)</li>
+<li>How missing values are recorded, i.e., whether they are recorded as missing values or substituted with some unrealistic value instead, which can happen since some sensors are not able to send a signal for “Not a Number” (NaN) directly or the database does not allow for the field to be empty.</li>
+<li>Notes on anything else you should be aware of, e.g., a sensor malfunctioning during a certain period of time or some other glitch that resulted in incorrect data. This can otherwise be difficult to spot, for example, if someone instead manually entered or copy &amp; pasted values from somewhere, which look normal at first glance.</li>
+</ul>
+<p>You can find further recommendations on what is particularly important when documenting datasets for machine learning applications in the <a href="https://pair-code.github.io/datacardsplaybook/">Data Cards Playbook</a>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In addition to documenting datasets as a whole, it is also helpful to store metadata for individual samples. For example, for image data, this could include the time stamp of when the image was taken, the geolocation (or if the camera is built into a manufacturing machine then the ID of this machine), information about the camera settings, etc.. This can greatly help when analyzing model prediction errors, as it might turn out that, for example, images taken with a particular camera setting are especially difficult to classify, which in turn gives us some hints on how to improve the data collection process.</p>
+</div>
+</div>
+</section>
+<section id="data-as-an-asset" class="level4 custom-gray-block">
+<h4 class="anchored" data-anchor-id="data-as-an-asset">Data as an Asset</h4>
+<p>With the right processes (e.g., roles such as “Data Owner” and “Data Controller” that are accountable for the data quality, and a consistent data infrastructure that includes a monitoring pipeline to validate new data), it is possible for an organization to get from “garbage in, garbage out” to “data is the new oil”:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/02_data/data_asset.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</section>
+<section id="with-big-data-comes-great-responsibility" class="level4 custom-gray-block">
+<h4 class="anchored" data-anchor-id="with-big-data-comes-great-responsibility">With (big) data comes great responsibility!</h4>
+<p>Some data might not seem very valuable to you, but can be a huge asset for others, i.e., with a different use case!</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/08_ml_in_practice/data_responsibility.png" class="img-fluid figure-img" style="width:55.0%"></p>
+<figcaption>A fitness tracker startup thought it would be a cool idea to publish popular jogging routes based on the data they’ve collected from their users. However, since many US soldiers also happened to use the tracker and frequently jogged around their army bases, this startup thereby accidentally outed a secret army base in Afghanistan, which appeared as a bright spot on their interactive map in an area where they otherwise had only few users. So even if your data looks harmless at first glance, please do think about what could go wrong in case you publish it (even in an aggregated, anonymized form)!</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="sec-preprocessing" class="level2">
+<h2 class="anchored" data-anchor-id="sec-preprocessing">Data Preprocessing</h2>
+<p>Now that we better understand our data and verified that it is (hopefully) of good quality, we can get it ready for our machine learning algorithms.</p>
+<div class="custom-gray-block">
+<p><strong>Raw Data</strong> can come in many different forms, e.g., sensor measurements, pixel values, text (e.g., HTML page), SAP database, …<br>
+→ <em>n</em> data points, stored as rows in an excel sheet, as individual files, etc.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>What constitutes one data point?</strong> It’s always important to be really clear about what one data point actually is, i.e., what the inputs look like and what we want back as a result from the model for each sample / observation. Think of this in terms of how you plan to integrate the ML model with the rest of your workflow: what data is generated in the previous step and can be used as input for the ML part, and what is needed as an output for the following step?</p>
+</div>
+</div>
+<section id="preprocessing" class="level4">
+<h4 class="anchored" data-anchor-id="preprocessing">Preprocessing</h4>
+<p>transforming and enriching the raw data before applying ML, for example:</p>
+<ul>
+<li>remove / correct missing or wrongly entered data (e.g., misplaced decimal point)</li>
+<li>exclude zero variance features (i.e., variables with always the same value) and nonsensical variables (e.g., IDs)</li>
+<li>feature extraction: transform into numerical values (e.g., unstructured data like text)</li>
+<li>feature engineering: compute additional/better features from the original variables</li>
+</ul>
+<p>⇒ <strong><em>Feature matrix</em></strong> <span class="math inline">\(\,X \in \mathbb{R}^{n\times d}\)</span>: <em>n</em> data points; each represented as a <em>d</em>-dimensional vector (i.e., with <em>d</em> features)</p>
+<p><strong>Prediction Targets?</strong><br>
+→ <strong><em>Label vector</em></strong> <span class="math inline">\(\,\mathbf{y}\)</span> : <em>n</em>-dimensional vector with one target value per data point</p>
+</section>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script type="text/javascript"> // go once over all images and transform the percentage width into pixels relative to original body size
+  const bodyWidth = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--custom-body-width')); // Get CSS variable
+  document.querySelectorAll('.quarto-figure img').forEach((img) => {
+    const styleWidth = img.getAttribute('style').match(/width:\s*([\d.]+)%/); // Extract percentage
+    if (styleWidth) {
+      const percentage = parseFloat(styleWidth[1]) / 100;
+      img.style.width = `${bodyWidth * percentage}px`; // Apply calculated width
+    }
+  });
+</script>
+
+<style type="text/css">
+#footer {
+  font-size: 80%; /* Makes the font 70% smaller */
+  border-top: 1px solid #ccc; /* Adds a horizontal line above the footer */
+  padding-top: 10px; /* Adds some spacing above the footer content */
+}
+</style>
+
+<!-- FOOTER  -->
+<div id="footer" class="outer">
+  <footer class="inner">
+    <p><b>Book/Course Feedback: </b> <a href="https://forms.gle/Ccv5h5zQxwPjWtCS7" target="_blank" rel="nofollow">Full Feedback Survey</a> or <a href="https://forms.gle/qK8T5ALzgpiZaxd49" target="_blank" rel="nofollow">Short Comment</a><br></p>
+
+    <p>Find me on <a href="https://github.com/cod3licious/" target="_blank" rel="nofollow">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/" target="_blank" rel="nofollow">LinkedIn</a><br>
+      <a href="https://franziskahorn.de/">Home</a> ~ <a href="mailto:hey@franziskahorn.de?Subject=Book%20Feedback" target="_blank" rel="nofollow">Contact</a> ~ <a href="https://franziskahorn.de/impressum.html">Impressum</a></p>
+
+      <!-- CC license -->
+   <p xmlns:cc="http://creativecommons.org/ns#">This work is licensed under <a href="https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY 4.0<img style="height:16px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:16px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""></a></p>
+  </footer>
+</div>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./01b_basics.html" class="pagination-link" aria-label="The Basics">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">The Basics</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./05_supervised_models.html" class="pagination-link" aria-label="Deep Learning">
+        <span class="nav-page-text"><span class="chapter-title">Deep Learning</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

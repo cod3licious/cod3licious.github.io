@@ -1,0 +1,1650 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.39">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Grundlagen – A Practitioner's Guide to Machine Learning</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./02_data.html" rel="next">
+<link href="./01a_intro.html" rel="prev">
+<link href="./favicon.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-37b241f53b32a5ad598e4053e71b073f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Keine Treffer",
+    "search-matching-documents-text": "Treffer",
+    "search-copy-link-title": "Link in die Suche kopieren",
+    "search-hide-matches-text": "Zusätzliche Treffer verbergen",
+    "search-more-match-text": "weitere Treffer in diesem Dokument",
+    "search-more-matches-text": "weitere Treffer in diesem Dokument",
+    "search-clear-button-title": "Zurücksetzen",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Abbrechen",
+    "search-submit-button-title": "Abschicken",
+    "search-label": "Suchen"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01b_basics.html"><span class="chapter-title">Grundlagen</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">A Practitioner’s Guide to Machine Learning</a> 
+        <div class="sidebar-tools-main">
+    <a href="./A-Practitioner-s-Guide-to-Machine-Learning.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Suchen"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Vorwort</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01a_intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Einleitung</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01b_basics.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Grundlagen</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Datenanalyse &amp; Preprocessing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_supervised_models.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Deep Learning</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_pitfalls.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Häufige Fehler vermeiden</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08_conclusion.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Fazit</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Inhaltsverzeichnis</h2>
+   
+  <ul>
+  <li><a href="#sec-data-oil" id="toc-sec-data-oil" class="nav-link active" data-scroll-target="#sec-data-oil">Daten sind das neue Öl!?</a>
+  <ul class="collapse">
+  <li><a href="#insights" id="toc-insights" class="nav-link" data-scroll-target="#insights">Insights</a></li>
+  <li><a href="#automatisierung" id="toc-automatisierung" class="nav-link" data-scroll-target="#automatisierung">Automatisierung</a></li>
+  </ul></li>
+  <li><a href="#sec-what-is-ml" id="toc-sec-what-is-ml" class="nav-link" data-scroll-target="#sec-what-is-ml">Was ist ML?</a></li>
+  <li><a href="#sec-how-machines-learn" id="toc-sec-how-machines-learn" class="nav-link" data-scroll-target="#sec-how-machines-learn">Wie “lernen” Maschinen?</a>
+  <ul class="collapse">
+  <li><a href="#supervised-learning" id="toc-supervised-learning" class="nav-link" data-scroll-target="#supervised-learning">Supervised Learning</a></li>
+  </ul></li>
+  <li><a href="#sec-ml-use-cases" id="toc-sec-ml-use-cases" class="nav-link" data-scroll-target="#sec-ml-use-cases">ML Anwendungsfälle</a>
+  <ul class="collapse">
+  <li><a href="#dimensionsreduktion" id="toc-dimensionsreduktion" class="nav-link" data-scroll-target="#dimensionsreduktion">Dimensionsreduktion</a></li>
+  <li><a href="#anomalieerkennung" id="toc-anomalieerkennung" class="nav-link" data-scroll-target="#anomalieerkennung">Anomalieerkennung</a></li>
+  <li><a href="#clustering" id="toc-clustering" class="nav-link" data-scroll-target="#clustering">Clustering</a></li>
+  <li><a href="#regression-klassifikation" id="toc-regression-klassifikation" class="nav-link" data-scroll-target="#regression-klassifikation">Regression &amp; Klassifikation</a></li>
+  <li><a href="#deep-learning-generative-ai" id="toc-deep-learning-generative-ai" class="nav-link" data-scroll-target="#deep-learning-generative-ai">Deep Learning &amp; Generative AI</a></li>
+  <li><a href="#information-retrieval" id="toc-information-retrieval" class="nav-link" data-scroll-target="#information-retrieval">Information Retrieval</a></li>
+  <li><a href="#empfehlungssysteme" id="toc-empfehlungssysteme" class="nav-link" data-scroll-target="#empfehlungssysteme">Empfehlungssysteme</a></li>
+  <li><a href="#reinforcement-learning" id="toc-reinforcement-learning" class="nav-link" data-scroll-target="#reinforcement-learning">Reinforcement Learning</a></li>
+  <li><a href="#andere" id="toc-andere" class="nav-link" data-scroll-target="#andere">Andere</a></li>
+  </ul></li>
+  <li><a href="#sec-solving-problems" id="toc-sec-solving-problems" class="nav-link" data-scroll-target="#sec-solving-problems">Mit ML Probleme lösen</a>
+  <ul class="collapse">
+  <li><a href="#identifiziere-ein-problem" id="toc-identifiziere-ein-problem" class="nav-link" data-scroll-target="#identifiziere-ein-problem">1. Identifiziere ein Problem</a></li>
+  <li><a href="#entwickle-eine-lösung" id="toc-entwickle-eine-lösung" class="nav-link" data-scroll-target="#entwickle-eine-lösung">2. Entwickle eine Lösung</a></li>
+  <li><a href="#setze-die-lösung-ein" id="toc-setze-die-lösung-ein" class="nav-link" data-scroll-target="#setze-die-lösung-ein">3. Setze die Lösung ein</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-basics" class="quarto-section-identifier"><span class="chapter-title">Grundlagen</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Dieses Kapitel gibt eine allgemeine Einführung in das Thema Machine Learning (ML) und zeigt auf in welchen Bereichen der Einsatz von ML sinnvoll ist und welche Probleme man lieber mit einfacheren Mitteln lösen sollte.</p>
+<section id="sec-data-oil" class="level2">
+<h2 class="anchored" data-anchor-id="sec-data-oil">Daten sind das neue Öl!?</h2>
+<p>Lass uns von vorne anfangen. Alles beginnt mit Daten. Wahrscheinlich hast du diese Behauptung schon einmal gehört: “Daten sind das neue Öl!”. Dies legt nahe, dass Daten wertvoll sind. Aber sind sie das?<br>
+Der Grund, warum Öl als wertvoll angesehen wird, liegt darin, dass wir wichtige Anwendungsfälle dafür haben: den Antrieb unserer Autos, die Beheizung unserer Häuser und die Herstellung von Kunststoffen oder Düngemitteln. Genauso verhält es sich auch mit Daten: sie sind nur so wertvoll wie das was wir aus ihnen machen. Wofür können wir also Daten verwenden?</p>
+<p>Die wichtigsten Anwendungsfälle fallen in eine von zwei Kategorien:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_intro_ml/data_value.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:45.0%"></p>
+</figure>
+</div>
+<section id="insights" class="level3">
+<h3 class="anchored" data-anchor-id="insights">Insights</h3>
+<p>Erkenntnisse können wir entweder durch kontinuierliches Monitoring (“Sind wir auf Kurs?”) oder eine tiefere Analyse (“Was läuft falsch?”) generieren.</p>
+<p>In dem wir wichtige Variablen oder <em>Key Performance Indicators</em> (KPIs) in <strong>Berichten</strong> oder <strong>Dashboards</strong> visualisieren, machen wir den Status Quo transparenter und quantifizieren wie nah wir einem bestimmten Ziel schon gekommen sind. Wenn ein KPI weit ab von seinem Zielwert liegt, können wir mit einer explorativen Datenanalyse tiefer in die Daten eintauchen, um die Ursache des Problems zu identifizieren und Fragen wie diese zu beantworten:</p>
+<ul>
+<li>Warum erreichen wir unser Ziel nicht?</li>
+<li>Was sollen wir als nächstes tun?</li>
+</ul>
+<p>Zufriedenstellende Antworten zu finden ist allerdings oft mehr Kunst als Wissenschaft 😉 – mehr dazu im Kapitel <a href="02_data.html#sec-data-analysis">Datenanalyse</a>.</p>
+</section>
+<section id="automatisierung" class="level3">
+<h3 class="anchored" data-anchor-id="automatisierung">Automatisierung</h3>
+<p>Wie in den folgenden Unterkapiteln beschrieben, können Machine Learning Modelle dazu verwendet werden, um <strong>eine ‘Input → Output’ Aufgabe zu automatisieren</strong>, welche sonst ein (speziell geschulter) Mensch erledigen müsste. Diese Aufgaben fallen einem (entsprechend geschulten) Menschen in der Regel leicht:</p>
+<ul>
+<li>Übersetzen von Texten von einer Sprache in eine andere</li>
+<li>Produkte mit Kratzern aussortieren, wenn sie einen Kontrollpunkt am Fließband passieren</li>
+<li>Einem Freund Filme empfehlen</li>
+</ul>
+<p>Die ML-Modelle müssen dafür <strong>mit einer großen Menge historischer Daten trainiert</strong> werden (z.B. Texte in beiden Sprachen, Bilder von Produkten mit und ohne Kratzer, Informationen über verschiedene Nutzer und welche Filme sie gesehen haben).</p>
+<p>Die resultierende Software kann dann entweder verwendet werden, um die Aufgabe <strong>vollständig zu automatisieren</strong>, oder wir können einen <strong>Menschen dazwischen schalten</strong>, der eingreifen und die Vorschläge des Modells korrigieren kann.</p>
+</section>
+</section>
+<section id="sec-what-is-ml" class="level2">
+<h2 class="anchored" data-anchor-id="sec-what-is-ml">Was ist ML?</h2>
+<p>Was genau ist nun dieses maschinelle Lernen, das bereits unser aller Leben verändert?</p>
+<p>ML ist zunächst ein Forschungsgebiet im Bereich der theoretischen Informatik, an der Schnittstelle von Mathematik und Informatik:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_intro_ml/venn1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:35.0%"></p>
+</figure>
+</div>
+<p>Genauer gesagt ist <strong>maschinelles Lernen</strong> ein <strong>Überbegriff für Algorithmen, die Muster erkennen und Regeln aus Daten lernen</strong>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hinweis
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Vereinfacht kann man sich einen <strong>Algorithmus</strong> als <strong>Strategie oder Rezept zur Lösung eines speziellen Problems</strong> vorstellen. Es gibt zum Beispiel effektive Algorithmen, um den kürzesten Weg zwischen zwei Städten zu finden (z.B. genutzt in den Navigationssystemen von Google Maps) oder um Planungsprobleme zu lösen wie z.B.: “Welche Aufgabe sollte zuerst erledigt werden und welche Aufgabe danach um alle Aufgaben vor ihrer Deadline zu schaffen unter Berücksichtigung eventueller Abhängigkeiten zwischen den Aufgaben.” Maschinelles Lernen befasst sich mit der Teilmenge von Algorithmen, die statistische Regelmäßigkeiten in einem Datensatz erkennen und nutzen, um bestimmte Ergebnisse zu erzielen.</p>
+</div>
+</div>
+<div class="custom-gray-block">
+<p>Analog zu den Werkzeugen, mit denen man etwas in einem traditionellen Produktionsprozess herstellt, kann man sich <strong>ML-Algorithmen als Werkzeuge vorstellen, um Wert aus Daten zu generieren</strong>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_intro_ml/ml_carpentry_analogy2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+<p>Um ML erfolgreich anzuwenden, sollte man sich einige wichtige Fragen stellen:</p>
+<ul>
+<li><strong><em>Was könnte wertvoll sein?</em></strong> Dies kann beispielsweise ein neues Feature für ein existierendes Produkt sein, z.B. Face ID als neue Möglichkeit um ein Smartphone zu entsperren.</li>
+<li><strong><em>Welche Daten werden benötigt?</em></strong> Einen Holzstuhl kann man nicht aus Stoff und Metall oder ein paar im Wald gefundenen Zweigen herstellen. Genauso benötigt man je nachdem, was man mit ML erreichen möchte, auch die richtigen Daten in ausreichender Qualität &amp; Quantität um die Algorithmen überhaupt anwenden zu können. In vielen Anwendungsfällen ist dieser Teil besonders schwierig, da man die benötigten Daten oft nicht einfach kaufen kann, wie Holz im Baumarkt, sondern diese selbst sammeln – also quasi einen eigenen Wald anpflanzen muss, was einige Zeit dauern kann.</li>
+<li><strong><em>Welcher ML-Algorithmus ist das richtige Werkzeug für diese Aufgabe?</em></strong> (Welche Kategorie von ML-Algorithmen generiert die Art von Output, die wir benötigen?)</li>
+<li>Verfüge ich bzw. meine Mitarbeiter über die <strong><em>notwendigen Fähigkeiten und genügend Rechenleistung</em></strong>, um das Vorhaben erfolgreich umzusetzen?</li>
+</ul>
+</div>
+<p>Die unterschiedlichen Algorithmen bilden unseren <strong>ML Werkzeugkasten</strong>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_intro_ml/ml_toolset6.png" class="img-fluid figure-img" style="width:65.0%"></p>
+<figcaption>ML selbst ist ein Teilbereich der Künstlichen Intelligenz (KI/AI), das derzeit zwar häufiger verwendete Buzzword, jedoch basieren alle wirklich interessanten Anwendungen, z.B. die initial gezeigten Beispiele, tatsächlich auf ML. Zu KI gehören ansonsten zum Beispiel noch einige Suchalgorithmen, die beim Bau der ersten Schachcomputer verwendet wurden. ML kann wiederum in drei Hauptbereiche unterteilt werden, Unsupervised (“Unüberwachtes”), Supervised (“Überwachtes”) und Reinforcement (“Bestärkendes”) Learning. Das Buzzword “Deep Learning” ist außerdem ein Überbegriff für neuronale Netzwerkmodelle und beinhaltet auch Generative AI (GenAI) Modelle wie ChatGPT. Einige der einfachsten im ML verwendeten Algorithmen, wie die lineare Regression oder PCA (sehr ähnlich der Faktorenanalyse), werden auch von Statistikern verwendet, die jedoch auch andere Werkzeuge wie Hypothesentests verwenden, welche keine Regeln oder Muster aus Daten lernen. Die meisten Data Scientists verwenden viele Methoden aus ML und Statistik, aber auch zusätzliche Werkzeuge wie A/B-Tests, z.B. um zu überprüfen, ob ein roter oder grüner “Kaufen”-Button auf einer Website mehr Umsatz generiert.</figcaption>
+</figure>
+</div>
+<section id="ml-algorithmen-lösen-input-output-probleme" class="level4">
+<h4 class="anchored" data-anchor-id="ml-algorithmen-lösen-input-output-probleme">ML Algorithmen lösen “Input → Output” Probleme</h4>
+<p>All diesen ML-Algorithmen aus unserem Werkzeugkasten ist gemein, dass sie “Input → Output” Probleme wie diese lösen:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_intro_ml/input_output5.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption>Beispiel “Input → Output” ML Probleme: Erkennen von Objekten in Bildern; Übersetzen von Text von einer Sprache in eine andere; Bestimmen eines guten nächsten Zuges angesichts des aktuellen Zustands eines Go-Boards; Gruppieren ähnlicher Nutzer/Kunden anhand verschiedener Informationen über sie, wie z.B. Umfrageantworten (im Marketing als Kundensegmentierung bezeichnet dient dies dazu z.B. unterschiedliche Kundengruppen in sozialen Medien mit spezifischen Werbekampagnen anzusprechen).</figcaption>
+</figure>
+</div>
+<p>Während in den obigen Beispielen ein (entsprechend geschulter) Mensch zur jeweiligen Eingabe in der Regel leicht die richtige Ausgabe erzeugt (z.B. kann sogar ein kleines Kind die Katze im ersten Bild erkennen), fällt es Menschen oft schwer zu beschreiben, <em>wie</em> sie zur richtigen Antwort gekommen sind (woran erkennt man, dass dies eine Katze und kein kleiner Hund ist? an den spitzen Ohren? den Schnurrhaaren?). Im Gegensatz dazu <strong>lernen ML-Algorithmen solche Regeln aus den gegebenen Beispieldaten</strong>.</p>
+</section>
+<section id="ml-vs.-herkömmliche-software" class="level4 custom-gray-block">
+<h4 class="anchored" data-anchor-id="ml-vs.-herkömmliche-software">ML vs.&nbsp;herkömmliche Software</h4>
+<p>Während man <strong>herkömmliche Software</strong>-Lösungen dazu verwenden kann, um Aufgaben zu automatisieren, bei denen eine vordefinierte Abfolge von Aktionen nach einigen <strong>festgeschriebenen Regeln</strong> ausgeführt wird (z.B. “Eine Tür soll sich öffnen, <em>wenn</em> ein Objekt eine Lichtschranke durchquert und sich 20 Sekunden später wieder schließen”), kann man mit maschinellem Lernen <strong>“Input → Output”-Aufgaben automatisieren</strong>, für die es sonst <strong>schwierig wäre, solche Regeln aufzustellen</strong>.</p>
+<p>Die Qualitätskontrolle in einer Keks-Fabrik ist ein Beispiel für eine solche “Input (Keks) → Output (ok/fehlerhaft)”-Aufgabe: Während z.B. zerbrochene Kekse automatisch aussortiert werden könnten, indem man überprüft, dass jeder Keks etwa 15g wiegt, ist es schwierig, Regeln zu formulieren, die alle möglichen Produktionsfehler zuverlässig abfangen. Also müsste entweder ein Mensch die Produktionslinie beobachten, um z.B. zusätzlich verbrannte Kekse zu erkennen, oder man könnte Bilder von den Keksen machen und sie als Input für ein Machine Learning Modell verwenden, um die fehlerhaften Kekse zu erkennen:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_intro_ml/input_output_solving_cookie3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+<p>Um dieses Problem mit ML zu lösen, muss zunächst ein großer Datensatz mit Fotos vieler guter, aber auch allerlei fehlerhafter Kekse zusammengestellt werden, inklusive der entsprechenden Annotationen, also einem Label für jedes Bild, ob es einen guten oder fehlerhaften Keks zeigt (aber nicht unbedingt die Art des Fehlers). Aus diesen Beispielen kann dann ein ML-Algorithmus lernen, zwischen guten und fehlerhaften Keksen zu unterscheiden.</p>
+</section>
+<section id="wann-man-ml-nicht-verwenden-sollte" class="level4 custom-gray-block">
+<h4 class="anchored" data-anchor-id="wann-man-ml-nicht-verwenden-sollte">Wann man ML (nicht) verwenden sollte</h4>
+<p><strong>ML ist übertrieben, wenn:</strong></p>
+<ul>
+<li>ein manuell definiertes Regelwerk oder ein mechanistisches (white box) Modell das Problem lösen kann. Wenn beispielsweise in unserer Keks-Fabrik das einzige Qualitätsproblem immer nur zerbrochene Kekse wären, dann würde die Regel “Keks-Gewicht muss zwischen 14-16g liegen” ausreichen, um alle fehlerhaften Kekse zuverlässig zu erkennen. Eine solche Regel ist außerdem einfacher zu implementieren, da nicht erst ein großer Datensatz gesammelt werden muss.</li>
+</ul>
+<p><strong>ML hat großes Potenzial, wenn:</strong></p>
+<ul>
+<li>eine exakte Simulation mit einem mechanistischen Modell zu lange dauert (dieses aber verwendet werden kann, um einen qualitativ hochwertigen Datensatz zu generieren). Z.B. wurde das in der Einleitung erwähnte AlphaFold-Modell, mit dem die 3D-Struktur eines Proteins anhand seiner Aminosäuresequenz vorhergesagt werden kann, auf den Daten trainiert, die das ursprüngliche Simulationsmodell zur Lösung dieser Aufgabe zuvor generiert hat, welches allerdings zu langsam ist, um auf eine große Anzahl von Proteinen angewendet zu werden.</li>
+<li>eine “einfache”, aber schwer zu erklärenden Aufgabe gelöst werden soll, die ein (geschulter) Mensch in ~1 Sekunde lösen kann, z.B. etwas auf einem Bild erkennen<br>
+⇒ Dadurch können repetitive Aufgaben automatisiert und Expertenwissen für alle zugänglich gemacht werden, wie z.B. beim eingangs gezeigten Diagnosemodell für diabetische Retinopathie von Google.<br>
+<u>Aber:</u> Erfolg hängt von der Datenqualität &amp; -quantität ab!<br>
+→ Menschen können aus wenigen Beispielen viel besser verallgemeinern. Ein Arzt kann beispielsweise eine Krankheit auch dann noch leicht erkennen, wenn die Bilder z.B. mit einer älteren Maschine aufgenommen wurden. Ein ML-Modell muss für dieses geänderte Setup u.U. neu trainiert werden, wofür wieder viele zusätzliche Daten gesammelt werden müssen.</li>
+</ul>
+<p><strong>ML ist deine beste Chance, wenn:</strong></p>
+<ul>
+<li>Menschen von sehr komplexen, hochdimensionalen Daten überfordert sind. Z.B. fällt es einem Menschen schwer, bei einer Excel-Tabelle mit hunderten von Spalten den Durchblick zu behalten. Wir können in so einem Meer von Zahlen oft keine Muster erkennen. Im ungünstigsten Fall gibt es tatsächlich keine Zusammenhänge in den Daten, da vielleicht nicht alle relevanten Faktoren gemessen wurden, aber wenn doch, wird ML die Zusammenhänge höchstwahrscheinlich finden.</li>
+</ul>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Vorsicht
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Verwende ML nur dann, wenn gelegentliche Fehler akzeptabel sind. ML-Modelle werden normalerweise mit von Menschen erstellten Daten trainiert, die anfällig für Rauschen sind, da selbst Experten bei bestimmten Fällen unterschiedlicher Meinung sein können. Außerdem müssen ML-Modelle möglicherweise extrapolieren und Vorhersagen für neue Datenpunkte machen, die sich von den Trainingsdaten unterscheiden, was zu falschen Ergebnissen führen kann. Um Fehler zu minimieren, kann es hilfreich sein, die Vorhersagen des ML-Modells gelegentlich von einem Menschen überprüfen zu lassen (“human in the loop”).</p>
+</div>
+</div>
+</section>
+<section id="schritte-zur-identifizierung-eines-potenziellen-ml-projekts" class="level4">
+<h4 class="anchored" data-anchor-id="schritte-zur-identifizierung-eines-potenziellen-ml-projekts">Schritte zur Identifizierung eines potenziellen ML-Projekts</h4>
+<ol type="1">
+<li><p>Erstelle ein Prozessdiagramm: Welche Schritte werden in einem Geschäftsprozess ausgeführt und welche Daten werden wo gesammelt (Material- &amp; Informationsfluss). Zum Beispiel in einem Produktionsprozess, bei dem einige der produzierten Teile fehlerhaft sind:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_intro_ml/automate_insights7a.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
+</figure>
+</div></li>
+<li><p>Identifiziere Teile des Prozesses, die entweder mit ML automatisiert werden könnten (z.B. einfache, sich wiederholende Aufgaben, die sonst von Menschen erledigt werden) oder die auf andere Weise durch eine Analyse von Daten verbessert werden könnten (z.B. um die Ursachen eines Problems zu verstehen, die Planung mit Was-wäre-wenn-Simulationen zu verbessern, oder die Ressourcennutzung zu optimieren):</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_intro_ml/automate_insights7b.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Die erste Idee besteht darin, die bisher von einem Menschen durchgeführte Qualitätsprüfung zu automatisieren: Da der Mensch die Defekte in den aufgenommenen Produktbildern leicht erkennen kann, sollte ein ML-Modell dies auch schaffen. Die nächste Idee besteht darin, anhand der Zusammensetzung der Rohstoffe und der gegebenen Prozessbedingungen vor der Herstellung vorherzusagen, ob ein Produkt fehlerhaft sein wird oder nicht: Der Erfolg ist hier unklar, da eine menschliche Expertin nicht von vorne herein abschätzen kann, ob alle relevanten Informationen dafür in diesen Daten enthalten sind. Aber dennoch wäre es einen Versuch wert, da man dadurch viele Ressourcen sparen könnte. Während das endgültige ML-Modell, welches das Input-Output-Problem löst, als Software im laufenden Betrieb eingesetzt werden kann, kann ein Data Scientist zusätzlich die Ergebnisse analysieren und das Modell interpretieren und somit Erkenntnisse gewinnen und Handlungsempfehlungen aussprechen.</figcaption>
+</figure>
+</div></li>
+<li><p>Priorisieren: Welches Projekt hätte eine große Wirkung und gleichzeitig gute Erfolgsaussichten, hätte also einen hohen Return on Investment (ROI)? Als Beispiel: Die Verwendung von ML zur Automatisierung einer einfachen Aufgabe ist aus technischer Sicht eine vergleichsweise risikoarme Investition, kann jedoch dazu führen, dass einige Fließbandarbeiter ihre Jobs verlieren. Andererseits könnten durch die Ermittlung der Ursachen, warum in einem Produktionsprozess 10% Ausschuss produziert werden, Millionen eingespart werden. Allerdings ist nicht vorhersehbar, ob eine solche Analyse tatsächlich nützliche Ergebnisse liefert, da die gesammelten Daten zu den Prozessbedingungen möglicherweise nicht alle erforderlichen Informationen enthalten.</p></li>
+</ol>
+</section>
+</section>
+<section id="sec-how-machines-learn" class="level2">
+<h2 class="anchored" data-anchor-id="sec-how-machines-learn">Wie “lernen” Maschinen?</h2>
+<p>Wie lösen ML-Algorithmen diese “Input → Output” Probleme, also wie erkennen sie Muster und lernen Regeln aus Daten?</p>
+<p>ML-Algorithmen lassen sich nach ihrer Funktionsweise, d.h. wie sie lernen, weiter unterteilen. Diese Unterteilung ist inspiriert von der Art und Weise wie Menschen lernen:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_intro_ml/ml_algorithms_short_human4.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption><strong>Unsupervised Learning:</strong> Menschen sind sehr gut darin, statistische Gesetzmäßigkeiten in der Welt zu erkennen, ohne dass sie ausdrücklich dazu aufgefordert werden. Ist dir zum Beispiel schon einmal aufgefallen, dass wir beim Sprechen keine … Pausen … zwischen … Wörtern machen? Dennoch lernen Kinder intuitiv, welche Silben zu einem Wort gehören und wo dieses Wort endet und das nächste beginnt. Dies funktioniert, weil die Silben eines Wortes immer in dieser spezifischen Kombination vorkommen, diesem Wort dann aber unterschiedliche Wörter, beginnend mit vielen verschiedenen Silben, folgen. Das bedeutet, dass wir durch Hören von gesprochenem Text die bedingten Wahrscheinlichkeitsverteilungen von Silben erfassen. <strong>Supervised Learning:</strong> Diese Art des Lernens benötigt eine Lehrerin, die uns die richtigen Antworten sagt und uns korrigiert, wenn wir etwas falsch machen. Um z.B. einem Kind ein Wort beizubringen veranschaulicht man ihm die Bedeutung anhand von Beispielen, und wenn das Kind etwas falsch benennt, z.B. einen kleinen Hund als Katze bezeichnet, korrigiert man es. <strong>Reinforcement Learning:</strong> Auch diese Art von “Learning by Doing” passiert ganz natürlich wenn Menschen aus den Konsequenzen ihrer Handlungen lernen. Durch Experimentieren und Üben können wir zum Beispiel eine komplexe Abfolge von Handbewegungen einstudieren, mit der wir einer Geige schöne Klänge entlocken, anstatt schmerzhaftes Kreischen zu erzeugen. Zwar ist keine einzelne Handbewegung an sich gut oder schlecht, jedoch nur die richtige Kombination bringt Musik in unsere Ohren.</figcaption>
+</figure>
+</div>
+<p>Analog dazu können auch Maschinen nach diesen drei Strategien lernen:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_intro_ml/ml_algorithms_short4.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption><strong>Unsupervised Learning:</strong> Diese Algorithmen erkennen statistische Regelmäßigkeiten in den Daten, z.B. können sie Gruppen ähnlicher Dinge identifizieren (Beispiel Kundensegmentierung) oder einzelne Punkte finden, die aus der Reihe tanzen (Anomalieerkennung), z.B. ungewöhnliches Verhalten einer Maschine aufgrund eines defekten Teils oder verdächtige Kreditkartentransaktionen im Onlinehandel. <strong>Supervised Learning:</strong> Diese Algorithmen lernen aus vielen Input-Output-Beispielen, z.B. Bilder und darauf sichtbare Objekte oder Produktionsbedingungen zusammen mit der resultierenden Produktqualität. Das gelernte Modell kann dann für einen neuen Input den dazugehörigen Output vorhersagen. <strong>Reinforcement Learning:</strong> Diese Art des Lernens ist etwas komplizierter: Der Lernalgorithmus wird hier als Agent bezeichnet, welcher sich in einer Umgebung bewegt, z.B. ein Roboter in der realen Welt oder ein virtueller Agent in einer Simulationsumgebung wie einem Videospiel (was normalerweise viel billiger ist ;-)). Die Umgebung teilt dem Agenten mit, in welchem Zustand oder in welcher Situation er sich gerade befindet, dann kann der Agent auswählen, wie er in diesem Zustand reagieren will, d.h. welche (vordefinierte) Aktion er ausführt. Die Konsequenzen dieser Aktion werden anschließend durch die Umgebung bestimmt (z.B. ein Monster in einem Videospiel besiegen oder von einer Klippe fallen) und je nach Ergebnis wird eine Belohnung zurückgeben (z.B. zusätzliche Punkte für eingesammelte Münzen). Dann wiederholt sich der Zyklus, da sich der Agent im nächsten Zustand befindet. Basierend auf der erhaltenen Belohnung lernt der Agent im Laufe der Zeit, welche Aktionen in welchen Situationen von Vorteil sind und wie er sich in der Umgebung zurechtfindet. Das Schwierige daran ist, dass der Agent die Belohnungssignale teilweise erst lange nachdem die Aktion ausgeführt wurde erhält. In einem Videospiel zum Beispiel findet der Agent zu Beginn eines Levels einen Schlüssel, aber die Tür, die damit geöffnet werden kann, kommt erst viele Frames später. Eine verzögerte Belohnung macht es dem Agent schwerer diese mit der entsprechenden Aktion zu verknüpfen. Da Menschen viel Hintergrundwissen haben, ist es für uns viel einfacher herauszufinden, was in einem Spiel funktioniert und was nicht.</figcaption>
+</figure>
+</div>
+<section id="daten-voraussetzungen-für-das-lernen-mit-diesen-strategien" class="level4">
+<h4 class="anchored" data-anchor-id="daten-voraussetzungen-für-das-lernen-mit-diesen-strategien">Daten-Voraussetzungen für das Lernen mit diesen Strategien:</h4>
+<ul>
+<li><p><u>Unsupervised Learning:</u> ein Datensatz mit Beispielen</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_intro_ml/requirements_learning_unsupervised.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+</figure>
+</div></li>
+<li><p><u>Supervised Learning:</u> ein Datensatz mit <strong><em>gelabelten</em></strong> Beispielen</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_intro_ml/requirements_learning_supervised.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+</figure>
+</div></li>
+<li><p><u>Reinforcement Learning:</u> eine (Simulations-) Umgebung, die, basierend auf den Aktionen des Agenten, Daten (Belohnung + neue Zustände) generiert</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_intro_ml/requirements_learning_reinforce.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+<p>Aufgrund der Abhängigkeit von einer datenerzeugenden Umgebung ist Reinforcement Learning ein Sonderfall. Außerdem ist es derzeit noch sehr schwer, Reinforcement Learning Algorithmen zum Laufen zu bringen, weshalb sie hauptsächlich in der Forschung und weniger für praktische Anwendungen verwendet werden.</p></li>
+</ul>
+</section>
+<section id="supervised-learning" class="level3">
+<h3 class="anchored" data-anchor-id="supervised-learning">Supervised Learning</h3>
+<p>Supervised Learning ist die verbreitetste Art des maschinellen Lernens in heutigen Anwendungen.</p>
+<p>Beim Supervised Learning möchten wir ein <strong>Modell (= eine mathematische Funktion)</strong> <span class="math inline">\(f(x)\)</span> lernen, um den Zusammenhang zwischen einem oder mehreren <strong>Input(s)</strong> <span class="math inline">\(x\)</span> (z.B. Produktionsbedingungen wie Temperatur, Material, etc.) und einem <strong>Output</strong> <span class="math inline">\(y\)</span> (z.B. resultierende Produktqualität) zu beschreiben.</p>
+<p>Dieses Modell kann dann verwendet werden, um <strong>Vorhersagen für neue Datenpunkte zu machen</strong>, also <span class="math inline">\(f(x') = y'\)</span> für ein neues <span class="math inline">\(x'\)</span> zu berechnen (z.B. für einen neuen Satz von Produktionsbedingungen vorhersagen, ob das Produkt von hoher Qualität sein wird, oder ob man den Vorgang lieber gleich abbrechen sollte).</p>
+<p><strong>Supervised Learning – kurz und knapp:</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/04_supervised_intro/sl_steps5.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption>Zuerst muss man sich darüber im Klaren sein, was vorhergesagt werden soll und inwiefern einem die Vorhersage hilft, das eigentliche Ziel zu erreichen und Mehrwert generiert. Außerdem muss man sich überlegen, wie man den Erfolg misst, d.h. den Key Performance Indicator (KPI) des Prozesses bestimmen. Anschließend muss man Trainingsdaten sammeln. Da wir hier im Bereich des Supervised Learnings sind, müssen dies <em>gelabelte</em> Daten sein, also inkl. der Zielvariable, die man vorhersagen möchte. Dann “lernt” (oder “trainiert” oder “fittet”) man ein Modell auf diesen Daten um schließlich Vorhersagen für neue Datenpunkte zu generieren.</figcaption>
+</figure>
+</div>
+<section id="features-labels" class="level4 custom-gray-block">
+<h4 class="anchored" data-anchor-id="features-labels">Features &amp; Labels</h4>
+<p>Ein typisches Supervised Learning Problem wäre beispielsweise ein Produktionsprozess, bei dem wir vorhersagen möchten, ob ein unter bestimmten Produktionsbedingungen produziertes Teil Ausschuss ist. Hier beinhalten die gesammelten Daten für jedes produzierte Teil die Prozessbedingungen, unter denen es hergestellt wurde, und ob das resultierende Produkt in Ordnung oder Ausschuss war:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/02_data/toy_data3.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Bei den für diesen Anwendungsfall erhobenen Daten handelt es sich um strukturierte Daten in tabellarischer Form (z.B. in einer Excel-Tabelle). Ein Datenpunkt / eine Probe / eine Beobachtung befindet sich immer in einer Zeile dieser Tabelle.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/02_data/toy_data6.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Die Spalten der Tabelle enthalten die unterschiedlichen Messwerte/Variablen, welche für jeden Datenpunkt erhoben wurden. Dabei unterscheiden wir zwischen <em>Features</em> (in diesem Fall die Produktionsbedingungen) und <em>Labels</em> (ob das jeweilige Produkt in Ordnung oder Ausschuss war). Features, auch als Matrix <span class="math inline">\(X\)</span> bezeichnet, sind typischerweise diejenigen Messwerte, die wir ohne Aufwand erhalten, da sie während des Prozesses bereits für andere Zwecke gesammelt werden. Wenn beispielsweise der Bediener der Maschine die Temperatur für die Produktion auf einen bestimmten Wert einstellt, wird dies aufgezeichnet während das Signal an das Heizgerät weitergeleitet wird. Das Sammeln der dazugehörigen Labels, bezeichnet als Vektor <span class="math inline">\(\mathbf{y}\)</span>, ist oft kostspieliger. Um beispielsweise im Produktionsprozess einen Datenpunkt mit dem Label <em>“Ausschuss”</em> zu sammeln, muss (vorsätzlich) ein fehlerhaftes Produkt produziert werden, was uns wertvolle Ressourcen kostet. Ein anderes Beispiel für die mit Labels verbunden Kosten ist die Tatsache, dass Google ein Team von Fachärzten bezahlte, um mehrere Bilder von diabetischer Retinopathie, zu denen es widersprüchliche Meinungen gab, zu diskutieren und neu zu bewerten.</figcaption>
+</figure>
+</div>
+<p>Im Supervised Learning werden die Features als Input (Eingabe) für das Modell verwendet, während die Labels die Zielvariable, d.h. der vorhergesagte Output (Ausgabe) darstellen. Im Allgemeinen sollten Features unabhängige Variablen sein (z.B. Einstellungen, die der Bediener nach Belieben wählen kann), während der Zielwert von diesen Eingaben abhängig sein sollte, damit wir ihn vorhersagen können.</p>
+</section>
+<section id="ein-modell-aus-daten-lernen" class="level4 custom-gray-block">
+<h4 class="anchored" data-anchor-id="ein-modell-aus-daten-lernen">Ein Modell aus Daten “lernen”</h4>
+<p><u>Ziel:</u> Beschreibe den Zusammenhang zwischen Input(s) <span class="math inline">\(x\)</span> und Output <span class="math inline">\(y\)</span> mit einem Modell, d.h. einer mathematischen Funktion <span class="math inline">\(f(x)\)</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_intro_ml/learning_model_handout.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+<ol type="1">
+<li><p><strong>Wähle eine Modell Klasse (= Struktur der Funktion):</strong> Annahme: Zusammenhang ist linear<br>
+→ lineares Regressionsmodell: <span class="math inline">\(y = f(x) = b + w\cdot x\)</span></p></li>
+<li><p><strong>Definiere die Zielfunktion:</strong> Minimiere die Abweichung zwischen echtem &amp; vorhergesagtem <span class="math inline">\(y\)</span>:<br>
+→ <span class="math inline">\(\min_{b,w} \sum_i (y_i - f(x_i))^2\)</span></p></li>
+<li><p><strong>Finde die besten Modellparameter für die gegebenen Daten:</strong> d.h. löse das in Schritt 2 definierte Optimierungsproblem<br>
+⇒ <span class="math inline">\(f(x) = -2.7 + 5.2x\)</span></p></li>
+</ol>
+</section>
+<div class="callout callout-style-default callout-tip callout-titled" title="Video Empfehlung">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Video Empfehlung
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Wenn dir lineare Regression nichts sagt</strong>, findest du hier eine tolle Erklärung von der Google-Mitarbeiterin Cassie Kozyrkov zur Funktionsweise der linearen Regression, des einfachsten Supervised Learning Algorithmus: [<a href="https://youtu.be/j8VjRnaHRBM">Teil 1</a>] [<a href="https://youtu.be/VqhafjGTDI8">Teil 2</a>] [<a href="https://youtu.be/sxZDZVN0JAg">Teil 3</a>]</p>
+</div>
+</div>
+<p>Die existierenden Supervised Learning Algorithmen unterscheiden sich in der <strong>Art des <span class="math inline">\(x \to y\)</span> Zusammenhangs</strong>, den sie beschreiben können (z.B. linear oder nichtlinear) und welche Art von <strong>Zielfunktion</strong> (auch Fehlerfunktion genannt) sie minimieren. Die Aufgabe eines Data Scientists besteht darin, einen für den Datensatz passenden Modelltyp auszuwählen. Den Rest erledigt dann eine <strong>Optimierungsmethode, die Parameter für das Modells findet, welche die Zielfunktion des Modells minimieren</strong>, d.h. sodass der Vorhersagefehler des Modells auf den gegebenen Daten so klein wie möglich ist.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hinweis
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In diesem Buch werden die Begriffe “ML-Algorithmus” und “ML-Modell” meist synonym verwendet. Wenn man es aber genau nimmt, verarbeitet der Algorithmus die gegebenen Daten und lernt die Parameterwerte. Die gefundenen Parameter bestimmen das eigentliche Modell. Ein lineares Regressions<em>modell</em> wird beispielsweise durch seine Koeffizienten (d.h. die Parameter des Modells) definiert. Diese werden gefunden, in dem die Schritte des linearen Regressions<em>algorithmus</em> befolgt werden, also das Optimierungsproblem auf den gegebenen Daten gelöst wird.</p>
+</div>
+</div>
+<div class="custom-gray-block">
+<p>Da geht noch mehr!</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/04_supervised_intro/supervised_more4.png" class="img-fluid figure-img" style="width:55.0%"></p>
+<figcaption>In vielen Anwendungsfällen reicht es nicht aus, einfach “nur” die Zielvariable für einen neuen Datenpunkt vorherzusagen; ob beispielsweise ein unter bestimmten Bedingungen hergestelltes Produkt von hoher Qualität sein wird oder nicht. Stattdessen ist es oft notwendig, zusätzlich erklären zu können, <em>warum</em> diese Vorhersage gemacht wurde und welche Features für die Vorhersage entscheidend waren, sowohl um mögliche Ursachen eines Problems besser zu verstehen, aber auch um sicherzustellen, dass die Vorhersagen des Modells auf vernünftigen Annahmen basieren. Darüber hinaus kann ein erlerntes Modell auch innerhalb einer äußeren Optimierungsschleife verwendet werden, um optimale Inputs zu bestimmen. Im einfachsten Fall könnte man z.B. systematisch überprüfen, welche Produktqualität das Modell für verschiedene Prozessbedingungen vorhersagt, um für neue Produkte die Einstellungen mit der am höchsten vorhergesagten Qualität zu wählen. Aber Vorsicht: ML-Modelle sind nur zum Interpolieren, nicht zum Extrapolieren konzipiert, d.h. es muss sichergestellt werden, dass die getesteten Eingaben im gleichen Wertebereich liegen wie in den Daten, die zum Trainieren des Modells verwendet wurden.</figcaption>
+</figure>
+</div>
+</div>
+<p><strong><em>Prädiktive Analyse</em></strong></p>
+<p>Mit Supervised Learning Algorithmen können wir basierend auf historischen Daten ein <strong>Vorhersagemodell</strong> generieren, das Prognosen über zukünftige Szenarien anstellt um uns bei Planungen zu unterstützen.<br>
+<u>Beispiel:</u> <em>Verkaufsprognosen verwenden, um Lagerbestände besser zu planen.</em></p>
+<p><strong><em>Interpretation Prädiktiver Modelle</em></strong></p>
+<p><a href="https://franziskahorn.de/mlbook/06_pitfalls.html#sec-interpretability">Interpretiere das Vorhersagemodell</a> und seine Prognosen, um <strong>die zugrundeliegenden Ursache-Wirkung Beziehungen des Prozesses besser zu verstehen</strong>.<br>
+<u>Beispiel:</u> <em>Gegeben ein Modell, welches die Qualität eines Produkts aus den Produktionsbedingungen vorhersagt, verstehe welche Faktoren dazu führen dass Produkte von geringerer Qualität sind.</em></p>
+<p><strong><em>Was-wäre-wenn Analyse &amp; Optimierung</em></strong></p>
+<p>Verwende ein Vorhersagemodell für eine <strong>Was-wäre-wenn-Vorhersage</strong>, um zu untersuchen, wie ein System auf unterschiedliche Bedingungen reagieren könnte (aber <a href="06_pitfalls.html#sec-pitfall-spurious">Vorsicht</a>!).<br>
+<u>Beispiel:</u> <em>Gegeben ein Modell, welches die verbleibende Lebenszeit für eine Maschinenkomponente aus den Prozessbedingungen vorhersagt, wie schnell würde diese Komponente unter anderen Prozessbedingungen verschleißen?</em></p>
+<p>Wenn wir noch einen Schritt weiter gehen wollen, können wir auch automatisch verschiedene Inputs mit dem Vorhersagemodell in einer Optimierungsschleife bewerten, um systematisch <strong>optimale Einstellungen zu finden</strong>.<br>
+<u>Beispiel:</u> <em>Gegeben ein Modell, welches die Qualität eines Produkts aus den Produktionsbedingungen vorhersagt, bestimme automatisch die besten Produktionseinstellungen für einen neuen Rohstofftyp.</em></p>
+</section>
+</section>
+<section id="sec-ml-use-cases" class="level2">
+<h2 class="anchored" data-anchor-id="sec-ml-use-cases">ML Anwendungsfälle</h2>
+<p>ML-Algorithmen können auf Input Daten in verschiedensten Formaten angewendet werden…</p>
+<section id="strukturierte-vs.-unstrukturierte-daten" class="level4 custom-gray-block">
+<h4 class="anchored" data-anchor-id="strukturierte-vs.-unstrukturierte-daten">Strukturierte vs.&nbsp;Unstrukturierte Daten</h4>
+<p>Daten können in verschiedenen Formaten vorliegen und während einige Datentypen evtl. zusätzliche Verarbeitungsschritte erfordern, können ML-Algorithmen im Prinzip mit jeder Art von Daten arbeiten.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/02_data/data_types2.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption>Die wichtigste Unterscheidung bei der Charakterisierung von Daten liegt zwischen <em>strukturierten</em> Daten, das ist jeder Datensatz, der einzelne Messgrößen/Variablen/Attribute/Features enthält, die eindeutige Größen darstellen, und <em>unstrukturierten</em> Daten, die nicht in sinnvolle Variablen unterteilt werden können. Z.B. in Bildern “erster Pixel von links” oder in Texten “10. Wort im 2. Absatz” würden wir nicht Variablen nennen, im Gegensatz zu “Fläche in Quadratmetern” oder “Anzahl Schlafzimmern”, womit man sinnvoll eine Wohnung beschreiben könnte. Strukturierte Daten sind oft <em>heterogen</em>, da die verschiedenen Variablen in einem Datensatz typischerweise für sehr unterschiedliche Dinge stehen. Wenn man beispielsweise mit Sensordaten arbeitet enthält ein Datensatz nicht nur Temperaturmessungen, sondern zusätzlich z.B. Druck und Durchflusswerte, die unterschiedliche Einheiten haben und in sehr unterschiedlichen Skalen gemessen werden können. Unstrukturierte Daten hingegen sind <em>homogen</em>, z.B. gibt es keinen qualitativen Unterschied zwischen dem 10. und dem 100. Pixel in einem Bild.</figcaption>
+</figure>
+</div>
+</section>
+<p>…aber unser Ziel, also der gewünschte Output, bestimmt welche <strong>Art von Algorithmus</strong> wir für das Problem verwenden sollten:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_intro_ml/ml_goals3.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Wenn wir einen Datensatz etwas besser verstehen und uns einen Überblick verschaffen wollen, dann können wir zur Visualisierung einen Dimensionsreduktionsalgorithmus aus dem Bereich Unsupervised Learning verwenden. Andere Unsupervised Learning Algorithmen ermöglichen uns, Muster in Daten zu entdecken, wobei es hier darauf ankommt, welche Art von Muster man finden möchte: Mit Algorithmen zur Ausreißer-/Anomalieerkennung (Anomaly Detection) lassen sich einzelne Datenpunkte identifizieren, die stark vom Rest abweichen (z.B. eine defekte Maschine oder eine betrügerische Kreditkartentransaktion). Clustering-Algorithmen wiederum finden Gruppen ähnlicher Datenpunkte (z.B. zur Kundensegmentierung). Wenn wir stattdessen ein Vorhersagemodell möchten, um für einen speziellen Input den entsprechenden Output zu berechnen (z.B. vorhersagen, ob ein Produkt fehlerhaft ist, wenn es unter bestimmten Bedingungen produziert wird), dann brauchen wir dafür einen Algorithmus aus dem Bereich Supervised Learning. In erster Linie wird hier zwischen Regressions- und Klassifikationsalgorithmen unterschieden: Bei Regressionsaufgaben ist die zu prognostizierende Zielgröße kontinuierlich (z.B. Nutzeranzahl, Preis etc.), bei Klassifikationsaufgaben ist die Zielgröße diskret, d.h. sie kann nur einen eindeutigen Wert annehmen und es gibt kein Kontinuum zwischen den verschiedenen Werten (z.B. kann ein Tier auf einem Bild entweder eine Katze oder ein Hund sein, aber nichts dazwischen). Während Unsupervised und Supervised Learning die meisten allgemeinen Anwendungsfälle abdecken, gibt es auch Algorithmen für speziellere Anwendungen, z.B. Empfehlungssysteme (Recommender Systems) oder Generative AI.</figcaption>
+</figure>
+</div>
+<p>Einige Beispiele für ‘Input → Output’ Aufgaben und welche Art von ML-Algorithmus verwendet werden kann, um sie zu lösen:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Input <span class="math inline">\(X\)</span></th>
+<th style="text-align: left;">Output <span class="math inline">\(Y\)</span></th>
+<th style="text-align: left;">ML-Algorithmus Kategorie</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Fragebogenantworten</td>
+<td style="text-align: left;">Kundensegmentierung</td>
+<td style="text-align: left;">Clustering</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sensormessungen</td>
+<td style="text-align: left;">alles normal?</td>
+<td style="text-align: left;">Anomalieerkennung</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Vergangene Nutzung einer Maschine</td>
+<td style="text-align: left;">Restlebensdauer</td>
+<td style="text-align: left;">Regression</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">E-Mail</td>
+<td style="text-align: left;">Spam (ja/nein)</td>
+<td style="text-align: left;">Klassifikation (binär)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bild</td>
+<td style="text-align: left;">welches Tier?</td>
+<td style="text-align: left;">Klassifikation (mehrere Klassen)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bisherige Einkäufe des Nutzers</td>
+<td style="text-align: left;">Produktvorschläge</td>
+<td style="text-align: left;">Empfehlungssysteme</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Suchanfrage</td>
+<td style="text-align: left;">relevante Dokumente</td>
+<td style="text-align: left;">Information Retrieval</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Audio</td>
+<td style="text-align: left;">Text</td>
+<td style="text-align: left;">Spracherkennung</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Text auf Englisch</td>
+<td style="text-align: left;">Text auf Französisch</td>
+<td style="text-align: left;">Maschinelle Übersetzung</td>
+</tr>
+</tbody>
+</table>
+<p>Zusammengefasst (siehe auch: <a href="https://franziskahorn.de/mlws_resources/algorithm_cheatsheet.pdf">Übersichtstabelle als PDF</a>):</p>
+<p><strong>Existierende ML-Lösungen &amp; entsprechende Outputs (für einen Datenpunkt):</strong></p>
+<ul>
+<li><u>Dimensionsreduktion:</u> (normalerweise) <strong>2D-Koordinaten</strong> (um den Datensatz zu visualisieren)</li>
+<li><u>Ausreißer-/Anomalieerkennung:</u> <strong>Anomalie-Score</strong> (normalerweise ein Wert zwischen 0 und 1, der angibt, inwiefern dieser Punkt von der Norm abweicht)</li>
+<li><u>Clustering:</u> <strong>Cluster-Index</strong> (eine Zahl zwischen 0 und <em>k-1</em>, die angibt, zu welchem der <em>k</em> Cluster ein Datenpunkt gehört (oder -1 für Ausreißer))</li>
+<li><u>Regression:</u> ein <strong>kontinuierlicher Wert</strong> (eine numerischer Größe, die vorhergesagt werden soll)</li>
+<li><u>Klassifikation:</u> ein <strong>diskreter Wert</strong> (eine von mehreren sich gegenseitig ausschließenden Kategorien)</li>
+<li><u>Generative AI:</u> <strong>unstrukturierte Outputs wie Text oder Bild</strong> (z.B. Spracherkennung, maschinelle Übersetzung, Bild Generierung oder Neural Style Transfer)</li>
+<li><u>Empfehlungssysteme &amp; Information Retrieval:</u> <strong>Rangliste einer Menge von Elementen</strong> (Empfehlungssysteme ordnen beispielsweise die Produkte nach Relevanz für den jeweiligen Nutzer; Information Retrieval Systeme sortieren Elemente nach ihrer Ähnlichkeit zu einer gegebenen Suchanfrage)</li>
+<li><u>Reinforcement Learning:</u> eine Sequenz von <strong>Aktionen</strong> (abhängig vom Zustand in dem sich der Agent befindet)</li>
+</ul>
+<p>Beginnen wir mit einem detaillierteren Blick auf die verschiedenen Unsupervised und Supervised Learning Algorithmen und wie sie uns helfen können:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_ml_overview/ml_algorithms_12.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Für die Anwendung von Unsupervised Learning Algorithmen braucht man nur eine Feature Matrix <span class="math inline">\(X\)</span>, während man zum Erlernen eines Vorhersagemodells mit Supervised Learning Algorithmen auch die dazugehörigen Labels <span class="math inline">\(\mathbf{y}\)</span> benötigt.</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tipp
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Auch wenn unser eigentliches Ziel darin besteht, etwas vorherzusagen (also Supervised Learning zu verwenden), kann es dennoch sehr hilfreich sein, zunächst Unsupervised Learning Algorithmen anzuwenden, um den Datensatz besser zu verstehen. Beispielsweise kann man die Daten im Vorfeld mit Dimensionsreduktionsmethoden visualisieren, um alle Datenpunkte und ihre Vielfalt auf einen Blick zu sehen. Anschließend kann man den Datensatz bereinigen, in dem man Ausreißer identifiziert. Bei einem Klassifikationsproblem ist es häufig sinnvoll, die Datenpunkte zuerst zu clustern, um zu überprüfen, in wie weit die angegebenen Klassenlabels mit den natürlich vorkommenden Gruppen in den Daten übereinstimmen. Beispielsweise sieht man dann vielleicht, dass man das Problem vereinfachen kann, in dem man zwei sehr ähnliche Klassen kombiniert.</p>
+</div>
+</div>
+<div class="custom-gray-block">
+<p><strong>Gleicher Datensatz, unterschiedliche Anwendungsfälle</strong></p>
+<p>Wir veranschaulichen den Nutzen der fünf verschiedenen Arten von Unsupervised und Supervised Learning Algorithmen in dem wir sie auf diesen Beispieldatensatz anwenden:</p>
+<table class="table-striped table">
+<caption>Dies ist ein kleiner Musterdatensatz mit strukturierten Daten über verschiedene Wohnungen, wie sie jemand über eine Immobilienwebsite gesammelt haben könnte, z.B. die Größe der Wohnung in Quadratmetern, die Anzahl der Schlafzimmer, die Anzahl der Badezimmer, das Jahr der letzten Renovierung und schließlich den Preis der Wohnung und ob sie zu diesem Preis verkauft wurde (1) oder nicht (0).</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;">m<sup>2</sup></th>
+<th style="text-align: center;"># Schlafz.</th>
+<th style="text-align: center;"># Bad</th>
+<th style="text-align: center;">Renoviert</th>
+<th style="text-align: center;">…</th>
+<th style="text-align: center;">Preis</th>
+<th style="text-align: center;">Verkauft</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">125</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2000</td>
+<td style="text-align: center;">…</td>
+<td style="text-align: center;">500k</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">75</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1990</td>
+<td style="text-align: center;">…</td>
+<td style="text-align: center;">350k</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">150</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2010</td>
+<td style="text-align: center;">…</td>
+<td style="text-align: center;">750k</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">…</td>
+<td style="text-align: center;">…</td>
+<td style="text-align: center;">…</td>
+<td style="text-align: center;">…</td>
+<td style="text-align: center;">…</td>
+<td style="text-align: center;">…</td>
+<td style="text-align: center;">…</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">35</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">1999</td>
+<td style="text-align: center;">…</td>
+<td style="text-align: center;">620k</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">65</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2015</td>
+<td style="text-align: center;">…</td>
+<td style="text-align: center;">220k</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2003</td>
+<td style="text-align: center;">…</td>
+<td style="text-align: center;">450k</td>
+<td style="text-align: center;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="dimensionsreduktion" class="level3">
+<h3 class="anchored" data-anchor-id="dimensionsreduktion">Dimensionsreduktion</h3>
+<p><strong><em>Anwendungsfälle:</em></strong></p>
+<ul>
+<li>Erstellen einer 2D-Visualisierung, um den Datensatz im Ganzen zu überblicken, wobei wir oft bereits beim Draufschauen Muster identifizieren können, wie Datenpunkte, die zusammen gruppiert werden können (Cluster) oder die nicht ins Bild passen (Ausreißer)</li>
+<li>Rauschunterdrückung und/oder Feature-Engineering als Datenvorverarbeitungsschritt zur Verbesserung der Ergebnisse eines Vorhersagemodells</li>
+</ul>
+<div class="custom-gray-block">
+<p><strong>Beispiel Unsupervised Learning: Dimensionsreduktion</strong></p>
+<p><u>Ziel:</u> Datensatz visualisieren</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_housing_example/dimred.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Der erste Schritt bei der Analyse eines neuen Datensatzes besteht normalerweise darin, diesen zu visualisieren, um einen besseren Überblick über alle Datenpunkte und ihre Vielfalt zu erhalten. Dafür eignet sich ein Dimensionsreduktionsalgorithmus, der die ursprünglichen hochdimensionalen Daten als Input nimmt, wobei jede Spalte (= Feature) in der Tabelle eine Dimension darstellt, und eine niedrigerdimensionale Darstellung der Datenpunkte ausgibt, d.h. eine neue Matrix mit weniger Spalten (normalerweise zwei für eine Visualisierung). Diese beiden neuen Features, in unserem Fall <span class="math inline">\(z_1\)</span> und <span class="math inline">\(z_2\)</span> genannt, können jetzt verwendet werden, um einen Scatterplot des Datensatzes zu erstellen. Dabei wird jeder Datenpunkt / Zeile (also in diesem Fall jede Wohnung) als Punkt in diesem neuen 2D-Koordinatensystems dargestellt. Wir können uns diese Darstellung als eine Landkarte unseres Datensatzes vorstellen, die es uns ermöglicht, alle Datenpunkte auf einen Blick zu sehen und evtl. schon interessante Muster zu erkennen, z.B. Gruppen ähnlicher Datenpunkte, die auf dieser 2D-Karte eng beieinander liegen. Aber bitte beachte: was sich hinter diesen neuen Koordinaten verbirgt lässt sich bei den meisten Dimensionsreduktionsmethoden nicht genau nachvollziehen. Insbesondere sind dies nicht einfach die beiden informativsten Originalfeatures, sondern völlig neue Variablen, die die Informationen der ursprünglichen Inputs zusammenfassen. Um den Scatterplot besser interpretieren zu können, ist es oft hilfreich, die Punkte nachträglich mit den Werten einer Variablen einzufärben, wodurch möglicherweise die treibenden Faktoren hinter den auffälligsten Mustern im Datensatz aufgedeckt werden können. In diesem Beispiel hätten wir die Punkte nach dem Preis der entsprechenden Wohnung einfärben können und dadurch gesehen, ob ähnlich bepreiste Wohnungen nah beieinander liegen.</figcaption>
+</figure>
+</div>
+</div>
+<p><strong><em>Mögliche Herausforderungen:</em></strong></p>
+<ul>
+<li>die Transformation der Daten mit Dimensionsreduktionsmethoden konstruiert neue Features als (nicht)lineare Kombination der ursprünglichen Features, was die Interpretation der nachfolgenden Analyseergebnisse erschwert</li>
+</ul>
+</section>
+<section id="anomalieerkennung" class="level3">
+<h3 class="anchored" data-anchor-id="anomalieerkennung">Anomalieerkennung</h3>
+<p><strong><em>Anwendungsfälle:</em></strong></p>
+<ul>
+<li>Bereinigung der Daten, z.B. durch Entfernen von Datenpunkten mit falsch eingegebenen Werten, als Datenvorverarbeitungsschritt zur Verbesserung der Ergebnisse eines Vorhersagemodells</li>
+<li>Warnung für Anomalien einrichten, zum Beispiel:
+<ul>
+<li>Betrugserkennung: Identifizierung betrügerischer Kreditkartentransaktionen im E-Commerce</li>
+<li>Überwachen einer Maschine, um zu erkennen, wenn etwas Außergewöhnliches passiert oder die Maschine möglicherweise gewartet werden muss</li>
+</ul></li>
+</ul>
+<div class="custom-gray-block">
+<p><strong>Beispiel Unsupervised Learning: Anomalieerkennung</strong></p>
+<p><u>Ziel:</u> Ausreißer im Datensatz finden</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_housing_example/anomaly.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Als nächstes prüfen wir unseren Datensatz auf Ausreißer/Anomalien (Outliers/Anomalies), um diese Datenpunkte dann gegebenenfalls nachträglich zu korrigieren oder zu entfernen. Ein Algorithmus zur Anomalieerkennung gibt für jeden Datenpunkt einen Anomalie-Score aus, der angibt, inwieweit dieser Datenpunkt von der Norm abweicht. Diese Scores können wir auch verwenden, um die 2D-Landkarte unseres Datensatzes aus dem vorherigen Schritt einzufärben. Dadurch werden die Anomalien im Kontext sichtbar. Leider sagt uns ein Anomalieerkennungsalgorithmus nicht, <em>warum</em> ein bestimmter Punkt als Ausreißer erkannt wurde. Ein Data Scientist muss deshalb die gefundenen Anomalien untersuchen und entscheiden, ob diese z.B. aufgrund fehlerhafter Messungen entfernt werden sollten oder ob sie interessante Sonderfälle darstellen. In unserem Beispiel handelt es sich bei dem als Anomalie identifizierten Datenpunkt um eine Wohnung, die angeblich nur eine Größe von 35<span class="math inline">\(m^2\)</span>, aber gleichzeitig 5 Schlafzimmer hat. Da liegt die Vermutung nahe, dass hier beim Eintragen der Daten ein Fehler passiert ist und die Größe der Wohnung stattdessen 135<span class="math inline">\(m^2\)</span> sein sollte.</figcaption>
+</figure>
+</div>
+</div>
+<p><strong><em>Mögliche Herausforderungen:</em></strong></p>
+<ul>
+<li>du solltest immer einen guten Grund haben, Datenpunkte weg zu lassen – Ausreißer sind selten zufällig, manchmal sind dies interessante Randfälle, die nicht ignoriert werden sollten</li>
+</ul>
+</section>
+<section id="clustering" class="level3">
+<h3 class="anchored" data-anchor-id="clustering">Clustering</h3>
+<p><strong><em>Anwendungsfälle:</em></strong></p>
+<ul>
+<li>Identifizieren von Gruppen verwandter Datenpunkte, zum Beispiel:
+<ul>
+<li>Kundensegmentierung für gezielte Marketingkampagnen</li>
+</ul></li>
+</ul>
+<div class="custom-gray-block">
+<p><strong>Beispiel Unsupervised Learning: Clustering</strong></p>
+<p><u>Ziel:</u> Natürlich vorkommende Gruppen im Datensatz finden</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_housing_example/clustering.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Als letzte explorative Analyse können wir überprüfen, ob der Datensatz natürlich vorkommende Gruppen enthält. Das funktioniert mit einem Clustering-Algorithmus, der einen Cluster-Index für jeden Datenpunkt zurückgibt, wobei Punkte mit demselben Index in der selben Gruppe sind. Bitte beachte, dass diese Cluster-Indizes nicht geordnet sind und beim erneuten Ausführen des Algorithmus den Datenpunkten möglicherweise andere Nummern zugewiesen werden. Die Datenpunkte, denen vorher die gleiche Nummer zugewiesen wurde, sollten allerdings immer noch im gleichen Cluster sein, nur kann es eben sein, dass dieser Cluster nun ‘5’ statt ‘3’ heißt. Auch diese Cluster-Indizes können wir zur Einfärbung unserer Daten-Landkarte verwenden, um die Cluster im Kontext zu sehen. Allerdings sagt uns auch ein Clustering-Algorithmus wieder nur, welche Punkte sich ähnlich genug sind, um zusammen gruppiert zu werden, aber nicht, <em>warum</em> die Punkte dem Cluster zugeordnet wurden und was die Cluster bedeuten. Die Data Scientistin muss auch hier wieder die Ergebnisse untersuchen und versuchen zu interpretieren, worin sich die Cluster unterscheiden. In unserem Beispiel könnten die Cluster “billige Studiowohnungen”, “große Familienwohnungen” und “luxuriöse Penthouse Wohnungen” sein. Beim Unsupervised Learning gibt es keine richtige Lösung und ein anderer Clustering-Algorithmus könnte andere Ergebnisse liefern. Verwende einfach die Lösung, die für deinen Anwendungsfall am hilfreichsten ist.</figcaption>
+</figure>
+</div>
+</div>
+<p><strong><em>Mögliche Herausforderungen:</em></strong></p>
+<ul>
+<li>keine Ground Truth: Modell- und Parameterselektion nicht trivial → die Algorithmen werden immer etwas finden, aber ob dies sinnvoll ist (d.h. was die identifizierten Muster bedeuten), kann ein Menschen in einem Nachbearbeitungsschritt bestimmen</li>
+<li>viele der Algorithmen beruhen auf Ähnlichkeiten oder Distanzen zwischen Datenpunkten, und es kann schwierig sein, dafür ein geeignetes Maß zu definieren oder im Voraus zu wissen, welche Merkmale verglichen werden sollten (z.B. was macht zwei Kunden ähnlich?)</li>
+</ul>
+<section id="unsupervised-learning-hat-keine-zugrundeliegende-wahrheit" class="level4 custom-gray-block">
+<h4 class="anchored" data-anchor-id="unsupervised-learning-hat-keine-zugrundeliegende-wahrheit">Unsupervised Learning hat keine zugrundeliegende Wahrheit</h4>
+<p>Bei Unsupervised Learning Problemen sollte uns bewusst sein, dass es keine richtigen oder falschen Antworten gibt. Unsupervised Learning Algorithmen erkennen lediglich Muster in den Daten. Das Ergebnis kann für uns Menschen sinnvoll sein oder auch nicht.</p>
+<p>Ein Beispiel: Im Bereich Unsupervised Learning gibt es eine Reihe verschiedener Algorithmen, die Datenpunkte in Cluster gruppieren. Dabei arbeitet jeder Algorithmus nach einer etwas anderen Strategie und bewertet unterschiedlich, ab wann zwei Punkte ähnlich genug sind, dass sie in denselben Cluster eingeordnet werden können.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_intro_ml/clustering_ambiguous3.png" class="img-fluid figure-img" style="width:65.0%"></p>
+<figcaption>Die offensichtlichste Reaktion eines Menschen ist, diese Bilder nach den darauf gezeigten Früchten zu sortieren. Theoretisch ist es jedoch genauso richtig, die Bilder anhand eines anderen Merkmals zu gruppieren, z.B. der Hintergrundfarbe, ob an der Frucht ein Blatt hängt, in welche Richtung der Stiel zeigt usw.</figcaption>
+</figure>
+</div>
+<p>Es ist unsere Aufgabe, die Ergebnisse eines Unsupervised Learning Algorithmus zu untersuchen und zu verstehen. Entsprechen die Resultate nicht unseren Erwartungen, spricht nichts dagegen, einen anderen Algorithmus auszuprobieren.</p>
+</section>
+</section>
+<section id="regression-klassifikation" class="level3">
+<h3 class="anchored" data-anchor-id="regression-klassifikation">Regression &amp; Klassifikation</h3>
+<p><strong><em>Anwendungsfälle:</em></strong></p>
+<ul>
+<li>Lerne ein Modell, um eine Input-Output-Beziehung zu beschreiben und Vorhersagen für neue Datenpunkte zu treffen, zum Beispiel:
+<ul>
+<li>vor der Produktion vorhersagen, ob ein unter den vorgeschlagenen Prozessbedingungen hergestelltes Produkt von hoher Qualität oder Ressourcenverschwendung sein wird</li>
+<li>Churn Prediction: Erkenne Kunden, die kurz davor stehen, ihren Vertrag zu kündigen (oder Mitarbeiter, die kurz davor stehen zu kündigen), damit du sie kontaktieren und überzeugen kannst zu bleiben</li>
+<li>Preisoptimierung: Bestimme den optimalen Preis für ein Produkt (oft für dynamische Preisgestaltung verwendet, z.B. um Preise basierend auf dem Gerät anzupassen, das ein Kunde verwendet, wenn er auf eine Website zugreift, wie z. B. ein neues iPhone gegenüber einem alten Android-Handy)</li>
+<li>Predictive Maintenance: Sage voraus, wie lange ein Maschinenbauteil halten wird</li>
+<li>Umsatzprognosen: Sag den Umsatz in den kommenden Wochen und den erforderlichen Lagerbestand voraus, um die Nachfrage zu befriedigen</li>
+</ul></li>
+</ul>
+<!-- * Input-Output-Beziehungen in realen Prozessen beschreiben (und anschließend besser verstehen und optimieren), zum Beispiel:
+** den Preis für ein zum Verkauf stehendes Haus bestimmen und den Hausbesitzern erklären, was sie tun können, um ihr Haus zu einem höheren Preis zu verkaufen (z.B. kann ein frisch renoviertes Badezimmer einen größeren Einfluss darauf haben, was potenzielle Käufer zu zahlen bereit sind als ein neuer Außenanstrich)
+** vor der Produktion vorhersagen, ob ein unter den vorgeschlagenen Prozessbedingungen hergestelltes Produkt von hoher Qualität oder Ressourcenverschwendung sein wird
+** identifizieren, welche Prozessbedingungen den größten Einfluss auf die Qualität des Produkts haben
+** gegeben bestimmter äußerer Bedingungen (z.B. Außentemperatur, Zusammensetzung der Rohstoffe von einem neuen Lieferanten) automatisch die besten Prozesseinstellungen bestimmen, um qualitativ hochwertige Produkte herzustellen
+
+[sidebar]
+--
+[.underline]#Schritte:#
+
+. [optional] ein Dashboard erstellen, um die KPIs zu überwachen
+. ein Modell lernen, das die Input-Output-Beziehung zwischen den Prozessvariablen und KPIs zuverlässig erfasst
+. das Modell interpretieren, um zu verstehen, welche Inputs den größten Einfluss auf die KPIs haben und wie diese zusammenhängen (Ursachen Analyse)
+. mit dem Modell Vorhersagen für neue Datenpunkte generieren oder eine Was-wäre-wenn-Prognose erstellen, um besser zu Planen
+. das Modell innerhalb eines äußeren Regelkreises verwenden, um automatisch optimale Inputs zu finden (entweder mit klassischen Optimierungstechniken oder Reinforcement Learning für längere Zeithorizonte)
+-- -->
+<div class="custom-gray-block">
+<p><strong>Beispiel Supervised Learning: Klassifikation</strong></p>
+<p><u>Ziel:</u> Vorhersage eines diskreten Werts für jeden Datenpunkt</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_housing_example/classification.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Nun könnten wir vorhersagen, ob eine Wohnung zum angegebenen Preis verkauft wird. Da die Variable “Verkauft” nur die diskreten Werte ‘ja’ (1) oder ‘nein’ (0) annehmen kann, ist dies ein binäres Klassifikationsproblem. Ein Klassifikationsmodell nimmt die Attribute einer Wohnung zusammen mit dem Angebotspreis als Input und berechnet dann, ob die Wohnung zu diesem Preis verkauft wird oder nicht. Da wir hier nun die wahren Labels kennen (zumindest für den ursprünglich gesammelten Datensatz), können wir die Genauigkeit des Modells bewerten, indem wir berechnen, wie viele falsche Vorhersagen es generiert. Das ist ein Vorteil beim Supervised Learning: Wir können objektiv bestimmen, wie gut eine Lösung ist, und somit verschiedene Modelle systematisch miteinander vergleichen, während die Data Scientistin beim Unsupervised Learning die Ergebnisse manuell im Detail untersuchen muss, um sie zu bewerten.</figcaption>
+</figure>
+</div>
+</div>
+<div class="custom-gray-block">
+<p><strong>Beispiel Supervised Learning: Regression</strong></p>
+<p><u>Ziel:</u> Vorhersage eines kontinuierlichen Werts für jeden Datenpunkt</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_housing_example/regression.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Schließlich möchten wir vielleicht für eine neue Wohnung einen angemessenen Preis vorhersagen. Da Preise kontinuierliche Werte sind, ist dies ein Regressionsproblem. Das Modell verwendet die Attribute der Wohnungen als Input und schlägt dann einen geeigneten Preis vor. Da uns für die erhobenen Daten die tatsächlichen (bzw. vom Immobilienmakler bestimmten) Preise vorliegen, können wir erneut berechnen, inwieweit das Regressionsmodell mit seinen Schätzungen vom Originalpreis abweicht.</figcaption>
+</figure>
+</div>
+</div>
+<p><strong><em>Mögliche Herausforderungen:</em></strong></p>
+<ul>
+<li>Erfolg ungewiss: die Anwendung der Algorithmen ist zwar relativ einfach, aber es ist schwierig, im Voraus festzustellen, ob überhaupt ein Zusammenhang zwischen den gemessenen Inputs und Outputs besteht (→ Achtung: Garbage in, Garbage out!)</li>
+<li>angemessene Definition des Ergebnisses/Ziels/KPI, das modelliert werden soll, d.h. was bedeutet es eigentlich, dass ein Prozess gut läuft, und wie könnten externe Faktoren diese Definition beeinflussen (können wir z.B. die gleiche Leistung in einem außergewöhnlich heißen Sommertag erwarten?)</li>
+<li>wichtige Inputs fehlen, z.B. wenn es andere Einflussfaktoren gibt, die wir nicht berücksichtigt haben oder nicht messen konnten, wodurch nicht die gesamte Varianz der Zielgröße erklärt werden kann</li>
+<li>viele möglicherweise irrelevante Inputs, die eine sorgfältige Feature Selektion erfordern, um <a href="https://www.tylervigen.com/spurious-correlations">Scheinkorrelationen</a> zu vermeiden, die zu falschen “Was-wäre-wenn”-Prognosen führen würden, da die wahre kausale Beziehung zwischen den Inputs und Outputs nicht erfasst wird</li>
+<li>oft sehr zeitintensive Datenvorverarbeitung notwendig, z.B. bei der Zusammenführung von Daten aus unterschiedlichen Quellen und manuellem Feature Engineering</li>
+</ul>
+</section>
+<section id="deep-learning-generative-ai" class="level3">
+<h3 class="anchored" data-anchor-id="deep-learning-generative-ai">Deep Learning &amp; Generative AI</h3>
+<p><strong><em>Anwendungsfälle:</em></strong></p>
+<ul>
+<li>Automatisierung langwieriger, repetitiver Aufgaben, die sonst ein Menschen erledigt würde, z.B. (siehe auch <a href="01a_intro.html#sec-ml-everywhere">ML ist überall!</a>):
+<ul>
+<li>Textklassifizierung (z.B. Spam / Hate Speech / Fake News erkennen; Kundensupportanfragen an die passende Abteilung weiterleiten)</li>
+<li>Sentimentanalyse (Teilaufgabe der Textklassifikation: Positive oder negative Texte erkennen, z.B. um Produktbewertungen oder das, was Social-Media-Nutzer über ein Unternehmen sagen, zu überwachen)</li>
+<li>Spracherkennung (z.B. diktierte Notizen transkribieren oder Videos mit Untertiteln versehen)</li>
+<li>maschinelle Übersetzung (Texte von einer Sprache in eine andere übersetzen)</li>
+<li>Bildklassifizierung / Objekterkennung (z.B. Identifizierung problematischer Inhalte (wie Kinderpornografie) oder Erkennung von Straßenschildern und Fußgängern beim autonomen Fahren)</li>
+<li>Bildbeschreibungen generieren (z.B. um das Online-Erlebnis für Menschen mit Sehbehinderung zu verbessern)</li>
+<li>Predictive Typing (z.B. bei der Texteingabe auf dem Smartphone mögliche nächste Wörter vorschlagen)</li>
+<li>Datengenerierung (z.B. neue Fotos/Bilder von bestimmten Objekten oder Szenen generieren)</li>
+<li>Style Transfer (ein Bild in einen anderen Stil zeigen, z.B. Fotos wie van Gogh-Gemälde aussehen lassen)</li>
+<li>einzelne Quellen eines Audiosignals trennen (z.B. einen Song entmischen, d.h. Gesang und Instrumente in einzelne Spuren trennen)</li>
+</ul></li>
+<li>klassische Simulationsmodelle durch ML Modelle ersetzen: da exakte Simulationsmodelle oft langsam sind, kann die Berechnung für neue Datenpunkte beschleunigt werden, indem die Ergebnisse stattdessen mit einem ML-Modell vorhergesagt werden, z.B.:
+<ul>
+<li>AlphaFold: 3D-Proteinstruktur aus Aminosäuresequenz generieren (zur Erleichterung der Arzneimittelentwicklung)</li>
+<li>SchNet: Energie und andere Eigenschaften von Molekülen anhand ihrer Atomkonfiguration vorhersagen (um die Materialforschung zu beschleunigen)</li>
+</ul></li>
+</ul>
+<p><strong><em>Mögliche Herausforderungen:</em></strong></p>
+<ul>
+<li>Auswählen einer geeigneten neuronalen Netzarchitektur und dafür sorgen, dass das Modell gute Vorhersagen generiert; insbesondere beim Ersetzen traditioneller Simulationsmodelle ist es häufig erforderlich, eine völlig neue Art von neuronaler Netzarchitektur zu entwickeln, die speziell für diese Aufgabe und Inputs/Outputs ausgelegt ist, was viel ML- und Domänenwissen, Intuition und Kreativität erfordert</li>
+<li>Rechenressourcen (trainiere kein neuronales Netz ohne GPU!)</li>
+<li>Datenqualität und -quantität: es werden viele <em>konsistent</em> (von Menschen) gelabelte Daten benötigt</li>
+</ul>
+</section>
+<section id="information-retrieval" class="level3">
+<h3 class="anchored" data-anchor-id="information-retrieval">Information Retrieval</h3>
+<p><strong><em>Anwendungsfälle:</em></strong></p>
+<ul>
+<li>Verbesserte Suchergebnisse durch Identifizierung ähnlicher Artikel, zum Beispiel:
+<ul>
+<li>bei einer Suchanfrage passende Dokumente / Websites zurückgeben</li>
+<li>gegeben einem Film, den der Nutzer gerade anschaut, ähnliche Filme anzeigen (z.B. gleiches Genre, gleicher Regisseur usw.)</li>
+</ul></li>
+</ul>
+<p><strong><em>Mögliche Herausforderungen:</em></strong></p>
+<ul>
+<li>Qualität der Ergebnisse hängt stark von der gewählten Ähnlichkeitsmetrik ab; die Identifizierung semantisch verwandter Elemente ist derzeit für einige Datentypen (z.B. Bilder) schwieriger als für andere (z.B. Text)</li>
+</ul>
+</section>
+<section id="empfehlungssysteme" class="level3">
+<h3 class="anchored" data-anchor-id="empfehlungssysteme">Empfehlungssysteme</h3>
+<p><strong><em>Anwendungsfälle:</em></strong></p>
+<ul>
+<li>personalisierte Vorschläge: gegeben einer Instanz (z.B. Benutzer, Proteinstruktur) die relevantesten Elemente identifizieren (z.B. Film, Arzneimittelzusammensetzung), zum Beispiel:
+<ul>
+<li>einem Nutzer Filme vorschlagen, die anderen Nutzern mit ähnlichem Geschmack ebenfalls gefallen haben</li>
+<li>Molekülstrukturen empfehlen, die in eine, für eine bestimmte Krankheit relevante, Proteinstruktur passen könnte</li>
+</ul></li>
+</ul>
+<p><strong><em>Mögliche Herausforderungen:</em></strong></p>
+<ul>
+<li>wenig / unvollständige Daten, z.B. mögen verschiedene Nutzer denselben Artikel aus unterschiedlichen Gründen und es ist unklar, ob z.B. ein Nutzer einen Film nicht angesehen hat, weil er sich nicht dafür interessiert oder weil er ihn einfach noch nicht gefunden hat</li>
+</ul>
+</section>
+<section id="reinforcement-learning" class="level3">
+<h3 class="anchored" data-anchor-id="reinforcement-learning">Reinforcement Learning</h3>
+<p><strong><em>Anwendungsfälle:</em></strong></p>
+<ul>
+<li>Ermittlung einer optimalen Handlungsabfolge bei wechselnden Umgebungsbedingungen, z.B.:
+<ul>
+<li>Virtueller Agent, der ein (Video-)Spiel spielt</li>
+<li>Roboter mit komplexen Bewegungsmustern, z.B. Aufnehmen unterschiedlich geformter Gegenstände aus einer Kiste</li>
+</ul></li>
+</ul>
+<p>⇒ Anders als bei der regulären Optimierung, wo eine optimale Eingabe für einen spezifischen externen Zustand bestimmt wird, versucht hier ein “Agent” (= der RL-Algorithmus) eine optimale <em>Reihenfolge</em> von Eingaben zu finden, um die kumulative Belohnung über mehrere Schritte zu maximieren. Dabei kann zwischen einer Handlung und der dazugehörigen Belohnung eine erhebliche Zeitverzögerung liegen (z.B. wenn in einem Videospiel zu Beginn eines Levels ein Schlüssel gefunden werden muss, aber die Tür, die damit geöffnet werden kann, erst einige Frames später kommt).</p>
+<p><strong><em>Mögliche Herausforderungen:</em></strong></p>
+<ul>
+<li>erfordert normalerweise eine Simulationsumgebung, in der der Agent “angelernt” wird, bevor er anfängt, in der realen Welt zu handeln. Die Entwicklung eines exakten Simulationsmodells ist allerdings nicht einfach und der Agent wird alle Bugs ausnutzen, wenn dies zu höheren Belohnungen führt</li>
+<li>es kann schwierig sein, eine klare Belohnungsfunktion zu definieren, die optimiert werden soll (“Imitation Learning” ist dabei oft einfacher, wobei der Agent stattdessen versucht, die Entscheidungen eines Menschen in einer bestimmten Situation nachzuahmen)</li>
+<li>lange Verzögerungen zwischen kritischen Aktionen und der dazugehörigen Belohnung erschweren das lernen korrekter Assoziationen</li>
+<li>der Agent generiert seine eigenen Daten: Wenn er mit einer schlechten Policy startet, wird es schwierig, dieser zu entkommen (z.B. wenn der Agent in einem Videospiel immer in eine Lücke fällt, anstatt darüber zu springen, sieht er nie die Belohnung, die auf der anderen Seite wartet und lernt daher nicht, dass es von Vorteil wäre, über die Lücke zu springen)</li>
+</ul>
+</section>
+<section id="andere" class="level3">
+<h3 class="anchored" data-anchor-id="andere">Andere</h3>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Wichtig
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>ML-Algorithmen werden anhand des Outputs kategorisiert, den sie für eine Eingabe generieren. Wenn man ein ‘Input → Output’-Problem mit einem anderen als den oben aufgeführten Outputs lösen möchte, wird das wahrscheinlich auf ein mehrjähriges Forschungsprojekt hinauslaufen – wenn das Problem überhaupt mit ML gelöst werden kann!</p>
+</div>
+</div>
+<section id="um-komplexe-probleme-zu-lösen-benötigt-man-möglicherweise-mehrere-algorithmen" class="level4 custom-gray-block">
+<h4 class="anchored" data-anchor-id="um-komplexe-probleme-zu-lösen-benötigt-man-möglicherweise-mehrere-algorithmen">Um komplexe Probleme zu lösen, benötigt man möglicherweise mehrere Algorithmen</h4>
+<p>Beispiel: virtueller Assistent (z.B. Siri oder Alexa): <em>“Hey &lt;Sprachassistent&gt;, erzähl mir einen Witz!”</em> → ein zufälliger Witz</p>
+<div class="small-text">
+<p>Das sieht zwar zunächst wie ein Input-Output-Problem aus, es direkt zu lösen wäre allerdings sehr schwierig und ineffizient. Stattdessen zerlegen wir das Problem in kleinere Teilaufgaben, die mit bestehenden Algorithmen gelöst werden können:</p>
+</div>
+<ol type="1">
+<li><strong>Triggerwort Erkennung:</strong><br>
+Audio → “Hey &lt;Sprachassistent&gt;” (ja/nein)?</li>
+<li><strong>Spracherkennung:</strong><br>
+Audio → Text</li>
+<li><strong>Klassifizierung der Absicht:</strong><br>
+Text → (Witz/Timer/Wettervorhersage/…)?</li>
+<li><strong>Führe spezifisches Programm aus (z.B. wähle zufälligen Witz aus)</strong></li>
+<li><strong>Sprachgenerierung:</strong><br>
+Text → Audio</li>
+</ol>
+<div class="small-text">
+<p>Zunächst muss der Smart Speaker wissen, ob er mit einem bestimmten Triggerwort (z.B. “Hey Siri”) angesprochen wurde. Dies ist eine einfache binäre Klassifikation (ja/nein), die normalerweise auf dem Gerät selbst ausgeführt wird, da wir nicht möchten, dass alles was wir sagen permanent in die Cloud gestreamt wird. Als nächstes werden die nach dem Triggerwort gesprochenen Wörter in Text übersetzt. Text ist einfacher zu handhaben, da beispielsweise Variationen aufgrund unterschiedlicher Akzente entfernt werden. Anhand dieses Textes wird die Absicht des Nutzers erkannt, also welche der verschiedenen Funktionalitäten des virtuellen Assistenten genutzt werden soll (z.B. Witz erzählen, Musik abspielen, Wecker stellen etc.). Dies ist ein Multiclass-Klassifikationsproblem. Zur Ausführung des Befehls wird kein ML benötigt, sondern ein normales, aufgabenspezifisches Programm, das als App auf dem Gerät installiert ist, z.B. wird ein Witz aus einer Datenbank ausgewählt oder ein Timer gesetzt usw.. Anschließend muss der Output des ausgeführten Programms wieder in ein Audiosignal umgewandelt werden. Ein ML-Modell kann dabei helfen, flüssig gesprochenen Text zu erzeugen – und in naher Zukunft vielleicht auch mit der Stimme von Morgan Freeman oder einer anderen berühmten Person, wie bei “Deep Fake”-Anwendungen.</p>
+</div>
+<p>⇒ Generell sollte man zunächst darüber nachzudenken, ob man ein Problem in leichter zu lösende Teilprobleme zerlegen kann, da es dafür oft schon große Datensätze oder sogar fertige Modelle gibt. Ein Modell für Spracherkennung kann beispielsweise zusätzlich auf Hörbüchern und transkribierten politische Reden trainiert werden, nicht nur auf den Daten, die von den Sprachassistent-Nutzern gesammelt wurden.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Vorsicht
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Wenn ein ML-Modell als Input den Output eines anderen ML-Modells erhält, bedeutet dies, dass wir, sobald wir eine neue Version des ersten ML-Modells verwenden, auch die folgenden Modelle neu trainieren sollten, da diese Modelle dann evtl. leicht andere Inputs erhalten, d.h. wir es mit einem <a href="06_pitfalls.html#sec-pitfall-drifts">Daten Drift</a> zu tun haben.</p>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="sec-solving-problems" class="level2">
+<h2 class="anchored" data-anchor-id="sec-solving-problems">Mit ML Probleme lösen</h2>
+<p>Das Lösen von “Input → Output”-Problemen mit ML erfordert drei Hauptschritte:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_intro_ml/input_output_solving_abstract6.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+<section id="identifiziere-ein-problem" class="level3">
+<h3 class="anchored" data-anchor-id="identifiziere-ein-problem">1. Identifiziere ein Problem</h3>
+<p>Der erste (und wohl wichtigste) Schritt besteht darin, zu <strong>identifizieren, wo maschinelles Lernen überhaupt eingesetzt werden kann (und sollte)</strong>.</p>
+<section id="ml-projekt-checkliste" class="level4 custom-gray-block">
+<h4 class="anchored" data-anchor-id="ml-projekt-checkliste">ML Projekt Checkliste</h4>
+<p><strong><em>Motivation</em></strong></p>
+<ul>
+<li><p><strong>Welches Problem möchtest du lösen?</strong><br>
+Machine Learning kann dir in verschiedenen Situationen helfen, z.B. indem es Erkenntnisse aus großen Mengen (möglicherweise unstrukturierter) Daten generiert, Entscheidungsfindungs- und Planungsprozesse durch Vorhersagen über zukünftige Ereignisse verbessert, oder mühsame Aufgaben automatisiert, die sonst menschliche Experten erfordern.<br>
+Wo läuft etwas ineffizient, was durch eine effektivere Nutzung von Daten verbessert werden könnte? Du könntest zum Beispiel nach Möglichkeiten suchen, verschwendete Ressourcen/Zeit/Kosten zu reduzieren oder den Umsatz/die Kundenzufriedenheit/usw. zu steigern.<br>
+Um systematisch Probleme oder Verbesserungsmöglichkeiten zu erkennen, kann es auch helfen, ein Prozessdiagramm oder eine Customer Journey Map zu erstellen.</p></li>
+<li><p><strong>Auf welche Art und Weise würde dies Wert für eure Organisation generieren?</strong><br>
+Wie könnte eure Organisation damit Geld verdienen oder Kosten senken?</p>
+<ul>
+<li>Könnte dies <em>einen internen Prozess verbessern</em> (z.B. könnte ein Prozess mit den Erkenntnissen aus einer Analyse effizienter gestaltet werden oder eine lästige Aufgabe, die sonst einen menschlichen Arbeiter erfordern würde, kann mithilfe eines ML-Modells automatisiert werden)?</li>
+<li>Könnte das ML-Modell als <em>neues Feature in ein bestehendes Produkt</em> integriert werden und dadurch z.B. dieses Produkt für Kunden attraktiver machen?</li>
+<li>Könnte die ML-Lösung als völlig <em>neues Produkt oder Service</em> verkauft werden, z.B. als <em>Software-as-a-Service (SaaS)-Lösung</em> angeboten werden?</li>
+</ul></li>
+</ul>
+<div class="small-text">
+<p>Bitte beachte, dass die letztendliche Verwendung der ML-Lösung auch eine strategische Entscheidung sein kann, die für jede Organisation unterschiedlich sein kann. Beispielsweise könnte eine ML-Lösung, die Kratzer auf produzierten Produkten erkennt, von einem Unternehmen verwendet werden, um ihren internen Produktionsprozess zu verbessern, während ein anderes Unternehmen, das die Maschinen herstellt, die die Produkte herstellen, dies als neues Feature in seine Maschinen integrieren könnte, und ein drittes Unternehmen bietet dies möglicherweise als SaaS-Lösung an, die mit verschiedenen Produktionslinien kompatibel ist.</p>
+</div>
+<ul>
+<li><strong>In welcher Größenordnung könnte dieses Projekt Mehrwerte generieren?</strong><br>
+Überlege dir den Impact im Hinblick auf
+<ul>
+<li><p><em>Größenordnung:</em> Kleine Verbesserung oder Revolution? Würde die Lösung einen <a href="08_conclusion.html#sec-ai-transformation">strategischen Vorteil</a> schaffen?</p></li>
+<li><p><em>Skalierung:</em> Wie oft wird es verwendet? Wie viele Benutzer/Kunden/Mitarbeiter werden davon profitieren?<br>
+Zum Beispiel:</p>
+<ul>
+<li>Kleine Prozessoptimierung, <em>aber</em> da dieser Prozess täglich in der gesamten Organisation verwendet wird, spart dies unzählige Stunden</li>
+<li>Neue Funktion, die ein Produkt revolutioniert und euch von der Konkurrenz abhebt, <em>aber</em> der Markt dafür ist winzig</li>
+</ul></li>
+<li><p>Hätte dies irgendwelche <em>wertvollen Nebenwirkungen</em>? Was wird anders sein? Gibt es zusätzliche Möglichkeiten, die sich daraus ergeben könnten? Können Synergien geschaffen werden zwischen Abteilungen, die mit ähnlichen Daten arbeiten?</p></li>
+</ul></li>
+<li><strong>Wann hast du dein Ziel erreicht?</strong><br>
+Wie würde Erfolg aussehen, d.h. was ist deine Definition von ‘fertig’?
+<ul>
+<li>Kannst du den Fortschritt mit einem KPI quantifizieren?</li>
+<li>Wie ist der Status quo, d.h. wie weit bist du derzeit von deinem Ziel entfernt?</li>
+<li>Welche Metriken sollten sich <em>nicht</em> verändern (verschlechtern) durch das Projekt?</li>
+</ul></li>
+</ul>
+<p><strong><em>Lösungsansatz</em></strong></p>
+<ul>
+<li><p><strong>Wie sieht deine Vision für die Zukunft mit ML aus?</strong></p>
+<ul>
+<li>Wie sieht dein bestehender Prozess / dein bestehendes System aus und was wird nach der Integration der ML-Lösung anders sein?</li>
+<li>Wer sind die Nutzer und wie werden sie von dieser Veränderung betroffen sein, brauchen sie z.B. zusätzliche Schulungen, um das neue System zu nutzen?</li>
+</ul></li>
+<li><p><strong>Was sind die Deliverables?</strong><br>
+Besteht die Lösung aus einer <strong>Software</strong>, die irgendwo eingesetzt wird, um kontinuierlich Vorhersagen für neue Datenpunkte zu generieren, oder interessierst du dich für die <strong>Erkenntnisse</strong>, die aus einer einmaligen Analyse historischer Daten gewonnen werden?</p></li>
+<li><p><strong>Wie wird im Falle einer Softwarelösung das ML-Modell in das bestehende Setup integriert?</strong></p>
+<ul>
+<li>Wie sieht eine Interaktion mit dem System aus (= 1 Datenpunkt / Beobachtung), z.B. ein Nutzer, der eine Anfrage stellt oder ein produziertes Produkt, das eine Qualitätskontrolle passiert?</li>
+<li>Von welchem System stammen die Inputs für das ML-Modell? Was passiert mit den Outputs des ML-Modells?</li>
+<li>Wird eine zusätzliche Benutzeroberfläche (UI) oder API benötigt, um mit dem ML-Modell zu interagieren?</li>
+<li>Muss das ML-Modell Vorhersagen sofort treffen, sobald neue Daten eintreffen, oder kann es Daten asynchron in Batches verarbeiten? Wie hoch ist der erwartete Traffic (d.h. die Anzahl der Datenpunkte, die pro Sekunde verarbeitet werden müssen)?</li>
+<li>Wie sollte das ML-Modell deployed werden (z.B. Cloud, On-Premise oder Edge-Gerät)? Erfordert dies zusätzliche Infrastruktur oder spezielle Hardware (z.B. GPUs)?</li>
+<li>Modellwartung: Was sind die Pläne im Hinblick auf Pipelines für zukünftige Datenerfassung, Modellüberwachung und automatisiertes Nachtrainieren?</li>
+</ul></li>
+<li><p><strong>Wie sehen die Input Daten aus? Wie sollen die Outputs aussehen?</strong></p>
+<ul>
+<li>Welche Art von Inputs bekommt das ML Modell (z.B. Bild / Text / Sensormessungen / etc.)?</li>
+<li>Welche Art von Outputs soll das ML-Modell produzieren, d.h. welche Kategorie von ML-Algorithmen löst dieses Problem?</li>
+<li>Hast du bereits Zugriff auf einen initialen Datensatz, um das Modell zu trainieren?</li>
+</ul></li>
+<li><p><strong>Wie soll die Performance des ML-Modells evaluiert werden?</strong></p>
+<ul>
+<li>Welche Evaluierungsmetriken sind für den gegebenen ML-Anwendungsfall geeignet (z.B. Accuracy)?</li>
+<li>Wie stehen diese Metriken in Zusammenhang mit den Geschäfts-KPIs, die durch diese Lösung verbessert werden sollen?</li>
+<li>Wie kann die Performance des Modells im laufenden Betrieb überwacht werden? Werden dafür kontinuierlich neue gelabelte Daten gesammelt?</li>
+</ul></li>
+<li><p><strong>Gibt es eine einfachere Lösung <a href="#sec-what-is-ml">ohne ML</a>?</strong><br>
+Verwende ML, um <em>unbekannte, komplexe</em> Regeln aus Daten zu lernen.</p>
+<ul>
+<li>Auch wenn ML hier die richtige Wahl ist, könntest du ein minimal funktionsfähiges Produkt ohne ML entwickeln, um die Lösung als Ganzes zu validieren, bevor du in ML investierst?</li>
+</ul></li>
+</ul>
+<p><strong><em>Herausforderungen &amp; Risiken</em></strong></p>
+<ul>
+<li><strong>Gibt es <a href="02_data.html#sec-data-garbage">genügend hochwertige Daten</a> um das Modell zu trainieren und zu evaluieren?</strong>
+<ul>
+<li>Qualität: Hast du die richtigen Inputs und eindeutige Labels?<br>
+→ Frage eine Fachexpertin, ob sie denkt, dass alle relevanten Inputs vorhanden sind, um das gewünschte Ergebnis zu berechnen. Dies ist bei unstrukturierten Daten wie Bildern in der Regel leicht zu bestimmen - wenn ein Mensch das Objekt im Bild sehen kann, sollte es ML auch können. Aber bei strukturierten Daten, wie z.B. einer Tabelle mit Hunderten von Spalten mit Sensormessungen, kann dies unmöglich zu bestimmen sein, bevor man eine Analyse der Daten durchführt.</li>
+<li>Quantität: Wie viele Daten wurden bereits gesammelt (einschließlich seltener Ereignisse und Labels)? Wie lange würde es dauern, mehr Daten zu sammeln? Könnten zusätzliche Daten von einem Anbieter gekauft werden und wenn ja, wie viel würde das kosten?</li>
+<li>Wie schwierig ist es, auf alle Daten zuzugreifen und sie ordentlich an einem Ort zu kombinieren? Mit wem würdest du sprechen, um die Dateninfrastruktur einzurichten/zu verbessern?</li>
+<li>Wie viel Vorverarbeitung ist notwendig (z.B. Entfernung von Ausreißern, Korrigieren fehlender Werte, Feature Engineering, d.h. Berechnung neuer Variablen aus den bestehenden Messungen, etc.)? Was sollten die nächsten Schritte sein, um die Datenqualität und -quantität systematisch zu verbessern und die Vorverarbeitungsanforderungen in Zukunft zu verringern?</li>
+</ul></li>
+<li><strong>Kann das Problem mit einem <a href="#sec-ml-use-cases">existierenden ML-Algorithmus</a> gelöst werden?</strong><br>
+Frage eine ML-Expertin, ob ein ähnliches Problem bereits mit einem bewährten Algorithmus gelöst wurde.
+<ul>
+<li>Für bekannte Lösungen: Wie komplex ist es, das Modell zum Laufen zu bringen (z.B. lineare Regression vs.&nbsp;tiefes neuronales Netz)?</li>
+<li>Für unbekannte Lösungen: Anstatt Jahre in die Forschung zu investieren, um einen neuartigen Algorithmus zu entwickeln, wäre es möglich, das Input-Output-Problem in einfachere Teilprobleme mit bekannten Lösungen zu zerlegen?</li>
+</ul></li>
+<li><strong>Was würde im schlimmsten Fall passieren, wenn das Modell falsch liegt?</strong><br>
+Das ML-System wird (wie Menschen auch) Fehler machen. Benutze kein ML wenn du immer 100% korrekte Ergebnisse brauchst!
+<ul>
+<li>Welches Performance-Level wird mindestens benötigt, damit die ML-Lösung Mehrwert liefert? Z.B. welche Falsch Positiv oder Falsch Negativ Rate wäre noch akzeptabel? Was wäre das Worst-Case-Szenario und wie viel Risiko bist du bereit einzugehen?</li>
+<li>Wie wahrscheinlich ist es, dass sich die Inputs im Laufe der Zeit ändern, beispielsweise auf Grund sich ändernder Demographie der Nutzer oder durch unerwartete Ereignisse (Black Swan Events) wie eine Pandemie (z.B. COVID-19)? Wie oft müsste man das Modell nachtrainieren, um diese Veränderungen zu kompensieren und werden dafür schnell genug neue (gelabelte) Daten gesammelt?</li>
+<li>Besteht für die Nutzer ein Anreiz, das System absichtlich zu täuschen (z.B. entwickeln Spammer raffiniertere Nachrichten, wenn ihre ursprünglichen Nachrichten vom Spamfilter abgefangen werden)?</li>
+<li>Gibt es eine Möglichkeit, das System erst zu überwachen und trotzdem einen Mehrwert zu generieren (z.B. mit einer “Human in the Loop” Lösung), statt vom ersten Tag an voll auf ML zu setzen?</li>
+</ul></li>
+<li><strong>Gibt es rechtliche oder ethische Bedenken beim Einsatz der Lösung?</strong>
+<ul>
+<li>Verbietet irgendeine Verordnung, zum Beispiel das EU-Gesetz über künstliche Intelligenz (EU AI Act), den Einsatz von ML für diese Anwendung?</li>
+<li>Gibt es datenschutzrechtliche Bedenken, zum Beispiel weil personenbezogene Daten verwendet werden?</li>
+<li>Müssen die Entscheidungen des ML-Modells transparent und nachvollziehbar sein, z.B. wenn jemandem aufgrund eines algorithmisch generierten Kreditscores ein Kredit verweigert wird?</li>
+<li>Besteht die Gefahr, dass das Modell Nutzer diskriminieren könnte, beispielsweise weil es mit verzerrten Daten trainiert wurde?</li>
+</ul></li>
+<li><strong>Was könnte sonst noch schief gehen?</strong>
+<ul>
+<li>Warum könnten die Nutzer von der Lösung frustriert sein? An welcher Stelle würden sie z.B. lieber mit einem echten Menschen statt einem Chatbot interagieren?</li>
+</ul></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_data_issues/wrong_uber_accident.png" class="img-fluid figure-img" style="width:55.0%"></p>
+<figcaption>Glücklicherweise sind lebensbedrohliche Situationen bei den meisten Machine Learning Anwendungsfällen kein Thema. Es ist jedoch wichtig, das Worst-Case-Szenario in Betracht zu ziehen, sollte das Modell falsche Ergebnisse liefern.</figcaption>
+</figure>
+</div>
+<p><strong><em>Selbst bauen oder einkaufen?</em></strong></p>
+<ul>
+<li><p><strong>Kernbereich vs.&nbsp;generische Anwendung: Schafft diese Lösung einen strategischen Vorteil?</strong><br>
+Wird die Lösung ein wichtiger Bestandteil eures Geschäfts sein, z.B. ein neues Feature, das euer Produkt attraktiver macht und/oder erfordert die Lösung spezifisches Domänenwissen, das nur in eurer Organisation verfügbar ist, z.B. weil du Daten analysierst, die von euren eigenen speziellen Prozessen/Maschinen generiert werden? Oder ist dies ein allgemeines (aber komplexes) Problem, für das es bereits eine Lösung gibt (z.B. als Software-as-a-Service (SaaS)-Produkt), die ihr von der Stange kaufen könntet?<br>
+Beispielsweise ist das Extrahieren der relevanten Informationen aus gescannten Rechnungen zur Automatisierung von Buchhaltungsprozessen eine relativ komplexe Aufgabe, für die es bereits viele gute Lösungen gibt. Wenn du nicht gerade in einem Unternehmen arbeitest, das Buchhaltungssoftware entwickelt, und ihr plant, eine bessere Alternative zu diesen vorhandenen Lösungen zu verkaufen, ist es wahrscheinlich nicht sinnvoll, dies selbst zu implementieren.</p></li>
+<li><p><strong>Besitzt ihr die nötige technische Expertise und Wissen im Anwendungsbereich, um die Lösung selbst zu implementieren?</strong></p>
+<ul>
+<li>Wie schwierig wäre es, die ML-Lösung selbst zu implementieren? Welche Open-Source-Bibliotheken gibt es, die eine solche Aufgabe lösen?</li>
+<li>Verfügt eure Organisation über das nötige ML-Talent? Falls nicht könnte auch eine hybride Entwicklung zusammen mit einer Universität oder Forschungsinstitution oder externen Beratern möglich sein.</li>
+</ul></li>
+<li><p><strong>Was wäre der Return on Investment (ROI) einer eingekauften Lösung?</strong></p>
+<ul>
+<li>Wie zuverlässig ist die eingekaufte ML-Lösung? Gibt es Benchmarks und/oder könnt ihr sie mit einigen gängigen Beispielen und Randfällen selbst testen?</li>
+<li>Wie aufwändig wäre die Vorverarbeitung eurer Daten um die eingekaufte ML-Lösung zu verwenden?</li>
+<li>Wie kompliziert wäre es, die Outputs der eingekauften ML-Lösung in euer System zu integrieren? Macht diese Lösung genau das, was ihr braucht, oder wären zusätzliche Nachbearbeitungsschritte erforderlich?</li>
+<li>Kann die eingekaufte ML-Lösung intern deployed werden oder läuft sie auf einem externen Server und würde dies Datenschutzprobleme mit sich bringen?</li>
+<li>Wie hoch sind die laufenden Lizenzgebühren und was ist in der Wartung enthalten (z.B. wie oft werden die Modelle nachtrainiert)?</li>
+</ul></li>
+</ul>
+<p>Sofern die ML-Lösung kein integraler Bestandteil eures Geschäftsmodells sein wird, wird es am Ende wahrscheinlich darauf hinauslaufen, die internen Kosten für die Entwicklung, Implementierung, den Betrieb und die Wartung des Systems mit den Kosten für die Integration der Standardlösung in euren bestehenden Arbeitsablauf (einschließlich der erforderlichen Datenvorverarbeitung) und den laufenden Lizenzgebühren zu vergleichen.</p>
+</section>
+<p>Für weitere Informationen lies <a href="https://towardsdatascience.com/the-ultimate-guide-to-starting-ai-d506255d7ea">diesen Blog Artikel</a>.</p>
+</section>
+<section id="entwickle-eine-lösung" class="level3">
+<h3 class="anchored" data-anchor-id="entwickle-eine-lösung">2. Entwickle eine Lösung</h3>
+<p>Sobald ein geeignetes “Input → Output”-Problem identifiziert wurde, müssen <strong>historische Daten gesammelt und der richtige ML-Algorithmus ausgewählt und angewendet werden</strong>, um eine funktionierende Lösung zu erhalten. Darum geht es in den nächsten Kapiteln.</p>
+<p>Um ein konkretes Problem mit ML zu lösen, gehen wir in der Regel wie folgt vor:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_ds_workflow/data_science_workflow_17.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption>Wir beginnen immer mit einer Fragestellung oder einem Problem, das mit ML gelöst werden soll. Und um es zu lösen, benötigen wir Daten, die in der Regel bereinigt werden müssen, bevor man mit ihnen arbeiten kann (z.B. verschiedene Excel-Dateien zusammenführen, fehlende Werte korrigieren usw.). Dann ist es Zeit für eine explorative Analyse, um besser zu verstehen, womit wir es zu tun haben. Abhängig von der Art der Daten ist es evtl. erforderlich, geeignete “Features” (Charakteristiken oder Kennzahlen) zu extrahieren oder zusätzlich zu berechnen, wobei Domänenwissen sehr hilfreich ist. Alle diese Schritte sind unter “Preprocessing” (Vorverarbeitung) gruppiert <em>(roter Kasten)</em> und die Arbeitsschritte sind nicht linear angeordnet, da wir oft zwischen diesen Schritten hin- und herspringen. Beispielsweise stellen wir bei der Visualisierung des Datensatzes fest, dass es Ausreißer in den Daten gibt, die wir entfernen müssen, oder nachdem neue Features berechnet wurden, gehen wir zurück und visualisieren den Datensatz erneut. Als nächstes kommt der ML-Teil <em>(grüner Kasten)</em>: Normalerweise fängt man mit einem einfachen Modell an, evaluiert es, probiert ein komplexeres Modell aus, experimentiert mit verschiedenen Hyperparametern, … und stellt dann fest, dass man den ML-Werkzeugkasten durch hat, aber kein Modell eine zufriedenstellende Performance zeigt. An diesem Punkt muss man einen Schritt zurück gehen und entweder aussagekräftigere Features berechnen oder, wenn das auch nicht hilft, mehr und/oder bessere Daten sammeln (z.B. mehr Proben, Daten von zusätzlichen Sensoren, eindeutigere Labels usw.). Wenn wir uns schließlich auf die Vorhersagen des Modells verlassen können, gibt es zwei Wege, die man gehen kann: Entweder die Data Science Route, bei der die gewonnen Erkenntnisse an Stakeholder übermittelt werden (was oft zu weiteren Fragen führt). Oder die ML-Software Route, in welcher das endgültige Modell in den Prozess eingebunden wird. Aber Achtung: Die Performance des Modells muss kontinuierlich überwacht werden und es müssen auch in Zukunft weiterhin neue Daten gesammelt werden, damit das Modell immer wieder nachtrainiert werden kann, vor allem falls es Änderungen im Prozess gibt. Insgesamt ist die Arbeit an einem Machine Learning Projekt ein sehr iterativer Prozess.</figcaption>
+</figure>
+</div>
+<p>Da viele Unternehmen keine standardisierte Dateninfrastruktur besitzen, ist die traurige Wahrheit leider, dass eine Data Scientistin normalerweise (mindestens) etwa 90% ihrer Zeit damit verbringt, die Daten zu sammeln, zu bereinigen und anderweitig vorzuverarbeiten, um sie in ein Format zu bringen worauf die ML-Algorithmen angewendet werden können:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_ds_workflow/data_science_workflow_19.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></p>
+</figure>
+</div>
+<p>Auch wenn es manchmal frustrierend ist, ist die Zeit, die man mit der Bereinigung und Vorverarbeitung der Daten verbringt, nie verschwendet, da die ML-Algorithmen nur mit einer soliden Datengrundlage brauchbare Ergebnisse erzielen können.</p>
+</section>
+<section id="setze-die-lösung-ein" class="level3">
+<h3 class="anchored" data-anchor-id="setze-die-lösung-ein">3. Setze die Lösung ein</h3>
+<p>Wenn die prototypische Lösung implementiert ist und das geforderte Performance-Level erfüllt, muss diese Lösung dann “deployed” werden, d.h. <strong>produktiv in den allgemeinen Workflow und die Infrastruktur integriert werden</strong>, damit sie in der Praxis tatsächlich zur Verbesserung des jeweiligen Prozesses eingesetzt werden kann (als Software, die kontinuierlich Vorhersagen für neue Datenpunkte macht). Das könnte auch den Bau zusätzlicher Software rund um das ML-Modell erfordern, wie etwa eine API, um das Modell programmatisch abzufragen, oder eine dedizierte Benutzeroberfläche, um mit dem System zu interagieren. Schließlich gibt es im Allgemeinen zwei Strategien, wie die fertige Lösung betrieben werden kann:</p>
+<ol type="1">
+<li><strong>Das ML-Modell läuft auf einem “Edge-Gerät”</strong>, d.h. auf jedem einzelnen Gerät (z.B. Smartphone), das Inputdaten erzeugt und die Ergebnisse des Modells im nachfolgenden Prozessschritt verwendet. Dies ist oft die beste Strategie, wenn Ergebnisse in Echtzeit berechnet werden müssen und/oder eine durchgehende Internetverbindung nicht gewährleistet ist, wie z.B. bei selbstfahrenden Autos. Der Nachteil dieser Strategie ist jedoch, dass je nach Art des ML-Modells vergleichsweise teure Rechenressourcen in jedes Gerät eingebaut werden müssen, z.B. GPUs für neuronale Netze.</li>
+<li><strong>Das ML-Modell läuft in der “Cloud”</strong>, d.h. auf einem zentralen Server, z.B. in Form einer Webanwendung, die Daten einzelner Nutzer entgegennimmt, verarbeitet und die Ergebnisse zurücksendet. Dies ist oft die effizientere Lösung, wenn für den Anwendungsfall eine Antwort innerhalb weniger Sekunden ausreicht. Die Verarbeitung personenbezogener Daten in der “Cloud” kann jedoch Datenschutzbedenken mit sich bringen. Einer der Hauptvorteile dieser Lösung besteht darin, dass man das ML-Modell einfacher aktualisieren kann, sobald mehr historische Daten verfügbar werden oder wenn sich der Prozess ändert und das Modell nun mit leicht anderen Eingaben umgehen muss (worauf wir in späteren Kapiteln noch ausführlicher eingehen).</li>
+</ol>
+<p>→ Da diese Entscheidungen stark vom spezifischen Anwendungsfall abhängen, sprengen sie den Rahmen dieses Buches. Suche online nach “MLOps” oder ließ das Buch <a href="https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/">Designing Machine Learning Systems</a>, um mehr über diese Themen zu erfahren und beauftrage eine:n Machine Learning oder Data Engineer, um die erforderliche Infrastruktur im Unternehmen einzurichten.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script type="text/javascript"> // go once over all images and transform the percentage width into pixels relative to original body size
+  const bodyWidth = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--custom-body-width')); // Get CSS variable
+  document.querySelectorAll('.quarto-figure img').forEach((img) => {
+    const styleWidth = img.getAttribute('style').match(/width:\s*([\d.]+)%/); // Extract percentage
+    if (styleWidth) {
+      const percentage = parseFloat(styleWidth[1]) / 100;
+      img.style.width = `${bodyWidth * percentage}px`; // Apply calculated width
+    }
+  });
+</script>
+
+<style type="text/css">
+#footer {
+  font-size: 80%; /* Makes the font 70% smaller */
+  border-top: 1px solid #ccc; /* Adds a horizontal line above the footer */
+  padding-top: 10px; /* Adds some spacing above the footer content */
+}
+</style>
+
+<!-- FOOTER  -->
+<div id="footer" class="outer">
+  <footer class="inner">
+    <p><b>Book/Course Feedback: </b> <a href="https://forms.gle/Ccv5h5zQxwPjWtCS7" target="_blank" rel="nofollow">Full Feedback Survey</a> or <a href="https://forms.gle/qK8T5ALzgpiZaxd49" target="_blank" rel="nofollow">Short Comment</a><br></p>
+
+    <p>Find me on <a href="https://github.com/cod3licious/" target="_blank" rel="nofollow">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/" target="_blank" rel="nofollow">LinkedIn</a><br>
+      <a href="https://franziskahorn.de/">Home</a> ~ <a href="mailto:hey@franziskahorn.de?Subject=Book%20Feedback" target="_blank" rel="nofollow">Contact</a> ~ <a href="https://franziskahorn.de/impressum.html">Impressum</a></p>
+
+      <!-- CC license -->
+   <p xmlns:cc="http://creativecommons.org/ns#">This work is licensed under <a href="https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY 4.0<img style="height:16px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:16px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""></a></p>
+  </footer>
+</div>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Kopiert");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Kopiert");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./01a_intro.html" class="pagination-link" aria-label="Einleitung">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Einleitung</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./02_data.html" class="pagination-link" aria-label="Datenanalyse &amp; Preprocessing">
+        <span class="nav-page-text"><span class="chapter-title">Datenanalyse &amp; Preprocessing</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

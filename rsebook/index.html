@@ -222,13 +222,13 @@ ul.task-list li input[type="checkbox"] {
 <li>Prepare your research code for production</li>
 <li>Share your work with pride.</li>
 </ul>
-<p>Whether you’re just beginning your scientific journey—perhaps working on your first major project like a master’s thesis or your first paper—or you’re contemplating a move from academia to industry, the practical advice in this book can guide you along the way.</p>
+<p>Whether you’re just beginning your scientific journey—perhaps working on your first major project like a master’s thesis or your first paper—or you’re contemplating a move from academia to industry, the practical advice in this book can guide you along the way. We will approach software design from first principles and tackle research questions with a product mindset.</p>
 <p>While the book contains some example code in Python to illustrate the concepts, the general ideas are independent of any programming language.</p>
-<p><em><strong>This is still a draft version!</strong></em> Please write me an email, if you have any suggestions for how this book could be improved!</p>
+<p><strong><em>This is still a draft version!</em></strong> Please write me an email, if you have any suggestions for how this book could be improved!</p>
 <p>Enjoy! 😊</p>
 <section id="acknowledgments" class="level4">
 <h4 class="anchored" data-anchor-id="acknowledgments">Acknowledgments</h4>
-<p>The texts in this book were edited and refined with the help of ChatGPT, however, all original content is my own.</p>
+<p>The texts in this book were partly edited and refined with the help of ChatGPT, however, all original content is my own.</p>
 </section>
 <section id="how-to-cite" class="level4">
 <h4 class="anchored" data-anchor-id="how-to-cite">How to cite</h4>
@@ -247,10 +247,12 @@ ul.task-list li input[type="checkbox"] {
 <script type="text/javascript"> // go once over all images and transform the percentage width into pixels relative to original body size
   const bodyWidth = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--custom-body-width')); // Get CSS variable
   document.querySelectorAll('.quarto-figure img').forEach((img) => {
-    const styleWidth = img.getAttribute('style').match(/width:\s*([\d.]+)%/); // Extract percentage
-    if (styleWidth) {
-      const percentage = parseFloat(styleWidth[1]) / 100;
-      img.style.width = `${bodyWidth * percentage}px`; // Apply calculated width
+    if (img.getAttribute('style')) {
+      const styleWidth = img.getAttribute('style').match(/width:\s*([\d.]+)%/); // Extract percentage
+      if (styleWidth) {
+        const percentage = parseFloat(styleWidth[1]) / 100;
+        img.style.width = `${bodyWidth * percentage}px`; // Apply calculated width
+      }
     }
   });
 </script>

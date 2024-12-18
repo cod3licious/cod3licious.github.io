@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -169,7 +203,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#programming-languages" id="toc-programming-languages" class="nav-link active" data-scroll-target="#programming-languages">Programming languages</a></li>
+  <li><a href="#version-control" id="toc-version-control" class="nav-link active" data-scroll-target="#version-control">Version Control</a></li>
+  <li><a href="#development-environment" id="toc-development-environment" class="nav-link" data-scroll-target="#development-environment">Development Environment</a></li>
+  <li><a href="#programming-languages" id="toc-programming-languages" class="nav-link" data-scroll-target="#programming-languages">Programming Languages</a></li>
+  <li><a href="#reproducible-setups" id="toc-reproducible-setups" class="nav-link" data-scroll-target="#reproducible-setups">Reproducible Setups</a></li>
+  <li><a href="#clean-and-consistent-code" id="toc-clean-and-consistent-code" class="nav-link" data-scroll-target="#clean-and-consistent-code">Clean and Consistent Code</a></li>
+  <li><a href="#putting-it-all-together" id="toc-putting-it-all-together" class="nav-link" data-scroll-target="#putting-it-all-together">Putting It All Together</a></li>
   </ul>
 </nav>
     </div>
@@ -195,12 +234,310 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Before we continue with creating your results - i.e., actually start with the programming part - here is a quick overview of the tools that could come in handy during your software engineering journey.</p>
-<p>While the examples will use the Python programming language, the general principles discussed in the book are equally applicable to other programming languages.</p>
+<p>Before we continue with creating your results—i.e., actually start developing software—let’s take a quick tour of some tools that can make your software engineering journey smoother.</p>
+<p>Although the code examples in this book use Python, the general principles discussed here apply to most programming languages.</p>
+<section id="version-control" class="level2">
+<h2 class="anchored" data-anchor-id="version-control">Version Control</h2>
+<p>Version control is essential in software development to keep track of code changes and collaborate effectively. Think of it as a time machine that lets you revert to any version of your code or examine how it evolved.</p>
+<section id="why-use-version-control" class="level4">
+<h4 class="anchored" data-anchor-id="why-use-version-control">Why Use Version Control?</h4>
+<ul>
+<li><strong>Track changes</strong>: See what you’ve modified and when, with the ability to revert if necessary.</li>
+<li><strong>Review collaborators’ changes</strong>: When working with others, reviewing their changes before they are merged with the main version of the code (in so-called pull or merge requests) ensures quality and provides opportunities to teach each other better ways of doing things.</li>
+<li><strong>Not just for code</strong>: Version control can be used for any kind of file. While it’s less effective for binary formats like images or Microsoft Word where you can’t create a clean “diff” between two versions, you should definitely give it a try when writing your next paper in a text-based format like LaTeX.</li>
+</ul>
+</section>
+<section id="git" class="level4">
+<h4 class="anchored" data-anchor-id="git">Git</h4>
+<p>The go-to tool for version control is <strong>Git</strong>. While desktop clients exist, many professionals use <code>git</code> directly in the terminal as a command line tool.</p>
+<p>If you’re new to Git, <a href="https://www.atlassian.com/git/tutorials">this beginner’s guide</a> is a great place to start.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Essential Git Commands">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Essential Git Commands
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>git init</code>: Start a new repository in the current folder.</li>
+<li><code>git status</code>: View changes.</li>
+<li><code>git diff</code>: View differences between file versions before committing.</li>
+<li><code>git add [file]</code>: Stage files for a commit.</li>
+<li><code>git commit -m "message"</code>: Save staged changes.</li>
+<li><code>git push</code>: Upload changes to a remote repository (e.g., on GitHub).</li>
+<li><code>git pull</code>: Download changes from a remote repository.</li>
+<li><code>git branch</code>: Create or list branches.</li>
+<li><code>git checkout [branch]</code>: Switch branches.</li>
+<li><code>git merge [branch]</code>: Combine branches.</li>
+</ul>
+</div>
+</div>
+</div>
+<p>By default, your repository’s files are on the <em>main</em> branch. Creating a new branch is like stepping into an alternate universe where you can experiment without affecting the main timeline. <strong>When making a major change</strong> or adding a new feature, it’s good practice to <strong>create a new branch</strong>, like <em>new-feature</em>, and implement your changes there. Once you’re satisfied with the result, you can merge the changes back into the <em>main</em> branch.</p>
+<p>This approach keeps the <em>main</em> branch stable and ensures you always have a working version of your code. If you decide against your new feature, you can simply abandon the branch and start fresh from <em>main</em>. By <strong>creating a merge request</strong> (MR) once your <em>new-feature</em> branch is ready, you or a collaborator can <strong>review the changes</strong> thoroughly before merging them into <em>main</em>.</p>
+<p>To <strong>publish your code</strong> or <strong>collaborate with others</strong>, your repository (i.e., the folder under version control) can be <strong>hosted on a platform</strong> like:</p>
+<ul>
+<li><strong><a href="https://github.com/">GitHub</a></strong>: Great for open-source projects and public personal repositories to show off your skills.</li>
+<li><strong><a href="https://about.gitlab.com/">GitLab</a></strong>: Supports self-hosting, making it ideal for organizational needs.</li>
+</ul>
+<p>We strongly encourage you to publish any code related to your publications on one of these platforms to promote reproducibility of your results! 👩‍🔬</p>
+</section>
+</section>
+<section id="development-environment" class="level2">
+<h2 class="anchored" data-anchor-id="development-environment">Development Environment</h2>
+<p>The program you choose for writing code directly impacts your productivity. While you can technically write code using a plain text editor (like Notepad on Windows or TextEdit on macOS), <strong>special-purpose text editors</strong> and <strong>integrated development environments (IDEs)</strong> provide a tailored experience that boosts productivity.</p>
+<section id="text-editors" class="level4">
+<h4 class="anchored" data-anchor-id="text-editors">Text Editors</h4>
+<p>Developer-focused text editors are lightweight tools with features like syntax highlighting and extensions for basic programming tasks.<br>
+Examples include:</p>
+<ul>
+<li><strong>Sublime Text</strong>: Lightweight and fast, with excellent customization through lots of plugins.</li>
+<li><strong>Atom</strong>: Open-source and backed by GitHub (though less popular than other tools).</li>
+<li><strong>Vim</strong> and <strong>Emacs</strong>: Some of the first code editors, often used as command line tools and beloved by keyboard shortcuts enthusiasts.</li>
+</ul>
+</section>
+<section id="full-ides" class="level4">
+<h4 class="anchored" data-anchor-id="full-ides">Full IDEs</h4>
+<p>For more features, IDEs integrate tools like file browsers, Git support, and debuggers. They are ideal for larger projects and provide support for more complex tasks, like renaming variables across multiple files when you’re refactoring your code.<br>
+Examples include:</p>
+<ul>
+<li><strong>VS Code</strong>: Minimalist by default but highly customizable with plugins, making it suitable for everything from basic editing to full-scale development.</li>
+<li><strong>JetBrains IDEs</strong> (e.g., PyCharm): IDEs tailored to the needs of specific programming languages with very advanced features. You need to purchase a license to use the full version, but for many IDEs there is also a free community edition available.</li>
+<li><strong>JupyterLab</strong>: An extension of Jupyter notebooks (see below), popular for data science and exploratory coding.</li>
+<li><strong>RStudio</strong>: Tailored for R programming, with excellent support for data visualization, markdown reporting, and reproducible research workflows.</li>
+<li><strong>MATLAB</strong>: The MATLAB programming language and IDE are virtually synonymous. However, its rich feature set comes with steep licensing fees.</li>
+</ul>
+</section>
+<section id="jupyter-notebooks" class="level4">
+<h4 class="anchored" data-anchor-id="jupyter-notebooks">Jupyter Notebooks</h4>
+<p>Jupyter notebooks are a unique format that lets you <strong>mix code, output (like plots), and explanatory text</strong> in one document. The name <em>Jupyter</em> is derived from Julia, Python, and R, the programming languages for which the notebook format, and later the JupyterLab IDE, were created. The IDE itself runs inside your web browser.</p>
+<p>Notebooks are great for exploratory data analysis and to create reproducible reports. However, since the notebooks themselves are composed of individual interactive cells that can be executed in any order, developing in notebooks often becomes messy quickly. We recommend that you keep the main logic and reusable functions in separate scrips or libraries and primarily use notebooks to create plots and other results. It is also good practice to run your notebook again from top to bottom once you’re finished to make sure everything still works and you’re not relying on variables that were defined in now-deleted cells, for example.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Jupyter notebooks, stored as files ending in <code>.ipynb</code>, are internally represented as JSON documents. If you have your notebooks under version control (which you should 😉), you’ll notice that the diffs between versions look quite bloated. But do not despair! Tools like <a href="https://jupytext.readthedocs.io/en/latest/">Jupytext</a> can convert notebooks into plain text without loss of functionality.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you want to execute the same notebook with multiple different parameter settings (e.g., create the same plots for different models), have a look at <a href="https://papermill.readthedocs.io/en/latest/">papermill</a>.</p>
+</div>
+</div>
+</section>
+</section>
 <section id="programming-languages" class="level2">
-<h2 class="anchored" data-anchor-id="programming-languages">Programming languages</h2>
-<p>choose the one that is most common in your field - you’ll find more relevant resources and libraries that will come in handy and it’s easier to collaborate with co-workers.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Before you continue">
+<h2 class="anchored" data-anchor-id="programming-languages">Programming Languages</h2>
+<p>Different programming languages suit different needs. Here’s a quick overview of some popular ones used in science and engineering:</p>
+<ul>
+<li><strong>R</strong>: Commonly used for statistics, with rich functionality to create data visualizations, fit statistical models (like different types of regression), and conduct advanced statistical tests (like ANOVA). The poplar Shiny framework also makes it possible to create interactive dashboards that run as web applications.</li>
+<li><strong>MATLAB</strong>: Once dominant in engineering, used for simulations. But due to its high licensing costs, MATLAB is being replaced more and more by Python and Julia.</li>
+<li><strong>Julia</strong>: Gaining traction in scientific computing for its speed and modern syntax.</li>
+<li><strong>Python</strong>: A versatile language with strong support for data science, AI, web development, and more. Its active open source community has created many popular libraries for scientific computing (numpy, scipy), machine learning (scikit-learn, TensorFlow, PyTorch), and web development (FastAPI, streamlit).</li>
+</ul>
+<p>Due to its broad applicability and popularity in industry, Python is used for the examples in this book. However, you should <strong>choose the programming language that is most popular in your field</strong> as this will make it easier for you to find relevant resources (e.g., tailored libraries) and collaborate with colleagues.</p>
+<p>There are plenty of great books and other resources available to teach you programming fundamentals, which is why this book focuses on higher level concepts. Going forward we’ll assume that you’re familiar with the basic syntax and functionality of your programming language of choice (incl.&nbsp;key scientific libraries). For example, to learn Python essentials, you can work through <a href="https://github.com/cod3licious/python_tutorial">this tutorial</a>.</p>
+</section>
+<section id="reproducible-setups" class="level2">
+<h2 class="anchored" data-anchor-id="reproducible-setups">Reproducible Setups</h2>
+<p>“It works on my machine” isn’t good enough for science. Reproducibility means your results can be replicated by others (and by you a few months later when the reviewers of your paper request changes to your experiments). The first step to achieve this is to <strong>manage your dependencies</strong> (i.e., external libraries used by your code) to ensure the environment in which your code is executed is identical for everyone that runs your code, every time. This can be done using <strong>virtual environments</strong>, or, if you want to go even further, <strong>containers</strong> like Docker, which will be discussed in <a href="06_production.html" class="quarto-xref"><span>Chapter 6</span></a>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Virtual Environments in Python with `poetry`">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Virtual Environments in Python with <code>poetry</code>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Virtual environments isolate your project’s dependencies, thereby ensuring consistency. For Python, a common tool to do this is <a href="https://python-poetry.org/"><code>poetry</code></a>. It tracks the libraries and their versions in a <code>pyproject.toml</code> like this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[tool.poetry]</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">name</span> <span class="op">=</span> <span class="st">"example-project"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">version</span> <span class="op">=</span> <span class="st">"0.1.0"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="dt">description</span> <span class="op">=</span> <span class="st">"A sample Python project"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="dt">authors</span> <span class="op">=</span> <span class="op">[</span><span class="st">"Your Name &lt;youremail@example.com&gt;"</span><span class="op">]</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">[tool.poetry.dependencies]</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="dt">python</span> <span class="op">=</span> <span class="st">"^3.9"</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="dt">requests</span> <span class="op">=</span> <span class="st">"^2.26.0"</span>  <span class="co"># external libraries incl. versions</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="kw">[build-system]</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="dt">requires</span> <span class="op">=</span> <span class="op">[</span><span class="st">"poetry-core"</span><span class="op">]</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="dt">build-backend</span> <span class="op">=</span> <span class="st">"poetry.core.masonry.api"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Basic commands:</p>
+<ul>
+<li><code>poetry new example-project</code>: Create a new project (folder incl.&nbsp;<code>pyproject.toml</code> file).</li>
+<li><code>poetry add [package]</code>: Add a dependency (can also be done directly in the file).</li>
+<li><code>poetry install</code>: Install all dependencies.</li>
+<li><code>poetry shell</code>: Activate the virtual environment.</li>
+</ul>
+</div>
+</div>
+</div>
+<section id="handling-randomness" class="level4">
+<h4 class="anchored" data-anchor-id="handling-randomness">Handling Randomness</h4>
+<p>Your program will often depend on randomly sampled values, for example, when defining the initial conditions for a simulation or initializing a model before it is fitted to data (like a neural network). To ensure that your experiments can be reproduced, it is important that you always <strong>set a random seed</strong> at the beginning of your program so the random number generator starts from a consistent state.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Setting Random Seeds in Python">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Setting Random Seeds in Python
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>At the beginning of your script, set a random seed (depending on the library that you’re using this can vary):</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>random.seed(<span class="dv">42</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<p>To get a better idea of how much your results depend on the random initialization and therefore how robust they are, it is always advisable to <strong>run your code with multiple random seeds and compare the results</strong> (e.g., compute the mean and standard deviation of the outcomes of different runs like in <a href="02_data.html#fig-data-what-results" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>).</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Depending on the programming language that you’re using, if you run a script without executing any other code before, the random number generator may or may not always start in the same state. This means, if you don’t set a random seed and, for example, run your script ten times from scratch, you may always receive the same result even though the results would differ if the code was run under different conditions. To avoid surprises, you should always explicitly set the random seed to have more control over the results.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If your code is run on very different hardware, e.g., a CPU vs.&nbsp;a GPU (graphics card, used to train neural network models, for example), despite setting a random seed, your results might still differ slightly. This is due to how the different architectures internally represent float values, i.e., with what precision the numbers are stored in memory.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="clean-and-consistent-code" class="level2">
+<h2 class="anchored" data-anchor-id="clean-and-consistent-code">Clean and Consistent Code</h2>
+<p>Especially when working together with others, it can be helpful to <strong>follow to a style guide to produce clean and consistent code</strong>. Google published their <a href="https://google.github.io/styleguide/">style guides for multiple programming languages</a>, which is a great resource and adhering to these rules will also help you to avoid common sources of bugs.</p>
+<section id="formatters-linters" class="level4">
+<h4 class="anchored" data-anchor-id="formatters-linters">Formatters &amp; Linters</h4>
+<p>Since programmers are often rather lazy, they developed tools that automatically fix your code to implement these rules where possible:</p>
+<ul>
+<li><strong>Formatters</strong> rewrite code to follow a consistent style (e.g., add whitespace after commas).</li>
+<li><strong>Linters</strong> analyze code for errors, inefficiencies, and deviations from best practices.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled" title="Formatter &amp; Linter in Python: `ruff`">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Formatter &amp; Linter in Python: <code>ruff</code>
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><a href="https://docs.astral.sh/ruff/"><code>ruff</code></a> is an extremely fast formatter and linter for Python, written in Rust. You can install it via <code>pip</code> and configure it in the same <code>pyproject.toml</code> file that we also used for <code>poetry</code>. Then run it over you code like this:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ruff</span> check        <span class="co"># see which errors the linter finds</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">ruff</span> check <span class="at">--fix</span>  <span class="co"># automatically fix errors where possible</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">ruff</span> format       <span class="co"># automatically format the code</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You’ll probably want to add exceptions for some of the errors that the linter checks for in your <code>pyproject.toml</code> file as <code>ruff</code> is quite strict. 😉</p>
+</div>
+</div>
+</div>
+<p>It is important to have the configuration for your formatter and linter under version control as well, so that all collaborators use the same settings and you avoid unnecessary changes (and bloated diffs in merge requests) when different people format the code.</p>
+</section>
+<section id="pre-commit-hooks" class="level4">
+<h4 class="anchored" data-anchor-id="pre-commit-hooks">Pre-commit Hooks</h4>
+<p>In the heat of the moment, you might forget to run the formatter and linter over your code before committing your changes. To avoid accidentally checking messy code into your repository, you can configure so-called “pre-commit hooks”. <a href="https://pre-commit.com/">Pre-commit hooks</a> catch issues automatically by enforcing coding standards before committing or pushing code with git.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Setting up pre-commit hooks">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Setting up pre-commit hooks
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>First, you need to install pre-commit hooks through Python’s package manger <code>pip</code>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pre-commit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then configure it in a file named <code>.pre-commit-config.yaml</code> (here done for <code>ruff</code>):</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">repos</span><span class="kw">:</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">repo</span><span class="kw">:</span><span class="at"> https://github.com/pre-commit/pre-commit-hooks</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">rev</span><span class="kw">:</span><span class="at"> v2.3.0</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">hooks</span><span class="kw">:</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> check-yaml</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> end-of-file-fixer</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> trailing-whitespace</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">repo</span><span class="kw">:</span><span class="at"> https://github.com/astral-sh/ruff-pre-commit</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">  # Ruff version.</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">rev</span><span class="kw">:</span><span class="at"> v0.8.3</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">hooks</span><span class="kw">:</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">    # Run the linter.</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> ruff</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">args</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> --fix </span><span class="kw">]</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">    # Run the formatter.</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> ruff-format</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then install the git hook scripts from the config file:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pre-commit</span> install</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now the configured hooks will be run on all changed files when you try to commit them and you can only proceed if all checks pass.</p>
+</div>
+</div>
+</div>
+<p>To catch any style inconsistencies after the code was pushed to your remote repository (e.g., in case one of your collaborators has not installed the pre-commit hooks), you can also add these checks to your CI/CD pipeline (see <a href="06_production.html" class="quarto-xref"><span>Chapter 6</span></a>).</p>
+</section>
+</section>
+<section id="putting-it-all-together" class="level2">
+<h2 class="anchored" data-anchor-id="putting-it-all-together">Putting It All Together</h2>
+<p>When you set up all these tools, your repository should now look something like this (see <a href="https://www.pyopensci.org/python-package-guide/package-structure-code/python-package-structure.html">here</a> for more details; setup for programming languages other than Python will differ slightly):</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">project-name/</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> .gitignore              <span class="co"># Exclude unnecessary files from version control</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> README.md               <span class="co"># Describe the project purpose and usage</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> pre-commit-config.yaml  <span class="co"># Pre-commit hook setup</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> pyproject.toml          <span class="co"># Python dependencies and configs</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> data/                   <span class="co"># Store (small) datasets</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> notebooks/              <span class="co"># For exploratory analysis</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> src/                    <span class="co"># Core source code</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> tests/                  <span class="co"># Unit tests</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>A clean project structure makes it easier to maintain your code.</p>
+<div class="callout callout-style-default callout-caution callout-titled" title="Before you continue">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -213,6 +550,7 @@ Before you continue
 <p>At this point, you should have a clear understanding of:</p>
 <ul>
 <li>How to set up your development environment to code efficiently.</li>
+<li>How to host your version-controlled repository on a platform like GitHub or GitLab, complete with pre-commit hooks to ensure well-formatted code.</li>
 <li>The fundamental syntax of your programming language of choice (incl.&nbsp;key scientific libraries) to get started.</li>
 </ul>
 </div>
@@ -225,10 +563,12 @@ Before you continue
 <script type="text/javascript"> // go once over all images and transform the percentage width into pixels relative to original body size
   const bodyWidth = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--custom-body-width')); // Get CSS variable
   document.querySelectorAll('.quarto-figure img').forEach((img) => {
-    const styleWidth = img.getAttribute('style').match(/width:\s*([\d.]+)%/); // Extract percentage
-    if (styleWidth) {
-      const percentage = parseFloat(styleWidth[1]) / 100;
-      img.style.width = `${bodyWidth * percentage}px`; // Apply calculated width
+    if (img.getAttribute('style')) {
+      const styleWidth = img.getAttribute('style').match(/width:\s*([\d.]+)%/); // Extract percentage
+      if (styleWidth) {
+        const percentage = parseFloat(styleWidth[1]) / 100;
+        img.style.width = `${bodyWidth * percentage}px`; // Apply calculated width
+      }
     }
   });
 </script>

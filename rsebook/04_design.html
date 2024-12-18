@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -70,6 +90,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="style.css">
 </head>
@@ -164,8 +213,14 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#avoid-complexity" id="toc-avoid-complexity" class="nav-link active" data-scroll-target="#avoid-complexity">Avoid Complexity</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -189,17 +244,51 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>Now that your code repository is set up, are you itching to start programming? Hold on for a moment!</p>
+<p>One of the most <strong>common missteps</strong> I’ve seen junior developers take is <strong>jumping straight into coding without first thinking through what they actually want to build</strong>. Imagine trying to construct a house by just laying bricks without consulting an architect first—halfway through you’d probably realize the walls don’t align, and you forgot the plumbing for the kitchen. You’d have to tear it down and start over! To avoid this fate for your software, it’s essential to make a plan and design the final outcome first. It doesn’t have to be perfect—a quick sketch on paper will do. And you’ll likely need to adapt as you go (which is fine since we’ll design with flexibility in mind!). But the more thought you put into planning, the smoother and faster execution will be.</p>
+<p>To make sure your designs will be worthy of implementation, this chapter also covers key paradigms and best practices that will help you create <strong>clean, maintainable code that’s easy to extend and reuse</strong> in future projects.</p>
+<section id="avoid-complexity" class="level2">
+<h2 class="anchored" data-anchor-id="avoid-complexity">Avoid Complexity</h2>
+<p>A common acronym in software engineering is <strong>KISS</strong> - “keep it simple, stupid!”. While this is well-intentioned advice, it can only apply to individual parts of your code, as a full-fledged software is a system that consists of multiple components that interact with each other. Here, the best you can hope for is <em>complicated</em>, i.e., to avoid complexity (<a href="#fig-complexity" class="quarto-xref">Figure&nbsp;<span>4.1</span></a>).</p>
+<div id="fig-complexity" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-complexity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/04_design/complexity.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-complexity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.1: (Software) Systems can be of different complexity. A script or function that linearly executes a set of steps could be considered simple. But most software programs are (at least) complicated: they consist of multiple components that interact with each other. However, these can still be broken down into manageable subsystems, which makes it possible to understand the system as a whole. A complex system, in computer science referred to as “spaghetti code” or a “big ball of mud” <span class="citation" data-cites="foote1997big">[<a href="references.html#ref-foote1997big" role="doc-biblioref">1</a>]</span>, contains many individual elements and interactions between them – when you change something on one end it is unclear how this will affect the other pieces as it is difficult to understand how all the elements come together.
+</figcaption>
+</figure>
+</div>
+<div id="fig-abstraction-levels" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-abstraction-levels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/04_design/abstraction_levels.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-abstraction-levels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.2: Complicated systems in software design can usually be represented as hierarchies that show different levels of abstraction, e.g., in this case for plotting the results of a predictive model, i.e., creating a scatter plot that shows the true vs.&nbsp;predicted values together with the <span class="math inline">\(R^2\)</span> value that indicates the overall performance of the model.
+</figcaption>
+</figure>
+</div>
 
 
+<div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-foote1997big" class="csl-entry" role="listitem">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">Foote B, Yoder J (1997) Big ball of mud. <em>Pattern languages of program design</em> 4: 654–692.</div>
+</div>
+</div>
+</section>
 
 </main> <!-- /main -->
 <script type="text/javascript"> // go once over all images and transform the percentage width into pixels relative to original body size
   const bodyWidth = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--custom-body-width')); // Get CSS variable
   document.querySelectorAll('.quarto-figure img').forEach((img) => {
-    const styleWidth = img.getAttribute('style').match(/width:\s*([\d.]+)%/); // Extract percentage
-    if (styleWidth) {
-      const percentage = parseFloat(styleWidth[1]) / 100;
-      img.style.width = `${bodyWidth * percentage}px`; // Apply calculated width
+    if (img.getAttribute('style')) {
+      const styleWidth = img.getAttribute('style').match(/width:\s*([\d.]+)%/); // Extract percentage
+      if (styleWidth) {
+        const percentage = parseFloat(styleWidth[1]) / 100;
+        img.style.width = `${bodyWidth * percentage}px`; // Apply calculated width
+      }
     }
   });
 </script>

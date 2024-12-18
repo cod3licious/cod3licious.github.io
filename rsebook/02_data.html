@@ -300,7 +300,7 @@ window.Quarto = {
 <div id="fig-data-types" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-data-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../images/02_data/data_types2.png" class="img-fluid figure-img" style="width:80.0%">
+<img src="../images/02_data/data_types2.png" class="img-fluid figure-img" style="width:65.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2.1: Structured and unstructured data.
@@ -364,7 +364,7 @@ Data types in Python
 <li><strong>Continuous (numerical) variables</strong> represent measurable values (e.g., temperature, height). These are usually stored as floats or integers.</li>
 <li><strong>Discrete (categorical) variables</strong> represent distinct options or groups (e.g., nationality, product type). These are often stored as strings, booleans, or sometimes integers.</li>
 </ol>
-<div class="callout callout-style-default callout-caution callout-titled" title="Misleading data types">
+<div class="callout callout-style-default callout-warning callout-titled" title="Misleading data types">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -374,7 +374,7 @@ Misleading data types
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Be cautious: a variable that looks numerical (e.g., <code>1</code>, <code>2</code>, <code>3</code>) may actually represent categories. For example, a <code>material_type</code> column with values <code>1</code>, <code>2</code>, and <code>3</code> might correspond to aluminum, copper, and steel, respectively. In this case, the numbers are IDs, not quantities.</p>
+<p>Be cautious: a variable that looks numerical (e.g., <code>1</code>, <code>2</code>, <code>3</code>) may actually represent categories. For example, a <code>material_type</code> column with values <code>1</code>, <code>2</code>, and <code>3</code> might correspond to <em>aluminum</em>, <em>copper</em>, and <em>steel</em>, respectively. In this case, the numbers are IDs, not quantities.</p>
 </div>
 </div>
 <p>Recognizing whether a variable is continuous or discrete is crucial for creating meaningful visualizations and using appropriate statistical models.</p>
@@ -546,7 +546,8 @@ Warning
 </section>
 <section id="draw-your-what" class="level2">
 <h2 class="anchored" data-anchor-id="draw-your-what">Draw your What</h2>
-<p>You might not have looked at your data yet—or maybe you haven’t even collected it—but it’s important to start programming with the end in mind. Think about how, in software development, a UX designer typically creates mockups of a user interface (like the screens of a mobile app) before developers begin coding. Similarly, in our case, we want to start with a clear picture of what the output of our program should look like. The difference is that, instead of users interacting with the software themselves, they’ll only see the plots or tables that your program generated, maybe in a journal article.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>You may not have looked at your data yet—or maybe you haven’t even collected it—but it’s important to start with the end in mind.</p>
+<p>In software development, a UX designer typically creates mockups of a user interface (like the screens of a mobile app) before developers begin coding. Similarly, in our case, we want to start with a clear picture of what the output of our program should look like. The difference is that, instead of users interacting with the software themselves, they’ll only see the plots or tables that your program generated, maybe in a journal article.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <p>Based on your takeaways from the previous chapter—about the problem you’re solving and the metrics you should use to evaluate your solution—try sketching what your final results might look like. Ask yourself: <em>What figures or tables would best communicate the advantages of my approach?</em></p>
 <p>Depending on your research goals, your results might be as simple as a single number, such as a p-value or the total number of people surveyed. However, if you’re reading this, you’re likely tackling something that requires a more complex analysis. For example, you might compare your solution’s overall performance to several baseline approaches or illustrate how your solution converges over time (<a href="#fig-data-what-results" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>).</p>
 <div id="fig-data-what-results" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -555,7 +556,7 @@ Warning
 <img src="../images/02_data/draw_what_results.png" class="img-fluid figure-img" style="width:80.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-what-results-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.2: Exemplary envisioned results: The plots show the outcome of a multi-agent simulation, where ‘my approach’ clearly outperforms two baseline methods. In this simulation, a group of agents is tasked with locating a food source and transporting the food back to their home base piece by piece. The ideal algorithm identifies the shortest path to the food source quickly to maximize food collection. Each algorithmic approach was tested 10 times using different random seeds to evaluate reliability. The plots display the mean and standard deviations across these runs. <em>Left:</em> How quickly each algorithm converges to the shortest path (resulting in the highest number of agents delivering food back to the home base per step). <em>Right:</em> Cumulative food collected by the end of the simulation.
+Figure&nbsp;2.2: Exemplary envisioned results: The plots show the outcome of a multi-agent simulation, where ‘my approach’ clearly outperforms two baseline methods. In this simulation, a group of agents is tasked with locating a food source and transporting the food back to their home base piece by piece. The ideal algorithm identifies the shortest path to the food source quickly to maximize food collection. Each algorithmic approach is tested 10 times using different random seeds to evaluate reliability. The plots display the mean and standard deviations across these runs. <em>Left:</em> How quickly each algorithm converges to the shortest path (resulting in the highest number of agents delivering food back to the home base per step). <em>Right:</em> Cumulative food collected by the end of the simulation.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>
 </figcaption>
 </figure>
 </div>
@@ -572,12 +573,12 @@ Figure&nbsp;2.2: Exemplary envisioned results: The plots show the outcome of a m
 <img src="../images/02_data/draw_what_data.png" class="img-fluid figure-img" style="width:65.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-what-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.3: Work backwards from the desired results to determine what data is necessary to create them.
+Figure&nbsp;2.3: Work backward from the desired results to determine what data is necessary to create them.
 </figcaption>
 </figure>
 </div>
 <p>By working backward from your desired results to the required data, you can design your code and analysis pipeline to ensure your program delivers exactly what you need.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Before you continue">
+<div class="callout callout-style-default callout-caution callout-titled" title="Before you continue">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -606,6 +607,7 @@ Before you continue
 <hr>
 <ol>
 <li id="fn1"><p>A former master’s student that I mentored humorously called this approach “plot-driven development,” a nod to test-driven development (TDD) in software engineering, where you write a test for your function first and then implement the function to pass the test. You could even use these sketches of your results as placeholders if you’re already drafting a paper or presentation.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>These plots and the next were generated with Python using matplotlib’s <code>plt.xkcd()</code> setting and the <a href="https://github.com/ipython/xkcd-font">xkcd script font</a>. A pen and paper sketch will be sufficient for your case.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
@@ -613,10 +615,12 @@ Before you continue
 <script type="text/javascript"> // go once over all images and transform the percentage width into pixels relative to original body size
   const bodyWidth = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--custom-body-width')); // Get CSS variable
   document.querySelectorAll('.quarto-figure img').forEach((img) => {
-    const styleWidth = img.getAttribute('style').match(/width:\s*([\d.]+)%/); // Extract percentage
-    if (styleWidth) {
-      const percentage = parseFloat(styleWidth[1]) / 100;
-      img.style.width = `${bodyWidth * percentage}px`; // Apply calculated width
+    if (img.getAttribute('style')) {
+      const styleWidth = img.getAttribute('style').match(/width:\s*([\d.]+)%/); // Extract percentage
+      if (styleWidth) {
+        const percentage = parseFloat(styleWidth[1]) / 100;
+        img.style.width = `${bodyWidth * percentage}px`; // Apply calculated width
+      }
     }
   });
 </script>

@@ -612,10 +612,12 @@ It is generally a good idea to first start with a large range of values and then
 <script type="text/javascript"> // go once over all images and transform the percentage width into pixels relative to original body size
   const bodyWidth = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--custom-body-width')); // Get CSS variable
   document.querySelectorAll('.quarto-figure img').forEach((img) => {
-    const styleWidth = img.getAttribute('style').match(/width:\s*([\d.]+)%/); // Extract percentage
-    if (styleWidth) {
-      const percentage = parseFloat(styleWidth[1]) / 100;
-      img.style.width = `${bodyWidth * percentage}px`; // Apply calculated width
+    if (img.getAttribute('style')) {
+      const styleWidth = img.getAttribute('style').match(/width:\s*([\d.]+)%/); // Extract percentage
+      if (styleWidth) {
+        const percentage = parseFloat(styleWidth[1]) / 100;
+        img.style.width = `${bodyWidth * percentage}px`; // Apply calculated width
+      }
     }
   });
 </script>

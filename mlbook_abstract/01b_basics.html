@@ -373,25 +373,6 @@ Caution
 </div>
 </div>
 </section>
-<section id="steps-to-identify-a-potential-ml-project" class="level4">
-<h4 class="anchored" data-anchor-id="steps-to-identify-a-potential-ml-project">Steps to identify a potential ML project</h4>
-<ol type="1">
-<li><p>Create a process map: which steps are executed in the business process (flow of materials &amp; information) and what data is collected where. For example, in a production process where some of the produced parts are defective:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../images/01b_intro_ml/automate_insights7a.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
-</figure>
-</div></li>
-<li><p>Identify parts of the process that could either be automated with ML (e.g., straightforward, repetitive tasks otherwise done by humans) or in other ways improved by analyzing data (e.g., to understand root causes of a problem, to improve planning with what-if simulations, or to optimize the use of resources):</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../images/01b_intro_ml/automate_insights7b.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<figcaption>The first idea is to automate the quality check that was so far done by a human: since the human can easily recognize the defects in the pictures taken of the products, an ML model should be able to do this, too. The next idea is to try to predict in advance whether a product will be faulty or not based on the composition of raw materials and the proposed process conditions: success here is unclear, since the human experts are not sure whether all of the information necessary to determine if the product will be fine is contained in this data – but nevertheless it’s worth a try since this could save lots of resources. While the final ML model that solves the input-output problem can be deployed as software in the ongoing process, when a data scientist analyzes the results and interprets the model, she can additionally generate insights that can be translated into action recommendations.</figcaption>
-</figure>
-</div></li>
-<li><p>Prioritize: which project will have a high impact, but at the same time also a good chance of success, i.e., should yield a high return on investment (ROI)? For example, using ML to automate a simple task is a comparatively low risk investment, but might cause some assembly-line workers to loose their jobs. In contrast, identifying the root causes of why a production process results in 10% scrap could save millions, but it is not clear from the start that such an analysis will yield useful results, since the collected data on the process conditions might not contain all the needed information.</p></li>
-</ol>
-</section>
 </section>
 <section id="sec-how-machines-learn" class="level2">
 <h2 class="anchored" data-anchor-id="sec-how-machines-learn">How do machines “learn”?</h2>
@@ -1006,6 +987,25 @@ Caution
 <section id="identify-a-suitable-problem" class="level3">
 <h3 class="anchored" data-anchor-id="identify-a-suitable-problem">1. Identify a suitable problem</h3>
 <p>The first (and arguably most important) step is to <strong>identify where machine learning can (and should) be used</strong> in the first place.</p>
+<section id="steps-to-identify-a-potential-ml-project" class="level4">
+<h4 class="anchored" data-anchor-id="steps-to-identify-a-potential-ml-project">Steps to identify a potential ML project</h4>
+<ol type="1">
+<li><p>Create a process map: which steps are executed in the business process (flow of materials &amp; information) and what data is collected where. For example, in a production process where some of the produced parts are defective:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_intro_ml/automate_insights7a.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
+</figure>
+</div></li>
+<li><p>Identify parts of the process that could either be automated with ML (e.g., straightforward, repetitive tasks otherwise done by humans) or in other ways improved by analyzing data (e.g., to understand root causes of a problem, to improve planning with what-if simulations, or to optimize the use of resources):</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_intro_ml/automate_insights7b.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>The first idea is to automate the quality check that was so far done by a human: since the human can easily recognize the defects in the pictures taken of the products, an ML model should be able to do this, too. The next idea is to try to predict in advance whether a product will be faulty or not based on the composition of raw materials and the proposed process conditions: success here is unclear, since the human experts are not sure whether all of the information necessary to determine if the product will be fine is contained in this data – but nevertheless it’s worth a try since this could save lots of resources. While the final ML model that solves the input-output problem can be deployed as software in the ongoing process, when a data scientist analyzes the results and interprets the model, she can additionally generate insights that can be translated into action recommendations.</figcaption>
+</figure>
+</div></li>
+<li><p>Prioritize: which project will have a high impact, but at the same time also a good chance of success, i.e., should yield a high return on investment (ROI)? For example, using ML to automate a simple task is a comparatively low risk investment, but might cause some assembly-line workers to loose their jobs. In contrast, identifying the root causes of why a production process results in 10% scrap could save millions, but it is not clear from the start that such an analysis will yield useful results, since the collected data on the process conditions might not contain all the needed information.</p></li>
+</ol>
+</section>
 <section id="ml-project-checklist" class="level4 custom-gray-block">
 <h4 class="anchored" data-anchor-id="ml-project-checklist">ML project checklist</h4>
 <p><strong><em>Motivation</em></strong></p>
@@ -1183,10 +1183,12 @@ For example, extracting the relevant information from scanned invoices to automa
 <script type="text/javascript"> // go once over all images and transform the percentage width into pixels relative to original body size
   const bodyWidth = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--custom-body-width')); // Get CSS variable
   document.querySelectorAll('.quarto-figure img').forEach((img) => {
-    const styleWidth = img.getAttribute('style').match(/width:\s*([\d.]+)%/); // Extract percentage
-    if (styleWidth) {
-      const percentage = parseFloat(styleWidth[1]) / 100;
-      img.style.width = `${bodyWidth * percentage}px`; // Apply calculated width
+    if (img.getAttribute('style')) {
+      const styleWidth = img.getAttribute('style').match(/width:\s*([\d.]+)%/); // Extract percentage
+      if (styleWidth) {
+        const percentage = parseFloat(styleWidth[1]) / 100;
+        img.style.width = `${bodyWidth * percentage}px`; // Apply calculated width
+      }
     }
   });
 </script>

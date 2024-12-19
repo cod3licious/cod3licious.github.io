@@ -321,7 +321,7 @@ ul.task-list li input[type="checkbox"] {
 <figcaption>Data Source: https://www.webofknowledge.com/</figcaption>
 </figure>
 </div>
-<p>Interestingly, this is not due to an abundance of groundbreaking theoretical accomplishments in the last few years (indicated as purple diamonds in the plot), but rather many of the algorithms used today were actually developed as far back as the late 50s / early 60s. For example, the perceptron is a precursor of neural networks, which are behind all the examples shown in the last section. Indeed, the most important neural network architectures, recurrent neural networks (RNN) and convolutional neural networks (CNN), which provide the foundation for state-of-the-art language and image processing respectively, were developed in the early 80s and 90s. But back then we lacked the computational resources to use them on anything more than small toy datasets.</p>
+<p>Interestingly, this is not due to an abundance of groundbreaking theoretical accomplishments in the last few years (indicated as purple diamonds in the plot), but rather many of the algorithms used today were actually developed as far back as the late 50s / early 60s. For example, the perceptron is a precursor of neural networks, which are behind all the examples shown in the last section. Indeed, some of the most important neural network architectures, recurrent neural networks (RNN) and convolutional neural networks (CNN), which provide the foundation for state-of-the-art language and image processing respectively, were developed in the early 80s and 90s. But back then we lacked the computational resources to use them on anything more than small toy datasets.</p>
 <p>This is why the rise in ML publications correlates more closely with the number of transistors on CPUs (i.e., the regular processors in normal computers) and GPUs (graphics cards, which parallelize the kinds of computations needed to train neural network models efficiently):</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -369,10 +369,12 @@ If you’re interested to learn more about the faults of current AI systems, the
 <script type="text/javascript"> // go once over all images and transform the percentage width into pixels relative to original body size
   const bodyWidth = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--custom-body-width')); // Get CSS variable
   document.querySelectorAll('.quarto-figure img').forEach((img) => {
-    const styleWidth = img.getAttribute('style').match(/width:\s*([\d.]+)%/); // Extract percentage
-    if (styleWidth) {
-      const percentage = parseFloat(styleWidth[1]) / 100;
-      img.style.width = `${bodyWidth * percentage}px`; // Apply calculated width
+    if (img.getAttribute('style')) {
+      const styleWidth = img.getAttribute('style').match(/width:\s*([\d.]+)%/); // Extract percentage
+      if (styleWidth) {
+        const percentage = parseFloat(styleWidth[1]) / 100;
+        img.style.width = `${bodyWidth * percentage}px`; // Apply calculated width
+      }
     }
   });
 </script>

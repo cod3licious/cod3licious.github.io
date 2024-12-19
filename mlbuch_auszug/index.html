@@ -208,12 +208,13 @@ ul.task-list li input[type="checkbox"] {
 <li>Was sind häufige Fallstricke in der Praxis und wie vermeidet man diese?</li>
 </ul>
 <p>Dieses Buch erklärt <strong>nicht</strong> die neuesten ausgefallenen neuronalen Netzwerkmodelle, die bei einer bestimmten Aufgabe eine state-of-the-art Performance erreichen. Es soll vielmehr ein grundlegendes Verständnis für die Ideen hinter den verschiedenen ML Algorithmen vermitteln, um ein solides Fundament zu schaffen und somit einen Rahmen vorzugeben, in den weiteres Wissen integriert werden kann.</p>
-<p>Dieses Buch und die dazugehörigen Kurse gibt es in zwei Versionen:</p>
+<p>Dieses Buch gibt es in zwei Versionen:</p>
 <ul>
-<li>die ausführliche Version, die sich an (zukünftige) Data Scientists richtet (auf Englisch): [<a href="https://franziskahorn.de/mlbook/">Buch</a>] [<a href="https://franziskahorn.de/mlws_scientist.html">Kurs</a>]</li>
-<li>die vorliegende, komprimierte Version, die sich an ein allgemeineres Publikum richtet: [<a href="https://franziskahorn.de/mlbuch_auszug/">Buch</a>] [<a href="https://franziskahorn.de/mlws_strategist_de.html">Kurs</a>] (auch auf Englisch: [<a href="https://franziskahorn.de/mlbook_abstract/">Buch</a>] [<a href="https://franziskahorn.de/mlws_strategist.html">Kurs</a>])</li>
+<li>Die <a href="https://franziskahorn.de/mlbook/">ausführliche Version</a>, die sich an (zukünftige) Data Scientists richtet (auf Englisch).</li>
+<li>Die vorliegende, <a href="https://franziskahorn.de/mlbuch_auszug/">komprimierte Version</a>, die sich an ein allgemeineres Publikum richtet (gibts auch auf <a href="https://franziskahorn.de/mlbook_abstract/">Englisch</a>).</li>
 </ul>
 <p>Diese Kurzfassung richtet sich an interessierte Leser, die verstehen wollen, was hinter dem Hype steckt und wo ML eingesetzt werden kann – oder besser nicht eingesetzt werden sollte. Die Vollversion ist hauptsächlich für ML-Anwender geschrieben und setzt voraus, dass der Leser mit elementaren Konzepten der linearen Algebra vertraut ist (siehe auch: <a href="https://franziskahorn.de/mlws_resources/math_basics.pdf">Übersicht zur mathematischen Notation</a>).</p>
+<p>Wenn du die Inhalte des Buchs lieber etwas strukturierter in der Gruppe durcharbeiten möchtest, kannst du dich auch für einen meiner <a href="https://franziskahorn.de/resources.html">Online-Kurse</a> anmelden. Dort hast du zusätzlich die Möglichkeit, Fragen zu diskutieren.</p>
 <p><strong><em>Dieses Manuskript ist noch in Arbeit!</em></strong> Ich freue mich sehr über Verbesserungsvorschläge per Email oder <a href="https://forms.gle/Ccv5h5zQxwPjWtCS7">Feedback-Formular</a>!</p>
 <p>Tipp: Mit einem Klick auf das PDF-Icon oben links neben dem Titel kannst du das Buch auch als PDF herunterladen.</p>
 <!-- Wenn du Fragen hast oder deine Lösungen zu den Übungen diskutieren möchtest (oder etwas anderes im Zusammenhang mit Data Science), vereinbare gerne einen [individuellen Coaching Termin](https://franziskahorn.de/consulting.html) mit mir! -->
@@ -246,10 +247,12 @@ ul.task-list li input[type="checkbox"] {
 <script type="text/javascript"> // go once over all images and transform the percentage width into pixels relative to original body size
   const bodyWidth = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--custom-body-width')); // Get CSS variable
   document.querySelectorAll('.quarto-figure img').forEach((img) => {
-    const styleWidth = img.getAttribute('style').match(/width:\s*([\d.]+)%/); // Extract percentage
-    if (styleWidth) {
-      const percentage = parseFloat(styleWidth[1]) / 100;
-      img.style.width = `${bodyWidth * percentage}px`; // Apply calculated width
+    if (img.getAttribute('style')) {
+      const styleWidth = img.getAttribute('style').match(/width:\s*([\d.]+)%/); // Extract percentage
+      if (styleWidth) {
+        const percentage = parseFloat(styleWidth[1]) / 100;
+        img.style.width = `${bodyWidth * percentage}px`; // Apply calculated width
+      }
     }
   });
 </script>

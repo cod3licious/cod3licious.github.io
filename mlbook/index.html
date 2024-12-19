@@ -229,12 +229,13 @@ ul.task-list li input[type="checkbox"] {
 <li>How do you actually get this to work in practice and avoid common pitfalls?</li>
 </ul>
 <p>This book does <strong>not</strong> explain the latest fancy neural network model that achieves state-of-the-art performance on some specific task. Instead it provides a general intuition for the ideas behind different machine learning algorithms to establish a solid framework that helps you better understand and integrate into a bigger picture what you later read about these specific approaches.</p>
-<p>This book and the associated courses exist in two versions:</p>
+<p>This book exist in two versions:</p>
 <ul>
-<li>the full version, targeted at (about to be) data scientists: [<a href="https://franziskahorn.de/mlbook/">book</a>] [<a href="https://franziskahorn.de/mlws_scientist.html">course</a>]</li>
-<li>the condensed version, targeted at a more general audience: [<a href="https://franziskahorn.de/mlbook_abstract/">book</a>] [<a href="https://franziskahorn.de/mlws_strategist.html">course</a>] (also available in German: [<a href="https://franziskahorn.de/mlbuch_auszug/">book</a>] [<a href="https://franziskahorn.de/mlws_strategist_de.html">course</a>])</li>
+<li>The <a href="https://franziskahorn.de/mlbook/">full version</a>, targeted at (about to be) data scientists.</li>
+<li>The <a href="https://franziskahorn.de/mlbook_abstract/">condensed version</a>, targeted at a more general audience (also available in <a href="https://franziskahorn.de/mlbuch_auszug/">German</a>).</li>
 </ul>
 <p>The condensed version is written for all audiences, i.e., readers generally interested in ML, who want to understand what is behind the hype and where ML can – or should not – be used. The full version is mainly written for ML practitioners and assumes the reader is familiar with elementary concepts of linear algebra (see also this <a href="https://franziskahorn.de/mlws_resources/math_basics.pdf">overview on the mathematical notation</a> used in the book).</p>
+<p>If you prefer to work through the book’s content in a more structured way as part of a group, you can also enroll in one of my <a href="https://franziskahorn.de/resources.html">online courses</a>. There, you’ll also have the opportunity to discuss questions.</p>
 <p>While the book focuses on the general principles behind the different models, there are also references included to specific Python libraries (mostly scikit-learn) where the respective algorithms are implemented and tips for how to use them. To get an even deeper understanding of how to apply the different algorithms, I recommend that you try to solve some <a href="https://github.com/cod3licious/ml_exercises">exercises</a> covering different ML use cases.</p>
 <p><strong><em>This is still a draft version!</em></strong> Please write me an email or <a href="https://forms.gle/Ccv5h5zQxwPjWtCS7">fill out the feedback survey</a>, if you have any suggestions for how this book could be improved!</p>
 <p>Tip: You can also download the book as a PDF by clicking on the PDF icon next to the title in the upper left corner.</p>
@@ -268,10 +269,12 @@ ul.task-list li input[type="checkbox"] {
 <script type="text/javascript"> // go once over all images and transform the percentage width into pixels relative to original body size
   const bodyWidth = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--custom-body-width')); // Get CSS variable
   document.querySelectorAll('.quarto-figure img').forEach((img) => {
-    const styleWidth = img.getAttribute('style').match(/width:\s*([\d.]+)%/); // Extract percentage
-    if (styleWidth) {
-      const percentage = parseFloat(styleWidth[1]) / 100;
-      img.style.width = `${bodyWidth * percentage}px`; // Apply calculated width
+    if (img.getAttribute('style')) {
+      const styleWidth = img.getAttribute('style').match(/width:\s*([\d.]+)%/); // Extract percentage
+      if (styleWidth) {
+        const percentage = parseFloat(styleWidth[1]) / 100;
+        img.style.width = `${bodyWidth * percentage}px`; // Apply calculated width
+      }
     }
   });
 </script>

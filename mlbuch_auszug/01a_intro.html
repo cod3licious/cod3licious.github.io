@@ -321,7 +321,7 @@ ul.task-list li input[type="checkbox"] {
 <figcaption>Datenquelle: https://www.webofknowledge.com/</figcaption>
 </figure>
 </div>
-<p>Interessanterweise liegt das aber nicht etwa an einer Fülle bahnbrechender theoretischer Errungenschaften in den letzten Jahren (in der Grafik als violette Rauten gekennzeichnet). Im Gegenteil: Viele der heute verwendeten Algorithmen wurden bereits Ende der 50er / Anfang der 60er Jahre entwickelt. So ist beispielsweise das Perzeptron der Vorläufer von neuronalen Netzen, die hinter allen im letzten Abschnitt gezeigten Beispielen stecken. Die wichtigsten neuronalen Netzarchitekturen, Recurrent Neural Networks (RNN, “rekurrente neuronale Netze”) und Convolutional Neural Networks (CNN, “faltende neuronale Netze”), welche die Grundlage für moderne Sprach- bzw. Bildverarbeitung bilden, wurden in den frühen 80er und 90er Jahren entwickelt. Aber zu dieser Zeit hatten wir noch nicht die Rechenressourcen, um diese Modelle für mehr als kleine Experimente zu verwenden.</p>
+<p>Interessanterweise liegt das aber nicht etwa an einer Fülle bahnbrechender theoretischer Errungenschaften in den letzten Jahren (in der Grafik als violette Rauten gekennzeichnet). Im Gegenteil: Viele der heute verwendeten Algorithmen wurden bereits Ende der 50er / Anfang der 60er Jahre entwickelt. So ist beispielsweise das Perzeptron der Vorläufer von neuronalen Netzen, die hinter allen im letzten Abschnitt gezeigten Beispielen stecken. Einige der wichtigsten neuronalen Netzarchitekturen, Recurrent Neural Networks (RNN, “rekurrente neuronale Netze”) und Convolutional Neural Networks (CNN, “faltende neuronale Netze”), welche die Grundlage für moderne Sprach- bzw. Bildverarbeitung bilden, wurden in den frühen 80er und 90er Jahren entwickelt. Aber zu dieser Zeit hatten wir noch nicht die Rechenressourcen, um diese Modelle für mehr als kleine Experimente zu verwenden.</p>
 <p>Aufgrund dessen korreliert der Anstieg der ML-Publikationen stärker mit der Anzahl der Transistoren auf CPUs (also den regulären Prozessoren in normalen Computern) und GPUs (Grafikkarten, die die Arten von Berechnungen parallelisieren, die zum effizienten Trainieren von neuronalen Netzwerkmodellen erforderlich sind):</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -369,10 +369,12 @@ Wenn du mehr über die Mängel aktueller KI-Systeme erfahren möchtest, sind die
 <script type="text/javascript"> // go once over all images and transform the percentage width into pixels relative to original body size
   const bodyWidth = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--custom-body-width')); // Get CSS variable
   document.querySelectorAll('.quarto-figure img').forEach((img) => {
-    const styleWidth = img.getAttribute('style').match(/width:\s*([\d.]+)%/); // Extract percentage
-    if (styleWidth) {
-      const percentage = parseFloat(styleWidth[1]) / 100;
-      img.style.width = `${bodyWidth * percentage}px`; // Apply calculated width
+    if (img.getAttribute('style')) {
+      const styleWidth = img.getAttribute('style').match(/width:\s*([\d.]+)%/); // Extract percentage
+      if (styleWidth) {
+        const percentage = parseFloat(styleWidth[1]) / 100;
+        img.style.width = `${bodyWidth * percentage}px`; // Apply calculated width
+      }
     }
   });
 </script>

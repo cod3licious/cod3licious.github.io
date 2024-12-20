@@ -522,11 +522,17 @@ Hinweis
 </div>
 </section>
 <p>…aber unser Ziel, also der gewünschte Output, bestimmt welche <strong>Art von Algorithmus</strong> wir für das Problem verwenden sollten:</p>
+<div class="multiline-figcaption">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../images/01b_intro_ml/ml_goals3.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<figcaption>Wenn wir einen Datensatz etwas besser verstehen und uns einen Überblick verschaffen wollen, dann können wir zur Visualisierung einen Dimensionsreduktionsalgorithmus aus dem Bereich Unsupervised Learning verwenden. Andere Unsupervised Learning Algorithmen ermöglichen uns, Muster in Daten zu entdecken, wobei es hier darauf ankommt, welche Art von Muster man finden möchte: Mit Algorithmen zur Ausreißer-/Anomalieerkennung (Anomaly Detection) lassen sich einzelne Datenpunkte identifizieren, die stark vom Rest abweichen (z.B. eine defekte Maschine oder eine betrügerische Kreditkartentransaktion). Clustering-Algorithmen wiederum finden Gruppen ähnlicher Datenpunkte (z.B. zur Kundensegmentierung). Wenn wir stattdessen ein Vorhersagemodell möchten, um für einen speziellen Input den entsprechenden Output zu berechnen (z.B. vorhersagen, ob ein Produkt fehlerhaft ist, wenn es unter bestimmten Bedingungen produziert wird), dann brauchen wir dafür einen Algorithmus aus dem Bereich Supervised Learning. In erster Linie wird hier zwischen Regressions- und Klassifikationsalgorithmen unterschieden: Bei Regressionsaufgaben ist die zu prognostizierende Zielgröße kontinuierlich (z.B. Nutzeranzahl, Preis etc.), bei Klassifikationsaufgaben ist die Zielgröße diskret, d.h. sie kann nur einen eindeutigen Wert annehmen und es gibt kein Kontinuum zwischen den verschiedenen Werten (z.B. kann ein Tier auf einem Bild entweder eine Katze oder ein Hund sein, aber nichts dazwischen). Während Unsupervised und Supervised Learning die meisten allgemeinen Anwendungsfälle abdecken, gibt es auch Algorithmen für speziellere Anwendungen, z.B. Empfehlungssysteme (Recommender Systems) oder Generative AI.</figcaption>
+<p><img src="../images/01b_intro_ml/ml_goals.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Wenn unser Ziel darin besteht, Muster in einem Datensatz zu <strong>entdecken</strong> (discover), sind Unsupervised Learning Algorithmen ideal: mit <em>Dimensionsreduktion</em> bekommen wir durch eine 2D Visualisierung eine Übersicht über die Daten, <em>Anomalieerkennung</em> identifiziert Ausreißer (z.B. eine defekte Maschine oder eine betrügerische Kreditkartentransaktion), und <em>Clustering</em> gruppiert ähnliche Datenpunkte (z.B. zur Kundensegmentierung).<br>
+Supervised Learning Modelle werden verwendet, um unbekannte Werte zu <strong>schätzen</strong> (estimate) (z.B. vorhersagen, ob ein Produkt fehlerhaft ist, wenn es unter bestimmten Bedingungen produziert wird): <em>Regression</em> sagt kontinuierliche Werte voraus (z.B. Anzahl der Nutzer, Preis etc.), während <em>Klassifikation</em> diskrete Labels basierend auf den Inputdaten zuweist (z.B. kann ein Tier in einem Bild entweder eine Katze oder ein Hund sein, aber nichts dazwischen).<br>
+<em>Recommender Systems</em> und <em>Information Retrieval</em>-Algorithmen können Artikel von Interesse <strong>empfehlen</strong> (recommend), wie Dokumente, Songs oder Filme, basierend auf den Präferenzen eines Nutzers oder den Artikeln, mit denen sie interagiert haben.<br>
+Die vielseitigsten Modelle sind <em>Generative AI</em> und <em>Deep Learning</em>, die hauptsächlich unstrukturierte Daten nutzen. Sie können vielfältige Outputs <strong>erzeugen</strong> (generate) – wie Bilder, Texte (z.B. für maschinelle Übersetzung) oder Musik – basierend auf einem gegebenen Prompt.<br>
+Schließlich werden <em>Reinforcement Learning</em>-Algorithmen verwendet, um Prozesse zu <strong>planen und zu steuern</strong> (plan and control), indem optimale Aktionssequenzen unter spezifischen Umweltbedingungen bestimmt werden.</figcaption>
 </figure>
+</div>
 </div>
 <p>Einige Beispiele für ‘Input → Output’ Aufgaben und welche Art von ML-Algorithmus verwendet werden kann, um sie zu lösen:</p>
 <table class="table">
@@ -793,7 +799,7 @@ Tipp
 <ul>
 <li>vor der Produktion vorhersagen, ob ein unter den vorgeschlagenen Prozessbedingungen hergestelltes Produkt von hoher Qualität oder Ressourcenverschwendung sein wird</li>
 <li>Churn Prediction: Erkenne Kunden, die kurz davor stehen, ihren Vertrag zu kündigen (oder Mitarbeiter, die kurz davor stehen zu kündigen), damit du sie kontaktieren und überzeugen kannst zu bleiben</li>
-<li>Preisoptimierung: Bestimme den optimalen Preis für ein Produkt (oft für dynamische Preisgestaltung verwendet, z.B. um Preise basierend auf dem Gerät anzupassen, das ein Kunde verwendet, wenn er auf eine Website zugreift, wie z. B. ein neues iPhone gegenüber einem alten Android-Handy)</li>
+<li>Preisoptimierung: Bestimme den optimalen Preis für ein Produkt (oft für dynamische Preisgestaltung verwendet, z.B. um Preise basierend auf dem Gerät anzupassen, das ein Kunde verwendet, wenn er auf eine Website zugreift, wie z.B. ein neues iPhone gegenüber einem alten Android-Handy)</li>
 <li>Predictive Maintenance: Sage voraus, wie lange ein Maschinenbauteil halten wird</li>
 <li>Umsatzprognosen: Sag den Umsatz in den kommenden Wochen und den erforderlichen Lagerbestand voraus, um die Nachfrage zu befriedigen</li>
 </ul></li>

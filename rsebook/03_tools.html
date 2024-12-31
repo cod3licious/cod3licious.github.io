@@ -189,6 +189,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./07_afterword.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Afterword</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -203,9 +209,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#version-control" id="toc-version-control" class="nav-link active" data-scroll-target="#version-control">Version Control</a></li>
+  <li><a href="#programming-languages" id="toc-programming-languages" class="nav-link active" data-scroll-target="#programming-languages">Programming Languages</a></li>
+  <li><a href="#version-control" id="toc-version-control" class="nav-link" data-scroll-target="#version-control">Version Control</a></li>
   <li><a href="#development-environment" id="toc-development-environment" class="nav-link" data-scroll-target="#development-environment">Development Environment</a></li>
-  <li><a href="#programming-languages" id="toc-programming-languages" class="nav-link" data-scroll-target="#programming-languages">Programming Languages</a></li>
   <li><a href="#reproducible-setups" id="toc-reproducible-setups" class="nav-link" data-scroll-target="#reproducible-setups">Reproducible Setups</a></li>
   <li><a href="#clean-and-consistent-code" id="toc-clean-and-consistent-code" class="nav-link" data-scroll-target="#clean-and-consistent-code">Clean and Consistent Code</a></li>
   <li><a href="#putting-it-all-together" id="toc-putting-it-all-together" class="nav-link" data-scroll-target="#putting-it-all-together">Putting It All Together</a></li>
@@ -236,6 +242,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>Before we continue with creating your results—i.e., actually start developing software—let’s take a quick tour of some tools that can make your software engineering journey smoother.</p>
 <p>Although the code examples in this book use Python, the general principles discussed here apply to most programming languages.</p>
+<section id="programming-languages" class="level2">
+<h2 class="anchored" data-anchor-id="programming-languages">Programming Languages</h2>
+<p>Different programming languages suit different needs. Here’s a quick overview of some popular ones used in science and engineering:</p>
+<ul>
+<li><strong>R</strong>: Commonly used for statistics, with rich functionality to create data visualizations, fit statistical models (like different types of regression), and conduct advanced statistical tests (like ANOVA). The poplar Shiny framework also makes it possible to create interactive dashboards that run as web applications.</li>
+<li><strong>MATLAB</strong>: Once dominant in engineering, used for simulations. But due to its high licensing costs, MATLAB is being replaced more and more by Python and Julia.</li>
+<li><strong>Julia</strong>: Gaining traction in scientific computing for its speed and modern syntax.</li>
+<li><strong>Python</strong>: A versatile language with strong support for data science, AI, web development, and more. Its active open source community has created many popular libraries for scientific computing (numpy, scipy), machine learning (scikit-learn, TensorFlow, PyTorch), and web development (FastAPI, streamlit).</li>
+</ul>
+<p>Due to its broad applicability and popularity in industry, Python is used for the examples in this book. However, you should <strong>choose the programming language that is most popular in your field</strong> as this will make it easier for you to find relevant resources (e.g., tailored libraries) and collaborate with colleagues.</p>
+<p>There are plenty of great books and other resources available to teach you programming fundamentals, which is why this book focuses on higher level concepts. Going forward we’ll assume that you’re familiar with the basic syntax and functionality of your programming language of choice (incl.&nbsp;key scientific libraries). For example, to learn Python essentials, you can work through <a href="https://github.com/cod3licious/python_tutorial">this tutorial</a>.</p>
+</section>
 <section id="version-control" class="level2">
 <h2 class="anchored" data-anchor-id="version-control">Version Control</h2>
 <p>Version control is essential in software development to keep track of code changes and collaborate effectively. Think of it as a time machine that lets you revert to any version of your code or examine how it evolved.</p>
@@ -286,6 +304,19 @@ Essential Git Commands
 <li><strong><a href="https://about.gitlab.com/">GitLab</a></strong>: Supports self-hosting, making it ideal for organizational needs.</li>
 </ul>
 <p>We strongly encourage you to publish any code related to your publications on one of these platforms to promote reproducibility of your results! 👩‍🔬</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Data Versioning">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Data Versioning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In addition to the changes made to your code, you should also keep track of how your data is generated and transformed over time (<em>data lineage</em>). While small datasets can be included in your repository (e.g., in a separate <code>data/</code> folder), there are also more tailored tools available specifically to version your data, like <a href="https://dvc.org/">DVC</a>.</p>
+</div>
+</div>
 </section>
 </section>
 <section id="development-environment" class="level2">
@@ -317,51 +348,40 @@ Examples include:</p>
 <h4 class="anchored" data-anchor-id="jupyter-notebooks">Jupyter Notebooks</h4>
 <p>Jupyter notebooks are a unique format that lets you <strong>mix code, output (like plots), and explanatory text</strong> in one document. The name <em>Jupyter</em> is derived from Julia, Python, and R, the programming languages for which the notebook format, and later the JupyterLab IDE, were created. The IDE itself runs inside your web browser.</p>
 <p>Notebooks are great for exploratory data analysis and to create reproducible reports. However, since the notebooks themselves are composed of individual interactive cells that can be executed in any order, developing in notebooks often becomes messy quickly. We recommend that you keep the main logic and reusable functions in separate scrips or libraries and primarily use notebooks to create plots and other results. It is also good practice to run your notebook again from top to bottom once you’re finished to make sure everything still works and you’re not relying on variables that were defined in now-deleted cells, for example.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled" title="Notebooks as text files">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip
+Notebooks as text files
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Jupyter notebooks, stored as files ending in <code>.ipynb</code>, are internally represented as JSON documents. If you have your notebooks under version control (which you should 😉), you’ll notice that the diffs between versions look quite bloated. But do not despair! Tools like <a href="https://jupytext.readthedocs.io/en/latest/">Jupytext</a> can convert notebooks into plain text without loss of functionality.</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled" title="Parameterize notebooks">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip
+Parameterize notebooks
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>If you want to execute the same notebook with multiple different parameter settings (e.g., create the same plots for different models), have a look at <a href="https://papermill.readthedocs.io/en/latest/">papermill</a>.</p>
+<p>If you want to execute the same notebook with multiple different parameter settings (e.g., create the same plots for different model configurations), have a look at <a href="https://papermill.readthedocs.io/en/latest/">papermill</a>.</p>
 </div>
 </div>
+<p>In addition to the original JupyterLab IDE and notebooks that you install on your computer, there are also free cloud-based options available, such as <a href="https://colab.research.google.com/">Google Colab</a>, which even gives you free compute time on GPUs.</p>
 </section>
-</section>
-<section id="programming-languages" class="level2">
-<h2 class="anchored" data-anchor-id="programming-languages">Programming Languages</h2>
-<p>Different programming languages suit different needs. Here’s a quick overview of some popular ones used in science and engineering:</p>
-<ul>
-<li><strong>R</strong>: Commonly used for statistics, with rich functionality to create data visualizations, fit statistical models (like different types of regression), and conduct advanced statistical tests (like ANOVA). The poplar Shiny framework also makes it possible to create interactive dashboards that run as web applications.</li>
-<li><strong>MATLAB</strong>: Once dominant in engineering, used for simulations. But due to its high licensing costs, MATLAB is being replaced more and more by Python and Julia.</li>
-<li><strong>Julia</strong>: Gaining traction in scientific computing for its speed and modern syntax.</li>
-<li><strong>Python</strong>: A versatile language with strong support for data science, AI, web development, and more. Its active open source community has created many popular libraries for scientific computing (numpy, scipy), machine learning (scikit-learn, TensorFlow, PyTorch), and web development (FastAPI, streamlit).</li>
-</ul>
-<p>Due to its broad applicability and popularity in industry, Python is used for the examples in this book. However, you should <strong>choose the programming language that is most popular in your field</strong> as this will make it easier for you to find relevant resources (e.g., tailored libraries) and collaborate with colleagues.</p>
-<p>There are plenty of great books and other resources available to teach you programming fundamentals, which is why this book focuses on higher level concepts. Going forward we’ll assume that you’re familiar with the basic syntax and functionality of your programming language of choice (incl.&nbsp;key scientific libraries). For example, to learn Python essentials, you can work through <a href="https://github.com/cod3licious/python_tutorial">this tutorial</a>.</p>
 </section>
 <section id="reproducible-setups" class="level2">
 <h2 class="anchored" data-anchor-id="reproducible-setups">Reproducible Setups</h2>
 <p>“It works on my machine” isn’t good enough for science. Reproducibility means your results can be replicated by others (and by you a few months later when the reviewers of your paper request changes to your experiments). The first step to achieve this is to <strong>manage your dependencies</strong> (i.e., external libraries used by your code) to ensure the environment in which your code is executed is identical for everyone that runs your code, every time. This can be done using <strong>virtual environments</strong>, or, if you want to go even further, <strong>containers</strong> like Docker, which will be discussed in <a href="06_production.html" class="quarto-xref"><span>Chapter 6</span></a>.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Virtual Environments in Python with `poetry`">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -370,7 +390,7 @@ Virtual Environments in Python with <code>poetry</code>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Virtual environments isolate your project’s dependencies, thereby ensuring consistency. For Python, a common tool to do this is <a href="https://python-poetry.org/"><code>poetry</code></a>. It tracks the libraries and their versions in a <code>pyproject.toml</code> like this:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[tool.poetry]</span></span>
@@ -400,7 +420,7 @@ Virtual Environments in Python with <code>poetry</code>
 <h4 class="anchored" data-anchor-id="handling-randomness">Handling Randomness</h4>
 <p>Your program will often depend on randomly sampled values, for example, when defining the initial conditions for a simulation or initializing a model before it is fitted to data (like a neural network). To ensure that your experiments can be reproduced, it is important that you always <strong>set a random seed</strong> at the beginning of your program so the random number generator starts from a consistent state.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Setting Random Seeds in Python">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -409,7 +429,7 @@ Setting Random Seeds in Python
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>At the beginning of your script, set a random seed (depending on the library that you’re using this can vary):</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
@@ -420,27 +440,27 @@ Setting Random Seeds in Python
 </div>
 </div>
 </div>
-<p>To get a better idea of how much your results depend on the random initialization and therefore how robust they are, it is always advisable to <strong>run your code with multiple random seeds and compare the results</strong> (e.g., compute the mean and standard deviation of the outcomes of different runs like in <a href="02_data.html#fig-data-what-results" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>).</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<p>To get a better idea of how much your results depend on the random initialization and therefore how robust they are, it is advisable to always <strong>run your code with multiple random seeds and compare the results</strong> (e.g., compute the mean and standard deviation of the outcomes of different runs like in <a href="02_data.html#fig-data-what-results" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>).</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Random state at startup">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+Random state at startup
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Depending on the programming language that you’re using, if you run a script without executing any other code before, the random number generator may or may not always start in the same state. This means, if you don’t set a random seed and, for example, run your script ten times from scratch, you may always receive the same result even though the results would differ if the code was run under different conditions. To avoid surprises, you should always explicitly set the random seed to have more control over the results.</p>
+<p>Depending on the programming language that you’re using, if you run a script without executing any other code before, the random number generator may or may not always start in the same state. This means, if you don’t set a random seed and, for example, run your script ten times from scratch, you may always receive the same result even though the results would differ if the code was run under different circumstances. To avoid surprises, you should always explicitly set the random seed to have more control over the results.</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout callout-style-default callout-warning callout-titled" title="Hardware differences">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Warning
+Hardware differences
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -460,7 +480,7 @@ Warning
 <li><strong>Linters</strong> analyze code for errors, inefficiencies, and deviations from best practices.</li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled" title="Formatter &amp; Linter in Python: `ruff`">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -469,9 +489,9 @@ Formatter &amp; Linter in Python: <code>ruff</code>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><a href="https://docs.astral.sh/ruff/"><code>ruff</code></a> is an extremely fast formatter and linter for Python, written in Rust. You can install it via <code>pip</code> and configure it in the same <code>pyproject.toml</code> file that we also used for <code>poetry</code>. Then run it over you code like this:</p>
+<p><a href="https://docs.astral.sh/ruff/"><code>ruff</code></a> is a (super fast) formatter and linter for Python, written in Rust. You can install it via <code>pip</code> and configure it in the same <code>pyproject.toml</code> file that we also used for <code>poetry</code>. Then run it over you code like this:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ruff</span> check        <span class="co"># see which errors the linter finds</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">ruff</span> check <span class="at">--fix</span>  <span class="co"># automatically fix errors where possible</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">ruff</span> format       <span class="co"># automatically format the code</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -483,9 +503,9 @@ Formatter &amp; Linter in Python: <code>ruff</code>
 </section>
 <section id="pre-commit-hooks" class="level4">
 <h4 class="anchored" data-anchor-id="pre-commit-hooks">Pre-commit Hooks</h4>
-<p>In the heat of the moment, you might forget to run the formatter and linter over your code before committing your changes. To avoid accidentally checking messy code into your repository, you can configure so-called “pre-commit hooks”. <a href="https://pre-commit.com/">Pre-commit hooks</a> catch issues automatically by enforcing coding standards before committing or pushing code with git.</p>
+<p>In the heat of the moment, you might forget to run the formatter and linter over your code before committing your changes. To <strong>avoid accidentally checking messy code into your repository</strong>, you can configure so-called “pre-commit hooks”. <a href="https://pre-commit.com/">Pre-commit hooks</a> catch issues automatically by enforcing coding standards before committing or pushing code with git.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Setting up pre-commit hooks">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -494,7 +514,7 @@ Setting up pre-commit hooks
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>First, you need to install pre-commit hooks through Python’s package manger <code>pip</code>:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pre-commit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

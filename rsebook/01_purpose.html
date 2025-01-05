@@ -388,13 +388,23 @@ Model accuracy is crucial
 </ul></li>
 </ul>
 <p>Your evaluation typically involves multiple metrics. For example, in prescriptive analytics, you need to demonstrate both the accuracy of your model and that the recommendations generated with it led to a genuinely optimized process or product. Before starting your research, review similar work in your field to understand which metrics are standard in your community.</p>
-<p>Ideally, you should already have an idea of how existing solutions perform on these metrics (e.g., based on findings from other publications) to establish <strong>the baseline your solution should outperform</strong>. You’ll likely need to replicate at least some of these baseline results (e.g., by reimplementing existing models) to ensure your comparisons are not influenced by external factors. But understanding where the “competition” stands can also help you identify secondary metrics where your solution could excel. For example, even if there’s little room to improve model accuracy, existing solutions might be too slow to handle large datasets efficiently.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div id="fig-kpi-tradeoff" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-kpi-tradeoff-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/01_purpose/kpi_tradeoff.png" class="img-fluid figure-img" style="width:45.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-kpi-tradeoff-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.2: The metrics we’re interested in often represent trade-offs. For example, we want a high quality product, but it should also be cheap. Or a good model accuracy, but at the same time not use excessive compute resources. Your approach might not outperform existing baselines on all metrics, but its trade-off could still be preferable.
+</figcaption>
+</figure>
+</div>
+<p>Ideally, you should already have an idea of how existing solutions perform on these metrics (e.g., based on findings from other publications) to establish <strong>the baseline your solution should outperform</strong>. You’ll likely need to replicate at least some of these baseline results (e.g., by reimplementing existing models) to ensure your comparisons are not influenced by external factors. But understanding where the “competition” stands can also help you identify secondary metrics where your solution could excel. For example, even if there’s little room to improve model accuracy, existing solutions might be too slow to handle large datasets efficiently (<a href="#fig-kpi-tradeoff" class="quarto-xref">Figure&nbsp;<span>1.2</span></a>).<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <p>These results are central to your research (and publications), and much of your code will be devoted to generating them, along with the models and simulations behind them. Clearly defining the key metrics needed to demonstrate your research’s impact will help you focus your programming efforts effectively.</p>
 </section>
 <section id="draw-your-why" class="level2">
 <h2 class="anchored" data-anchor-id="draw-your-why">Draw Your Why</h2>
 <p>Whether you’re collaborating with colleagues, presenting at a conference, or writing a paper—clearly communicating the problem you’re solving and your proposed solution is essential.</p>
-<p>Visual representations are particularly powerful for conveying complex ideas. One effective approach is creating <strong>“before and after” visuals that contrast the current state of the field with your proposed improvements</strong> (<a href="#fig-draw-why" class="quarto-xref">Figure&nbsp;<span>1.2</span></a>).</p>
+<p>Visual representations are particularly powerful for conveying complex ideas. One effective approach is creating <strong>“before and after” visuals that contrast the current state of the field with your proposed improvements</strong> (<a href="#fig-draw-why" class="quarto-xref">Figure&nbsp;<span>1.3</span></a>).</p>
 <p>The “before” scenario might show a lack of data, an incomplete understanding of a phenomenon, poor model performance, or an inefficient process or material. The “after” scenario highlights how your research addresses these issues and improves on the current state, such as refining a predictive model or enhancing the properties of a new material.</p>
 <div id="fig-draw-why" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -402,19 +412,19 @@ Model accuracy is crucial
 <img src="../images/01_purpose/draw_why.png" class="img-fluid figure-img" style="width:70.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-draw-why-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1.2: Exemplary research goals and corresponding “before and after” visuals for descriptive, diagnostic, predictive, and prescriptive analytics tasks.
+Figure&nbsp;1.3: Exemplary research goals and corresponding “before and after” visuals for descriptive, diagnostic, predictive, and prescriptive analytics tasks.
 </figcaption>
 </figure>
 </div>
 <p>At this point, your “after” scenario might be based on a hypothesis or an educated guess about what your results will look like—and that’s totally fine! The purpose of visualizing your goal is to guide your development process. Later, you can update the picture with actual results if you decide to include it in a journal publication, for example.</p>
-<p>Of course, not all research goals are tied directly to analytics. Sometimes the main improvement is more qualitative, for example, focusing on design or functionality (<a href="#fig-draw-why-qual" class="quarto-xref">Figure&nbsp;<span>1.3</span></a>). Even in these cases, however, you’ll often need to demonstrate that your new approach meets or exceeds existing solutions in terms of other key performance indicators (KPIs), such as energy efficiency, speed, or quality parameters like strength or durability.</p>
+<p>Of course, not all research goals are tied directly to analytics. Sometimes the main improvement is more qualitative, for example, focusing on design or functionality (<a href="#fig-draw-why-qual" class="quarto-xref">Figure&nbsp;<span>1.4</span></a>). Even in these cases, however, you’ll often need to demonstrate that your new approach meets or exceeds existing solutions in terms of other key performance indicators (KPIs), such as energy efficiency, speed, or quality parameters like strength or durability.</p>
 <div id="fig-draw-why-qual" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-draw-why-qual-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../images/01_purpose/draw_why_qualitative.png" class="img-fluid figure-img" style="width:65.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-draw-why-qual-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1.3: This example illustrates a task where a robot must reach its target (represented by money) as efficiently as possible. <strong>Original approach (<em>left</em>)</strong>: The robot relied on information encoded in the environment as expected rewards. To determine the shortest path to the target, the robot required a large sensor (shown as a yellow circle) capable of scanning nearby fields to locate the highest reward. <strong>New approach (<em>right</em>)</strong>: Instead of relying on reward values scattered across the environment, the optimal direction is now encoded directly in the current field. This eliminates the need for large sensors, as the robot only needs to read the value of its current position, enabling it to operate with a much smaller sensor and thereby reducing hardware costs. <strong>Additional quantitative evaluation:</strong> It still needs to be demonstrated that with the new approach, the robot reaches its target at least as quickly as with the original approach.
+Figure&nbsp;1.4: This example illustrates a task where a robot must reach its target (represented by money) as efficiently as possible. <strong>Original approach (<em>left</em>)</strong>: The robot relied on information encoded in the environment as expected rewards. To determine the shortest path to the target, the robot required a large sensor (shown as a yellow circle) capable of scanning nearby fields to locate the highest reward. <strong>New approach (<em>right</em>)</strong>: Instead of relying on reward values scattered across the environment, the optimal direction is now encoded directly in the current field. This eliminates the need for large sensors, as the robot only needs to read the value of its current position, enabling it to operate with a much smaller sensor and thereby reducing hardware costs. <strong>Additional quantitative evaluation:</strong> It still needs to be demonstrated that with the new approach, the robot reaches its target at least as quickly as with the original approach.
 </figcaption>
 </figure>
 </div>

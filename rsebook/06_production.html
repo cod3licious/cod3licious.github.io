@@ -214,7 +214,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#graphical-user-interface-gui" id="toc-graphical-user-interface-gui" class="nav-link" data-scroll-target="#graphical-user-interface-gui">Graphical User Interface (GUI)</a></li>
   <li><a href="#databases" id="toc-databases" class="nav-link" data-scroll-target="#databases">Databases</a></li>
   <li><a href="#apis" id="toc-apis" class="nav-link" data-scroll-target="#apis">APIs</a></li>
-  <li><a href="#events" id="toc-events" class="nav-link" data-scroll-target="#events">Events</a></li>
+  <li><a href="#async-communication-events" id="toc-async-communication-events" class="nav-link" data-scroll-target="#async-communication-events">Async Communication: Events</a></li>
   <li><a href="#batch-jobs" id="toc-batch-jobs" class="nav-link" data-scroll-target="#batch-jobs">Batch Jobs</a></li>
   <li><a href="#software-design-revisited" id="toc-software-design-revisited" class="nav-link" data-scroll-target="#software-design-revisited">Software Design Revisited</a></li>
   </ul></li>
@@ -251,19 +251,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<p>Your results look great, the paper is written, the conference talk is over—now you’re done, right?! Well, in academia you might be, but let’s have a look at some concepts and tools that are common in industry that could take your code to the next level. Maybe they might even inspire you to transform your code into a little app that can be deployed and could serve as an excellent reference when you apply for your next job?</p>
 <section id="components-of-software-products" class="level2">
 <h2 class="anchored" data-anchor-id="components-of-software-products">Components of Software Products</h2>
+<p>Up to now, your code probably consisted of a script or some notebooks to create your analysis results and a collection of reusable helper functions in your personal library modules. As a next step, we’ll explore how your code can be made more accessible to other users by running it as a standalone software with a graphical user interface that users can interact with. Furthermore, we’ll explore other data sources beyond reading your data from a CSV or Excel file from your computer.</p>
 <section id="graphical-user-interface-gui" class="level3">
 <h3 class="anchored" data-anchor-id="graphical-user-interface-gui">Graphical User Interface (GUI)</h3>
+<p>An important feature of software is that users can interact with it. And since we’re well past the 1980s, users expect to do this via a graphical user interface (GUI), i.e., by clicking buttons, not by running your program in the command line and supplying text inputs.</p>
+<p>We distinguish between two types of software programs:</p>
+<ol type="1">
+<li><strong>Stand-alone desktop or mobile application</strong> that a user downloads and installs on their machine (either their personal computer or smartphone).</li>
+<li><strong>Web-based programs</strong>, like software-as-a-service (SaaS) applications, that run in your web browser (e.g., Google Docs). Since internet access is now almost ubiquitous, these are becoming more and more popular.</li>
+</ol>
+<p>Especially when talking about web apps, the GUI is often referred to as the <strong><em>frontend</em></strong>, in contrast to the <strong><em>backend</em></strong>, which refers to the service (API) running in the background, providing functionality related to data storage and other business logic. Even if you are using what looks like a stand-alone desktop client, often these programs still communicate with a backend server over the internet, e.g., to save your work in the cloud and thereby also enable collaboration with others.</p>
+<p>Since research use cases are mostly about making our results accessible to others, e.g., by transforming a static report into an interactive dashboard where users can explore the data themselves, you’ll probably want to start with a web-based app.</p>
+<p>Many books and tutorials were written on the topic of building user-friendly software applications and a lot of it is very specific to the programming language you’re using—please consult your favorite search engine to discover more resources on this topic. 😉</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Web apps with Python's `streamlit` framework">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Web apps with Python’s <code>streamlit</code> framework
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you’re working with Python, the <a href="https://streamlit.io/">streamlit</a> app framework is highly recommended to turn your analysis script into a fully functioning web app in minutes. Give it a try!</p>
+</div>
+</div>
 </section>
 <section id="databases" class="level3">
 <h3 class="anchored" data-anchor-id="databases">Databases</h3>
+</ul>
 </section>
 <section id="apis" class="level3">
 <h3 class="anchored" data-anchor-id="apis">APIs</h3>
 </section>
-<section id="events" class="level3">
-<h3 class="anchored" data-anchor-id="events">Events</h3>
+<section id="async-communication-events" class="level3">
+<h3 class="anchored" data-anchor-id="async-communication-events">Async Communication: Events</h3>
 </section>
 <section id="batch-jobs" class="level3">
 <h3 class="anchored" data-anchor-id="batch-jobs">Batch Jobs</h3>

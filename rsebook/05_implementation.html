@@ -261,7 +261,7 @@ window.Quarto = {
   <li><a href="#from-design-to-code-fill-in-the-blanks" id="toc-from-design-to-code-fill-in-the-blanks" class="nav-link active" data-scroll-target="#from-design-to-code-fill-in-the-blanks">From Design to Code: Fill in the Blanks</a>
   <ul class="collapse">
   <li><a href="#minimum-viable-results" id="toc-minimum-viable-results" class="nav-link" data-scroll-target="#minimum-viable-results">Minimum Viable Results</a></li>
-  <li><a href="#breaking-code-into-components" id="toc-breaking-code-into-components" class="nav-link" data-scroll-target="#breaking-code-into-components">Breaking Code into Components</a></li>
+  <li><a href="#breaking-code-into-modules" id="toc-breaking-code-into-modules" class="nav-link" data-scroll-target="#breaking-code-into-modules">Breaking Code into Modules</a></li>
   <li><a href="#keep-it-compact" id="toc-keep-it-compact" class="nav-link" data-scroll-target="#keep-it-compact">Keep It Compact</a></li>
   </ul></li>
   <li><a href="#documentation-comments-a-note-to-your-future-self" id="toc-documentation-comments-a-note-to-your-future-self" class="nav-link" data-scroll-target="#documentation-comments-a-note-to-your-future-self">Documentation &amp; Comments: A Note to Your Future Self</a></li>
@@ -303,8 +303,49 @@ window.Quarto = {
 <p>Now that you have a plan, it’s finally time to get started with the implementation.</p>
 <section id="from-design-to-code-fill-in-the-blanks" class="level2">
 <h2 class="anchored" data-anchor-id="from-design-to-code-fill-in-the-blanks">From Design to Code: Fill in the Blanks</h2>
-<p>Armed with your design from the last chapter, you can now <strong>translate your sketch into a code skeleton</strong>. Start by outlining the functions, place calls to them where needed, and add comments for any steps you’ll figure out later. For example, the design from Figure X could result in the following draft:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Armed with your design from the last chapter, you can now <strong>translate your sketch into a code skeleton</strong>. Start by outlining the functions, place calls to them where needed, and add comments for any steps you’ll figure out later. For example, the design from <a href="04_design.html#fig-draw-how" class="quarto-xref">Figure&nbsp;<span>4.3</span></a> could result in the following draft:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Model:</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, param1):</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.param1 <span class="op">=</span> param1</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> fit(<span class="va">self</span>, x, y):</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">pass</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> predict(<span class="va">self</span>, x):</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> ...</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> y</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> preprocess(df):</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> ...</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> load_data(file_name):</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.read_csv(file_name)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> preprocess(df)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_R2(y, y_pred):</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    R2 <span class="op">=</span> ...</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> R2</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> evaluate_and_plot(y, y_pred):</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    R2 <span class="op">=</span> compute_R2(y, y_pred)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ... create and save plot ...</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> R2</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># script is called as `python script.py seed param1 [param2]`</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    seed, param1, param2 <span class="op">=</span> ...</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    np.random.seed(seed)</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> Model(param1)</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    df_train <span class="op">=</span> load_data(<span class="st">"train.csv"</span>)</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    model.fit(df_train.x, df_train.y)</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    df_test <span class="op">=</span> load_data(<span class="st">"test.csv"</span>)</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    y_pred <span class="op">=</span> model.predict(df_test.x)</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    R2 <span class="op">=</span> evaluate_and_plot(df_test.y, y_pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Order of functions">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -315,7 +356,7 @@ Order of functions
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Your script likely includes multiple functions, so you’ll need to decide their order from top to bottom. Since scripts typically start with imports (e.g., of libraries like <code>numpy</code>) and end with a <code>main</code> function, personally I prefer to put general functions that only rely on external dependencies at the top (i.e., the ones that are at the lower levels of abstraction in your call hierarchy). This ensures that, as you read the script from top to bottom, <strong>each function depends only on what was defined before it</strong>. Maintaining this order avoids circular dependencies and encourages you to write reusable, modular functions that serve as building blocks for the code that follows.</p>
+<p>Your script likely includes multiple functions, so you’ll need to decide their order from top to bottom. Since scripts typically start with imports (e.g., of libraries like <code>numpy</code>) and end with a <code>main</code> function, personally I prefer to put more general functions (i.e., the ones that are at the lower levels of abstraction in your call hierarchy and that only rely on external dependencies) towards the top of the file. This ensures that, as you read the script from top to bottom, <strong>each function depends only on what was defined before it</strong>. Maintaining this order avoids circular dependencies and encourages you to write reusable, modular functions that serve as building blocks for the code that follows.</p>
 </div>
 </div>
 <p>Once your skeleton stands, you “only” need to <strong>fill in the details</strong>, which is a lot less intimidating than facing a blank page. Plus, since you started with a thoughtful design, your final program is more likely to be well-structured and easy to understand. Compare this to writing code on the fly, where decisions about functions are often made haphazardly—you’ll appreciate the difference.</p>
@@ -342,11 +383,11 @@ To get better results, consider crafting prompts like: <em>“You are a senior P
 <li>If your goal is to build a prediction model, start with one that simply predicts the mean of the observed data.</li>
 <li>If you’re developing a simulation, begin with random outputs, such as a random walk.</li>
 </ul>
-<p>This approach also serves as a <strong>“stupid baseline”</strong>—a simple, easy-to-beat reference point for your final method. It’s a sanity check: if your sophisticated solution can’t outperform this baseline, something’s off.</p>
 <p>By starting with Minimum Viable Results, you can <strong>test your code end-to-end</strong> early on, see tangible progress, and <strong>iteratively improve</strong> from there.</p>
+<p>This approach also serves as a <strong>“stupid baseline”</strong>—a simple, easy-to-beat reference point for your final method. It’s a sanity check: if your sophisticated solution can’t outperform this baseline, something’s off.</p>
 </section>
-<section id="breaking-code-into-components" class="level3">
-<h3 class="anchored" data-anchor-id="breaking-code-into-components">Breaking Code into Components</h3>
+<section id="breaking-code-into-modules" class="level3">
+<h3 class="anchored" data-anchor-id="breaking-code-into-modules">Breaking Code into Modules</h3>
 <p>Starting a new project often begins with all your code in a single script or notebook. This is fine for quick and small tasks, but as your project grows, keeping everything in one file becomes messy and overwhelming. To keep your code organized and easier to understand, it’s a good idea to move functionality into separate files, also called (sub)modules. <strong>Separating code into modules makes your project easier to navigate, test, and reuse.</strong></p>
 <p>A typical first step is splitting the main logic of your analysis (<code>main.py</code>) from general-purpose helper functions (<code>utils.py</code>). Over time, as <code>utils.py</code> expands, you’ll notice clusters of related functionality that can be moved into their own files, such as <code>preprocessing.py</code>, <code>models.py</code>, or <code>plot_results.py</code>. This modular approach naturally leads to a clean directory structure, which might look like this for a larger Python project:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">src/</span></span>
@@ -399,7 +440,7 @@ Tips to create compact, reusable code
 <div class="callout-body-container callout-body">
 <ul>
 <li><p><strong>Avoid duplication</strong>: Instead of copying and pasting code in multiple places, consolidate it into a reusable function to save lines.</p></li>
-<li><p><strong>Prefer ‘deep’ functions</strong>: Avoid extracting very short code fragments (1-2 lines) into a separate function, especially if this function would require many arguments. Such shallow functions with wide interfaces increase complexity without meaningfully reducing line count. Instead, strive for <em>deep functions</em> (spanning multiple lines) with <em>narrow interfaces</em> (e.g., only 1-3 input arguments, i.e., <strong>fewer arguments than the function has lines of code</strong>), which tend to be more general and reusable <span class="citation" data-cites="ousterhout2018philosophy">[<a href="references.html#ref-ousterhout2018philosophy" role="doc-biblioref">3</a>]</span>.</p></li>
+<li><p><strong>Prefer ‘deep’ functions</strong>: Avoid extracting very short code fragments (1-2 lines) into a separate function, especially if this function would require many arguments. Such shallow functions with wide interfaces increase complexity without meaningfully reducing line count. Instead, strive for <em>deep functions</em> (spanning multiple lines) with <em>narrow interfaces</em> (e.g., only 1-3 input arguments, i.e., <strong>fewer arguments than the function has lines of code</strong>), which tend to be more general and reusable <span class="citation" data-cites="ousterhout2018philosophy">[<a href="references.html#ref-ousterhout2018philosophy" role="doc-biblioref">5</a>]</span>.</p></li>
 <li><p><strong>Address nesting</strong>: If your code becomes overly nested, this can be a sign that parts of the code should be moved into a separate function. This simplifies logic and shortens lines.</p></li>
 <li><p><strong>Use Guard Clauses</strong>: Deeply nested <code>if</code>-statements can make code harder to read. Instead, use guard clauses <span class="citation" data-cites="beck2023tidy">[<a href="references.html#ref-beck2023tidy" role="doc-biblioref">1</a>]</span> to handle preconditions (e.g., checking for wrong user input) early, leaving the “happy path” clear and concise. For example:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> condition:</span>
@@ -423,7 +464,7 @@ Tips to create compact, reusable code
 </section>
 <section id="documentation-comments-a-note-to-your-future-self" class="level2">
 <h2 class="anchored" data-anchor-id="documentation-comments-a-note-to-your-future-self">Documentation &amp; Comments: A Note to Your Future Self</h2>
-<p>While you write it, everything seems obvious. However, when revisiting your code a few months later (e.g., to address reviewer feedback), you’re often left wondering what the heck you were doing. This is especially true when some external constraint (like a library quirk) forced you to create a workaround instead of opting for the straightforward solution. When returning to such code, you might be tempted to replace the awkward implementation with something more elegant, only to rediscover why you chose that approach in the first place. This is where comments can save you some trouble. And they are even more important when collaborating with others who need to understand your code.</p>
+<p>While you write it, everything seems obvious. However, when revisiting your code a few months later (e.g., to try a different experiment), you’re often left wondering what the heck you were doing. This is especially true when some external constraint (like a library quirk) forced you to create a workaround instead of opting for the straightforward solution. When returning to such code, you might be tempted to replace the awkward implementation with something more elegant, only to rediscover why you chose that approach in the first place. This is where comments can save you some trouble. And they are even more important when collaborating with others who need to understand your code.</p>
 <p>We distinguish between documentation and comments: <strong>Documentation</strong> provides the general description of <strong><em>when and how to use your code</em></strong>, such as function docstrings explaining what the function computes, its input parameters, and return values. This is particularly important for open source libraries where you can’t personally explain the code’s purpose and usage to others. <strong>Comments</strong> help developers understand <strong><em>why your code was written in a certain way</em></strong>, like explaining that unintuitive workaround. Additionally, for scientific code, you may also need to document the origin of certain values or equations by referencing the corresponding paper in the comments.</p>
 <div class="callout callout-style-default callout-warning callout-titled" title="Code should be self-documenting">
 <div class="callout-header d-flex align-content-center">
@@ -436,7 +477,7 @@ Code should be self-documenting
 </div>
 <div class="callout-body-container callout-body">
 <p>Ideally, your code should be written so clearly that it’s self-explanatory. Comments shouldn’t explain <em>what</em> the code does, only <em>why</em> it does that (when not obvious). <strong>Comments and documentation, like code, need to be maintained</strong>—if you modify code, update the corresponding comments, or they become misleading and harmful rather than helpful. Using comments sparingly minimizes the risk of confusing, outdated comments.</p>
-<p>Informative variable and function names are essential for self-explanatory code. When you’re tempted to write a comment that summarizes what the following block of code does (e.g., <code># preprocess data</code>), consider moving these lines into a separate function with an informative name, especially if they contain significant, reusable logic.</p>
+<p>Informative variable and function names are essential for self-explanatory code. When you’re tempted to write a comment that summarizes what the following block of code does (e.g., <code># preprocess data</code>), consider <strong>moving these lines into a separate function with an informative name</strong>, especially if they contain significant, reusable logic.</p>
 </div>
 </div>
 <section id="naming-is-hard" class="level4">
@@ -483,7 +524,6 @@ Tips for effective naming
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> add(<span class="dv">5</span>, <span class="op">-</span><span class="dv">6</span>) <span class="op">==</span> <span class="op">-</span><span class="dv">1</span>, <span class="st">"5 - 6 should equal -1"</span></span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> add(<span class="op">-</span><span class="dv">2</span>, <span class="fl">10.6</span>) <span class="op">==</span> <span class="fl">8.6</span>, <span class="st">"-2 + 10.6 should equal 8.6"</span></span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> add(<span class="dv">0</span>, <span class="dv">0</span>) <span class="op">==</span> <span class="dv">0</span>, <span class="st">"0 + 0 should equal 0"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><strong>Pure functions</strong>—those without side effects like reading or writing external files—are especially <strong>easy to test</strong> because you can directly supply the necessary inputs. Placing your main logic into pure functions therefore simplifies testing the critical parts of your code. For impure functions, such as those interacting with databases or APIs, you can use techniques like <strong>mocking</strong> to simulate external dependencies.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Testing in Python with `pytest`">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -495,6 +535,44 @@ Testing in Python with <code>pytest</code>
 </div>
 <div class="callout-body-container callout-body">
 <p>Consider using the <a href="https://docs.pytest.org/en/stable/"><code>pytest</code></a> framework for your Python tests. Organize all your test scripts in a dedicated <code>tests/</code> folder to keep them separate from the main source code.</p>
+</div>
+</div>
+<p><strong>Pure functions</strong>—those without side effects like reading or writing external files—are especially <strong>easy to test</strong> because you can directly supply the necessary inputs. Placing your main logic into pure functions therefore simplifies testing the critical parts of your code. For impure functions, such as those interacting with databases or APIs, you can use techniques like <strong>mocking</strong> to simulate external dependencies.</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Call-By-Value vs. Call-By-Reference">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Call-By-Value vs.&nbsp;Call-By-Reference
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Depending on your programming language, function arguments can be passed either by <strong>value (a copy of the variable’s content)</strong> or by <strong>reference (the function accesses the variable’s memory location, allowing direct manipulation)</strong>. For clean code, we aim to follow the principle: “What happens inside a function stays inside the function (except for return values).” However, passing by reference can introduce unintended side effects, where changes made inside the function affect variables outside it, increasing complexity and leading to confusing bugs. In Python, this often occurs with mutable data types like lists and dictionaries:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> change_list(a_list):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    a_list[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">42</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    my_list <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(my_list)  <span class="co"># [1, 2, 3]</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    change_list(a_list)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(my_list)  <span class="co"># [42, 2, 3] 😱</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To prevent such side effects, create a copy of the variable before modifying it. This ensures the original remains unchanged:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> copy <span class="im">import</span> deepcopy</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> change_list(a_list):</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    a_list <span class="op">=</span> deepcopy(a_list)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    a_list[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">42</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    my_list <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    change_list(a_list)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(my_list)  <span class="co"># [1, 2, 3] 😊</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To avoid sneaky bugs, <strong>include tests to verify</strong>:</p>
+<ol type="1">
+<li><strong>Inputs remain unchanged</strong> after execution.</li>
+<li>The function <strong>produces the same output when called twice</strong> with identical inputs.</li>
+</ol>
 </div>
 </div>
 <p>When designing your tests, focus on <strong>edge cases</strong>—unusual or extreme scenarios like values outside the normal range or invalid inputs (e.g., dividing by zero or passing an empty list). The more thorough your tests, the more confident you can be in your code. Each time you make significant changes, run all your tests to ensure the code still behaves as expected.</p>
@@ -553,6 +631,7 @@ Readability over performance
 <section id="find-and-fix-the-bottlenecks" class="level4">
 <h4 class="anchored" data-anchor-id="find-and-fix-the-bottlenecks">Find and fix the bottlenecks</h4>
 <p>Instead of randomly trying to speed up everything, focus on the parts of your code that are actually slow. A quick way to find bottlenecks is to manually interrupt your code during a long run; if it always stops in the same place, that’s likely the issue. For a more systematic approach, use a <strong>profiler</strong>. Profilers analyze your code and show you how much time each part takes, helping you decide where to focus your efforts.</p>
+<p><strong>Accessing files on disk or fetching data over the network</strong> is one of the slowest operations in most programs. Whenever possible, <strong>cache the results</strong> by storing the loaded data in memory to avoid repeated access to external resources. Just be mindful of how frequently the external data changes and invalidate the cache when the information becomes outdated.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Run it in the cloud">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -579,7 +658,7 @@ Run it in the cloud
 </section>
 <section id="divide-conquer" class="level3">
 <h3 class="anchored" data-anchor-id="divide-conquer">Divide &amp; Conquer</h3>
-<p>If your code is too slow or your dataset too large, try <strong>splitting the work into smaller, independent chunks and combining the results</strong>. This “divide and conquer” approach is used in many algorithms, like the <a href="https://en.wikipedia.org/wiki/Merge_sort">merge sort algorithm</a>, and in big data frameworks like MapReduce.</p>
+<p>If your code is too slow or your dataset too large, try <strong>splitting the work into smaller, independent chunks and combining the results</strong>. Such a “divide and conquer” approach is used in many algorithms, like the <a href="https://en.wikipedia.org/wiki/Merge_sort">merge sort algorithm</a>, and in big data frameworks like MapReduce.</p>
 <section id="example-mapreduce" class="level4">
 <h4 class="anchored" data-anchor-id="example-mapreduce">Example: MapReduce</h4>
 <p>MapReduce <span class="citation" data-cites="dean2008mapreduce">[<a href="references.html#ref-dean2008mapreduce" role="doc-biblioref">2</a>]</span> was one of the first frameworks developed to work with ‘big data’ that does not fit on a single computer anymore. The data is split into chunks and distributed across multiple machines, where each chunk is processed in parallel (<em>map</em> step), and then the results are combined into the final output (<em>reduce</em> step).</p>
@@ -596,35 +675,35 @@ Replace For-Loops with Map/Filter/Reduce
 <div class="callout-body-container callout-body">
 <p>Sequential <code>for</code> loops can often be replaced with <code>map</code>, <code>filter</code>, and <code>reduce</code> operations for better readability and potential parallelism:</p>
 <ul>
-<li><strong><code>map</code></strong>: Transforms each element in a sequence.</li>
-<li><strong><code>filter</code></strong>: Keeps elements that meet a condition.</li>
-<li><strong><code>reduce</code></strong>: Aggregates elements recursively (e.g., summing values).</li>
+<li><strong><code>map</code></strong>: Transform each element in a sequence.</li>
+<li><strong><code>filter</code></strong>: Keep elements that meet a condition.</li>
+<li><strong><code>reduce</code></strong>: Aggregate elements recursively (e.g., summing values).</li>
 </ul>
 <p>For example:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> <span class="bu">reduce</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">### Simplify this loop:</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>current_sum <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>current_max <span class="op">=</span> <span class="op">-</span><span class="bu">float</span>(<span class="st">'inf'</span>)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10000</span>):</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    new_i <span class="op">=</span> i<span class="op">**</span><span class="fl">0.5</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># the modulo operator x % y gives the remainder when diving x by y</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># i.e., we're checking for even numbers, where the rest is == 0</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="bu">round</span>(new_i) <span class="op">%</span> <span class="dv">2</span>) <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        current_sum <span class="op">+=</span> new_i</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>        current_max <span class="op">=</span> <span class="bu">max</span>(current_max, new_i)</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">### Using map/filter/reduce:</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co"># map(function to apply, list of elements)</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>new_i_all <span class="op">=</span> <span class="bu">map</span>(<span class="kw">lambda</span> x: x<span class="op">**</span><span class="fl">0.5</span>, <span class="bu">range</span>(<span class="dv">10000</span>))</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co"># filter(function that returns true or false, list of elements)</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>new_i_filtered <span class="op">=</span> <span class="bu">filter</span>(<span class="kw">lambda</span> x: (<span class="bu">round</span>(x) <span class="op">%</span> <span class="dv">2</span>) <span class="op">==</span> <span class="dv">0</span>, new_i_all)</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co"># reduce(function to combine current result with next element, list of elements, initial value)</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>current_sum <span class="op">=</span> <span class="bu">reduce</span>(<span class="kw">lambda</span> acc, x: acc <span class="op">+</span> x, new_i_filtered, <span class="dv">0</span>)</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>current_max <span class="op">=</span> <span class="bu">reduce</span>(<span class="kw">lambda</span> acc, x: <span class="bu">max</span>(acc, x), new_i_filtered, <span class="op">-</span><span class="bu">float</span>(<span class="st">'inf'</span>))</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co"># (of course, for these simple cases you could just use sum() and max() on the list directly)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> <span class="bu">reduce</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">### Simplify this loop:</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>result_sum <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>result_max <span class="op">=</span> <span class="op">-</span><span class="bu">float</span>(<span class="st">'inf'</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10000</span>):</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    new_i <span class="op">=</span> i<span class="op">**</span><span class="fl">0.5</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># the modulo operator x % y gives the remainder when diving x by y</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># i.e., we're checking for even numbers, where the rest is == 0</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="bu">round</span>(new_i) <span class="op">%</span> <span class="dv">2</span>) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>        result_sum <span class="op">+=</span> new_i</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>        result_max <span class="op">=</span> <span class="bu">max</span>(result_max, new_i)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">### Using map/filter/reduce:</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co"># map(function to apply, list of elements)</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>new_i_all <span class="op">=</span> <span class="bu">map</span>(<span class="kw">lambda</span> x: x<span class="op">**</span><span class="fl">0.5</span>, <span class="bu">range</span>(<span class="dv">10000</span>))</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co"># filter(function that returns true or false, list of elements)</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>new_i_filtered <span class="op">=</span> <span class="bu">filter</span>(<span class="kw">lambda</span> x: (<span class="bu">round</span>(x) <span class="op">%</span> <span class="dv">2</span>) <span class="op">==</span> <span class="dv">0</span>, new_i_all)</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co"># reduce(function to combine current result with next element, list of elements, initial value)</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>result_sum <span class="op">=</span> <span class="bu">reduce</span>(<span class="kw">lambda</span> acc, x: acc <span class="op">+</span> x, new_i_filtered, <span class="dv">0</span>)</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>result_max <span class="op">=</span> <span class="bu">reduce</span>(<span class="kw">lambda</span> acc, x: <span class="bu">max</span>(acc, x), new_i_filtered, <span class="op">-</span><span class="bu">float</span>(<span class="st">'inf'</span>))</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co"># (of course, for these simple cases you could just use sum() and max() on the list directly)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>In Python, list comprehensions also offer concise alternatives:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>new_i_filtered <span class="op">=</span> [i<span class="op">**</span><span class="fl">0.5</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10000</span>) <span class="cf">if</span> (<span class="bu">round</span>(i<span class="op">**</span><span class="fl">0.5</span>) <span class="op">%</span> <span class="dv">2</span>) <span class="op">==</span> <span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>new_i_filtered <span class="op">=</span> [i<span class="op">**</span><span class="fl">0.5</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10000</span>) <span class="cf">if</span> (<span class="bu">round</span>(i<span class="op">**</span><span class="fl">0.5</span>) <span class="op">%</span> <span class="dv">2</span>) <span class="op">==</span> <span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
@@ -636,10 +715,10 @@ Replace For-Loops with Map/Filter/Reduce
 </section>
 <section id="refactoring-make-change-easy" class="level2">
 <h2 class="anchored" data-anchor-id="refactoring-make-change-easy">Refactoring: Make Change Easy</h2>
-<p>Refactoring is the process of <strong>modifying existing code without altering its external behavior</strong>. In other words, it preserves the “contract” (interface) between your code and its users while improving its internal structure.<br>
+<p>Refactoring is the process of <strong>modifying existing code without altering its external behavior</strong> <span class="citation" data-cites="fowler2018refactoring">[<a href="references.html#ref-fowler2018refactoring" role="doc-biblioref">4</a>]</span>. In other words, it preserves the “contract” (interface) between your code and its users while improving its internal structure.<br>
 Common refactoring tasks include:</p>
 <ul>
-<li><strong>Renaming</strong>: Giving variables, functions, or classes more meaningful and descriptive names.</li>
+<li><strong>Renaming</strong>: Giving (internally used) variables, functions, or classes more meaningful and descriptive names.</li>
 <li><strong>Extracting Functions</strong>: Breaking large functions into smaller, more focused ones (<span class="math inline">\(\to\)</span> one function should do one thing).</li>
 <li><strong>Eliminating Duplication</strong>: Consolidating repeated code into reusable functions.</li>
 <li><strong>Simplifying Logic</strong>: Reducing deeply nested code structures or introducing guard clauses for clarity.</li>
@@ -655,7 +734,7 @@ When code is written quickly—often to meet deadlines—it may include shortcut
 <li>Example: Revisiting old code can be like tidying up a messy campsite. Just as a good scout leaves the campground cleaner than they found it, a responsible developer leaves the codebase better for the next person (or themselves in the future).</li>
 </ul></li>
 <li><strong>Making Change Easier</strong>:<br>
-Sometimes, implementing a new feature in your existing code feels like forcing a square peg into a round hole. Instead of struggling with awkward workarounds, you should first refactor your code to align with the new requirements. The goal of software design isn’t to predict every possible future change (which is impossible) but to adapt gracefully when those changes arise.
+Sometimes, implementing a new feature in your existing code feels like forcing a square peg into a round hole. Instead of struggling with awkward workarounds, you should first refactor your code to align with the new requirements. The goal of software design isn’t to predict every possible future change (which is impossible) but to adapt gracefully when those changes arise. This promotes an evolutionary architecture, where you solve problems once you understand them better <span class="citation" data-cites="ford2022building">[<a href="references.html#ref-ford2022building" role="doc-biblioref">3</a>]</span>.
 <ul>
 <li>Before adding a new feature, clean up your code so that the change feels natural and seamless. This not only simplifies the task at hand but also results in a more general, reusable functions and classes.</li>
 </ul></li>
@@ -669,26 +748,43 @@ Sometimes, implementing a new feature in your existing code feels like forcing a
 </blockquote>
 <ul>
 <li><p><strong>Replace Magic Numbers with Constants</strong>: Magic numbers—values with unclear meaning—can make code harder to understand and maintain. By replacing them with constants, you create a single source of truth that’s easy to modify.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Before:</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> status <span class="op">==</span> <span class="dv">404</span>:</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    ...</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># After:</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>ERROR_NOT_FOUND <span class="op">=</span> <span class="dv">404</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> status <span class="op">==</span> ERROR_NOT_FOUND:</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Before:</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> status <span class="op">==</span> <span class="dv">404</span>:</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># After:</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>ERROR_NOT_FOUND <span class="op">=</span> <span class="dv">404</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> status <span class="op">==</span> ERROR_NOT_FOUND:</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p><strong>Don’t Repeat Yourself (DRY)</strong>: Copying and pasting code may seem like a quick fix, but it leads to problems later. If the logic changes, you’ll need to update it everywhere it’s duplicated, which is error-prone. Instead, move the logic into a reusable function or method.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Before:</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (model.a <span class="op">&gt;</span> <span class="dv">5</span>) <span class="kw">and</span> (model.b <span class="op">==</span> <span class="dv">3</span>) <span class="kw">and</span> (model.c <span class="op">&lt;</span> <span class="dv">8</span>):</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    ...</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># After:</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MyModel:</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> is_ready(<span class="va">self</span>):</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (<span class="va">self</span>.a <span class="op">&gt;</span> <span class="dv">5</span>) <span class="kw">and</span> (<span class="va">self</span>.b <span class="op">==</span> <span class="dv">3</span>) <span class="kw">and</span> (<span class="va">self</span>.c <span class="op">&lt;</span> <span class="dv">8</span>)</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> model.is_ready():</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Before:</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (model.a <span class="op">&gt;</span> <span class="dv">5</span>) <span class="kw">and</span> (model.b <span class="op">==</span> <span class="dv">3</span>) <span class="kw">and</span> (model.c <span class="op">&lt;</span> <span class="dv">8</span>):</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># After:</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MyModel:</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> is_ready(<span class="va">self</span>):</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (<span class="va">self</span>.a <span class="op">&gt;</span> <span class="dv">5</span>) <span class="kw">and</span> (<span class="va">self</span>.b <span class="op">==</span> <span class="dv">3</span>) <span class="kw">and</span> (<span class="va">self</span>.c <span class="op">&lt;</span> <span class="dv">8</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> model.is_ready():</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p><strong>Implement Wrappers</strong>: When working with external libraries or APIs, their provided interface might not align with your needs, and adapting to it directly can lead to awkward implementations in your code. A better solution is to create a wrapper that implements <strong>the interface you wish you had</strong>, translating the external API’s inputs and outputs into the format that best suits your implementation. This approach keeps your code clean, consistent, and easier to maintain, while confining the less-than-ideal API interactions to a single location. Plus, if the external API changes, you only need to update the wrapper instead of changing your code everywhere.</p></li>
+<li><p><strong>Use Alternative Constructors</strong>: Similar to a wrapper, you can add a class method to create objects in a way that’s different from the regular constructor. This is useful when the input data doesn’t directly match what the constructor needs. For instance, imagine you have a configuration file that specifies settings for a simulation. If the names or structure of these settings don’t match the constructor’s parameters, you can create a <code>from_config</code> method to handle the translation and then call the constructor with the correct arguments. The advantage is that if the format of the configuration file changes in the future, you only need to update this one method, keeping the rest of your code the same.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Date:</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, year, month, day):</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>      <span class="va">self</span>.year <span class="op">=</span> year</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>      <span class="va">self</span>.month <span class="op">=</span> month</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>      <span class="va">self</span>.day <span class="op">=</span> day</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">@classmethod</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> from_str(cls, date_str):</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Parse the string and create a new instance</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>      year, month, day <span class="op">=</span> <span class="bu">map</span>(<span class="bu">int</span>, date_str.split(<span class="st">'-'</span>))</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> cls(year, month, day)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Usage:</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>date1 <span class="op">=</span> Date(<span class="dv">2025</span>, <span class="dv">0</span><span class="er">1</span>, <span class="dv">30</span>)</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>date2 <span class="op">=</span> Date.from_str(<span class="st">"2025-01-30"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p><strong>Organize for Coherence</strong>: Keep code elements that need to change together in the same file or module. Conversely, separate unrelated parts of your code to prevent unnecessary entanglement. This way, changes are localized, which reduces cognitive load.</p>
 <p>In larger codebases shared by multiple teams, this is even more critical. <strong>When changes require excessive communication and coordination, it signals a need to reorganize the code.</strong> Clear ownership and reduced dependencies help teams work independently while keeping the system coherent through agreed upon interfaces.</p></li>
 </ul>
@@ -709,7 +805,7 @@ Additional tips
 </ul>
 </div>
 </div>
-<p>By refactoring regularly and following these practices, you’ll create a cleaner, more maintainable codebase that is adaptable to future needs and fun to work with.</p>
+<p>By refactoring regularly and following these practices, you’ll create a cleaner, more maintainable codebase that is adaptable to future needs and enjoyable to work with.</p>
 <div class="callout callout-style-default callout-caution callout-titled" title="Before you continue">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -736,8 +832,14 @@ Before you continue
 <div id="ref-dean2008mapreduce" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[2] </div><div class="csl-right-inline">Dean J, Ghemawat S. MapReduce: Simplified Data Processing on Large Clusters. <em>Communications of the ACM</em> 51(1), 107–113 (2008).</div>
 </div>
+<div id="ref-ford2022building" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">Ford N, Parsons R, Kua P, Sadalage P. <em>Building Evolutionary Architectures</em>. O’Reilly Media, Inc. (2022).</div>
+</div>
+<div id="ref-fowler2018refactoring" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline">Fowler M. <em>Refactoring: Improving the Design of Existing Code</em>. Addison-Wesley Professional (2018).</div>
+</div>
 <div id="ref-ousterhout2018philosophy" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[3] </div><div class="csl-right-inline">Ousterhout JK. <em>A Philosophy of Software Design</em>. Yaknyam Press Palo Alto, CA, USA (2018).</div>
+<div class="csl-left-margin">[5] </div><div class="csl-right-inline">Ousterhout JK. <em>A Philosophy of Software Design</em>. Yaknyam Press Palo Alto, CA, USA (2018).</div>
 </div>
 </div>
 </section>

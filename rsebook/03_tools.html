@@ -262,12 +262,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li><strong>Track changes</strong>: See what you’ve modified and when, with the ability to revert if necessary.</li>
 <li><strong>Review collaborators’ changes</strong>: When working with others, reviewing their changes before they are merged with the main version of the code (in so-called pull or merge requests) ensures quality and provides opportunities to teach each other better ways of doing things.</li>
-<li><strong>Not just for code</strong>: Version control can be used for any kind of file. While it’s less effective for binary formats like images or Microsoft Word where you can’t create a clean “diff” between two versions, you should definitely give it a try when writing your next paper in a text-based format like LaTeX.</li>
+<li><strong>Not just for code</strong>: Version control can be used for any kind of file. While it’s less effective for binary formats like images or Microsoft Word documents where you can’t create a clean “diff” between two versions, you should definitely give it a try when writing your next paper in a text-based format like LaTeX.</li>
 </ul>
 </section>
 <section id="git" class="level4">
 <h4 class="anchored" data-anchor-id="git">Git</h4>
-<p>The go-to tool for version control is <strong>Git</strong>. While desktop clients exist, many professionals use <code>git</code> directly in the terminal as a command line tool.</p>
+<p>The go-to tool for version control is <strong>Git</strong>. While desktop clients exist, you can also use <code>git</code> directly in the terminal as a command line tool.</p>
 <p>If you’re new to Git, <a href="https://www.atlassian.com/git/tutorials">this beginner’s guide</a> is a great place to start.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Essential Git Commands">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -332,9 +332,41 @@ Examples include:</p>
 <li><strong>Vim</strong> and <strong>Emacs</strong>: Some of the first code editors, often used as command line tools and beloved by keyboard shortcuts enthusiasts.</li>
 </ul>
 </section>
+<section id="terminal" class="level4">
+<h4 class="anchored" data-anchor-id="terminal">Terminal</h4>
+<p>When you write code in a text editor, you need a way to execute it. This is where the <strong>terminal</strong> comes in. A terminal, or console, lets you interact with your computer through the <strong>command line</strong>, using text-based commands. Think of it like stepping back to the 1970s—or like being one of those cool hackers you see on TV.</p>
+<p>On macOS and Linux, a terminal app is already preinstalled. On Windows, different options exist to install a Unix-like terminal, like the Windows Terminal. Inside the terminal, there’s a <strong>shell</strong>: the actual program that processes the commands you type. The most common shells on Unix systems are <code>bash</code> and <code>zsh</code>, which are quite similar. For this book, we’ll assume you’re using one of these.</p>
+<p>With the shell, you can navigate your computer’s file system and run programs through their command-line interface (CLI). Try it out!</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Basic Shell Commands">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Basic Shell Commands
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Follow along by typing these commands into your terminal. In parallel, you can watch your normal file browser to see files and folders appear or disappear as you go.</p>
+<ul>
+<li><code>pwd</code>: Print the current working directory—this shows the path to where you opened the terminal.</li>
+<li><code>ls</code>: List files and directories in the current location. Use <code>ls -la</code> for more details, including hidden files (like <code>.gitignore</code>).</li>
+<li><code>cd path/to/folder</code>: Change directory to the specified path. Tips: Use tab to autocomplete names. If the path starts with <code>/</code>, it’s absolute (from the file system’s root). If it starts with <code>~/</code>, it’s relative to your home directory. Use <code>..</code> to move up one folder.</li>
+<li><code>mkdir new_folder</code>: Create a new directory named <code>new_folder</code>.</li>
+<li><code>touch new_file.txt</code>: Create an empty file named <code>new_file.txt</code>.</li>
+<li><code>cp new_file.txt copied_file.txt</code>: Copy <code>new_file.txt</code> to <code>copied_file.txt</code>. Use <code>mv</code> instead of <code>cp</code> to move or rename files.</li>
+<li><code>rm new_file.txt</code>: Delete <code>new_file.txt</code>. Add <code>-r</code> to delete directories. But be careful: files deleted this way bypass the trash and are gone for good, so double-check before hitting enter!</li>
+</ul>
+<p>You can also run other CLI programs in the terminal, like using the <code>git</code> commands described earlier.<br>
+A Python script can be executed with <code>python script.py</code> (assuming the script is in your current directory).</p>
+</div>
+</div>
+<p>Not all CLI programs mentioned in this book will be preinstalled on your machine. Linux systems already come with a command-line package manager (like <code>apt</code> on Ubuntu), which can be used to install other tools. A popular package manager for macOS is <a href="https://brew.sh/"><code>brew</code></a>, while for Windows you can use <a href="https://learn.microsoft.com/en-us/windows/package-manager/winget/"><code>winget</code></a>.</p>
+<p>Once you get comfortable with your shell, you can also create <strong>shell scripts</strong> (files with a <code>.sh</code> extension) to automate tasks and handle more complex workflows. These scripts can include conditionals, loops, and other programming constructs. For more information on bash scripting, check out <a href="https://devhints.io/bash">this resource</a>.</p>
+</section>
 <section id="full-ides" class="level4">
 <h4 class="anchored" data-anchor-id="full-ides">Full IDEs</h4>
-<p>For more features, IDEs integrate tools like file browsers, Git support, and debuggers. They are ideal for larger projects and provide support for more complex tasks, like renaming variables across multiple files when you’re refactoring your code.<br>
+<p>Integrated Development Environments (IDEs) combine all the tools you need in one place—file browser, editor, terminal, Git support, debugger, and more. They are ideal for larger projects and provide support for more complex tasks, like renaming variables across multiple files when you’re refactoring your code.<br>
 Examples include:</p>
 <ul>
 <li><strong>VS Code</strong>: Minimalist by default but highly customizable with plugins, making it suitable for everything from basic editing to full-scale development.</li>
@@ -347,7 +379,7 @@ Examples include:</p>
 <section id="jupyter-notebooks" class="level4">
 <h4 class="anchored" data-anchor-id="jupyter-notebooks">Jupyter Notebooks</h4>
 <p>Jupyter notebooks are a unique format that lets you <strong>mix code, output (like plots), and explanatory text</strong> in one document. The name <em>Jupyter</em> is derived from Julia, Python, and R, the programming languages for which the notebook format, and later the JupyterLab IDE, were created. The IDE itself runs inside your web browser.</p>
-<p>Notebooks are great for exploratory data analysis and to create reproducible reports. However, since the notebooks themselves are composed of individual interactive cells that can be executed in any order, developing in notebooks often becomes messy quickly. We recommend that you keep the main logic and reusable functions in separate scrips or libraries and primarily use notebooks to create plots and other results. It is also good practice to run your notebook again from top to bottom once you’re finished to make sure everything still works and you’re not relying on variables that were defined in now-deleted cells, for example.</p>
+<p>Notebooks are great for exploratory data analysis and to create reproducible reports. However, since the notebooks themselves are composed of individual interactive cells that can be executed in any order, developing in notebooks often becomes messy quickly. We recommend that you keep the main logic and reusable functions in separate scrips or libraries and primarily use notebooks to create plots and other results. It is also good practice once you’re finished to restart the kernel and run your notebook again from top to bottom to make sure everything still works and you’re not relying on variables that were defined in now-deleted cells, for example.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Notebooks as text files">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -381,7 +413,7 @@ Parameterize notebooks
 <h2 class="anchored" data-anchor-id="reproducible-setups">Reproducible Setups</h2>
 <p>“It works on my machine” isn’t good enough for science. Reproducibility means your results can be replicated by others (and by you a few months later when the reviewers of your paper request changes to your experiments). The first step to achieve this is to <strong>manage your dependencies</strong> (i.e., external libraries used by your code) to ensure the environment in which your code is executed is identical for everyone that runs your code, every time. This can be done using <strong>virtual environments</strong>, or, if you want to go even further, <strong>containers</strong> like Docker, which will be discussed in <a href="06_production.html" class="quarto-xref"><span>Chapter 6</span></a>.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Virtual Environments in Python with `poetry`">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -390,7 +422,7 @@ Virtual Environments in Python with <code>poetry</code>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Virtual environments isolate your project’s dependencies, thereby ensuring consistency. For Python, a common tool to do this is <a href="https://python-poetry.org/"><code>poetry</code></a>. It tracks the libraries and their versions in a <code>pyproject.toml</code> like this:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode toml code-with-copy"><code class="sourceCode toml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[tool.poetry]</span></span>
@@ -420,7 +452,7 @@ Virtual Environments in Python with <code>poetry</code>
 <h4 class="anchored" data-anchor-id="handling-randomness">Handling Randomness</h4>
 <p>Your program will often depend on randomly sampled values, for example, when defining the initial conditions for a simulation or initializing a model before it is fitted to data (like a neural network). To ensure that your experiments can be reproduced, it is important that you always <strong>set a random seed</strong> at the beginning of your program so the random number generator starts from a consistent state.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Setting Random Seeds in Python">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -429,7 +461,7 @@ Setting Random Seeds in Python
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>At the beginning of your script, set a random seed (depending on the library that you’re using this can vary):</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
@@ -480,7 +512,7 @@ Hardware differences
 <li><strong>Linters</strong> analyze code for errors, inefficiencies, and deviations from best practices.</li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled" title="Formatter &amp; Linter in Python: `ruff`">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -489,7 +521,7 @@ Formatter &amp; Linter in Python: <code>ruff</code>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><a href="https://docs.astral.sh/ruff/"><code>ruff</code></a> is a (super fast) formatter and linter for Python, written in Rust. You can install it via <code>pip</code> and configure it in the same <code>pyproject.toml</code> file that we also used for <code>poetry</code>. Then run it over you code like this:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ruff</span> check        <span class="co"># see which errors the linter finds</span></span>
@@ -505,7 +537,7 @@ Formatter &amp; Linter in Python: <code>ruff</code>
 <h4 class="anchored" data-anchor-id="pre-commit-hooks">Pre-commit Hooks</h4>
 <p>In the heat of the moment, you might forget to run the formatter and linter over your code before committing your changes. To <strong>avoid accidentally checking messy code into your repository</strong>, you can configure so-called “pre-commit hooks”. <a href="https://pre-commit.com/">Pre-commit hooks</a> catch issues automatically by enforcing coding standards before committing or pushing code with git.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Setting up pre-commit hooks">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -514,9 +546,9 @@ Setting up pre-commit hooks
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>First, you need to install pre-commit hooks through Python’s package manger <code>pip</code>:</p>
+<p>First, you need to install pre-commit hooks, e.g., through Python’s package manger <code>pip</code>:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pre-commit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Then configure it in a file named <code>.pre-commit-config.yaml</code> (here done for <code>ruff</code>):</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">repos</span><span class="kw">:</span></span>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.39">
+<meta name="generator" content="quarto-1.6.40">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -92,7 +92,7 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-37b241f53b32a5ad598e4053e71b073f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -258,23 +258,14 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#from-design-to-code-fill-in-the-blanks" id="toc-from-design-to-code-fill-in-the-blanks" class="nav-link active" data-scroll-target="#from-design-to-code-fill-in-the-blanks">From Design to Code: Fill in the Blanks</a>
-  <ul class="collapse">
-  <li><a href="#minimum-viable-results" id="toc-minimum-viable-results" class="nav-link" data-scroll-target="#minimum-viable-results">Minimum Viable Results</a></li>
-  <li><a href="#breaking-code-into-modules" id="toc-breaking-code-into-modules" class="nav-link" data-scroll-target="#breaking-code-into-modules">Breaking Code into Modules</a></li>
-  <li><a href="#keep-it-compact" id="toc-keep-it-compact" class="nav-link" data-scroll-target="#keep-it-compact">Keep It Compact</a></li>
-  </ul></li>
+  <li><a href="#from-design-to-code-fill-in-the-blanks" id="toc-from-design-to-code-fill-in-the-blanks" class="nav-link active" data-scroll-target="#from-design-to-code-fill-in-the-blanks">From Design to Code: Fill in the Blanks</a></li>
   <li><a href="#documentation-comments-a-note-to-your-future-self" id="toc-documentation-comments-a-note-to-your-future-self" class="nav-link" data-scroll-target="#documentation-comments-a-note-to-your-future-self">Documentation &amp; Comments: A Note to Your Future Self</a></li>
   <li><a href="#tests-protect-what-you-love" id="toc-tests-protect-what-you-love" class="nav-link" data-scroll-target="#tests-protect-what-you-love">Tests: Protect What You Love</a>
   <ul class="collapse">
   <li><a href="#debugging" id="toc-debugging" class="nav-link" data-scroll-target="#debugging">Debugging</a></li>
   </ul></li>
-  <li><a href="#make-it-fast" id="toc-make-it-fast" class="nav-link" data-scroll-target="#make-it-fast">Make It Fast</a>
-  <ul class="collapse">
-  <li><a href="#think-about-big-o" id="toc-think-about-big-o" class="nav-link" data-scroll-target="#think-about-big-o">Think About Big O</a></li>
-  <li><a href="#divide-conquer" id="toc-divide-conquer" class="nav-link" data-scroll-target="#divide-conquer">Divide &amp; Conquer</a></li>
-  </ul></li>
-  <li><a href="#refactoring-make-change-easy" id="toc-refactoring-make-change-easy" class="nav-link" data-scroll-target="#refactoring-make-change-easy">Refactoring: Make Change Easy</a></li>
+  <li><a href="#make-it-fast" id="toc-make-it-fast" class="nav-link" data-scroll-target="#make-it-fast">Make It Fast</a></li>
+  <li><a href="#sec-refactoring" id="toc-sec-refactoring" class="nav-link" data-scroll-target="#sec-refactoring">Refactoring: Make Change Easy</a></li>
   </ul>
 </nav>
     </div>
@@ -303,11 +294,11 @@ window.Quarto = {
 <p>Now that you have a plan, it’s finally time to get started with the implementation.</p>
 <section id="from-design-to-code-fill-in-the-blanks" class="level2">
 <h2 class="anchored" data-anchor-id="from-design-to-code-fill-in-the-blanks">From Design to Code: Fill in the Blanks</h2>
-<p>Armed with your design from the last chapter, you can now <strong>translate your sketch into a code skeleton</strong>. Start by outlining the functions, place calls to them where needed, and add comments for any steps you’ll figure out later. For example, the design from <a href="04_design.html#fig-draw-how" class="quarto-xref">Figure&nbsp;<span>4.3</span></a> could result in the following draft:</p>
+<p>Armed with your design from the last chapter, you can now <strong>translate your sketch into a code skeleton</strong>. Start by outlining the functions, place calls to them where needed, and add comments for any steps you’ll figure out later. For example, the design from <a href="04_design.html#fig-draw-how" class="quarto-xref">Figure&nbsp;<span>4.13</span></a> could result in the following draft:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Model:</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MyModel:</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, param1):</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.param1 <span class="op">=</span> param1</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
@@ -327,25 +318,29 @@ window.Quarto = {
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> preprocess(df)</span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_R2(y, y_pred):</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    R2 <span class="op">=</span> ...</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> R2</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_r2(y, y_pred):</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    r2 <span class="op">=</span> ...</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> r2</span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> evaluate_and_plot(y, y_pred):</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    R2 <span class="op">=</span> compute_R2(y, y_pred)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> evaluate_plot(y, y_pred):</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    r2 <span class="op">=</span> compute_r2(y, y_pred)</span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ... create and save plot ...</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> R2</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> r2</span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># script is called as `python script.py seed param1 [param2]`</span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    seed, param1, param2 <span class="op">=</span> ...</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    np.random.seed(seed)</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> Model(param1)</span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    df_train <span class="op">=</span> load_data(<span class="st">"train.csv"</span>)</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    model.fit(df_train.x, df_train.y)</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    df_test <span class="op">=</span> load_data(<span class="st">"test.csv"</span>)</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    y_pred <span class="op">=</span> model.predict(df_test.x)</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    R2 <span class="op">=</span> evaluate_and_plot(df_test.y, y_pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main(model):</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    df_train <span class="op">=</span> load_data(<span class="st">"train.csv"</span>)</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    model.fit(df_train.x, df_train.y)</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    df_test <span class="op">=</span> load_data(<span class="st">"test.csv"</span>)</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    y_pred <span class="op">=</span> model.predict(df_test.x)</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    r2 <span class="op">=</span> evaluate_plot(df_test.y, y_pred)</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    <span class="co"># script is called as `python script.py seed param1 [param2]`</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    seed, param1, param2 <span class="op">=</span> ...</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    np.random.seed(seed)</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span><span class="al">TODO</span><span class="co">: check which type of model should be created (mine or baseline)</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> MyModel(param1)</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    main(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Order of functions">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -360,52 +355,39 @@ Order of functions
 </div>
 </div>
 <p>Once your skeleton stands, you “only” need to <strong>fill in the details</strong>, which is a lot less intimidating than facing a blank page. Plus, since you started with a thoughtful design, your final program is more likely to be well-structured and easy to understand. Compare this to writing code on the fly, where decisions about functions are often made haphazardly—you’ll appreciate the difference.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Using AI Code Generators">
+<div class="callout callout-style-default callout-tip callout-titled" title="Using AI code generators">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Using AI Code Generators
+Using AI code generators
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>AI assistants like ChatGPT or GitHub Copilot can be helpful tools when writing code, especially at the level of individual functions. However, remember that these tools only reproduce patterns from their training data, which includes both good and bad code. As a result, the code they generate may not always be optimal. For instance, they might use inefficient for-loops instead of more elegant matrix operations. Similarly, support for less popular programming languages may be subpar.<br>
+<p>AI assistants like ChatGPT, Claude, or GitHub Copilot can be helpful tools when writing code, especially at the level of individual functions. However, remember that these tools only reproduce patterns from their training data, which includes both good and bad code. As a result, the code they generate may not always be optimal. For instance, they might use inefficient for-loops instead of more elegant matrix operations. Similarly, support for less popular programming languages may be subpar.<br>
 To get better results, consider crafting prompts like: <em>“You are a senior Python developer with 10 years of experience writing efficient, edge-case-aware code. Write a function …”</em></p>
 </div>
 </div>
-<section id="minimum-viable-results" class="level3">
-<h3 class="anchored" data-anchor-id="minimum-viable-results">Minimum Viable Results</h3>
-<p>In product development, there’s a concept called the <strong>Minimum Viable Product (MVP)</strong>. This refers to the simplest version of a product that still provides value to users. The MVP serves as a prototype to gather feedback on whether the product meets user needs and to identify which features are truly essential. By iterating quickly and testing hypotheses, teams can increase the odds of creating a successful product that people will actually pay for.</p>
-<p>This approach also has motivational benefits. Seeing something functional—even if basic—early on makes it easier to stay engaged. It’s far better than toiling for months without tangible results. We recommend applying this mindset to your research software development by <strong>starting with a script that generates “Minimum Viable Results.”</strong></p>
-<p>This means creating a program that produces outputs resembling your final results, like plots or tables, but using placeholder data instead of actual values. For instance:</p>
-<ul>
-<li>If your goal is to build a prediction model, start with one that simply predicts the mean of the observed data.</li>
-<li>If you’re developing a simulation, begin with random outputs, such as a random walk.</li>
-</ul>
-<p>By starting with Minimum Viable Results, you can <strong>test your code end-to-end</strong> early on, see tangible progress, and <strong>iteratively improve</strong> from there.</p>
-<p>This approach also serves as a <strong>“stupid baseline”</strong>—a simple, easy-to-beat reference point for your final method. It’s a sanity check: if your sophisticated solution can’t outperform this baseline, something’s off.</p>
-</section>
-<section id="breaking-code-into-modules" class="level3">
-<h3 class="anchored" data-anchor-id="breaking-code-into-modules">Breaking Code into Modules</h3>
-<p>Starting a new project often begins with all your code in a single script or notebook. This is fine for quick and small tasks, but as your project grows, keeping everything in one file becomes messy and overwhelming. To keep your code organized and easier to understand, it’s a good idea to move functionality into separate files, also called (sub)modules. <strong>Separating code into modules makes your project easier to navigate, test, and reuse.</strong></p>
-<p>A typical first step is splitting the main logic of your analysis (<code>main.py</code>) from general-purpose helper functions (<code>utils.py</code>). Over time, as <code>utils.py</code> expands, you’ll notice clusters of related functionality that can be moved into their own files, such as <code>preprocessing.py</code>, <code>models.py</code>, or <code>plot_results.py</code>. This modular approach naturally leads to a clean directory structure, which might look like this for a larger Python project:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<section id="breaking-code-into-modules" class="level4">
+<h4 class="anchored" data-anchor-id="breaking-code-into-modules">Breaking Code into Modules</h4>
+<p>Starting a new project often begins with all your code in a single script or notebook. This is fine for quick and small tasks, but as your project grows, keeping everything in one file becomes messy and overwhelming. To keep your code organized and easier to understand, it’s a good idea to move functionality into separate files, also called (sub)modules. Separating code into modules makes your project easier to navigate and can lay the foundation for your own <strong>library of reusable functions and classes</strong>, useful across multiple projects.</p>
+<p>A typical first step is splitting the main logic of your analysis (<code>main.py</code>) from general-purpose helper functions (<code>utils.py</code>). Over time, as <code>utils.py</code> expands, you’ll notice clusters of related functionality that can be moved into their own files, such as <code>data_utils.py</code>, <code>models.py</code>, or <code>results.py</code>. This modular approach naturally leads to a clean directory structure, which might look like this for a larger Python project:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">src/</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> my-package/</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">├──</span> __init__.py</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">├──</span> main.py</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="ex">├──</span> models/</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">│</span>   ├── __init__.py</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="ex">│</span>   ├── baseline_a.py</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="ex">│</span>   ├── baseline_b.py</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="ex">│</span>   └── my_model.py</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">└──</span> utils/</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="ex">├──</span> __init__.py</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="ex">├──</span> preprocessing.py</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="ex">└──</span> plot_results.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> main.py</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> my_library/</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">├──</span> __init__.py</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="ex">├──</span> data_utils.py</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">├──</span> models/</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="ex">│</span>   ├── __init__.py</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="ex">│</span>   ├── baseline_a.py</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="ex">│</span>   ├── baseline_b.py</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">│</span>   ├── interface.py</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="ex">│</span>   └── my_model.py</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">└──</span> results.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>In <code>main.py</code>, you can import the relevant classes and functions from these modules to keep the main script clean and focused:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> models.my_model <span class="im">import</span> MyModel</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils <span class="im">import</span> preprocessing</span>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> my_library.models.my_model <span class="im">import</span> MyModel</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> my_library.data_utils <span class="im">import</span> load_data</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># steps that will be executed when running `python main.py`</span></span>
@@ -420,13 +402,13 @@ Keep helper functions separate
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Always <strong>separate reusable helper functions from the main executable code</strong>. This also means that files like <code>utils/preprocessing.py</code> should not include a <em>main</em> function, as they are not standalone scripts. Instead, these modules provide functionality that can be imported by other scripts—just like external dependencies such as <code>numpy</code>.</p>
-<p>As you tackle more projects, you may develop a set of functions that are so versatile and useful that you find yourself reusing them across multiple projects. At that point, you might consider packaging them as your own open-source library, allowing others to install and use it just like any other external library.</p>
+<p>Always <strong>separate reusable helper functions from the main executable code</strong>. This also means that files like <code>data_utils.py</code> should not include a <em>main</em> function, as they are not standalone scripts. Instead, these modules provide functionality that can be imported by other scripts—just like external libraries such as <code>numpy</code>.</p>
 </div>
 </div>
+<p>As you tackle more projects, you may develop a set of functions that are so versatile and useful that you find yourself reusing them across multiple projects. At that point, you might consider packaging them as your own <strong>open-source library</strong>, allowing other researchers to install and use them as well.</p>
 </section>
-<section id="keep-it-compact" class="level3">
-<h3 class="anchored" data-anchor-id="keep-it-compact">Keep It Compact</h3>
+<section id="keep-it-compact" class="level4">
+<h4 class="anchored" data-anchor-id="keep-it-compact">Keep It Compact</h4>
 <p>When writing code, aim to achieve your goals while using <strong>as little screen space as possible</strong>—this applies to both the number of lines and their length.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Tips to create compact, reusable code">
 <div class="callout-header d-flex align-content-center">
@@ -439,7 +421,7 @@ Tips to create compact, reusable code
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li><p><strong>Avoid duplication</strong>: Instead of copying and pasting code in multiple places, consolidate it into a reusable function to save lines.</p></li>
+<li><p><strong>Avoid duplication</strong>: Instead of copying and pasting code in multiple places, consolidate it into a reusable function to save lines (DRY principle).</p></li>
 <li><p><strong>Prefer ‘deep’ functions</strong>: Avoid extracting very short code fragments (1-2 lines) into a separate function, especially if this function would require many arguments. Such shallow functions with wide interfaces increase complexity without meaningfully reducing line count. Instead, strive for <em>deep functions</em> (spanning multiple lines) with <em>narrow interfaces</em> (e.g., only 1-3 input arguments, i.e., <strong>fewer arguments than the function has lines of code</strong>), which tend to be more general and reusable <span class="citation" data-cites="ousterhout2018philosophy">[<a href="references.html#ref-ousterhout2018philosophy" role="doc-biblioref">5</a>]</span>.</p></li>
 <li><p><strong>Address nesting</strong>: If your code becomes overly nested, this can be a sign that parts of the code should be moved into a separate function. This simplifies logic and shortens lines.</p></li>
 <li><p><strong>Use Guard Clauses</strong>: Deeply nested <code>if</code>-statements can make code harder to read. Instead, use guard clauses <span class="citation" data-cites="beck2023tidy">[<a href="references.html#ref-beck2023tidy" role="doc-biblioref">1</a>]</span> to handle preconditions (e.g., checking for wrong user input) early, leaving the “happy path” clear and concise. For example:</p>
@@ -465,7 +447,7 @@ Tips to create compact, reusable code
 <section id="documentation-comments-a-note-to-your-future-self" class="level2">
 <h2 class="anchored" data-anchor-id="documentation-comments-a-note-to-your-future-self">Documentation &amp; Comments: A Note to Your Future Self</h2>
 <p>While you write it, everything seems obvious. However, when revisiting your code a few months later (e.g., to try a different experiment), you’re often left wondering what the heck you were doing. This is especially true when some external constraint (like a library quirk) forced you to create a workaround instead of opting for the straightforward solution. When returning to such code, you might be tempted to replace the awkward implementation with something more elegant, only to rediscover why you chose that approach in the first place. This is where comments can save you some trouble. And they are even more important when collaborating with others who need to understand your code.</p>
-<p>We distinguish between documentation and comments: <strong>Documentation</strong> provides the general description of <strong><em>when and how to use your code</em></strong>, such as function docstrings explaining what the function computes, its input parameters, and return values. This is particularly important for open source libraries where you can’t personally explain the code’s purpose and usage to others. <strong>Comments</strong> help developers understand <strong><em>why your code was written in a certain way</em></strong>, like explaining that unintuitive workaround. Additionally, for scientific code, you may also need to document the origin of certain values or equations by referencing the corresponding paper in the comments.</p>
+<p>We distinguish between documentation and comments: <strong>Documentation</strong> provides the general description of <strong><em>when and how to use your code</em></strong>, such as function docstrings explaining what the function computes, its input arguments, and return values. This is particularly important for open source libraries where you can’t personally explain the code’s purpose and usage to others. <strong>Comments</strong> help developers understand <strong><em>why your code was written in a certain way</em></strong>, like explaining that unintuitive workaround. Additionally, for scientific code, you may also need to document the origin of certain values or equations by referencing the corresponding paper in the comments.</p>
 <div class="callout callout-style-default callout-warning callout-titled" title="Code should be self-documenting">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -481,7 +463,7 @@ Code should be self-documenting
 </div>
 </div>
 <section id="naming-is-hard" class="level4">
-<h4 class="anchored" data-anchor-id="naming-is-hard">Naming is hard</h4>
+<h4 class="anchored" data-anchor-id="naming-is-hard">Naming Is Hard</h4>
 <blockquote class="blockquote">
 <p><em>There are only two hard things in Computer Science: cache invalidation and naming things.</em><br>
 – Phil Karlton<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
@@ -504,7 +486,7 @@ Tips for effective naming
 <li>Use <strong>verbs for functions, nouns for classes</strong>.</li>
 <li>Use <strong>affirmative phrases for booleans</strong> (e.g., <code>is_visible</code> instead of <code>is_invisible</code>).</li>
 <li>Use <strong>plurals for collections</strong> (e.g., <code>cats</code> instead of <code>list_of_cats</code>).</li>
-<li><strong>Avoid encoding types in names</strong> (e.g., <code>color_dict</code>), since if you decide to change the data type later, you either need to rename the variable everywhere or the name is now misleading.</li>
+<li><strong>Avoid encoding types in names</strong> (e.g., <code>sample_array</code>), since if you decide to change the data type later, you either need to rename the variable everywhere or the name is now misleading.</li>
 </ul>
 </div>
 </div>
@@ -537,48 +519,9 @@ Testing in Python with <code>pytest</code>
 <p>Consider using the <a href="https://docs.pytest.org/en/stable/"><code>pytest</code></a> framework for your Python tests. Organize all your test scripts in a dedicated <code>tests/</code> folder to keep them separate from the main source code.</p>
 </div>
 </div>
-<p><strong>Pure functions</strong>—those without side effects like reading or writing external files—are especially <strong>easy to test</strong> because you can directly supply the necessary inputs. Placing your main logic into pure functions therefore simplifies testing the critical parts of your code. For impure functions, such as those interacting with databases or APIs, you can use techniques like <strong>mocking</strong> to simulate external dependencies.</p>
-<div class="callout callout-style-default callout-warning callout-titled" title="Call-By-Value vs. Call-By-Reference">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Call-By-Value vs.&nbsp;Call-By-Reference
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Depending on your programming language, function arguments can be passed either by <strong>value (a copy of the variable’s content)</strong> or by <strong>reference (the function accesses the variable’s memory location, allowing direct manipulation)</strong>. For clean code, we aim to follow the principle: “What happens inside a function stays inside the function (except for return values).” However, passing by reference can introduce unintended side effects, where changes made inside the function affect variables outside it, increasing complexity and leading to confusing bugs. In Python, this often occurs with mutable data types like lists and dictionaries:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> change_list(a_list):</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    a_list[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">42</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    my_list <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(my_list)  <span class="co"># [1, 2, 3]</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    change_list(my_list)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(my_list)  <span class="co"># [42, 2, 3] 😱</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>To prevent such side effects, create a copy of the variable before modifying it. This ensures the original remains unchanged:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> copy <span class="im">import</span> deepcopy</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> change_list(a_list):</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    a_list <span class="op">=</span> deepcopy(a_list)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    a_list[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">42</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a_list</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    my_list <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    new_list <span class="op">=</span> change_list(my_list)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(my_list)  <span class="co"># [1, 2, 3] 😊</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(new_list) <span class="co"># [42, 2, 3]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>To avoid sneaky bugs, <strong>include tests to verify</strong>:</p>
-<ol type="1">
-<li><strong>Inputs remain unchanged</strong> after execution.</li>
-<li>The function <strong>produces the same output when called twice</strong> with identical inputs.</li>
-</ol>
-</div>
-</div>
+<p>As discussed in <a href="04_design.html" class="quarto-xref"><span>Chapter 4</span></a>, <strong>pure functions</strong>—those without side effects like reading or writing external files—are especially <strong>easy to test</strong> because you can directly supply the necessary inputs. Placing your main logic into pure functions therefore simplifies testing the critical parts of your code. For impure functions, such as those interacting with databases or APIs, you can use techniques like <strong>mocking</strong> to simulate external resources, ideally combined with <strong>dependency injection</strong>.</p>
 <p>When designing your tests, focus on <strong>edge cases</strong>—unusual or extreme scenarios like values outside the normal range or invalid inputs (e.g., dividing by zero or passing an empty list). The more thorough your tests, the more confident you can be in your code. Each time you make significant changes, run all your tests to ensure the code still behaves as expected.</p>
-<p>Some developers even adopt <strong>Test-Driven Development (TDD)</strong>, where they write tests before the actual code. The process begins with writing tests that fail, then creating the code to make them pass. TDD can be highly motivating as it provides clear goals, but it requires discipline and may not always be practical in the early stages of development when function definitions are still evolving.</p>
+<p>Some developers even adopt <strong>Test-Driven Development (TDD)</strong>, where they write tests before the actual code. The process begins with writing tests that fail (or don’t even compile), then creating the code to make them pass. TDD can be highly motivating as it provides clear goals, but it requires discipline and may not always be practical in the early stages of development when function definitions are still evolving.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Testing at different levels">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -591,8 +534,8 @@ Testing at different levels
 <div class="callout-body-container callout-body">
 <p>Ideally, you’ll test your software at all levels:</p>
 <ul>
-<li><strong>Unit Tests:</strong> Test individual components (e.g., single functions) to verify basic logic.</li>
-<li><strong>Integration/System Tests:</strong> Check that different parts of the system work together as expected. These often require more complex setups, like running multiple services at the same time.</li>
+<li><strong>Unit Tests:</strong> Test individual units (e.g., single functions) to verify basic logic. These should make up the bulk of your test code.</li>
+<li><strong>Integration/System Tests:</strong> Check that different parts of the system work together as expected. These often require more complex setups, like running multiple services at the same time, to test the flow end-to-end.</li>
 <li><strong>Manual Testing:</strong> Identify unexpected behavior or overlooked edge cases. <strong>Whenever a bug is found, create an automated test to reproduce it and prevent regression.</strong></li>
 <li><strong>User Testing:</strong> Evaluate the user interface (UI) with real users to ensure clarity and usability. UX designers often perform these tests using design mockups before coding begins.</li>
 </ul>
@@ -600,21 +543,21 @@ Testing at different levels
 </div>
 <section id="debugging" class="level3">
 <h3 class="anchored" data-anchor-id="debugging">Debugging</h3>
-<p>When your code doesn’t work as intended, you’ll need to debug—<strong>systematically identify and fix the problem</strong>. Debugging becomes easier if your code is organized into small, testable functions covered by unit tests. These tests often help narrow down the source of the issue. If none of your tests caught the bug, write a new test to reproduce it and ensure this case is covered in the future.</p>
+<p>When your code doesn’t work as intended, you’ll need to debug—<strong>systematically identify and fix the problem</strong>. Debugging becomes easier if your code is organized into small, testable functions covered by unit tests. These tests often help narrow down the source of the issue. If your existing tests didn’t catch the bug, <strong>first write a new, failing test to reproduce it</strong> before fixing it. This confirms your fix works and prevents a regression—meaning the bug won’t sneak back into the code later.</p>
 <p>To isolate the exact line causing the error:</p>
 <ul>
 <li>Use <code>print</code> statements to log variable values at key points and understand the program’s flow.</li>
 <li>Add <code>assert</code> statements to verify intermediate results.</li>
 <li>Use a <strong>debugger</strong>, often integrated into your IDE, to set breakpoints where execution will pause, allowing you to step through the program manually and inspect variables.</li>
 </ul>
-<p>Debugging is an essential skill that not only fixes bugs but also improves your understanding of the code and its behavior.</p>
+<p>Debugging is an essential skill, not only to identify the root cause of bugs, but also to improve your understanding of the code and its behavior.</p>
 </section>
 </section>
 <section id="make-it-fast" class="level2">
 <h2 class="anchored" data-anchor-id="make-it-fast">Make It Fast</h2>
 <blockquote class="blockquote">
 <p><em>Make it run, make it right, make it fast.</em><br>
-– Kent Beck (or rather this dad, Douglas Kent Beck<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>)</p>
+– Kent Beck (or rather his dad, Douglas Kent Beck<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>)</p>
 </blockquote>
 <p>Now that your code works and produces the right results (as you’ve dutifully confirmed with thorough testing), it’s time to think about performance.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="Readability over performance">
@@ -627,12 +570,12 @@ Readability over performance
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Always prioritize writing code that’s easy to understand.</strong> Performance optimizations should never come at the cost of readability. More time is spent by humans reading and maintaining code than machines executing it.</p>
+<p><strong>Always prioritize writing code that’s easy to understand.</strong> Performance optimizations should not come at the cost of readability. More time is spent by humans reading and maintaining code than machines executing it.</p>
 </div>
 </div>
 <section id="find-and-fix-the-bottlenecks" class="level4">
 <h4 class="anchored" data-anchor-id="find-and-fix-the-bottlenecks">Find and fix the bottlenecks</h4>
-<p>Instead of randomly trying to speed up everything, focus on the parts of your code that are actually slow. A quick way to find bottlenecks is to manually interrupt your code during a long run; if it always stops in the same place, that’s likely the issue. For a more systematic approach, use a <strong>profiler</strong>. Profilers analyze your code and show you how much time each part takes, helping you decide where to focus your efforts.</p>
+<p>Instead of randomly trying to speed up everything, focus on the parts of your code that are actually slow. A simple way to identify bottlenecks is to insert log statements with timestamps at key points in your code to measure the time elapsed between steps. And if you manually interrupt a (Python) script during a long run and it always stops in the same place, that’s also often an indication that this step could be the issue. For a more systematic approach, use a <strong>profiler</strong>. Profilers analyze your code and show you how much time each part takes, helping you decide where to focus your efforts.</p>
 <p><strong>Accessing files on disk or fetching data over the network</strong> is one of the slowest operations in most programs. Whenever possible, <strong>cache the results</strong> by storing the loaded data in memory to avoid repeated access to external resources. Just be mindful of how frequently the external data changes and invalidate the cache when the information becomes outdated.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Run it in the cloud">
 <div class="callout-header d-flex align-content-center">
@@ -648,21 +591,21 @@ Run it in the cloud
 </div>
 </div>
 </section>
-<section id="think-about-big-o" class="level3">
-<h3 class="anchored" data-anchor-id="think-about-big-o">Think About Big O</h3>
+<section id="think-about-big-o" class="level4">
+<h4 class="anchored" data-anchor-id="think-about-big-o">Think About Big O</h4>
 <p>Some computations have unavoidable limits. For example, finding the maximum value in an unsorted list requires checking every item—there is no way around this. The “Big O” notation is used to describe these limits, helping you understand how your code scales as data grows (both in terms of execution time and required memory).</p>
 <ul>
 <li><strong>Constant time</strong> (<span class="math inline">\(\mathcal{O}(1)\)</span>): Independent of dataset size (e.g., looking up a key in a dictionary).</li>
 <li><strong>Linear time</strong> (<span class="math inline">\(\mathcal{O}(n)\)</span>): Grows proportionally to data size (e.g., finding the maximum in a list).</li>
 <li><strong>Problematic growth</strong> (e.g., <span class="math inline">\(\mathcal{O}(n^3)\)</span> or <span class="math inline">\(\mathcal{O}(2^n)\)</span>): Polynomial or exponential scaling can make algorithms impractical for large datasets.</li>
 </ul>
-<p>When developing a novel algorithm, you should examine its scaling behavior both theoretically (e.g., using proofs) and empirically (e.g., timing it on datasets of different sizes). Designing a more efficient algorithm is a major achievement in computational research!</p>
+<p>When developing a novel algorithm, you should <strong>examine its scaling behavior both theoretically (e.g., using proofs) and empirically (e.g., timing it on datasets of different sizes)</strong>. Designing a more efficient algorithm is a major achievement in computational research!</p>
 </section>
-<section id="divide-conquer" class="level3">
-<h3 class="anchored" data-anchor-id="divide-conquer">Divide &amp; Conquer</h3>
+<section id="divide-conquer" class="level4">
+<h4 class="anchored" data-anchor-id="divide-conquer">Divide &amp; Conquer</h4>
 <p>If your code is too slow or your dataset too large, try <strong>splitting the work into smaller, independent chunks and combining the results</strong>. Such a “divide and conquer” approach is used in many algorithms, like the <a href="https://en.wikipedia.org/wiki/Merge_sort">merge sort algorithm</a>, and in big data frameworks like MapReduce.</p>
-<section id="example-mapreduce" class="level4">
-<h4 class="anchored" data-anchor-id="example-mapreduce">Example: MapReduce</h4>
+<section id="example-mapreduce" class="level5">
+<h5 class="anchored" data-anchor-id="example-mapreduce">Example: MapReduce</h5>
 <p>MapReduce <span class="citation" data-cites="dean2008mapreduce">[<a href="references.html#ref-dean2008mapreduce" role="doc-biblioref">2</a>]</span> was one of the first frameworks developed to work with ‘big data’ that does not fit on a single computer anymore. The data is split into chunks and distributed across multiple machines, where each chunk is processed in parallel (<em>map</em> step), and then the results are combined into the final output (<em>reduce</em> step).</p>
 <p>For instance, if you’re training a machine learning model on a very large dataset, you could train separate models on subsets of the data and then aggregate their predictions (e.g., by averaging them), thereby creating an ensemble model.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Replace For-Loops with Map/Filter/Reduce">
@@ -682,47 +625,47 @@ Replace For-Loops with Map/Filter/Reduce
 <li><strong><code>reduce</code></strong>: Aggregate elements recursively (e.g., summing values).</li>
 </ul>
 <p>For example:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> <span class="bu">reduce</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">### Simplify this loop:</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>result_sum <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>result_max <span class="op">=</span> <span class="op">-</span><span class="bu">float</span>(<span class="st">'inf'</span>)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10000</span>):</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    new_i <span class="op">=</span> i<span class="op">**</span><span class="fl">0.5</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># the modulo operator x % y gives the remainder when diving x by y</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># i.e., we're checking for even numbers, where the rest is == 0</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="bu">round</span>(new_i) <span class="op">%</span> <span class="dv">2</span>) <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>        result_sum <span class="op">+=</span> new_i</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>        result_max <span class="op">=</span> <span class="bu">max</span>(result_max, new_i)</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">### Using map/filter/reduce:</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co"># map(function to apply, list of elements)</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>new_i_all <span class="op">=</span> <span class="bu">map</span>(<span class="kw">lambda</span> x: x<span class="op">**</span><span class="fl">0.5</span>, <span class="bu">range</span>(<span class="dv">10000</span>))</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co"># filter(function that returns true or false, list of elements)</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>new_i_filtered <span class="op">=</span> <span class="bu">filter</span>(<span class="kw">lambda</span> x: (<span class="bu">round</span>(x) <span class="op">%</span> <span class="dv">2</span>) <span class="op">==</span> <span class="dv">0</span>, new_i_all)</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co"># reduce(function to combine current result with next element, list of elements, initial value)</span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>result_sum <span class="op">=</span> <span class="bu">reduce</span>(<span class="kw">lambda</span> acc, x: acc <span class="op">+</span> x, new_i_filtered, <span class="dv">0</span>)</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>result_max <span class="op">=</span> <span class="bu">reduce</span>(<span class="kw">lambda</span> acc, x: <span class="bu">max</span>(acc, x), new_i_filtered, <span class="op">-</span><span class="bu">float</span>(<span class="st">'inf'</span>))</span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co"># (of course, for these simple cases you could just use sum() and max() on the list directly)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> <span class="bu">reduce</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">### Simplify this loop:</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>result_sum <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>result_max <span class="op">=</span> <span class="op">-</span><span class="bu">float</span>(<span class="st">'inf'</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10000</span>):</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    new_i <span class="op">=</span> i<span class="op">**</span><span class="fl">0.5</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># the modulo operator x % y gives the remainder when diving x by y</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># i.e., we're checking for even numbers, where the rest is == 0</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="bu">round</span>(new_i) <span class="op">%</span> <span class="dv">2</span>) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        result_sum <span class="op">+=</span> new_i</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>        result_max <span class="op">=</span> <span class="bu">max</span>(result_max, new_i)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">### Using map/filter/reduce:</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co"># map(function to apply, list of elements)</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>new_i_all <span class="op">=</span> <span class="bu">map</span>(<span class="kw">lambda</span> x: x<span class="op">**</span><span class="fl">0.5</span>, <span class="bu">range</span>(<span class="dv">10000</span>))</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co"># filter(function that returns true or false, list of elements)</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>new_i_filtered <span class="op">=</span> <span class="bu">filter</span>(<span class="kw">lambda</span> x: (<span class="bu">round</span>(x) <span class="op">%</span> <span class="dv">2</span>) <span class="op">==</span> <span class="dv">0</span>, new_i_all)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co"># reduce(function to combine current result with next element, list of elements, initial value)</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>result_sum <span class="op">=</span> <span class="bu">reduce</span>(<span class="kw">lambda</span> acc, x: acc <span class="op">+</span> x, new_i_filtered, <span class="dv">0</span>)</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>result_max <span class="op">=</span> <span class="bu">reduce</span>(<span class="kw">lambda</span> acc, x: <span class="bu">max</span>(acc, x), new_i_filtered, <span class="op">-</span><span class="bu">float</span>(<span class="st">'inf'</span>))</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co"># (of course, for these simple cases you could just use sum() and max() on the list directly)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>In Python, list comprehensions also offer concise alternatives:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>new_i_filtered <span class="op">=</span> [i<span class="op">**</span><span class="fl">0.5</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10000</span>) <span class="cf">if</span> (<span class="bu">round</span>(i<span class="op">**</span><span class="fl">0.5</span>) <span class="op">%</span> <span class="dv">2</span>) <span class="op">==</span> <span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>new_i_filtered <span class="op">=</span> [i<span class="op">**</span><span class="fl">0.5</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10000</span>) <span class="cf">if</span> (<span class="bu">round</span>(i<span class="op">**</span><span class="fl">0.5</span>) <span class="op">%</span> <span class="dv">2</span>) <span class="op">==</span> <span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
+</section>
 </section>
 <section id="exploit-parallelism" class="level4">
 <h4 class="anchored" data-anchor-id="exploit-parallelism">Exploit Parallelism</h4>
-<p>Many scientific computations are “embarrassingly parallelizable,” meaning tasks can run independently. For example, running simulations with different model configurations, initial conditions, or random seeds. Each of these experiments can be submitted as a separate job and run in parallel on a compute cluster. By identifying parts of your code that can be parallelized, you can save time and make full use of available resources.</p>
+<p>Many scientific computations are “<strong>embarrassingly parallelizable</strong>,” meaning tasks can run independently. For example, running simulations with different model configurations, initial conditions, or random seeds. Each of these experiments can be submitted as a separate job and run in parallel on a compute cluster. By identifying parts of your code that can be parallelized, you can save time and make full use of available resources.</p>
 </section>
 </section>
-</section>
-<section id="refactoring-make-change-easy" class="level2">
-<h2 class="anchored" data-anchor-id="refactoring-make-change-easy">Refactoring: Make Change Easy</h2>
+<section id="sec-refactoring" class="level2">
+<h2 class="anchored" data-anchor-id="sec-refactoring">Refactoring: Make Change Easy</h2>
 <p>Refactoring is the process of <strong>modifying existing code without altering its external behavior</strong> <span class="citation" data-cites="fowler2018refactoring">[<a href="references.html#ref-fowler2018refactoring" role="doc-biblioref">4</a>]</span>. In other words, it preserves the “contract” (interface) between your code and its users while improving its internal structure.<br>
 Common refactoring tasks include:</p>
 <ul>
 <li><strong>Renaming</strong>: Giving (internally used) variables, functions, or classes more meaningful and descriptive names.</li>
-<li><strong>Extracting Functions</strong>: Breaking large functions into smaller, more focused ones (<span class="math inline">\(\to\)</span> one function should do one thing).</li>
-<li><strong>Eliminating Duplication</strong>: Consolidating repeated code into reusable functions.</li>
+<li><strong>Extracting Functions</strong>: Breaking large functions into smaller, more focused ones (with a <strong>single responsibility</strong>).</li>
+<li><strong>Eliminating Duplication</strong>: Consolidating repeated code into reusable functions (<strong>DRY</strong> principle).</li>
 <li><strong>Simplifying Logic</strong>: Reducing deeply nested code structures or introducing guard clauses for clarity.</li>
 <li><strong>Reorganizing Code</strong>: Grouping related functions or classes into appropriate files or modules.</li>
 </ul>
@@ -750,43 +693,61 @@ Sometimes, implementing a new feature in your existing code feels like forcing a
 </blockquote>
 <ul>
 <li><p><strong>Replace Magic Numbers with Constants</strong>: Magic numbers—values with unclear meaning—can make code harder to understand and maintain. By replacing them with constants, you create a single source of truth that’s easy to modify.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Before:</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> status <span class="op">==</span> <span class="dv">404</span>:</span>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># before:</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> status <span class="op">==</span> <span class="dv">404</span>:</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># after:</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>ERROR_NOT_FOUND <span class="op">=</span> <span class="dv">404</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> status <span class="op">==</span> ERROR_NOT_FOUND:</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can also use enumerations to specify a set of related constants. Enums can be especially helpful to <strong>make a function’s interface explicit</strong>. For example, by specifying that an input argument should be an <code>HTTPStatus</code>, users of the function know that they can’t just pass any arbitrary integer:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> enum <span class="im">import</span> Enum</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> HTTPStatus(Enum):</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    OK <span class="op">=</span> <span class="dv">200</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    CREATED <span class="op">=</span> <span class="dv">201</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    FORBIDDEN <span class="op">=</span> <span class="dv">403</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    NOT_FOUND <span class="op">=</span> <span class="dv">404</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    INTERNAL_SERVER_ERROR <span class="op">=</span> <span class="dv">500</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    SERVICE_UNAVAILABLE <span class="op">=</span> <span class="dv">503</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_status_message(status_code: HTTPStatus):</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Returns the HTTP status message for a given HTTPStatus enum value."""</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"</span><span class="sc">{</span>status_code<span class="sc">.</span>name<span class="sc">.</span>replace(<span class="st">'_'</span>, <span class="st">' '</span>)<span class="sc">.</span>title()<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>status_code<span class="sc">.</span>value<span class="sc">}</span><span class="ss">)"</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(get_status_message(HTTPStatus.OK))  <span class="co"># Output: Ok (200)</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(get_status_message(HTTPStatus.NOT_FOUND))  <span class="co"># Output: Not Found (404)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p><strong>Don’t Repeat Yourself (DRY)</strong>: Copying and pasting code may seem like a quick fix, but it leads to problems later. If the logic changes, you’ll need to update it everywhere it’s duplicated, which is error-prone. Instead, move the logic into a reusable function or method.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># before:</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (model.a <span class="op">&gt;</span> <span class="dv">5</span>) <span class="kw">and</span> (model.b <span class="op">==</span> <span class="dv">3</span>) <span class="kw">and</span> (model.c <span class="op">&lt;</span> <span class="dv">8</span>):</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    ...</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># After:</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>ERROR_NOT_FOUND <span class="op">=</span> <span class="dv">404</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> status <span class="op">==</span> ERROR_NOT_FOUND:</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p><strong>Don’t Repeat Yourself (DRY)</strong>: Copying and pasting code may seem like a quick fix, but it leads to problems later. If the logic changes, you’ll need to update it everywhere it’s duplicated, which is error-prone. Instead, move the logic into a reusable function or method.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Before:</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (model.a <span class="op">&gt;</span> <span class="dv">5</span>) <span class="kw">and</span> (model.b <span class="op">==</span> <span class="dv">3</span>) <span class="kw">and</span> (model.c <span class="op">&lt;</span> <span class="dv">8</span>):</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    ...</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># After:</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MyModel:</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> is_ready(<span class="va">self</span>):</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (<span class="va">self</span>.a <span class="op">&gt;</span> <span class="dv">5</span>) <span class="kw">and</span> (<span class="va">self</span>.b <span class="op">==</span> <span class="dv">3</span>) <span class="kw">and</span> (<span class="va">self</span>.c <span class="op">&lt;</span> <span class="dv">8</span>)</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> model.is_ready():</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># after:</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MyModel:</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> is_ready(<span class="va">self</span>):</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (<span class="va">self</span>.a <span class="op">&gt;</span> <span class="dv">5</span>) <span class="kw">and</span> (<span class="va">self</span>.b <span class="op">==</span> <span class="dv">3</span>) <span class="kw">and</span> (<span class="va">self</span>.c <span class="op">&lt;</span> <span class="dv">8</span>)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> model.is_ready():</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p><strong>Implement Wrappers</strong>: When working with external libraries or APIs, their provided interface might not align with your needs, and adapting to it directly can lead to awkward implementations in your code. A better solution is to create a wrapper that implements <strong>the interface you wish you had</strong>, translating the external API’s inputs and outputs into the format that best suits your implementation. This approach keeps your code clean, consistent, and easier to maintain, while confining the less-than-ideal API interactions to a single location. Plus, if the external API changes, you only need to update the wrapper instead of changing your code everywhere.</p></li>
 <li><p><strong>Use Alternative Constructors</strong>: Similar to a wrapper, you can add a class method to create objects in a way that’s different from the regular constructor. This is useful when the input data doesn’t directly match what the constructor needs. For instance, imagine you have a configuration file that specifies settings for a simulation. If the names or structure of these settings don’t match the constructor’s parameters, you can create a <code>from_config</code> method to handle the translation and then call the constructor with the correct arguments. The advantage is that if the format of the configuration file changes in the future, you only need to update this one method, keeping the rest of your code the same.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Date:</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, year, month, day):</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>      <span class="va">self</span>.year <span class="op">=</span> year</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>      <span class="va">self</span>.month <span class="op">=</span> month</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>      <span class="va">self</span>.day <span class="op">=</span> day</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">@classmethod</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> from_str(cls, date_str):</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Parse the string and create a new instance</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>      year, month, day <span class="op">=</span> <span class="bu">map</span>(<span class="bu">int</span>, date_str.split(<span class="st">'-'</span>))</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> cls(year, month, day)</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Usage:</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>date1 <span class="op">=</span> Date(<span class="dv">2025</span>, <span class="dv">0</span><span class="er">1</span>, <span class="dv">30</span>)</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>date2 <span class="op">=</span> Date.from_str(<span class="st">"2025-01-30"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Date:</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, year, month, day):</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>      <span class="va">self</span>.year <span class="op">=</span> year</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>      <span class="va">self</span>.month <span class="op">=</span> month</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>      <span class="va">self</span>.day <span class="op">=</span> day</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">@classmethod</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> from_str(cls, date_str):</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>      <span class="co"># parse the string and create a new instance</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>      year, month, day <span class="op">=</span> <span class="bu">map</span>(<span class="bu">int</span>, date_str.split(<span class="st">'-'</span>))</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> cls(year, month, day)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co"># usage:</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>date1 <span class="op">=</span> Date(<span class="dv">2025</span>, <span class="dv">0</span><span class="er">1</span>, <span class="dv">30</span>)</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>date2 <span class="op">=</span> Date.from_str(<span class="st">"2025-01-30"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p><strong>Organize for Coherence</strong>: Keep code elements that need to change together in the same file or module. Conversely, separate unrelated parts of your code to prevent unnecessary entanglement. This way, changes are localized, which reduces cognitive load.</p>
 <p>In larger codebases shared by multiple teams, this is even more critical. <strong>When changes require excessive communication and coordination, it signals a need to reorganize the code.</strong> Clear ownership and reduced dependencies help teams work independently while keeping the system coherent through agreed upon interfaces.</p></li>
 </ul>

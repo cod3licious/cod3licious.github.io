@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.39">
+<meta name="generator" content="quarto-1.6.40">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -92,7 +92,7 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-37b241f53b32a5ad598e4053e71b073f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -124,35 +124,6 @@ div.csl-indent {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="style.css">
 </head>
@@ -270,7 +241,7 @@ window.Quarto = {
   <li><a href="#exploratory-analysis" id="toc-exploratory-analysis" class="nav-link" data-scroll-target="#exploratory-analysis">Exploratory Analysis</a></li>
   <li><a href="#explanatory-analysis" id="toc-explanatory-analysis" class="nav-link" data-scroll-target="#explanatory-analysis">Explanatory Analysis</a></li>
   </ul></li>
-  <li><a href="#draw-your-what" id="toc-draw-your-what" class="nav-link" data-scroll-target="#draw-your-what">Draw Your What</a></li>
+  <li><a href="#sec-draw-what" id="toc-sec-draw-what" class="nav-link" data-scroll-target="#sec-draw-what">Draw Your What</a></li>
   </ul>
 </nav>
     </div>
@@ -338,7 +309,7 @@ This book focuses on structured data
 <li><strong>Strings</strong> (text)</li>
 <li><strong>Boolean values</strong> (true/false)</li>
 </ul>
-<p>In programming, these are so-called <em>primitive data types</em> (as opposed to composite types, like arrays or dictionaries containing multiple values, or user-defined objects) and define how information is stored in computer memory.</p>
+<p>In programming, these are so-called <em>primitive data types</em> (as opposed to composite types, like lists or dictionaries containing multiple values, or user-defined objects) and define how information is stored in computer memory.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Data types in Python">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -410,7 +381,7 @@ Always record timestamps
 <p>When analyzing data, the process is typically divided into two phases:</p>
 <ol type="1">
 <li><strong>Exploratory Analysis</strong>: This involves generating a variety of plots to gain a deeper understanding of your data, such as identifying correlations between variables. It’s often a quick and dirty process to help you familiarize yourself with the dataset.</li>
-<li><strong>Explanatory Analysis</strong>: This focuses on creating refined, polished plots intended for communicating your findings, such as in a publication or presentation. These visuals are designed to clearly convey your results to an audience that may not be familiar with your data.</li>
+<li><strong>Explanatory Analysis</strong>: This focuses on creating refined, polished plots intended for communicating your findings to others, such as in a publication or presentation. These visuals are designed to clearly convey your results to an audience that may not be familiar with your data.</li>
 </ol>
 <section id="exploratory-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="exploratory-analysis">Exploratory Analysis</h3>
@@ -424,7 +395,7 @@ Always record timestamps
 <ul>
 <li>What does each variable mean? Given your understanding of the variable, are its values in a reasonable range?</li>
 <li>Are missing values encoded as NaN (Not a Number) or as ‘unrealistic’ numeric values (e.g., -1 while normal values are between 0 and 100)?</li>
-<li>Are missing values random or systematic (e.g., in a survey rich people are less likely to answer questions about their income or specific measurements are only collected under certain conditions)? This can influence how missing values should be handled, e.g., whether it makes sense to impute them with the mean or some other specific value (e.g., zero).</li>
+<li>Are missing values random or systematic (e.g., specific measurements might only be collected under certain conditions; in a survey rich people are less likely to answer questions about their income)? This can influence how missing values should be handled, e.g., whether it makes sense to impute them with the mean or some other specific value (e.g., zero).</li>
 </ul></li>
 <li><p>Examine the <strong>distributions of individual (continuous) variables</strong>:</p>
 <div class="quarto-figure quarto-figure-center">
@@ -538,8 +509,8 @@ Don’t force an exploratory analysis onto your audience
 <h4 class="anchored" data-anchor-id="step-4-make-data-accessible">Step 4: Make data accessible</h4>
 <ul>
 <li>Add context: Which values are good (goal state), which are bad (alert threshold)? Should the value be compared to another variable (e.g., actual vs.&nbsp;forecast)?</li>
-<li>Leverage consistent colors when information is spread across multiple plots (e.g., data from a certain country is always drawn in the same color).</li>
-<li>Annotate the plot with text explaining the main takeaways (if this is not possible, e.g., in interactive dashboards where the data keeps changing, the title can instead include the question that the plot should answer, e.g., “Is the material quality on target?”).</li>
+<li>Leverage consistent colors when information is spread across multiple plots (e.g., data from a certain country is always shown in the same color).</li>
+<li>Annotate the plot with text explaining the main takeaways. If this is not possible, e.g., in interactive dashboards where the data keeps changing, the title can instead include the question that the plot should answer (e.g., “Is the material quality on target?”).</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -550,40 +521,23 @@ Don’t force an exploratory analysis onto your audience
 </section>
 </section>
 </section>
-<section id="draw-your-what" class="level2">
-<h2 class="anchored" data-anchor-id="draw-your-what">Draw Your What</h2>
+<section id="sec-draw-what" class="level2">
+<h2 class="anchored" data-anchor-id="sec-draw-what">Draw Your What</h2>
 <p>You may not have looked at your data yet—or maybe you haven’t even collected it—but it’s important to start with the end in mind.</p>
-<p>In software development, a UX designer typically creates mockups of a user interface (like the screens of a mobile app) before developers begin coding. Similarly, in our case, we want to start with a clear picture of what the output of our program should look like. The difference is that, instead of users interacting with the software themselves, they’ll only see the plots or tables that your program generated, maybe in a journal article.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<p>Based on your takeaways from the previous chapter—about the problem you’re solving and the metrics you should use to evaluate your solution—try sketching what your final results might look like. Ask yourself: <strong><em>What figures or tables would best communicate the advantages of my approach?</em></strong></p>
-<p>Depending on your research goals, your results might be as simple as a single number, such as a p-value or the total number of people surveyed. However, if you’re reading this, you’re likely tackling something that requires a more complex analysis. For example, you might compare your solution’s overall performance to several baseline approaches or illustrate how your solution converges over time (<a href="#fig-data-what-results" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>).</p>
+<p>In software development, a UX designer typically creates mockups of a user interface (like the screens of a mobile app) before developers begin coding so that everyone has a clear understanding of the desired end result. Similarly, in our case, we want to start with a clear picture of what the output of our program should look like. The difference is that, instead of users interacting with the software themselves, they’ll only see the plots or tables that your program generated, maybe in a journal article.</p>
+<p>Based on your takeaways from the previous chapter—about the problem you’re solving and the metrics you should use to evaluate your solution—try sketching what your final results might look like. Put yourself in your audience’s shoes and consider what they need to address their questions and concerns. Ask yourself: <strong><em>What figures or tables would best communicate the advantages of my approach?</em></strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>Depending on your research goals, your results might be as simple as a single number, such as a p-value or the total number of people surveyed. However, if you’re reading this, you’re likely tackling something that requires a more complex analysis. For example, you might compare your model’s overall performance to several baseline approaches or illustrate how your solution converges over time (<a href="#fig-data-what-results" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>).</p>
 <div id="fig-data-what-results" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-data-what-results-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../images/02_data/draw_what_results.png" class="img-fluid figure-img" style="width:80.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-what-results-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.2: Exemplary envisioned results: The plots show the outcome of a multi-agent simulation, where ‘my approach’ clearly outperforms two baseline methods. In this simulation, a group of agents is tasked with locating a food source and transporting the food back to their home base piece by piece. The ideal algorithm identifies the shortest path to the food source quickly to maximize food collection. Each algorithmic approach is tested 10 times using different random seeds to evaluate reliability. The plots display the mean and standard deviations across these runs. <em>Left:</em> How quickly each algorithm converges to the shortest path (resulting in the highest number of agents delivering food back to the home base per step). <em>Right:</em> Cumulative food collected by the end of the simulation.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>
+Figure&nbsp;2.2: Exemplary envisioned results: The plots show the outcome of a multi-agent simulation, where ‘my approach’ clearly outperforms two baseline methods. In this simulation, a group of agents is tasked with locating a food source in the environment and transporting the food back to their home base piece by piece. The ideal algorithm identifies the shortest path to the food source quickly to maximize food collection. Each algorithmic approach is tested 10 times using different random seeds to evaluate reliability. The plots display the mean and standard deviations across these runs. <em>Left:</em> How quickly each algorithm converges to the shortest path (resulting in the highest number of agents delivering food back to the home base per step). <em>Right:</em> Cumulative food collected by the end of the simulation.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>
 </figcaption>
 </figure>
 </div>
 <p>It’s important to remember that your actual results might look very different from your initial sketches—they might even show that your solution performs worse than the baseline. This is completely normal. The scientific method is inherently iterative, and unexpected results are often a stepping stone to deeper understanding. By starting with a clear plan, you can generate results more efficiently and quickly pivot to a new hypothesis if needed. When your results deviate from your expectations, analyzing those differences can sharpen your intuition about the data and help you form better hypotheses in the future.</p>
-<p>Once you’ve visualized the results you want, <strong>work backward to figure out what data you need</strong> to create them. This is especially important when you’re generating the data yourself, such as through simulations. For instance, if you plan to plot how values change over time, you’ll need to record variables at every time step rather than just saving the final outcome of a simulation (duh!). Similarly, if you want to report your model’s accuracy (<a href="#fig-data-what-data" class="quarto-xref">Figure&nbsp;<span>2.3</span></a>), you’ll need:</p>
-<ol type="1">
-<li>Input variables for each data point to generate predictions (= model output).</li>
-<li>The actual (true) values for each data point.</li>
-<li>A way to compute the overall deviation between predictions and true values, such as using an evaluation metric like <span class="math inline">\(R^2\)</span>.</li>
-</ol>
-<div id="fig-data-what-data" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-data-what-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../images/02_data/draw_what_data.png" class="img-fluid figure-img" style="width:65.0%">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-what-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.3: Work backward from the desired results to determine what data is necessary to create them.
-</figcaption>
-</figure>
-</div>
-<p>By working backward from your desired results to the required data, you can design your code and analysis pipeline to ensure your program delivers exactly what you need.</p>
 <div class="callout callout-style-default callout-caution callout-titled" title="Before you continue">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -613,7 +567,7 @@ Before you continue
 <hr>
 <ol>
 <li id="fn1"><p>A former master’s student that I mentored humorously called this approach “plot-driven development,” a nod to test-driven development (TDD) in software engineering, where you write a test for your function first and then implement the function to pass the test. You could even use these sketches of your results as placeholders if you’re already drafting a paper or presentation.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>These plots and the next were generated with Python using matplotlib’s <code>plt.xkcd()</code> setting and the <a href="https://github.com/ipython/xkcd-font">xkcd script font</a>. A pen and paper sketch will be sufficient for your case.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>These plots were generated with Python using matplotlib’s <code>plt.xkcd()</code> setting and the <a href="https://github.com/ipython/xkcd-font">xkcd script font</a>. A pen and paper sketch will be sufficient for your case.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

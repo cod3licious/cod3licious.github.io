@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.39">
+<meta name="generator" content="quarto-1.6.40">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -58,7 +58,7 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-37b241f53b32a5ad598e4053e71b073f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -311,8 +311,8 @@ Examples include:</p>
 <p><em>Methodology:</em><br>
 The key difference lies in how much domain knowledge informs the model:</p>
 <ul>
-<li><p><em>White-box (mechanistic) models:</em> Based entirely on known principles, such as physical laws or experimental findings. These models are often manually designed, with parameters fitted to observed data.</p></li>
-<li><p><em>Black-box (data-driven) models:</em> Derived primarily from observational data. Researchers usually test different model types (e.g., neural networks or Gaussian processes) and choose the one with the highest accuracy.</p></li>
+<li><p><em>White-box (mechanistic) models:</em> Based entirely on known principles, such as physical laws or experimental findings. These models are often manually designed, with parameters fitted to match observed data.</p></li>
+<li><p><em>Black-box (data-driven) models:</em> Derived primarily from observational data. Researchers usually test different model types (e.g., neural networks or Gaussian processes) and choose the one with the highest prediction accuracy.</p></li>
 <li><p><em>Gray-box (hybrid) models:</em> These combine mechanistic and data-driven approaches. For example, the output of a mechanistic model may serve as an input to a data-driven model, or the data-driven model may predict residuals (i.e., prediction errors) from the mechanistic model, where both outputs combined yield the final prediction.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Resources to learn more about data-driven models">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -328,14 +328,14 @@ Resources to learn more about data-driven models
 <div class="callout-body-container callout-body">
 <p>If you want to learn more about how to create data-driven models and the machine learning (ML) algorithms behind them, these two free online books are highly recommended:</p>
 <ul>
-<li><span class="citation" data-cites="freiesleben2024supervised">[<a href="references.html#ref-freiesleben2024supervised" role="doc-biblioref">2</a>]</span> <a href="https://ml-science-book.com/">Supervised Machine Learning for Science</a> by Christoph Molnar &amp; Timo Freiesleben; A fantastic introduction focused on applying black-box models in scientific research.</li>
-<li><span class="citation" data-cites="horn2021mlpractitioner">[<a href="references.html#ref-horn2021mlpractitioner" role="doc-biblioref">3</a>]</span> <a href="https://franziskahorn.de/mlbook/">A Practitioner’s Guide to Machine Learning</a> by me; A broader overview of ML methods for a variety of use cases.</li>
+<li><span class="citation" data-cites="freiesleben2024supervised">[<a href="references.html#ref-freiesleben2024supervised" role="doc-biblioref">2</a>]</span> <a href="https://ml-science-book.com/">Supervised Machine Learning for Science</a> by Christoph Molnar &amp; Timo Freiesleben; a fantastic introduction focused on applying black-box models in scientific research.</li>
+<li><span class="citation" data-cites="horn2021mlpractitioner">[<a href="references.html#ref-horn2021mlpractitioner" role="doc-biblioref">3</a>]</span> <a href="https://franziskahorn.de/mlbook/">A Practitioner’s Guide to Machine Learning</a> by me; a broader overview of ML methods for a variety of use cases.</li>
 </ul>
 </div>
 </div>
 </div></li>
 </ul>
-<p>After developing an accurate model, researchers can analyze its behavior (e.g., through a sensitivity analysis, which examines how outputs change with varying inputs) to gain further insights about the system (to feed back into diagnostic analytics).</p>
+<p>After developing an accurate (!) model, researchers can analyze its behavior (e.g., through a sensitivity analysis, which examines how outputs change with varying inputs) to gain further insights about the modeled system itself (to feed back into diagnostic analytics).</p>
 </section>
 <section id="prescriptive-analytics" class="level4">
 <h4 class="anchored" data-anchor-id="prescriptive-analytics">Prescriptive Analytics</h4>
@@ -380,14 +380,15 @@ Model accuracy is crucial
 <li>Uncertainty estimates to understand how confident the model is in its predictions.</li>
 </ul></li>
 <li><strong>Algorithm performance:</strong> This includes metrics like memory usage and the time required to fit a model or make predictions, and how these values change as the dataset size increases. Efficient algorithms are crucial when scaling to large datasets or handling complex simulations.</li>
-<li><strong>Key Performance Indicators (KPIs):</strong> These are the practical measures that matter in your field. For example:
+<li><strong>Key Performance Indicators (KPIs):</strong> Any other practical measures that matter in your field. For example:
 <ul>
-<li>For a chemical process: yield, purity, energy efficiency</li>
-<li>For a new material: strength, durability, cost</li>
-<li>For an optimization task: convergence time, solution quality</li>
+<li>For a chemical process: yield, purity, energy efficiency.</li>
+<li>For a new material: strength, durability, cost.</li>
+<li>For an optimization task: convergence time, solution quality.</li>
 </ul></li>
 </ul>
-<p>Your evaluation typically involves multiple metrics. For example, in prescriptive analytics, you need to demonstrate both the accuracy of your model and that the recommendations generated with it led to a genuinely optimized process or product. Before starting your research, review similar work in your field to understand which metrics are standard in your community.</p>
+<p>Your evaluation typically involves multiple metrics. For example, in prescriptive analytics, you need to demonstrate both the accuracy of your model and that the recommendations generated with it led to a genuinely optimized process or product. Before starting your research, <strong>review similar work in your field to understand which metrics are standard in your community</strong>.</p>
+<p>Ideally, you should already have an idea of how existing solutions perform on your chosen metrics (e.g., based on findings from other publications) to establish <strong>the baseline your solution should outperform</strong>. You’ll likely need to replicate at least some of these baseline results (e.g., by reimplementing existing models) to ensure your comparisons are not influenced by external factors. But understanding where the “competition” stands can also help you identify secondary metrics where your solution could excel. For example, even if there’s little room to improve model accuracy, existing solutions might be too slow to handle large datasets efficiently (<a href="#fig-kpi-tradeoff" class="quarto-xref">Figure&nbsp;<span>1.2</span></a>).<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <div id="fig-kpi-tradeoff" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-kpi-tradeoff-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -398,7 +399,6 @@ Figure&nbsp;1.2: The metrics we’re interested in often represent trade-offs. F
 </figcaption>
 </figure>
 </div>
-<p>Ideally, you should already have an idea of how existing solutions perform on these metrics (e.g., based on findings from other publications) to establish <strong>the baseline your solution should outperform</strong>. You’ll likely need to replicate at least some of these baseline results (e.g., by reimplementing existing models) to ensure your comparisons are not influenced by external factors. But understanding where the “competition” stands can also help you identify secondary metrics where your solution could excel. For example, even if there’s little room to improve model accuracy, existing solutions might be too slow to handle large datasets efficiently (<a href="#fig-kpi-tradeoff" class="quarto-xref">Figure&nbsp;<span>1.2</span></a>).<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <p>These results are central to your research (and publications), and much of your code will be devoted to generating them, along with the models and simulations behind them. Clearly defining the key metrics needed to demonstrate your research’s impact will help you focus your programming efforts effectively.</p>
 </section>
 <section id="draw-your-why" class="level2">
@@ -424,7 +424,7 @@ Figure&nbsp;1.3: Exemplary research goals and corresponding “before and after�
 <img src="../images/01_purpose/draw_why_qualitative.png" class="img-fluid figure-img" style="width:65.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-draw-why-qual-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1.4: This example illustrates a task where a robot must reach its target (represented by money) as efficiently as possible. <strong>Original approach (<em>left</em>)</strong>: The robot relied on information encoded in the environment as expected rewards. To determine the shortest path to the target, the robot required a large sensor (shown as a yellow circle) capable of scanning nearby fields to locate the highest reward. <strong>New approach (<em>right</em>)</strong>: Instead of relying on reward values scattered across the environment, the optimal direction is now encoded directly in the current field. This eliminates the need for large sensors, as the robot only needs to read the value of its current position, enabling it to operate with a much smaller sensor and thereby reducing hardware costs. <strong>Additional quantitative evaluation:</strong> It still needs to be demonstrated that with the new approach, the robot reaches its target at least as quickly as with the original approach.
+Figure&nbsp;1.4: This example illustrates a task where a robot must reach its target (represented by money) as efficiently as possible. <strong>Original approach (<em>left</em>)</strong>: The robot relied on information encoded in the environment as expected rewards. To determine the shortest path to the target, the robot required a large sensor (shown as the yellow circle) capable of scanning multiple nearby fields to locate the highest reward. <strong>New approach (<em>right</em>)</strong>: Instead of relying on reward values scattered across the environment, the optimal direction is now encoded directly in the current field. This eliminates the need for large sensors, as the robot only needs to read the value of its current position, enabling it to operate with a much smaller sensor and thereby reducing hardware costs. <strong>Additional quantitative evaluation:</strong> It still needs to be demonstrated that with the new approach, the robot reaches its target at least as quickly as with the original approach.
 </figcaption>
 </figure>
 </div>
@@ -464,7 +464,7 @@ Before you continue
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>For example, currently, a lot of research aims to replace traditional mechanistic models with data-driven machine learning models, as these enable significantly faster simulations. A notable example is the AlphaFold model, which predicts protein folding from amino acid sequences—a breakthrough so impactful it was recognized with a Nobel Prize <span class="citation" data-cites="callaway2024chemistry">[<a href="references.html#ref-callaway2024chemistry" role="doc-biblioref">1</a>]</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>For example, currently, a lot of research aims to replace traditional mechanistic models with data-driven machine learning models, as these enable significantly faster simulations. A notable example is the AlphaFold model, which predicts protein folding from amino acid sequences—a breakthrough so impactful it was recognized with a Nobel Prize <span class="citation" data-cites="callaway2024chemistry">[<a href="references.html#ref-callaway2024chemistry" role="doc-biblioref">1</a>]</span>!<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

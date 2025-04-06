@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Franziska Horn">
-<meta name="dcterms.date" content="2025-03-16">
+<meta name="dcterms.date" content="2025-04-06">
 
 <title>Research Software Engineering: A Primer</title>
 <style>
@@ -32,7 +32,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./01_purpose.html" rel="next">
+<link href="./01_tools.html" rel="next">
 <link href="./favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -120,37 +120,37 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01_purpose.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Research Purpose</span></span></a>
+  <a href="./01_tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Tools</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02_data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data &amp; Results</span></span></a>
+  <a href="./02_why_we_code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Why We Code</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03_tools.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Tools</span></span></a>
+  <a href="./03_why_we_code_what_we_code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Why We Code What We Code</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04_design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Software Design</span></span></a>
+  <a href="./04_what_we_code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">What We Code</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05_implementation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Implementation</span></span></a>
+  <a href="./05_how_we_code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">How We Code</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06_production.html" class="sidebar-item-text sidebar-link">
+  <a href="./06_from_research_to_production.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">From Research to Production</span></span></a>
   </div>
 </li>
@@ -176,7 +176,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a></li>
+  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a>
+  <ul class="collapse">
+  <li><a href="#what-to-expect" id="toc-what-to-expect" class="nav-link" data-scroll-target="#what-to-expect">What to Expect</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -202,7 +205,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 16, 2025</p>
+      <p class="date">April 6, 2025</p>
     </div>
   </div>
   
@@ -218,7 +221,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="preface" class="level1 unnumbered">
 <h1 class="unnumbered">Preface</h1><p><img src="rse_cover.png" title="Research Software Engineering: A Primer" class="quarto-cover-image img-fluid"></p>
 <p>This book is meant to <strong>empower researchers to code with confidence and clarity</strong>.</p>
-<p>If you studied something other than computer science—especially in the natural sciences like physics, chemistry, or biology—it’s likely you were never taught how to properly develop software. Yet, you’re often still expected to write code as part of your daily work. Maybe you’ve taken a programming course like <em>Python for Biologists</em> and can put together functional scripts through trial and error (with a little help from ChatGPT). But chances are, no one ever showed you how to write well-structured, maintainable, and reusable code that could make your life—and collaborating with your colleagues—so much easier.</p>
+<p>If you studied something other than computer science—especially in the natural sciences like physics, chemistry, or biology—it’s likely you were never taught how to properly develop software. Yet, you’re often still expected to write code as part of your daily work. Maybe you’ve taken a programming course like <em>Python for Biologists</em> and can put together functional scripts through trial and error (with a little help from an AI assistant). But chances are, no one ever showed you how to write well-structured, maintainable, and reusable code that could make your life—and collaborating with your colleagues—so much easier.</p>
 <p>This book is for you if you want to:</p>
 <ul>
 <li>Write functional software more quickly</li>
@@ -230,15 +233,35 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>Whether you’re just beginning your scientific journey—perhaps working on your first major project like a master’s thesis or your first paper—or you’re contemplating a move from academia to industry, the practical advice in this book can guide you along the way. We will approach software design from first principles and tackle research questions with a product mindset. While the book contains some example code in Python to illustrate the concepts, the general ideas are independent of any programming language.</p>
 <p>Software development is a craft that’s best learned with the guidance of a senior colleague—someone who can show you the right tools and provide feedback through code reviews. Unfortunately, mentors with industry experience are rare in academia. While a book can’t replace an apprenticeship, I hope this one gives you a head start. It’s the book I wish I could have read at university and the one I always wanted to recommend to the students and junior developers I’ve mentored.</p>
+<section id="what-to-expect" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-expect">What to Expect</h2>
+<p>In this book, we examine all aspects of writing code to generate research results (<a href="#fig-code-questions" class="quarto-xref">Figure&nbsp;<span>1</span></a>). Specifically:</p>
+<ul>
+<li><a href="02_why_we_code.html" class="quarto-xref"><span>2&nbsp; Why We Code</span></a>: What drives companies or individuals to develop software in the first place?</li>
+<li><a href="03_why_we_code_what_we_code.html" class="quarto-xref"><span>3&nbsp; Why We Code What We Code</span></a>: What output creates the most value for our users?</li>
+<li><a href="04_what_we_code.html" class="quarto-xref"><span>4&nbsp; What We Code</span></a>: What code generates these outputs and how do we get from working code to good code?</li>
+<li><a href="05_how_we_code.html" class="quarto-xref"><span>5&nbsp; How We Code</span></a>: What should we consider during the implementation?</li>
+</ul>
+<div id="fig-code-questions" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-code-questions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/01_purpose/code_questions.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-code-questions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: A developer writes code, which is then executed to generate some output that is consumed by a user.
+</figcaption>
+</figure>
+</div>
+<p>Additionally, you’ll get an introduction to some tools that will help you develop software more efficiently (<a href="01_tools.html" class="quarto-xref"><span>1&nbsp; Tools</span></a>) and we’ll close with an outlook of what it takes to go from research to production-grade software (<a href="06_from_research_to_production.html" class="quarto-xref"><span>6&nbsp; From Research to Production</span></a>).</p>
 <p><strong><em>This is still a draft version!</em></strong> Please write me an email, if you have any suggestions for how this book could be improved!</p>
 <p>Enjoy! 😊</p>
 <section id="acknowledgments" class="level4">
 <h4 class="anchored" data-anchor-id="acknowledgments">Acknowledgments</h4>
-<p>I would like to thank <a href="https://www.linkedin.com/in/marcel-lengert/">Marcel Lengert</a> for his thoughtful feedback.</p>
+<p>I would like to thank Marcel Lengert for his thoughtful feedback.</p>
 <p>The texts in this book were partly edited and refined with the help of ChatGPT, however, all original content is my own.</p>
 </section>
 <section id="how-to-cite" class="level4">
-<h4 class="anchored" data-anchor-id="how-to-cite">How to cite</h4>
+<h4 class="anchored" data-anchor-id="how-to-cite">How to Cite</h4>
 <pre><code>@book{horn2025rseprimer,
   author = {Horn, Franziska},
   title = {Research Software Engineering: A Primer},
@@ -247,6 +270,7 @@ ul.task-list li input[type="checkbox"] {
 }</code></pre>
 
 
+</section>
 </section>
 </section>
 
@@ -708,8 +732,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./01_purpose.html" class="pagination-link" aria-label="Research Purpose">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Research Purpose</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./01_tools.html" class="pagination-link" aria-label="Tools">
+        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Tools</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>4&nbsp; What We Code – Research Software Engineering: A Primer</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./05_how_we_code.html" rel="next">
+<link href="./03_why_we_code_what_we_code.html" rel="prev">
+<link href="./favicon.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-37b241f53b32a5ad598e4053e71b073f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04_what_we_code.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">What We Code</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Research Software Engineering: A Primer</a> 
+        <div class="sidebar-tools-main">
+    <a href="./Research-Software-Engineering--A-Primer.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Tools</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_why_we_code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Why We Code</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_why_we_code_what_we_code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Why We Code What We Code</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_what_we_code.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">What We Code</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_how_we_code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">How We Code</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_from_research_to_production.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">From Research to Production</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07_afterword.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Afterword</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#step-by-step-from-output-to-input" id="toc-step-by-step-from-output-to-input" class="nav-link active" data-scroll-target="#step-by-step-from-output-to-input">Step by Step: From Output to Input</a></li>
+  <li><a href="#analogy-the-cupcake-recipe" id="toc-analogy-the-cupcake-recipe" class="nav-link" data-scroll-target="#analogy-the-cupcake-recipe">Analogy: The Cupcake Recipe</a></li>
+  <li><a href="#good-code" id="toc-good-code" class="nav-link" data-scroll-target="#good-code">Good Code</a>
+  <ul class="collapse">
+  <li><a href="#cohesive-decoupled-units" id="toc-cohesive-decoupled-units" class="nav-link" data-scroll-target="#cohesive-decoupled-units">Cohesive &amp; Decoupled Units</a></li>
+  <li><a href="#building-with-blocks-units-in-context" id="toc-building-with-blocks-units-in-context" class="nav-link" data-scroll-target="#building-with-blocks-units-in-context">Building with Blocks: Units in Context</a></li>
+  <li><a href="#summary-from-working-to-good-code" id="toc-summary-from-working-to-good-code" class="nav-link" data-scroll-target="#summary-from-working-to-good-code">Summary: From Working to Good Code</a></li>
+  </ul></li>
+  <li><a href="#sec-draw-code" id="toc-sec-draw-code" class="nav-link" data-scroll-target="#sec-draw-code">Draw Your Code</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-design" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">What We Code</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Now that you know which results you want to create, are you itching to start programming? Hold on for a moment!</p>
+<p>One of the most <strong>common missteps</strong> I’ve seen junior developers take is <strong>jumping straight into coding without first thinking through what they actually want to build</strong>. Imagine trying to construct a house by just laying bricks without consulting an architect first—halfway through you’d probably realize the walls don’t align, and you forgot the plumbing for the kitchen. You’d have to tear it down and start over! To avoid this fate for your software, it’s essential to make a plan and sketch out the final result first (<a href="#fig-code-questions-3" class="quarto-xref">Figure&nbsp;<span>4.1</span></a>).</p>
+<div id="fig-code-questions-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-code-questions-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/01_purpose/code_questions_3.png" class="img-fluid figure-img" style="width:55.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-code-questions-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.1: Before we write code, we should first think about what it is we actually want to write.
+</figcaption>
+</figure>
+</div>
+<p>Your software design doesn’t have to be perfect—we don’t want to overengineer our solution, especially since many details only become clear once we start coding and see how users interact with the software. But the more thought you put into planning, the smoother and faster execution will be.</p>
+<p>Unlike a house, where your design will be quite literally set in stone, code should be designed with flexibility in mind. While expanding a house to add extra rooms for a growing family—and then removing them again when downsizing for retirement—would be costly and difficult, this kind of adaptability is exactly what we strive for in software. Our goal is to <strong>create code that can evolve with changing requirements</strong>.</p>
+<p>To make sure your designs will be worthy of implementation, this chapter also introduces key paradigms and best practices that will help you create <strong>clean, maintainable code that’s easy to extend and reuse</strong> in future projects.</p>
+<section id="step-by-step-from-output-to-input" class="level2">
+<h2 class="anchored" data-anchor-id="step-by-step-from-output-to-input">Step by Step: From Output to Input</h2>
+<p>Once we know the outputs we want (e.g., result plots), the next step is identifying the sequence of instructions and the data required to generate them.</p>
+<p>At its core, programming is about <strong>transforming inputs into outputs</strong>. To determine the process for obtaining the desired results, we can <strong>work backward to figure out what data we need</strong> to create them (<a href="#fig-work-backward" class="quarto-xref">Figure&nbsp;<span>4.2</span></a>). This is especially important when generating data yourself, such as through simulations. For example, if you want to plot how values change over time, you’ll need to record variables at every time step—not just the final outcome of a simulation (duh!).</p>
+<div id="fig-work-backward" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-work-backward-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/04_design/work_backward.png" class="img-fluid figure-img" style="width:65.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-work-backward-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.2: Work backward from the desired results to determine what data is needed to create them.
+</figcaption>
+</figure>
+</div>
+<section id="breaking-down-the-steps" class="level4">
+<h4 class="anchored" data-anchor-id="breaking-down-the-steps">Breaking Down the Steps</h4>
+<p>Let’s map out the steps required to create the above scatter plot displaying actual values <span class="math inline">\(y\)</span> (<code>y</code>), model predictions <span class="math inline">\(\hat{y}\)</span> (<code>y_pred</code>), and the <span class="math inline">\(R^2\)</span> value in the title to indicate the model’s goodness of fit:</p>
+<ol type="1">
+<li>To create the plot, we need <span class="math inline">\(R^2\)</span>, <code>y</code>, and <code>y_pred</code>.</li>
+<li><span class="math inline">\(R^2\)</span> can be computed from the values stored in <code>y</code> and <code>y_pred</code>.</li>
+<li><code>y</code> can be loaded from a file containing test data.</li>
+<li><code>y_pred</code> must be estimated using our model, which requires:
+<ul>
+<li>The corresponding input values (<code>x1</code> … <code>x5</code>) from the test data file.</li>
+<li>A trained model that can make predictions.</li>
+</ul></li>
+<li>To obtain a trained model, we need to:
+<ul>
+<li>Create an instance of the model with the correct configuration.</li>
+<li>Load the training data.</li>
+<li>Train the model on the training data.</li>
+</ul></li>
+<li>The model configuration needs to be provided by the user when running the script.</li>
+</ol>
+<p>Each step will require further details (e.g., implementing the formula for computing <span class="math inline">\(R^2\)</span>), but we now have a clear structure. From here, we can write these steps in reverse order in our programming language of choice to produce the desired results (see <a href="#sec-draw-code" class="quarto-xref"><span>Section 4.4</span></a> for how these steps could come together in the final script).</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Optimize the ordering of steps">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Optimize the ordering of steps
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Some steps depend on others</strong> (e.g., you must fit your model before making predictions), but others can be performed in any order. Optimizing the sequence can <strong>improve performance and efficiency</strong>.</p>
+<p>For example, if you’re baking bread, you wouldn’t preheat the oven hours before the dough has risen—that would waste energy. Similarly, when processing a large dataset, where you need to perform an expensive computation on each item but only a specific subset of these items is included in the final results, then it may be more efficient to filter the items first so you only compute values for the necessary items.</p>
+</div>
+</div>
+</section>
+<section id="designing-an-algorithm" class="level4">
+<h4 class="anchored" data-anchor-id="designing-an-algorithm">Designing an Algorithm</h4>
+<p>Some problems require more <strong>creativity to come up with an efficient algorithm</strong> that produces the correct output from a given input. Take the <strong>traveling salesman problem</strong>, where the goal is to find the shortest possible route through a given set of cities. Designing an efficient solution often involves choosing the right <strong>data structures</strong> (e.g., representing cities as nodes in a graph), using <strong>heuristics</strong>, and <strong>breaking the problem down into simpler subproblems</strong> (divide &amp; conquer strategy). If you’re working on a novel problem, studying algorithm design can be invaluable (one of my favorite books on the topic is <em>The Algorithm Design Manual</em> by Steven Skiena <span class="citation" data-cites="skiena2008algorithm">[<a href="references.html#ref-skiena2008algorithm" role="doc-biblioref">6</a>]</span>).</p>
+<p>However, for many common tasks, you can <strong>leverage existing algorithms</strong> instead of reinventing the wheel. For the rest of this book, we’ll assume you already have a general idea of the steps your code needs to perform and focus on how to implement them effectively.</p>
+<p>While our list of steps enables us to create <em>working code</em>, unfortunately, this is not the same as <em>good code</em>. A script with a long sequence of instructions can be difficult to read, understand, and maintain. Since you’ll likely be working with the same code for a while—and may even want to reuse parts of it in future projects—it’s worth investing in better design. Let’s explore how to make that happen.</p>
+</section>
+</section>
+<section id="analogy-the-cupcake-recipe" class="level2">
+<h2 class="anchored" data-anchor-id="analogy-the-cupcake-recipe">Analogy: The Cupcake Recipe</h2>
+<p>Before diving into how to write good code, let’s explore the basic principles using a more relatable example: a cupcake recipe (<a href="#fig-recipe-code" class="quarto-xref">Figure&nbsp;<span>4.3</span></a>). Because who wants result plots when you could have cupcakes?! 🧁</p>
+<div id="fig-recipe-code" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-recipe-code-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/04_design/recipe_code.png" class="img-fluid figure-img" style="width:55.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-recipe-code-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.3: A chef writes a recipe, which then needs to be executed (baked) to generate the output (cupcakes) that the consumers enjoy.
+</figcaption>
+</figure>
+</div>
+<p>Like code, a recipe is just <strong>text that describes a sequence of steps to achieve a goal</strong>. What you ultimately want are delicious cupcakes (your result plots). The recipe (your script) details how to transform raw ingredients (input) into the baked goods (output). But the steps don’t mean anything unless you actually <strong>execute them</strong>—you have to bake the cupcakes (run <code>python script.py</code>) to get results.</p>
+<p>So, how can we write a good recipe?</p>
+<section id="breaking-down-the-steps-1" class="level4">
+<h4 class="anchored" data-anchor-id="breaking-down-the-steps-1">Breaking Down the Steps</h4>
+<p>To start, we <strong>brainstorm all the necessary steps</strong> for making cupcakes (<a href="#fig-recipe-steps1" class="quarto-xref">Figure&nbsp;<span>4.4</span></a>). For this, we can again <strong>work backward from the final result</strong> (cupcakes) through the intermediate steps (cake batter and frosting) until we reach the raw ingredients.</p>
+<div id="fig-recipe-steps1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-recipe-steps1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/04_design/recipe_steps1.png" class="img-fluid figure-img" style="width:55.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-recipe-steps1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.4: Everything you need to make cupcakes. The unstructured brain dump we’ll transform into a proper recipe.
+</figcaption>
+</figure>
+</div>
+<p>You’ll notice that your list includes both <strong>ingredients</strong> (in code: <strong>variables containing data</strong>) and <strong>instructions for transforming those ingredients</strong>, like melting butter or mixing multiple ingredients (in code: <strong>statements</strong>, including conditionals (<code>if/else</code>) and loops (<code>for</code>, <code>while</code>), that create intermediate variables). These steps also need to follow a <strong>specific order</strong>—you wouldn’t frost a cupcake before baking it! Often, steps <strong>depend on one another</strong>, requiring a structured sequence (<a href="#fig-recipe-steps2" class="quarto-xref">Figure&nbsp;<span>4.5</span></a>).</p>
+<div id="fig-recipe-steps2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-recipe-steps2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/04_design/recipe_steps2.png" class="img-fluid figure-img" style="width:55.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-recipe-steps2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.5: A recipe usually includes a list of ingredients followed by instructions on what to do with them. The order matters, especially when one step depends on the completion of another.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="avoiding-repetition-reusable-steps" class="level4">
+<h4 class="anchored" data-anchor-id="avoiding-repetition-reusable-steps">Avoiding Repetition: Reusable Steps</h4>
+<p>If your recipe is part of a cookbook with multiple related recipes, some steps might apply to several of them. Instead of repeating those steps in every recipe, you can <strong>group and document them in a separate section</strong> (in code: define a <strong>function</strong>) and reference them when needed (<a href="#fig-recipe-steps3" class="quarto-xref">Figure&nbsp;<span>4.6</span></a>).</p>
+<p>This follows the <strong>Don’t Repeat Yourself (DRY)</strong> principle <span class="citation" data-cites="thomas2019pragmatic">[<a href="references.html#ref-thomas2019pragmatic" role="doc-biblioref">7</a>]</span>. Not only does this reduce redundancy, but it also makes updates easier—if a general step changes (e.g., you refine a technique or fix a typo), you only need to update it in one place (<strong>a single source of truth</strong>).</p>
+<div id="fig-recipe-steps3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-recipe-steps3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/04_design/recipe_steps3.png" class="img-fluid figure-img" style="width:55.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-recipe-steps3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.6: Some instructions might be relevant in multiple recipes (e.g., general baking tips); instead of repeating them in every recipe, you can just refer to the page where they are described.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="organizing-by-components" class="level4">
+<h4 class="anchored" data-anchor-id="organizing-by-components">Organizing by Components</h4>
+<p>Looking at your recipe, you might notice that some <strong>ingredients and instructions naturally group into self-contained components</strong> (in code: <strong>classes</strong>). Structuring the recipe this way makes it clearer and easier to follow (<a href="#fig-recipe-steps4" class="quarto-xref">Figure&nbsp;<span>4.7</span></a>). Instead of juggling all the steps at once, you can <strong>focus on creating one component at a time</strong>—first the plain cupcake, then the frosting, then assembling everything.</p>
+<p>This modular approach also allows <strong>delegation</strong>—for example, you could buy pre-made cupcakes and just focus on making the frosting. In programming, this means that <strong>the final code doesn’t need to know how each component was made—it only cares that the components exist</strong>.</p>
+<div id="fig-recipe-steps4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-recipe-steps4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/04_design/recipe_steps4.png" class="img-fluid figure-img" style="width:55.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-recipe-steps4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.7: For more complex recipes where the final dish consists of multiple components (like cupcakes, which have cake part and frosting), grouping by component improves clarity.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="making-variants-with-minimal-effort" class="level4">
+<h4 class="anchored" data-anchor-id="making-variants-with-minimal-effort">Making Variants with Minimal Effort</h4>
+<p>Organizing a recipe into components also makes it easier to <strong>create variations</strong> (<a href="#fig-recipe-steps5" class="quarto-xref">Figure&nbsp;<span>4.8</span></a>).</p>
+<p>Two key concepts make this possible:</p>
+<ol type="1">
+<li><strong>Polymorphism</strong>—each variation should behave like the original so it can be used interchangeably (in code: implementing the same <strong>interface</strong>).</li>
+<li><strong>Code reuse</strong>—instead of rewriting everything from scratch, <strong>extend</strong> the original recipe by specifying only the changes (in code: use <strong>inheritance</strong> or <strong>mixins</strong>).</li>
+</ol>
+<p>For example, a chocolate frosting variant can build on the plain frosting recipe by adding cocoa powder. The rest of the instructions remain unchanged.</p>
+<div id="fig-recipe-steps5" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-recipe-steps5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/04_design/recipe_steps5.png" class="img-fluid figure-img" style="width:55.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-recipe-steps5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.8: Some components have variants that can be used as drop-in replacements. Since these variants extend the original (e.g., chocolate frosting builds on plain frosting), we reuse existing instructions and only describe what’s new.
+</figcaption>
+</figure>
+</div>
+<p>By applying these strategies, we turn a random assortment of ingredients and instructions into a well-structured, easy-to-follow recipe. This makes the cookbook not only clearer but the recipes also easier to maintain and extend—changes to general instructions only need to be made once, and readers can effortlessly create variations by reusing existing steps.</p>
+<p>Now, let’s take the same approach with code.</p>
+</section>
+</section>
+<section id="good-code" class="level2">
+<h2 class="anchored" data-anchor-id="good-code">Good Code</h2>
+<p>When we talk about good code in this book, we focus on three key properties, each building upon and influencing the others:</p>
+<ol type="1">
+<li><p><strong>Easy to understand:</strong> To work with code, you need to be able to understand it. When using a common library, it may be enough to know what a function does and how to use it, trusting that it works correctly under the hood. But with your own code, you also need to understand the implementation details. Otherwise, you’ll hesitate to make changes and won’t be able to confidently say that it behaves as expected. Since code is read far more often than it is written, making it easy to understand ultimately saves time in the long run.</p></li>
+<li><p><strong>Easy to change:</strong> Code is never truly finished. It requires ongoing maintenance—fixing bugs, updating dependencies (e.g., when a library releases a security patch with breaking changes), and adapting to evolving requirements, such as adding new features to stay competitive. Code that is easy to modify makes all of this much smoother.</p></li>
+<li><p><strong>Easy to build upon and reuse:</strong> Ideally, adding new features shouldn’t mean proportional growth in your codebase. Instead, you should be able to reuse existing functionality. Following the DRY (Don’t Repeat Yourself) principle—avoiding redundant logic—makes code easier to maintain because updates only need to be made in one place.</p></li>
+</ol>
+<p>These qualities (along with others, like being easy to test) can be achieved by <strong>breaking code into smaller, independent units</strong> and organizing them into clear layers of abstraction. This approach has multiple benefits:</p>
+<ul>
+<li><strong>Manageable cognitive load:</strong> Smaller units fit comfortably into your working memory, making them easier to understand and reason about.</li>
+<li><strong>Ease of modification:</strong> Since units are independent, you can change one without unintended side effects elsewhere.</li>
+<li><strong>Reusability:</strong> Well-designed, general-purpose building blocks allow you to quickly assemble more complex functionality—like constructing something out of LEGO bricks.</li>
+</ul>
+<section id="from-complex-to-complicated" class="level4">
+<h4 class="anchored" data-anchor-id="from-complex-to-complicated">From Complex to Complicated</h4>
+<p>A well-known software engineering principle is <strong>KISS</strong>—“Keep It Simple, Stupid!” While this is good advice at the level of individual functions or classes, it’s unrealistic to expect an entire software system to be <em>simple</em>. Most real-world software consists of multiple interacting components, making it inherently <em>complicated</em> rather than simple. The goal is to avoid unnecessary <strong>complexity</strong> (<a href="#fig-complexity" class="quarto-xref">Figure&nbsp;<span>4.9</span></a>).</p>
+<div id="fig-complexity" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-complexity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/04_design/complexity.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-complexity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.9: In accordance with the <a href="https://en.wikipedia.org/wiki/Cynefin_framework">Cynefin framework</a>, (software) systems can have different levels of complexity <span class="citation" data-cites="khononov2024balancing">[<a href="references.html#ref-khononov2024balancing" role="doc-biblioref">2</a>]</span>. A script that sequentially executes a few steps might be simple. Most software, however, is at least complicated—it consists of multiple interacting components but can still be broken down into understandable subsystems. A complex system, often referred to as “spaghetti code” or a “big ball of mud” <span class="citation" data-cites="foote1997big">[<a href="references.html#ref-foote1997big" role="doc-biblioref">1</a>]</span>, has so many interdependencies that its behavior is very difficult to predict—changes in one part can have unintended consequences elsewhere.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> (Figure adapted from <span class="citation" data-cites="mcchrystal2015team">[<a href="references.html#ref-mcchrystal2015team" role="doc-biblioref">3</a>]</span>)
+</figcaption>
+</figure>
+</div>
+<p>A <strong>complex</strong> system has many interconnected elements with dependencies that are difficult to trace. Making a small change in one place can unexpectedly break something elsewhere. This makes debugging and maintenance a nightmare.</p>
+<p>Instead, we aim for a <strong>complicated</strong> system—one that may have many components, but is structured into independent, well-organized subsystems <span class="citation" data-cites="khononov2024balancing">[<a href="references.html#ref-khononov2024balancing" role="doc-biblioref">2</a>]</span>. This way, we can understand and modify individual parts without having to fully grasp the entire system. To achieve this, components should be:</p>
+<ul>
+<li><strong>Decoupled</strong> – minimizing dependencies between them.</li>
+<li><strong>Cohesive</strong> – ensuring they are “complete” and contain all the code needed to fulfill their purpose.</li>
+</ul>
+<p>Decomposing a system this way will always constitute a trade-off, requiring us to balance <strong>local vs.&nbsp;global complexity</strong> <span class="citation" data-cites="khononov2024balancing">[<a href="references.html#ref-khononov2024balancing" role="doc-biblioref">2</a>]</span>. Consider two extremes:</p>
+<ul>
+<li>A system with <strong>two massive 500-line functions</strong> has low global complexity (only two things to keep track of) but high local complexity (each function is overwhelming to understand).</li>
+<li>A system with <strong>500 tiny 2-line functions</strong> has low local complexity (each function is simple) but high global complexity (understanding how they interact becomes difficult).</li>
+</ul>
+<p>What constitutes a <strong>“right-sized” unit</strong>—small enough to be understandable, yet large enough to avoid excessive fragmentation—will depend on the context and your personal preferences (I usually aim for functions with around 5-10 lines of code).</p>
+<p>Ideally, these units should then form a hierarchy with different <strong>levels of abstraction</strong> (<a href="#fig-abstraction-levels" class="quarto-xref">Figure&nbsp;<span>4.10</span></a>), where lower-level units can be used as building blocks to create more advanced functionality.</p>
+<div id="fig-abstraction-levels" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-abstraction-levels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/04_design/abstraction_levels.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-abstraction-levels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.10: Complicated systems in software design often follow a hierarchy of abstraction. For example, to plot the results of a predictive model you call a function to create a scatter plot of predicted vs.&nbsp;actual values, which internally calls another, more specific function to compute the <span class="math inline">\(R^2\)</span> value displayed in the plot’s title.
+</figcaption>
+</figure>
+</div>
+<p>At each level, you only need to understand how to use the functions at lower levels but not their internals. This <strong>reduces cognitive load</strong>, making it easier to navigate and extend the codebase with confidence.</p>
+</section>
+<section id="cohesive-decoupled-units" class="level3">
+<h3 class="anchored" data-anchor-id="cohesive-decoupled-units">Cohesive &amp; Decoupled Units</h3>
+<p>Code consists of variables that store data and statements such as conditionals (<code>if/else</code>), loops (<code>for/while</code>), and transformations of this data to generate the desired output. To make our code easier to understand, modify, and reuse, we <strong>group related lines of code into individual units: functions and classes.</strong></p>
+<p>Each unit has an <strong>interface</strong> (what is visible from the outside) and an <strong>implementation</strong> (the actual code—details that users of the unit shouldn’t need to worry about). By designing simple interfaces that hide complex implementations, we create an <strong>abstraction</strong> that reduces cognitive load.</p>
+<p>A good unit is both <strong>cohesive</strong> and <strong>decoupled</strong>:</p>
+<ul>
+<li><strong>Cohesion</strong>: Each unit should do a single, well-defined task, and all its code should relate to that purpose.</li>
+<li><strong>Decoupling</strong>: Units should have minimal dependencies on other parts of the code or external resources. This reduces the risk that changes in one part of the system trigger more changes in multiple other parts.</li>
+</ul>
+<p>In the following sections, we’ll explore how to create such units in practice.</p>
+<section id="interface-implementation" class="level4">
+<h4 class="anchored" data-anchor-id="interface-implementation">Interface &amp; Implementation</h4>
+<p>To avoid creating an unmanageable tangle of code, it’s crucial that we establish clear <strong>boundaries</strong> for each subsystem—what is inside a unit’s scope and what isn’t. These boundaries form the unit’s <strong>interface</strong>: the part that is accessible from the outside and works like a contract, guaranteeing stable usage over time.</p>
+<p>The unit’s <strong>implementation</strong>, on the other hand, consists of the internal details of how the code works. This part is private and subject to change, meaning others shouldn’t rely on it.</p>
+<p>Let’s look at a simple example:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_times_x(x, n):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        result <span class="op">+=</span> x</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># call our function with some values</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    my_result <span class="op">=</span> n_times_x(<span class="dv">3</span>, <span class="dv">5</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(my_result)  <span class="co"># should output 15</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The <strong>interface</strong> of the <code>n_times_x</code> function consists of:</p>
+<ul>
+<li>The function name (<code>n_times_x</code>)</li>
+<li>The input arguments (<code>x</code> and <code>n</code>)</li>
+<li>The return value (<code>result</code>)</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled" title="Make interfaces explicit">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Make interfaces explicit
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Interfaces should be <strong>explicit and foolproof</strong>, especially since not all users read documentation carefully.</p>
+<p>For example, if a function relies on <strong>positional arguments</strong>, users might accidentally swap values, leading to hard-to-find bugs. Using <strong>keyword arguments</strong> (forcing users to specify argument names) makes the interface clearer and reduces errors.</p>
+</div>
+</div>
+<p>As long as the interface remains unchanged, we can freely <strong>modify the implementation</strong>. For instance, we can replace the inefficient loop with a proper multiplication:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_times_x(x, n):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> n <span class="op">*</span> x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This change improves efficiency, but since the function still works the same way externally (it’s called with the same arguments and returns the same results), no updates are required in other parts of the code. This is the power of clear boundaries.</p>
+<p>However, changing a function’s <strong>name</strong>, for example, is another story. If we rename <code>n_times_x</code>, every reference to it must also be updated. Modern IDEs can automate this within a project, but if the function is used in external code (e.g., if it is part of an open source library), renaming requires a <strong>deprecation process</strong> to transition users gradually.</p>
+<p>This is why <strong>choosing stable, well-thought-out interfaces upfront saves effort in the long run</strong>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Go deep">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Go deep
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Powerful units have <strong>narrow interfaces with deep implementations</strong>—they expose only what’s necessary while handling meaningful computations internally <span class="citation" data-cites="ousterhout2018philosophy">[<a href="references.html#ref-ousterhout2018philosophy" role="doc-biblioref">5</a>]</span>. For example:</p>
+<ul>
+<li>A function might take just two inputs (narrow interface) but span ten lines of logic (deep implementation).</li>
+<li>Or a one-liner function might use a complex formula that users shouldn’t need to understand.</li>
+</ul>
+<p>But if your function is called <code>n_times_x</code>, and the implementation is just a one-liner doing exactly that, the abstraction does not help to reduce cognitive load. 😉 As a general rule, <strong>a unit’s interface should be significantly easier to understand than its implementation.</strong></p>
+</div>
+</div>
+</section>
+<section id="cohesion" class="level4">
+<h4 class="anchored" data-anchor-id="cohesion">Cohesion</h4>
+<p>When breaking code into functions, <strong>everything inside a unit should be related to its single responsibility</strong>. The unit should:</p>
+<ol type="1">
+<li><strong>Include all relevant code</strong> needed to perform its task.</li>
+<li><strong>Exclude unrelated logic</strong> that belongs elsewhere.</li>
+</ol>
+<p>This principle extends to <strong>classes</strong>, which group related data (attributes) and behaviors (methods).</p>
+<p><strong>Variables</strong> store values, like the ingredients from our cupcake recipe. The data referenced by a variable is always of a certain type:</p>
+<ul>
+<li><strong>Primitive types</strong>: Simple values like integers or strings (as discussed in <a href="03_why_we_code_what_we_code.html#sec-data" class="quarto-xref"><span>Section 3.2.1</span></a>).</li>
+<li><strong>Composite types</strong>: Structures like lists and dictionaries that hold multiple values.</li>
+<li><strong>User-defined objects</strong>: Special-purpose structures defined in classes.</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># primitive data type: float</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="fl">4.1083</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># composite data type: list</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>my_list <span class="op">=</span> [<span class="st">"hello"</span>, <span class="dv">42</span>, x]</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># composite data type: dict</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>my_dict <span class="op">=</span> {</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"key1"</span>: <span class="st">"hello"</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"key2"</span>: <span class="dv">42</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"key3"</span>: my_list,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Dictionaries are flexible but lack structure—fields can be added, removed, or modified unpredictably. <strong>Classes</strong> provide a more controlled way to define related values as part of a single entity. For example, a <code>Person</code> class ensures that every object has a first name, last name, and date of birth:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> date</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Person:</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, first_name: <span class="bu">str</span>, last_name: <span class="bu">str</span>, date_of_birth: date):</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.first_name <span class="op">=</span> first_name</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.last_name <span class="op">=</span> last_name</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> date_of_birth <span class="op">&gt;</span> date.today():</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Date of birth cannot be in the future."</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        <span class="co"># this attribute is private (by prefixing _) so that it is not accessed outside of the class</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._date_of_birth <span class="op">=</span> date_of_birth</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get_age(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        <span class="co"># code outside the class only gets access to the person's age</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        today <span class="op">=</span> date.today()</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        age <span class="op">=</span> today.year <span class="op">-</span> <span class="va">self</span>._date_of_birth.year</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (today.month, today.day) <span class="op">&lt;</span> (<span class="va">self</span>._date_of_birth.month, <span class="va">self</span>._date_of_birth.day):</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>            age <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> age</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>   new_person <span class="op">=</span> Person(<span class="st">"Jane"</span>, <span class="st">"Doe"</span>, date(<span class="dv">1988</span>, <span class="dv">5</span>, <span class="dv">20</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Additionally, the methods of a class can control how attributes can be accessed or modified.</p>
+<section id="public-vs.-private-in-classes" class="level5">
+<h5 class="anchored" data-anchor-id="public-vs.-private-in-classes">Public vs.&nbsp;Private in Classes</h5>
+<p>For well-structured classes, we should carefully control <strong>what is public and what is private</strong>:</p>
+<ul>
+<li><strong>Public attributes &amp; methods</strong> form the external interface—changing them may break code elsewhere.</li>
+<li><strong>Private attributes &amp; methods</strong> (meant for internal use) may be modified anytime.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Public and private in different languages">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Public and private in different languages
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Access levels vary by programming language, for example:</p>
+<ul>
+<li><strong>Java</strong> has multiple levels (<code>public</code>, <code>protected</code>, <code>package</code>, <code>private</code>).</li>
+<li><strong>Python</strong> relies on convention rather than enforcement. Prefixing names with <code>_</code> or <code>__</code> signals they are <strong>“private”</strong>, though they remain accessible.</li>
+</ul>
+<p>While Python won’t stop users from accessing private attributes, they do so <strong>at their own risk</strong>, knowing these details might change without notice.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="decoupled" class="level4">
+<h4 class="anchored" data-anchor-id="decoupled">Decoupled</h4>
+<p>Ideally, we want our units to be <strong>independent</strong>, meaning they should have as few dependencies as possible on their surroundings. This makes the code easier to understand since each unit can be comprehended in isolation. But even more importantly, it simplifies modifications: when requirements change or new features are needed, we want to minimize the number of places that require updates. In contrast, if code is tightly coupled, a single change in one unit can ripple through multiple parts of the system, increasing the likelihood of errors.</p>
+<section id="rely-only-on-public-interfaces" class="level5">
+<h5 class="anchored" data-anchor-id="rely-only-on-public-interfaces">Rely Only on Public Interfaces</h5>
+<p>A key principle for writing decoupled code is to <strong>only depend on the public interfaces of functions and classes</strong>. This means:</p>
+<ul>
+<li>Avoid accessing private variables.</li>
+<li>Don’t rely on undocumented quirks or unintended behaviors (e.g., a function returning an odd result when passed values outside its expected range).</li>
+</ul>
+<p>If a function’s official interface changes, you’ll likely receive a warning. But if you rely on internal implementation details, your code becomes fragile—seemingly minor updates in other parts of the code could break it.</p>
+</section>
+<section id="pure-vs.-impure-functions" class="level5">
+<h5 class="anchored" data-anchor-id="pure-vs.-impure-functions">Pure vs.&nbsp;Impure Functions</h5>
+<p>The gold standard for decoupled units is <strong>pure functions</strong> <span class="citation" data-cites="normand2021grokking">[<a href="references.html#ref-normand2021grokking" role="doc-biblioref">4</a>]</span>. A pure function behaves like a mathematical function <span class="math inline">\(f: x \to y\)</span>, taking inputs <span class="math inline">\(x\)</span> and returning an output <span class="math inline">\(y\)</span>—and given the same inputs, the results will be the same every time. <strong>Impure functions</strong>, on the other hand, have side effects—they interact with the outside world, such as reading from or writing to a file or modifying global state.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(a, b):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># pure: returns a computed result without side effects</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> write_file(file_path, result):</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># impure: writes data to a file (side effect)</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(file_path, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        f.write(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Why favor pure functions?</strong></p>
+<ul>
+<li>They are <strong>predictable</strong>—calling them with the same inputs always produces the same output.</li>
+<li>They are <strong>easy to test</strong> since they don’t rely on external state.</li>
+<li>They <strong>reduce unexpected behavior</strong>, unlike impure functions, which may depend on changing external factors (e.g., the function may run fine the first time but then crash when trying to create a file that already exists or the computed results are suddenly different because in the meantime other code updated values stored in a database).</li>
+</ul>
+<p>That said, impure functions are often necessary—code needs to have an effect on the outside world, otherwise why should we execute it in the first place? The trick is to <strong>encapsulate as much critical logic as possible in pure functions</strong>, keeping side effects separate:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pure_function(data):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># process data (pure logic)</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> ...</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main():</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"some_input.txt"</span>) <span class="im">as</span> f:</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        data <span class="op">=</span> f.read()</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> pure_function(data)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"some_output.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        f.write(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This structure ensures the core logic is <strong>pure and testable</strong>:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tests.py</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_pure_function():</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> <span class="st">"some test data"</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> pure_function(data)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> result <span class="op">==</span> <span class="st">"some test result"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="dependency-injection-for-flexibility" class="level5">
+<h5 class="anchored" data-anchor-id="dependency-injection-for-flexibility">Dependency Injection for Flexibility</h5>
+<p>To further decouple your code, use <strong>dependency injection</strong>: instead of hardcoding dependencies (e.g., file operations, database access), pass them as arguments. This allows functions to remain independent of specific implementations.</p>
+<p>Without dependency injection:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> DataSource:</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> read(<span class="va">self</span>):</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"some_input.txt"</span>) <span class="im">as</span> f:</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> f.read()</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> write(<span class="va">self</span>, result):</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"some_output.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>            f.write(result)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fun_without_di():</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># create external dependency inside the function</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    ds <span class="op">=</span> DataSource()</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> ds.read()</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> ...</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    ds.write(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>With dependency injection:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fun_with_di(ds):</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># dependency is passed as an argument</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> ds.read()</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> ...</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    ds.write(result)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    ds <span class="op">=</span> DataSource()</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    fun_with_di(ds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now, <code>fun_with_di</code> only requires an object implementing <code>read</code> and <code>write</code>, but it <strong>doesn’t care</strong> if it’s a <code>DataSource</code> or something else that implements the same interface. This makes testing much easier:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tests.py</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MockDataSource:</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> read(<span class="va">self</span>):</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Mocked test data"</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> write(<span class="va">self</span>, result):</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.success <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_fun_with_di():</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    mock_ds <span class="op">=</span> MockDataSource()</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    fun_with_di(mock_ds)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> mock_ds.success</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Dependency injection can also be <strong>combined with pure functions</strong> to make your code testable at different levels of abstraction.</p>
+</section>
+<section id="anti-pattern-global-variables" class="level5">
+<h5 class="anchored" data-anchor-id="anti-pattern-global-variables">Anti-Pattern: Global Variables</h5>
+<p>Besides external resources like files and databases, another source of <strong>tight coupling and error-prone behavior</strong> is relying on <strong>global variables</strong>. These are defined at the script level (usually below import statements) and can be accessed or modified anywhere in the code.</p>
+<p>Global variables can introduce <strong>temporal coupling</strong>, meaning the order of function execution suddenly matters. This can lead to subtle and hard-to-debug issues:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>PI <span class="op">=</span> <span class="fl">3.14159</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calc_area_impure(r):</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># since PI is not defined inside the function, the fallback is to use the global variable</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> PI <span class="op">*</span> r<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> change_pi(new_pi<span class="op">=</span><span class="dv">3</span>):</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># `global` is needed; otherwise, this would create a new local variable</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">global</span> PI</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    PI <span class="op">=</span> new_pi</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    area_org <span class="op">=</span> calc_area_impure(r)</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    change_pi()</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    area_new <span class="op">=</span> calc_area_impure(r)</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> area_org <span class="op">==</span> area_new, <span class="st">"Unexpectedly different results!"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The safer approach is to pass values explicitly:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calc_area_pure(r, pi):</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pi <span class="op">*</span> r<span class="op">**</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This avoids hidden dependencies and ensures reproducibility.</p>
+<p>To prevent unintended global variables, <strong>wrap your script logic inside a function</strong>:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main():</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>   <span class="co"># main script code incl. variable definitions</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>   ...</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    main()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This ensures that variables defined inside <code>main()</code> don’t leak into the global namespace.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Think you need global variables? Wrap your code inside a class instead!">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Think you need global variables? Wrap your code inside a class instead!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If multiple functions need to update the same set of variables, consider <strong>grouping them into a class</strong> instead of passing the same arguments repeatedly or relying on globals. A class can store shared state in attributes, accessed via <code>self</code>.</p>
+</div>
+</div>
+</section>
+<section id="call-by-value-vs.-call-by-reference" class="level5">
+<h5 class="anchored" data-anchor-id="call-by-value-vs.-call-by-reference">🚨 Call-By-Value vs.&nbsp;Call-By-Reference</h5>
+<p>Another common pitfall is <strong>accidentally modifying function arguments</strong>.</p>
+<p>Depending on the programming languages, input arguments can be passed:</p>
+<ul>
+<li><strong>By value</strong>: A copy of the data is passed.</li>
+<li><strong>By reference</strong>: The function gets access to the original memory location and can modify the data directly.</li>
+</ul>
+<p>Python uses <strong>call-by-reference for mutable objects</strong> (e.g., lists, dictionaries), which can lead to unexpected behavior:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> change_list(a_list):</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    a_list[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">42</span>  <span class="co"># modifies the original list</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a_list</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    my_list <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(my_list)  <span class="co"># [1, 2, 3]</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    new_list <span class="op">=</span> change_list(my_list)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(new_list) <span class="co"># [42, 2, 3]</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(my_list)  <span class="co"># [42, 2, 3] 😱</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To prevent such side effects, create a copy of the variable before modifying it. This ensures the original remains unchanged:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> copy <span class="im">import</span> deepcopy</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> change_list(a_list):</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    a_list <span class="op">=</span> deepcopy(a_list)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    a_list[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">42</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a_list</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    my_list <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    new_list <span class="op">=</span> change_list(my_list)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(my_list)  <span class="co"># [1, 2, 3] 😊</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To avoid sneaky bugs, <strong>test your code to verify</strong>:</p>
+<ol type="1">
+<li><strong>Inputs remain unchanged</strong> after execution.</li>
+<li>The function <strong>produces the same output when called twice</strong> with identical inputs.</li>
+</ol>
+</section>
+</section>
+</section>
+<section id="building-with-blocks-units-in-context" class="level3">
+<h3 class="anchored" data-anchor-id="building-with-blocks-units-in-context">Building with Blocks: Units in Context</h3>
+<p>By following the strategies outlined in the previous section, your code units should now be well-structured: each performs a meaningful task, encapsulated behind a simple interface, and avoids unnecessary dependencies on external resources or volatile implementation details. But does this mean that when combined, these units automatically form good code? Unfortunately, not necessarily.</p>
+<section id="dont-repeat-yourself-dry" class="level4">
+<h4 class="anchored" data-anchor-id="dont-repeat-yourself-dry">Don’t Repeat Yourself (DRY)</h4>
+<p>When considering multiple code units in context, a common pitfall is violating the <strong>DRY (Don’t Repeat Yourself) principle</strong>. For example, critical business logic—such as computing an evaluation metric, applying a discount in an e-commerce system, or validating data, like the rules that define an acceptable password—might be duplicated across several locations. If this logic needs to change (due to an error or evolving business requirements), you’d need to update multiple places, making your code harder to maintain and more prone to bugs. Make sure that important values and business rules are defined in a central place, the <strong>single source of truth</strong>, to avoid inconsistencies and duplication.</p>
+<p>The most obvious DRY violation occurs when you catch yourself <strong>copy-pasting code</strong>—this is a clear signal to refactor it into a reusable function. However, DRY isn’t just about code; it applies to <strong>anything where a single change in requirements forces multiple updates</strong>, including tests, documentation, or data stored across different databases <span class="citation" data-cites="thomas2019pragmatic">[<a href="references.html#ref-thomas2019pragmatic" role="doc-biblioref">7</a>]</span>. To maintain your code effectively, aim to make each change in one place only. If that’s not feasible, at least keep related elements close together—for example, documenting interfaces using docstrings in the code rather than in separate files.</p>
+</section>
+<section id="facilitate-reuse" class="level4">
+<h4 class="anchored" data-anchor-id="facilitate-reuse">Facilitate Reuse</h4>
+<p>While we want to keep interfaces narrow and simple, we also want our code units to be broadly applicable. This often means <strong>replacing hardcoded values with function arguments</strong>. Consider these two functions:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> a_plus_1(a):</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> a_plus_b(a, b<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The first function is highly specific, while the second is more general and adaptable. By providing <strong>sensible default values</strong> (<code>b=1</code>), we keep the function easy to use while allowing flexibility for more advanced cases.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Reusable code through refactoring, not overengineering">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Reusable code through refactoring, not overengineering
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Reusable code isn’t typically created on the first try because future needs are unpredictable. Instead of overengineering, focus on writing simple, clear code and adapt it as new opportunities for reuse emerge. This process, called <em>refactoring</em>, is covered in more detail in <a href="05_how_we_code.html#sec-refactoring" class="quarto-xref"><span>Section 5.6</span></a>.</p>
+</div>
+</div>
+<p>That said, if your function ends up with ten arguments, reconsider whether it has a <strong>single responsibility</strong>. If it’s doing too much, breaking it into multiple functions is likely a better approach.</p>
+<section id="polymorphism" class="level5">
+<h5 class="anchored" data-anchor-id="polymorphism">Polymorphism</h5>
+<p>When working with classes, reuse can be achieved through <strong>polymorphism</strong>, where multiple classes implement the same interface and can be used interchangeably. We’ve already applied this principle when we used <code>MockDataStorage</code> instead of <code>DataStorage</code> for testing. This approach can be useful in research code as well, for example, you could define a <code>Model</code> interface with <code>fit</code> and <code>predict</code> methods so multiple models can share the same experiment logic:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Model:</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> fit(<span class="va">self</span>, x, y):</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">NotImplementedError</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> predict(<span class="va">self</span>, x):</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">NotImplementedError</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MyModel(Model):</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> fit(<span class="va">self</span>, x, y):</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>        ...  <span class="co"># implementation</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> predict(<span class="va">self</span>, x):</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>        y_pred <span class="op">=</span> ...</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> y_pred</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run_experiment(model: Model):</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># this code works with any model that implements</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># appropriate fit and predict functions</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    x_train, y_train <span class="op">=</span> ...</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>    model.fit(x_train, y_train)</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>    x_test <span class="op">=</span> ...</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>    y_test_pred <span class="op">=</span> model.predict(x_test)</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># create a specific model (possibly based on arguments passed by the user)</span></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> MyModel()</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>    run_experiment(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This way you can reuse your analysis code with all your models, which not only avoids redundancy, but ensure that all models are evaluated consistently.</p>
+</section>
+<section id="mixins" class="level5">
+<h5 class="anchored" data-anchor-id="mixins">Mixins</h5>
+<p>Another approach to reuse is using <strong>mixins</strong>, small reusable classes that provide additional functionality:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ScoredModelMixin:</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> score(<span class="va">self</span>, x, y):</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>        y_pred <span class="op">=</span> <span class="va">self</span>.predict(x)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> np.mean((y <span class="op">-</span> y_pred)<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MyModel(Model, ScoredModelMixin):</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> MyModel()</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># this uses the function implemented in ScoredModelMixin</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(model.score(np.random.randn(<span class="dv">5</span>, <span class="dv">3</span>), np.random.randn(<span class="dv">5</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Historically, deep class hierarchies were common, but they often led to unnecessary complexity. Instead of forcing all functionality into a single class hierarchy, it’s better to keep interfaces narrow and <strong>compose functionality from multiple small, focused classes</strong>.</p>
+</section>
+</section>
+</section>
+<section id="summary-from-working-to-good-code" class="level3">
+<h3 class="anchored" data-anchor-id="summary-from-working-to-good-code">Summary: From Working to Good Code</h3>
+<p>With these best practices in mind, revisit the steps you outlined when working backward from your desired output (in our case a plot) to the necessary inputs (data):</p>
+<ol type="1">
+<li><strong>Group related steps into reusable functions.</strong> Functions like <code>load_data</code>, <code>fit_model</code>, <code>predict_with_model</code>, and <code>compute_r2</code> help structure your code and prevent redundancy (DRY principle).</li>
+<li><strong>Identify explicit and implicit inputs and outputs:</strong>
+<ul>
+<li><strong>Inputs</strong>: Passed as function arguments or read from external sources (files, databases, APIs—but avoid global variables!).</li>
+<li><strong>Outputs</strong>: Return values or data written to an external source (and other side effects, like modifying input arguments).</li>
+</ul></li>
+<li><strong>Extract pure functions</strong>, which use only explicit inputs (arguments) and outputs (return values), from functions that rely on external resources or have other side effects. For example, if <code>load_data</code> includes both file I/O and preprocessing, separate out <code>preprocess</code> as a pure function to improve testability. Additionally, consider opportunities for <strong>dependency injection</strong>.</li>
+<li><strong>Encapsulate related variables and functions into classes</strong>:
+<ul>
+<li>Look for <strong>multiple variables describing the same object</strong> (e.g., parameters describing a <code>Model</code> instance).</li>
+<li>Identify <strong>functions that need access to private attributes</strong> or should update attributes in-place (e.g., <code>fit</code> and <code>predict</code> should be methods of <code>Model</code>).</li>
+</ul></li>
+<li><strong>Generalize where possible</strong>:
+<ul>
+<li>Should <strong>hardcoded values</strong> be passed as function arguments?</li>
+<li>Could multiple classes implement a <strong>unified interface</strong>? For example, different model classes should all implement the same <code>fit</code> and <code>predict</code> methods so they can be used with the same analysis code.</li>
+</ul></li>
+<li><strong>Organize your code into modules</strong> when it grows too large:
+<ul>
+<li>Keep closely related functions together (e.g., <code>load_data</code> and <code>preprocess</code>).</li>
+<li>Place logically grouped files into separate directories (e.g., <code>models/</code> for different implementations).</li>
+</ul></li>
+</ol>
+<p>By following these steps, you’ll create code that is not only functional but also maintainable and extensible. However, <strong>avoid overengineering</strong> by trying to predict every possible future requirement. Instead, keep your code <strong>as simple as possible</strong> and refactor it <strong>as actual needs evolve</strong>.</p>
+</section>
+</section>
+<section id="sec-draw-code" class="level2">
+<h2 class="anchored" data-anchor-id="sec-draw-code">Draw Your Code</h2>
+<p>To summarize the overall design, we can create sketches that serve as both a high-level overview and an implementation guide. While formal modeling languages like UML exist for this purpose, don’t feel pressured to use them—these diagrams are for you and your collaborators, so <strong>prioritize clarity over formality</strong>. Unless they’re part of official documentation that must meet specific standards, a quick whiteboard sketch is often a better use of your time.</p>
+<p>We distinguish between two types of diagrams:</p>
+<ol type="1">
+<li><strong>Structural Diagrams</strong> – These show the organization of your code: which functions and classes are in which modules, and how they depend on one another.</li>
+<li><strong>Behavioral Diagrams</strong> – These describe how your program runs: how inputs flow through the system and are transformed into outputs.</li>
+</ol>
+<section id="structure-your-personal-code-library" class="level4">
+<h4 class="anchored" data-anchor-id="structure-your-personal-code-library">Structure: Your Personal Code Library</h4>
+<p>Our first sketch provides an overview of the <strong>reusable functions and classes</strong> we assembled in the previous section (<a href="#fig-draw-library" class="quarto-xref">Figure&nbsp;<span>4.11</span></a>). This collection forms your <strong>personal code library</strong>, which you can reuse not just for this project but for future ones as well.</p>
+<div id="fig-draw-library" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-draw-library-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/04_design/draw_library.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-draw-library-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.11: The different functions and classes in our personal library, a collection of reusable units that can serve us in multiple projects. They are organized in different files and folders to keep related code close together. Green boxes represent pure functions, purple boxes impure functions with side effects (like reading or writing to external files), and blue boxes class methods. For classes (like <code>MyModel</code>) that extend another class (<code>Model</code>), only the additional attributes and methods are listed for that class.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="behavior-mapping-out-your-script" class="level4">
+<h4 class="anchored" data-anchor-id="behavior-mapping-out-your-script">Behavior: Mapping Out Your Script</h4>
+<p>Our second sketch outlines the <strong>script you’ll execute</strong> to create the results you want, which builds upon these components (<a href="#fig-draw-script" class="quarto-xref">Figure&nbsp;<span>4.12</span></a>). When designing the flow of your script, consider:</p>
+<ul>
+<li><strong>How the script is triggered</strong> – Does it take command-line arguments? What inputs does it require?</li>
+<li><strong>What the final output should be</strong> – A results plot? A summary table? Something else?</li>
+<li><strong>Which intermediate results should be saved</strong> – If your script crashes, you don’t want to start over. Since variables in memory disappear when the script terminates, consider saving key outputs to disk at logical checkpoints.</li>
+<li><strong>Which functions and classes from your library are used at each step</strong> – Also, note any external resources (e.g., files, databases, or APIs) they interact with.</li>
+</ul>
+<div id="fig-draw-script" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-draw-script-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/04_design/draw_script.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-draw-script-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.12: The full flow of your script, including external resources and reusable functions. If you want, you can omit the lower levels as these internal function calls are already covered in our library diagram. The code to create a new model should create models of different types depending on the configuration parameters passed when calling the script so you can use the same script for multiple experiments.
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled" title="Before you continue">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Before you continue
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>At this point, you should have a clear understanding of:</p>
+<ul>
+<li>The steps and inputs required to produce your desired outputs—what constitutes <em>working code</em>.</li>
+<li>How to structure this code into <em>good code</em> by creating cohesive, decoupled, and reusable units that use simple interfaces to abstract away complicated implementation details.</li>
+</ul>
+</div>
+</div>
+
+
+<div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-foote1997big" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">Foote B, Yoder J. Big Ball of Mud. <em>Pattern languages of program design</em> 4, 654–692 (1997).</div>
+</div>
+<div id="ref-khononov2024balancing" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">Khononov V. <em>Balancing Coupling in Software Design: Universal Design Principles for Architecting Modular Software Systems</em>. Addison-Wesley Professional (2024).</div>
+</div>
+<div id="ref-mcchrystal2015team" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">McChrystal GS, Collins T, Silverman D, Fussell C. <em>Team of Teams: New Rules of Engagement for a Complex World</em>. Penguin (2015).</div>
+</div>
+<div id="ref-normand2021grokking" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline">Normand E. <em>Grokking Simplicity: Taming Complex Software with Functional Thinking</em>. Manning Publications (2021).</div>
+</div>
+<div id="ref-ousterhout2018philosophy" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[5] </div><div class="csl-right-inline">Ousterhout JK. <em>A Philosophy of Software Design</em>. Yaknyam Press Palo Alto, CA, USA (2018).</div>
+</div>
+<div id="ref-skiena2008algorithm" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[6] </div><div class="csl-right-inline">Skiena SS. <em>The Algorithm Design Manual</em>. Springer (2020).</div>
+</div>
+<div id="ref-thomas2019pragmatic" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[7] </div><div class="csl-right-inline">Thomas D, Hunt A. <em>The Pragmatic Programmer: Your Journey to Mastery, 20th Anniversary Edition</em>. Addison-Wesley Professional (2019).</div>
+</div>
+</div>
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>The fourth category is <strong>chaotic</strong>, where cause and effect are unknowable. In software, this could be compared to rare cosmic-ray-induced bit flips that cause random, unpredictable behavior.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script type="text/javascript"> // go once over all images and transform the percentage width into pixels relative to original body size
+  const bodyWidth = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--custom-body-width')); // Get CSS variable
+  document.querySelectorAll('.quarto-figure img').forEach((img) => {
+    if (img.getAttribute('style')) {
+      const styleWidth = img.getAttribute('style').match(/width:\s*([\d.]+)%/); // Extract percentage
+      if (styleWidth) {
+        const percentage = parseFloat(styleWidth[1]) / 100;
+        img.style.width = `${bodyWidth * percentage}px`; // Apply calculated width
+      }
+    }
+  });
+</script>
+
+<style type="text/css">
+#footer {
+  font-size: 80%; /* Makes the font 70% smaller */
+  border-top: 1px solid #ccc; /* Adds a horizontal line above the footer */
+  padding-top: 10px; /* Adds some spacing above the footer content */
+}
+</style>
+
+<!-- FOOTER  -->
+<div id="footer" class="outer">
+  <footer class="inner">
+    <p>Find me on <a href="https://github.com/cod3licious/" target="_blank" rel="nofollow">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/" target="_blank" rel="nofollow">LinkedIn</a><br>
+      <a href="https://franziskahorn.de/">Home</a> ~ <a href="mailto:hey@franziskahorn.de?Subject=Book%20Feedback" target="_blank" rel="nofollow">Contact</a> ~ <a href="https://franziskahorn.de/impressum.html">Impressum</a></p>
+
+      <!-- CC license -->
+    <p xmlns:cc="http://creativecommons.org/ns#">This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:16px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:16px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:16px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:16px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1" alt=""></a></p>
+  </footer>
+</div>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./03_why_we_code_what_we_code.html" class="pagination-link" aria-label="Why We Code What We Code">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Why We Code What We Code</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./05_how_we_code.html" class="pagination-link" aria-label="How We Code">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">How We Code</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

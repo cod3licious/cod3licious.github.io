@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>6&nbsp; From Research to Production – Research Software Engineering: A Primer</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./07_afterword.html" rel="next">
+<link href="./05_how_we_code.html" rel="prev">
+<link href="./favicon.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-37b241f53b32a5ad598e4053e71b073f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06_from_research_to_production.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">From Research to Production</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Research Software Engineering: A Primer</a> 
+        <div class="sidebar-tools-main">
+    <a href="./Research-Software-Engineering--A-Primer.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Tools</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_why_we_code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Why We Code</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_why_we_code_what_we_code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Why We Code What We Code</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_what_we_code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">What We Code</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_how_we_code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">How We Code</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_from_research_to_production.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">From Research to Production</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07_afterword.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Afterword</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#components-of-software-products" id="toc-components-of-software-products" class="nav-link active" data-scroll-target="#components-of-software-products">Components of Software Products</a>
+  <ul class="collapse">
+  <li><a href="#graphical-user-interface-gui" id="toc-graphical-user-interface-gui" class="nav-link" data-scroll-target="#graphical-user-interface-gui">Graphical User Interface (GUI)</a></li>
+  <li><a href="#databases" id="toc-databases" class="nav-link" data-scroll-target="#databases">Databases</a></li>
+  <li><a href="#apis" id="toc-apis" class="nav-link" data-scroll-target="#apis">APIs</a></li>
+  <li><a href="#asynchronous-communication" id="toc-asynchronous-communication" class="nav-link" data-scroll-target="#asynchronous-communication">Asynchronous Communication</a></li>
+  <li><a href="#batch-jobs" id="toc-batch-jobs" class="nav-link" data-scroll-target="#batch-jobs">Batch Jobs</a></li>
+  <li><a href="#software-design-revisited" id="toc-software-design-revisited" class="nav-link" data-scroll-target="#software-design-revisited">Software Design Revisited</a></li>
+  </ul></li>
+  <li><a href="#delivery-deployment" id="toc-delivery-deployment" class="nav-link" data-scroll-target="#delivery-deployment">Delivery &amp; Deployment</a>
+  <ul class="collapse">
+  <li><a href="#cicd-pipelines-automating-development-cycles" id="toc-cicd-pipelines-automating-development-cycles" class="nav-link" data-scroll-target="#cicd-pipelines-automating-development-cycles">CI/CD Pipelines: Automating Development Cycles</a></li>
+  <li><a href="#containers-in-the-cloud" id="toc-containers-in-the-cloud" class="nav-link" data-scroll-target="#containers-in-the-cloud">Containers in the Cloud</a></li>
+  <li><a href="#scaling-considerations" id="toc-scaling-considerations" class="nav-link" data-scroll-target="#scaling-considerations">Scaling Considerations</a></li>
+  <li><a href="#monitoring-and-observability" id="toc-monitoring-and-observability" class="nav-link" data-scroll-target="#monitoring-and-observability">Monitoring and Observability</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-production" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">From Research to Production</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Your results look great, the paper is written, the conference talk is over—now you’re done, right?! Well, in academia, you might be. But in industry, this is often just the beginning.</p>
+<p>In this chapter, we explore some concepts and tools that can elevate your code to the next level: the additional components required to build a full-fledged software product that users can interact with, as well as some strategies for deploying your code and delivering it to your end users (<a href="#fig-software-product" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>).</p>
+<div id="fig-software-product" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-software-product-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/06_production/software_product.png" class="img-fluid figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-software-product-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.1: Unlike a script that runs locally on your laptop, a production-grade software application—such as a mobile app or a cloud-based web service—requires your code to be packaged and deployed within a runtime environment. The user can then interact with the software by providing inputs (like clicking a button) and receiving outputs (like seeing a new webpage).
+</figcaption>
+</figure>
+</div>
+<p>Who knows—maybe you’ll even be inspired to turn your project into a deployable app, which could become a great showcase in your next job application.</p>
+<section id="components-of-software-products" class="level2">
+<h2 class="anchored" data-anchor-id="components-of-software-products">Components of Software Products</h2>
+<p>So far, your code might consist of scripts or notebooks for analysis and a set of reusable helper functions in your personal library. The next step? Making your code accessible to others by turning it into standalone software with a graphical user interface (GUI). Furthermore, we’ll explore how to expand beyond static data sources like CSV or Excel files.</p>
+<section id="graphical-user-interface-gui" class="level3">
+<h3 class="anchored" data-anchor-id="graphical-user-interface-gui">Graphical User Interface (GUI)</h3>
+<p>Software shines when users can interact with it easily. Instead of using a command-line interface (CLI), these days, users expect intuitive GUIs with buttons and visual elements.</p>
+<p>We can broadly categorize software programs into:</p>
+<ol type="1">
+<li><strong>Stand-alone desktop or mobile applications</strong>, which users download and install on their devices.</li>
+<li><strong>Web-based applications</strong> that run in a browser, like Google Docs. These are increasingly popular thanks to widespread internet access.</li>
+</ol>
+<p>For web apps, the GUI that users interact with is also referred to as the <strong>frontend</strong>, while the <strong>backend</strong> handles behind-the-scenes tasks like data storage and processing. Even seemingly standalone desktop clients often connect to a backend server for cloud storage or to enable collaboration on shared documents. We’ll explore how this works in the section on APIs.</p>
+<p>In research, the goal is often to make results more accessible, for example, by transforming a static report into an interactive dashboard where users can explore data. To do this, we recommend you start with a web-based app.</p>
+<p>Many books and tutorials were written on the topic of building user-friendly software applications and a lot of it is very specific to the programming language you’re using—please consult your favorite search engine to discover more resources on this topic. 😉</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Web apps with Python's `streamlit` framework">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Web apps with Python’s <code>streamlit</code> framework
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you use Python, try the <a href="https://streamlit.io/">Streamlit</a> framework to create web apps from your analysis scripts in minutes.</p>
+</div>
+</div>
+</section>
+<section id="databases" class="level3">
+<h3 class="anchored" data-anchor-id="databases">Databases</h3>
+<p>So far, we’ve assumed that your data is stored in spreadsheets (like CSV or Excel files) on your computer. While this works for smaller datasets and simple workflows, it becomes less practical as your data grows or is generated dynamically, such as through user interactions, and needs to be accessed and updated by multiple people at the same time. This is where databases come in, offering a more efficient and scalable way to store, retrieve, and manage data <span class="citation" data-cites="kleppmann2017designing">[<a href="references.html#ref-kleppmann2017designing" role="doc-biblioref">5</a>]</span>.</p>
+<p>Databases come in many forms, each suited to different types of data and use cases. Two key considerations when choosing a database are <span class="citation" data-cites="serra2024deciphering">[<a href="references.html#ref-serra2024deciphering" role="doc-biblioref">7</a>]</span>:</p>
+<ol type="1">
+<li>the kind of data you need to store, and</li>
+<li>how that data will be used.</li>
+</ol>
+<section id="types-of-data-in-databases" class="level4">
+<h4 class="anchored" data-anchor-id="types-of-data-in-databases">Types of Data in Databases</h4>
+<p>Different kinds of databases are ideal for different types of data (see also <a href="03_why_we_code_what_we_code.html#sec-data" class="quarto-xref"><span>Section 3.2.1</span></a>):</p>
+<ul>
+<li><p><strong>Structured data:</strong> This resembles spreadsheet data, with rows for records and columns for attributes. Structured data is typically stored in relational (SQL) databases, where data is organized into multiple interrelated tables. Each table has a schema—a strict definition of the fields it contains and their types, such as text or numbers. If data doesn’t match the schema, it’s rejected.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Normalization in relational databases">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Normalization in relational databases
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A process called normalization reduces redundancy by splitting data into separate tables. For example, instead of storing <code>material_type</code>, <code>material_supplier</code>, and <code>material_quality</code> directly in a table of <code>samples</code>, you’d create a <code>materials</code> table with a unique ID for each material, then reference the <code>material_id</code> in the <code>samples</code> table. This avoids duplication and makes updates easier but requires more complex queries to combine tables and extract all the data needed for analysis.</p>
+</div>
+</div></li>
+<li><p><strong>Semi-structured data:</strong> JSON or XML documents contain data in flexible key-value pairs and are often stored in NoSQL databases. Unlike SQL databases, these databases don’t enforce a strict schema, which makes them ideal for handling complex, nested data structures or dynamically changing datasets. For example, APIs often exchange data in JSON format, which can be stored as-is to avoid breaking it into tables and reconstructing it later.<br>
+Modern relational databases, such as Postgres, blur the line between structured and semi-structured data by supporting JSON columns alongside traditional tables.</p></li>
+<li><p><strong>Unstructured data:</strong> Files like images, videos, and text documents are typically stored on disk. Data lakes (e.g., AWS S3) provide additional tools to manage these files, but fundamentally, this is similar to organizing files in folders on your computer. If your data is processed through a pipeline, it’s a good idea to save copies of the files at each stage (e.g., in <code>raw/</code> and <code>cleaned/</code> folders).</p></li>
+<li><p><strong>Streaming data:</strong> High-volume, real-time data (e.g., IoT sensor logs) is best managed in specialized databases optimized for streaming, such as Apache Kafka.</p></li>
+</ul>
+</section>
+<section id="use-cases-for-databases" class="level4">
+<h4 class="anchored" data-anchor-id="use-cases-for-databases">Use Cases for Databases</h4>
+<p>When choosing a database, you’ll also want to consider how the data will be used later:</p>
+<ul>
+<li><strong>Transactional processing (OLTP):</strong> In this use case, individual records are frequently created and retrieved (e.g., financial transactions). These systems prioritize fast write speeds and maintaining an up-to-date view of the data.</li>
+<li><strong>Batch analytics (OLAP):</strong> Data analysis is often performed in large batches to generate reports or insights, such as identifying which products users purchased last month. To avoid overloading the operational database with complex queries, data is typically copied from transactional systems to analytical systems (e.g., data warehouses) using an ETL process (Extract-Transform-Load).</li>
+<li><strong>Real-time analytics:</strong> For applications requiring live data (e.g., interactive dashboards), databases and frameworks optimized for streaming or in-memory processing (e.g., Apache Flink) are ideal.</li>
+</ul>
+<p>Scaling your database system is another critical factor. Consider how many users will access it simultaneously, how much data they’ll retrieve, and how often it will be updated.</p>
+</section>
+<section id="crud-operations" class="level4">
+<h4 class="anchored" data-anchor-id="crud-operations">CRUD Operations</h4>
+<p>Databases support four basic operations collectively called CRUD:</p>
+<ul>
+<li><strong>Create:</strong> Add new records.</li>
+<li><strong>Read:</strong> Retrieve data.</li>
+<li><strong>Update:</strong> Modify existing records.</li>
+<li><strong>Delete:</strong> Remove records.</li>
+</ul>
+<p>These operations are performed using <strong>queries</strong>, often written in SQL (Structured Query Language). For example, <code>SELECT * FROM table;</code> retrieves all records from a table. If you’re new to SQL, <a href="https://www.w3schools.com/sql/">this tutorial</a> is a great place to start.</p>
+</section>
+<section id="orms-and-database-migrations" class="level4">
+<h4 class="anchored" data-anchor-id="orms-and-database-migrations">ORMs and Database Migrations</h4>
+<p>Writing raw database queries can be tedious, especially when working with complex schemas. <strong>Object-Relational Mappers</strong> (ORMs) simplify this by mapping database tables to objects in your code. With ORMs, you can interact with your database using familiar programming constructs and even define the schema directly in your code.</p>
+<p>When designing a database schema and implementing the corresponding ORMs, it’s helpful to first sketch out the structure of the data (<a href="#fig-db-schema" class="quarto-xref">Figure&nbsp;<span>6.2</span></a>). Start by identifying the key objects (which map to database tables), their fields, and their relationships.</p>
+<div id="fig-db-schema" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-db-schema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/06_production/db_schema.png" class="img-fluid figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-db-schema-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.2: The classes <code>User</code>, <code>Order</code>, <code>Product</code>, and <code>Category</code> are mapped to the corresponding tables <code>users</code>, <code>orders</code>, <code>products</code>, and <code>categories</code>. Every record in a table is uniquely identified by a <strong>primary key</strong>, often named <code>id</code>. Fields in a table can either store data directly (e.g., text or boolean values) or reference records in another table, establishing <strong>relationships between tables</strong>. These relationships are defined using <strong>foreign keys</strong>, which store the primary key of a related record. For example, an <code>Order</code> references a single <code>User</code> ID (indicating the user who placed the order) and multiple <code>Product</code> IDs (the items included in the order).<br>
+Relationships between tables can be <strong>bidirectional</strong> or <strong>unidirectional</strong>, depending on the use case. For instance, when querying a <code>Product</code>, we want to list all the categories it belongs to, and vice versa. In contrast, the relationship between <code>Order</code> and <code>Product</code> only goes one way: when retrieving an <code>Order</code>, we want to know which products are included, but querying a <code>Product</code> doesn’t usually require listing all the orders it appears in.
+</figcaption>
+</figure>
+</div>
+<p><strong>Database migrations</strong>, or schema changes, often require careful coordination between code and database updates. For instance, renaming a field means you have to update your database and modify the code accessing it at the same time. Keeping migration scripts and application code (including ORMs) in the same repository helps ensure consistency during such updates.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Managing databases in Python">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Managing databases in Python
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <a href="https://sqlmodel.tiangolo.com/">SQLModel</a> library is highly recommended when working with relational databases in Python and also includes a great <a href="https://sqlmodel.tiangolo.com/learn/">tutorial</a> to learn more about ORMs and databases in general. For database migrations, check out <a href="https://alembic.sqlalchemy.org/">Alembic</a>.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="apis" class="level3">
+<h3 class="anchored" data-anchor-id="apis">APIs</h3>
+<p>In contrast to a user interface, through which a human interacts with a program, an <strong>Application Programming Interface (API)</strong> enables software components to communicate with one another. Think of it as a contract that defines how different systems interact. For example, an API might specify the classes and functions a library provides so developers can integrate it effectively.</p>
+<p>APIs are often associated with <strong>Web APIs</strong>, which provide functionality over the internet. These can either be external services, like the Google Maps API for retrieving directions, or a custom-built <strong>backend</strong> that serves as an <strong>abstraction layer for a database</strong>. This abstraction is useful because it can combine data, enforce rules (e.g., verifying user permissions), and maintain a consistent interface even when the database structure changes.</p>
+<section id="interacting-with-apis" class="level4">
+<h4 class="anchored" data-anchor-id="interacting-with-apis">Interacting with APIs</h4>
+<p>Web APIs typically use four HTTP methods that correspond to the CRUD (Create, Read, Update, Delete) operations in databases:</p>
+<ul>
+<li><strong>GET</strong>: Retrieves data, most commonly used when accessing websites. You can include additional parameters by appending a <code>?</code> to the URL. For example, <code>https://www.google.com/search?q=web+api</code> searches for “web api” using the query parameter <code>q</code>. To pass multiple parameters, separate them with <code>&amp;</code>.</li>
+<li><strong>POST</strong>: Sends data to create a new record, often as a JSON object, for example, when submitting a form.</li>
+<li><strong>PUT</strong>: Updates an existing record.</li>
+<li><strong>DELETE</strong>: Removes a record.</li>
+</ul>
+<p>You typically interact with APIs through a website’s <strong>frontend</strong>, which triggers these API calls in the background. However, APIs can also be queried directly to access raw data, usually returned in <strong>JSON</strong> format.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="API Keys and Authentication">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+API Keys and Authentication
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Many APIs require an <strong>API key</strong> to access their functionality. This key serves as an identifier, allowing the API to authenticate users, track usage, and apply rate limits to prevent abuse. Always keep your API keys secure and avoid exposing them in public repositories or client-side code.</p>
+</div>
+</div>
+<p>There are <a href="https://github.com/public-apis/public-apis">many free public APIs</a> you can explore. As an example, we’ll use <a href="https://thecatapi.com/">The Cat API</a> to demonstrate how to interact with an API.</p>
+<p>You can perform a <strong>GET request</strong> directly in your web browser. For instance, by visiting <a href="https://api.thecatapi.com/v1/images/search?limit=10"><code>https://api.thecatapi.com/v1/images/search?limit=10</code></a>, you’ll receive a JSON response containing a list of 10 random cat image URLs along with additional details like the image IDs.</p>
+<p>For more advanced requests, such as <strong>POST</strong>, you’ll need specialized tools. Popular GUI clients include <a href="https://www.postman.com/">Postman</a>, <a href="https://insomnia.rest/">Insomnia</a>, and <a href="https://www.usebruno.com/">Bruno</a>. If you prefer command-line tools, <a href="https://curl.se/"><code>curl</code></a> is a powerful option. Alternatively, you can interact with APIs programmatically using your preferred programming language and relevant libraries.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Interacting with APIs programmatically">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Interacting with APIs programmatically
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In the examples below, we use <code>curl</code> and Python to interact with The Cat API to retrieve the latest votes for cat images with a GET request and submit a new vote using a POST request.</p>
+<p><strong>Using <code>curl</code></strong></p>
+<p>Ensure <code>curl</code> is installed by running <code>which curl</code> in a terminal—this should return a valid path to your installation.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># GET request to view the last 10 votes for cat images</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="st">"https://api.thecatapi.com/v1/votes?limit=10&amp;order=DESC"</span> <span class="dt">\</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>-H <span class="st">"x-api-key: DEMO-API-KEY"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># POST request to submit a new vote</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># the payload after -d is the JSON object submitted to the API</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-X</span> POST <span class="st">"https://api.thecatapi.com/v1/votes"</span> <span class="dt">\</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>-H <span class="st">"Content-Type: application/json"</span> <span class="dt">\</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>-H <span class="st">"x-api-key: DEMO-API-KEY"</span> <span class="dt">\</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>-d <span class="st">'{</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="st">  "image_id": "HT902S6ra",</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="st">  "sub_id": "my-user-1234",</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="st">  "value": 1</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="st">}'</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># now run the GET request again to see your new vote</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Using Python</strong></p>
+<p>Python’s <a href="https://requests.readthedocs.io/en/latest/"><code>requests</code></a> library is great for working with APIs.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>BASE_URL <span class="op">=</span> <span class="st">"https://api.thecatapi.com/v1/votes"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>API_KEY <span class="op">=</span> <span class="st">"DEMO-API-KEY"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># GET request to fetch the last 10 votes</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_last_votes():</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> requests.get(</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        BASE_URL,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        headers<span class="op">=</span>{<span class="st">"x-api-key"</span>: API_KEY},</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        params<span class="op">=</span>{<span class="st">"limit"</span>: <span class="dv">10</span>, <span class="st">"order"</span>: <span class="st">"DESC"</span>}</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> response.status_code <span class="op">==</span> <span class="dv">200</span>:</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(response.json())</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Error: </span><span class="sc">{</span>response<span class="sc">.</span>status_code<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co"># POST request to submit a new vote</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> submit_vote(image_id, sub_id, value):</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> {<span class="st">"image_id"</span>: image_id, <span class="st">"sub_id"</span>: sub_id, <span class="st">"value"</span>: value}</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    response <span class="op">=</span> requests.post(</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        BASE_URL,</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        headers<span class="op">=</span>{<span class="st">"Content-Type"</span>: <span class="st">"application/json"</span>, <span class="st">"x-api-key"</span>: API_KEY},</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        json<span class="op">=</span>data</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> response.status_code <span class="op">==</span> <span class="dv">201</span>:</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Vote submitted!"</span>)</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Error: </span><span class="sc">{</span>response<span class="sc">.</span>status_code<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    get_last_votes()</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    submit_vote(<span class="st">"HT902S6ra"</span>, <span class="st">"my-user-1234"</span>, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="implementing-apis" class="level4">
+<h4 class="anchored" data-anchor-id="implementing-apis">Implementing APIs</h4>
+<p>When designing an API, specifically a REST (REpresentational State Transfer) API, it’s important to understand the concept of an <strong>endpoint</strong>. An endpoint is a specific URL in your API where a resource can be accessed or modified. For example, if you’re building a photo-sharing app, an endpoint like <code>/images</code> might allow users to view or upload images. Endpoints should be named using descriptive, plural nouns (e.g., <code>/users</code>, <code>/images</code>) to clearly represent the resources being accessed. It’s also best practice to avoid including verbs in endpoint names (e.g., <code>/get_users</code>), since the HTTP method (like GET or POST) already specifies the action being taken, such as retrieving or creating data.</p>
+<p>Another key design principle is <strong>statelessness</strong>. Similar to the concept of pure functions, this means that each API request should contain all the information needed to complete the action, like user authentication tokens. This way, the server doesn’t need to remember anything about previous requests, making the API easier to scale. This is especially important in cloud-based environments where multiple requests from the same user may be routed to different servers <span class="citation" data-cites="davis2019cloud">[<a href="references.html#ref-davis2019cloud" role="doc-biblioref">1</a>]</span>.<br>
+Data that needs to be persisted can be stored either in the frontend or a central database in the backend, depending on its purpose. Temporary data, like a shopping cart, can be maintained on the user’s machine using cookies or local storage. Permanent data, such as a purchase order, is best stored in the backend database to ensure long-term accessibility. This approach supports stateless APIs, as the backend server doesn’t need to keep the session state in memory. Instead, all necessary data is either included in the request or can be fetched from the database, allowing each request to be processed independently.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Implementing APIs in Python with `FastAPI`">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Implementing APIs in Python with <code>FastAPI</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><a href="https://fastapi.tiangolo.com/">FastAPI</a> is a Python framework that makes building APIs straightforward. With just a few lines of code, you can turn a function into an endpoint that validates input and returns a JSON response. It’s beginner-friendly and highly performant.</p>
+</div>
+</div>
+</section>
+<section id="communicating-with-a-server-use-cases" class="level4">
+<h4 class="anchored" data-anchor-id="communicating-with-a-server-use-cases">Communicating with a Server: Use Cases</h4>
+<p>Code that runs on our <strong>local devices</strong> (like your laptop or smartphone) is often <strong>limited by the available hardware</strong>. For example, if you play a chess game on your phone against a bot, this bot will only have limited capabilities since the processor on your phone is not sufficient to run an advanced AI model (<a href="#fig-game-local" class="quarto-xref">Figure&nbsp;<span>6.3</span></a>).</p>
+<div id="fig-game-local" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-game-local-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/06_production/game_local.png" class="img-fluid figure-img" style="width:55.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-game-local-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.3: The user interacts only with their device to play chess against a simple bot locally on their phone. The small database icon next to the phone symbolizes the local storage on your phone, where the current game state is saved after each move in case the app is closed so that you can retrieve this saved state the next time you open the app and continue with the game.
+</figcaption>
+</figure>
+</div>
+<p>A <strong>server in the cloud</strong>, on the other hand, has <strong>the necessary hardware</strong> (in this case multiple GPUs) to run an advanced AI-based chess bot (<a href="#fig-game-server-ai" class="quarto-xref">Figure&nbsp;<span>6.4</span></a>). However, to play against this more challenging opponent, you need to have internet access to be able to submit your current game state to the server and receive the next bot move as a response. This also means that <strong>you can’t play the game in case your internet connection is not sufficient or the server is down.</strong></p>
+<div id="fig-game-server-ai" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-game-server-ai-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/06_production/game_server_ai.png" class="img-fluid figure-img" style="width:55.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-game-server-ai-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.4: The user interacts with their device and data is submitted to and received from a server in the cloud hosting an advanced AI to determine the next bot move.
+</figcaption>
+</figure>
+</div>
+<p>Finally, <strong>by communicating with a server we can also play against other human players</strong> (<a href="#fig-game-two-players" class="quarto-xref">Figure&nbsp;<span>6.5</span></a>). For this, both players take turns in submitting and receiving their next moves to the server. Since the chess API may run on multiple server nodes to handle a high load of requests, it can’t be guaranteed that both players will interact with the same node, i.e., we need a stateless design. To accomplish this, the server persists and retrieves data in a central database that can be accessed by all nodes.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div id="fig-game-two-players" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-game-two-players-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/06_production/game_two_players.png" class="img-fluid figure-img" style="width:55.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-game-two-players-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.5: Player 1 interacts with their device and data about the next move is submitted to a server node, where it is stored in a central database. The device from player 2 requests an update from a different server node, which accesses the same database to retrieve the move submitted by player 1.
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="asynchronous-communication" class="level3">
+<h3 class="anchored" data-anchor-id="asynchronous-communication">Asynchronous Communication</h3>
+<p>When your script calls a library function or API and waits for it to return before continuing with the rest of the code, this is an example of <strong>synchronous communication</strong>. It’s similar to a conversation where one person speaks and then waits and listens while the other person responds.</p>
+<p>In contrast, <strong>asynchronous (async) communication</strong> allows the program to <strong>keep running while waiting for a response</strong>. Once the response arrives, it is processed and integrated into the workflow, but until then the code just continues without it. Just like when you send an email to someone asking for some data and they send you the results a few hours later.<br>
+For example, a website might fetch data from multiple APIs, showing placeholders until the responses arrive. This approach improves the user experience because it keeps the user interface (UI) responsive and enables faster loading by <strong>processing multiple tasks in parallel</strong>.</p>
+<section id="event-driven-architecture" class="level4">
+<h4 class="anchored" data-anchor-id="event-driven-architecture">Event-Driven Architecture</h4>
+<p>For most applications, communicating directly with external services—whether synchronously or async—is the right approach, because eventually the requested data is needed to finish the original task. But there are also use cases where it’s enough that your message was received and you don’t need to wait for a response. For example, when placing an order in an online shop, users only care that the order was submitted successfully. They don’t wait in front of the screen until it was packaged and shipped—which could take days. An email notification can inform them of progress later.</p>
+<p>Such a scenario calls for an <strong>event-driven architecture</strong>, which takes async communication to the extreme. Here, multiple services can operate independently by exchanging information via events using a <strong>message queue (MQ)</strong>, a system that temporarily stores event messages like JSON documents. These messages act as instructions, containing all relevant details about an event, such as a user’s order information. Publishers (senders) create events, and subscribers (receivers) process them based on their type, such as <code>Order Submitted</code>.</p>
+<p>An event-driven architecture offers several <strong>advantages</strong>. By decoupling components, it allows publishers and subscribers to run independently, even in different programming languages or environments. This makes it easier to scale systems and assign teams to own specific components without needing to understand the full system. Additionally, one event can trigger multiple actions. For instance, when an order is packed, one system might update the user database while another generates a shipping label. This approach thereby simplifies the propagation of data to multiple services and can also facilitate replication of live data to testing and staging environments.</p>
+<p>However, this type of architecture also brings with it some <strong>challenges</strong>. Since no single component has a full view of the system, tracking the state of a specific task, such as whether an order is still waiting or in progress, can be difficult. Furthermore, while MQs often guarantee that each message is handled at least once, the system requires careful design in case a message is processed multiple times. For example, if a subscriber crashes after processing a message but before confirming its completion, the MQ might reassign the task to another instance, potentially leading to duplicate processing. For these reasons, event-driven architectures should only be used when direct communication between services is not an option <span class="citation" data-cites="richards2020fundamentals">[<a href="references.html#ref-richards2020fundamentals" role="doc-biblioref">6</a>]</span>.</p>
+</section>
+</section>
+<section id="batch-jobs" class="level3">
+<h3 class="anchored" data-anchor-id="batch-jobs">Batch Jobs</h3>
+<p>Unlike continuously running services such as web APIs, <strong>batch jobs</strong> are scripts or workflows used to process accumulated data in one go. They are particularly effective when tasks don’t require immediate processing or when grouping tasks can improve efficiency. To automate recurring tasks, batch workflows can be scheduled at specific intervals using tools like <strong>cron jobs</strong>.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>Examples of scenarios where batch jobs are useful include:</p>
+<ul>
+<li>Fetching new messages from a queue every 10 minutes to process them in bulk, reducing overhead.</li>
+<li>Generating a sales report for the marketing department every Monday at midnight.</li>
+<li>Running nightly data validation to check for data drift or anomalous patterns.</li>
+<li>Retraining a machine learning model every week using newly collected data to create updated recommendations, like Spotify’s “Discover Weekly” playlist <span class="citation" data-cites="huyen2022designing">[<a href="references.html#ref-huyen2022designing" role="doc-biblioref">3</a>]</span>.</li>
+</ul>
+<p>For large-scale jobs, distributed systems might be necessary to ensure they complete within an acceptable timeframe.</p>
+</section>
+<section id="software-design-revisited" class="level3">
+<h3 class="anchored" data-anchor-id="software-design-revisited">Software Design Revisited</h3>
+<p>As your software evolves beyond a simple script, it becomes a system composed of multiple interconnected components. Each component can be viewed as a subsystem with its own defined boundaries and interface, responsible for specific functionalities while interacting with other parts of the system.</p>
+<p>To manage this growing complexity, it’s best to think of these components—such as a <strong>GUI/frontend</strong>, <strong>API/backend</strong>, and <strong>data storage</strong> (files, databases, message queues)—as distinct layers. A clean design follows the principle of <strong>layered communication</strong>, where each layer interacts only with the layer directly below it <span class="citation" data-cites="khononov2021learning">[<a href="references.html#ref-khononov2021learning" role="doc-biblioref">4</a>]</span>. For example, the frontend communicates with the backend, and the backend interacts with the database, avoiding “skip connections” where one layer bypasses another.<br>
+This design principle minimizes dependencies and makes the system easier to maintain: If the interface of one component changes, only the layer directly above it has to be adapted.</p>
+<p>When you design these more complicated systems, it’s even more important to sketch the overall architecture before you start with the implementation. Visualizing how the layers interact can reveal potential bottlenecks or unnecessary complexity and gives you and your collaborators clarity on the big picture.<br>
+Instead of lumping everything into “your code” versus “the outside world” as we did in <a href="04_what_we_code.html#fig-draw-script" class="quarto-xref">Figure&nbsp;<span>4.12</span></a>, you can use <strong>swimlanes</strong> to separate the process steps performed by each component and distinguish between the different layers (<a href="#fig-production-design" class="quarto-xref">Figure&nbsp;<span>6.6</span></a>).</p>
+<p><strong>Begin by visualizing the flow from the user’s perspective</strong>, focusing on how they interact with the frontend to complete their intended task. Once the user experience is clear, <strong>continue with the backend and database layers</strong> and map out how these can support and implement each step:</p>
+<ul>
+<li>What data is needed to render the GUI?</li>
+<li>What data needs to be persisted in the database for later?</li>
+</ul>
+<p>Finally, in accordance with the read and write (CRUD) operations on the database, you can <strong>design the ORMs</strong> used to represent and store the required data (<a href="#fig-db-schema" class="quarto-xref">Figure&nbsp;<span>6.2</span></a>).</p>
+<div id="fig-production-design" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-production-design-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/06_production/production_design.png" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-production-design-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.6: A simplified flow showing what happens when a user orders something online: the user opens a product page, which triggers a request to the API to fetch the corresponding product details from the database (DB). The user then clicks the “add to cart” button, which places the product into the shopping cart (in local storage managed by the frontend). The user then views the shopping cart and clicks “purchase”, which triggers a POST request to the API, submitting the user’s cart contents. The API creates a new record in the <code>orders</code> table to store the purchase details and submits an <code>Order</code> event to the message queue (MQ), thereby alerting other services that a new order needs to be packed and shipped. The endpoint returns with the status code 201 (“success”) and the frontend redirects the user to a page that tells them the purchase was successful, at which point the user closes the tab.
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="delivery-deployment" class="level2">
+<h2 class="anchored" data-anchor-id="delivery-deployment">Delivery &amp; Deployment</h2>
+<p>Modern software development requires reliable and efficient processes to build, test, and deploy applications <span class="citation" data-cites="forsgren2018accelerate">[<a href="references.html#ref-forsgren2018accelerate" role="doc-biblioref">2</a>]</span>. Delivery and deployment strategies ensure that new features and updates are released quickly, safely, and at scale, minimizing disruptions to users while maintaining quality.</p>
+<section id="cicd-pipelines-automating-development-cycles" class="level3">
+<h3 class="anchored" data-anchor-id="cicd-pipelines-automating-development-cycles">CI/CD Pipelines: Automating Development Cycles</h3>
+<p><strong>Continuous Integration (CI)</strong> and <strong>Continuous Delivery/Deployment (CD)</strong> pipelines are the backbone of modern software practices. CI focuses on automating the process of integrating code changes into a shared repository. Every change triggers automated tests to ensure that the new code works harmoniously with the existing codebase. CD extends this by automating the preparation or deployment of changes into production, either ready for manual approval (Continuous Delivery) or fully automated (Continuous Deployment). This drastically reduces manual effort, minimizes human error, and enables faster iteration cycles.</p>
+<p>CI/CD pipelines are either included directly into version control platforms, such as GitHub Actions and GitLab CI/CD, or can be run using external tools like Jenkins or CircleCI.</p>
+<section id="optimizing-cicd-pipelines" class="level4">
+<h4 class="anchored" data-anchor-id="optimizing-cicd-pipelines">Optimizing CI/CD Pipelines</h4>
+<p>To enhance pipeline efficiency and reliability, consider the following practices:</p>
+<ul>
+<li><strong>Dependency Caching:</strong> Cache dependencies to reduce the time spent downloading and installing them for each build.</li>
+<li><strong>Selective Testing:</strong> Run only the tests affected by recent changes to speed up feedback.</li>
+<li><strong>Real-Time Notifications:</strong> Notify developers immediately when a pipeline fails, enabling faster issue resolution.</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled" title="Security in CI/CD pipelines">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Security in CI/CD pipelines
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Security must be a priority in any CI/CD process. For example, it is best practice to include a <strong>dependency scanning</strong> step to detect vulnerabilities in third-party libraries. Furthermore, you should never include <strong>sensitive information</strong>—such as API tokens, database credentials, or private keys—directly in your code. However, because CI jobs often require access to this information, you can securely store secrets using dedicated CI/CD variables or external <strong>secret management tools</strong> like HashiCorp Vault or AWS Secrets Manager.</p>
+</div>
+</div>
+<p>A well-designed CI/CD pipeline not only saves time and resources but also ensures a consistent and high-quality delivery of software.</p>
+</section>
+</section>
+<section id="containers-in-the-cloud" class="level3">
+<h3 class="anchored" data-anchor-id="containers-in-the-cloud">Containers in the Cloud</h3>
+<p><strong>Containers</strong>, powered by tools like <strong>Docker</strong>, encapsulate applications with their dependencies, ensuring consistency across different environments. This portability simplifies deployment and reduces issues caused by environment differences.</p>
+<p>For managing containerized applications at scale, <strong>Kubernetes (k8s)</strong> is the industry standard. Kubernetes automates the <strong>orchestration of containers</strong>, providing features like:</p>
+<ul>
+<li><strong>Auto-scaling:</strong> Adjust resources dynamically based on workload.</li>
+<li><strong>Self-healing:</strong> Automatically restart failed containers.</li>
+<li><strong>Load Balancing:</strong> Distribute traffic efficiently across services.</li>
+</ul>
+<section id="using-cloud-platforms" class="level4">
+<h4 class="anchored" data-anchor-id="using-cloud-platforms">Using Cloud Platforms</h4>
+<p>Cloud platforms like <strong>AWS</strong>, <strong>Google Cloud Platform (GCP)</strong>, and <strong>Microsoft Azure</strong> offer robust infrastructures for deploying and scaling applications. For simpler workflows, <strong>managed services</strong> like Render or Heroku abstract away much of the operational complexity.</p>
+<p>Managing costs effectively is critical in cloud deployments. Key strategies include:</p>
+<ul>
+<li><strong>Resource Scaling:</strong> Reduce unused resources during off-peak hours.</li>
+<li><strong>Serverless Computing:</strong> Use serverless models, like AWS Lambda, for infrequent workloads to save costs.</li>
+<li><strong>Cost Monitoring Tools:</strong> Leverage AWS Cost Explorer or GCP Billing to track and optimize spending.</li>
+</ul>
+</section>
+<section id="infrastructure-as-code-iac" class="level4">
+<h4 class="anchored" data-anchor-id="infrastructure-as-code-iac">Infrastructure as Code (IaC)</h4>
+<p>Instead of configuring your cloud setup manually through the platform’s GUI, it is highly recommended to use <strong>Infrastructure as Code</strong> tools like Terraform and AWS CloudFormation to manage cloud infrastructure programmatically. The IaC configuration files can then be version-controlled, which ensures:</p>
+<ul>
+<li>Reproducible setups for consistent environments.</li>
+<li>Easier onboarding for new team members.</li>
+<li>Reduced risk of configuration drift.</li>
+</ul>
+</section>
+<section id="testing-and-staging-environments" class="level4">
+<h4 class="anchored" data-anchor-id="testing-and-staging-environments">Testing and Staging Environments</h4>
+<p>Deploying changes directly to production is risky. To ensure stability:</p>
+<ul>
+<li>Use <strong>staging environments</strong> that mimic production to validate changes before release.</li>
+<li>Maintain <strong>testing environments</strong> for early experimentation and debugging.</li>
+</ul>
+<p>Techniques like <strong>A/B testing</strong> and <strong>feature toggles</strong> allow gradual rollouts or controlled exposure of new features, minimizing user disruption. This can be achieved using deployment strategies like:</p>
+<ul>
+<li><strong>Blue-Green Deployments:</strong> Maintain two environments (blue and green) and switch traffic between them for A/B tests or to reduce downtime during updates.</li>
+<li><strong>Canary Releases:</strong> Gradually expose updates to a small group of users, monitoring for issues before full deployment.</li>
+</ul>
+</section>
+</section>
+<section id="scaling-considerations" class="level3">
+<h3 class="anchored" data-anchor-id="scaling-considerations">Scaling Considerations</h3>
+<p>As applications grow, scaling requires thoughtful architectural design. You should consider:</p>
+<ul>
+<li><strong>Task Separation:</strong> For example, train machine learning models periodically as batch jobs, while keeping prediction services running continuously. This is particularly important when services have vastly <strong>different user bases</strong> (e.g., hundreds of admins versus millions of regular users), as they require varying replication rates for horizontal scaling. Especially if services rely on distinct dependencies, combining them into a single Docker container can result in a large, inefficient image, which increases the services’ startup time.</li>
+<li><strong>Team Autonomy:</strong> Design services such that teams can own and work on individual components independently, thereby reducing communication overhead and speeding up development cycles <span class="citation" data-cites="skelton2019team">[<a href="references.html#ref-skelton2019team" role="doc-biblioref">8</a>]</span>.</li>
+</ul>
+</section>
+<section id="monitoring-and-observability" class="level3">
+<h3 class="anchored" data-anchor-id="monitoring-and-observability">Monitoring and Observability</h3>
+<p>To ensure smooth operation and detect issues proactively, monitoring and observability are essential. Focus on:</p>
+<ul>
+<li><strong>System Performance:</strong> Monitor the “golden signals”—latency, traffic, errors, and saturation of your services. Tools like Prometheus and Grafana are commonly used for this.</li>
+<li><strong>Data Quality:</strong> Track changes in input data distributions and monitor metrics like model accuracy to detect data drift.</li>
+<li><strong>Synthetic Monitoring:</strong> Simulate user behavior to identify bottlenecks and improve responsiveness. Complement this with chaos engineering tools like <strong>Chaos Monkey</strong> to test your system’s resilience by deliberately introducing failures, ensuring your infrastructure can handle unexpected disruptions effectively.</li>
+<li><strong>Distributed Tracing:</strong> Debug across microservices using tools like Jaeger or OpenTelemetry.</li>
+</ul>
+<p>When issues arise, having a rollback strategy is crucial. Options include:</p>
+<ul>
+<li>Reverting to a stable container image.</li>
+<li>Rolling back database migrations.</li>
+<li>Using feature toggles to disable problematic updates.</li>
+</ul>
+<p>By combining robust delivery pipelines, thoughtful architecture, and effective monitoring, teams can ensure that their applications remain reliable, scalable, and adaptable to changing needs.</p>
+<div class="callout callout-style-default callout-caution callout-titled" title="Before you continue">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Before you continue
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>At this point, you should have a clear understanding of:</p>
+<ul>
+<li>Which additional steps you could take to make your research project production-ready.</li>
+</ul>
+</div>
+</div>
+
+
+<div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-davis2019cloud" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">Davis C. <em>Cloud Native Patterns: Designing Change-Tolerant Software</em>. Manning Publications (2019).</div>
+</div>
+<div id="ref-forsgren2018accelerate" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">Forsgren N, Humble J, Kim G. <em>Accelerate: The Science of Lean Software and Devops: Building and Scaling High Performing Technology Organizations</em>. IT Revolution (2018).</div>
+</div>
+<div id="ref-huyen2022designing" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">Huyen C. <em>Designing Machine Learning Systems</em>. O’Reilly Media, Inc. (2022).</div>
+</div>
+<div id="ref-khononov2021learning" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline">Khononov V. <em>Learning Domain-Driven Design</em>. O’Reilly Media, Inc. (2021).</div>
+</div>
+<div id="ref-kleppmann2017designing" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[5] </div><div class="csl-right-inline">Kleppmann M. <em>Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems</em>. O’Reilly Media, Inc. (2017).</div>
+</div>
+<div id="ref-richards2020fundamentals" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[6] </div><div class="csl-right-inline">Richards M, Ford N. <em>Fundamentals of Software Architecture: An Engineering Approach</em>. O’Reilly Media, Inc. (2020).</div>
+</div>
+<div id="ref-serra2024deciphering" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[7] </div><div class="csl-right-inline">Serra J. <em>Deciphering Data Architectures</em>. O’Reilly Media, Inc. (2024).</div>
+</div>
+<div id="ref-skelton2019team" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[8] </div><div class="csl-right-inline">Skelton M, Pais M. <em>Team Topologies: Organizing Business and Technology Teams for Fast Flow</em>. IT Revolution (2019).</div>
+</div>
+</div>
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>This use case could also be implemented using an event-driven architecture as discussed in the next section. With this setup, both players would publish their next moves to a message queue and subscribe to it to receive updates about the moves of their opponent.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Tools like <a href="https://crontab.guru/">Crontab Guru</a> can help configure these schedules.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script type="text/javascript"> // go once over all images and transform the percentage width into pixels relative to original body size
+  const bodyWidth = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--custom-body-width')); // Get CSS variable
+  document.querySelectorAll('.quarto-figure img').forEach((img) => {
+    if (img.getAttribute('style')) {
+      const styleWidth = img.getAttribute('style').match(/width:\s*([\d.]+)%/); // Extract percentage
+      if (styleWidth) {
+        const percentage = parseFloat(styleWidth[1]) / 100;
+        img.style.width = `${bodyWidth * percentage}px`; // Apply calculated width
+      }
+    }
+  });
+</script>
+
+<style type="text/css">
+#footer {
+  font-size: 80%; /* Makes the font 70% smaller */
+  border-top: 1px solid #ccc; /* Adds a horizontal line above the footer */
+  padding-top: 10px; /* Adds some spacing above the footer content */
+}
+</style>
+
+<!-- FOOTER  -->
+<div id="footer" class="outer">
+  <footer class="inner">
+    <p>Find me on <a href="https://github.com/cod3licious/" target="_blank" rel="nofollow">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/" target="_blank" rel="nofollow">LinkedIn</a><br>
+      <a href="https://franziskahorn.de/">Home</a> ~ <a href="mailto:hey@franziskahorn.de?Subject=Book%20Feedback" target="_blank" rel="nofollow">Contact</a> ~ <a href="https://franziskahorn.de/impressum.html">Impressum</a></p>
+
+      <!-- CC license -->
+    <p xmlns:cc="http://creativecommons.org/ns#">This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:16px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:16px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:16px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:16px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1" alt=""></a></p>
+  </footer>
+</div>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./05_how_we_code.html" class="pagination-link" aria-label="How We Code">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">How We Code</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./07_afterword.html" class="pagination-link" aria-label="Afterword">
+        <span class="nav-page-text">Afterword</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>3&nbsp; Why We Code What We Code – Research Software Engineering: A Primer</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./04_what_we_code.html" rel="next">
+<link href="./02_why_we_code.html" rel="prev">
+<link href="./favicon.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-37b241f53b32a5ad598e4053e71b073f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03_why_we_code_what_we_code.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Why We Code What We Code</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Research Software Engineering: A Primer</a> 
+        <div class="sidebar-tools-main">
+    <a href="./Research-Software-Engineering--A-Primer.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Tools</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_why_we_code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Why We Code</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_why_we_code_what_we_code.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Why We Code What We Code</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_what_we_code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">What We Code</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_how_we_code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">How We Code</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_from_research_to_production.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">From Research to Production</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07_afterword.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Afterword</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#ux-design" id="toc-ux-design" class="nav-link active" data-scroll-target="#ux-design">UX Design</a></li>
+  <li><a href="#data-analysis-results" id="toc-data-analysis-results" class="nav-link" data-scroll-target="#data-analysis-results">Data Analysis Results</a>
+  <ul class="collapse">
+  <li><a href="#sec-data" id="toc-sec-data" class="nav-link" data-scroll-target="#sec-data">Data Types</a></li>
+  <li><a href="#exploratory-analysis" id="toc-exploratory-analysis" class="nav-link" data-scroll-target="#exploratory-analysis">Exploratory Analysis</a></li>
+  <li><a href="#explanatory-analysis" id="toc-explanatory-analysis" class="nav-link" data-scroll-target="#explanatory-analysis">Explanatory Analysis</a></li>
+  </ul></li>
+  <li><a href="#sec-draw-results" id="toc-sec-draw-results" class="nav-link" data-scroll-target="#sec-draw-results">Draw Your Results</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-why-value" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Why We Code What We Code</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>In the previous chapter, we’ve gained clarity on the problem you’re trying to solve and how to quantify the improvements your research generates. Now it’s time to dive deeper into what these results might actually look like and the data on which they are built. This requires us to understand what kind of output our code should create in order to be useful for our users (<a href="#fig-code-questions-2" class="quarto-xref">Figure&nbsp;<span>3.1</span></a>), for example, what kind of plots would help your audience to understand the benefits of your approach.</p>
+<div id="fig-code-questions-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-code-questions-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/01_purpose/code_questions_2.png" class="img-fluid figure-img" style="width:55.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-code-questions-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.1: The output that our code generates needs to be useful for our users.
+</figcaption>
+</figure>
+</div>
+<section id="ux-design" class="level2">
+<h2 class="anchored" data-anchor-id="ux-design">UX Design</h2>
+<p>Before building a product, we first need to understand <strong>how it will be used, by whom, and for what purpose</strong>. A product can be anything—physical or digital: a woodworking tool, an e-commerce website, or, in our case, a script that generates research results. By <strong>empathizing with the user experience (UX)</strong>, we ensure that what we build is valuable and enjoyable to use.</p>
+<p>Ask yourself:</p>
+<ol type="1">
+<li><p><strong>Who are your users?</strong><br>
+Depending on the product, your target users might be broad or highly specific. For example, a general consumer product could be used by anyone over 14, while enterprise solutions may cater to niche audiences, such as professionals in a particular field. Even if your users could theoretically be “everyone,” picturing a more <strong>specific user</strong> can help refine your design. Trying to please everyone often results in satisfying no one. Focusing on a distinct user group can also help differentiate your product in the market.</p>
+<p>UX designers often create <em>user personas</em>—fictional but representative users based on real-world insights. These personas include details like age, profession, hobbies, and specific needs:</p>
+<ul>
+<li><em>Woodworking tool:</em> “Mary, the multitasking mom”—a part-time teacher who enjoys DIY projects.</li>
+<li><em>E-commerce website:</em> “Harry, the practical shopper”—a 55-year-old lawyer who values efficiency, quality, and good deals.</li>
+<li><em>Your result plots:</em> “Reviewer 2, the relentless critic”—a researcher from your field but with a slightly different area of expertise.</li>
+</ul></li>
+<li><p><strong>Why are they using the product?</strong><br>
+What is their goal—their “job-to-be-done”? What problems are they trying to solve? What does success look like for them?</p>
+<ul>
+<li><em>Woodworking tool:</em> Build a bird house.</li>
+<li><em>E-commerce website:</em> Buy a birthday gift for his partner.</li>
+<li><em>Your result plots:</em> Understand if your approach is any good.</li>
+</ul></li>
+<li><p><strong>How will they interact with the product?</strong><br>
+What will the actual user experience be like? Where and for how long will they use the product? What constraints do these conditions introduce?</p>
+<ul>
+<li><em>Woodworking tool:</em> Needs to be light enough for one-handed use and quiet enough to be used inside an apartment in the city.</li>
+<li><em>E-commerce website:</em> Harry uses an iPhone with a large font size, so the page must be optimized for mobile browsing and still look good with an increased text size.</li>
+<li><em>Your result plots:</em> View the plots as part of a journal paper, possibly printed out in black and white.</li>
+</ul></li>
+</ol>
+<section id="the-output-that-gets-you-there" class="level4">
+<h4 class="anchored" data-anchor-id="the-output-that-gets-you-there">The output that gets you there</h4>
+<p>Based on these insights about your users, you can now design the end product that will (hopefully) be valuable for your users. Use sketches, wireframes, or prototypes to make your idea tangible:</p>
+<ul>
+<li><p><em>Woodworking tool:</em> Drawings, material specifications, and physical prototypes of a lightweight, quiet tool that an average woman can use with one hand.</p></li>
+<li><p><em>E-commerce website:</em> Wireframes and mockups of a website with a modern interface that helps users quickly find and purchase products (<a href="#fig-ux-design" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>).</p>
+<div id="fig-ux-design" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ux-design-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/04_design/ux_design.png" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ux-design-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.2: A simple mockup illustrating the user experience flow on an e-commerce website, from opening the page and looking at a product to purchasing it.
+</figcaption>
+</figure>
+</div></li>
+<li><p><em>Your result plots:</em> Sketches of the plots you want to generate (which we’ll discuss in more detail in <a href="#sec-draw-results" class="quarto-xref"><span>Section 3.3</span></a>).</p></li>
+</ul>
+<p>This is an <strong>iterative process</strong>—you refine your design until you’re reasonably confident it satisfies your goal. Testing with potential users is crucial—is this what they need? Observe where they struggle: Do your colleagues correctly interpret the message you want to convey with your plots? <strong>Your design idea is essentially a hypothesis</strong>, and before investing significant resources to implement it, you should validate whether your assumptions are correct and this design valuable and usable.</p>
+<p>If possible, you should additionally <strong>test your product with real users as you build it</strong>. While physical products are hard to modify after manufacturing, software is flexible—so take advantage of that. Keep iterating to better meet user needs, both now and in the future.</p>
+</section>
+</section>
+<section id="data-analysis-results" class="level2">
+<h2 class="anchored" data-anchor-id="data-analysis-results">Data Analysis Results</h2>
+<p>No matter how much programming your project requires, nearly all scientific work involves analyzing your data to create result plots for publications or presentations.</p>
+<p>When analyzing data, the process is typically divided into two phases:</p>
+<ol type="1">
+<li><strong>Exploratory Analysis</strong>: This involves generating a variety of plots to gain a deeper understanding of your data, such as identifying correlations between variables. It’s often a quick and dirty process to help you familiarize yourself with the dataset.</li>
+<li><strong>Explanatory Analysis</strong>: This focuses on creating refined, polished plots intended for communicating your findings to others, such as in a publication or presentation. These visuals are designed to clearly convey your results to an audience that may not be familiar with your data.</li>
+</ol>
+<p>But before we dive into how to conduct exploratory and explanatory analyses, let’s first take a quick look at what data actually is.</p>
+<section id="sec-data" class="level3">
+<h3 class="anchored" data-anchor-id="sec-data">Data Types</h3>
+<p>In one form or another, you’re research will rely on data, both collected or generated by yourself and possibly others.</p>
+<section id="structured-vs.-unstructured-data" class="level4">
+<h4 class="anchored" data-anchor-id="structured-vs.-unstructured-data">Structured vs.&nbsp;Unstructured Data</h4>
+<p>Data can take many forms, but one key distinction is between structured and unstructured data (<a href="#fig-data-types" class="quarto-xref">Figure&nbsp;<span>3.3</span></a>).</p>
+<div id="fig-data-types" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/02_data/data_types2.png" class="img-fluid figure-img" style="width:65.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.3: Structured and unstructured data.
+</figcaption>
+</figure>
+</div>
+<p><strong>Structured data is organized in rows and columns</strong>, like in Excel spreadsheets, CSV files, or relational databases. Each row represents a sample or observation (a data point), while each column corresponds to a variable or measurement (e.g., temperature, pressure, household income, number of children).</p>
+<p><strong>Unstructured data</strong>, in contrast, lacks a predefined structure. Examples include <strong>images, text, audio recordings, and videos</strong>, typically stored as separate files on a computer or in the cloud. While these files might include structured metadata (e.g., timestamps, camera settings), the data content itself can vary widely—for instance, audio recordings can range from seconds to hours in length.</p>
+<p>Structured data is often <em>heterogeneous</em>, meaning it includes variables representing different kinds of information with distinct units or scales (e.g., temperature in °C and pressure in kPa). Unstructured data tends to be <em>homogeneous</em>; for example, there’s no inherent difference between one pixel and the next in an image.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="This book focuses on structured data">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+This book focuses on structured data
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Even though unstructured data is common in science (e.g., microscopy images), for simplicity, this book focuses on structured data. Furthermore, for now we’ll assume that your data is stored in an Excel or CSV file, i.e., a spreadsheet with rows (samples) and columns (variables), on your computer. Later in <a href="06_from_research_to_production.html" class="quarto-xref"><span>Chapter 6</span></a>, we’ll discuss more advanced options for storing and accessing data, such as databases and APIs.</p>
+</div>
+</div>
+</section>
+<section id="programming-data-types" class="level4">
+<h4 class="anchored" data-anchor-id="programming-data-types">Programming Data Types</h4>
+<p>Each variable in your dataset (i.e., each column in your spreadsheet) is represented as a specific data type, such as:</p>
+<ul>
+<li><strong>Numbers</strong> (integers for whole numbers or floats for decimals)</li>
+<li><strong>Strings</strong> (text)</li>
+<li><strong>Boolean values</strong> (true/false)</li>
+</ul>
+<p>In programming, these are so-called <em>primitive data types</em> (as opposed to composite types, like lists or dictionaries containing multiple values, or user-defined objects) and define how information is stored in computer memory.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Data types in Python">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Data types in Python
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># integer</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">42</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># float</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="fl">4.1083</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># string</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> <span class="st">"hello world!"</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># boolean</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="va">False</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="statistical-data-types" class="level4">
+<h4 class="anchored" data-anchor-id="statistical-data-types">Statistical Data Types</h4>
+<p>Even more important than how your data is stored, is understanding what your data <em>means</em>. Variables fall into two main categories:</p>
+<ol type="1">
+<li><strong>Continuous (numerical) variables</strong> represent measurable values (e.g., temperature, height). These are usually stored as floats or integers.</li>
+<li><strong>Discrete (categorical) variables</strong> represent distinct options or groups (e.g., nationality, product type). These are often stored as strings, booleans, or sometimes integers.</li>
+</ol>
+<div class="callout callout-style-default callout-warning callout-titled" title="Misleading data types">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Misleading data types
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Be cautious: a variable that looks numerical (e.g., <code>1</code>, <code>2</code>, <code>3</code>) may actually represent categories. For example, a <code>material_type</code> column with values <code>1</code>, <code>2</code>, and <code>3</code> might correspond to <em>aluminum</em>, <em>copper</em>, and <em>steel</em>, respectively. In this case, the numbers are IDs, not quantities.</p>
+</div>
+</div>
+<p>Recognizing whether a variable is continuous or discrete is crucial for creating meaningful visualizations and using appropriate statistical models.</p>
+</section>
+<section id="time-series-data" class="level4">
+<h4 class="anchored" data-anchor-id="time-series-data">Time Series Data</h4>
+<p>Another consideration is whether your data points are linked by time. Time series data often refers to numerical data collected over time, like temperature readings or sales numbers. These datasets are usually expected to exhibit <strong>seasonal patterns or trends</strong> over time.</p>
+<p>However, <strong>nearly all datasets involve some element of time</strong>. For example, if your dataset consists of photos, timestamps might seem unimportant, but they could reveal trends—like changes in image quality due to new equipment.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Always record timestamps">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Always record timestamps
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Always include timestamps in your data or metadata to help identify potential correlations or unexpected trends over time.</p>
+</div>
+</div>
+<p>Sometimes, you may be able to collect truly time-independent data (e.g., sending a survey to 1,000 people simultaneously and they all answer within the next 10 minutes). But usually, your data collection will take longer and external factors—like an election during a longer survey period—might unintentionally affect your results. By tracking time, you can assess and adjust for such influences.</p>
+</section>
+</section>
+<section id="exploratory-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="exploratory-analysis">Exploratory Analysis</h3>
+<p>In this initial analysis, the goal is to get acquainted with the data, check if the trends and relationships you anticipated are present, and uncover any unexpected patterns or insights.</p>
+<ul>
+<li><p>Examine the <strong>raw data</strong>:</p>
+<ul>
+<li>Is the dataset complete, i.e., does it contain all the variables and samples you expected?</li>
+</ul></li>
+<li><p>Examine <strong>summary statistics</strong> (e.g., mean, standard deviation (std), min/max values, missing value count, etc.):</p>
+<ul>
+<li>What does each variable mean? Given your understanding of the variable, are its values in a reasonable range?</li>
+<li>Are missing values encoded as NaN (Not a Number) or as ‘unrealistic’ numeric values (e.g., -1 while normal values are between 0 and 100)?</li>
+<li>Are missing values random or systematic (e.g., specific measurements might only be collected under certain conditions; in a survey rich people are less likely to answer questions about their income)? This can influence how missing values should be handled, e.g., whether it makes sense to impute them with the mean or some other specific value (e.g., zero).</li>
+</ul></li>
+<li><p>Examine the <strong>distributions of individual (continuous) variables</strong>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/02_data/exploratory_dist.png" class="img-fluid figure-img" style="width:40.0%"></p>
+<figcaption>Histogram, strip plot, violin plot, box plot, and summary statistics of the same values.</figcaption>
+</figure>
+</div>
+<ul>
+<li>Are there any outliers? Are these genuine edge cases or can they be ignored (e.g., due to measurement errors or wrongly encoded data)?</li>
+<li>Is the data normally distributed or does the plot show multiple peaks? Is this expected?</li>
+</ul></li>
+<li><p>Examine <strong>trends over time</strong> (by plotting variables over time, even if you don’t think your data has a meaningful time component, e.g., by lining up representative images according to their timestamps to see if there is a pattern):</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/02_data/exploratory_ts.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption>What caused these trends and what are their implications for the future? This plot shows fictitious data of the pressure in a pipe affected by fouling—that is, a buildup of unwanted material on the pipe’s surface, leading to increased pressure. The pipe is cleaned at regular intervals, causing a drop in pressure. However, because the cleaning process is imperfect, the baseline pressure gradually shifts upward over time.</figcaption>
+</figure>
+</div>
+<ul>
+<li>Are there time periods where the data was sampled irregularly or samples are missing? Why?</li>
+<li>Are there any (gradual or sudden) data drifts over time? Are these genuine changes (e.g., due to changes in the raw materials used in the process) or artifacts (e.g., due to a malfunctioning sensor recording wrong values)?</li>
+</ul></li>
+<li><p>Examine <strong>relationships between two variables</strong>:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/02_data/exploratory_rel.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption>Depending on the variables’ types (continuous or discrete), relationships can be shown in scatter plots, box plots, or a table. Please note that not all interesting relations between the two variables can be detected through a high <a href="https://en.wikipedia.org/wiki/Correlation">correlation coefficient</a>, so you should always check the scatter plot for details.</figcaption>
+</figure>
+</div>
+<ul>
+<li>Are the observed correlations between variables expected?</li>
+</ul></li>
+<li><p>Examine <strong>patterns in multidimensional data</strong> (using a parallel coordinate plot):</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/02_data/exploratory_parcoord.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>Each line in a parallel coordinate plot represents one data point, with the corresponding values for the different variables marked at the respective y-axis. The screenshot here shows an interactive plot created using the Python <code>plotly</code> library. By selecting value ranges for the different dimensions (indicated by the pink stripes), it is possible to spot interesting patterns resulting from a combination of values across multiple variables.</figcaption>
+</figure>
+</div>
+<ul>
+<li>Do the observed patterns in the data match your understanding of the problem and dataset?</li>
+</ul></li>
+</ul>
+</section>
+<section id="explanatory-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="explanatory-analysis">Explanatory Analysis</h3>
+<p>Most of the plots you create during an exploratory analysis are likely for your eyes only. Any plots you do choose to share with a broader audience—such as in a paper or presentation—should be refined to <strong>clearly communicate your findings</strong>. Since your audience is much less familiar with the data and likely lacks the time or interest to explore it in depth, it’s essential to make your results more accessible. This process is often referred to as <em>explanatory analysis</em> <span class="citation" data-cites="knaflic2015storytelling">[<a href="references.html#ref-knaflic2015storytelling" role="doc-biblioref">1</a>]</span>.</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Don't force an exploratory analysis onto your audience">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Don’t force an exploratory analysis onto your audience
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Don’t “just show all the data” and hope that your audience will make something of it—understand what they need to answer the questions they have.</p>
+</div>
+</div>
+<section id="step-1-choose-the-right-plot-type" class="level4">
+<h4 class="anchored" data-anchor-id="step-1-choose-the-right-plot-type">Step 1: Choose the right plot type</h4>
+<ul>
+<li>Get inspired by visualization libraries (e.g., <a href="https://github.com/Financial-Times/chart-doctor/blob/main/visual-vocabulary/Visual-vocabulary-en.pdf">here</a> or <a href="https://datavizcatalogue.com/">here</a>), but avoid the urge to create fancy graphics; sticking with common visualizations makes it easier for the audience to correctly decode the presented information.</li>
+<li>Don’t use 3D effects!</li>
+<li>Avoid pie or donut charts (angles are hard to interpret).</li>
+<li>Use line plots for time series data.</li>
+<li>Use horizontal instead of vertical bar charts for audiences that read left to right.</li>
+<li>Start the y-axis at 0 for area &amp; bar charts.</li>
+<li>Consider using <a href="https://en.wikipedia.org/wiki/Small_multiple">small multiples</a> or sparklines instead of cramming too much into a single chart.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/02_data/explanatory1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption><em>Left:</em> Bar charts (especially in 3D) make it hard to compare numbers over a longer period of time. <em>Right:</em> Trends over time can be more easily detected in line charts. [Example adapted from: <em>Storytelling with Data</em> by Cole Nussbaum Knaflic]</figcaption>
+</figure>
+</div>
+</section>
+<section id="step-2-cut-clutter-maximize-data-to-ink-ratio" class="level4">
+<h4 class="anchored" data-anchor-id="step-2-cut-clutter-maximize-data-to-ink-ratio">Step 2: Cut clutter / maximize data-to-ink ratio</h4>
+<ul>
+<li>Remove border.</li>
+<li>Remove gridlines.</li>
+<li>Remove data markers.</li>
+<li>Clean up axis labels.</li>
+<li>Label data directly.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/02_data/explanatory2.gif" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption>Cut clutter! [Example adapted from: <em>Storytelling with Data</em> by Cole Nussbaum Knaflic]</figcaption>
+</figure>
+</div>
+</section>
+<section id="step-3-focus-attention" class="level4">
+<h4 class="anchored" data-anchor-id="step-3-focus-attention">Step 3: Focus attention</h4>
+<ul>
+<li>Start with gray, i.e., push everything in the background.</li>
+<li>Use pre-attentive attributes like color strategically to highlight what’s most important.</li>
+<li>Use data labels sparingly.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/02_data/explanatory3.gif" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption>Start with gray and use pre-attentive attributes strategically to focus the audience’s attention. [Example adapted from: <em>Storytelling with Data</em> by Cole Nussbaum Knaflic]</figcaption>
+</figure>
+</div>
+</section>
+<section id="step-4-make-data-accessible" class="level4">
+<h4 class="anchored" data-anchor-id="step-4-make-data-accessible">Step 4: Make data accessible</h4>
+<ul>
+<li>Add context: Which values are good (goal state), which are bad (alert threshold)? Should the value be compared to another variable (e.g., actual vs.&nbsp;forecast)?</li>
+<li>Leverage consistent colors when information is spread across multiple plots (e.g., data from a certain country is always shown in the same color).</li>
+<li>Annotate the plot with text explaining the main takeaways. If this is not possible, e.g., in interactive dashboards where the data keeps changing, the title can instead include the question that the plot should answer (e.g., “Is the material quality on target?”).</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/02_data/explanatory4.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption>Tell a story. [Example adapted from: <em>Storytelling with Data</em> by Cole Nussbaum Knaflic]</figcaption>
+</figure>
+</div>
+</section>
+</section>
+</section>
+<section id="sec-draw-results" class="level2">
+<h2 class="anchored" data-anchor-id="sec-draw-results">Draw Your Results</h2>
+<p>You may not have looked at your data yet—or maybe you haven’t even collected it—but it’s important to start with the end in mind.</p>
+<p>In software development, a UX designer typically creates mockups of a user interface (like the screens of a mobile app) before developers begin coding so that everyone has a clear understanding of the desired end result. Similarly, in our case, we want to start with a clear picture of what the output of our program should look like. The difference is that, instead of users interacting with the software themselves, they’ll only see the plots or tables that your program generated, maybe in a journal article.</p>
+<p>Based on your takeaways from the previous chapter—about the problem you’re solving and the metrics you should use to evaluate your solution—try sketching what your final results might look like. Put yourself in your audience’s shoes and consider what they need to address their questions and concerns. Ask yourself: <strong><em>What figures or tables would best communicate the advantages of my approach?</em></strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>Depending on your research goals, your results might be as simple as a single number, such as a p-value or the total number of people surveyed. However, if you’re reading this, you’re likely tackling something that requires a more complex analysis. For example, you might compare your model’s overall performance to several baseline approaches or illustrate how your solution converges over time (<a href="#fig-draw-results" class="quarto-xref">Figure&nbsp;<span>3.4</span></a>).</p>
+<div id="fig-draw-results" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-draw-results-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/02_data/draw_results.png" class="img-fluid figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-draw-results-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.4: Exemplary envisioned results: The plots show the outcome of a multi-agent simulation, where ‘my approach’ clearly outperforms two baseline methods. In this simulation, a group of agents is tasked with locating a food source in the environment and transporting the food back to their home base piece by piece. The ideal algorithm identifies the shortest path to the food source quickly to maximize food collection. Each algorithmic approach is tested 10 times using different random seeds to evaluate reliability. The plots display the mean and standard deviations across these runs. <em>Left:</em> How quickly each algorithm converges to the shortest path (resulting in the highest number of agents delivering food back to the home base per step). <em>Right:</em> Cumulative food collected by the end of the simulation.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>
+</figcaption>
+</figure>
+</div>
+<p>It’s important to remember that your actual results might look very different from your initial sketches—they might even show that your solution performs worse than the baseline. This is completely normal. The scientific method is inherently iterative, and unexpected results are often a stepping stone to deeper understanding. By starting with a clear plan, you can generate results more efficiently and quickly pivot to a new hypothesis if needed. When your results deviate from your expectations, analyzing those differences can sharpen your intuition about the data and help you form better hypotheses in the future.</p>
+<div class="callout callout-style-default callout-caution callout-titled" title="Before you continue">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Before you continue
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>At this point, you should have a clear understanding of:</p>
+<ul>
+<li>The specific results (tables and figures) you want to create to show how your solution outperforms existing approaches (e.g., in terms of accuracy, speed, etc.).</li>
+<li>The underlying data needed to produce these results (e.g., what rows and columns should be in your spreadsheet).</li>
+</ul>
+</div>
+</div>
+
+
+<div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-knaflic2015storytelling" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">Knaflic CN. <em>Storytelling with Data: A Data Visualization Guide for Business Professionals</em>. John Wiley &amp; Sons (2015).</div>
+</div>
+</div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>A former master’s student that I mentored humorously called this approach “plot-driven development,” a nod to test-driven development (TDD) in software engineering, where you write a test for your function first and then implement the function to pass the test. You could even use these sketches of your results as placeholders if you’re already drafting a paper or presentation.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>These plots were generated with Python using matplotlib’s <code>plt.xkcd()</code> setting and the <a href="https://github.com/ipython/xkcd-font">xkcd script font</a>. A pen and paper sketch will be sufficient for your case.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script type="text/javascript"> // go once over all images and transform the percentage width into pixels relative to original body size
+  const bodyWidth = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--custom-body-width')); // Get CSS variable
+  document.querySelectorAll('.quarto-figure img').forEach((img) => {
+    if (img.getAttribute('style')) {
+      const styleWidth = img.getAttribute('style').match(/width:\s*([\d.]+)%/); // Extract percentage
+      if (styleWidth) {
+        const percentage = parseFloat(styleWidth[1]) / 100;
+        img.style.width = `${bodyWidth * percentage}px`; // Apply calculated width
+      }
+    }
+  });
+</script>
+
+<style type="text/css">
+#footer {
+  font-size: 80%; /* Makes the font 70% smaller */
+  border-top: 1px solid #ccc; /* Adds a horizontal line above the footer */
+  padding-top: 10px; /* Adds some spacing above the footer content */
+}
+</style>
+
+<!-- FOOTER  -->
+<div id="footer" class="outer">
+  <footer class="inner">
+    <p>Find me on <a href="https://github.com/cod3licious/" target="_blank" rel="nofollow">GitHub</a> and <a href="https://www.linkedin.com/in/franziska-horn/" target="_blank" rel="nofollow">LinkedIn</a><br>
+      <a href="https://franziskahorn.de/">Home</a> ~ <a href="mailto:hey@franziskahorn.de?Subject=Book%20Feedback" target="_blank" rel="nofollow">Contact</a> ~ <a href="https://franziskahorn.de/impressum.html">Impressum</a></p>
+
+      <!-- CC license -->
+    <p xmlns:cc="http://creativecommons.org/ns#">This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:16px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:16px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:16px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:16px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1" alt=""></a></p>
+  </footer>
+</div>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./02_why_we_code.html" class="pagination-link" aria-label="Why We Code">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Why We Code</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./04_what_we_code.html" class="pagination-link" aria-label="What We Code">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">What We Code</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

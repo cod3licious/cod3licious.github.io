@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>6&nbsp; From Research to Production – Research Software Engineering: A Primer</title>
+<title>6&nbsp; From Research to Production – Clarity-Driven Development of Scientific Software</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -152,9 +152,9 @@ div.csl-indent {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Research Software Engineering: A Primer</a> 
+      <a href="./">Clarity-Driven Development of Scientific Software</a> 
         <div class="sidebar-tools-main">
-    <a href="./Research-Software-Engineering--A-Primer.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <a href="./Clarity-Driven-Development-of-Scientific-Software.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
       </div>
@@ -275,7 +275,7 @@ div.csl-indent {
 <div id="fig-software-product" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-software-product-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="../images/06_production/software_product.png" class="img-fluid figure-img" style="width:80.0%">
+<img src="../images/06_production/software_product.png" class="img-fluid figure-img" style="width:75.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-software-product-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;6.1: Unlike a script that runs locally on your laptop, a production-grade software application—such as a mobile app or a cloud-based web service—requires your code to be packaged and deployed within a runtime environment. The user can then interact with the software by providing inputs (like clicking a button) and receiving outputs (like seeing a new webpage).
@@ -285,7 +285,7 @@ Figure&nbsp;6.1: Unlike a script that runs locally on your laptop, a production-
 <p>Who knows—maybe you’ll even be inspired to turn your project into a deployable app, which could become a great showcase in your next job application.</p>
 <section id="components-of-software-products" class="level2">
 <h2 class="anchored" data-anchor-id="components-of-software-products">Components of Software Products</h2>
-<p>So far, your code might consist of scripts or notebooks for analysis and a set of reusable helper functions in your personal library. The next step? Making your code accessible to others by turning it into standalone software with a graphical user interface (GUI). Furthermore, we’ll explore how to expand beyond static data sources like CSV or Excel files.</p>
+<p>So far, your code might consist of scripts or notebooks with analyses and a set of reusable helper functions in your personal library. The next step? Making your code accessible to others by turning it into standalone software with a graphical user interface (GUI). Additionally, we’ll explore how to expand beyond static data sources like CSV or Excel files.</p>
 <section id="graphical-user-interface-gui" class="level3">
 <h3 class="anchored" data-anchor-id="graphical-user-interface-gui">Graphical User Interface (GUI)</h3>
 <p>Software shines when users can interact with it easily. Instead of using a command-line interface (CLI), these days, users expect intuitive GUIs with buttons and visual elements.</p>
@@ -296,7 +296,7 @@ Figure&nbsp;6.1: Unlike a script that runs locally on your laptop, a production-
 </ol>
 <p>For web apps, the GUI that users interact with is also referred to as the <strong>frontend</strong>, while the <strong>backend</strong> handles behind-the-scenes tasks like data storage and processing. Even seemingly standalone desktop clients often connect to a backend server for cloud storage or to enable collaboration on shared documents. We’ll explore how this works in the section on APIs.</p>
 <p>In research, the goal is often to make results more accessible, for example, by transforming a static report into an interactive dashboard where users can explore data. To do this, we recommend you start with a web-based app.</p>
-<p>Many books and tutorials were written on the topic of building user-friendly software applications and a lot of it is very specific to the programming language you’re using—please consult your favorite search engine to discover more resources on this topic. 😉</p>
+<p>Many books and tutorials are written on the topic of building user-friendly software applications and a lot of it is very specific to the programming language and framework you’re using—please consult your favorite search engine to discover more resources on this topic. 😉</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Web apps with Python's `streamlit` framework">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -307,14 +307,14 @@ Web apps with Python’s <code>streamlit</code> framework
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>If you use Python, try the <a href="https://streamlit.io/">Streamlit</a> framework to create web apps from your analysis scripts in minutes.</p>
+<p>If you use Python, try the <a href="https://streamlit.io/">Streamlit</a> framework to turn your analysis scripts into a web app with just a few additional lines of code.</p>
 </div>
 </div>
 </section>
 <section id="databases" class="level3">
 <h3 class="anchored" data-anchor-id="databases">Databases</h3>
 <p>So far, we’ve assumed that your data is stored in spreadsheets (like CSV or Excel files) on your computer. While this works for smaller datasets and simple workflows, it becomes less practical as your data grows or is generated dynamically, such as through user interactions, and needs to be accessed and updated by multiple people at the same time. This is where databases come in, offering a more efficient and scalable way to store, retrieve, and manage data <span class="citation" data-cites="kleppmann2017designing">[<a href="references.html#ref-kleppmann2017designing" role="doc-biblioref">5</a>]</span>.</p>
-<p>Databases come in many forms, each suited to different types of data and use cases. Two key considerations when choosing a database are <span class="citation" data-cites="serra2024deciphering">[<a href="references.html#ref-serra2024deciphering" role="doc-biblioref">7</a>]</span>:</p>
+<p>Databases come in many forms, each suited to different types of data and use cases. Two key considerations when choosing a database are <span class="citation" data-cites="serra2024deciphering">[<a href="references.html#ref-serra2024deciphering" role="doc-biblioref">9</a>]</span>:</p>
 <ol type="1">
 <li>the kind of data you need to store, and</li>
 <li>how that data will be used.</li>
@@ -339,7 +339,7 @@ Normalization in relational databases
 </div></li>
 <li><p><strong>Semi-structured data:</strong> JSON or XML documents contain data in flexible key-value pairs and are often stored in NoSQL databases. Unlike SQL databases, these databases don’t enforce a strict schema, which makes them ideal for handling complex, nested data structures or dynamically changing datasets. For example, APIs often exchange data in JSON format, which can be stored as-is to avoid breaking it into tables and reconstructing it later.<br>
 Modern relational databases, such as Postgres, blur the line between structured and semi-structured data by supporting JSON columns alongside traditional tables.</p></li>
-<li><p><strong>Unstructured data:</strong> Files like images, videos, and text documents are typically stored on disk. Data lakes (e.g., AWS S3) provide additional tools to manage these files, but fundamentally, this is similar to organizing files in folders on your computer. If your data is processed through a pipeline, it’s a good idea to save copies of the files at each stage (e.g., in <code>raw/</code> and <code>cleaned/</code> folders).</p></li>
+<li><p><strong>Unstructured data:</strong> Files like images, videos, and text documents are typically stored on disk. Data lakes (e.g., AWS S3) provide additional tools to manage these files, but fundamentally, this is similar to organizing files in folders on your computer. If your data is processed through a pipeline, it’s often a good idea to save copies of the files at each stage (e.g., in <code>raw/</code> and <code>cleaned/</code> folders).</p></li>
 <li><p><strong>Streaming data:</strong> High-volume, real-time data (e.g., IoT sensor logs) is best managed in specialized databases optimized for streaming, such as Apache Kafka.</p></li>
 </ul>
 </section>
@@ -348,7 +348,7 @@ Modern relational databases, such as Postgres, blur the line between structured 
 <p>When choosing a database, you’ll also want to consider how the data will be used later:</p>
 <ul>
 <li><strong>Transactional processing (OLTP):</strong> In this use case, individual records are frequently created and retrieved (e.g., financial transactions). These systems prioritize fast write speeds and maintaining an up-to-date view of the data.</li>
-<li><strong>Batch analytics (OLAP):</strong> Data analysis is often performed in large batches to generate reports or insights, such as identifying which products users purchased last month. To avoid overloading the operational database with complex queries, data is typically copied from transactional systems to analytical systems (e.g., data warehouses) using an ETL process (Extract-Transform-Load).</li>
+<li><strong>Batch analytics (OLAP):</strong> Data analysis is often performed in large batches to generate reports or insights, such as identifying which products users purchased last month. To avoid overloading the operational database with complex queries, data is typically copied from transactional systems into analytical systems (e.g., data warehouses) using an ETL process (Extract-Transform-Load).</li>
 <li><strong>Real-time analytics:</strong> For applications requiring live data (e.g., interactive dashboards), databases and frameworks optimized for streaming or in-memory processing (e.g., Apache Flink) are ideal.</li>
 </ul>
 <p>Scaling your database system is another critical factor. Consider how many users will access it simultaneously, how much data they’ll retrieve, and how often it will be updated.</p>
@@ -409,13 +409,13 @@ Managing databases in Python
 <li><strong>DELETE</strong>: Removes a record.</li>
 </ul>
 <p>You typically interact with APIs through a website’s <strong>frontend</strong>, which triggers these API calls in the background. However, APIs can also be queried directly to access raw data, usually returned in <strong>JSON</strong> format.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="API Keys and Authentication">
+<div class="callout callout-style-default callout-tip callout-titled" title="API keys and authentication">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-API Keys and Authentication
+API keys and authentication
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -495,7 +495,7 @@ Interacting with APIs programmatically
 <h4 class="anchored" data-anchor-id="implementing-apis">Implementing APIs</h4>
 <p>When designing an API, specifically a REST (REpresentational State Transfer) API, it’s important to understand the concept of an <strong>endpoint</strong>. An endpoint is a specific URL in your API where a resource can be accessed or modified. For example, if you’re building a photo-sharing app, an endpoint like <code>/images</code> might allow users to view or upload images. Endpoints should be named using descriptive, plural nouns (e.g., <code>/users</code>, <code>/images</code>) to clearly represent the resources being accessed. It’s also best practice to avoid including verbs in endpoint names (e.g., <code>/get_users</code>), since the HTTP method (like GET or POST) already specifies the action being taken, such as retrieving or creating data.</p>
 <p>Another key design principle is <strong>statelessness</strong>. Similar to the concept of pure functions, this means that each API request should contain all the information needed to complete the action, like user authentication tokens. This way, the server doesn’t need to remember anything about previous requests, making the API easier to scale. This is especially important in cloud-based environments where multiple requests from the same user may be routed to different servers <span class="citation" data-cites="davis2019cloud">[<a href="references.html#ref-davis2019cloud" role="doc-biblioref">1</a>]</span>.<br>
-Data that needs to be persisted can be stored either in the frontend or a central database in the backend, depending on its purpose. Temporary data, like a shopping cart, can be maintained on the user’s machine using cookies or local storage. Permanent data, such as a purchase order, is best stored in the backend database to ensure long-term accessibility. This approach supports stateless APIs, as the backend server doesn’t need to keep the session state in memory. Instead, all necessary data is either included in the request or can be fetched from the database, allowing each request to be processed independently.</p>
+Data that needs to be persisted can be stored either in the frontend (client) or a central database in the backend (server), depending on its purpose. Temporary data, like a shopping cart, can be maintained on the user’s machine using cookies or local storage. Permanent data, such as a purchase order, is best stored in the backend database to ensure long-term accessibility. This approach supports stateless APIs, as the backend server doesn’t need to keep the session state in memory. Instead, all necessary data is either included in the request or can be fetched from the database, allowing each request to be processed independently.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Implementing APIs in Python with `FastAPI`">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -557,7 +557,7 @@ For example, a website might fetch data from multiple APIs, showing placeholders
 <p>For most applications, communicating directly with external services—whether synchronously or async—is the right approach, because eventually the requested data is needed to finish the original task. But there are also use cases where it’s enough that your message was received and you don’t need to wait for a response. For example, when placing an order in an online shop, users only care that the order was submitted successfully. They don’t wait in front of the screen until it was packaged and shipped—which could take days. An email notification can inform them of progress later.</p>
 <p>Such a scenario calls for an <strong>event-driven architecture</strong>, which takes async communication to the extreme. Here, multiple services can operate independently by exchanging information via events using a <strong>message queue (MQ)</strong>, a system that temporarily stores event messages like JSON documents. These messages act as instructions, containing all relevant details about an event, such as a user’s order information. Publishers (senders) create events, and subscribers (receivers) process them based on their type, such as <code>Order Submitted</code>.</p>
 <p>An event-driven architecture offers several <strong>advantages</strong>. By decoupling components, it allows publishers and subscribers to run independently, even in different programming languages or environments. This makes it easier to scale systems and assign teams to own specific components without needing to understand the full system. Additionally, one event can trigger multiple actions. For instance, when an order is packed, one system might update the user database while another generates a shipping label. This approach thereby simplifies the propagation of data to multiple services and can also facilitate replication of live data to testing and staging environments.</p>
-<p>However, this type of architecture also brings with it some <strong>challenges</strong>. Since no single component has a full view of the system, tracking the state of a specific task, such as whether an order is still waiting or in progress, can be difficult. Furthermore, while MQs often guarantee that each message is handled at least once, the system requires careful design in case a message is processed multiple times. For example, if a subscriber crashes after processing a message but before confirming its completion, the MQ might reassign the task to another instance, potentially leading to duplicate processing. For these reasons, event-driven architectures should only be used when direct communication between services is not an option <span class="citation" data-cites="richards2020fundamentals">[<a href="references.html#ref-richards2020fundamentals" role="doc-biblioref">6</a>]</span>.</p>
+<p>However, this type of architecture also brings with it some <strong>challenges</strong>. Since no single component has a full view of the system, tracking the state of a specific task, such as whether an order is still waiting or in progress, can be difficult. Furthermore, while MQs often guarantee that each message is handled at least once, the system requires careful design in case a message is processed multiple times. For example, if a subscriber crashes after processing a message but before confirming its completion, the MQ might reassign the task to another instance, potentially leading to duplicate processing. For these reasons, event-driven architectures should only be used when direct communication between services is not an option <span class="citation" data-cites="richards2020fundamentals">[<a href="references.html#ref-richards2020fundamentals" role="doc-biblioref">8</a>]</span>.</p>
 </section>
 </section>
 <section id="batch-jobs" class="level3">
@@ -575,11 +575,11 @@ For example, a website might fetch data from multiple APIs, showing placeholders
 <section id="software-design-revisited" class="level3">
 <h3 class="anchored" data-anchor-id="software-design-revisited">Software Design Revisited</h3>
 <p>As your software evolves beyond a simple script, it becomes a system composed of multiple interconnected components. Each component can be viewed as a subsystem with its own defined boundaries and interface, responsible for specific functionalities while interacting with other parts of the system.</p>
-<p>To manage this growing complexity, it’s best to think of these components—such as a <strong>GUI/frontend</strong>, <strong>API/backend</strong>, and <strong>data storage</strong> (files, databases, message queues)—as distinct layers. A clean design follows the principle of <strong>layered communication</strong>, where each layer interacts only with the layer directly below it <span class="citation" data-cites="khononov2021learning">[<a href="references.html#ref-khononov2021learning" role="doc-biblioref">4</a>]</span>. For example, the frontend communicates with the backend, and the backend interacts with the database, avoiding “skip connections” where one layer bypasses another.<br>
-This design principle minimizes dependencies and makes the system easier to maintain: If the interface of one component changes, only the layer directly above it has to be adapted.</p>
+<p>To manage this growing complexity, it’s best to think of these components—such as a <strong>GUI/client/frontend</strong>, <strong>API/server/backend</strong>, and <strong>data storage</strong> (files, databases, message queues)—as distinct layers. A clean design follows the principle of <strong>layered communication</strong>, where each layer interacts only with the layer directly below it <span class="citation" data-cites="lilienthal2019sustainable">[<a href="references.html#ref-lilienthal2019sustainable" role="doc-biblioref">6</a>]</span>. For example, the client communicates with the server, and the server interacts with the database, avoiding “skip connections” where one layer bypasses another.<br>
+This design principle minimizes dependencies and makes the system easier to maintain: If the interface of one component changes, only the layer directly above it has to be adapted, for example, if a field in the database is renamed, only the API needs to be updated.</p>
 <p>When you design these more complicated systems, it’s even more important to sketch the overall architecture before you start with the implementation. Visualizing how the layers interact can reveal potential bottlenecks or unnecessary complexity and gives you and your collaborators clarity on the big picture.<br>
 Instead of lumping everything into “your code” versus “the outside world” as we did in <a href="04_what_we_code.html#fig-draw-script" class="quarto-xref">Figure&nbsp;<span>4.12</span></a>, you can use <strong>swimlanes</strong> to separate the process steps performed by each component and distinguish between the different layers (<a href="#fig-production-design" class="quarto-xref">Figure&nbsp;<span>6.6</span></a>).</p>
-<p><strong>Begin by visualizing the flow from the user’s perspective</strong>, focusing on how they interact with the frontend to complete their intended task. Once the user experience is clear, <strong>continue with the backend and database layers</strong> and map out how these can support and implement each step:</p>
+<p><strong>Begin by visualizing the flow from the user’s perspective</strong>, focusing on how they interact with the client to complete their intended task. Once the user experience is clear, <strong>continue with the server and database layers</strong> and map out how these can support and implement each step:</p>
 <ul>
 <li>What data is needed to render the GUI?</li>
 <li>What data needs to be persisted in the database for later?</li>
@@ -591,10 +591,16 @@ Instead of lumping everything into “your code” versus “the outside world�
 <img src="../images/06_production/production_design.png" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-production-design-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.6: A simplified flow showing what happens when a user orders something online: the user opens a product page, which triggers a request to the API to fetch the corresponding product details from the database (DB). The user then clicks the “add to cart” button, which places the product into the shopping cart (in local storage managed by the frontend). The user then views the shopping cart and clicks “purchase”, which triggers a POST request to the API, submitting the user’s cart contents. The API creates a new record in the <code>orders</code> table to store the purchase details and submits an <code>Order</code> event to the message queue (MQ), thereby alerting other services that a new order needs to be packed and shipped. The endpoint returns with the status code 201 (“success”) and the frontend redirects the user to a page that tells them the purchase was successful, at which point the user closes the tab.
+Figure&nbsp;6.6: A simplified flow showing what happens when a user orders something online: the user opens a product page, which triggers a request to the API to fetch the corresponding product details from the database (DB). The user then clicks the “add to cart” button, which places the product into the shopping cart (in local storage managed by the client). The user then views the shopping cart and clicks “purchase”, which triggers a POST request to the API, submitting the user’s cart contents. The API creates a new record in the <code>orders</code> table to store the purchase details and submits an <code>Order</code> event to the message queue (MQ), thereby alerting other services that a new order needs to be packed and shipped. The endpoint returns with the status code 201 (“success”) and the client redirects the user to a page that tells them the purchase was successful, at which point the user closes the tab.
 </figcaption>
 </figure>
 </div>
+<section id="domain-driven-design" class="level4">
+<h4 class="anchored" data-anchor-id="domain-driven-design">Domain-Driven Design</h4>
+<p>As a software product grows, it eventually becomes too complex for a single team to manage. To reduce cognitive load and improve maintainability, the system should be broken into smaller <strong>subsystems</strong>, each of which can be <strong>owned and managed autonomously</strong> by a dedicated team.</p>
+<p>To minimize inter-team dependencies and reduce communication overhead, it’s best to split the system along <strong>domain or use-case boundaries</strong> <span class="citation" data-cites="khononov2021learning">[<a href="references.html#ref-khononov2021learning" role="doc-biblioref">4</a>]</span><span class="citation" data-cites="lilienthal2023ddt">[<a href="references.html#ref-lilienthal2023ddt" role="doc-biblioref">7</a>]</span>. For example, in an e-commerce platform, one team might own the “search &amp; browse” domain, while another handles “purchasing.” Although implementing a new feature may involve both client and server changes, those changes typically stay within a single domain, allowing the responsible team to implement them independently.</p>
+<p>Technically, this often means breaking a monolith into <strong>domain-based microservices</strong> <span class="citation" data-cites="lilienthal2023ddt">[<a href="references.html#ref-lilienthal2023ddt" role="doc-biblioref">7</a>]</span>, where each service operates independently (which also means it needs its own database). The key challenge is balancing <strong>local vs.&nbsp;global complexity</strong>: Each microservice should be <strong>small enough</strong> to be fully understood and maintained by one team, but <strong>large enough</strong> to encapsulate meaningful logic. If services are too granular, they require excessive inter-service communication to get anything done, leading to tightly coupled systems, only now with the added complexity of a distributed system and multiple deployments.</p>
+</section>
 </section>
 </section>
 <section id="delivery-deployment" class="level2">
@@ -675,7 +681,7 @@ Security in CI/CD pipelines
 <p>As applications grow, scaling requires thoughtful architectural design. You should consider:</p>
 <ul>
 <li><strong>Task Separation:</strong> For example, train machine learning models periodically as batch jobs, while keeping prediction services running continuously. This is particularly important when services have vastly <strong>different user bases</strong> (e.g., hundreds of admins versus millions of regular users), as they require varying replication rates for horizontal scaling. Especially if services rely on distinct dependencies, combining them into a single Docker container can result in a large, inefficient image, which increases the services’ startup time.</li>
-<li><strong>Team Autonomy:</strong> Design services such that teams can own and work on individual components independently, thereby reducing communication overhead and speeding up development cycles <span class="citation" data-cites="skelton2019team">[<a href="references.html#ref-skelton2019team" role="doc-biblioref">8</a>]</span>.</li>
+<li><strong>Team Autonomy:</strong> Design services such that teams can own and work on individual components independently, thereby reducing communication overhead and speeding up development cycles <span class="citation" data-cites="skelton2019team">[<a href="references.html#ref-skelton2019team" role="doc-biblioref">10</a>]</span>.</li>
 </ul>
 </section>
 <section id="monitoring-and-observability" class="level3">
@@ -728,14 +734,20 @@ Before you continue
 <div id="ref-kleppmann2017designing" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[5] </div><div class="csl-right-inline">Kleppmann M. <em>Designing Data-Intensive Applications: The Big Ideas Behind Reliable, Scalable, and Maintainable Systems</em>. O’Reilly Media, Inc. (2017).</div>
 </div>
+<div id="ref-lilienthal2019sustainable" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[6] </div><div class="csl-right-inline">Lilienthal C. <em>Sustainable Software Architecture: Analyze and Reduce Technical Debt</em>. dpunkt.verlag (2019).</div>
+</div>
+<div id="ref-lilienthal2023ddt" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[7] </div><div class="csl-right-inline">Lilienthal C, Schwentner H. <em>Domain-Driven Transformation: Monolithen Und Microservices Zukunftsfähig Machen</em>. dpunkt.verlag (2023).</div>
+</div>
 <div id="ref-richards2020fundamentals" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[6] </div><div class="csl-right-inline">Richards M, Ford N. <em>Fundamentals of Software Architecture: An Engineering Approach</em>. O’Reilly Media, Inc. (2020).</div>
+<div class="csl-left-margin">[8] </div><div class="csl-right-inline">Richards M, Ford N. <em>Fundamentals of Software Architecture: An Engineering Approach</em>. O’Reilly Media, Inc. (2020).</div>
 </div>
 <div id="ref-serra2024deciphering" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[7] </div><div class="csl-right-inline">Serra J. <em>Deciphering Data Architectures</em>. O’Reilly Media, Inc. (2024).</div>
+<div class="csl-left-margin">[9] </div><div class="csl-right-inline">Serra J. <em>Deciphering Data Architectures</em>. O’Reilly Media, Inc. (2024).</div>
 </div>
 <div id="ref-skelton2019team" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[8] </div><div class="csl-right-inline">Skelton M, Pais M. <em>Team Topologies: Organizing Business and Technology Teams for Fast Flow</em>. IT Revolution (2019).</div>
+<div class="csl-left-margin">[10] </div><div class="csl-right-inline">Skelton M, Pais M. <em>Team Topologies: Organizing Business and Technology Teams for Fast Flow</em>. IT Revolution (2019).</div>
 </div>
 </div>
 </section>

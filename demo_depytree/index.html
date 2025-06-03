@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DePyTree</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    body { margin: 0; font-family: sans-serif; }
+    #graph-container {
+      height: 100vh; /* Full viewport height */
+      width: 100vw;  /* Full viewport width */
+      overflow: scroll;
+    }
+    svg {
+      width: auto;
+      height: auto;
+      display: block;
+      background: #fafafa;
+    }
+    .node-label { font-size: 12px; text-anchor: start; }
+    .link { fill: none; stroke-width: 1.5px; }
+    .node { cursor: pointer; }
+    .tooltip {
+      position: absolute;
+      padding: 5px 10px;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      font-size: 12px;
+      border-radius: 4px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+  </style>
+</head>
+<body>
+  <label for="data-source">Data Source:</label>
+  <select id="data-source" onchange="changeDataSource(this.value)">
+    <option value="https://franziskahorn.de/demo_depytree/data/graph_data_modules.json">modules</option>
+    <option value="https://franziskahorn.de/demo_depytree/data/graph_data.json">all</option>
+  </select>
+
+  <button onclick="showFull()">–</button>
+  <button onclick="showZoomed()">+</button>
+
+  <label>
+    <input type="checkbox" id="showGit" checked> Show Git
+  </label>
+
+  <div id="graph-container">
+    <svg></svg>
+  </div>
+
+<script>
+function showFull() {
+  const svg = document.querySelector("svg")
+  svg.style.height = `${Math.min(0.95 * window.innerHeight, svg.viewBox.baseVal.height)}px`;
+}
+
+function showZoomed() {
+  const svg = document.querySelector("svg")
+  svg.style.height = `${svg.viewBox.baseVal.height}px`;
+}
+
+window.addEventListener("load", showFull);
+window.addEventListener("resize", showFull);
+
+function changeDataSource(filename) {
+  drawGraph(filename)
+}
+
+function drawGraph(filename) {
+  fetch(filename)
+  .then(response => response.json())
+  .then(data => {
+    const link_green = "#6ab82e";
+    const link_red = "#b82e37";
+    const link_git = "#f79b11";
+
+    const nodeSpacing = 14; // in px
+    const reqHeight = (data.nodes.length - 1) * nodeSpacing;
+    const reqWidth = Math.max(reqHeight, window.innerWidth / 2)
+    const centerX = reqWidth / 2;
+
+    const svg = d3.select("svg")
+      .attr("viewBox", `0 0 ${reqWidth} ${reqHeight}`);
+    svg.style.height = `${Math.min(0.95 * window.innerHeight, reqHeight)}px`;
+
+    svg.selectAll("*").remove();  // in case new file is loaded
+
+    const g = svg.append("g");
+
+    const tooltip = d3.select("body").append("div")
+      .attr("class", "tooltip");
+
+    const y = d3.scalePoint()
+      .domain(data.nodes.map(d => d.id))
+      .range([0, reqHeight])
+      .padding(1);
+
+    // Prepare links - upper to lower on the left (green, lower to upper on the right (red)
+    function getFilteredLinks() {
+      const showGit = document.getElementById("showGit").checked;
+      return showGit ? data.links : data.links.filter(d => d.type !== "git");
+    }
+
+    function computeArc(d) {
+      const sourceY = y(d.source);
+      const targetY = y(d.target);
+      const verticalDistance = Math.abs(targetY - sourceY);
+      const curveStrength = Math.max(10, verticalDistance / 2);
+      const xCurveOffset = sourceY < targetY ? -curveStrength : curveStrength;
+
+      return `M${centerX},${sourceY} C${centerX + xCurveOffset},${sourceY} ${centerX + xCurveOffset},${targetY} ${centerX},${targetY}`;
+    }
+
+    function getArcColor(d) {
+      return d.type === "git" ? link_git : y(d.source) < y(d.target) ? link_green : link_red;
+    }
+
+    const linkGroup = g.append("g");
+
+    let link = linkGroup
+      .selectAll("path")
+      .data(getFilteredLinks())
+      .join("path")
+      .attr("class", "link")
+      .attr("d", computeArc)
+      .attr("stroke", getArcColor)
+      .attr("stroke-opacity", d => d.strength);
+
+    // Prepare nodes
+    const node = g.append("g")
+      .selectAll("circle")
+      .data(data.nodes)
+      .join("circle")
+      .attr("class", "node")
+      .attr("cx", centerX)
+      .attr("cy", d => y(d.id))
+      .attr("r", d => 4 + d.size * 3)
+      .attr("fill", d => d.color || "#333")
+      .on("click", (event, d) => {
+        event.stopPropagation(); // Prevent background reset
+        highlightNode(d.id);
+      })
+      .on("mouseover", (event, d) => {
+        tooltip.style("opacity", 1)
+               .html(d.id)
+               .style("left", (event.pageX + 10) + "px")
+               .style("top", (event.pageY - 10) + "px");
+      })
+      .on("mouseout", () => {
+        tooltip.style("opacity", 0);
+      });
+
+    // Prepare labels
+    const label = g.append("g")
+      .selectAll("text")
+      .data(data.nodes)
+      .join("text")
+      .attr("x", centerX + 10)
+      .attr("y", d => y(d.id))
+      .attr("dy", "0.35em")
+      .attr("class", "node-label")
+      .style("font-weight", d => d.type === "file" ? "bold" : "normal")
+      .text(d => d.label);
+
+    // Build lookup maps for fast checking
+    const outgoing = {};
+    const incoming = {};
+    data.links.forEach(l => {
+      if (!outgoing[l.source]) outgoing[l.source] = [];
+      if (!incoming[l.target]) incoming[l.target] = [];
+      outgoing[l.source].push(l.target);
+      incoming[l.target].push(l.source);
+    });
+
+    function highlightNode(selectedId) {
+      link.attr("stroke", d => {
+          if (d.source === selectedId || d.target === selectedId) {
+            return getArcColor(d);
+          } else {
+            return "#ddd";
+          }
+        })
+        .attr("stroke-opacity", d => (d.source === selectedId || d.target === selectedId) ? 1 : 0.3);
+
+      node.attr("fill", d => {
+          if (d.id === selectedId || (outgoing[selectedId] && outgoing[selectedId].includes(d.id)) || (incoming[selectedId] && incoming[selectedId].includes(d.id))) {
+            return d.color || "#333";
+          } else {
+            return "#ddd";
+          }
+        });
+
+      label.attr("fill", d => {
+          if (d.id === selectedId || (outgoing[selectedId] && outgoing[selectedId].includes(d.id)) || (incoming[selectedId] && incoming[selectedId].includes(d.id))) {
+            return "#000";
+          } else {
+            return "#aaa";
+          }
+        });
+
+      svg.attr("cursor", "pointer");
+    }
+
+    // Reset view when clicking on background
+    svg.on("click", (event) => {
+      if (event.target.tagName === 'svg') {
+        link
+          .attr("stroke", getArcColor)
+          .attr("stroke-opacity", d => d.strength);
+
+        node
+          .attr("fill", d => d.color || "#333");
+
+        label
+          .attr("fill", "#000");
+
+        svg.attr("cursor", "auto");
+      }
+    });
+
+    // redraw links when checkbox state is changed - this also resets the node highlighting
+    document.getElementById("showGit").addEventListener("change", () => {
+      link = linkGroup
+        .selectAll("path")
+        .data(getFilteredLinks(), d => d.source + "-" + d.target)
+        .join("path")
+        .attr("class", "link")
+        .attr("d", computeArc)
+        .attr("stroke", getArcColor)
+        .attr("stroke-opacity", d => d.strength);
+    });
+
+  }).catch(error => console.log(error));
+}
+
+drawGraph("https://franziskahorn.de/demo_depytree/data/graph_data_modules.json")
+</script>
+
+</body>
+</html>

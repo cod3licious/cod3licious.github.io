@@ -62,15 +62,19 @@ function showZoomed() {
   svg.style.height = `${svg.viewBox.baseVal.height}px`;
 }
 
-window.addEventListener("load", showFull);
+window.addEventListener("load", async () => {
+  await drawGraph("https://franziskahorn.de/demo_depytree/data/graph_data_modules.json");
+  showFull();
+});
 window.addEventListener("resize", showFull);
 
-function changeDataSource(filename) {
-  drawGraph(filename)
+async function changeDataSource(filename) {
+  await drawGraph(filename);
+  showFull();
 }
 
-function drawGraph(filename) {
-  fetch(filename)
+async function drawGraph(filename) {
+  await fetch(filename)
   .then(response => response.json())
   .then(data => {
     const link_green = "#6ab82e";
@@ -235,8 +239,6 @@ function drawGraph(filename) {
 
   }).catch(error => console.log(error));
 }
-
-drawGraph("https://franziskahorn.de/demo_depytree/data/graph_data_modules.json")
 </script>
 
 </body>

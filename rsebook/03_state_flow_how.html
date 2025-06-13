@@ -331,7 +331,7 @@ Figure&nbsp;3.1: Before we write code, we should first think about what it is we
 <p>To make sure your designs will be worthy of implementation, this chapter also introduces key paradigms and best practices that will help you create <strong>clean, maintainable code that’s easy to extend and reuse</strong> in future projects.</p>
 <section id="step-by-step-from-output-to-input" class="level2">
 <h2 class="anchored" data-anchor-id="step-by-step-from-output-to-input">Step by Step: From Output to Input</h2>
-<p>Once we know the outputs we want (e.g., result plots), the next step is identifying the sequence of instructions and the data required to generate them.</p>
+<p>Once we know the outputs we want (e.g., result plots), the next step is identifying the sequence of instructions (<strong>flow</strong>) and the data (<strong>state</strong>) required to generate them.</p>
 <p>At its core, programming is about <strong>transforming inputs into outputs</strong>. To determine the process for obtaining the desired results, we can <strong>work backward to figure out what data we need</strong> to create them (<a href="#fig-work-backward" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>). This is especially important when generating data yourself, such as through simulations. For example, if you want to plot how values change over time, you’ll need to record variables at every time step—not just the final outcome of a simulation (duh!).</p>
 <div id="fig-work-backward" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -345,11 +345,11 @@ Figure&nbsp;3.2: Work backward from the desired results to determine what data i
 </div>
 <section id="breaking-down-the-steps" class="level4">
 <h4 class="anchored" data-anchor-id="breaking-down-the-steps">Breaking Down the Steps</h4>
-<p>Let’s map out the steps required to create the above scatter plot displaying actual values <span class="math inline">\(y\)</span> (<code>y</code>), model predictions <span class="math inline">\(\hat{y}\)</span> (<code>y_pred</code>), and the <span class="math inline">\(R^2\)</span> value in the title to indicate the model’s goodness of fit:</p>
+<p>Let’s map out the steps required to create the above scatter plot displaying actual values <span class="math inline">\(y\)</span> (<code>y</code>), model predictions <span class="math inline">\(\hat{y}\)</span> (<code>y_pred</code>), and the <span class="math inline">\(R^2\)</span> value (<code>R2</code>) in the title to indicate the model’s goodness of fit:</p>
 <ol type="1">
-<li><p>To create the plot, we need <span class="math inline">\(R^2\)</span>, <code>y</code>, and <code>y_pred</code>.</p>
+<li><p>To create the plot, we need <code>R2</code>, <code>y</code>, and <code>y_pred</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>plot_results(R2, y, y_pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p><span class="math inline">\(R^2\)</span> can be computed from the values stored in <code>y</code> and <code>y_pred</code>.</p>
+<li><p><code>R2</code> can be computed from the values stored in <code>y</code> and <code>y_pred</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>R2 <span class="op">=</span> compute_r2(y, y_pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p><code>y</code> can be loaded from a file containing test data.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
@@ -372,7 +372,7 @@ Figure&nbsp;3.2: Work backward from the desired results to determine what data i
 <li><p>The model configuration needs to be provided by the user when running the script.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>config <span class="op">=</span> ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ol>
-<p>Of course, in the actual implementation, each step will require further details (e.g., the formula for computing <span class="math inline">\(R^2\)</span> or where the data is loaded from). But since we know that following this sequence in reverse order will produce the desired results, this provides us with the rough outline of our code (see <a href="#sec-draw-code" class="quarto-xref"><span>Section 3.4</span></a> for how these steps could come together in the final script).</p>
+<p>Of course, in the actual implementation, each step will require further details (e.g., the formula for computing <span class="math inline">\(R^2\)</span> or how to load the training and test datasets). But since we know that following this sequence in reverse order will produce the desired results, this already provides us with the rough outline of our code (see <a href="#sec-draw-code" class="quarto-xref"><span>Section 3.4</span></a> for how these steps could come together in the final script).</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Optimize the ordering of steps">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -395,10 +395,21 @@ Optimize the ordering of steps
 </section>
 <section id="define-intermediate-data-structures" class="level4">
 <h4 class="anchored" data-anchor-id="define-intermediate-data-structures">Define Intermediate Data Structures</h4>
-<p>When transforming input data into desired outputs, it’s often necessary to <strong>persist intermediate results</strong>. These results should be stored in a format that makes sense for both the process that produces them and the one that consumes them. For example:</p>
+<p>When transforming input data into desired outputs, it’s often necessary to <strong>persist (i.e., save) intermediate results</strong> (<a href="#fig-state-flow" class="quarto-xref">Figure&nbsp;<span>3.3</span></a>).</p>
+<div id="fig-state-flow" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-state-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/00_clarity/state_flow.png" class="img-fluid figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-state-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.3: The script to create the result plot in a nutshell: At the top you see the <strong>output</strong> that is presented to the user in the <strong>user interface (UI)</strong> as the code is being executed. For the most part, this just consists of some log messages displayed in the terminal to show the progress of the script and then the final plot. Below this is the high level <strong>control flow</strong>, i.e., the sequence of instructions that we outlined in the previous section as the steps to get from input to output. While these instructions are executed, different variables (like <code>model</code> and <code>y_pred</code>) hold the current <strong>state</strong> of the program <strong>in memory</strong>. Some of the values stored in these variables are read from external files, possibly created by a different program. In case your script crashes in between, it is helpful to write intermediate results to disk (i.e., <strong>persist the current state</strong> of your variables). You could then load these files again to recreate the program’s previous state (indicated by the light gray arrows) and execute the remaining steps.
+</figcaption>
+</figure>
+</div>
+<p>Especially when <strong>different scripts or processes create and consume these intermediate result files</strong>, they should be stored in a <strong>format that makes sense for both sides</strong>. For example:</p>
 <ul>
 <li>A user fills out a form on a website. Their information is stored in a database so it can later be retrieved and displayed on their account page.</li>
-<li>You run simulations that output data to CSV files. These files are then used to generate plots.</li>
+<li>You run simulations that output data to CSV files. These files are then used by a separate script to generate plots.</li>
 <li>You define model settings in a <code>config.yml</code> file, which your script reads to initialize the model with the correct configuration.</li>
 </ul>
 <p>It’s important to <strong>carefully design the structure</strong> of this intermediate data—what fields it includes, what they’re called, and how they’re organized. Because if you later need to change the format, you’ll have to update both the producer and consumer processes, and potentially migrate existing data.</p>
@@ -436,14 +447,14 @@ Plan your experiments
 </section>
 <section id="analogy-the-cupcake-recipe" class="level2">
 <h2 class="anchored" data-anchor-id="analogy-the-cupcake-recipe">Analogy: The Cupcake Recipe</h2>
-<p>Before diving into how to write good code, let’s explore the basic principles using a more relatable example: a cupcake recipe (<a href="#fig-recipe-code" class="quarto-xref">Figure&nbsp;<span>3.3</span></a>). Because who wants result plots when you could have cupcakes?! 🧁</p>
+<p>Before diving into how to write good code, let’s explore the basic principles using a more relatable example: a cupcake recipe (<a href="#fig-recipe-code" class="quarto-xref">Figure&nbsp;<span>3.4</span></a>). Because who wants result plots when you could have cupcakes?! 🧁</p>
 <div id="fig-recipe-code" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-recipe-code-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../images/00_clarity/recipe_code.png" class="img-fluid figure-img" style="width:55.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-recipe-code-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3.3: A chef writes a recipe, which then needs to be executed (baked) to generate the output (cupcakes) that the consumers enjoy.
+Figure&nbsp;3.4: A chef writes a recipe, which then needs to be executed (baked) to generate the output (cupcakes) that the consumers enjoy.
 </figcaption>
 </figure>
 </div>
@@ -451,32 +462,32 @@ Figure&nbsp;3.3: A chef writes a recipe, which then needs to be executed (baked)
 <p>So, how can we write a good recipe?</p>
 <section id="breaking-down-the-steps-1" class="level4">
 <h4 class="anchored" data-anchor-id="breaking-down-the-steps-1">Breaking Down the Steps</h4>
-<p>To start, we <strong>brainstorm all the necessary steps</strong> for making cupcakes (<a href="#fig-recipe-steps1" class="quarto-xref">Figure&nbsp;<span>3.4</span></a>). For this, we can again <strong>work backward from the final result</strong> (cupcakes) through the intermediate steps (cake batter and frosting) until we reach the raw ingredients.</p>
+<p>To start, we <strong>brainstorm all the necessary steps</strong> for making cupcakes (<a href="#fig-recipe-steps1" class="quarto-xref">Figure&nbsp;<span>3.5</span></a>). For this, we can again <strong>work backward from the final result</strong> (cupcakes) through the intermediate steps (cake batter and frosting) until we reach the raw ingredients.</p>
 <div id="fig-recipe-steps1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-recipe-steps1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../images/03_code/recipe_steps1.png" class="img-fluid figure-img" style="width:55.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-recipe-steps1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3.4: Everything you need to make cupcakes. The unstructured brain dump we’ll transform into a proper recipe.
+Figure&nbsp;3.5: Everything you need to make cupcakes. The unstructured brain dump we’ll transform into a proper recipe.
 </figcaption>
 </figure>
 </div>
-<p>You’ll notice that your list includes both <strong>ingredients</strong> (in code: <strong>variables containing data</strong>) and <strong>instructions for transforming those ingredients</strong>, like melting butter or mixing multiple ingredients (in code: <strong>statements</strong>, including conditionals (<code>if/else</code>) and loops (<code>for</code>, <code>while</code>), that create intermediate variables). These steps also need to follow a <strong>specific order</strong>—you wouldn’t frost a cupcake before baking it! Often, steps <strong>depend on one another</strong>, requiring a structured sequence (<a href="#fig-recipe-steps2" class="quarto-xref">Figure&nbsp;<span>3.5</span></a>).</p>
+<p>You’ll notice that your list includes both <strong>ingredients</strong> (in code: <strong>variables containing data</strong>) and <strong>instructions for transforming those ingredients</strong>, like melting butter or mixing multiple ingredients (in code: the control flow, i.e., <strong>statements</strong>, including conditionals (<code>if/else</code>) and loops (<code>for</code>, <code>while</code>), that create intermediate variables). These steps also need to follow a <strong>specific order</strong>—you wouldn’t frost a cupcake before baking it! Often, steps <strong>depend on one another</strong>, requiring a structured sequence (<a href="#fig-recipe-steps2" class="quarto-xref">Figure&nbsp;<span>3.6</span></a>).</p>
 <div id="fig-recipe-steps2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-recipe-steps2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../images/03_code/recipe_steps2.png" class="img-fluid figure-img" style="width:55.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-recipe-steps2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3.5: A recipe usually includes a list of ingredients followed by instructions on what to do with them. The order matters, especially when one step depends on the completion of another.
+Figure&nbsp;3.6: A recipe usually includes a list of ingredients followed by instructions on what to do with them. The order matters, especially when one step depends on the completion of another.
 </figcaption>
 </figure>
 </div>
 </section>
 <section id="avoiding-repetition-reusable-steps" class="level4">
 <h4 class="anchored" data-anchor-id="avoiding-repetition-reusable-steps">Avoiding Repetition: Reusable Steps</h4>
-<p>If your recipe is part of a cookbook with multiple related recipes, some steps might apply to several of them. Instead of repeating those steps in every recipe, you can <strong>group and document them in a separate section</strong> (in code: define a <strong>function</strong>) and reference them when needed (<a href="#fig-recipe-steps3" class="quarto-xref">Figure&nbsp;<span>3.6</span></a>).</p>
+<p>If your recipe is part of a cookbook with multiple related recipes, some steps might apply to several of them. Instead of repeating those steps in every recipe, you can <strong>group and document them in a separate section</strong> (in code: define a <strong>function</strong>) and reference them when needed (<a href="#fig-recipe-steps3" class="quarto-xref">Figure&nbsp;<span>3.7</span></a>).</p>
 <p>This follows the <strong>Don’t Repeat Yourself (DRY)</strong> principle <span class="citation" data-cites="thomas2019pragmatic">[<a href="references.html#ref-thomas2019pragmatic" role="doc-biblioref">7</a>]</span>. Not only does this reduce redundancy, but it also makes updates easier—if a general step changes (e.g., you refine a technique or fix a typo), you only need to update it in one place (<strong>a single source of truth</strong>).</p>
 <div id="fig-recipe-steps3" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -484,14 +495,14 @@ Figure&nbsp;3.5: A recipe usually includes a list of ingredients followed by ins
 <img src="../images/03_code/recipe_steps3.png" class="img-fluid figure-img" style="width:55.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-recipe-steps3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3.6: Some instructions might be relevant in multiple recipes (e.g., general baking tips); instead of repeating them in every recipe, you can just refer to the page where they are described.
+Figure&nbsp;3.7: Some instructions might be relevant in multiple recipes (e.g., general baking tips); instead of repeating them in every recipe, you can just refer to the page where they are described.
 </figcaption>
 </figure>
 </div>
 </section>
 <section id="organizing-by-components" class="level4">
 <h4 class="anchored" data-anchor-id="organizing-by-components">Organizing by Components</h4>
-<p>Looking at your recipe, you might notice that some <strong>ingredients and instructions naturally group into self-contained components</strong> (in code: <strong>classes</strong>). Structuring the recipe this way makes it clearer and easier to follow (<a href="#fig-recipe-steps4" class="quarto-xref">Figure&nbsp;<span>3.7</span></a>). Instead of juggling all the steps at once, you can <strong>focus on creating one component at a time</strong>—first the plain cupcake, then the frosting, then assembling everything.</p>
+<p>Looking at your recipe, you might notice that some <strong>ingredients and instructions naturally group into self-contained components</strong> (in code: <strong>classes</strong>). Structuring the recipe this way makes it clearer and easier to follow (<a href="#fig-recipe-steps4" class="quarto-xref">Figure&nbsp;<span>3.8</span></a>). Instead of juggling all the steps at once, you can <strong>focus on creating one component at a time</strong>—first the plain cupcake, then the frosting, then assembling everything.</p>
 <p>This modular approach also allows <strong>delegation</strong>—for example, you could buy pre-made cupcakes and just focus on making the frosting. In programming, this means that <strong>the final code doesn’t need to know how each component was made—it only cares that the components exist</strong>.</p>
 <div id="fig-recipe-steps4" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -499,14 +510,14 @@ Figure&nbsp;3.6: Some instructions might be relevant in multiple recipes (e.g., 
 <img src="../images/03_code/recipe_steps4.png" class="img-fluid figure-img" style="width:55.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-recipe-steps4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3.7: For more complex recipes where the final dish consists of multiple components (like cupcakes, which have cake part and frosting), grouping by component improves clarity.
+Figure&nbsp;3.8: For more complex recipes where the final dish consists of multiple components (like cupcakes, which have cake part and frosting), grouping by component improves clarity.
 </figcaption>
 </figure>
 </div>
 </section>
 <section id="making-variants-with-minimal-effort" class="level4">
 <h4 class="anchored" data-anchor-id="making-variants-with-minimal-effort">Making Variants with Minimal Effort</h4>
-<p>Organizing a recipe into components also makes it easier to <strong>create variations</strong> (<a href="#fig-recipe-steps5" class="quarto-xref">Figure&nbsp;<span>3.8</span></a>).</p>
+<p>Organizing a recipe into components also makes it easier to <strong>create variations</strong> (<a href="#fig-recipe-steps5" class="quarto-xref">Figure&nbsp;<span>3.9</span></a>).</p>
 <p>Two key concepts make this possible:</p>
 <ol type="1">
 <li><strong>Polymorphism</strong>—each variation should behave like the original so it can be used interchangeably (in code: implement the same <strong>interface</strong>).</li>
@@ -519,7 +530,7 @@ Figure&nbsp;3.7: For more complex recipes where the final dish consists of multi
 <img src="../images/03_code/recipe_steps5.png" class="img-fluid figure-img" style="width:55.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-recipe-steps5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3.8: Some components have variants that can be used as drop-in replacements. Since these variants extend the original (e.g., chocolate frosting builds on plain frosting), we reuse existing instructions and only describe what’s new.
+Figure&nbsp;3.9: Some components have variants that can be used as drop-in replacements. Since these variants extend the original (e.g., chocolate frosting builds on plain frosting), we reuse existing instructions and only describe what’s new.
 </figcaption>
 </figure>
 </div>
@@ -529,7 +540,7 @@ Figure&nbsp;3.8: Some components have variants that can be used as drop-in repla
 </section>
 <section id="good-code" class="level2">
 <h2 class="anchored" data-anchor-id="good-code">Good Code</h2>
-<p>When we talk about good code in this book, we focus on three key properties, each building upon and influencing the others:</p>
+<p>When we talk about “good code” in this book, we focus on three key properties, each building upon and influencing the others:</p>
 <ol type="1">
 <li><p><strong>Easy to understand:</strong> To work with code, you need to be able to understand it. When using a common library, it may be enough to know what a function does and how to use it, trusting that it works correctly under the hood. But with your own code, you also need to understand the implementation details. Otherwise, you’ll hesitate to make changes and won’t be able to confidently say that it behaves as expected. Since code is read far more often than it is written, making it easy to understand ultimately saves time in the long run.</p></li>
 <li><p><strong>Easy to change:</strong> Code is never truly finished. It requires ongoing maintenance—fixing bugs, updating dependencies (e.g., when a library releases a security patch with breaking changes), and adapting to evolving requirements, such as adding new features to stay competitive. Code that is easy to modify makes all of this much smoother.</p></li>
@@ -543,14 +554,14 @@ Figure&nbsp;3.8: Some components have variants that can be used as drop-in repla
 </ul>
 <section id="from-complex-to-complicated" class="level4">
 <h4 class="anchored" data-anchor-id="from-complex-to-complicated">From Complex to Complicated</h4>
-<p>A well-known software engineering principle is <strong>KISS</strong>—“Keep It Simple, Stupid!” While this is good advice at the level of individual functions or classes, it’s unrealistic to expect an entire software system to be <em>simple</em>. Most real-world software consists of multiple interacting components, making it inherently <em>complicated</em> rather than simple. The goal is to avoid unnecessary <strong>complexity</strong> (<a href="#fig-complexity" class="quarto-xref">Figure&nbsp;<span>3.9</span></a>).</p>
+<p>A well-known software engineering principle is <strong>KISS</strong>—“Keep It Simple, Stupid!” While this is good advice at the level of individual functions or classes, it’s unrealistic to expect an entire software system to be <em>simple</em>. Most real-world software consists of multiple interacting components, making it inherently <em>complicated</em> rather than simple. The goal is to avoid unnecessary <strong>complexity</strong> (<a href="#fig-complexity" class="quarto-xref">Figure&nbsp;<span>3.10</span></a>).</p>
 <div id="fig-complexity" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-complexity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../images/03_code/complexity.png" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-complexity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3.9: In accordance with the <a href="https://en.wikipedia.org/wiki/Cynefin_framework">Cynefin framework</a>, (software) systems can have different levels of complexity <span class="citation" data-cites="khononov2024balancing">[<a href="references.html#ref-khononov2024balancing" role="doc-biblioref">2</a>]</span>. A script that sequentially executes a few steps might be simple. Most software, however, is at least complicated—it consists of multiple interacting components but can still be broken down into understandable subsystems. A complex system, often referred to as “spaghetti code” or a “big ball of mud” <span class="citation" data-cites="foote1997big">[<a href="references.html#ref-foote1997big" role="doc-biblioref">1</a>]</span>, has so many interdependencies that its behavior is very difficult to predict—changes in one part can have unintended consequences elsewhere.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> (Figure adapted from <span class="citation" data-cites="mcchrystal2015team">[<a href="references.html#ref-mcchrystal2015team" role="doc-biblioref">3</a>]</span>)
+Figure&nbsp;3.10: In accordance with the <a href="https://en.wikipedia.org/wiki/Cynefin_framework">Cynefin framework</a>, (software) systems can have different levels of complexity <span class="citation" data-cites="khononov2024balancing">[<a href="references.html#ref-khononov2024balancing" role="doc-biblioref">2</a>]</span>. A script that sequentially executes a few steps might be simple. Most software, however, is at least complicated—it consists of multiple interacting components but can still be broken down into understandable subsystems. A complex system, often referred to as “spaghetti code” or a “big ball of mud” <span class="citation" data-cites="foote1997big">[<a href="references.html#ref-foote1997big" role="doc-biblioref">1</a>]</span>, has so many interdependencies that its behavior is very difficult to predict—changes in one part can have unintended consequences elsewhere.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> (Figure adapted from <span class="citation" data-cites="mcchrystal2015team">[<a href="references.html#ref-mcchrystal2015team" role="doc-biblioref">3</a>]</span>)
 </figcaption>
 </figure>
 </div>
@@ -565,25 +576,25 @@ Figure&nbsp;3.9: In accordance with the <a href="https://en.wikipedia.org/wiki/C
 <li>A system with <strong>two massive 500-line functions</strong> has low global complexity (only two things to keep track of) but high local complexity (each function is overwhelming to understand).</li>
 <li>A system with <strong>500 tiny 2-line functions</strong> has low local complexity (each function is simple) but high global complexity (understanding how they interact becomes difficult).</li>
 </ul>
-<p>What constitutes a <strong>“right-sized” unit</strong>—small enough to be understandable, yet large enough to avoid excessive fragmentation—will depend on the context and your personal preferences (I usually aim for functions with around 5-10 lines of code).</p>
-<p>Ideally, these units should then form a hierarchy with different <strong>levels of abstraction</strong> (<a href="#fig-abstraction-levels" class="quarto-xref">Figure&nbsp;<span>3.10</span></a>), where lower-level units can be used as building blocks to create more advanced functionality.</p>
+<p>What constitutes a <strong>“right-sized” unit</strong>—small enough to be understandable, yet large enough to avoid excessive fragmentation—will depend on the context and your personal preferences (I usually aim for functions with around 5-15 lines of code).</p>
+<p>Ideally, these units should then form a hierarchy with different <strong>levels of abstraction</strong> (<a href="#fig-abstraction-levels" class="quarto-xref">Figure&nbsp;<span>3.11</span></a>), where lower-level units can be used as building blocks to create more advanced functionality.</p>
 <div id="fig-abstraction-levels" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-abstraction-levels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../images/03_code/abstraction_levels.png" class="img-fluid figure-img" style="width:70.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-abstraction-levels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3.10: Complicated systems in software design often follow a hierarchy of abstraction. For example, to plot the results of a predictive model you call a function to create a scatter plot of predicted vs.&nbsp;actual values, which internally calls another, more specific function to compute the <span class="math inline">\(R^2\)</span> value displayed in the plot’s title.
+Figure&nbsp;3.11: Complicated systems in software design often follow a hierarchy of abstraction. For example, to plot the results of a predictive model you call a function to create a scatter plot of predicted vs.&nbsp;actual values, which internally calls another, more specific function to compute the <span class="math inline">\(R^2\)</span> value displayed in the plot’s title.
 </figcaption>
 </figure>
 </div>
-<p>At each level, you only need to understand how to use the functions at lower levels but not their internals. This <strong>reduces cognitive load</strong>, making it easier to navigate and extend the codebase with confidence.</p>
+<p>At each level, you only need to understand <strong>how to use</strong> the functions at lower levels but <strong>not their internals</strong>. This <strong>reduces cognitive load</strong>, making it easier to navigate and extend the codebase with confidence.</p>
 <p>However, it’s important to note that <strong>low-level functions should ideally be kept stable</strong>, since everything built on top of them depends on their behavior. <strong>If these functions change, any code that relies on them will also need to be updated</strong>. This applies not only to your own functions but also to external libraries your code depends on.</p>
-<p>Standard libraries are generally safe to build upon, as their functionality tends to be stable. In contrast, relying heavily on experimental or rapidly evolving libraries can lead to constant breakage as new versions introduce changes. To mitigate this, consider using an <em>anti-corruption layer</em>—a wrapper that provides a stable interface and handles necessary transformations. This centralizes adaptation and isolates the rest of your code from volatile dependencies.</p>
+<p>Standard libraries (i.e., those included with a programming language, not installed separately) are generally safe to build upon, as their functionality tends to be stable. In contrast, relying heavily on experimental or rapidly evolving libraries can lead to constant breakage as new versions introduce changes. To mitigate this, consider implementing an <em>anti-corruption layer</em>—a wrapper that provides a stable interface and handles necessary transformations. This centralizes adaptation and isolates the rest of your code from volatile dependencies.</p>
 </section>
 <section id="cohesive-decoupled-units" class="level3">
 <h3 class="anchored" data-anchor-id="cohesive-decoupled-units">Cohesive &amp; Decoupled Units</h3>
-<p>Code consists of variables that store data and statements such as conditionals (<code>if/else</code>), loops (<code>for/while</code>), and transformations of this data to generate the desired output. To make our code easier to understand, modify, and reuse, we <strong>group related lines of code into individual units: functions and classes.</strong></p>
+<p>Code consists of variables that store data (<strong>state</strong>) and statements such as conditionals (<code>if/else</code>), loops (<code>for/while</code>), and transformations of this data to generate the desired output (<strong>control flow</strong>). To make our code easier to understand, modify, and reuse, we <strong>group related lines of code into individual units: functions and classes.</strong></p>
 <p>Each unit has an <strong>interface</strong> (what is visible from the outside) and an <strong>implementation</strong> (the actual code—details that users of the unit shouldn’t need to worry about). By designing simple interfaces that hide complex implementations, we create an <strong>abstraction</strong> that reduces cognitive load.</p>
 <p>A good unit is both <strong>cohesive</strong> and <strong>decoupled</strong>:</p>
 <ul>
@@ -702,6 +713,7 @@ Go deep
 <span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
 <span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>   new_person <span class="op">=</span> Person(<span class="st">"Jane"</span>, <span class="st">"Doe"</span>, date(<span class="dv">1988</span>, <span class="dv">5</span>, <span class="dv">20</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Additionally, the methods of a class can control how attributes can be accessed or modified.</p>
+<p>A cohesive class is designed to represent one specific concept completely—and only that concept. If a class contains many attributes, and one group of methods uses one subset of those attributes while another group relies on a different, non-overlapping subset, this suggests the class may be doing too much. In such cases, it likely no longer adheres to the single responsibility principle and should be broken into smaller, more focused classes.</p>
 </section>
 <section id="public-vs.-private-in-classes" class="level5">
 <h5 class="anchored" data-anchor-id="public-vs.-private-in-classes">Public vs.&nbsp;Private in Classes</h5>
@@ -744,7 +756,8 @@ Public and private in different languages
 </section>
 <section id="pure-vs.-impure-functions" class="level5">
 <h5 class="anchored" data-anchor-id="pure-vs.-impure-functions">Pure vs.&nbsp;Impure Functions</h5>
-<p>The gold standard for decoupled units is <strong>pure functions</strong> <span class="citation" data-cites="normand2021grokking">[<a href="references.html#ref-normand2021grokking" role="doc-biblioref">4</a>]</span>. A pure function behaves like a mathematical function <span class="math inline">\(f: x \to y\)</span>, taking inputs <span class="math inline">\(x\)</span> and returning an output <span class="math inline">\(y\)</span>—and given the same inputs, the results will be the same every time. <strong>Impure functions</strong>, on the other hand, have side effects—they interact with the outside world, such as reading from or writing to a file or modifying global state.</p>
+<p>In addition to dependencies on code defined elsewhere, another form of coupling comes from <strong>relying on external resources</strong> (like files, databases, or APIs). These kinds of external dependencies are eliminated when your units are pure functions <span class="citation" data-cites="normand2021grokking">[<a href="references.html#ref-normand2021grokking" role="doc-biblioref">4</a>]</span>.</p>
+<p>A <strong>pure function</strong> behaves like a mathematical function <span class="math inline">\(f: x \to y\)</span>, taking inputs <span class="math inline">\(x\)</span> and returning an output <span class="math inline">\(y\)</span>—and given the same inputs, the results will be the same every time. <strong>Impure functions</strong>, on the other hand, have side effects—they interact with the outside world, such as reading from or writing to a file or modifying global state.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(a, b):</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># pure: returns a computed result without side effects</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span>
@@ -765,7 +778,7 @@ Public and private in different languages
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> ...</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main():</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> impure_function():</span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"some_input.txt"</span>) <span class="im">as</span> f:</span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>        data <span class="op">=</span> f.read()</span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> pure_function(data)</span>
@@ -870,7 +883,7 @@ Think you need global variables? Wrap your code inside a class instead!
 <section id="call-by-value-vs.-call-by-reference" class="level5">
 <h5 class="anchored" data-anchor-id="call-by-value-vs.-call-by-reference">🚨 Call-By-Value vs.&nbsp;Call-By-Reference</h5>
 <p>Another common pitfall is <strong>accidentally modifying function arguments</strong>.</p>
-<p>Depending on the programming languages, input arguments can be passed:</p>
+<p>Depending on the programming language you use, input arguments are passed:</p>
 <ul>
 <li><strong>By value</strong>: A copy of the data is passed.</li>
 <li><strong>By reference</strong>: The function gets access to the original memory location and can modify the data directly.</li>
@@ -1028,21 +1041,21 @@ Reusable code through refactoring, not overengineering
 </ol>
 <section id="structure-your-personal-code-library" class="level4">
 <h4 class="anchored" data-anchor-id="structure-your-personal-code-library">Structure: Your Personal Code Library</h4>
-<p>Our first sketch provides an overview of the <strong>reusable functions and classes</strong> we assembled in the previous section (<a href="#fig-draw-library" class="quarto-xref">Figure&nbsp;<span>3.11</span></a>). This collection forms your <strong>personal code library</strong>, which you can reuse not just for this project but for future ones as well.</p>
+<p>Our first sketch provides an overview of the <strong>reusable functions and classes</strong> we assembled in the previous section (<a href="#fig-draw-library" class="quarto-xref">Figure&nbsp;<span>3.12</span></a>). This collection forms your <strong>personal code library</strong>, which you can reuse not just for this project but for future ones as well.</p>
 <div id="fig-draw-library" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-draw-library-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../images/00_clarity/draw_library.png" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-draw-library-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3.11: The different functions and classes in our personal library, a collection of reusable units that can serve us in multiple projects. They are organized in different files and folders to keep related code close together. Green boxes represent pure functions, purple boxes impure functions with side effects (like reading or writing to external files), and blue boxes class methods. For classes (like <code>MyModel</code>) that extend another class (<code>Model</code>), only the additional attributes and methods are listed for that class. The arrows indicate dependencies.
+Figure&nbsp;3.12: The different functions and classes in our personal library, a collection of reusable units that can serve us in multiple projects. They are organized in different files and folders to keep related code close together. Green boxes represent pure functions, purple boxes impure functions with side effects (like reading or writing to external files), and blue boxes class methods. For classes (like <code>MyModel</code>) that extend another class (<code>Model</code>), only the additional attributes and methods are listed for that class. The arrows indicate dependencies.
 </figcaption>
 </figure>
 </div>
 </section>
 <section id="behavior-mapping-out-your-script" class="level4">
 <h4 class="anchored" data-anchor-id="behavior-mapping-out-your-script">Behavior: Mapping Out Your Script</h4>
-<p>Our second sketch outlines the <strong>script you’ll execute</strong> to create the results you want, which builds upon these components (<a href="#fig-draw-script" class="quarto-xref">Figure&nbsp;<span>3.12</span></a>). When designing the flow of your script, consider:</p>
+<p>Our second sketch outlines the <strong>script you’ll execute</strong> to create the results you want, which builds upon these components (<a href="#fig-draw-script" class="quarto-xref">Figure&nbsp;<span>3.13</span></a>). When designing the flow of your script, consider:</p>
 <ul>
 <li><strong>How the script is triggered</strong> – Does it take command-line arguments? What inputs does it require?</li>
 <li><strong>What the final output should be</strong> – A results plot? A summary table? Something else?</li>
@@ -1055,7 +1068,7 @@ Figure&nbsp;3.11: The different functions and classes in our personal library, a
 <img src="../images/00_clarity/draw_script.png" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-draw-script-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3.12: The full flow of your script, including external resources and reusable functions. If you want, you can omit the lower levels as these internal function calls are already covered in our library diagram. The code to create a new model should create models of different types depending on the configuration parameters passed when calling the script so you can use the same script for multiple experiments.
+Figure&nbsp;3.13: The full flow of your script, including external resources and reusable functions. If you want, you can omit the lower levels as these internal function calls are already covered in our library diagram. The code to create a new model should create models of different types depending on the configuration parameters passed when calling the script so you can use the same script for multiple experiments.
 </figcaption>
 </figure>
 </div>

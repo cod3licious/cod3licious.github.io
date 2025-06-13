@@ -319,17 +319,17 @@ Figure&nbsp;6.1: Unlike a script that runs locally on your laptop, a production-
 <p>For web apps, the GUI that users interact with is also referred to as the <strong>frontend</strong>, while the <strong>backend</strong> handles behind-the-scenes tasks like data storage and processing. Even seemingly standalone desktop clients often connect to a backend server for cloud storage or to enable collaboration on shared documents. We’ll explore how this works in the section on APIs.</p>
 <p>In research, the goal is often to make results more accessible, for example, by transforming a static report into an interactive dashboard where users can explore data. To do this, we recommend you start with a web-based app.</p>
 <p>Many books and tutorials are written on the topic of building user-friendly software applications and a lot of it is very specific to the programming language and framework you’re using—please consult your favorite search engine to discover more resources on this topic. 😉</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Web apps with Python's `streamlit` framework">
+<div class="callout callout-style-default callout-tip callout-titled" title="Web apps in Python">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Web apps with Python’s <code>streamlit</code> framework
+Web apps in Python
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>If you use Python, try the <a href="https://streamlit.io/">Streamlit</a> framework to turn your analysis scripts into a web app with just a few additional lines of code.</p>
+<p>If you use Python, try the <a href="https://streamlit.io/">Streamlit</a> framework to turn your analysis scripts into a web app with just a few additional lines of code. To create more advanced web apps, you can also check out the <a href="https://reflex.dev/">Reflex</a> framework.</p>
 </div>
 </div>
 </section>
@@ -600,7 +600,7 @@ For example, a website might fetch data from multiple APIs, showing placeholders
 <p>To manage this growing complexity, it’s best to think of these components—such as a <strong>GUI/client/frontend</strong>, <strong>API/server/backend</strong>, and <strong>data storage</strong> (files, databases, message queues)—as distinct layers. A clean design follows the principle of <strong>layered communication</strong>, where each layer interacts only with the layer directly below it <span class="citation" data-cites="lilienthal2019sustainable">[<a href="references.html#ref-lilienthal2019sustainable" role="doc-biblioref">6</a>]</span>. For example, the client communicates with the server, and the server interacts with the database, avoiding “skip connections” where one layer bypasses another.<br>
 This design principle minimizes dependencies and makes the system easier to maintain: If the interface of one component changes, only the layer directly above it has to be adapted, for example, if a field in the database is renamed, only the API needs to be updated.</p>
 <p>When you design these more complicated systems, it’s even more important to sketch the overall architecture before you start with the implementation. Visualizing how the layers interact can reveal potential bottlenecks or unnecessary complexity and gives you and your collaborators clarity on the big picture.<br>
-Instead of lumping everything into “your code” versus “the outside world” as we did in <a href="03_state_flow_how.html#fig-draw-script" class="quarto-xref">Figure&nbsp;<span>3.12</span></a>, you can use <strong>swimlanes</strong> to separate the process steps performed by each component and distinguish between the different layers (<a href="#fig-production-design" class="quarto-xref">Figure&nbsp;<span>6.6</span></a>).</p>
+Instead of lumping everything into “your code” versus “the outside world” as we did in <a href="03_state_flow_how.html#fig-draw-script" class="quarto-xref">Figure&nbsp;<span>3.13</span></a>, you can use <strong>swimlanes</strong> to separate the process steps performed by each component and distinguish between the different layers (<a href="#fig-production-design" class="quarto-xref">Figure&nbsp;<span>6.6</span></a>).</p>
 <p><strong>Begin by visualizing the flow from the user’s perspective</strong>, focusing on how they interact with the client to complete their intended task. Once the user experience is clear, <strong>continue with the server and database layers</strong> and map out how these can support and implement each step:</p>
 <ul>
 <li>What data is needed to render the GUI?</li>

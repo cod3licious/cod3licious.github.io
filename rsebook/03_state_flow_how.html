@@ -280,10 +280,11 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#step-by-step-from-output-to-input" id="toc-step-by-step-from-output-to-input" class="nav-link active" data-scroll-target="#step-by-step-from-output-to-input">Step by Step: From Output to Input</a></li>
-  <li><a href="#analogy-the-cupcake-recipe" id="toc-analogy-the-cupcake-recipe" class="nav-link" data-scroll-target="#analogy-the-cupcake-recipe">Analogy: The Cupcake Recipe</a></li>
+  <li><a href="#working-code" id="toc-working-code" class="nav-link active" data-scroll-target="#working-code">Working Code</a></li>
   <li><a href="#good-code" id="toc-good-code" class="nav-link" data-scroll-target="#good-code">Good Code</a>
   <ul class="collapse">
+  <li><a href="#analogy-the-cupcake-recipe" id="toc-analogy-the-cupcake-recipe" class="nav-link" data-scroll-target="#analogy-the-cupcake-recipe">Analogy: The Cupcake Recipe</a></li>
+  <li><a href="#from-complex-to-complicated" id="toc-from-complex-to-complicated" class="nav-link" data-scroll-target="#from-complex-to-complicated">From Complex to Complicated</a></li>
   <li><a href="#cohesive-decoupled-units" id="toc-cohesive-decoupled-units" class="nav-link" data-scroll-target="#cohesive-decoupled-units">Cohesive &amp; Decoupled Units</a></li>
   <li><a href="#building-with-blocks-units-in-context" id="toc-building-with-blocks-units-in-context" class="nav-link" data-scroll-target="#building-with-blocks-units-in-context">Building with Blocks: Units in Context</a></li>
   <li><a href="#summary-from-working-to-good-code" id="toc-summary-from-working-to-good-code" class="nav-link" data-scroll-target="#summary-from-working-to-good-code">Summary: From Working to Good Code</a></li>
@@ -315,7 +316,7 @@ window.Quarto = {
 
 
 <p>Now that you know what outputs you want to create, are you itching to start programming? Hold on for a moment!</p>
-<p>One of the most <strong>common missteps</strong> I’ve seen junior developers take is <strong>jumping straight into coding without first thinking through what they actually want to build</strong>. Imagine trying to construct a house by just laying bricks without consulting an architect first—halfway through you’d probably realize the walls don’t align, and you forgot the plumbing for the kitchen. You’d have to tear it down and start over! To avoid this fate for your software, it’s essential to make a plan and sketch out the final design first (<a href="#fig-code-questions-3" class="quarto-xref">Figure&nbsp;<span>3.1</span></a>).</p>
+<p>One of the most <strong>common missteps</strong> I’ve seen junior developers take is <strong>jumping straight into coding without first thinking through what they actually want to write</strong>. Imagine trying to construct a house by just laying bricks without consulting an architect first—halfway through you’d probably realize the walls don’t align, and you forgot the plumbing for the kitchen. You’d have to tear it down and start over! To avoid this fate for your software, it’s essential to make a plan and sketch out the final design first (<a href="#fig-code-questions-3" class="quarto-xref">Figure&nbsp;<span>3.1</span></a>).</p>
 <div id="fig-code-questions-3" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-code-questions-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -334,8 +335,8 @@ Figure&nbsp;3.1: Before we write code, we should first think about what it is we
 <p>Commercial software applications and the scripts used in your research share many of the same core principles—both involve writing code to produce outputs, and both benefit from the same standards of good code quality. That’s the topic of this chapter.<br>
 However, full-scale software applications, especially those with graphical interfaces, are naturally more complex than a script that generates static results. The additional components required for production-grade software are covered later in <a href="06_from_research_to_production.html" class="quarto-xref"><span>Chapter 6</span></a>.</p>
 </section>
-<section id="step-by-step-from-output-to-input" class="level2">
-<h2 class="anchored" data-anchor-id="step-by-step-from-output-to-input">Step by Step: From Output to Input</h2>
+<section id="working-code" class="level2">
+<h2 class="anchored" data-anchor-id="working-code">Working Code</h2>
 <p>Once we know the outputs we want (e.g., result plots), the next step is identifying the sequence of instructions (<strong>flow</strong>) and the data (<strong>state</strong>) required to generate them.</p>
 <p>At its core, programming is about <strong>transforming inputs into outputs</strong>. To determine the process for obtaining the desired results, we can <strong>work backward to figure out what data we need</strong> to create them (<a href="#fig-work-backward" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>). This is especially important when generating data yourself, such as through simulations. For example, if you want to plot how values change over time, you’ll need to record variables at every time step—not just the final outcome of a simulation (duh!).</p>
 <div id="fig-work-backward" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -348,8 +349,8 @@ Figure&nbsp;3.2: Work backward from the desired results to determine what data i
 </figcaption>
 </figure>
 </div>
-<section id="breaking-down-the-steps" class="level4">
-<h4 class="anchored" data-anchor-id="breaking-down-the-steps">Breaking Down the Steps</h4>
+<section id="step-by-step-from-output-to-input" class="level4">
+<h4 class="anchored" data-anchor-id="step-by-step-from-output-to-input">Step by Step: From Output to Input</h4>
 <p>Let’s map out the steps required to create the above scatter plot displaying actual values <span class="math inline">\(y\)</span> (<code>y</code>), model predictions <span class="math inline">\(\hat{y}\)</span> (<code>y_pred</code>), and the <span class="math inline">\(R^2\)</span> value (<code>R2</code>) in the title to indicate the model’s goodness of fit:</p>
 <ol type="1">
 <li><p>To create the plot, we need <code>R2</code>, <code>y</code>, and <code>y_pred</code>.</p>
@@ -377,7 +378,7 @@ Figure&nbsp;3.2: Work backward from the desired results to determine what data i
 <li><p>The model configuration needs to be provided by the user when running the script.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>config <span class="op">=</span> ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ol>
-<p>Of course, in the actual implementation, each step will require further details (e.g., the formula for computing <span class="math inline">\(R^2\)</span> or how to load the training and test datasets). But since we know that following this sequence in reverse order will produce the desired results, this already provides us with the rough outline of our code (see <a href="#sec-draw-code" class="quarto-xref"><span>Section 3.4</span></a> for how these steps could come together in the final script).</p>
+<p>Of course, in the actual implementation, each step will require further details (e.g., the formula for computing <span class="math inline">\(R^2\)</span> or how to load the training and test datasets). But since we know that following this sequence in reverse order will produce the desired results, this already provides us with the rough outline of our code (see <a href="#sec-draw-code" class="quarto-xref"><span>Section 3.3</span></a> for how these steps could come together in the final script).</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Optimize the ordering of steps">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -407,7 +408,7 @@ Optimize the ordering of steps
 <img src="../images/00_clarity/state_flow.png" class="img-fluid figure-img" style="width:80.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-state-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3.3: The script to create the result plot in a nutshell: At the top you see the <strong>output</strong> that is presented to the user in the <strong>user interface (UI)</strong> as the code is being executed. For the most part, this just consists of some log messages displayed in the terminal to show the progress of the script and then the final plot. Below this is the high level <strong>control flow</strong>, i.e., the sequence of instructions that we outlined in the previous section as the steps to get from input to output. While these instructions are executed, different variables (like <code>model</code> and <code>y_pred</code>) hold the current <strong>state</strong> of the program <strong>in memory</strong>. Some of the values stored in these variables are read from external files, possibly created by a different program. In case your script crashes in between, it is helpful to write intermediate results to disk (i.e., <strong>persist the current state</strong> of your variables). You could then load these files again to recreate the program’s previous state (indicated by the light gray arrows) and execute the remaining steps.
+Figure&nbsp;3.3: A rough outline of the script to create our result plot: At the top you see the <strong>output</strong> that is presented to the user in the <strong>user interface (UI)</strong> as the code is being executed. For the most part, this just consists of some log messages displayed in the terminal to show the progress of the script and then the final plot. Below this is the high level <strong>control flow</strong>, i.e., the sequence of instructions that we outlined in the previous section as the steps to get from input to output. While these instructions are executed, different variables (like <code>model</code> and <code>y_pred</code>) hold the current <strong>state</strong> of the program <strong>in memory</strong>. Some of the values stored in these variables are read from external files, possibly created by a different program. In case your script crashes in between, it is helpful to write intermediate results to disk (i.e., <strong>persist the current state</strong> of your variables). You could then load these files again to recreate the program’s previous state (indicated by the light gray arrows) and execute the remaining steps.
 </figcaption>
 </figure>
 </div>
@@ -415,7 +416,7 @@ Figure&nbsp;3.3: The script to create the result plot in a nutshell: At the top 
 <ul>
 <li>A user fills out a form on a website. Their information is stored in a database so it can later be retrieved and displayed on their account page.</li>
 <li>You run simulations that output data to CSV files. These files are then used by a separate script to generate plots.</li>
-<li>You define model settings in a <code>config.yml</code> file, which your script reads to initialize the model with the correct configuration.</li>
+<li>You define model settings in a <code>config.json</code> file, which your script reads to initialize the model with the correct configuration.</li>
 </ul>
 <p>It’s important to <strong>carefully design the structure</strong> of this intermediate data—what fields it includes, what they’re called, and how they’re organized. Because if you later need to change the format, you’ll have to update both the producer and consumer processes, and potentially migrate existing data.</p>
 <p>To design an effective structure, start by identifying the fields required by the downstream process. Then consider whether other processes might use this data and if they might need additional fields. Don’t overengineer it—we’re not trying to future-proof against every possible scenario. But it’s worth considering whether to store data at a finer level of detail than what’s currently needed. It’s much easier to extract or summarize detailed data later than to reverse-engineer missing details from aggregate values.</p>
@@ -450,8 +451,22 @@ Plan your experiments
 <p>While our list of steps enables us to create <em>working code</em>, unfortunately, this is not the same as <em>good code</em>. A script with a long sequence of instructions can be difficult to read, understand, and maintain. Since you’ll likely be working with the same code for a while—and may even want to reuse parts of it in future projects—it’s worth investing in better design. Let’s explore how to make that happen.</p>
 </section>
 </section>
-<section id="analogy-the-cupcake-recipe" class="level2">
-<h2 class="anchored" data-anchor-id="analogy-the-cupcake-recipe">Analogy: The Cupcake Recipe</h2>
+<section id="good-code" class="level2">
+<h2 class="anchored" data-anchor-id="good-code">Good Code</h2>
+<p>When we talk about “good code” in this book, we focus on three key properties, each building upon and influencing the others:</p>
+<ol type="1">
+<li><p><strong>Easy to understand:</strong> To work with code, you need to be able to understand it. When using a common library, it may be enough to know what a function does and how to use it, trusting that it works correctly under the hood. But with your own code, you also need to understand the implementation details. Otherwise, you’ll hesitate to make changes and won’t be able to confidently say that it behaves as expected. Since code is read far more often than it is written, making it easy to understand ultimately saves time in the long run.</p></li>
+<li><p><strong>Easy to change:</strong> Code is never truly finished. It requires ongoing maintenance—fixing bugs, updating dependencies (e.g., when a library releases a security patch with breaking changes), and adapting to evolving requirements, such as adding new features to stay competitive. Code that is easy to modify makes all of this much smoother.</p></li>
+<li><p><strong>Easy to build upon and reuse:</strong> Ideally, adding new features shouldn’t mean proportional growth in your codebase. Instead, you should be able to reuse existing functionality. Following the DRY (Don’t Repeat Yourself) principle—avoiding redundant logic—makes code easier to maintain because updates only need to be made in one place.</p></li>
+</ol>
+<p>These qualities (along with others, like being easy to test) can be achieved by <strong>breaking code into smaller, independent units</strong> and organizing them into clear layers of abstraction. This approach has multiple benefits:</p>
+<ul>
+<li><strong>Manageable cognitive load:</strong> Smaller units fit comfortably into your working memory, making them easier to understand and reason about.</li>
+<li><strong>Ease of modification:</strong> Since units are independent, you can change one without unintended side effects elsewhere.</li>
+<li><strong>Reusability:</strong> Well-designed, general-purpose building blocks allow you to quickly assemble more complex functionality—like constructing something out of LEGO bricks.</li>
+</ul>
+<section id="analogy-the-cupcake-recipe" class="level3">
+<h3 class="anchored" data-anchor-id="analogy-the-cupcake-recipe">Analogy: The Cupcake Recipe</h3>
 <p>Before diving into how to write good code, let’s explore the basic principles using a more relatable example: a cupcake recipe (<a href="#fig-recipe-code" class="quarto-xref">Figure&nbsp;<span>3.4</span></a>). Because who wants result plots when you could have cupcakes?! 🧁</p>
 <div id="fig-recipe-code" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -465,8 +480,8 @@ Figure&nbsp;3.4: A chef writes a recipe, which then needs to be executed (baked)
 </div>
 <p>Like code, a recipe is just <strong>text that describes a sequence of steps to achieve a goal</strong>. What you ultimately want are delicious cupcakes (your result plots). The recipe (your script) details how to transform raw ingredients (input) into the baked goods (output). But the steps don’t mean anything unless you actually <strong>execute them</strong>—you have to bake the cupcakes (run <code>python script.py</code>) to get results.</p>
 <p>So, how can we write a good recipe?</p>
-<section id="breaking-down-the-steps-1" class="level4">
-<h4 class="anchored" data-anchor-id="breaking-down-the-steps-1">Breaking Down the Steps</h4>
+<section id="breaking-down-the-steps" class="level4">
+<h4 class="anchored" data-anchor-id="breaking-down-the-steps">Breaking Down the Steps</h4>
 <p>To start, we <strong>brainstorm all the necessary steps</strong> for making cupcakes (<a href="#fig-recipe-steps1" class="quarto-xref">Figure&nbsp;<span>3.5</span></a>). For this, we can again <strong>work backward from the final result</strong> (cupcakes) through the intermediate steps (cake batter and frosting) until we reach the raw ingredients.</p>
 <div id="fig-recipe-steps1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -543,22 +558,8 @@ Figure&nbsp;3.9: Some components have variants that can be used as drop-in repla
 <p>Now, let’s take the same approach with code.</p>
 </section>
 </section>
-<section id="good-code" class="level2">
-<h2 class="anchored" data-anchor-id="good-code">Good Code</h2>
-<p>When we talk about “good code” in this book, we focus on three key properties, each building upon and influencing the others:</p>
-<ol type="1">
-<li><p><strong>Easy to understand:</strong> To work with code, you need to be able to understand it. When using a common library, it may be enough to know what a function does and how to use it, trusting that it works correctly under the hood. But with your own code, you also need to understand the implementation details. Otherwise, you’ll hesitate to make changes and won’t be able to confidently say that it behaves as expected. Since code is read far more often than it is written, making it easy to understand ultimately saves time in the long run.</p></li>
-<li><p><strong>Easy to change:</strong> Code is never truly finished. It requires ongoing maintenance—fixing bugs, updating dependencies (e.g., when a library releases a security patch with breaking changes), and adapting to evolving requirements, such as adding new features to stay competitive. Code that is easy to modify makes all of this much smoother.</p></li>
-<li><p><strong>Easy to build upon and reuse:</strong> Ideally, adding new features shouldn’t mean proportional growth in your codebase. Instead, you should be able to reuse existing functionality. Following the DRY (Don’t Repeat Yourself) principle—avoiding redundant logic—makes code easier to maintain because updates only need to be made in one place.</p></li>
-</ol>
-<p>These qualities (along with others, like being easy to test) can be achieved by <strong>breaking code into smaller, independent units</strong> and organizing them into clear layers of abstraction. This approach has multiple benefits:</p>
-<ul>
-<li><strong>Manageable cognitive load:</strong> Smaller units fit comfortably into your working memory, making them easier to understand and reason about.</li>
-<li><strong>Ease of modification:</strong> Since units are independent, you can change one without unintended side effects elsewhere.</li>
-<li><strong>Reusability:</strong> Well-designed, general-purpose building blocks allow you to quickly assemble more complex functionality—like constructing something out of LEGO bricks.</li>
-</ul>
-<section id="from-complex-to-complicated" class="level4">
-<h4 class="anchored" data-anchor-id="from-complex-to-complicated">From Complex to Complicated</h4>
+<section id="from-complex-to-complicated" class="level3">
+<h3 class="anchored" data-anchor-id="from-complex-to-complicated">From Complex to Complicated</h3>
 <p>A well-known software engineering principle is <strong>KISS</strong>—“Keep It Simple, Stupid!” While this is good advice at the level of individual functions or classes, it’s unrealistic to expect an entire software system to be <em>simple</em>. Most real-world software consists of multiple interacting components, making it inherently <em>complicated</em> rather than simple. The goal is to avoid unnecessary <strong>complexity</strong> (<a href="#fig-complexity" class="quarto-xref">Figure&nbsp;<span>3.10</span></a>).</p>
 <div id="fig-complexity" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -595,7 +596,7 @@ Figure&nbsp;3.11: Complicated systems in software design often follow a hierarch
 </div>
 <p>At each level, you only need to understand <strong>how to use</strong> the functions at lower levels but <strong>not their internals</strong>. This <strong>reduces cognitive load</strong>, making it easier to navigate and extend the codebase with confidence.</p>
 <p>However, it’s important to note that <strong>low-level functions should ideally be kept stable</strong>, since everything built on top of them depends on their behavior. <strong>If these functions change, any code that relies on them will also need to be updated</strong>. This applies not only to your own functions but also to external libraries your code depends on.</p>
-<p>Standard libraries (i.e., those included with a programming language, not installed separately) are generally safe to build upon, as their functionality tends to be stable. In contrast, relying heavily on experimental or rapidly evolving libraries can lead to constant breakage as new versions introduce changes. To mitigate this, consider implementing an <em>anti-corruption layer</em>—a wrapper that provides a stable interface and handles necessary transformations. This centralizes adaptation and isolates the rest of your code from volatile dependencies.</p>
+<p>Standard libraries (i.e., those included with a programming language, not installed separately) are generally safe to build upon, as their functionality tends to be stable. In contrast, relying heavily on experimental or rapidly evolving libraries can lead to constant breakage as new versions introduce changes. To mitigate this, consider implementing an <strong>anti-corruption layer</strong>—a wrapper that provides a stable interface and handles necessary transformations. This centralizes adaptation and isolates the rest of your code from volatile dependencies.</p>
 </section>
 <section id="cohesive-decoupled-units" class="level3">
 <h3 class="anchored" data-anchor-id="cohesive-decoupled-units">Cohesive &amp; Decoupled Units</h3>

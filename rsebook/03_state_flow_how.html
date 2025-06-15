@@ -338,6 +338,8 @@ However, full-scale software applications, especially those with graphical inter
 <section id="working-code" class="level2">
 <h2 class="anchored" data-anchor-id="working-code">Working Code</h2>
 <p>Once we know the outputs we want (e.g., result plots), the next step is identifying the sequence of instructions (<strong>flow</strong>) and the data (<strong>state</strong>) required to generate them.</p>
+<section id="step-by-step-from-output-to-input" class="level4">
+<h4 class="anchored" data-anchor-id="step-by-step-from-output-to-input">Step by Step: From Output to Input</h4>
 <p>At its core, programming is about <strong>transforming inputs into outputs</strong>. To determine the process for obtaining the desired results, we can <strong>work backward to figure out what data we need</strong> to create them (<a href="#fig-work-backward" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>). This is especially important when generating data yourself, such as through simulations. For example, if you want to plot how values change over time, you’ll need to record variables at every time step—not just the final outcome of a simulation (duh!).</p>
 <div id="fig-work-backward" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -349,8 +351,6 @@ Figure&nbsp;3.2: Work backward from the desired results to determine what data i
 </figcaption>
 </figure>
 </div>
-<section id="step-by-step-from-output-to-input" class="level4">
-<h4 class="anchored" data-anchor-id="step-by-step-from-output-to-input">Step by Step: From Output to Input</h4>
 <p>Let’s map out the steps required to create the above scatter plot displaying actual values <span class="math inline">\(y\)</span> (<code>y</code>), model predictions <span class="math inline">\(\hat{y}\)</span> (<code>y_pred</code>), and the <span class="math inline">\(R^2\)</span> value (<code>R2</code>) in the title to indicate the model’s goodness of fit:</p>
 <ol type="1">
 <li><p>To create the plot, we need <code>R2</code>, <code>y</code>, and <code>y_pred</code>.</p>

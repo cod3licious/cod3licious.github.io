@@ -318,7 +318,7 @@ Figure&nbsp;6.1: Unlike a script that runs locally on your laptop, a production-
 </ol>
 <p>For web apps, the GUI that users interact with is also referred to as the <strong>frontend</strong>, while the <strong>backend</strong> handles behind-the-scenes tasks like data storage and processing. Even seemingly standalone desktop clients often connect to a backend server for cloud storage or to enable collaboration on shared documents. We’ll explore how this works in the section on APIs.</p>
 <p>In research, the goal is often to make results more accessible, for example, by transforming a static report into an interactive dashboard where users can explore data. To do this, we recommend you start with a web-based app.</p>
-<p>Many books and tutorials are written on the topic of building user-friendly software applications and a lot of it is very specific to the programming language and framework you’re using—please consult your favorite search engine to discover more resources on this topic. 😉</p>
+<p>Many books and tutorials are written on the topic of building user-friendly software applications and a lot of it is very specific to the programming language and framework you’re using—please consult your favorite search engine to discover more resources on this topic.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> 😉</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Web apps in Python">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -329,7 +329,7 @@ Web apps in Python
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>If you use Python, try the <a href="https://streamlit.io/">Streamlit</a> framework to turn your analysis scripts into a web app with just a few additional lines of code. To create more advanced web apps, you can also check out the <a href="https://reflex.dev/">Reflex</a> framework.</p>
+<p>If you use Python, try the <a href="https://panel.holoviz.org/">Panel</a> or <a href="https://streamlit.io/">Streamlit</a> framework to turn your analysis scripts into a web app with just a few additional lines of code. To create more advanced web apps, you can also check out the <a href="https://reflex.dev/">Reflex</a> framework.</p>
 </div>
 </div>
 </section>
@@ -556,7 +556,7 @@ Figure&nbsp;6.4: The user interacts with their device and data is submitted to a
 </figcaption>
 </figure>
 </div>
-<p>Finally, <strong>by communicating with a server we can also play against other human players</strong> (<a href="#fig-game-two-players" class="quarto-xref">Figure&nbsp;<span>6.5</span></a>). For this, both players take turns in submitting and receiving their next moves to the server. Since the chess API may run on multiple server nodes to handle a high load of requests, it can’t be guaranteed that both players will interact with the same node, i.e., we need a stateless design. To accomplish this, the server persists and retrieves data in a central database that can be accessed by all nodes.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>Finally, <strong>by communicating with a server we can also play against other human players</strong> (<a href="#fig-game-two-players" class="quarto-xref">Figure&nbsp;<span>6.5</span></a>). For this, both players take turns in submitting and receiving their next moves to the server. Since the chess API may run on multiple server nodes to handle a high load of requests, it can’t be guaranteed that both players will interact with the same node, i.e., we need a stateless design. To accomplish this, the server persists and retrieves data in a central database that can be accessed by all nodes.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <div id="fig-game-two-players" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-game-two-players-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -584,7 +584,7 @@ For example, a website might fetch data from multiple APIs, showing placeholders
 </section>
 <section id="batch-jobs" class="level3">
 <h3 class="anchored" data-anchor-id="batch-jobs">Batch Jobs</h3>
-<p>Unlike continuously running services such as web APIs, <strong>batch jobs</strong> are scripts or workflows used to process accumulated data in one go. They are particularly effective when tasks don’t require immediate processing or when grouping tasks can improve efficiency. To automate recurring tasks, batch workflows can be scheduled at specific intervals using tools like <strong>cron jobs</strong>.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>Unlike continuously running services such as web APIs, <strong>batch jobs</strong> are scripts or workflows used to process accumulated data in one go. They are particularly effective when tasks don’t require immediate processing or when grouping tasks can improve efficiency. To automate recurring tasks, batch workflows can be scheduled at specific intervals using tools like <strong>cron jobs</strong>.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
 <p>Examples of scenarios where batch jobs are useful include:</p>
 <ul>
 <li>Fetching new messages from a queue every 10 minutes to process them in bulk, reducing overhead.</li>
@@ -776,8 +776,9 @@ Before you continue
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>This use case could also be implemented using an event-driven architecture as discussed in the next section. With this setup, both players would publish their next moves to a message queue and subscribe to it to receive updates about the moves of their opponent.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Tools like <a href="https://crontab.guru/">Crontab Guru</a> can help configure these schedules.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>I recommend choosing a framework that follows a <a href="https://en.wikipedia.org/wiki/Reactive_programming">reactive programming style</a>, as this often leads to simpler implementations compared to manually handling events in imperative, callback-driven frameworks.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>This use case could also be implemented using an event-driven architecture as discussed in the next section. With this setup, both players would publish their next moves to a message queue and subscribe to it to receive updates about the moves of their opponent.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Tools like <a href="https://crontab.guru/">Crontab Guru</a> can help configure these schedules.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

@@ -331,7 +331,7 @@ Figure&nbsp;3.1: Before we write code, we should first think about what it is we
 <p>Unlike a house, where your design will be quite literally set in stone, code should be designed with flexibility in mind. While expanding a house to add extra rooms for a growing family—and then removing them again when downsizing for retirement—would be costly and difficult, this kind of adaptability is exactly what we strive for in software. Our goal is to <strong>create code that can evolve with changing requirements</strong>.</p>
 <p>To make sure your designs will be worthy of implementation, this chapter also introduces key paradigms and best practices that will help you create <strong>clean, maintainable code that’s easy to extend and reuse</strong> in future projects.</p>
 <section id="difference-between-commercial-software-and-research-code" class="level4">
-<h4 class="anchored" data-anchor-id="difference-between-commercial-software-and-research-code">Difference between commercial software and research code?</h4>
+<h4 class="anchored" data-anchor-id="difference-between-commercial-software-and-research-code">Difference Between Commercial Software and Research Code?</h4>
 <p>Commercial software applications and the scripts used in your research share many of the same core principles—both involve writing code to produce outputs, and both benefit from the same standards of good code quality. That’s the topic of this chapter.<br>
 However, full-scale software applications, especially those with graphical interfaces, are naturally more complex than a script that generates static results. The additional components required for production-grade software are covered later in <a href="06_from_research_to_production.html" class="quarto-xref"><span>Chapter 6</span></a>.</p>
 </section>
@@ -341,7 +341,7 @@ However, full-scale software applications, especially those with graphical inter
 <p>At its core, programming is about <strong>transforming inputs into outputs</strong>. Our code defines the sequence of operations (e.g., adding or multiplying values), conditional statements (e.g., <code>if/else</code>), and loops (e.g., <code>for</code> and <code>while</code>) that drive this process—collectively known as an algorithm or <strong>control flow</strong>. As these steps are executed, both the inputs and the intermediate results are stored in variables, which represent the current <strong>state</strong> of the program.</p>
 <section id="data-structures" class="level4">
 <h4 class="anchored" data-anchor-id="data-structures">Data Structures</h4>
-<p><strong>Variables</strong> (like <code>y</code>) store values (like <code>42</code>). When we define a variable, it points to a location in the computer’s memory—a sequence of bits (0s and 1s)—that can be decoded into a specific value. For example, the binary <code>101010</code> represents <code>42</code> as an integer, but if interpreted as an ASCII character, it yields <code>*</code>. To decode these bits correctly, the system must therefore know the <strong>data type</strong> of the value being stored. These data types range in complexity:</p>
+<p><strong>Variables</strong> (like <code>y</code>) store values (like <code>42</code>). When we define a variable, it points to a location in the computer’s memory—a sequence of bits (0s and 1s)—that can be decoded into a specific value. To decode these bits correctly, the system must know the <strong>data type</strong> of the value being stored. For example, the binary <code>101010</code> represents <code>42</code> as an integer, but if interpreted as an ASCII character, it yields <code>"*"</code>. These data types range in complexity:</p>
 <ul>
 <li><strong>Primitive data types</strong>: Simple values like integers or strings (as discussed in <a href="02_output_what.html#sec-data" class="quarto-xref"><span>Section 2.2.1</span></a>).</li>
 <li><strong>Composite data types</strong>: Structures like lists, sets, and dictionaries that hold multiple values.</li>
@@ -360,7 +360,7 @@ However, full-scale software applications, especially those with graphical inter
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"key2"</span>: <span class="dv">42</span>,</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"key3"</span>: my_list,</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Depending on the problem you’re solving, <strong>choosing the right data structure</strong> can make a big difference. Structures like trees or graphs can simplify operations such as finding related values or navigating nested relationships. That’s why it’s important to consider not just the sequence of operations in your code, but also how the data is structured.</p>
+<p>Depending on the problem you’re solving, <strong>choosing the right data structure</strong> can make a big difference. For example, structures like trees or graphs can simplify operations such as finding related values or navigating nested relationships. That’s why it’s important to consider not just the sequence of operations in your code, but also how the data is structured.</p>
 <p>You can define custom data structures using <strong>classes</strong>. These are especially useful when multiple values represent a single entity. For instance, instead of managing separate variables like <code>first_name</code>, <code>last_name</code>, and <code>date_of_birth</code>, you can group them into a single <strong>object</strong> of a <code>Person</code> class.</p>
 <p>While dictionaries could also store related fields, they offer less control: keys and values can be added or removed dynamically and without constraints. In contrast, classes provide structure and validation, such as enforcing required attributes during object creation or controlling how attributes are accessed or updated via class methods.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> date</span>
@@ -459,14 +459,14 @@ Figure&nbsp;3.3: A rough outline of the script to create our result plot: At the
 </figcaption>
 </figure>
 </div>
-<p>Especially when <strong>different scripts or processes create and consume these intermediate result files</strong>, they should be stored in a <strong>format that makes sense for both sides</strong>. For example:</p>
+<p>Especially when <strong>different scripts or processes create and consume these intermediate results</strong>, they should be stored in a <strong>format that makes sense for both sides</strong>. For example:</p>
 <ul>
 <li>A user fills out a form on a website. Their information is stored in a database so it can later be retrieved and displayed on their account page.</li>
 <li>You run simulations that output data to CSV files. These files are then used by a separate script to generate plots.</li>
 <li>You define model settings in a <code>config.json</code> file, which your script reads to initialize the model with the correct configuration.</li>
 </ul>
 <p>It’s important to <strong>carefully design the structure</strong> of this intermediate data—what fields it includes, what they’re called, and how they’re organized. Because if you later need to change the format, you’ll have to update both the producer and consumer processes, and potentially migrate existing data.</p>
-<p>To design an effective structure, start by identifying the fields required by the downstream process. Then consider whether other processes might use this data and if they might need additional fields. Don’t overengineer it—we’re not trying to future-proof against every possible scenario. But it’s worth considering whether to store data at a finer level of detail than what’s currently needed. It’s much easier to extract or summarize detailed data later than to reverse-engineer missing details from aggregate values.</p>
+<p>To design an effective structure, start by identifying the fields required by the downstream process. Then consider whether other processes will use this data and if they might need additional fields. Don’t overengineer it—we’re not trying to future-proof against every possible scenario. But it’s worth considering whether to store data at a finer level of detail than what’s currently needed. It’s much easier to extract or summarize detailed data later than to reverse-engineer missing details from aggregate values.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Plan your experiments">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -487,13 +487,13 @@ Plan your experiments
 </ul>
 <p>Think about the data each experiment run will generate and how you’ll process it later. For instance, you might need a separate script that loads data from multiple runs to create additional plots comparing the performance of multiple models. This is simplified by using <strong>a clear naming convention</strong> for all output files, such as:</p>
 <pre><code>{dataset}_{model}_{model_settings}_{seed}.csv</code></pre>
-<p>If your experiments will take several days, check whether you can run them on a <strong>compute cluster</strong>, submitting each experiment as a separate job to <strong>run in parallel</strong>.</p>
+<p>If your experiments will take several days, check whether you can run them on a compute cluster, submitting each experiment as a separate job to <strong>run in parallel</strong>.</p>
 </div>
 </div>
 </section>
 <section id="designing-an-algorithm" class="level4">
 <h4 class="anchored" data-anchor-id="designing-an-algorithm">Designing an Algorithm</h4>
-<p>Some problems require more <strong>creativity to come up with an efficient algorithm</strong> that produces the correct output from a given input. Take the <strong>traveling salesman problem</strong>, where the goal is to find the shortest possible route through a given set of cities. Designing an efficient solution often involves choosing the right <strong>data structures</strong> (e.g., representing cities as nodes in a graph), using <strong>heuristics</strong>, and <strong>breaking the problem down into simpler subproblems</strong> (divide &amp; conquer strategy). If you’re working on a novel problem, studying algorithm design can be invaluable (one of my favorite books on the topic is <em>The Algorithm Design Manual</em> by Steven Skiena <span class="citation" data-cites="skiena2008algorithm">[<a href="references.html#ref-skiena2008algorithm" role="doc-biblioref">6</a>]</span>).</p>
+<p>Some problems require more <strong>creativity to come up with an efficient algorithm</strong> that produces the correct output from a given input. Take the <strong>traveling salesman problem</strong>, where the goal is to find the shortest possible route through a given set of cities. Designing an efficient solution often involves choosing the right <strong>data structures</strong> (e.g., representing cities as nodes in a graph), using <strong>heuristics</strong>, and <strong>breaking the problem down into simpler subproblems</strong> (divide &amp; conquer strategy). If you’re working on a novel problem, studying algorithm design can be invaluable (one of my favorite books on the topic is <em>The Algorithm Design Manual</em> by Steven Skiena <span class="citation" data-cites="skiena2008algorithm">[<a href="references.html#ref-skiena2008algorithm" role="doc-biblioref">8</a>]</span>).</p>
 <p>However, for many common tasks, you can <strong>leverage existing algorithms</strong> instead of reinventing the wheel. For the rest of this book, we’ll assume you already have a general idea of the steps your code needs to perform and focus on how to implement them effectively.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Practice algorithmic thinking">
 <div class="callout-header d-flex align-content-center">
@@ -508,7 +508,7 @@ Practice algorithmic thinking
 <p>Coming up with efficient algorithms—even for simple problems—often takes practice. Platforms like <a href="https://leetcode.com/">LeetCode</a> provide a fun way to build that skill by working through small, focused problems.</p>
 </div>
 </div>
-<p>While our sequence of steps enables us to create <em>working code</em>, unfortunately, this is not the same as <em>good code</em>. A script with a long list of instructions can be difficult to read, understand, and maintain. Since you’ll likely be working with the same code for a while—and may even want to reuse parts of it in future projects—it’s worth investing in better design. Let’s explore how to make that happen.</p>
+<p>While the sequence of steps we derived above enables us to create <em>working code</em>, unfortunately, this is not the same as <em>good code</em>. A <strong>script that consists of a long list of instructions</strong> can be difficult to read, understand, and maintain. Since you’ll likely be working with the same code for a while—and may even want to reuse parts of it in future projects—it’s worth investing in a better design. Let’s explore how to make that happen.</p>
 </section>
 </section>
 <section id="good-code" class="level2">
@@ -568,7 +568,7 @@ Figure&nbsp;3.6: A recipe usually includes a list of ingredients followed by ins
 <section id="avoiding-repetition-reusable-steps" class="level4">
 <h4 class="anchored" data-anchor-id="avoiding-repetition-reusable-steps">Avoiding Repetition: Reusable Steps</h4>
 <p>If your recipe is part of a cookbook with multiple related recipes, some steps might apply to several of them. Instead of repeating those steps in every recipe, you can <strong>group and document them in a separate section</strong> (in code: define a <strong>function</strong>) and reference them when needed (<a href="#fig-recipe-steps3" class="quarto-xref">Figure&nbsp;<span>3.7</span></a>).</p>
-<p>This follows the <strong>Don’t Repeat Yourself (DRY)</strong> principle <span class="citation" data-cites="thomas2019pragmatic">[<a href="references.html#ref-thomas2019pragmatic" role="doc-biblioref">7</a>]</span>. Not only does this reduce redundancy, but it also makes updates easier—if a general step changes (e.g., you refine a technique or fix a typo), you only need to update it in one place (<strong>a single source of truth</strong>).</p>
+<p>This follows the <strong>Don’t Repeat Yourself (DRY)</strong> principle <span class="citation" data-cites="thomas2019pragmatic">[<a href="references.html#ref-thomas2019pragmatic" role="doc-biblioref">9</a>]</span>. Not only does this reduce redundancy, but it also makes updates easier—if a general step changes (e.g., you refine a technique or fix a typo), you only need to update it in one place (<strong>a single source of truth</strong>).</p>
 <div id="fig-recipe-steps3" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-recipe-steps3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -590,7 +590,7 @@ Figure&nbsp;3.7: Some instructions might be relevant in multiple recipes (e.g., 
 <img src="../images/03_code/recipe_steps4.png" class="img-fluid figure-img" style="width:55.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-recipe-steps4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3.8: For more complex recipes where the final dish consists of multiple components (like cupcakes, which have cake part and frosting), grouping by component improves clarity.
+Figure&nbsp;3.8: For more complex recipes where the final dish consists of multiple components (like cupcakes, which have a cake part and frosting), grouping by component improves clarity.
 </figcaption>
 </figure>
 </div>
@@ -621,6 +621,23 @@ Figure&nbsp;3.9: Some components have variants that can be used as drop-in repla
 <section id="encapsulated" class="level3">
 <h3 class="anchored" data-anchor-id="encapsulated">Encapsulated</h3>
 <p>Reading through a long script can be overwhelming. To make code easier to understand, we can <strong>group related lines into units such as functions and classes</strong>—a practice called <strong>encapsulation</strong>.</p>
+<p>As a first step, <strong>reorder the lines</strong> in your code so they <strong>follow overarching logical steps</strong>, such as <em>data preprocessing</em> or <em>model fitting</em>. For example, if you define a variable at the top of the script, then execute some unrelated computations, and only later use that variable, move the definition down so it’s closer to where it’s actually used. This alone already makes your script easier to follow because the reader doesn’t have to keep unrelated variables in mind while trying to understand what’s happening. You’ll know you’ve succeeded when your code is organized into separate blocks, each representing a distinct process step. You can even add a brief comment above each block describing, at a high level, what the following lines do.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Before:</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> ...     <span class="co"># data</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> ...  <span class="co"># model</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>df_processed <span class="op">=</span> ... <span class="co"># do something with df</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>model_fitted <span class="op">=</span> ... <span class="co"># do something with model</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># After:</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">### Step 1: data preprocessing</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> ...</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>df_processed <span class="op">=</span> ...</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">### Step 2: model fitting</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> ...</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>model_fitted <span class="op">=</span> ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The next step is to <strong>move these blocks into dedicated functions</strong> (e.g., <code>preprocessing</code>) <strong>or classes</strong> (e.g., <code>Model</code>). Done well, this makes your code even more readable: your main script is reduced to a few lines of calls to these units, while the individual functions and classes can be understood in isolation. At that point, you won’t even need the separating comments—your structure will speak for itself. In the following sections, we’ll explore how to use encapsulation effectively to reduce complexity.</p>
 <section id="from-complex-to-complicated" class="level4">
 <h4 class="anchored" data-anchor-id="from-complex-to-complicated">From Complex to Complicated</h4>
 <p>A well-known software engineering principle is <strong>KISS</strong>—“Keep It Simple, Stupid!” While this is good advice at the level of individual functions or classes, it’s unrealistic to expect an entire software system to be <em>simple</em>. Most real-world software consists of multiple interacting components, making it inherently <em>complicated</em> rather than simple. The goal is to avoid unnecessary <strong>complexity</strong> (<a href="#fig-complexity" class="quarto-xref">Figure&nbsp;<span>3.10</span></a>).</p>
@@ -630,7 +647,7 @@ Figure&nbsp;3.9: Some components have variants that can be used as drop-in repla
 <img src="../images/03_code/complexity.png" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-complexity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3.10: In accordance with the <a href="https://en.wikipedia.org/wiki/Cynefin_framework">Cynefin framework</a>, (software) systems can have different levels of complexity <span class="citation" data-cites="khononov2024balancing">[<a href="references.html#ref-khononov2024balancing" role="doc-biblioref">2</a>]</span>. A script that sequentially executes a few steps might be simple. Most software, however, is at least complicated—it consists of multiple interacting components but can still be broken down into understandable subsystems. A complex system, often referred to as “spaghetti code” or a “big ball of mud” <span class="citation" data-cites="foote1997big">[<a href="references.html#ref-foote1997big" role="doc-biblioref">1</a>]</span>, has so many interdependencies that its behavior is very difficult to predict—changes in one part can have unintended consequences elsewhere.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> (Figure adapted from <span class="citation" data-cites="mcchrystal2015team">[<a href="references.html#ref-mcchrystal2015team" role="doc-biblioref">3</a>]</span>)
+Figure&nbsp;3.10: In accordance with the <a href="https://en.wikipedia.org/wiki/Cynefin_framework">Cynefin framework</a>, (software) systems can have different levels of complexity <span class="citation" data-cites="khononov2024balancing">[<a href="references.html#ref-khononov2024balancing" role="doc-biblioref">2</a>]</span>. A script that sequentially executes a few steps might be simple. Most software, however, is at least complicated—it consists of multiple interacting components but can still be broken down into understandable subsystems. A complex system, often referred to as “spaghetti code” or a “big ball of mud” <span class="citation" data-cites="foote1997big">[<a href="references.html#ref-foote1997big" role="doc-biblioref">1</a>]</span>, has so many interdependencies that its behavior is very difficult to predict—changes in one part can have unintended consequences elsewhere.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> (Figure adapted from <span class="citation" data-cites="mcchrystal2015team">[<a href="references.html#ref-mcchrystal2015team" role="doc-biblioref">4</a>]</span>)
 </figcaption>
 </figure>
 </div>
@@ -652,7 +669,10 @@ Cohesive units have a single responsibility
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Following the <strong>single responsibility principle</strong>, each unit should be <strong>cohesive</strong>—focused on a single, well-defined task, with all of its internal code serving that purpose. For example, a cohesive class is designed to represent one specific concept completely—and only that concept. If a class contains many attributes, and one group of methods uses one subset of those attributes while another group relies on a different, non-overlapping subset, this suggests the class no longer adheres to the single responsibility principle and should be broken into smaller, more focused classes.</p>
+<p>Following the <strong>single responsibility principle</strong>, each unit should be <strong>cohesive</strong>—focused on a single, well-defined task, with all of its internal code serving that purpose.</p>
+<p>For example, a cohesive function performs a single task. If a boolean flag in its arguments determines which code path it follows and leads to different return values, it’s better to split it into two separate functions.<br>
+Similarly, a cohesive class is designed to represent one specific concept completely—and only that concept. If a class contains many attributes, and one group of methods uses one subset of those attributes while another group relies on a different, non-overlapping subset, this suggests the class no longer adheres to the single responsibility principle and should be broken into smaller, more focused classes.</p>
+<p>However, the reverse is also true: units can be <strong>too narrowly defined to represent a complete task</strong>. For example, if three functions must always run in a specific order to produce a usable result, and none is ever called independently, they should likely be combined into a single function.</p>
 </div>
 </div>
 </section>
@@ -661,16 +681,16 @@ Cohesive units have a single responsibility
 <p>The key idea of encapsulation is to establish a clear <strong>boundary</strong> between a unit’s internal logic and the rest of the program. This allows us to hide the complex <strong>implementation</strong> (the underlying code that users of the unit don’t need to see) behind a simple <strong>interface</strong> (the part exposed for use). This creates an effective <strong>abstraction</strong>, reducing cognitive load: users only need to understand how to interact with the unit, not how it works internally.</p>
 <p>The <strong>interface</strong> serves as a contract, promising consistent behavior over time. The <strong>implementation</strong>, in contrast, is internal and can change freely—so others shouldn’t depend on it.</p>
 <p>Let’s look at a simple example to see this in action:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_times_x(x, n):</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>        result <span class="op">+=</span> x</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># call our function with some values</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    my_result <span class="op">=</span> n_times_x(<span class="dv">3</span>, <span class="dv">5</span>)</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(my_result)  <span class="co"># should output 15</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_times_x(x, n):</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>        result <span class="op">+=</span> x</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># call our function with some values</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    my_result <span class="op">=</span> n_times_x(<span class="dv">3</span>, <span class="dv">5</span>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(my_result)  <span class="co"># should output 15</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The <strong>interface</strong> (also called signature) of the <code>n_times_x</code> function consists of:</p>
 <ul>
 <li>The function name (<code>n_times_x</code>)</li>
@@ -692,8 +712,8 @@ Make interfaces explicit
 </div>
 </div>
 <p>As long as the interface remains unchanged, we can freely <strong>modify the implementation</strong>. For instance, we can replace the inefficient loop with a proper multiplication:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_times_x(x, n):</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> n <span class="op">*</span> x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_times_x(x, n):</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> n <span class="op">*</span> x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This change improves efficiency, but since the function still works the same way externally (it’s called with the same arguments and returns the same results), no updates are required in other parts of the code. This is the power of clear boundaries.</p>
 <p>However, changing a function’s <strong>name</strong>, for example, is another story. If we rename <code>n_times_x</code>, every reference to it must also be updated. Modern IDEs can automate this within a project, but if the function is used in external code (e.g., if it is part of an open source library), renaming requires a <strong>deprecation process</strong> to transition users gradually.</p>
 <p>This is why <strong>choosing stable, well-thought-out interfaces upfront saves effort in the long run</strong>.</p>
@@ -707,7 +727,7 @@ Go deep
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Powerful units have <strong>narrow interfaces with deep implementations</strong>—they expose only what’s necessary while handling meaningful computations internally <span class="citation" data-cites="ousterhout2018philosophy">[<a href="references.html#ref-ousterhout2018philosophy" role="doc-biblioref">5</a>]</span>. For example:</p>
+<p>Powerful units have <strong>narrow interfaces with deep implementations</strong>—they expose only what’s necessary while handling meaningful computations internally <span class="citation" data-cites="ousterhout2018philosophy">[<a href="references.html#ref-ousterhout2018philosophy" role="doc-biblioref">6</a>]</span>. For example:</p>
 <ul>
 <li>A function might take just two inputs (narrow interface) but span ten lines of logic (deep implementation).</li>
 <li>Or a one-liner function might implement a complex formula that users shouldn’t need to understand.</li>
@@ -743,6 +763,22 @@ Public and private in different languages
 </div>
 </section>
 </section>
+</section>
+<section id="decoupled" class="level3">
+<h3 class="anchored" data-anchor-id="decoupled">Decoupled</h3>
+<blockquote class="blockquote">
+<p><em>Two components are connascent [i.e., coupled] if a change in one would require the other to be modified in order to maintain the overall correctness of the system.</em><br>
+– Meilir Page-Jones <span class="citation" data-cites="page1995every">[<a href="references.html#ref-page1995every" role="doc-biblioref">7</a>]</span></p>
+</blockquote>
+<p>We do not want to just hide arbitrary implementation details behind an interface, but ideally these units should also be <strong>decoupled</strong>. This means they should have as <strong>few dependencies as possible</strong> on other parts of the code or external resources, especially if these may change frequently. This makes the code easier to understand since <strong>each unit can be comprehended in isolation</strong>. But even more importantly, it <strong>simplifies modifications</strong>: when requirements change or new features are needed, we want to minimize the number of places that require updates. <strong>In contrast, if code is tightly coupled, a single change in one unit can ripple through multiple parts of the system</strong>, increasing the likelihood of errors.</p>
+<section id="make-coupling-explicit" class="level4">
+<h4 class="anchored" data-anchor-id="make-coupling-explicit">Make Coupling Explicit</h4>
+<p>To build a larger software system that does anything meaningful, we must compose it from multiple components. This inevitably means our units are coupled in some way—one function must call another, so they cannot exist in complete isolation. The goal is to <strong>make this coupling explicit so that if one unit changes, it is clear how dependent units need to be updated</strong>.</p>
+<p>The most explicit form of coupling is referencing a function or class by name when calling it. Because the name is part of the unit’s <strong>public interface</strong>, any change should include a deprecation warning to support a smooth transition. The more explicit the public interface—such as using keyword arguments instead of positional ones—the safer it is to use this unit, since compilers and static code analysis tools can detect changes or errors ahead of time, and IDEs can assist with refactoring.</p>
+<p>Coupling is riskier when your code relies on a unit’s <strong>internal implementation details</strong>, like private attributes, undocumented quirks, or unintended behaviors (e.g., a function producing odd results when given inputs outside its intended range). Often, multiple parts of the code must share assumptions, such as the meaning of certain values (e.g., the magic number <code>404</code> representing the HTTP status code “not found”) or the use of a specific algorithm when encrypting and decrypting data.</p>
+<p>The above examples are examples of static coupling, meaning they can be spotted in the source code directly. An even more error-prone form is <strong>dynamic coupling</strong>, visible only at runtime. For example, a class might require its methods to be called in a particular order to initialize all necessary values for a correct computation.</p>
+<p>To minimize coupling risks, <strong>identify the assumptions your code makes</strong> about how and in which context it will be used. Don’t just document the correct usage and hope it’s followed, but make interactions explicit. This can mean defining formal interfaces, validating inputs, and enforcing usage constraints in code. Otherwise, the system becomes fragile, and even small changes in unrelated areas can cause breakages.</p>
+</section>
 <section id="layers-of-abstraction" class="level4">
 <h4 class="anchored" data-anchor-id="layers-of-abstraction">Layers of Abstraction</h4>
 <p>Ideally, our units should form a hierarchy with different <strong>levels of abstraction</strong> (<a href="#fig-abstraction-levels" class="quarto-xref">Figure&nbsp;<span>3.11</span></a>), where lower-level units can be used as building blocks to create more advanced functionality.</p>
@@ -760,31 +796,18 @@ Figure&nbsp;3.11: Complicated systems in software design often follow a hierarch
 <p>However, it’s important to note that <strong>low-level functions should ideally be kept stable</strong>, since everything built on top of them depends on their behavior. <strong>If the interface of such a function changes, any code that relies on it will also need to be updated</strong>. This applies not only to your own functions but also to external libraries your code depends on.</p>
 <p>Standard libraries (i.e., those included with a programming language, not installed separately) are generally safe to build upon, as their functionality tends to be stable. In contrast, relying heavily on experimental or rapidly evolving libraries can lead to constant breakage as new versions introduce changes. To mitigate this, consider implementing an <strong>anti-corruption layer</strong>—a wrapper that provides a stable interface and handles necessary transformations. This centralizes adaptation and isolates the rest of your code from volatile dependencies.</p>
 </section>
-</section>
-<section id="decoupled" class="level3">
-<h3 class="anchored" data-anchor-id="decoupled">Decoupled</h3>
-<p>Ideally, we want our units to be <strong>decoupled</strong>, meaning they should have as few dependencies as possible on other parts of the code or external resources, especially if these may change frequently. This makes the code easier to understand since each unit can be comprehended in isolation. But even more importantly, it simplifies modifications: when requirements change or new features are needed, we want to minimize the number of places that require updates. In contrast, if code is tightly coupled, a single change in one unit can ripple through multiple parts of the system, increasing the likelihood of errors.</p>
-<section id="rely-only-on-public-interfaces" class="level4">
-<h4 class="anchored" data-anchor-id="rely-only-on-public-interfaces">Rely Only on Public Interfaces</h4>
-<p>A key principle for writing decoupled code is to <strong>only depend on the public interfaces of functions and classes</strong>. This means:</p>
-<ul>
-<li>Avoid accessing private variables or methods.</li>
-<li>Don’t rely on undocumented quirks or unintended behaviors (e.g., a function returning an odd result when passed values outside its expected range).</li>
-</ul>
-<p>If a function’s official interface changes, you’ll likely receive a warning. But if you rely on internal implementation details, your code becomes fragile—seemingly minor updates in other parts of the code could break it.</p>
-</section>
 <section id="pure-vs.-impure-functions" class="level4">
 <h4 class="anchored" data-anchor-id="pure-vs.-impure-functions">Pure vs.&nbsp;Impure Functions</h4>
-<p>In addition to dependencies on code defined elsewhere, another form of coupling comes from <strong>relying on external resources</strong> (like files, databases, or APIs). These kinds of external dependencies are eliminated when your units are pure functions <span class="citation" data-cites="normand2021grokking">[<a href="references.html#ref-normand2021grokking" role="doc-biblioref">4</a>]</span>.</p>
+<p>In addition to dependencies on code defined elsewhere, another form of coupling comes from <strong>relying on external resources</strong> (like files, databases, or APIs). These kinds of external dependencies are eliminated when your units are pure functions <span class="citation" data-cites="normand2021grokking">[<a href="references.html#ref-normand2021grokking" role="doc-biblioref">5</a>]</span>.</p>
 <p>A <strong>pure function</strong> behaves like a mathematical function <span class="math inline">\(f: x \to y\)</span>, taking inputs <span class="math inline">\(x\)</span> and returning an output <span class="math inline">\(y\)</span>—and given the same inputs, the results will be the same every time. <strong>Impure functions</strong>, on the other hand, have side effects—they interact with the outside world, such as reading from or writing to a file or modifying global state.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(a, b):</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># pure: returns a computed result without side effects</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> write_file(file_path, result):</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># impure: writes data to a file (side effect)</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(file_path, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>        f.write(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(a, b):</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># pure: returns a computed result without side effects</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> write_file(file_path, result):</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># impure: writes data to a file (side effect)</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(file_path, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>        f.write(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Why favor pure functions?</strong></p>
 <ul>
 <li>They are <strong>predictable</strong>—calling them with the same inputs always produces the same output.</li>
@@ -792,97 +815,97 @@ Figure&nbsp;3.11: Complicated systems in software design often follow a hierarch
 <li>They <strong>reduce unexpected behavior</strong>, unlike impure functions, which may depend on changing external factors (e.g., the function may run fine the first time but then crash when trying to create a file that already exists or the computed results are suddenly different because in the meantime other code updated values stored in a database).</li>
 </ul>
 <p>That said, impure functions are often necessary—code needs to have an effect on the outside world, otherwise why should we execute it in the first place? The trick is to <strong>encapsulate as much essential logic as possible in pure functions</strong> at the lower layers of abstraction, while isolating side effects in higher layers:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pure_function(data):</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># process data (pure logic)</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> ...</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> impure_function():</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"some_input.txt"</span>) <span class="im">as</span> f:</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>        data <span class="op">=</span> f.read()</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> pure_function(data)</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"some_output.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>        f.write(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pure_function(data):</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># process data (pure logic)</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> ...</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> impure_function():</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"some_input.txt"</span>) <span class="im">as</span> f:</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>        data <span class="op">=</span> f.read()</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> pure_function(data)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"some_output.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>        f.write(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This structure ensures the core logic is <strong>pure and testable</strong>:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tests.py</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_pure_function():</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> <span class="st">"some test data"</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> pure_function(data)</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> result <span class="op">==</span> <span class="st">"some test result"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tests.py</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_pure_function():</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> <span class="st">"some test data"</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> pure_function(data)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> result <span class="op">==</span> <span class="st">"some test result"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="dependency-injection-for-flexibility" class="level5">
 <h5 class="anchored" data-anchor-id="dependency-injection-for-flexibility">Dependency Injection for Flexibility</h5>
 <p>To further decouple your code, use <strong>dependency injection</strong>: instead of hardcoding dependencies (e.g., file operations, database access), pass them as arguments. This allows functions to remain independent of specific implementations.</p>
 <p>Without dependency injection:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> DataSource:</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> read(<span class="va">self</span>):</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"some_input.txt"</span>) <span class="im">as</span> f:</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> f.read()</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> write(<span class="va">self</span>, result):</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"some_output.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>            f.write(result)</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fun_without_di():</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># create external dependency inside the function</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    ds <span class="op">=</span> DataSource()</span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> ds.read()</span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> ...</span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    ds.write(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> DataSource:</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> read(<span class="va">self</span>):</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"some_input.txt"</span>) <span class="im">as</span> f:</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> f.read()</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> write(<span class="va">self</span>, result):</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"some_output.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>            f.write(result)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fun_without_di():</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># create external dependency inside the function</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    ds <span class="op">=</span> DataSource()</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> ds.read()</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> ...</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    ds.write(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>With dependency injection:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fun_with_di(ds):</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># dependency is passed as an argument</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> ds.read()</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> ...</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    ds.write(result)</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    ds <span class="op">=</span> DataSource()</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    fun_with_di(ds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fun_with_di(ds):</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># dependency is passed as an argument</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> ds.read()</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> ...</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    ds.write(result)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    ds <span class="op">=</span> DataSource()</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    fun_with_di(ds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Now, <code>fun_with_di</code> only requires an object implementing <code>read</code> and <code>write</code>, but it <strong>doesn’t care</strong> if it’s a <code>DataSource</code> or something else that implements the same interface. This makes testing much easier:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tests.py</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MockDataSource:</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> read(<span class="va">self</span>):</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Mocked test data"</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> write(<span class="va">self</span>, result):</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.success <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_fun_with_di():</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    mock_ds <span class="op">=</span> MockDataSource()</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    fun_with_di(mock_ds)</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> mock_ds.success</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tests.py</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MockDataSource:</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> read(<span class="va">self</span>):</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Mocked test data"</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> write(<span class="va">self</span>, result):</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.success <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test_fun_with_di():</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    mock_ds <span class="op">=</span> MockDataSource()</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    fun_with_di(mock_ds)</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> mock_ds.success</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Dependency injection can also be <strong>combined with pure functions</strong> to make your code testable at different levels of abstraction.</p>
 </section>
 <section id="anti-pattern-global-variables" class="level5">
 <h5 class="anchored" data-anchor-id="anti-pattern-global-variables">Anti-Pattern: Global Variables</h5>
 <p>Besides external resources like files and databases, another source of <strong>tight coupling and error-prone behavior</strong> is relying on <strong>global variables</strong>. These are defined at the script level (often below import statements) and can be accessed or modified anywhere in the code.</p>
 <p>Global variables can introduce <strong>temporal coupling</strong>, meaning the order of function execution suddenly matters. This can lead to subtle and hard-to-debug issues:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>PI <span class="op">=</span> <span class="fl">3.14159</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calc_area_impure(r):</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># since PI is not defined inside the function, the fallback is to use the global variable</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> PI <span class="op">*</span> r<span class="op">**</span><span class="dv">2</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> change_pi(new_pi<span class="op">=</span><span class="dv">3</span>):</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># `global` is needed; otherwise, this would create a new local variable</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">global</span> PI</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    PI <span class="op">=</span> new_pi</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    area_org <span class="op">=</span> calc_area_impure(r)</span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    change_pi()</span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>    area_new <span class="op">=</span> calc_area_impure(r)</span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> area_org <span class="op">==</span> area_new, <span class="st">"Unexpectedly different results!"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>PI <span class="op">=</span> <span class="fl">3.14159</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calc_area_impure(r):</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># since PI is not defined inside the function, the fallback is to use the global variable</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> PI <span class="op">*</span> r<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> change_pi(new_pi<span class="op">=</span><span class="dv">3</span>):</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># `global` is needed; otherwise, this would create a new local variable</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">global</span> PI</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    PI <span class="op">=</span> new_pi</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    area_org <span class="op">=</span> calc_area_impure(r)</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    change_pi()</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    area_new <span class="op">=</span> calc_area_impure(r)</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> area_org <span class="op">==</span> area_new, <span class="st">"Unexpectedly different results!"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The safer approach is to pass values explicitly:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calc_area_pure(r, pi):</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pi <span class="op">*</span> r<span class="op">**</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calc_area_pure(r, pi):</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pi <span class="op">*</span> r<span class="op">**</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This avoids hidden dependencies and ensures reproducibility.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <p>To prevent unintended global variables, <strong>wrap your script logic inside a function</strong>:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main():</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>   <span class="co"># main script code incl. variable definitions</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>   ...</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    main()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main():</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>   <span class="co"># main script code incl. variable definitions</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>   ...</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    main()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This ensures that variables defined inside <code>main()</code> don’t leak into the global namespace.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Think you need global variables? Wrap your code inside a class instead!">
 <div class="callout-header d-flex align-content-center">
@@ -907,28 +930,28 @@ Think you need global variables? Wrap your code inside a class instead!
 <li><strong>By reference</strong>: The function gets access to the original memory location and can modify the data directly.</li>
 </ul>
 <p>Python uses <strong>call-by-reference for mutable objects</strong> (e.g., lists, dictionaries), which can lead to unexpected behavior:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> change_list(a_list):</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    a_list[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">42</span>  <span class="co"># modifies the original list</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a_list</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    my_list <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(my_list)  <span class="co"># [1, 2, 3]</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    new_list <span class="op">=</span> change_list(my_list)</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(new_list) <span class="co"># [42, 2, 3]</span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(my_list)  <span class="co"># [42, 2, 3] 😱</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> change_list(a_list):</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    a_list[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">42</span>  <span class="co"># modifies the original list</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a_list</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    my_list <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(my_list)  <span class="co"># [1, 2, 3]</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    new_list <span class="op">=</span> change_list(my_list)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(new_list) <span class="co"># [42, 2, 3]</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(my_list)  <span class="co"># [42, 2, 3] 😱</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>To prevent such side effects, create a copy of the variable before modifying it. This ensures the original remains unchanged:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> copy <span class="im">import</span> deepcopy</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> change_list(a_list):</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    a_list <span class="op">=</span> deepcopy(a_list)</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    a_list[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">42</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a_list</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    my_list <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    new_list <span class="op">=</span> change_list(my_list)</span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(my_list)  <span class="co"># [1, 2, 3] 😊</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> copy <span class="im">import</span> deepcopy</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> change_list(a_list):</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    a_list <span class="op">=</span> deepcopy(a_list)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    a_list[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">42</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a_list</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    my_list <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    new_list <span class="op">=</span> change_list(my_list)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(my_list)  <span class="co"># [1, 2, 3] 😊</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>To avoid sneaky bugs, <strong>test your code to verify</strong>:</p>
 <ol type="1">
 <li><strong>Inputs remain unchanged</strong> after execution.</li>
@@ -939,17 +962,17 @@ Think you need global variables? Wrap your code inside a class instead!
 <section id="dont-repeat-yourself-dry" class="level4">
 <h4 class="anchored" data-anchor-id="dont-repeat-yourself-dry">Don’t Repeat Yourself (DRY)</h4>
 <p>A more subtle form of coupling comes from violating the <strong>DRY (Don’t Repeat Yourself) principle</strong>. For example, critical business logic—such as computing an evaluation metric, applying a discount in an e-commerce system, or validating data, like the rules that define an acceptable password—might be duplicated across several locations. If this logic needs to change (due to an error or evolving business requirements), you’d need to update multiple places, making your code harder to maintain and more prone to bugs. Make sure that important values and business rules are defined in a central place, the <strong>single source of truth</strong>, to avoid inconsistencies and duplication.</p>
-<p>The most obvious DRY violation occurs when you catch yourself <strong>copy-pasting code</strong>—this is a clear signal to refactor it into a reusable function. However, DRY isn’t just about code; it applies to <strong>anything where a single change in requirements forces multiple updates</strong>, including tests, documentation, or data stored across different databases <span class="citation" data-cites="thomas2019pragmatic">[<a href="references.html#ref-thomas2019pragmatic" role="doc-biblioref">7</a>]</span>. To maintain your code effectively, aim to make each change in one place only. If that’s not feasible, at least keep related elements close together—for example, documenting interfaces using docstrings in the code rather than in separate files.</p>
+<p>The most obvious DRY violation occurs when you catch yourself <strong>copy-pasting code</strong>—this is a clear signal to refactor it into a reusable function. However, DRY isn’t just about code; it applies to <strong>anything where a single change in requirements forces multiple updates</strong>, including tests, documentation, or data stored across different databases <span class="citation" data-cites="thomas2019pragmatic">[<a href="references.html#ref-thomas2019pragmatic" role="doc-biblioref">9</a>]</span>. To maintain your code effectively, aim to make each change in one place only. If that’s not feasible, at least keep related elements close together—for example, documenting interfaces using docstrings in the code rather than in separate files.</p>
 </section>
 </section>
 <section id="reusable" class="level3">
 <h3 class="anchored" data-anchor-id="reusable">Reusable</h3>
-<p>While we want to keep interfaces narrow and simple, we also want our code units to be broadly applicable. This often means <strong>replacing hardcoded values with function arguments</strong>. Consider these two functions:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> a_plus_1(a):</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> a_plus_b(a, b<span class="op">=</span><span class="dv">1</span>):</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>While we want to keep interfaces narrow and simple, we also want our units to be broadly applicable. This often means <strong>replacing hardcoded values with function arguments</strong>. Consider these two functions:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> a_plus_1(a):</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> a_plus_b(a, b<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The first function is highly specific, while the second is more general and adaptable. By providing <strong>sensible default values</strong> (<code>b=1</code>), we keep the function easy to use while allowing flexibility for more advanced cases.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Reusable code through refactoring, not overengineering">
 <div class="callout-header d-flex align-content-center">
@@ -961,58 +984,97 @@ Reusable code through refactoring, not overengineering
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Reusable code isn’t typically created on the first try because future needs are unpredictable. Instead of overengineering, focus on writing simple, clear code and adapt it as new opportunities for reuse emerge. This process, called <em>refactoring</em>, is covered in more detail in <a href="05_implementation.html#sec-refactoring" class="quarto-xref"><span>Section 5.6</span></a>.</p>
+<p>Reusable code isn’t typically created on the first try because future needs are unpredictable. Instead of overengineering, focus on writing simple, clear code and adapt it as new opportunities for reuse emerge. This process, called <em>refactoring</em>, is covered in more detail in <a href="05_implementation.html#sec-refactoring" class="quarto-xref"><span>Section 5.7</span></a>.</p>
 </div>
 </div>
 <p>That said, if your function ends up with ten arguments, reconsider whether it has a <strong>single responsibility</strong>. If it’s doing too much, breaking it into multiple functions is likely a better approach.</p>
 <section id="polymorphism" class="level5">
 <h5 class="anchored" data-anchor-id="polymorphism">Polymorphism</h5>
 <p>When working with classes, reuse can be achieved through <strong>polymorphism</strong>, where multiple classes implement the same interface and can be used interchangeably. We’ve already applied this principle when we used <code>MockDataStorage</code> instead of <code>DataStorage</code> for testing. This approach can be useful in research code as well, for example, you could define a <code>Model</code> interface with <code>fit</code> and <code>predict</code> methods so multiple models can share the same experiment logic:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Model:</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> fit(<span class="va">self</span>, x, y):</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">NotImplementedError</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> predict(<span class="va">self</span>, x):</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">NotImplementedError</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MyModel(Model):</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> fit(<span class="va">self</span>, x, y):</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>        ...  <span class="co"># implementation</span></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> predict(<span class="va">self</span>, x):</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>        y_pred <span class="op">=</span> ...</span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> y_pred</span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run_experiment(model: Model):</span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># this code works with any model that implements</span></span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># appropriate fit and predict functions</span></span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>    x_train, y_train <span class="op">=</span> ...</span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>    model.fit(x_train, y_train)</span>
-<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>    x_test <span class="op">=</span> ...</span>
-<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>    y_test_pred <span class="op">=</span> model.predict(x_test)</span>
-<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
-<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># create a specific model (possibly based on arguments passed by the user)</span></span>
-<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> MyModel()</span>
-<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>    run_experiment(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This way you can reuse your analysis code with all your models, which not only avoids redundancy, but ensure that all models are evaluated consistently.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Model:</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> fit(<span class="va">self</span>, x, y):</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">NotImplementedError</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> predict(<span class="va">self</span>, x):</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">NotImplementedError</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MyModel(Model):</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> fit(<span class="va">self</span>, x, y):</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>        ...  <span class="co"># implementation</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> predict(<span class="va">self</span>, x):</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>        y_pred <span class="op">=</span> ...</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> y_pred</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run_experiment(model: Model):</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># this code works with any model that implements</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># appropriate fit and predict functions</span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>    x_train, y_train <span class="op">=</span> ...</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>    model.fit(x_train, y_train)</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>    x_test <span class="op">=</span> ...</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>    y_test_pred <span class="op">=</span> model.predict(x_test)</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># create a specific model (possibly based on arguments passed by the user)</span></span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> MyModel()</span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>    run_experiment(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This way you can reuse your analysis code with all your models, which not only avoids redundancy, but ensures that all models are evaluated consistently.</p>
 </section>
 <section id="mixins" class="level5">
 <h5 class="anchored" data-anchor-id="mixins">Mixins</h5>
-<p>Another approach to reuse is using <strong>mixins</strong>, small reusable classes that provide additional functionality:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ScoredModelMixin:</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> score(<span class="va">self</span>, x, y):</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>        y_pred <span class="op">=</span> <span class="va">self</span>.predict(x)</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> np.mean((y <span class="op">-</span> y_pred)<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MyModel(Model, ScoredModelMixin):</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    ...</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> MyModel()</span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># this uses the function implemented in ScoredModelMixin</span></span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(model.score(np.random.randn(<span class="dv">5</span>, <span class="dv">3</span>), np.random.randn(<span class="dv">5</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Another approach to reuse is using <strong>mixins</strong>—small reusable classes that provide additional functionality:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ScoredModelMixin:</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> score(<span class="va">self</span>, x, y):</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>        y_pred <span class="op">=</span> <span class="va">self</span>.predict(x)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> np.mean((y <span class="op">-</span> y_pred)<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MyModel(Model, ScoredModelMixin):</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> MyModel()</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># this uses the function implemented in ScoredModelMixin</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(model.score(np.random.randn(<span class="dv">5</span>, <span class="dv">3</span>), np.random.randn(<span class="dv">5</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Historically, deep class hierarchies with multiple levels of inheritance were common, but they often led to unnecessary complexity. Instead of forcing all functionality into a single class hierarchy, it’s better to keep interfaces narrow and <strong>compose functionality from multiple small, focused classes</strong>.</p>
+</section>
+<section id="breaking-code-into-modules" class="level4">
+<h4 class="anchored" data-anchor-id="breaking-code-into-modules">Breaking Code into Modules</h4>
+<p>Starting a new project often begins with all your code in a single script. This is fine for quick and small tasks, but as your project grows, keeping everything in one file becomes messy and overwhelming. To keep your code organized and easier to understand, it’s a good idea to move functionality into separate files, also referred to as (sub)modules. Separating code into modules makes your project easier to navigate and can lay the foundation for your own <strong>library of reusable functions and classes</strong>, useful across multiple projects.</p>
+<p>A typical first step is splitting the main logic of your analysis (<code>main.py</code>) from general-purpose helper functions (<code>utils.py</code>). Over time, as <code>utils.py</code> expands, you’ll notice clusters of related functionality that can be moved into their own files, such as <code>data_utils.py</code>, <code>models.py</code>, or <code>results.py</code>. To create cohesive modules, you should <strong>group code that tends to change together</strong>, which increases maintainability as you don’t need to switch between files when implementing a new feature. Modules based on domains or use cases, instead of technical layers, are therefore preferred, as the changes required to implement a new feature are generally limited to a single domain <span class="citation" data-cites="lilienthal2023ddt">[<a href="references.html#ref-lilienthal2023ddt" role="doc-biblioref">3</a>]</span>.</p>
+<p>This approach naturally leads to a clean directory structure, which might look like this for a larger Python project:<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">src/</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> main.py</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> my_library/</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">├──</span> __init__.py</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="ex">├──</span> data_utils.py</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">├──</span> models/</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    <span class="ex">│</span>   ├── __init__.py</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    <span class="ex">│</span>   ├── baseline_a.py</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    <span class="ex">│</span>   ├── baseline_b.py</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    <span class="ex">│</span>   ├── interface.py</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    <span class="ex">│</span>   └── my_model.py</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">└──</span> results.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In <code>main.py</code>, you can import the relevant classes and functions from these modules to keep the main script clean and focused:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> my_library.models.my_model <span class="im">import</span> MyModel</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> my_library.data_utils <span class="im">import</span> load_data</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># steps that will be executed when running `python main.py`</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> MyModel()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Keep helper functions separate">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Keep helper functions separate
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Always <strong>separate reusable helper functions from the main executable code</strong>. This also means that files like <code>data_utils.py</code> should not include a <em>main</em> function, as they are not standalone scripts. Instead, these modules provide functionality that can be imported by other scripts—just like external libraries such as <code>numpy</code>.</p>
+</div>
+</div>
+<p>As you tackle more projects, you may develop a set of functions that are so versatile and useful that you find yourself reusing them across multiple projects. At that point, you might consider packaging them as your own <strong>open-source library</strong>, allowing other researchers to install and use them as well.</p>
 </section>
 </section>
 <section id="summary-from-working-to-good-code" class="level3">
@@ -1034,7 +1096,7 @@ Reusable code through refactoring, not overengineering
 <li><strong>Generalize where possible</strong>:
 <ul>
 <li>Should <strong>hardcoded values</strong> be passed as function arguments?</li>
-<li>Could multiple classes implement a <strong>unified interface</strong>? For example, different model classes should all implement the same <code>fit</code> and <code>predict</code> methods so they can be used with the same analysis code. The might also share some functionality through <strong>mixins</strong>.</li>
+<li>Could multiple classes implement a <strong>unified interface</strong>? For example, different model classes should all implement the same <code>fit</code> and <code>predict</code> methods so they can be used with the same analysis code. They might also share some functionality through <strong>mixins</strong>.</li>
 </ul></li>
 <li><strong>Organize your code into modules</strong> (i.e., separate files and folders) when it grows too large:
 <ul>
@@ -1050,8 +1112,8 @@ Reusable code through refactoring, not overengineering
 <p>To summarize the overall design, we can create sketches that serve as both a high-level overview and an implementation guide. While formal modeling languages like UML exist for this purpose, don’t feel pressured to use them—these diagrams are for you and your collaborators, so <strong>prioritize clarity over formality</strong>. Unless they’re part of official documentation that must meet specific standards, a quick whiteboard sketch is often a better use of your time.</p>
 <p>We distinguish between two types of diagrams:</p>
 <ol type="1">
-<li><strong>Structural Diagrams</strong> – These show the organization of your code: which functions and classes are in which modules, and how they depend on one another.</li>
-<li><strong>Behavioral Diagrams</strong> – These describe how your program runs: how inputs flow through the system and are transformed into outputs.</li>
+<li><strong>Structural diagrams</strong> – These show the organization of your code: which functions and classes are in which modules, and how they depend on one another.</li>
+<li><strong>Behavioral diagrams</strong> – These describe how your program runs: how inputs flow through the system and are transformed into outputs.</li>
 </ol>
 <section id="structure-your-personal-code-library" class="level4">
 <h4 class="anchored" data-anchor-id="structure-your-personal-code-library">Structure: Your Personal Code Library</h4>
@@ -1112,20 +1174,26 @@ Before you continue
 <div id="ref-khononov2024balancing" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[2] </div><div class="csl-right-inline">Khononov V. <em>Balancing Coupling in Software Design: Universal Design Principles for Architecting Modular Software Systems</em>. Addison-Wesley Professional (2024).</div>
 </div>
+<div id="ref-lilienthal2023ddt" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">Lilienthal C, Schwentner H. <em>Domain-Driven Transformation: Monolithen Und Microservices Zukunftsfähig Machen</em>. dpunkt.verlag (2023).</div>
+</div>
 <div id="ref-mcchrystal2015team" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[3] </div><div class="csl-right-inline">McChrystal GS, Collins T, Silverman D, Fussell C. <em>Team of Teams: New Rules of Engagement for a Complex World</em>. Penguin (2015).</div>
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline">McChrystal GS, Collins T, Silverman D, Fussell C. <em>Team of Teams: New Rules of Engagement for a Complex World</em>. Penguin (2015).</div>
 </div>
 <div id="ref-normand2021grokking" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[4] </div><div class="csl-right-inline">Normand E. <em>Grokking Simplicity: Taming Complex Software with Functional Thinking</em>. Manning Publications (2021).</div>
+<div class="csl-left-margin">[5] </div><div class="csl-right-inline">Normand E. <em>Grokking Simplicity: Taming Complex Software with Functional Thinking</em>. Manning Publications (2021).</div>
 </div>
 <div id="ref-ousterhout2018philosophy" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[5] </div><div class="csl-right-inline">Ousterhout JK. <em>A Philosophy of Software Design</em>. Yaknyam Press Palo Alto, CA, USA (2018).</div>
+<div class="csl-left-margin">[6] </div><div class="csl-right-inline">Ousterhout JK. <em>A Philosophy of Software Design</em>. Yaknyam Press Palo Alto, CA, USA (2018).</div>
+</div>
+<div id="ref-page1995every" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[7] </div><div class="csl-right-inline">Page-Jones M. <em>What Every Programmer Should Know about Object-Oriented Design</em>. Dorset House (1995).</div>
 </div>
 <div id="ref-skiena2008algorithm" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[6] </div><div class="csl-right-inline">Skiena SS. <em>The Algorithm Design Manual</em>. Springer (2020).</div>
+<div class="csl-left-margin">[8] </div><div class="csl-right-inline">Skiena SS. <em>The Algorithm Design Manual</em>. Springer (2020).</div>
 </div>
 <div id="ref-thomas2019pragmatic" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[7] </div><div class="csl-right-inline">Thomas D, Hunt A. <em>The Pragmatic Programmer: Your Journey to Mastery, 20th Anniversary Edition</em>. Addison-Wesley Professional (2019).</div>
+<div class="csl-left-margin">[9] </div><div class="csl-right-inline">Thomas D, Hunt A. <em>The Pragmatic Programmer: Your Journey to Mastery, 20th Anniversary Edition</em>. Addison-Wesley Professional (2019).</div>
 </div>
 </div>
 </section>
@@ -1135,6 +1203,7 @@ Before you continue
 <ol>
 <li id="fn1"><p>The fourth category is <strong>chaotic</strong>, where cause and effect are unknowable. In software, this could be compared to rare cosmic-ray-induced bit flips that cause random, unpredictable behavior.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>In some programming languages, you can define <strong>constants</strong>—variables whose values cannot be changed. These are often declared as global variables so that all functions can reference the same value. In Python, constants are defined by convention using <code>ALL_CAPS</code> variable names. However, Python does not enforce immutability, so the value can still be changed despite the naming convention.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>The <code>__init__.py</code> file is needed to turn a directory into a package from which other scripts can import functionality. Usually, the file is completely empty.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

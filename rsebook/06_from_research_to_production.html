@@ -262,10 +262,8 @@ div.csl-indent {
   </ul></li>
   <li><a href="#delivery-deployment" id="toc-delivery-deployment" class="nav-link" data-scroll-target="#delivery-deployment">Delivery &amp; Deployment</a>
   <ul class="collapse">
-  <li><a href="#cicd-pipelines-automating-development-cycles" id="toc-cicd-pipelines-automating-development-cycles" class="nav-link" data-scroll-target="#cicd-pipelines-automating-development-cycles">CI/CD Pipelines: Automating Development Cycles</a></li>
+  <li><a href="#cicd-pipelines" id="toc-cicd-pipelines" class="nav-link" data-scroll-target="#cicd-pipelines">CI/CD Pipelines</a></li>
   <li><a href="#containers-in-the-cloud" id="toc-containers-in-the-cloud" class="nav-link" data-scroll-target="#containers-in-the-cloud">Containers in the Cloud</a></li>
-  <li><a href="#scaling-considerations" id="toc-scaling-considerations" class="nav-link" data-scroll-target="#scaling-considerations">Scaling Considerations</a></li>
-  <li><a href="#monitoring-and-observability" id="toc-monitoring-and-observability" class="nav-link" data-scroll-target="#monitoring-and-observability">Monitoring and Observability</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -430,7 +428,7 @@ Managing databases in Python
 <li><strong>PUT</strong>: Updates an existing record.</li>
 <li><strong>DELETE</strong>: Removes a record.</li>
 </ul>
-<p>You typically interact with APIs through a website’s <strong>frontend</strong>, which triggers these API calls in the background. However, APIs can also be queried directly to access raw data, usually returned in <strong>JSON</strong> format.</p>
+<p>As a user, you typically interact with APIs through a website’s <strong>frontend</strong>, which triggers these API calls in the background. However, APIs can also be queried directly to access raw data, usually returned in <strong>JSON</strong> format.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="API keys and authentication">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -515,7 +513,7 @@ Interacting with APIs programmatically
 </section>
 <section id="implementing-apis" class="level4">
 <h4 class="anchored" data-anchor-id="implementing-apis">Implementing APIs</h4>
-<p>When designing an API, specifically a REST (REpresentational State Transfer) API, it’s important to understand the concept of an <strong>endpoint</strong>. An endpoint is a specific URL in your API where a resource can be accessed or modified. For example, if you’re building a photo-sharing app, an endpoint like <code>/images</code> might allow users to view or upload images. Endpoints should be named using descriptive, plural nouns (e.g., <code>/users</code>, <code>/images</code>) to clearly represent the resources being accessed. It’s also best practice to avoid including verbs in endpoint names (e.g., <code>/get_users</code>), since the HTTP method (like GET or POST) already specifies the action being taken, such as retrieving or creating data.</p>
+<p>When designing an API, specifically a REST (REpresentational State Transfer) API, it’s important to understand the concept of an <strong>endpoint</strong>. An endpoint is a specific URL in your API where a resource can be accessed or modified. For example, if you’re building a photo-sharing app, an endpoint like <code>/images</code> might allow users to view or upload images. Endpoints should be named using descriptive, plural nouns (e.g., <code>/users</code>, <code>/images</code>) to clearly represent the resources being accessed (possibly corresponding directly to your database tables). It’s also best practice to avoid including verbs in endpoint names (e.g., <code>/get_users</code>), since the HTTP method (like GET or POST) already specifies the action being taken, such as retrieving or creating data.</p>
 <p>Another key design principle is <strong>statelessness</strong>. Similar to the concept of pure functions, this means that each API request should contain all the information needed to complete the action, like user authentication tokens. This way, the server doesn’t need to remember anything about previous requests, making the API easier to scale. This is especially important in cloud-based environments where multiple requests from the same user may be routed to different servers <span class="citation" data-cites="davis2019cloud">[<a href="references.html#ref-davis2019cloud" role="doc-biblioref">1</a>]</span>.<br>
 Data that needs to be persisted can be stored either in the frontend (client) or a central database in the backend (server), depending on its purpose. Temporary data, like a shopping cart, can be maintained on the user’s machine using cookies or local storage. Permanent data, such as a purchase order, is best stored in the backend database to ensure long-term accessibility. This approach supports stateless APIs, as the backend server doesn’t need to keep the session state in memory. Instead, all necessary data is either included in the request or can be fetched from the database, allowing each request to be processed independently.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Implementing APIs in Python with `FastAPI`">
@@ -627,17 +625,17 @@ Figure&nbsp;6.6: A simplified flow showing what happens when a user orders somet
 <section id="delivery-deployment" class="level2">
 <h2 class="anchored" data-anchor-id="delivery-deployment">Delivery &amp; Deployment</h2>
 <p>Modern software development requires reliable and efficient processes to build, test, and deploy applications <span class="citation" data-cites="forsgren2018accelerate">[<a href="references.html#ref-forsgren2018accelerate" role="doc-biblioref">2</a>]</span>. Delivery and deployment strategies ensure that new features and updates are released quickly, safely, and at scale, minimizing disruptions to users while maintaining quality.</p>
-<section id="cicd-pipelines-automating-development-cycles" class="level3">
-<h3 class="anchored" data-anchor-id="cicd-pipelines-automating-development-cycles">CI/CD Pipelines: Automating Development Cycles</h3>
+<section id="cicd-pipelines" class="level3">
+<h3 class="anchored" data-anchor-id="cicd-pipelines">CI/CD Pipelines</h3>
 <p><strong>Continuous Integration (CI)</strong> and <strong>Continuous Delivery/Deployment (CD)</strong> pipelines are the backbone of modern software practices. CI focuses on automating the process of integrating code changes into a shared repository. Every change triggers automated tests to ensure that the new code works harmoniously with the existing codebase. CD extends this by automating the preparation or deployment of changes into production, either ready for manual approval (Continuous Delivery) or fully automated (Continuous Deployment). This drastically reduces manual effort, minimizes human error, and enables faster iteration cycles.</p>
 <p>CI/CD pipelines are either included directly into version control platforms, such as GitHub Actions and GitLab CI/CD, or can be run using external tools like Jenkins or CircleCI.</p>
 <section id="optimizing-cicd-pipelines" class="level4">
 <h4 class="anchored" data-anchor-id="optimizing-cicd-pipelines">Optimizing CI/CD Pipelines</h4>
 <p>To enhance pipeline efficiency and reliability, consider the following practices:</p>
 <ul>
-<li><strong>Dependency Caching:</strong> Cache dependencies to reduce the time spent downloading and installing them for each build.</li>
-<li><strong>Selective Testing:</strong> Run only the tests affected by recent changes to speed up feedback.</li>
-<li><strong>Real-Time Notifications:</strong> Notify developers immediately when a pipeline fails, enabling faster issue resolution.</li>
+<li><strong>Dependency caching:</strong> Cache dependencies to reduce the time spent downloading and installing them for each build.</li>
+<li><strong>Selective testing:</strong> Run only the tests affected by recent changes to speed up feedback.</li>
+<li><strong>Real-time notifications:</strong> Notify developers immediately when a pipeline fails, enabling faster issue resolution.</li>
 </ul>
 <div class="callout callout-style-default callout-important callout-titled" title="Security in CI/CD pipelines">
 <div class="callout-header d-flex align-content-center">
@@ -662,16 +660,16 @@ Security in CI/CD pipelines
 <ul>
 <li><strong>Auto-scaling:</strong> Adjust resources dynamically based on workload.</li>
 <li><strong>Self-healing:</strong> Automatically restart failed containers.</li>
-<li><strong>Load Balancing:</strong> Distribute traffic efficiently across services.</li>
+<li><strong>Load balancing:</strong> Distribute traffic efficiently across services.</li>
 </ul>
 <section id="using-cloud-platforms" class="level4">
 <h4 class="anchored" data-anchor-id="using-cloud-platforms">Using Cloud Platforms</h4>
 <p>Cloud platforms like <strong>AWS</strong>, <strong>Google Cloud Platform (GCP)</strong>, and <strong>Microsoft Azure</strong> offer robust infrastructures for deploying and scaling applications. For simpler workflows, <strong>managed services</strong> like Render or Heroku abstract away much of the operational complexity.</p>
 <p>Managing costs effectively is critical in cloud deployments. Key strategies include:</p>
 <ul>
-<li><strong>Resource Scaling:</strong> Reduce unused resources during off-peak hours.</li>
-<li><strong>Serverless Computing:</strong> Use serverless models, like AWS Lambda, for infrequent workloads to save costs.</li>
-<li><strong>Cost Monitoring Tools:</strong> Leverage AWS Cost Explorer or GCP Billing to track and optimize spending.</li>
+<li><strong>Resource scaling:</strong> Reduce unused resources during off-peak hours.</li>
+<li><strong>Serverless computing:</strong> Use serverless models, like AWS Lambda, for infrequent workloads to save costs.</li>
+<li><strong>Cost monitoring tools:</strong> Leverage AWS Cost Explorer or GCP Billing to track and optimize spending.</li>
 </ul>
 </section>
 <section id="infrastructure-as-code-iac" class="level4">
@@ -690,35 +688,34 @@ Security in CI/CD pipelines
 <li>Use <strong>staging environments</strong> that mimic production to validate changes before release.</li>
 <li>Maintain <strong>testing environments</strong> for early experimentation and debugging.</li>
 </ul>
-<p>Techniques like <strong>A/B testing</strong> and <strong>feature toggles</strong> allow gradual rollouts or controlled exposure of new features, minimizing user disruption. This can be achieved using deployment strategies like:</p>
+<p>Techniques like <strong>A/B testing</strong> and <strong>feature flags</strong> allow gradual rollouts or controlled exposure of new features, minimizing user disruption. This can be achieved using deployment strategies like:</p>
 <ul>
-<li><strong>Blue-Green Deployments:</strong> Maintain two environments (blue and green) and switch traffic between them for A/B tests or to reduce downtime during updates.</li>
-<li><strong>Canary Releases:</strong> Gradually expose updates to a small group of users, monitoring for issues before full deployment.</li>
+<li><strong>Blue-green deployments:</strong> Maintain two environments (blue and green) and switch traffic between them for A/B tests or to reduce downtime during updates.</li>
+<li><strong>Canary releases:</strong> Gradually expose updates to a small group of users, monitoring for issues before full deployment.</li>
 </ul>
 </section>
-</section>
-<section id="scaling-considerations" class="level3">
-<h3 class="anchored" data-anchor-id="scaling-considerations">Scaling Considerations</h3>
+<section id="scaling-considerations" class="level4">
+<h4 class="anchored" data-anchor-id="scaling-considerations">Scaling Considerations</h4>
 <p>As applications grow, scaling requires thoughtful architectural design. You should consider:</p>
 <ul>
-<li><strong>Task Separation:</strong> For example, train machine learning models periodically as batch jobs, while keeping prediction services running continuously. This is particularly important when services have vastly <strong>different user bases</strong> (e.g., hundreds of admins versus millions of regular users), as they require varying replication rates for horizontal scaling. Especially if services rely on distinct dependencies, combining them into a single Docker container can result in a large, inefficient image, which increases the services’ startup time.</li>
-<li><strong>Team Autonomy:</strong> Design services such that teams can own and work on individual components independently, thereby reducing communication overhead and speeding up development cycles <span class="citation" data-cites="skelton2019team">[<a href="references.html#ref-skelton2019team" role="doc-biblioref">10</a>]</span>.</li>
+<li><strong>Task separation:</strong> For example, train machine learning models periodically as batch jobs, while keeping prediction services running continuously. This is particularly important when services have vastly <strong>different user bases</strong> (e.g., hundreds of admins versus millions of regular users), as they require varying replication rates for horizontal scaling. Especially if services rely on distinct dependencies, combining them into a single Docker container can result in a large, inefficient image, which increases the services’ startup time.</li>
+<li><strong>Team autonomy:</strong> Design services such that teams can own and work on individual components independently, thereby reducing communication overhead and speeding up development cycles <span class="citation" data-cites="skelton2019team">[<a href="references.html#ref-skelton2019team" role="doc-biblioref">10</a>]</span>.</li>
 </ul>
 </section>
-<section id="monitoring-and-observability" class="level3">
-<h3 class="anchored" data-anchor-id="monitoring-and-observability">Monitoring and Observability</h3>
+<section id="monitoring-and-observability" class="level4">
+<h4 class="anchored" data-anchor-id="monitoring-and-observability">Monitoring and Observability</h4>
 <p>To ensure smooth operation and detect issues proactively, monitoring and observability are essential. Focus on:</p>
 <ul>
-<li><strong>System Performance:</strong> Monitor the “golden signals”—latency, traffic, errors, and saturation of your services. Tools like Prometheus and Grafana are commonly used for this.</li>
-<li><strong>Data Quality:</strong> Track changes in input data distributions and monitor metrics like model accuracy to detect data drift.</li>
-<li><strong>Synthetic Monitoring:</strong> Simulate user behavior to identify bottlenecks and improve responsiveness. Complement this with chaos engineering tools like <strong>Chaos Monkey</strong> to test your system’s resilience by deliberately introducing failures, ensuring your infrastructure can handle unexpected disruptions effectively.</li>
-<li><strong>Distributed Tracing:</strong> Debug across microservices using tools like Jaeger or OpenTelemetry.</li>
+<li><strong>System performance:</strong> Monitor the “golden signals”—latency, traffic, errors, and saturation of your services. Tools like Prometheus and Grafana are commonly used for this.</li>
+<li><strong>Data quality:</strong> Track changes in input data distributions and monitor metrics like model accuracy to detect data drift.</li>
+<li><strong>Synthetic monitoring:</strong> Simulate user behavior to identify bottlenecks and improve responsiveness. Complement this with chaos engineering tools like <strong>Chaos Monkey</strong> to test your system’s resilience by deliberately introducing failures, ensuring your infrastructure can handle unexpected disruptions effectively.</li>
+<li><strong>Distributed tracing:</strong> Debug across microservices using tools like Jaeger or OpenTelemetry.</li>
 </ul>
 <p>When issues arise, having a rollback strategy is crucial. Options include:</p>
 <ul>
 <li>Reverting to a stable container image.</li>
 <li>Rolling back database migrations.</li>
-<li>Using feature toggles to disable problematic updates.</li>
+<li>Using feature flags to disable problematic updates.</li>
 </ul>
 <p>By combining robust delivery pipelines, thoughtful architecture, and effective monitoring, teams can ensure that their applications remain reliable, scalable, and adaptable to changing needs.</p>
 <div class="callout callout-style-default callout-caution callout-titled" title="Before you continue">
@@ -771,6 +768,7 @@ Before you continue
 <div class="csl-left-margin">[10] </div><div class="csl-right-inline">Skelton M, Pais M. <em>Team Topologies: Organizing Business and Technology Teams for Fast Flow</em>. IT Revolution (2019).</div>
 </div>
 </div>
+</section>
 </section>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">

@@ -285,7 +285,7 @@ div.csl-indent {
 <p>Let’s start with a quick tour of some tools that can make your software engineering journey smoother.</p>
 <section id="programming-languages" class="level2">
 <h2 class="anchored" data-anchor-id="programming-languages">Programming Languages</h2>
-<p>Different programming languages suit different needs. Here’s a quick overview of some popular ones used in science and engineering:</p>
+<p>Different programming languages suit different needs. Here’s a brief overview of some popular ones used in science and engineering:</p>
 <ul>
 <li><strong>R</strong>: Commonly used for statistics, with rich functionality to create data visualizations, fit statistical models (like different types of regression), and conduct advanced statistical tests (like ANOVA). The poplar Shiny framework also makes it possible to create interactive dashboards that run as web applications.</li>
 <li><strong>MATLAB</strong>: Once dominant in engineering, used for simulations. But due to its high licensing costs, MATLAB is being replaced more and more by Python and Julia.</li>
@@ -392,7 +392,7 @@ Basic shell commands
 <ul>
 <li><code>pwd</code>: Print the current working directory—this shows the path to where you opened the terminal.</li>
 <li><code>ls</code>: List files and directories in the current location. Use <code>ls -la</code> for more details, including hidden files (like <code>.gitignore</code>).</li>
-<li><code>cd path/to/folder</code>: Change directory to the specified path. Tips: Use tab to autocomplete names. If the path starts with <code>/</code>, it’s absolute (from the file system’s root). If it starts with <code>~/</code>, it’s relative to your home directory. Use <code>..</code> to move up one folder.</li>
+<li><code>cd path/to/folder</code>: Change directory to the specified path. Tip: Use tab to autocomplete names. If the path starts with <code>/</code>, it’s absolute (from the file system’s root). If it starts with <code>~/</code>, it’s relative to your home directory. Use <code>..</code> to move up one folder.</li>
 <li><code>mkdir new_folder</code>: Create a new directory named <code>new_folder</code>.</li>
 <li><code>touch new_file.txt</code>: Create an empty file named <code>new_file.txt</code>.</li>
 <li><code>cp new_file.txt copied_file.txt</code>: Copy <code>new_file.txt</code> to <code>copied_file.txt</code>. Use <code>mv</code> instead of <code>cp</code> to move or rename files.</li>
@@ -420,7 +420,7 @@ Examples include:</p>
 <section id="jupyter-notebooks" class="level4">
 <h4 class="anchored" data-anchor-id="jupyter-notebooks">Jupyter Notebooks</h4>
 <p>Jupyter notebooks are a unique format that lets you <strong>mix code, output (like plots), and explanatory text</strong> in one document. The name <em>Jupyter</em> is derived from Julia, Python, and R, the programming languages for which the notebook format, and later the JupyterLab IDE, were created. The IDE itself runs inside your web browser.</p>
-<p>Notebooks are great for exploratory data analysis and to create reproducible reports. However, since the notebooks themselves are composed of individual interactive cells that can be executed in any order, developing in notebooks often becomes messy quickly. We recommend that you keep the main logic and reusable functions in separate scrips or libraries and primarily use notebooks to create plots and other results. It is also good practice once you’re finished to restart the kernel and run your notebook again from top to bottom to make sure everything still works and you’re not relying on variables that were defined in now-deleted cells, for example.</p>
+<p>Notebooks are great for exploratory data analysis and to create reproducible reports. However, since the notebooks themselves are composed of individual interactive cells that can be executed in any order, developing in notebooks often becomes messy quickly. I recommend that you keep the main logic and reusable functions in separate scrips or libraries and primarily use notebooks to create plots and other results. It is also good practice once you’re finished to restart the kernel and run your notebook again from top to bottom to make sure everything still works and you’re not relying on variables that were defined in now-deleted cells, for example.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Notebooks as text files">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -479,7 +479,7 @@ Virtual environments in Python with <code>uv</code>
 <p>Basic commands:</p>
 <ul>
 <li><code>uv init example-project</code>: Create a new project (folder incl.&nbsp;<code>pyproject.toml</code> file).</li>
-<li><code>uv add {package}</code>: Add a dependency (can also be done directly in the file).</li>
+<li><code>uv add [package]</code>: Add a dependency (can also be done directly in the file).</li>
 <li><code>uv sync</code>: Install all dependencies.</li>
 <li><code>uv run python script.py</code>: Run a Python script inside the virtual environment.</li>
 </ul>
@@ -549,19 +549,19 @@ Hardware differences
 <li><strong>Formatters</strong> rewrite code to follow a consistent style (e.g., add whitespace after commas).</li>
 <li><strong>Linters</strong> analyze code for errors, inefficiencies, and deviations from best practices.</li>
 </ul>
-<div class="callout callout-style-default callout-tip callout-titled" title="Formatter &amp; Linter in Python: `ruff`">
+<div class="callout callout-style-default callout-tip callout-titled" title="Formatter &amp; linter in Python: `ruff`">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Formatter &amp; Linter in Python: <code>ruff</code>
+Formatter &amp; linter in Python: <code>ruff</code>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><a href="https://docs.astral.sh/ruff/"><code>ruff</code></a> is a (super fast) formatter and linter for Python, written in Rust. You can install it via <code>pip</code> and configure it in the same <code>pyproject.toml</code> file that we also used to manage the dependencies of our project. Then run it over you code like this:</p>
+<p><a href="https://docs.astral.sh/ruff/"><code>ruff</code></a> is a (super fast) formatter and linter for Python, written in Rust. You can install it via <code>pip</code> and configure it in the same <code>pyproject.toml</code> file that we also used to manage the dependencies of our project. Then run it over your code like this:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ruff</span> check        <span class="co"># see which errors the linter finds</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">ruff</span> check <span class="at">--fix</span>  <span class="co"># automatically fix errors where possible</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">ruff</span> format       <span class="co"># automatically format the code</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -597,13 +597,13 @@ Setting up pre-commit hooks
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> end-of-file-fixer</span></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> trailing-whitespace</span></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">repo</span><span class="kw">:</span><span class="at"> https://github.com/astral-sh/ruff-pre-commit</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">  # Ruff version.</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">  # Ruff version</span></span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">rev</span><span class="kw">:</span><span class="at"> v0.8.3</span></span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">hooks</span><span class="kw">:</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">    # Run the linter.</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">    # Run the linter</span></span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> ruff</span></span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">args</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at"> --fix </span><span class="kw">]</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">    # Run the formatter.</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">    # Run the formatter</span></span>
 <span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> ruff-format</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Then install the git hook scripts from the config file:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pre-commit</span> install</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -616,7 +616,7 @@ Setting up pre-commit hooks
 </section>
 <section id="putting-it-all-together" class="level2">
 <h2 class="anchored" data-anchor-id="putting-it-all-together">Putting It All Together</h2>
-<p>When you set up all these tools, your repository should now look something like this (see <a href="https://www.pyopensci.org/python-package-guide/package-structure-code/python-package-structure.html">here</a> for more details; setup for programming languages other than Python will differ slightly):</p>
+<p>When you set up all these tools, your repository should look something like this (see <a href="https://www.pyopensci.org/python-package-guide/package-structure-code/python-package-structure.html">here</a> for more details; setup for programming languages other than Python will differ slightly):</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">project-name/</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> .gitignore              <span class="co"># Exclude unnecessary files from version control</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> README.md               <span class="co"># Describe the project purpose and usage</span></span>

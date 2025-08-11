@@ -337,7 +337,17 @@ However, full-scale software applications, especially those with graphical inter
 </section>
 <section id="working-code" class="level2">
 <h2 class="anchored" data-anchor-id="working-code">Working Code</h2>
-<p>Once we know the outputs we want (e.g., result plots), the next step is identifying the sequence of instructions and required data to generate them.</p>
+<p>No one needs a program that does some computation but never reveals the results to anyone. In the end, we always want to produce some kind of <strong>output that has an effect on the world outside of our code</strong>. These outputs can take many different forms:</p>
+<ul>
+<li>Writing a log message with the result from a calculation to the console</li>
+<li>Displaying information in a graphical user interface (GUI)</li>
+<li>Writing data to a file (e.g., a CSV or Excel spreadsheet)</li>
+<li>Sending a POST request to an external web API</li>
+<li>Creating, updating, or deleting records in a database</li>
+<li>Sending an email</li>
+<li>Moving the actuators in a robotic arm</li>
+</ul>
+<p>Once we have clarity on the outputs we want (e.g., result plots), the next step is <strong>identifying the sequence of instructions and required data</strong> to generate them.</p>
 <p>At its core, programming is about <strong>transforming inputs into outputs</strong>. Our code defines the sequence of operations (e.g., adding or multiplying values), conditional statements (e.g., <code>if/else</code>), and loops (e.g., <code>for</code> and <code>while</code>) that drive this process—collectively known as an algorithm or <strong>control flow</strong>. As these steps are executed, both the inputs and the intermediate results are stored in variables, which represent the current <strong>state</strong> of the program.</p>
 <section id="data-structures" class="level4">
 <h4 class="anchored" data-anchor-id="data-structures">Data Structures</h4>
@@ -387,7 +397,7 @@ However, full-scale software applications, especially those with graphical inter
 </section>
 <section id="step-by-step-from-output-to-input" class="level4">
 <h4 class="anchored" data-anchor-id="step-by-step-from-output-to-input">Step by Step: From Output to Input</h4>
-<p>To determine the sequence of steps for obtaining our desired results, we can <strong>work backward to figure out what data we need</strong> to create them (<a href="#fig-work-backward" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>). This is especially important when generating data yourself, such as through simulations. For example, if you want to plot how values change over time, you’ll need to record variables at every time step—not just the final outcome of a simulation (duh!).</p>
+<p>To determine the sequence of steps for obtaining our desired outputs, we can <strong>work backward to figure out which inputs we need and how these should be transformed</strong> (<a href="#fig-work-backward" class="quarto-xref">Figure&nbsp;<span>3.2</span></a>). This is especially important when generating input data yourself, such as through simulations. For example, if you want to plot how values change over time, you’ll need to record variables at every time step—not just the final outcome of a simulation (duh!).</p>
 <div id="fig-work-backward" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-work-backward-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -425,7 +435,7 @@ Figure&nbsp;3.2: Work backward from the desired results to determine what data i
 <li><p>The model configuration needs to be provided by the user when running the script.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>config <span class="op">=</span> ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ol>
-<p>Of course, in the actual implementation, each step will require further details (e.g., the formula for computing <span class="math inline">\(R^2\)</span> or how to load the training and test datasets). But since we know that following this sequence in reverse order will produce the desired results, this already provides us with the rough outline of our code (see <a href="#sec-draw-code" class="quarto-xref"><span>Section 3.3</span></a> for how these steps could come together in the final script).</p>
+<p>Of course, in the actual implementation, each step will require further details (e.g., the formula for computing <span class="math inline">\(R^2\)</span> or how to load the training and test datasets). But since we know that following this sequence in reverse order will produce the desired output, this already provides us with the rough outline of our code (see <a href="#sec-draw-code" class="quarto-xref"><span>Section 3.3</span></a> for how these steps could come together in the final script).</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Optimize the ordering of steps">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1160,7 +1170,7 @@ Before you continue
 <div class="callout-body-container callout-body">
 <p>At this point, you should have a clear understanding of:</p>
 <ul>
-<li>The inputs and steps required to produce your desired outputs—what constitutes <em>working code</em>.</li>
+<li>The inputs and transformations required to produce your desired outputs—what constitutes <em>working code</em>.</li>
 <li>How to structure this code into <em>good code</em> by creating cohesive, decoupled, and reusable units that use simple interfaces to abstract away complicated implementation details.</li>
 </ul>
 </div>

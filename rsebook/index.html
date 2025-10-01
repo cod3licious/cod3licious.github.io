@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.34">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Franziska Horn">
-<meta name="dcterms.date" content="2025-09-21">
+<meta name="dcterms.date" content="2025-10-01">
 
 <title>Clarity-Driven Development of Scientific Software</title>
 <style>
@@ -36,14 +36,15 @@ ul.task-list li input[type="checkbox"] {
 <link href="./favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-31e51141b8c31bdc536616a43344ac8e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-f3084fe83d417c7d07102af91575287a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -98,7 +99,9 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Clarity-Driven Development of Scientific Software</a> 
     </div>
@@ -222,7 +225,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 21, 2025</p>
+      <p class="date">October 1, 2025</p>
     </div>
   </div>
   
@@ -241,11 +244,11 @@ ul.task-list li input[type="checkbox"] {
 <p>If you studied something other than computer science—especially in the natural sciences like physics, chemistry, or biology—it’s likely you were never taught how to properly develop software. Yet, you’re often still expected to write code as part of your daily work. Maybe you’ve taken a programming course like <em>Python for Chemists</em> and can put together functional scripts through trial and error (with a little help from an AI assistant). But chances are, no one ever showed you how to write well-structured, maintainable, and reusable code that could make your life—and collaborating with your colleagues—so much easier.</p>
 <p>This book is for you if you want to:</p>
 <ul>
-<li>Write functional software more quickly</li>
-<li>Use a structured approach to design better programs</li>
-<li>Reuse your code in future projects</li>
-<li>Feel confident about what your scripts are doing</li>
-<li>Prepare your research code for production</li>
+<li>Write functional software more quickly.</li>
+<li>Use a structured approach to design better programs.</li>
+<li>Reuse your code in future projects.</li>
+<li>Feel confident about what your scripts are doing.</li>
+<li>Prepare your research code for production.</li>
 <li>Share your work with pride.</li>
 </ul>
 <p>Whether you’re just beginning your scientific journey—perhaps working on your first major project like a master’s thesis or your first paper—or you’re contemplating a move from academia to industry, the practical advice in this book can guide you along the way. We will approach software design from first principles and tackle research questions with a product mindset.</p>
@@ -256,10 +259,10 @@ ul.task-list li input[type="checkbox"] {
 <p>I’m always looking to improve the contents of this book (or any other resources you can find on my website). Please <strong>send me an email</strong> to <code>hey@franziskahorn.de</code>, if you have any suggestions for how this book could be improved!<br>
 Specifically, I’d really appreciate some <strong>feedback</strong> on</p>
 <ul>
-<li>Where you got confused or lost or have an unanswered question</li>
-<li>Where you disagree, or have different experiences</li>
-<li>Where you started to get bored and felt like skipping ahead or giving up</li>
-<li>Anything you found especially interesting or helpful</li>
+<li>Where you got confused or lost or have an unanswered question.</li>
+<li>Where you disagree, or have different experiences.</li>
+<li>Where you started to get bored and felt like skipping ahead or giving up.</li>
+<li>Anything you found especially interesting or helpful.</li>
 </ul>
 <p>Thank you so much &amp; enjoy! 😊</p>
 </section>
@@ -373,13 +376,14 @@ Specifically, I’d really appreciate some <strong>feedback</strong> on</p>
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

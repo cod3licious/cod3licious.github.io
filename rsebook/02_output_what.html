@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.34">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -90,14 +90,15 @@ div.csl-indent {
 <link href="./favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-31e51141b8c31bdc536616a43344ac8e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-f3084fe83d417c7d07102af91575287a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -152,7 +153,9 @@ div.csl-indent {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Clarity-Driven Development of Scientific Software</a> 
     </div>
@@ -266,7 +269,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part1.html">Part 1: Gaining Clarity</a></li><li class="breadcrumb-item"><a href="./02_output_what.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Output: What?</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-why-value" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Output: What?</span></span></h1>
+<h1 class="title"><span id="sec-output-what" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Output: What?</span></span></h1>
 </div>
 
 
@@ -283,7 +286,7 @@ div.csl-indent {
 </header>
 
 
-<p>In the previous chapter, we’ve gained clarity on the problem you’re trying to solve and how to quantify the improvements your research generates. Now it’s time to dive deeper into what these results might actually look like and the data on which they are built. More specifically, we want to understand what kind of output our code should create in order to be useful for our users (<a href="#fig-code-questions-2" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>), for example, what kind of plots would help your audience to understand the benefits of your approach.</p>
+<p>In the previous chapter, we’ve gained clarity on the problem you’re trying to solve and how to quantify the improvements your research generates. Now it’s time to dive deeper into what these results might actually look like and the data on which they are built. More specifically, we want to understand <strong>what our implementation should look like to users</strong>, i.e., what output our code should create, for example, what kind of plots would help your audience to understand the benefits of your approach (<a href="#fig-code-questions-2" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>).</p>
 <div id="fig-code-questions-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-code-questions-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -308,12 +311,12 @@ Figure&nbsp;2.2: A simple mockup illustrating the user experience flow on an e-c
 </figure>
 </div>
 <p>A key part of this process is to <strong>empathize with the user’s experience</strong>. How will users interact with the product? Under what conditions will they use it, and for how long? These factors introduce constraints that must shape your design. For example, if a website is frequently accessed on smartphones with large text settings, the layout must remain functional and visually appealing under those conditions.</p>
-<p>Validating your design with real users is essential. <strong>Every design decision is a bet</strong>—an assumption about what users need and how they’ll respond. Before committing significant resources to its implementation, you need to test whether that bet is likely to pay off.</p>
-<p>This makes UX design an <strong>iterative process</strong>: the design is refined through multiple cycles until it reasonably satisfies its intended goals. And because software is flexible—unlike physical products that are costly to alter after production—<strong>you should continue testing and refining your product as you build it</strong>. Use this adaptability to your advantage by iterating continuously, ensuring the product evolves with your users’ needs over time.</p>
+<p>Validating your design with real users is essential. <strong>Every design decision is a bet</strong>—an assumption about what users need and how they’ll respond. Before committing significant resources to its implementation, you need to test whether that bet is likely to pay off or if users are confused by your design.</p>
+<p>This makes UX design an <strong>iterative process</strong>: the design is refined through multiple cycles of user testing until it reasonably satisfies its intended goals. And because software is flexible—unlike physical products that are costly to alter after production—<strong>you should continue testing and refining your product as you build it</strong>. Use this adaptability to your advantage to ensure the product evolves when users’ needs change over time.</p>
 </section>
 <section id="research-output-data-analysis-results" class="level2">
 <h2 class="anchored" data-anchor-id="research-output-data-analysis-results">Research Output: Data Analysis Results</h2>
-<p>No matter how much programming your project requires, nearly all scientific work involves analyzing your data to create <strong>result plots for publications or presentations</strong>—the final output of your code that will be seen by others.</p>
+<p>No matter how much programming your project requires, nearly all scientific work involves analyzing your data to create <strong>result plots for publications or presentations</strong>—the final output of your code that will be seen by others. In the following sections, we’ll discuss some best practices to make sure these analysis results are valuable and help your audience understand the benefits of your solution.</p>
 <p>When analyzing data, the process is typically divided into two phases:</p>
 <ol type="1">
 <li><strong>Exploratory analysis</strong>: This involves generating a variety of plots to gain a deeper understanding of your data, such as identifying correlations between variables. It’s often a quick and dirty process to help you familiarize yourself with the dataset.</li>
@@ -345,7 +348,7 @@ Figure&nbsp;2.3: Structured and unstructured data.
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-This book focuses on structured data
+<span class="screen-reader-only">Note</span>This book focuses on structured data
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -363,25 +366,25 @@ This book focuses on structured data
 </ul>
 <p>In programming, these are so-called <em>primitive data types</em> (as opposed to composite types, like lists, sets, or dictionaries containing multiple values, or user-defined objects) and define how information is stored in computer memory.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Data types in Python">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Data types in Python
+<span class="screen-reader-only">Tip</span>Data types in Python
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># integer</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># integer</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">42</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># float</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="fl">4.1083</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># string</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> <span class="st">"hello world!"</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># boolean</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="va">False</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="va">False</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -399,7 +402,7 @@ Data types in Python
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Misleading data types
+<span class="screen-reader-only">Warning</span>Misleading data types
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -418,7 +421,7 @@ Misleading data types
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Always record timestamps
+<span class="screen-reader-only">Important</span>Always record timestamps
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -495,7 +498,7 @@ Always record timestamps
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Don’t force an exploratory analysis onto your audience
+<span class="screen-reader-only">Warning</span>Don’t force an exploratory analysis onto your audience
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -555,7 +558,7 @@ Use the following steps to help you evaluate and improve your plot design.</p>
 <section id="step-4-make-data-accessible" class="level4">
 <h4 class="anchored" data-anchor-id="step-4-make-data-accessible">Step 4: Make Data Accessible</h4>
 <ul>
-<li>Add context: Which values are good (goal state), which are bad (alert threshold)? Should the value be compared to another variable (e.g., actual vs.&nbsp;forecast)?</li>
+<li>Add context: Which values are good (goal state), which are bad (alert threshold)? Should the values be compared to another variable (e.g., actual vs.&nbsp;forecast)?</li>
 <li>Leverage consistent colors when information is spread across multiple plots (e.g., data from a certain country is always shown in the same color).</li>
 <li>Annotate the plot with text explaining the main takeaways. If this is not possible, e.g., in interactive dashboards where the data keeps changing, the title can instead include the question that the plot should answer (e.g., “Is the material quality on target?”).</li>
 </ul>
@@ -570,7 +573,7 @@ Use the following steps to help you evaluate and improve your plot design.</p>
 </section>
 <section id="sec-draw-results" class="level2">
 <h2 class="anchored" data-anchor-id="sec-draw-results">Draw Your Output</h2>
-<p>You may not have looked at your data yet—or maybe you haven’t even collected it—but it’s important to start with the end in mind.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Similar to how UX designers create mockups to visualize a product before it gets built, we also need to envision what the final output of our code should look like before writing it. The key difference is that, instead of users interacting directly with the software, they’ll typically only see the results—such as plots or tables—produced by your script, often in a journal article or presentation.</p>
+<p>You may not have looked at your data yet—or maybe you haven’t even collected it—but it’s important to start with the end in mind.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Similar to how UX designers create mockups to visualize a product before it gets built, we should also envision what the final output of our code could look like before writing it. The key difference is that, instead of users interacting directly with the software, they’ll typically only see the results—such as plots or tables—produced by your script, often in a journal article or presentation.</p>
 <p>Based on your takeaways from the previous chapter—about the problem you’re solving and the metrics you should use to evaluate your solution—try sketching what your final results might look like. Put yourself in your audience’s shoes and consider what they need to address their questions and concerns. Ask yourself: <strong><em>What figures or tables would best communicate the advantages of my approach?</em></strong><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <p>Depending on your research goal, your results might be as simple as a single number, such as a p-value or the average response from the people you surveyed. However, if you’re reading this, you’re likely tackling something that requires a more complex analysis. For example, you might compare your model’s overall performance to several baseline approaches or illustrate how your solution converges over time (<a href="#fig-draw-results" class="quarto-xref">Figure&nbsp;<span>2.4</span></a>).</p>
 <div id="fig-draw-results" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -584,14 +587,14 @@ Figure&nbsp;2.4: Exemplary envisioned results: The plots show results of a multi
 </figure>
 </div>
 <p>Just as UX designs are <strong>tested with real users</strong>, you should share your result sketches with others and observe where they struggle. Do your colleagues interpret your plots the way you intend? Are they understanding the message you’re trying to convey?</p>
-<p>It’s important to remember that <strong>your actual results might look very different</strong> from your initial sketches—they might even show that your solution performs worse than the baseline! This is completely normal. The <strong>scientific method is inherently iterative</strong>, and unexpected results are often a stepping stone to deeper understanding. When your results deviate from your expectations, analyzing those differences can sharpen your intuition about the data and help you form better hypotheses in the future. But by starting with a clear plan, you can generate results more efficiently and quickly pivot to a new hypothesis if needed.</p>
+<p>It’s important to remember that <strong>your actual results might look very different</strong> from your initial sketches—they might even show that your solution performs worse than the baseline! This is completely normal. The <strong>scientific method is inherently iterative</strong>, and unexpected results are often a stepping stone to deeper understanding. When your results deviate from your expectations, analyzing those differences can sharpen your intuition about the data and help you form better hypotheses in the future. But by starting with a clear goal, you can generate results more efficiently and quickly pivot to a new hypothesis if needed.</p>
 <div class="callout callout-style-default callout-caution callout-titled" title="Before you continue">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Before you continue
+<span class="screen-reader-only">Caution</span>Before you continue
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -705,13 +708,14 @@ Before you continue
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

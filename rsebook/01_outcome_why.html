@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.34">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -55,14 +55,15 @@ div.csl-indent {
 <link href="./favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-31e51141b8c31bdc536616a43344ac8e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-f3084fe83d417c7d07102af91575287a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -105,7 +106,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -146,7 +147,9 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Clarity-Driven Development of Scientific Software</a> 
     </div>
@@ -261,7 +264,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./part1.html">Part 1: Gaining Clarity</a></li><li class="breadcrumb-item"><a href="./01_outcome_why.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Outcome: Why?</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-why-purpose" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Outcome: Why?</span></span></h1>
+<h1 class="title"><span id="sec-outcome-why" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Outcome: Why?</span></span></h1>
 </div>
 
 
@@ -278,17 +281,17 @@ window.Quarto = {
 </header>
 
 
-<p>Before writing your first line of code, it’s crucial to clearly understand what you’re trying to achieve—specifically, the purpose of your research. This helps you focus on developing an innovative solution that creates real value by improving existing approaches or addressing unmet needs. Furthermore, this clarity will help you choose the most appropriate analysis methods to support your objectives and enable you to communicate your research effectively to ensure your audience understands the benefits of your work.</p>
+<p>Before writing your first line of code, it’s crucial to clearly understand <strong>why your idea is worth implementing</strong>—specifically, the desired outcome of your research. This helps you focus on developing an innovative solution that creates real value by <strong>improving existing approaches or addressing unmet needs</strong>. Furthermore, this clarity will enable you to communicate your research more effectively to ensure your audience understands the benefits of your work.</p>
 <section id="why-we-develop-software" class="level2">
 <h2 class="anchored" data-anchor-id="why-we-develop-software">Why We Develop Software</h2>
-<p>While programming can be enjoyable in its own right, most people—and especially companies—aren’t willing to invest significant time or resources unless there’s a clear return. So why do we write code in the first place?</p>
+<p>While programming can be enjoyable in its own right, most people—and especially companies—aren’t willing to invest significant time or resources unless there’s a clear return. So why do we implement anything anyways?</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Code vs. Software Product">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Code vs.&nbsp;Software Product
+<span class="screen-reader-only">Note</span>Code vs.&nbsp;Software Product
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -322,11 +325,11 @@ Figure&nbsp;1.1: To become valuable, code needs to be executed and produce some 
 <li>Or you might create an open-source library that becomes popular (and receives a lot of stars on GitHub).</li>
 </ul>
 <p>With a bit of luck, that recognition could also translate into profit, as a successful side project might lead to a lucrative job offer or form the basis for a new grant proposal.</p>
+<p>Whatever your motivation, success—whether financial or reputational—only comes if your software meets a <strong>real need</strong>. In other words, it must <strong>create value for your users</strong>.</p>
 </section>
 <section id="commercial-software-outcome-satisfied-users" class="level2">
 <h2 class="anchored" data-anchor-id="commercial-software-outcome-satisfied-users">Commercial Software Outcome: Satisfied Users</h2>
-<p>Whatever your motivation, success—whether financial or reputational—only comes if your software meets a <strong>real need</strong>. In other words, it must <strong>create value for your users</strong>. Let’s first examine what this means for commercial software applications.</p>
-<p>Before developing a product, we need to understand <strong>our users and their priorities</strong> <span class="citation" data-cites="aulet2024disciplined">[<a href="references.html#ref-aulet2024disciplined" role="doc-biblioref">1</a>]</span>. These considerations are not only relevant for software, but apply to all kinds of products—physical and digital—like a woodworking tool or an e-commerce website.</p>
+<p>In order to create value for the users of a commercial software application, we must first develop a good understanding of <strong>our target users and their priorities</strong> <span class="citation" data-cites="aulet2024disciplined">[<a href="references.html#ref-aulet2024disciplined" role="doc-biblioref">1</a>]</span>. This actually applies not just to software, but to all products—physical or digital—like a woodworking tool or an e-commerce website.</p>
 <p>Ask yourself:</p>
 <ol type="1">
 <li><p><strong>Who are your users?</strong><br>
@@ -411,12 +414,12 @@ The key difference lies in how much domain knowledge informs the model:</p>
 <li><p><em>Black-box (data-driven) models:</em> Derived primarily from observational data. Researchers usually test different model types (e.g., neural networks or Gaussian processes) and choose the one with the highest prediction accuracy.</p></li>
 <li><p><em>Gray-box (hybrid) models:</em> These combine mechanistic and data-driven approaches. For example, the output of a mechanistic model may serve as an input to a data-driven model, or the data-driven model may predict residuals (i.e., prediction errors) from the mechanistic model, where both outputs combined yield the final prediction.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Resources to learn more about data-driven models">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Resources to learn more about data-driven models
+<span class="screen-reader-only">Tip</span>Resources to learn more about data-driven models
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -451,7 +454,7 @@ Examples include:</p>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Model accuracy is crucial
+<span class="screen-reader-only">Important</span>Model accuracy is crucial
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -467,7 +470,7 @@ Model accuracy is crucial
 <p>To demonstrate the impact of your work and compare your solution against existing approaches, it’s crucial to define what success looks like quantitatively. Consider these common evaluation metrics to measure the outcome of your research and generate compelling results:</p>
 <ul>
 <li><strong>Number of samples:</strong> This refers to the amount of data you’ve collected, such as whether you surveyed 100 or 10,000 people. Larger sample sizes can provide more robust and reliable results. It is also important to make sure your sample is representative of the population as a whole, i.e., to avoid sampling bias, which can cause misleading results and incorrect conclusions.</li>
-<li><strong>Reliability of measurements:</strong> This evaluates the consistency of your data. For example, how much variation occurs if you repeat the same measurement, e.g., run a simulation with different random seeds. This is important as others need to be able to reproduce your results.</li>
+<li><strong>Reliability of measurements:</strong> This evaluates the consistency of your data. For example, how much variation occurs if you repeat the same measurement or run a simulation with different random seeds. This is important as others need to be able to reproduce your results.</li>
 <li><strong>Statistical significance:</strong> The outcome of a statistical hypothesis test, such as a p-value that indicates whether the difference in symptom reduction between the treatment and placebo groups is significant.</li>
 <li><strong>Model accuracy:</strong> For predictive models, this includes:
 <ul>
@@ -513,7 +516,7 @@ Figure&nbsp;1.4: This example illustrates a task where a robot must reach its ta
 </figcaption>
 </figure>
 </div>
-<p>A “status quo” illustration is not always necessary, for example, if existing solutions are not directly comparable or so well known that they require no further explanation (<a href="#fig-draw-goal-method" class="quarto-xref">Figure&nbsp;<span>1.5</span></a>).</p>
+<p>If existing solutions are not directly comparable or so well known that they require no further explanation, a “status quo” illustration might not be necessary and you can focus solely on “your contribution” (<a href="#fig-draw-goal-method" class="quarto-xref">Figure&nbsp;<span>1.5</span></a>).</p>
 <div id="fig-draw-goal-method" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-draw-goal-method-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -539,7 +542,8 @@ Figure&nbsp;1.6: One of several sketches and the resulting final figure that was
 </section>
 <section id="draw-your-advantage" class="level2">
 <h2 class="anchored" data-anchor-id="draw-your-advantage">Draw Your Advantage</h2>
-<p>Ideally, you should already have an idea of how existing approaches perform on relevant evaluation metrics (e.g., based on findings from other publications) to establish <strong>the baseline your solution should outperform</strong>. You’ll likely need to replicate at least some of these baseline results (e.g., by reimplementing existing models) to ensure your comparisons are not influenced by external factors. But understanding where the “competition” stands can also help you identify secondary metrics where your solution could excel. For example, even if there’s little room to improve model accuracy, existing solutions might be too slow to handle large datasets efficiently (<a href="#fig-kpi-tradeoff" class="quarto-xref">Figure&nbsp;<span>1.7</span></a>).<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>Ideally, you should already have an idea of how existing approaches perform on relevant evaluation metrics (e.g., based on findings from other publications) to establish <strong>the baseline your solution should outperform</strong>. You’ll likely need to replicate at least some of these baseline results (e.g., by reimplementing existing models) to ensure your comparisons are not influenced by external factors. But understanding where the “competition” stands can also help you identify secondary metrics where your solution could excel. For example, even if there’s little room to improve model accuracy, existing solutions might be too slow to handle large datasets efficiently.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>To make explicit how you think your solution will compare against existing baselines, create a graph that <strong>illustrates the gap your approach aims to fill</strong> (<a href="#fig-kpi-tradeoff" class="quarto-xref">Figure&nbsp;<span>1.7</span></a>).</p>
 <div id="fig-kpi-tradeoff" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-kpi-tradeoff-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -550,14 +554,14 @@ Figure&nbsp;1.7: <strong>“Chart your competitive position”</strong> <span cl
 </figcaption>
 </figure>
 </div>
-<p>These results are central to your research (and publications), and much of your code will be devoted to generating them, along with the models and simulations behind them. Of course, at this stage, your solution’s performance on these dimensions is still aspirational—this graph simply <strong>illustrates the gap your approach aims to fill</strong>. But clearly defining the key metrics needed to demonstrate your research’s impact will help you focus your programming efforts effectively.</p>
+<p>Of course, at this stage, your solution’s performance is still aspirational. But clearly defining the key metrics to demonstrate your research’s impact will help you focus your programming efforts effectively. <!-- These results are central to your research (and publications), and much of your code will be devoted to generating them, along with the models and simulations behind them. --></p>
 <div class="callout callout-style-default callout-caution callout-titled" title="Before you continue">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Before you continue
+<span class="screen-reader-only">Caution</span>Before you continue
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -688,13 +692,14 @@ Before you continue
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

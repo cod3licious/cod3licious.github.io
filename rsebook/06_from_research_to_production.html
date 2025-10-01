@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.34">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -90,14 +90,15 @@ div.csl-indent {
 <link href="./favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-31e51141b8c31bdc536616a43344ac8e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-f3084fe83d417c7d07102af91575287a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -152,7 +153,9 @@ div.csl-indent {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Clarity-Driven Development of Scientific Software</a> 
     </div>
@@ -257,7 +260,10 @@ div.csl-indent {
   <li><a href="#apis" id="toc-apis" class="nav-link" data-scroll-target="#apis">APIs</a></li>
   <li><a href="#asynchronous-communication" id="toc-asynchronous-communication" class="nav-link" data-scroll-target="#asynchronous-communication">Asynchronous Communication</a></li>
   <li><a href="#batch-jobs" id="toc-batch-jobs" class="nav-link" data-scroll-target="#batch-jobs">Batch Jobs</a></li>
-  <li><a href="#software-design-revisited" id="toc-software-design-revisited" class="nav-link" data-scroll-target="#software-design-revisited">Software Design Revisited</a></li>
+  </ul></li>
+  <li><a href="#software-design-revisited" id="toc-software-design-revisited" class="nav-link" data-scroll-target="#software-design-revisited">Software Design Revisited</a>
+  <ul class="collapse">
+  <li><a href="#domain-driven-design" id="toc-domain-driven-design" class="nav-link" data-scroll-target="#domain-driven-design">Domain-Driven Design</a></li>
   </ul></li>
   <li><a href="#delivery-deployment" id="toc-delivery-deployment" class="nav-link" data-scroll-target="#delivery-deployment">Delivery &amp; Deployment</a>
   <ul class="collapse">
@@ -290,7 +296,7 @@ div.csl-indent {
 
 
 <p>Your results look great, the paper is written, the conference talk is over—now you’re done, right?! Well, in academia, you might be. But in industry, this is often just the beginning.</p>
-<p>In this chapter, we explore some concepts and tools that can elevate your code to the next level: the additional components required to build a full-fledged software product that users can interact with, as well as some strategies for deploying your code and delivering it to your end users (<a href="#fig-software-product" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>).</p>
+<p>In this chapter, we explore some practices and tools that can elevate your code to the next level: the additional components required to build a full-fledged software product that users can interact with, as well as some strategies for deploying your code and delivering it to your end users (<a href="#fig-software-product" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>).</p>
 <div id="fig-software-product" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-software-product-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -301,10 +307,10 @@ Figure&nbsp;6.1: Unlike a script that runs locally on your laptop, a production-
 </figcaption>
 </figure>
 </div>
-<p>Who knows—maybe you’ll even be inspired to turn your project into a deployable app, which could become a great showcase in your next job application.</p>
+<p>Who knows—maybe you’ll even be inspired to turn your project into a deployable app, which could become a great showcase in your next job application?</p>
 <section id="components-of-software-products" class="level2">
 <h2 class="anchored" data-anchor-id="components-of-software-products">Components of Software Products</h2>
-<p>So far, your code might consist of scripts or notebooks with analyses and a set of reusable helper functions in your personal library. The next step? Making your code accessible to others by turning it into standalone software with a graphical user interface (GUI). Additionally, we’ll explore how to expand beyond static data sources like CSV or Excel files.</p>
+<p>So far, your code probably consists of scripts or notebooks with analyses and a set of reusable helper functions in your personal library. The next step? Making your code accessible to others by turning it into a software application with a graphical user interface (GUI). Additionally, we’ll explore how to expand beyond static data sources like CSV or Excel files.</p>
 <section id="graphical-user-interface-gui" class="level3">
 <h3 class="anchored" data-anchor-id="graphical-user-interface-gui">Graphical User Interface (GUI)</h3>
 <p>Software shines when users can interact with it easily. Instead of using a command-line interface (CLI), these days, users expect intuitive GUIs with buttons and visual elements.</p>
@@ -314,7 +320,7 @@ Figure&nbsp;6.1: Unlike a script that runs locally on your laptop, a production-
 <li><strong>Web-based applications</strong> that run in a browser, like Google Docs. These are increasingly popular thanks to widespread internet access.</li>
 </ol>
 <p>For web apps, the GUI that users interact with is also referred to as the <strong>frontend</strong>, while the <strong>backend</strong> handles behind-the-scenes tasks like data storage and processing. Even seemingly standalone desktop clients often connect to a backend server for cloud storage or to enable collaboration on shared documents. We’ll explore how this works in the section on APIs.</p>
-<p>In research, the goal is often to make results more accessible, for example, by transforming a static report into an interactive dashboard where users can explore data. To do this, we recommend you start with a web-based app.</p>
+<p>In research, the goal is often to make results more accessible, for example, by transforming static plots into an interactive dashboard where users can explore data. To do this, we recommend you start with a web-based app.</p>
 <p>Many books and tutorials are written on the topic of building user-friendly software applications and a lot of it is very specific to the programming language and framework you’re using—please consult your favorite search engine to discover more resources on this topic.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> 😉</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Web apps in Python">
 <div class="callout-header d-flex align-content-center">
@@ -322,7 +328,7 @@ Figure&nbsp;6.1: Unlike a script that runs locally on your laptop, a production-
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Web apps in Python
+<span class="screen-reader-only">Tip</span>Web apps in Python
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -349,7 +355,7 @@ Web apps in Python
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Normalization in relational databases
+<span class="screen-reader-only">Note</span>Normalization in relational databases
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -358,7 +364,7 @@ Normalization in relational databases
 </div></li>
 <li><p><strong>Semi-structured data:</strong> JSON or XML documents contain data in flexible key-value pairs and are often stored in NoSQL databases. Unlike SQL databases, these databases don’t enforce a strict schema, which makes them ideal for handling complex, nested data structures or dynamically changing datasets. For example, APIs often exchange data in JSON format, which can be stored as-is to avoid breaking it into tables and reconstructing it later.<br>
 Modern relational databases, such as Postgres, blur the line between structured and semi-structured data by supporting JSON columns alongside traditional tables.</p></li>
-<li><p><strong>Unstructured data:</strong> Files like images, videos, and text documents are typically stored on disk. Data lakes (e.g., AWS S3) provide additional tools to manage these files, but fundamentally, this is similar to organizing files in folders on your computer. If your data is processed through a pipeline, it’s often a good idea to save copies of the files at each stage (e.g., in <code>raw/</code> and <code>cleaned/</code> folders).</p></li>
+<li><p><strong>Unstructured data:</strong> Files like images, videos, and text documents are typically stored on disk. Data lakes (e.g., AWS S3) provide additional tools to manage these files, but fundamentally, this is similar to organizing files in folders on your computer. When processing your data, it’s often a good idea to save copies of the files at each stage (e.g., in <code>raw/</code> and <code>cleaned/</code> folders).</p></li>
 <li><p><strong>Streaming data:</strong> High-volume, real-time data (e.g., IoT sensor logs) is best managed in specialized databases optimized for streaming, such as Apache Kafka.</p></li>
 </ul>
 </section>
@@ -405,7 +411,7 @@ Relationships between tables can be <strong>bidirectional</strong> or <strong>un
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Managing databases in Python
+<span class="screen-reader-only">Tip</span>Managing databases in Python
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -434,7 +440,7 @@ Managing databases in Python
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-API keys and authentication
+<span class="screen-reader-only">Tip</span>API keys and authentication
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -450,14 +456,14 @@ API keys and authentication
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Interacting with APIs programmatically
+<span class="screen-reader-only">Tip</span>Interacting with APIs programmatically
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>In the examples below, we use <code>curl</code> and Python to interact with The Cat API to retrieve the latest votes for cat images with a GET request and submit a new vote using a POST request.</p>
 <p><strong>Using <code>curl</code></strong></p>
 <p>Ensure <code>curl</code> is installed by running <code>which curl</code> in a terminal—this should return a valid path to your installation.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># GET request to view the last 10 votes for cat images</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># GET request to view the last 10 votes for cat images</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="st">"https://api.thecatapi.com/v1/votes?limit=10&amp;order=DESC"</span> <span class="dt">\</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>-H <span class="st">"x-api-key: DEMO-API-KEY"</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -471,10 +477,10 @@ Interacting with APIs programmatically
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="st">  "sub_id": "my-user-1234",</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="st">  "value": 1</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="st">}'</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># now run the GET request again to see your new vote</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># now run the GET request again to see your new vote</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Using Python</strong></p>
 <p>Python’s <a href="https://requests.readthedocs.io/en/latest/"><code>requests</code></a> library is great for working with APIs.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>BASE_URL <span class="op">=</span> <span class="st">"https://api.thecatapi.com/v1/votes"</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>API_KEY <span class="op">=</span> <span class="st">"DEMO-API-KEY"</span></span>
@@ -507,7 +513,7 @@ Interacting with APIs programmatically
 <span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
 <span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    get_last_votes()</span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    submit_vote(<span class="st">"HT902S6ra"</span>, <span class="st">"my-user-1234"</span>, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    submit_vote(<span class="st">"HT902S6ra"</span>, <span class="st">"my-user-1234"</span>, <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </section>
@@ -522,7 +528,7 @@ Data that needs to be persisted can be stored either in the frontend (client) or
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Implementing APIs in Python with <code>FastAPI</code>
+<span class="screen-reader-only">Tip</span>Implementing APIs in Python with <code>FastAPI</code>
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -587,16 +593,17 @@ For example, a website might fetch data from multiple APIs, showing placeholders
 <ul>
 <li>Fetching new messages from a queue every 10 minutes to process them in bulk, reducing overhead.</li>
 <li>Generating a sales report for the marketing department every Monday at midnight.</li>
-<li>Running nightly data validation to check for data drift or anomalous patterns.</li>
+<li>Running nightly data validation jobs to check for data drift or anomalous patterns.</li>
 <li>Retraining a machine learning model every week using newly collected data to create updated recommendations, like Spotify’s “Discover Weekly” playlist <span class="citation" data-cites="huyen2022designing">[<a href="references.html#ref-huyen2022designing" role="doc-biblioref">3</a>]</span>.</li>
 </ul>
 <p>For large-scale jobs, distributed systems might be necessary to ensure they complete within an acceptable timeframe.</p>
 </section>
-<section id="software-design-revisited" class="level3">
-<h3 class="anchored" data-anchor-id="software-design-revisited">Software Design Revisited</h3>
+</section>
+<section id="software-design-revisited" class="level2">
+<h2 class="anchored" data-anchor-id="software-design-revisited">Software Design Revisited</h2>
 <p>As your software evolves beyond a simple script, it becomes a system composed of multiple interconnected components. Each component can be viewed as a subsystem with its own defined boundaries and interface, responsible for specific functionalities while interacting with other parts of the system.</p>
 <p>To manage this growing complexity, it’s best to think of these components—such as a <strong>GUI/client/frontend</strong>, <strong>API/server/backend</strong>, and <strong>data storage</strong> (files, databases, message queues)—as distinct layers. A clean design follows the principle of <strong>layered communication</strong>, where each layer interacts only with the layer directly below it <span class="citation" data-cites="lilienthal2019sustainable">[<a href="references.html#ref-lilienthal2019sustainable" role="doc-biblioref">6</a>]</span>. For example, the client communicates with the server, and the server interacts with the database, avoiding “skip connections” where one layer bypasses another.<br>
-This design principle minimizes dependencies and makes the system easier to maintain: If the interface of one component changes, only the layer directly above it has to be adapted, for example, if a field in the database is renamed, only the API needs to be updated.</p>
+This design principle minimizes dependencies and makes the system easier to maintain: If the interface of one component changes, only the layer directly above it has to be adapted, for example, if a field in the database is renamed, only the API needs to be updated. Or if you decide to implement a mobile app in addition to the existing web frontend, both can use the same API.</p>
 <p>When you design these more complicated systems, it’s even more important to sketch the overall architecture before you start with the implementation (<a href="#fig-production-design" class="quarto-xref">Figure&nbsp;<span>6.6</span></a>). Visualizing how the layers interact can reveal potential bottlenecks or unnecessary complexity and gives you and your collaborators clarity on the big picture.</p>
 <div id="fig-production-design" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -621,7 +628,7 @@ Figure&nbsp;6.6: A simplified flow showing what happens when a user orders somet
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Event Modeling &amp; Data Completeness Check
+<span class="screen-reader-only">Tip</span>Event Modeling &amp; Data Completeness Check
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -639,12 +646,11 @@ Figure&nbsp;6.7: Wireframes with colored elements to indicate whether the shown 
 </div>
 </div>
 </div>
-<section id="domain-driven-design" class="level4">
-<h4 class="anchored" data-anchor-id="domain-driven-design">Domain-Driven Design</h4>
+<section id="domain-driven-design" class="level3">
+<h3 class="anchored" data-anchor-id="domain-driven-design">Domain-Driven Design</h3>
 <p>As a software product grows, it eventually becomes too complex for a single team to manage. To reduce cognitive load and improve maintainability, the system should be broken into smaller <strong>subsystems</strong>, each of which can be <strong>owned and managed autonomously</strong> by a dedicated team.</p>
 <p>To minimize inter-team dependencies and reduce communication overhead, it’s best to split the system along <strong>domain or use-case boundaries</strong>, making a cut through all technical layers <span class="citation" data-cites="khononov2021learning lilienthal2023ddt">[<a href="references.html#ref-khononov2021learning" role="doc-biblioref">4</a>,<a href="references.html#ref-lilienthal2023ddt" role="doc-biblioref">7</a>]</span>. For example, in an e-commerce platform, one team might own the “search &amp; browse” domain, while another handles “purchasing.” Although implementing a new feature may involve both client and server changes, those changes typically stay within a single domain, allowing the responsible team to implement them independently.</p>
 <p>Technically, this often means breaking a monolith into <strong>domain-based microservices</strong> <span class="citation" data-cites="lilienthal2023ddt">[<a href="references.html#ref-lilienthal2023ddt" role="doc-biblioref">7</a>]</span>, where each service operates independently (which also means it needs its own database). The key challenge is balancing <strong>local vs.&nbsp;global complexity</strong>: Each microservice should be <strong>small enough</strong> to be fully understood and maintained by one team, but <strong>large enough</strong> to encapsulate meaningful logic. If services are too granular, they require excessive inter-service communication to get anything done, leading to tightly coupled systems, only now with the added complexity of a distributed system and multiple deployments.</p>
-</section>
 </section>
 </section>
 <section id="delivery-deployment" class="level2">
@@ -668,7 +674,7 @@ Figure&nbsp;6.7: Wireframes with colored elements to indicate whether the shown 
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Security in CI/CD pipelines
+<span class="screen-reader-only">Important</span>Security in CI/CD pipelines
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -719,14 +725,6 @@ Security in CI/CD pipelines
 <li><strong>Canary releases:</strong> Gradually expose updates to a small group of users, monitoring for issues before full deployment.</li>
 </ul>
 </section>
-<section id="scaling-considerations" class="level4">
-<h4 class="anchored" data-anchor-id="scaling-considerations">Scaling Considerations</h4>
-<p>As applications grow, scaling requires thoughtful architectural design. You should consider:</p>
-<ul>
-<li><strong>Task separation:</strong> For example, train machine learning models periodically as batch jobs, while keeping prediction services running continuously. This is particularly important when services have vastly <strong>different user bases</strong> (e.g., hundreds of admins versus millions of regular users), as they require varying replication rates for horizontal scaling. Especially if services rely on distinct dependencies, combining them into a single Docker container can result in a large, inefficient image, which increases the services’ startup time.</li>
-<li><strong>Team autonomy:</strong> Design services such that teams can own and work on individual components independently, thereby reducing communication overhead and speeding up development cycles <span class="citation" data-cites="skelton2019team">[<a href="references.html#ref-skelton2019team" role="doc-biblioref">11</a>]</span>.</li>
-</ul>
-</section>
 <section id="monitoring-and-observability" class="level4">
 <h4 class="anchored" data-anchor-id="monitoring-and-observability">Monitoring and Observability</h4>
 <p>To ensure smooth operation and detect issues proactively, monitoring and observability are essential. Focus on:</p>
@@ -742,6 +740,14 @@ Security in CI/CD pipelines
 <li>Rolling back database migrations.</li>
 <li>Using feature flags to disable problematic updates.</li>
 </ul>
+</section>
+<section id="scaling-considerations" class="level4">
+<h4 class="anchored" data-anchor-id="scaling-considerations">Scaling Considerations</h4>
+<p>As applications grow, scaling requires thoughtful architectural design. You should consider:</p>
+<ul>
+<li><strong>Task separation:</strong> For example, train machine learning models periodically as batch jobs, while keeping prediction services running continuously. This is particularly important when services have vastly <strong>different user bases</strong> (e.g., hundreds of admins versus millions of regular users), as they require varying replication rates for horizontal scaling. Especially if services rely on distinct dependencies, combining them into a single Docker container can result in a large, inefficient image, which increases the services’ startup time.</li>
+<li><strong>Team autonomy:</strong> Design services such that teams can own and work on individual components independently, thereby reducing communication overhead and speeding up development cycles <span class="citation" data-cites="skelton2019team">[<a href="references.html#ref-skelton2019team" role="doc-biblioref">11</a>]</span>.</li>
+</ul>
 <p>By combining robust delivery pipelines, thoughtful architecture, and effective monitoring, teams can ensure that their applications remain reliable, scalable, and adaptable to changing needs.</p>
 <div class="callout callout-style-default callout-caution callout-titled" title="Before you continue">
 <div class="callout-header d-flex align-content-center">
@@ -749,7 +755,7 @@ Security in CI/CD pipelines
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Before you continue
+<span class="screen-reader-only">Caution</span>Before you continue
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -894,13 +900,14 @@ Before you continue
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

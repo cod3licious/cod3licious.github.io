@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.34">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -70,14 +70,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="./favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-31e51141b8c31bdc536616a43344ac8e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-f3084fe83d417c7d07102af91575287a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -120,7 +121,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -161,7 +162,9 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">A Practitioner’s Guide to Machine Learning</a> 
     </div>
@@ -419,7 +422,7 @@ Tip
 <p><u>Supervised Feature Selection Strategies:</u></p>
 <p><strong>1.) Univariate feature selection</strong><br>
 e.g., correlation between feature &amp; target</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.feature_selection <span class="im">import</span> SelectKBest</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.feature_selection <span class="im">import</span> SelectKBest</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Careful:</strong> This can lead to the inclusion of redundant features or the exclusion of features that might seem useless by themselves, but can be very informative when taken together with other features:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -431,14 +434,14 @@ e.g., correlation between feature &amp; target</p>
 <p>⇒ Better:</p>
 <p><strong>2.) Model-based feature selection</strong><br>
 select features based on <code>coef_</code> or <code>feature_importances_</code> attribute of trained model</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.feature_selection <span class="im">import</span> SelectFromModel</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.feature_selection <span class="im">import</span> SelectFromModel</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>3.) Sequential feature selection</strong><br>
 greedy algorithm that iteratively includes/removes one feature at a time:</p>
 <ul>
 <li><u>forward selection:</u> start with no features, iteratively add best feature until the performance stops improving</li>
 <li><u>backward elimination:</u> start with all features, iteratively eliminate worst feature until the performance starts to deteriorate</li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.feature_selection <span class="im">import</span> SequentialFeatureSelector</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.feature_selection <span class="im">import</span> SequentialFeatureSelector</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><u>General rule</u>: Always remove truly redundant (i.e., 100% correlated) features, but otherwise if in doubt: keep all features.</p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -575,7 +578,7 @@ See also Jonas Peters’ great <a href="https://www.youtube.com/watch?v=zvrcyqcN
 </div>
 <p>Please note that individual nodes in a causal graph can also represent hidden variables, i.e., process conditions that can not be directly observed, e.g., for which one might want to build a softsensor.</p>
 <p>Based on the above stated relationships, we can generate a dataset, where each variable additionally depends on an independent (w.r.t. the other variables) normally distributed noise component. This means for each sample some process conditions are set independently (<code>C</code> and <code>A</code>) while for others the value partially depends on the values already set for the other variables.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">20000</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">20000</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>C <span class="op">=</span>              <span class="fl">1.0</span> <span class="op">*</span> np.random.randn(n)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span>              <span class="fl">0.8</span> <span class="op">*</span> np.random.randn(n)</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> A          <span class="op">+</span> <span class="fl">0.1</span> <span class="op">*</span> np.random.randn(n)</span>
@@ -584,10 +587,10 @@ See also Jonas Peters’ great <a href="https://www.youtube.com/watch?v=zvrcyqcN
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span> <span class="op">-</span><span class="dv">2</span> <span class="op">*</span> X     <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> np.random.randn(n)</span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> D          <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> np.random.randn(n)</span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> K <span class="op">-</span> D  <span class="op">+</span> <span class="fl">0.2</span> <span class="op">*</span> np.random.randn(n)</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>H <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> Y    <span class="op">+</span> <span class="fl">0.1</span> <span class="op">*</span> np.random.randn(n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>H <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> Y    <span class="op">+</span> <span class="fl">0.1</span> <span class="op">*</span> np.random.randn(n)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Since the dependencies between the variables are linear, the optimal model type to learn any ‘input → output’ relation on this dataset is a linear regression model. The true coefficients that this model should find for one input variable are the values on the edges on the way from this variable’s node to the target node multiplied with each other, e.g., for <code>X</code> (input) on <code>Y</code> (target) this would be <code>-2</code> (from <code>X</code> to <code>D</code>) times <code>-1</code> (from <code>D</code> to <code>Y</code>), i.e., <code>2</code>.</p>
 <p>Depending on which variables we include as input features, the models is or isn’t able to learn the correct coefficients:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (1) missing relevant input feature K → wrong coefficient for X</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (1) missing relevant input feature K → wrong coefficient for X</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>R<span class="op">^</span><span class="dv">2</span> (train): <span class="fl">0.844</span><span class="op">;</span> (test): <span class="fl">0.848</span> ⇒ Y <span class="op">~</span>  <span class="fl">0.001</span> <span class="op">+</span> <span class="fl">1.285</span> <span class="op">*</span> X</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># (2) all the right input features → correct coefficients</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>R<span class="op">^</span><span class="dv">2</span> (train): <span class="fl">0.958</span><span class="op">;</span> (test): <span class="fl">0.959</span> ⇒ Y <span class="op">~</span>  <span class="fl">0.003</span> <span class="op">+</span> <span class="fl">2.003</span> <span class="op">*</span> X <span class="op">+</span> <span class="fl">2.010</span> <span class="op">*</span> K</span>
@@ -596,23 +599,23 @@ See also Jonas Peters’ great <a href="https://www.youtube.com/watch?v=zvrcyqcN
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># (4) additional input feature H, which is dependent on (i.e., highly correlated with) Y</span></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>R<span class="op">^</span><span class="dv">2</span> (train): <span class="fl">0.995</span><span class="op">;</span> (test): <span class="fl">0.995</span> ⇒ Y <span class="op">~</span>  <span class="fl">0.001</span> <span class="op">+</span> <span class="fl">0.242</span> <span class="op">*</span> X <span class="op">+</span> <span class="fl">0.245</span> <span class="op">*</span> K <span class="op">+</span> <span class="fl">1.759</span> <span class="op">*</span> H</span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># (5) additional input feature G that is not directly causal of Y, but dependent on D</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>R<span class="op">^</span><span class="dv">2</span> (train): <span class="fl">0.977</span><span class="op">;</span> (test): <span class="fl">0.976</span> ⇒ Y <span class="op">~</span>  <span class="fl">0.004</span> <span class="op">+</span> <span class="fl">0.978</span> <span class="op">*</span> X <span class="op">+</span> <span class="fl">2.002</span> <span class="op">*</span> K <span class="op">-</span> <span class="fl">0.510</span> <span class="op">*</span> G</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>R<span class="op">^</span><span class="dv">2</span> (train): <span class="fl">0.977</span><span class="op">;</span> (test): <span class="fl">0.976</span> ⇒ Y <span class="op">~</span>  <span class="fl">0.004</span> <span class="op">+</span> <span class="fl">0.978</span> <span class="op">*</span> X <span class="op">+</span> <span class="fl">2.002</span> <span class="op">*</span> K <span class="op">-</span> <span class="fl">0.510</span> <span class="op">*</span> G</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Often the best predictive model is not the true causal model (e.g., (4)) and especially regularized models, which try to explain the target with as few variables as possible, often choose variables dependent on the target (such as <code>H</code>) as the single best predictor instead of relying on multiple true causal influences (e.g., notice how <code>K</code> and <code>X</code> already have much lower coefficients in (4)).<br>
 But only the causal models are robust to data drifts and can extrapolate:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Changed equations to generate test data (notice larger noise component)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Changed equations to generate test data (notice larger noise component)</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> C <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> A  <span class="op">+</span> <span class="fl">2.0</span> <span class="op">*</span> np.random.randn(n)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>H <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> Y    <span class="op">+</span> <span class="fl">1.0</span> <span class="op">*</span> np.random.randn(n)</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># model (2): true relationship between X and Y → test performance equally good</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>R<span class="op">^</span><span class="dv">2</span> (train): <span class="fl">0.958</span><span class="op">;</span> (test): <span class="fl">0.987</span> ⇒ Y <span class="op">~</span> <span class="fl">0.003</span> <span class="op">+</span> <span class="fl">2.003</span> <span class="op">*</span> X <span class="op">+</span> <span class="fl">2.010</span> <span class="op">*</span> K</span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># model (4): variable dependent on but not causal of Y → test performance a lot worse</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>R<span class="op">^</span><span class="dv">2</span> (train): <span class="fl">0.995</span><span class="op">;</span> (test): <span class="fl">0.866</span> ⇒ Y <span class="op">~</span> <span class="fl">0.001</span> <span class="op">+</span> <span class="fl">0.242</span> <span class="op">*</span> X <span class="op">+</span> <span class="fl">0.245</span> <span class="op">*</span> K <span class="op">+</span> <span class="fl">1.759</span> <span class="op">*</span> H</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>R<span class="op">^</span><span class="dv">2</span> (train): <span class="fl">0.995</span><span class="op">;</span> (test): <span class="fl">0.866</span> ⇒ Y <span class="op">~</span> <span class="fl">0.001</span> <span class="op">+</span> <span class="fl">0.242</span> <span class="op">*</span> X <span class="op">+</span> <span class="fl">0.245</span> <span class="op">*</span> K <span class="op">+</span> <span class="fl">1.759</span> <span class="op">*</span> H</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>But unfortunately none of the models can handle a <em>concept</em> drift, i.e., when the underlying process, from which the data is sampled, changes:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Changed equation to generate test data (notice the reversed sign for X on the way to Y)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Changed equation to generate test data (notice the reversed sign for X on the way to Y)</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span>  <span class="dv">2</span> <span class="op">*</span> X     <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> np.random.randn(n)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># model (2): causal relationship between X and Y changed → test performance catastrophic</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>R<span class="op">^</span><span class="dv">2</span> (train): <span class="fl">0.958</span><span class="op">;</span> (test): <span class="op">-</span><span class="fl">1.797</span> ⇒ Y <span class="op">~</span> <span class="fl">0.003</span> <span class="op">+</span> <span class="fl">2.003</span> <span class="op">*</span> X <span class="op">+</span> <span class="fl">2.010</span> <span class="op">*</span> K</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>R<span class="op">^</span><span class="dv">2</span> (train): <span class="fl">0.958</span><span class="op">;</span> (test): <span class="op">-</span><span class="fl">1.797</span> ⇒ Y <span class="op">~</span> <span class="fl">0.003</span> <span class="op">+</span> <span class="fl">2.003</span> <span class="op">*</span> X <span class="op">+</span> <span class="fl">2.010</span> <span class="op">*</span> K</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>In this case only retraining the model on new data helps to recover the performance.</p>
 </section>
 </div>
@@ -875,7 +878,7 @@ Important
 <p><img src="../images/06_explainability/expl_perm_imp.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
 </figure>
 </div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.inspection <span class="im">import</span> permutation_importance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.inspection <span class="im">import</span> permutation_importance</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="global-model-agnostic-influence-of-individual-features-on-prediction" class="level3">
 <h3 class="anchored" data-anchor-id="global-model-agnostic-influence-of-individual-features-on-prediction">[Global] Model-agnostic: influence of individual features on prediction</h3>
@@ -914,7 +917,7 @@ Tip
 <p>Usually, we want a model that reacts smoothly to changes in the input data. Drastic changes in the decision function as a result of minor changes to the input data suggest that a model might be vulnerable to an adversarial attack. Data augmentation can help decrease the model’s sensitivity to noise and other minor variations in the input data.</p>
 </div>
 </div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.inspection <span class="im">import</span> partial_dependence</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.inspection <span class="im">import</span> partial_dependence</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="local-model-agnostic-local-interpretable-model-agnostic-explanations-lime" class="level3">
 <h3 class="anchored" data-anchor-id="local-model-agnostic-local-interpretable-model-agnostic-explanations-lime">[Local] Model-agnostic: <em>Local Interpretable Model-agnostic Explanations</em> (LIME)</h3>
@@ -1206,13 +1209,14 @@ Tip
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

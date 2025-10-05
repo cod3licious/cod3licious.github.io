@@ -412,6 +412,20 @@ window.Quarto = {
 <section id="fill-in-the-blanks" class="level5">
 <h5 class="anchored" data-anchor-id="fill-in-the-blanks">Fill in the Blanks</h5>
 <p>Once your skeleton stands, you “only” need to <strong>fill in the details</strong>, which is a lot less intimidating than facing a blank page. Plus, since you started with a thoughtful design, your final program is more likely to be well-structured and easy to understand. Compare this to writing code on the fly, where decisions about functions are often made haphazardly—you’ll appreciate the difference.</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Search before you write">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Search before you write
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When you need a specific functionality, first check whether this is already implemented by an open source library. Since popular libraries are usually maintained by multiple expert developers and reviewed thoroughly, the code they contain is likely of higher quality than what you could come up with by yourself.</p>
+</div>
+</div>
+<p>Before writing actual code, it is often helpful to first write out what your program should do in <strong>pseudocode</strong> (i.e., plain language) <span class="citation" data-cites="mcconnell2004code">[<a href="references.html#ref-mcconnell2004code" role="doc-biblioref">8</a>]</span>. This helps you think through the logic at a higher level before dealing with the syntax of your programming language. You can then turn the pseudocode into comments to provide a roadmap for the code that follows.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Using AI code generators">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -463,7 +477,7 @@ Go through your code line by line and consider <strong>what is true at each step
 <div class="callout-body-container callout-body">
 <ul>
 <li><p><strong>Avoid duplication</strong>: Instead of copying and pasting code in multiple places, consolidate it into a reusable function to save lines (DRY (Don’t Repeat Yourself) principle).</p></li>
-<li><p><strong>Prefer ‘deep’ functions</strong>: Avoid extracting very short code fragments (1-2 lines) into a separate function, especially if this function would require many arguments. Such shallow functions with wide interfaces increase complexity without meaningfully reducing line count. Instead, strive for <em>deep functions</em> (spanning multiple lines) with <em>narrow interfaces</em> (e.g., only 1-3 input arguments, i.e., <strong>fewer arguments than the function has lines of code</strong>), which tend to be more general and reusable <span class="citation" data-cites="ousterhout2018philosophy">[<a href="references.html#ref-ousterhout2018philosophy" role="doc-biblioref">8</a>]</span>.</p></li>
+<li><p><strong>Prefer ‘deep’ functions</strong>: Avoid extracting very short code fragments (1-2 lines) into a separate function, especially if this function would require many arguments. Such shallow functions with wide interfaces increase complexity without meaningfully reducing line count. Instead, strive for <em>deep functions</em> (spanning multiple lines) with <em>narrow interfaces</em> (e.g., only 1-3 input arguments, i.e., <strong>fewer arguments than the function has lines of code</strong>), which tend to be more general and reusable <span class="citation" data-cites="ousterhout2018philosophy">[<a href="references.html#ref-ousterhout2018philosophy" role="doc-biblioref">9</a>]</span>.</p></li>
 <li><p><strong>Address nesting</strong>: If your code becomes overly nested, this can be a sign that parts of the code should be moved into a separate function. This simplifies logic and shortens lines.</p></li>
 <li><p><strong>Use guard clauses</strong>: Deeply nested <code>if</code>-statements can make code harder to read. Instead, use guard clauses <span class="citation" data-cites="beck2023tidy">[<a href="references.html#ref-beck2023tidy" role="doc-biblioref">1</a>]</span> to handle preconditions (e.g., checking for wrong user input) early, leaving the “happy path” clear and concise. For example:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> condition:</span>
@@ -594,6 +608,19 @@ Go through your code line by line and consider <strong>what is true at each step
 <li>Add <code>assert</code> statements to verify intermediate results.</li>
 <li>Use a <strong>debugger</strong>, often integrated into your IDE, to set breakpoints where execution will pause, allowing you to step through the program manually and inspect variables.</li>
 </ul>
+<div class="callout callout-style-default callout-important callout-titled" title="Understand the problem before you fix it!">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Understand the problem before you fix it!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When your code contains a bug, treat it as a learning opportunity. Rather than applying random fixes to resolve the issue as quickly as possible, take time to understand where the problem comes from so you can address its root cause instead of merely fighting the symptoms.</p>
+</div>
+</div>
 <p>Debugging is an essential skill, not only to identify the root cause of bugs, but also to improve your understanding of the code and its behavior.</p>
 </section>
 <section id="optimizing-performance" class="level2">
@@ -668,33 +695,32 @@ Go through your code line by line and consider <strong>what is true at each step
 <li><strong><code>reduce</code></strong>: Aggregate elements recursively (e.g., summing values).</li>
 </ul>
 <p>For example:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> <span class="bu">reduce</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">### Simplify this loop:</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>result_sum <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>result_max <span class="op">=</span> <span class="op">-</span><span class="bu">float</span>(<span class="st">'inf'</span>)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10000</span>):</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    new_i <span class="op">=</span> i<span class="op">**</span><span class="fl">0.5</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># modulo operator x % y gives the remainder when diving x by y</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># i.e., we check for even numbers, where the rest is == 0</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="bu">round</span>(new_i) <span class="op">%</span> <span class="dv">2</span>) <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        result_sum <span class="op">+=</span> new_i</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>        result_max <span class="op">=</span> <span class="bu">max</span>(result_max, new_i)</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">### Using map/filter/reduce:</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co"># map(function to apply, list of elements)</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>new_i_all <span class="op">=</span> <span class="bu">map</span>(<span class="kw">lambda</span> x: x<span class="op">**</span><span class="fl">0.5</span>, <span class="bu">range</span>(<span class="dv">10000</span>))</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co"># filter(function that returns true or false, list of elements)</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>new_i_filtered <span class="op">=</span> <span class="bu">filter</span>(<span class="kw">lambda</span> x: (<span class="bu">round</span>(x) <span class="op">%</span> <span class="dv">2</span>) <span class="op">==</span> <span class="dv">0</span>, new_i_all)</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co"># reduce(function to combine current result with next element,</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co">#        list of elements, initial value)</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>result_sum <span class="op">=</span> <span class="bu">reduce</span>(<span class="kw">lambda</span> acc, x: acc <span class="op">+</span> x, new_i_filtered, <span class="dv">0</span>)</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>result_max <span class="op">=</span> <span class="bu">reduce</span>(<span class="kw">lambda</span> acc, x: <span class="bu">max</span>(acc, x),</span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>                    new_i_filtered, <span class="op">-</span><span class="bu">float</span>(<span class="st">'inf'</span>))</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co"># (of course, here we could've just used sum() and max() on the list)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">### Simplify this loop:</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>result_sum <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>result_max <span class="op">=</span> <span class="op">-</span><span class="bu">float</span>(<span class="st">'inf'</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10000</span>):</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    new_i <span class="op">=</span> i<span class="op">**</span><span class="fl">0.5</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># modulo operator x % y gives the remainder when diving x by y</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># i.e., we check for even numbers, where the rest is == 0</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="bu">round</span>(new_i) <span class="op">%</span> <span class="dv">2</span>) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        result_sum <span class="op">+=</span> new_i</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        result_max <span class="op">=</span> <span class="bu">max</span>(result_max, new_i)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">### Using map/filter/reduce:</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> <span class="bu">reduce</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># map(function to apply, list of elements)</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>new_i_all <span class="op">=</span> <span class="bu">map</span>(<span class="kw">lambda</span> x: x<span class="op">**</span><span class="fl">0.5</span>, <span class="bu">range</span>(<span class="dv">10000</span>))</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># filter(function that returns true or false, list of elements)</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>new_i_filtered <span class="op">=</span> <span class="bu">filter</span>(<span class="kw">lambda</span> x: (<span class="bu">round</span>(x) <span class="op">%</span> <span class="dv">2</span>) <span class="op">==</span> <span class="dv">0</span>, new_i_all)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># reduce(function to combine current result with next element,</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#        list of elements, initial value)</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>result_sum <span class="op">=</span> <span class="bu">reduce</span>(<span class="kw">lambda</span> acc, x: acc <span class="op">+</span> x, new_i_filtered, <span class="dv">0</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>result_max <span class="op">=</span> <span class="bu">reduce</span>(<span class="kw">lambda</span> acc, x: <span class="bu">max</span>(acc, x),</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>                    new_i_filtered, <span class="op">-</span><span class="bu">float</span>(<span class="st">'inf'</span>))</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># (of course, here we could've just used sum() and max() on the list)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>In Python, list comprehensions also offer concise alternatives:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>new_i_filtered <span class="op">=</span> [i<span class="op">**</span><span class="fl">0.5</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10000</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                         <span class="cf">if</span> (<span class="bu">round</span>(i<span class="op">**</span><span class="fl">0.5</span>) <span class="op">%</span> <span class="dv">2</span>) <span class="op">==</span> <span class="dv">0</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>new_i_filtered <span class="op">=</span> [i<span class="op">**</span><span class="fl">0.5</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10000</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                         <span class="cf">if</span> (<span class="bu">round</span>(i<span class="op">**</span><span class="fl">0.5</span>) <span class="op">%</span> <span class="dv">2</span>) <span class="op">==</span> <span class="dv">0</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </section>
@@ -756,62 +782,62 @@ Sometimes, implementing a new feature in your existing code feels like forcing a
 </blockquote>
 <ul>
 <li><p><strong>Replace magic numbers with constants</strong>: Magic numbers—values with unclear meaning—can make code harder to understand and maintain. By replacing them with constants, you create a single source of truth that’s easy to modify.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># before:</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> status <span class="op">==</span> <span class="dv">404</span>:</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    ...</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># after:</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>ERROR_NOT_FOUND <span class="op">=</span> <span class="dv">404</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> status <span class="op">==</span> ERROR_NOT_FOUND:</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># before:</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> status <span class="op">==</span> <span class="dv">404</span>:</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># after:</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>ERROR_NOT_FOUND <span class="op">=</span> <span class="dv">404</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> status <span class="op">==</span> ERROR_NOT_FOUND:</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>You can also use enumerations to specify a set of related constants. Enums can be especially helpful to <strong>make a function’s interface explicit</strong>. For example, by specifying that an input argument should be an <code>HTTPStatus</code>, users of the function know that they can’t just pass any arbitrary integer:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> enum <span class="im">import</span> Enum</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> HTTPStatus(Enum):</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    OK <span class="op">=</span> <span class="dv">200</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    CREATED <span class="op">=</span> <span class="dv">201</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    FORBIDDEN <span class="op">=</span> <span class="dv">403</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    NOT_FOUND <span class="op">=</span> <span class="dv">404</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    INTERNAL_SERVER_ERROR <span class="op">=</span> <span class="dv">500</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    SERVICE_UNAVAILABLE <span class="op">=</span> <span class="dv">503</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_status_message(s: HTTPStatus):</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Returns the HTTP status message for a HTTPStatus enum</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"</span><span class="sc">{</span>s<span class="sc">.</span>name<span class="sc">.</span>replace(<span class="st">'_'</span>, <span class="st">' '</span>)<span class="sc">.</span>title()<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>s<span class="sc">.</span>value<span class="sc">}</span><span class="ss">)"</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Output: "Ok (200)" and "Not Found (404)"</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(get_status_message(HTTPStatus.OK))</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(get_status_message(HTTPStatus.NOT_FOUND))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> enum <span class="im">import</span> Enum</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> HTTPStatus(Enum):</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    OK <span class="op">=</span> <span class="dv">200</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    CREATED <span class="op">=</span> <span class="dv">201</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    FORBIDDEN <span class="op">=</span> <span class="dv">403</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    NOT_FOUND <span class="op">=</span> <span class="dv">404</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    INTERNAL_SERVER_ERROR <span class="op">=</span> <span class="dv">500</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    SERVICE_UNAVAILABLE <span class="op">=</span> <span class="dv">503</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_status_message(s: HTTPStatus):</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Returns the HTTP status message for a HTTPStatus enum</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"</span><span class="sc">{</span>s<span class="sc">.</span>name<span class="sc">.</span>replace(<span class="st">'_'</span>, <span class="st">' '</span>)<span class="sc">.</span>title()<span class="sc">}</span><span class="ss"> (</span><span class="sc">{</span>s<span class="sc">.</span>value<span class="sc">}</span><span class="ss">)"</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Output: "Ok (200)" and "Not Found (404)"</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(get_status_message(HTTPStatus.OK))</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(get_status_message(HTTPStatus.NOT_FOUND))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li><p><strong>Don’t Repeat Yourself (DRY)</strong>: Copying and pasting code may seem like a quick fix, but it leads to problems later. If the logic changes, you’ll need to update it everywhere it’s duplicated, which is error-prone. Instead, move the logic into a reusable function or method.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># before:</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (model.a <span class="op">&gt;</span> <span class="dv">5</span>) <span class="kw">and</span> (model.b <span class="op">==</span> <span class="dv">3</span>) <span class="kw">and</span> (model.c <span class="op">&lt;</span> <span class="dv">8</span>):</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    ...</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># after:</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MyModel:</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> is_ready(<span class="va">self</span>):</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (<span class="va">self</span>.a <span class="op">&gt;</span> <span class="dv">5</span>) <span class="kw">and</span> (<span class="va">self</span>.b <span class="op">==</span> <span class="dv">3</span>) <span class="kw">and</span> (<span class="va">self</span>.c <span class="op">&lt;</span> <span class="dv">8</span>)</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> model.is_ready():</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># before:</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (model.a <span class="op">&gt;</span> <span class="dv">5</span>) <span class="kw">and</span> (model.b <span class="op">==</span> <span class="dv">3</span>) <span class="kw">and</span> (model.c <span class="op">&lt;</span> <span class="dv">8</span>):</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># after:</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MyModel:</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> is_ready(<span class="va">self</span>):</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (<span class="va">self</span>.a <span class="op">&gt;</span> <span class="dv">5</span>) <span class="kw">and</span> (<span class="va">self</span>.b <span class="op">==</span> <span class="dv">3</span>) <span class="kw">and</span> (<span class="va">self</span>.c <span class="op">&lt;</span> <span class="dv">8</span>)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> model.is_ready():</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li><p><strong>Implement wrappers</strong>: When working with external libraries or APIs, their provided interface might not align with your needs, and adapting to it directly can lead to awkward implementations in your code. A better solution is to create a wrapper that implements <strong>the interface you wish you had</strong>, translating the external API’s inputs and outputs into the format that best suits your implementation. This approach keeps your code clean, consistent, and easier to maintain, while confining the less-than-ideal API interactions to a single location. Plus, if the external API changes, you only need to update the wrapper instead of changing your code everywhere—which is why these wrappers are also called <em>anti-corruption layers</em>.</p></li>
 <li><p><strong>Use alternative constructors</strong>: Similar to a wrapper, you can add a class method to create objects in a way that’s different from the regular constructor. This is useful when the input data doesn’t directly match what the constructor needs. For instance, imagine you have a configuration file that specifies settings for a simulation. If the names or structure of these settings don’t match the constructor’s parameters, you can create a <code>from_config</code> method to handle the translation and then call the constructor with the correct arguments. The advantage is that if the format of the configuration file changes in the future, you only need to update this one method, keeping the rest of your code the same.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Date:</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, year, month, day):</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>      <span class="va">self</span>.year <span class="op">=</span> year</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>      <span class="va">self</span>.month <span class="op">=</span> month</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>      <span class="va">self</span>.day <span class="op">=</span> day</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">@classmethod</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> from_str(cls, date_str):</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>      <span class="co"># parse the string and create a new instance</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>      year, month, day <span class="op">=</span> <span class="bu">map</span>(<span class="bu">int</span>, date_str.split(<span class="st">'-'</span>))</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> cls(year, month, day)</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co"># usage:</span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>date1 <span class="op">=</span> Date(<span class="dv">2025</span>, <span class="dv">0</span><span class="er">1</span>, <span class="dv">30</span>)</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>date2 <span class="op">=</span> Date.from_str(<span class="st">"2025-01-30"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Date:</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, year, month, day):</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>      <span class="va">self</span>.year <span class="op">=</span> year</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>      <span class="va">self</span>.month <span class="op">=</span> month</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>      <span class="va">self</span>.day <span class="op">=</span> day</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">@classmethod</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> from_str(cls, date_str):</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>      <span class="co"># parse the string and create a new instance</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>      year, month, day <span class="op">=</span> <span class="bu">map</span>(<span class="bu">int</span>, date_str.split(<span class="st">'-'</span>))</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> cls(year, month, day)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co"># usage:</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>date1 <span class="op">=</span> Date(<span class="dv">2025</span>, <span class="dv">0</span><span class="er">1</span>, <span class="dv">30</span>)</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>date2 <span class="op">=</span> Date.from_str(<span class="st">"2025-01-30"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li><p><strong>Organize for cohesion</strong>: Keep code elements that need to change together in the same file or module. Conversely, separate unrelated parts of your code to prevent unnecessary entanglement. This way, changes are localized, which reduces cognitive load.</p>
 <p>In larger codebases shared by multiple teams, this is even more critical. <strong>When changes require excessive communication and coordination between teams, it signals a need to reorganize the code.</strong> Clear ownership and reduced dependencies help teams work independently by making sure the system is loosely coupled through agreed upon interfaces.</p></li>
 </ul>
@@ -888,8 +914,11 @@ Sometimes, implementing a new feature in your existing code feels like forcing a
 <div id="ref-lilienthal2023ddt" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[7] </div><div class="csl-right-inline">Lilienthal C, Schwentner H. <em>Domain-Driven Transformation: Monolithen Und Microservices Zukunftsfähig Machen</em>. dpunkt.verlag (2023).</div>
 </div>
+<div id="ref-mcconnell2004code" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[8] </div><div class="csl-right-inline">McConnell S. <em>Code Complete</em>. Microsoft Press (2004).</div>
+</div>
 <div id="ref-ousterhout2018philosophy" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[8] </div><div class="csl-right-inline">Ousterhout JK. <em>A Philosophy of Software Design</em>. Yaknyam Press Palo Alto, CA, USA (2018).</div>
+<div class="csl-left-margin">[9] </div><div class="csl-right-inline">Ousterhout JK. <em>A Philosophy of Software Design</em>. Yaknyam Press Palo Alto, CA, USA (2018).</div>
 </div>
 </div>
 </section>

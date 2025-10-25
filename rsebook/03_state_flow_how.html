@@ -535,7 +535,7 @@ Figure&nbsp;3.5: Improve efficiency through the order of steps.
 </section>
 <section id="designing-an-algorithm" class="level4">
 <h4 class="anchored" data-anchor-id="designing-an-algorithm">Designing an Algorithm</h4>
-<p>Some problems require more <strong>creativity to come up with an efficient algorithm</strong> that produces the correct output from a given input. Take the <strong>traveling salesman problem</strong>, where the goal is to find the shortest possible route through a given set of cities. Designing an efficient solution often involves choosing the right <strong>data structures</strong> (e.g., representing cities as nodes in a graph), using <strong>heuristics</strong>, and <strong>breaking the problem down into simpler subproblems</strong> (divide &amp; conquer strategy). If you’re working on a novel problem, studying algorithm design can be invaluable (one of my favorite books on the topic is <em>The Algorithm Design Manual</em> by Steven Skiena <span class="citation" data-cites="skiena2008algorithm">[<a href="references.html#ref-skiena2008algorithm" role="doc-biblioref">8</a>]</span>).</p>
+<p>Some problems require more <strong>creativity to come up with an efficient algorithm</strong> that produces the correct output from a given input. Take the <strong>traveling salesman problem</strong>, where the goal is to find the shortest possible route through a given set of cities. Designing an efficient solution often involves choosing the right <strong>data structures</strong> (e.g., representing cities as nodes in a graph), using <strong>heuristics</strong>, and <strong>breaking the problem down into simpler subproblems</strong> (divide &amp; conquer strategy). If you’re working on a novel problem, studying algorithm design can be invaluable (one of my favorite books on the topic is <em>The Algorithm Design Manual</em> by Steven Skiena <span class="citation" data-cites="skiena2008algorithm">[<a href="references.html#ref-skiena2008algorithm" role="doc-biblioref">9</a>]</span>).</p>
 <p>However, for many common tasks, you can <strong>leverage existing algorithms</strong> instead of reinventing the wheel. For the rest of this book, we’ll assume you already have a general idea of the steps your code needs to perform and focus on how to implement them effectively.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Practice algorithmic thinking">
 <div class="callout-header d-flex align-content-center">
@@ -566,7 +566,7 @@ Figure&nbsp;3.5: Improve efficiency through the order of steps.
 <ul>
 <li>Smaller units fit comfortably into your working memory, making them easier to understand and reason about, which lowers the overall cognitive load of your code.</li>
 <li>Since units are independent, you can change one without unintended side effects elsewhere.</li>
-<li>Well-designed, general-purpose building blocks allow you to quickly assemble more complex functionality—like constructing something out of LEGO bricks.</li>
+<li>Well-designed, general-purpose units act as building blocks, allowing you to quickly assemble more complex functionality—like constructing something out of LEGO bricks.</li>
 </ul>
 <section id="analogy-the-cupcake-recipe" class="level3">
 <h3 class="anchored" data-anchor-id="analogy-the-cupcake-recipe">Analogy: The Cupcake Recipe</h3>
@@ -611,7 +611,7 @@ Figure&nbsp;3.8: A recipe usually includes a list of ingredients followed by ins
 <section id="avoiding-repetition-reusable-steps" class="level4">
 <h4 class="anchored" data-anchor-id="avoiding-repetition-reusable-steps">Avoiding Repetition: Reusable Steps</h4>
 <p>If your recipe is part of a cookbook with multiple related recipes, some steps might apply to several of them. Instead of repeating those steps in every recipe, you can <strong>group and document them in a separate section</strong> (in code: define a <strong>function</strong>) and reference them when needed (<a href="#fig-recipe-steps3" class="quarto-xref">Figure&nbsp;<span>3.9</span></a>).</p>
-<p>This follows the <strong>Don’t Repeat Yourself (DRY)</strong> principle <span class="citation" data-cites="thomas2019pragmatic">[<a href="references.html#ref-thomas2019pragmatic" role="doc-biblioref">9</a>]</span>. Not only does this reduce redundancy, but it also makes updates easier—if a general step changes (e.g., you refine a technique or fix a typo), you only need to update it in one place (<strong>a single source of truth</strong>).</p>
+<p>This follows the <strong>Don’t Repeat Yourself (DRY)</strong> principle <span class="citation" data-cites="thomas2019pragmatic">[<a href="references.html#ref-thomas2019pragmatic" role="doc-biblioref">10</a>]</span>. Not only does this reduce redundancy, but it also makes updates easier—if a general step changes (e.g., you refine a technique or fix a typo), you only need to update it in one place (<strong>a single source of truth</strong>).</p>
 <div id="fig-recipe-steps3" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-recipe-steps3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -758,7 +758,7 @@ Similarly, a cohesive class is designed to represent one specific concept comple
 <p>As long as the interface remains unchanged, we can freely <strong>modify the implementation</strong>. For instance, we can replace the inefficient loop with a proper multiplication:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> n_times_x(x, n):</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> n <span class="op">*</span> x</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>This change improves efficiency, but since the function still works the same way externally (it’s called with the same arguments and returns the same results), no updates are required in other parts of the code. This is the power of clear boundaries.</p>
+<p>This change improves efficiency, but since the function still works the same way externally (it’s called with the same arguments and returns the same results), <strong>no updates are required in other parts of the code</strong>. This is the power of clear boundaries.</p>
 <p>However, changing a function’s <strong>name</strong>, for example, is another story. If we rename <code>n_times_x</code>, every reference to it must also be updated. Modern IDEs can automate this within a project, but if the function is used in external code (e.g., if it is part of an open source library), renaming requires a <strong>deprecation process</strong> to transition users gradually.</p>
 <p>This is why <strong>choosing stable, well-thought-out interfaces upfront saves effort in the long run</strong>.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Go deep">
@@ -781,7 +781,7 @@ Similarly, a cohesive class is designed to represent one specific concept comple
 </div>
 <section id="class-interfaces" class="level5">
 <h5 class="anchored" data-anchor-id="class-interfaces">Class Interfaces</h5>
-<p>As we already discussed, a <strong>class groups attributes and methods that belong to a single entity</strong>. For well-structured classes, we should carefully control <strong>what is public and what is private</strong>:</p>
+<p><strong>A class groups attributes and methods that belong to a single entity.</strong> For well-structured classes, we should carefully control <strong>what is public and what is private</strong>:</p>
 <ul>
 <li><strong>Public attributes &amp; methods</strong> form the external interface—changing them may break code elsewhere.</li>
 <li><strong>Private attributes &amp; methods</strong> are meant for internal use and may be modified anytime.</li>
@@ -800,7 +800,7 @@ Similarly, a cohesive class is designed to represent one specific concept comple
 <p>Access levels vary by programming language, for example:</p>
 <ul>
 <li><strong>Java</strong> has multiple levels (<code>public</code>, <code>protected</code>, <code>package</code>, <code>private</code>).</li>
-<li><strong>Python</strong> relies on convention rather than enforcement. Prefixing names with <code>_</code> or <code>__</code> signals they are <strong>“private”</strong>, though they remain accessible.</li>
+<li><strong>Python</strong> relies on convention rather than enforcement. Prefixing names with <code>_</code> or <code>__</code> signals they are <em>“private”</em>, though they remain accessible.</li>
 </ul>
 <p>While Python won’t stop users from accessing private attributes, they do so <strong>at their own risk</strong>, knowing these details might change without notice.</p>
 </div>
@@ -819,7 +819,7 @@ Similarly, a cohesive class is designed to represent one specific concept comple
 <h4 class="anchored" data-anchor-id="make-coupling-explicit">Make Coupling Explicit</h4>
 <p>To build a larger software system that does something meaningful, we must compose it from multiple components. This inevitably means our units are coupled in some way—one function must call another, so they cannot exist in complete isolation. The goal is to <strong>make this coupling explicit so that if one unit changes, it is clear how dependent units need to be updated</strong>.</p>
 <p>The most explicit form of coupling comes from referencing the <strong>public interface</strong> of a function or class. Any change in this interface should include a deprecation warning to support a smooth transition for the dependent units. The more explicit the public interface—such as using keyword arguments instead of positional ones—the safer it is to depend on this unit, since compilers and static code analysis tools can detect changes or errors ahead of time, and IDEs can assist with refactoring.</p>
-<p>Coupling becomes riskier when your code relies on a unit’s <strong>internal implementation details</strong>, like private attributes, undocumented quirks, or unintended behaviors (e.g., a function producing odd results when given inputs outside its intended range). Often, multiple parts of the code also share assumptions, such as the meaning of certain values (e.g., the magic number <code>404</code> representing the HTTP status code “not found”) or the use of a specific algorithm when encrypting and decrypting data.</p>
+<p>Coupling becomes riskier when your code relies on a unit’s <strong>internal implementation details</strong>, like private attributes, undocumented quirks, or unintended behaviors (e.g., a function producing odd results when given inputs outside its intended range). Often, multiple parts of a program also share assumptions, such as the meaning of certain values (e.g., the magic number <code>404</code> representing the HTTP status code “not found”) or the use of a specific algorithm when encrypting and decrypting data.</p>
 <p>The above examples are instances of static coupling, meaning they can be spotted in the source code directly. An even more error-prone form is <strong>dynamic coupling</strong>, visible only at runtime. For example, a class might require its methods to be called in a particular order to initialize all necessary values for a correct computation.</p>
 <p>To minimize coupling risks, <strong>identify the assumptions your code makes</strong> about how and in which context it will be used. Don’t just document the correct usage and hope it’s followed, but make interactions explicit. This can mean defining formal interfaces, validating inputs, and enforcing usage constraints in code. Otherwise, the system becomes fragile, and even small changes in unrelated areas can cause breakages.</p>
 </section>
@@ -855,7 +855,7 @@ Figure&nbsp;3.13: Complicated systems in software design often follow a hierarch
 </section>
 <section id="pure-vs.-impure-functions" class="level4">
 <h4 class="anchored" data-anchor-id="pure-vs.-impure-functions">Pure vs.&nbsp;Impure Functions</h4>
-<p>In addition to dependencies on code defined elsewhere, another form of coupling comes from <strong>relying on external resources</strong> (like files, databases, or APIs). These kinds of external dependencies are eliminated when our units are pure functions <span class="citation" data-cites="normand2021grokking">[<a href="references.html#ref-normand2021grokking" role="doc-biblioref">5</a>]</span>.</p>
+<p>In addition to dependencies on code defined elsewhere, another form of coupling comes from <strong>relying on external resources</strong> (like files, databases, or APIs), which may also change frequently. These kinds of external dependencies are eliminated when our units are pure functions <span class="citation" data-cites="normand2021grokking">[<a href="references.html#ref-normand2021grokking" role="doc-biblioref">5</a>]</span>.</p>
 <p>A <strong>pure function</strong> behaves like a mathematical function <span class="math inline">\(f: x \to y\)</span>, taking inputs <span class="math inline">\(x\)</span> and returning an output <span class="math inline">\(y\)</span>—and given the same inputs, the results will be the same every time. <strong>Impure functions</strong>, on the other hand, have side effects—they interact with the outside world, such as reading from or writing to a file or modifying global state.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(a, b):</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># pure: returns a computed result without side effects</span></span>
@@ -886,7 +886,7 @@ Figure&nbsp;3.13: Complicated systems in software design often follow a hierarch
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> result <span class="op">==</span> <span class="st">"some test result"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <section id="dependency-injection-for-flexibility" class="level5">
 <h5 class="anchored" data-anchor-id="dependency-injection-for-flexibility">Dependency Injection for Flexibility</h5>
-<p>To further decouple your code, use <strong>dependency injection</strong>: instead of hardcoding dependencies (e.g., file operations, database access), pass them as arguments. This allows functions to remain independent of specific implementations.</p>
+<p>To further decouple your code, use <strong>dependency injection</strong> <span class="citation" data-cites="percival2020architecture">[<a href="references.html#ref-percival2020architecture" role="doc-biblioref">8</a>]</span>: instead of hardcoding dependencies (e.g., file operations, database access), pass them as arguments. This allows functions to remain independent of specific implementations.</p>
 <p>Without dependency injection:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> DataSource:</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> read(<span class="va">self</span>):</span>
@@ -1015,7 +1015,7 @@ Figure&nbsp;3.13: Complicated systems in software design often follow a hierarch
 <section id="dont-repeat-yourself-dry" class="level4">
 <h4 class="anchored" data-anchor-id="dont-repeat-yourself-dry">Don’t Repeat Yourself (DRY)</h4>
 <p>A more subtle form of coupling comes from violating the <strong>DRY (Don’t Repeat Yourself) principle</strong>. For example, critical business logic—such as computing an evaluation metric, applying a discount in an e-commerce system, or validating data, like the rules that define an acceptable password—might be duplicated across several locations. If this logic needs to change (due to an error or evolving business requirements), you’d need to update multiple places, making your code harder to maintain and more prone to bugs. To avoid inconsistencies and duplicated work, make sure that important values and business rules are defined in a central place, the <strong>single source of truth</strong>.</p>
-<p>The most obvious DRY violation occurs when you catch yourself <strong>copy-pasting code</strong>—this is a clear signal to refactor it into a reusable function. However, DRY isn’t just about code; it applies to <strong>anything where a single change in requirements forces multiple updates</strong>, including tests, documentation, or data stored across different databases <span class="citation" data-cites="thomas2019pragmatic">[<a href="references.html#ref-thomas2019pragmatic" role="doc-biblioref">9</a>]</span>. To maintain your code effectively, aim to make each change in one place only. If that’s not feasible, at least keep related elements close together—for example, documenting interfaces using docstrings in the code rather than in separate files.</p>
+<p>The most obvious DRY violation occurs when you catch yourself <strong>copy-pasting code</strong>—this is a clear signal to refactor it into a reusable function. However, DRY isn’t just about code; it applies to <strong>anything where a single change in requirements forces multiple updates</strong>, including tests, documentation, or data stored across different databases <span class="citation" data-cites="thomas2019pragmatic">[<a href="references.html#ref-thomas2019pragmatic" role="doc-biblioref">10</a>]</span>. To maintain your code effectively, aim to make each change in one place only. If that’s not feasible, at least keep related elements close together—for example, documenting interfaces using docstrings in the code rather than in separate files.</p>
 </section>
 </section>
 <section id="reusable" class="level3">
@@ -1243,11 +1243,14 @@ Figure&nbsp;3.15: The full flow of your script, including external resources and
 <div id="ref-page1995every" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[7] </div><div class="csl-right-inline">Page-Jones M. <em>What Every Programmer Should Know about Object-Oriented Design</em>. Dorset House (1995).</div>
 </div>
+<div id="ref-percival2020architecture" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[8] </div><div class="csl-right-inline">Percival H, Gregory B. <em>Architecture Patterns with Python: Enabling Test-Driven Development, Domain-Driven Design, and Event-Driven Microservices</em>. O’Reilly Media, Inc. (2020).</div>
+</div>
 <div id="ref-skiena2008algorithm" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[8] </div><div class="csl-right-inline">Skiena SS. <em>The Algorithm Design Manual</em>. Springer (2020).</div>
+<div class="csl-left-margin">[9] </div><div class="csl-right-inline">Skiena SS. <em>The Algorithm Design Manual</em>. Springer (2020).</div>
 </div>
 <div id="ref-thomas2019pragmatic" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[9] </div><div class="csl-right-inline">Thomas D, Hunt A. <em>The Pragmatic Programmer: Your Journey to Mastery, 20th Anniversary Edition</em>. Addison-Wesley Professional (2019).</div>
+<div class="csl-left-margin">[10] </div><div class="csl-right-inline">Thomas D, Hunt A. <em>The Pragmatic Programmer: Your Journey to Mastery, 20th Anniversary Edition</em>. Addison-Wesley Professional (2019).</div>
 </div>
 </div>
 </section>

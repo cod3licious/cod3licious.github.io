@@ -329,7 +329,7 @@ window.Quarto = {
 </div>
 <div class="callout-body-container callout-body">
 <p>In product development, there’s a concept called the <strong>Minimum Viable Product (MVP)</strong>. This refers to the simplest version of a product that still provides value to users.</p>
-<p>The MVP serves as a prototype to gather feedback on whether the product meets user needs and to identify which features are truly essential. By iterating quickly and testing assumptions, teams can increase the odds of creating a successful product that people will actually pay for. This approach also has motivational benefits. Seeing something functional—even if basic—early on makes it easier to stay engaged. It’s far better than toiling for months without tangible results.</p>
+<p>The MVP serves as a prototype to gather feedback on whether the product meets user needs and to identify which features are truly essential. By iterating quickly and testing assumptions, teams can increase the odds of creating a successful product that people will actually pay for. This approach also has motivational benefits: Seeing something functional—even if basic—early on makes it easier to stay engaged. It’s far better than toiling for months without tangible results.</p>
 <p>You should apply the same mindset to your research software development by <strong>starting with a script that generates “Minimum Viable Results.”</strong> This means creating a program that produces outputs resembling your final results, like plots or tables, but using placeholder data instead of actual values. For instance:</p>
 <ul>
 <li>If your goal is to build a prediction model, start with one that simply predicts the mean of the observed data.</li>
@@ -618,7 +618,7 @@ Go through your code line by line and consider <strong>what is true at each step
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>When your code contains a bug, treat it as a learning opportunity. Rather than applying random fixes to resolve the issue as quickly as possible, take time to understand where the problem comes from so you can address its root cause instead of merely fighting the symptoms.</p>
+<p>When your code contains a bug, treat it as a learning opportunity. Rather than applying random fixes to resolve the issue as quickly as possible (as AI assistants often do), take time to understand where the problem comes from so you can address its root cause instead of merely fighting the symptoms.</p>
 </div>
 </div>
 <p>Debugging is an essential skill, not only to identify the root cause of bugs, but also to improve your understanding of the code and its behavior.</p>
@@ -630,13 +630,13 @@ Go through your code line by line and consider <strong>what is true at each step
 – Kent Beck (or rather his dad, Douglas Kent Beck)<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 </blockquote>
 <p>Now that your code works and produces the right results (as you’ve dutifully confirmed with thorough testing), it’s time to think about performance.</p>
-<div class="callout callout-style-default callout-important callout-titled" title="Readability over performance">
+<div class="callout callout-style-default callout-warning callout-titled" title="Readability over performance">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Readability over performance
+<span class="screen-reader-only">Warning</span>Readability over performance
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -748,7 +748,7 @@ Common refactoring tasks include:</p>
 <li><strong>Addressing technical debt</strong>:<br>
 When code is written quickly—often to meet deadlines—it may include shortcuts that make future changes harder. This accumulation of compromises is called “technical debt.” Refactoring cleans up this debt, improving code quality and making the code easier to understand.
 <ul>
-<li>Example: Revisiting old code can be like tidying up a messy campsite. Just as a good scout leaves the campground cleaner than they found it, a responsible developer leaves the codebase better for the next person (or themselves in the future).</li>
+<li>Revisiting old code can be like tidying up a messy campsite. Just as a good scout leaves the campground cleaner than they found it, a responsible developer leaves the codebase better for the next person (or themselves in the future).</li>
 </ul></li>
 <li><strong>Making change easier</strong>:<br>
 Sometimes, implementing a new feature in your existing code feels like forcing a square peg into a round hole. Instead of struggling with awkward workarounds, you should first refactor your code to align with the new requirements. The goal of software design isn’t to predict every possible future change (which is impossible) but to adapt gracefully when those changes arise. This promotes an evolutionary architecture, where you solve problems once you understand them better <span class="citation" data-cites="ford2022building">[<a href="references.html#ref-ford2022building" role="doc-biblioref">3</a>]</span>.
@@ -768,7 +768,7 @@ Sometimes, implementing a new feature in your existing code feels like forcing a
 <div class="callout-body-container callout-body">
 <ul>
 <li><strong>Test as you refactor</strong>: Always run tests before and after refactoring to ensure no functionality is accidentally broken. Writing or expanding automated tests is often part of the process to safeguard against regressions.</li>
-<li><strong>Leverage IDE support</strong>: Modern IDEs like PyCharm or Visual Studio Code provide tools for automated refactoring, such as renaming, extracting functions, or moving files. These can save time and reduce errors.</li>
+<li><strong>Leverage IDE support</strong>: Modern IDEs like PyCharm or VS Code provide tools for automated refactoring, such as renaming, extracting functions, or moving files. These can save time and reduce errors.</li>
 <li><strong>Avoid over-refactoring</strong>: While cleaning up code is valuable, avoid making unnecessary changes that don’t improve functionality or clarity. Over-refactoring wastes time and can confuse collaborators.</li>
 </ul>
 </div>
@@ -821,8 +821,8 @@ Sometimes, implementing a new feature in your existing code feels like forcing a
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> model.is_ready():</span>
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p><strong>Implement wrappers</strong>: When working with external libraries or APIs, their provided interface might not align with your needs, and adapting to it directly can lead to awkward implementations in your code. A better solution is to create a wrapper that implements <strong>the interface you wish you had</strong>, translating the external API’s inputs and outputs into the format that best suits your implementation. This approach keeps your code clean, consistent, and easier to maintain, while confining the less-than-ideal API interactions to a single location. Plus, if the external API changes, you only need to update the wrapper instead of changing your code everywhere—which is why these wrappers are also called <em>anti-corruption layers</em>.</p></li>
-<li><p><strong>Use alternative constructors</strong>: Similar to a wrapper, you can add a class method to create objects in a way that’s different from the regular constructor. This is useful when the input data doesn’t directly match what the constructor needs. For instance, imagine you have a configuration file that specifies settings for a simulation. If the names or structure of these settings don’t match the constructor’s parameters, you can create a <code>from_config</code> method to handle the translation and then call the constructor with the correct arguments. The advantage is that if the format of the configuration file changes in the future, you only need to update this one method, keeping the rest of your code the same.</p>
+<li><p><strong>Implement wrappers</strong>: When working with external libraries or APIs, their provided interface might not align with your needs, and adapting to it directly can lead to awkward implementations in your code. A better solution is to create a wrapper that implements <strong>the interface you wish you had</strong>, translating the external API’s inputs and outputs into the format that best suits your implementation. This approach keeps your code clean, consistent, and easier to maintain, while confining the less-than-ideal API interactions to a single location. Plus, if the external API changes, you only need to update this one wrapper instead of changing your code everywhere—which is why these wrappers are also called <em>anti-corruption layers</em>.</p></li>
+<li><p><strong>Use alternative constructors</strong>: Similar to a wrapper, you can add a function or class method to create objects in a way that’s different from the regular constructor. This is useful when the input data doesn’t directly match what the constructor needs. For instance, imagine you have a configuration file that specifies settings for a simulation. If the names or structure of these settings don’t match the constructor’s parameters, you can create a <code>from_config</code> method to handle the translation and then call the constructor with the correct arguments. The advantage is that if the format of the configuration file changes in the future, you only need to update this one method, keeping the rest of your code the same.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Date:</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, year, month, day):</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>      <span class="va">self</span>.year <span class="op">=</span> year</span>

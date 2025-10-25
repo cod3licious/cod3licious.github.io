@@ -373,7 +373,7 @@ Modern relational databases, such as Postgres, blur the line between structured 
 <p>When choosing a database, you’ll also want to consider how the data will be used later:</p>
 <ul>
 <li><strong>Transactional processing (OLTP):</strong> In this use case, individual records are frequently created and retrieved (e.g., financial transactions). These systems prioritize fast write speeds and maintaining an up-to-date view of the data.</li>
-<li><strong>Batch analytics (OLAP):</strong> Data analysis is often performed in large batches to generate reports or insights, such as identifying which products users purchased last month. To avoid overloading the operational database with complex queries, data is typically copied from transactional systems into analytical systems (e.g., data warehouses) using an ETL process (Extract-Transform-Load).</li>
+<li><strong>Batch analytics (OLAP):</strong> Data analysis is often performed in large batches to generate reports or insights, such as identifying which products users purchased last month. To avoid overloading the operational database with complex queries, data is often copied from transactional systems into analytical systems (e.g., data warehouses) using an ETL process (Extract-Transform-Load).</li>
 <li><strong>Real-time analytics:</strong> For applications requiring live data (e.g., interactive dashboards), databases and frameworks optimized for streaming or in-memory processing (e.g., Apache Flink) are ideal.</li>
 </ul>
 <p>Scaling your database system is another critical factor. Consider how many users will access it simultaneously, how much data they’ll retrieve, and how often it will be updated.</p>
@@ -415,7 +415,7 @@ Relationships between tables can be <strong>bidirectional</strong> or <strong>un
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The <a href="https://sqlmodel.tiangolo.com/">SQLModel</a> library is highly recommended when working with relational databases in Python and also includes a great <a href="https://sqlmodel.tiangolo.com/learn/">tutorial</a> to learn more about ORMs and databases in general. For database migrations, check out <a href="https://alembic.sqlalchemy.org/">Alembic</a>.</p>
+<p>The <a href="https://sqlmodel.tiangolo.com/">SQLModel</a> library is highly recommended when working with relational databases in Python and also includes a great <a href="https://sqlmodel.tiangolo.com/learn/">tutorial</a> to learn more about ORMs and databases in general. To manage database migrations, check out <a href="https://alembic.sqlalchemy.org/">Alembic</a>.</p>
 </div>
 </div>
 </section>
@@ -532,7 +532,7 @@ Data that needs to be persisted can be stored either in the frontend (client) or
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><a href="https://fastapi.tiangolo.com/">FastAPI</a> is a Python framework that makes building APIs straightforward. With just a few lines of code, you can turn a function into an endpoint that validates input and returns a JSON response. It’s beginner-friendly and highly performant.</p>
+<p><a href="https://fastapi.tiangolo.com/">FastAPI</a> is a Python framework that makes building APIs straightforward. With just a few lines of code, you can turn a function into an endpoint that validates inputs and returns a JSON response. It’s beginner-friendly and highly performant.</p>
 </div>
 </div>
 </section>
@@ -545,7 +545,7 @@ Data that needs to be persisted can be stored either in the frontend (client) or
 <img src="../images/06_production/game_local.png" class="img-fluid figure-img" style="width:60.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-game-local-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.3: The user interacts only with their device to play chess against a simple bot locally on their phone. The small database icon next to the phone symbolizes the local storage on your phone, where the current game state is saved after each move in case the app is closed so that you can retrieve this saved state the next time you open the app and continue with the game.
+Figure&nbsp;6.3: The user interacts only with their device to play chess against a simple bot locally on their phone. The small database icon next to the phone symbolizes the local storage on your phone, where the current game state is saved after each move in case the app is closed so that you can retrieve this saved state the next time you open the app to continue with the game.
 </figcaption>
 </figure>
 </div>
@@ -810,7 +810,7 @@ Figure&nbsp;6.7: Wireframes with colored elements to indicate whether the shown 
 <ol>
 <li id="fn1"><p>I recommend choosing a framework that follows a <a href="https://en.wikipedia.org/wiki/Reactive_programming">reactive programming style</a>, as this often leads to simpler implementations compared to manually handling events in imperative, callback-driven frameworks.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>This use case could also be implemented using an event-driven architecture as discussed in the next section. With this setup, both players would publish their next moves to a message queue and subscribe to it to receive updates about the moves of their opponent.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Tools like <a href="https://crontab.guru/">Crontab Guru</a> can help configure these schedules.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Check out <a href="https://crontab.guru/">Crontab Guru</a> to configure these schedules.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

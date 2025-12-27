@@ -90,21 +90,42 @@ ul.task-list li input[type="checkbox"] {
 <section id="why-another-model" class="level2">
 <h2 class="anchored" data-anchor-id="why-another-model">Why Another Model?</h2>
 <p>Yes, there already exist <strong>plenty of modeling notations and workshop formats</strong> that have proven their value in many contexts (check out the book <a href="https://leanpub.com/visualcollaborationtools"><em>Visual Collaboration Tools</em></a> for an overview). This article is not an argument against any of these tools.</p>
-<p>Still, despite being a great source of inspiration, somehow none of these methods felt exactly right for what I was trying to accomplish when creating the diagrams for <a href="https://franziskahorn.de/rsebook">my latest book</a>. So, just in case I’m not the only one out there yearning for an alternative approach, I figured I might as well share my notation and the ideas behind it in more detail.</p>
-<p>Let’s first acknowledge that <strong>systems can be modeled at different levels of abstraction</strong> (<a href="#fig-abstraction-levels" class="quarto-xref">Figure&nbsp;1</a>). For example, while techniques like <a href="https://cucumber.io/blog/bdd/example-mapping-introduction/"><em>Example Mapping</em></a> help uncover the business rules that determine the system’s behavior at a very granular level, tools like <a href="https://github.com/ddd-crew/context-mapping"><em>Context Mapping</em></a> or a <a href="https://c4model.com/diagrams/system-context"><em>C4 System context diagram</em></a> allow us to zoom all the way out. In this article, we focus on the middle ground: individual processes.</p>
-<div id="fig-abstraction-levels" class="quarto-float quarto-figure quarto-figure-center anchored">
+<p>Still, despite being a great source of inspiration, somehow none of these methods felt exactly right for what I was trying to accomplish when creating the diagrams for <a href="https://franziskahorn.de/rsebook">my latest book</a>. So, just in case I’m not the only one out there yearning for an alternative approach, I wanted to share my notation and the ideas behind it in more detail.</p>
+<section id="modeling-from-different-perspectives" class="level4">
+<h4 class="anchored" data-anchor-id="modeling-from-different-perspectives">Modeling from Different Perspectives</h4>
+<p>Let’s start by acknowledging that <strong>systems can be modeled from different perspectives</strong> (<a href="#fig-system-perspectives" class="quarto-xref">Figure&nbsp;1</a>).</p>
+<p>One perspective focuses on a system’s <strong>structure</strong>: how individual elements are organized and composed into larger subsystems, typically in a bottom-up manner. Examples include:</p>
+<ul>
+<li>Cells → Organs → Human body</li>
+<li>Employees → Teams → Departments → Company</li>
+<li>Lines of code → Functions and classes → Modules (files and folders) → Repository or deployable service</li>
+</ul>
+<p>Tools such as <a href="https://github.com/ddd-crew/context-mapping"><em>Context Mapping</em></a> and the <a href="https://c4model.com/"><em>C4 Model</em></a> are well suited to describing this structural view of (software) systems.</p>
+<p>Another perspective focuses on <strong>behavior</strong>: what the system does over time. Examples include:</p>
+<ul>
+<li>Transporting oxygen-rich blood to cells</li>
+<li>Onboarding a new employee</li>
+<li>A user interacting with a mobile app to accomplish a task</li>
+</ul>
+<p>These behaviors can be described as <strong>processes</strong>, which are the focus of this article.</p>
+<p>Processes themselves can be examined at different levels of granularity. Here, we deliberately stay at a higher level of abstraction.<br>
+Techniques such as <a href="https://cucumber.io/blog/bdd/example-mapping-introduction/"><em>Example Mapping</em></a> are better suited for zooming in further and uncovering the detailed business rules that govern individual steps.</p>
+<div id="fig-system-perspectives" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-abstraction-levels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/iafm/abstraction_levels.png" class="img-fluid figure-img" style="width:90.0%">
+<div aria-describedby="fig-system-perspectives-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/iafm/system_perspectives.png" class="img-fluid figure-img" style="width:90.0%">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-abstraction-levels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: At the highest level of abstraction, a system, like an organization, is composed of multiple components, like business domains, each with its own set of processes. A process, in turn, consists of individual actions or steps. Zooming in further, we arrive at the level of business logic, where operations, decision points, and loops detail how each step is executed.
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-system-perspectives-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: A system has a structure, defined by how individual elements form subsystems, and exhibits behaviors that can be described as processes. Zooming into a process step reveals business rules and logic, where individual operations, decision points, and loops detail how each step is executed.
 </figcaption>
 </figure>
 </div>
+</section>
+<section id="process-modeling" class="level4">
+<h4 class="anchored" data-anchor-id="process-modeling">Process Modeling</h4>
 <p>Existing tools to model processes all optimize for slightly different goals, for example:</p>
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Unified_Modeling_Language"><em>UML</em></a> and <a href="https://en.wikipedia.org/wiki/Business_Process_Model_and_Notation"><em>BPMN</em></a> are well-established standards for modeling software architectures and business processes. They allow for very detailed and precise diagrams, but their specialized notation often makes the resulting models inaccessible to non-experts. They were also primarily intended for documentation rather than collaborative exploration.</li>
+<li><a href="https://en.wikipedia.org/wiki/Unified_Modeling_Language"><em>UML</em></a> and <a href="https://en.wikipedia.org/wiki/Business_Process_Model_and_Notation"><em>BPMN</em></a> are well-established standards for modeling software architectures and business processes. They allow for very detailed and precise diagrams, but their specialized notation often makes the resulting models difficult to grasp for non-experts. They were also primarily intended for documentation rather than collaborative exploration.</li>
 <li><a href="https://www.eventstorming.com/"><em>EventStorming</em></a> is a popular collaborative modeling technique that emphasizes accessibility by using plain-language domain events. It works particularly well for discovering domain concepts and behavior, especially in unfamiliar problem spaces. However, the initial chaotic exploration phase can quickly become visually overwhelming, and as more structure and technical details are added, the resulting model often becomes difficult to follow. Additionally, expressing events in the past tense is unintuitive for many participants.</li>
 <li><a href="https://domainstorytelling.org/"><em>Domain Storytelling</em></a> focuses on interactions between actors and objects and produces diagrams that are easy to understand and discuss. While effective for creating a shared overview, the temporal sequence of a process is represented indirectly through numbered arrows, which can make it harder to perceive the overall flow at a glance in more complex scenarios.</li>
 </ul>
@@ -114,7 +135,8 @@ Figure&nbsp;1: At the highest level of abstraction, a system, like an organizati
 <li>A clear view of the <strong>process over time</strong>, with explicit separation of the <strong>different actors involved</strong>.</li>
 <li>A notation that supports <strong>direct translation of the modeled process into a software implementation</strong>.</li>
 </ul>
-<p>The technique that comes closest to InterAction Flow Mapping is <a href="https://eventmodeling.org/posts/what-is-event-modeling/"><em>Event Modeling</em></a>. It visualizes wireframes alongside read and write operations that aggregate event-based data from multiple sources. The resulting diagrams are easy for domain experts to follow while still providing a rough blueprint for developers. In practice, however, I found these models map more naturally to event-sourced architectures and often require an extra translation step when implementing a process with a simpler design based on relational databases.</p>
+<p>The technique that comes closest to InterAction Flow Mapping is <a href="https://eventmodeling.org/posts/what-is-event-modeling/"><em>Event Modeling</em></a>. It visualizes wireframes alongside read and write operations that aggregate event-based data from multiple sources. The resulting diagrams are easy for domain experts to follow while still providing a rough implementation blueprint for developers. In practice, however, I found these models map more naturally to event-sourced architectures and often require an extra translation step when implementing a process with a simpler design based on relational databases.</p>
+</section>
 </section>
 <section id="the-interaction-flow-notation" class="level2">
 <h2 class="anchored" data-anchor-id="the-interaction-flow-notation">The InterAction Flow Notation</h2>
@@ -126,7 +148,7 @@ Figure&nbsp;1: At the highest level of abstraction, a system, like an organizati
 </ul>
 <p>The visual elements are intentionally minimal (<a href="#fig-legend" class="quarto-xref">Figure&nbsp;2</a>):</p>
 <ul>
-<li><strong>Action boxes</strong> describe what an actor does, labeled with a short phrase in present tense starting with a verb (e.g., <em>verify credentials</em>). These actions should be meaningful at the business level and plausibly map to a function, endpoint, or responsibility in software.<br>
+<li><strong>Action boxes</strong> describe what an actor does, labeled with a short phrase in present tense starting with a verb (e.g., <em>verify credentials</em>). These actions should be meaningful at the business level and plausibly map to a function, API endpoint, or responsibility in software.<br>
 <strong>Start and end markers</strong> indicate where the process begins and terminates. These borrow from BPMN but are optional—feel free to use normal stickies in a CoMo session.</li>
 <li><strong>Arrows</strong> connect actions across swimlanes and are labeled with the <strong>information being exchanged</strong>. In software terms, these often correspond to input parameters and return values.</li>
 <li><strong>Resource icons</strong> indicate where data is read or written during an action.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
@@ -171,7 +193,7 @@ Figure&nbsp;4: Software-enabled process to reserve a hotel room: the user opens 
 <img src="images/iafm/hotel_ai_agent.png" class="img-fluid figure-img" style="width:60.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hotel-ai-agent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5: Process excerpt from a conversation with an AI agent, with the goal of finding a hotel room: the user submits a prompt; the Large Language Model (LLM) powering the agent analyzes it, determines which tools to use to gather the required information, calls those tools (in this case, an external API for hotel search), and then synthesizes a response from the results. Since this process step is more complex, it makes sense to spell out the individual subactions explicitly—while avoiding too much detail, so the overall process still remains understandable at a high level.
+Figure&nbsp;5: Process excerpt showing a conversation with an AI agent, with the goal of finding a hotel room: the user submits a prompt; the Large Language Model (LLM) powering the agent analyzes it, determines which tools to use to gather the required information, calls those tools (in this case, an external API for hotel search), and then synthesizes a response from the results. Since this process step is more complex, it makes sense to spell out the individual subactions explicitly—while avoiding too much detail, so the overall process still remains understandable at a high level.
 </figcaption>
 </figure>
 </div>
@@ -198,7 +220,7 @@ Figure&nbsp;5: Process excerpt from a conversation with an AI agent, with the go
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>If you feel compelled to add conditionals or loops to your flow, this is a signal to pause and reconsider the level of abstraction. In most cases, branching behavior happens <em>inside</em> an action and does not need to be visible at the overview level.<br>
+<p>If you feel compelled to add conditionals or loops to your flow, this is a signal to pause and reconsider the level of abstraction. A lot of branching behavior happens <em>inside</em> an action and does not need to be visible at the overview level.<br>
 When branching paths are central to the discussion, <strong>start by modeling the happy path</strong> and add annotations where alternatives exist, or create a separate diagram that starts at the branching point to explore the alternative flow.</p>
 </div>
 </div>
@@ -232,7 +254,7 @@ Figure&nbsp;6: Software-enabled process to book a hotel room with more details, 
 <li>designing a new (to-be) process, or</li>
 <li>improving an existing (as-is) process.</li>
 </ol>
-<p>Both workshops can be run in-person or remotely<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Feel free to adapt the workshop format to your needs!</p>
+<p>Both workshops can be run in-person or remotely<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Feel free to adapt these workshop formats to your needs!</p>
 <p>For more tips on how to conduct successful Collaborative Modeling sessions, please refer to the excellent book <a href="https://www.manning.com/books/collaborative-software-design"><em>Collaborative Software Design</em></a>.</p>
 <section id="designing-a-new-to-be-process" class="level3">
 <h3 class="anchored" data-anchor-id="designing-a-new-to-be-process">Designing a New (To-Be) Process</h3>
@@ -250,13 +272,13 @@ Figure&nbsp;6: Software-enabled process to book a hotel room with more details, 
 <li><strong>Braindrawing (together, alone):</strong> Give participants 5–10 minutes to independently sketch the process from their perspective, focusing on actors and their actions.<br>
 
 <ul>
-<li>A useful approach is to start with user interactions, then refine required data, its sources, and persistence.</li>
-<li>For in-person sessions, provide paper and pencils; for remote sessions, prepare individual whiteboard frames with example elements.</li>
+<li>A useful approach is to start with user interactions and then move on to refining the required data, its sources, and persistence.</li>
+<li>For in-person sessions, provide paper and pencils; for remote sessions, prepare an individual whiteboard frame with example elements for each participant.</li>
 </ul></li>
 <li><strong>Gallery walk:</strong> Allow time for participants to review each other’s diagrams.</li>
 <li><strong>Select a starting point:</strong> Choose one diagram as the basis for the shared InterAction Flow—preferably via dot voting during the gallery walk, or by facilitator choice if time is limited.</li>
-<li><strong>Incremental refinement:</strong> Starting with the author of the selected diagram, participants take turns explaining their view while the group incrementally refines the shared InterAction Flow.</li>
-<li><strong>[Optional] Compare with the as-is process:</strong> When redesigning an existing process, compare the new flow with the current-state diagram (including pain points) to ensure no key steps are missing and major issues are addressed.</li>
+<li><strong>Incremental refinement:</strong> Starting with the author of the selected diagram, participants take turns explaining their view while the group incrementally refines the shared InterAction Flow based on the new perspective.</li>
+<li><strong>[Optional] Compare with the as-is process:</strong> When redesigning an existing process, compare the new flow with the current-state diagram (including any identified pain points) to ensure no key steps are missing and major issues are addressed.</li>
 </ol>
 <p>For software projects, the InterAction Flow can be refined further to aid the implementation (as in <a href="#fig-hotel-software-details" class="quarto-xref">Figure&nbsp;6</a>) by splitting into two groups:</p>
 <ul>

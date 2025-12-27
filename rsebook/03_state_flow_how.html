@@ -361,13 +361,13 @@ Figure&nbsp;4.2: To be useful, our code needs to have an effect on the outside w
 <ul>
 <li>Writing a log message with the result from a calculation to the console.</li>
 <li>Displaying information in a graphical user interface (GUI) and asking the user for input.</li>
-<li>Reading inputs from or writing outputs to a file (e.g., an Excel spreadsheet or a PNG image).</li>
-<li>Creating, reading, updating, or deleting records in a database.</li>
-<li>Querying an external web API (e.g., through a GET or POST request).</li>
+<li>Writing outputs to a file (e.g., an Excel spreadsheet or a PNG image).</li>
+<li>Creating, updating, or deleting records in a database.</li>
+<li>Querying an external web API (e.g., through a POST request).</li>
 <li>Sending an email.</li>
 <li>Transmitting the necessary signals to move the actuators in a robotic arm.</li>
 </ul>
-<p>In the previous chapter, we’ve talked at length about what outputs we should show our users to create an optimal user experience. In <a href="05_from_research_to_production.html" class="quarto-xref"><span>Chapter 6</span></a>, we’ll cover how our program can interact with external systems through APIs. So let’s now turn to the topic of data persistence.</p>
+<p>In the previous chapter, we’ve talked at length about what outputs we should show our users to create an optimal user experience. In <a href="05_from_research_to_production.html" class="quarto-xref"><span>Chapter 6</span></a>, we’ll cover how our program can interact with external systems through (web) APIs. So let’s now turn to the topic of data persistence.</p>
 <section id="data-persistence" class="level4">
 <h4 class="anchored" data-anchor-id="data-persistence">Data Persistence</h4>
 <p>As our code runs, all the data it generates through its calculations and transformations is only present in the computer’s working memory (RAM). Once the program terminates—whether because it is finished with its task or crashes due to an error—these in-memory values are gone. It can therefore be helpful to <strong>persist (i.e., save) intermediate results</strong> while our code is executed.</p>
@@ -375,7 +375,7 @@ Figure&nbsp;4.2: To be useful, our code needs to have an effect on the outside w
 <ul>
 <li>You run simulations that output data to CSV files. These files are then used by a separate script to generate plots.</li>
 <li>You define model settings in a <code>config.json</code> file, which your script reads to initialize the model with the correct configuration.</li>
-<li>A user fills out a form on a website. Their information is stored in a database so it can later be retrieved and displayed on their account page.</li>
+<li>A user fills out a form on a website. Their information is stored in a database so it can later be retrieved and displayed on their profile page.</li>
 </ul>
 <p>In these cases especially, it’s important to <strong>carefully design the structure</strong> of this intermediate data—what fields it includes, what they’re called, and how they’re organized. Because if you later need to <strong>change the format</strong>, you’ll have to <strong>update both the producer and consumer processes</strong>, and potentially <strong>migrate existing data</strong>.</p>
 <p>To design an effective structure, start by identifying the fields required by the downstream process. Then consider whether other processes will use this data and if they might need additional fields. You might also want to store the data at a finer level of detail than what’s currently needed. It’s much easier to extract or summarize detailed data later than to reverse-engineer missing details from aggregate values. For example, if you first plan to plot only the final simulation outcome but later want to show values over time, you must have saved the variables at each time step.</p>
@@ -390,7 +390,7 @@ Figure&nbsp;4.2: To be useful, our code needs to have an effect on the outside w
 </div>
 <div class="callout-body-container callout-body">
 <p>If your code is supposed to do more than generate result plots—for example, if you’re running a simulation—you also need to <strong>plan your experiment runs</strong>.<br>
-Think about the data each experiment run will generate and how you’ll process it later. For instance, you might need a separate script that loads data from different runs to create additional plots comparing the performance of multiple models. This is simplified by using <strong>a clear naming convention</strong> for all output files, such as:</p>
+Think about the data each experiment run will generate and how you’ll process it later. For instance, you might need a separate script that loads data from multiple runs to create additional plots comparing the performance of different models. This is simplified by using <strong>a clear naming convention</strong> for all output files, such as:</p>
 <pre><code>{dataset}_{model}_{model_settings}_{seed}.csv</code></pre>
 <p>To determine all possible configuration variants for your experiments, consider:</p>
 <ul>
@@ -407,7 +407,7 @@ Think about the data each experiment run will generate and how you’ll process 
 </section>
 <section id="state-flow" class="level3">
 <h3 class="anchored" data-anchor-id="state-flow">State &amp; Flow</h3>
-<p>Code, at its core, is about <strong>transforming inputs into outputs</strong>. For example, a script could contain the steps needed to turn the data read from a spreadsheet (input) into a result plot shown to the user (output).</p>
+<p>Code, at its core, is about <strong>transforming inputs into outputs</strong> <span class="citation" data-cites="thomas2019pragmatic">[<a href="references.html#ref-thomas2019pragmatic" role="doc-biblioref">10</a>]</span>. For example, a script could contain the steps needed to turn the data read from a spreadsheet (input) into a result plot shown to the user (output).</p>
 <p>To drive this transformation process, the code defines a sequence of operations (e.g., adding or multiplying values), conditional statements (e.g., <code>if/else</code>), and loops (e.g., <code>for</code> and <code>while</code>)—collectively known as an algorithm or <strong>control flow</strong>.<br>
 As these instructions are executed, both the inputs and the intermediate results are stored in variables, which represent the current <strong>state</strong> of the program.</p>
 <section id="data-structures" class="level4">
@@ -664,6 +664,19 @@ Figure&nbsp;4.11: Some components have variants that can be used as drop-in repl
 <section id="encapsulated" class="level3">
 <h3 class="anchored" data-anchor-id="encapsulated">Encapsulated</h3>
 <p>Reading through a long script can be overwhelming. To make code easier to understand, we can <strong>group related lines into units such as functions and classes</strong>—a practice called <strong>encapsulation</strong>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Encapsulation and cognitive load">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Encapsulation and cognitive load
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Once a block of code exceeds the limits of our working memory, it becomes hard to reason about. Splitting code into functions leverages the fact that <strong>our brains handle meaningful chunks far better than long sequences of individual elements</strong>. Remembering <code>177619181945196919892001</code> is difficult, but grouping the same digits into familiar chunks—1776, 1918, 1945, 1969, 1989, 2001—makes it easy. Functions apply the same principle: they collapse many low-level details into a single, named concept. However, this only works if the chunks are meaningful; splitting code arbitrarily adds indirection and creates confusion.</p>
+</div>
+</div>
 <p>As a first step, <strong>reorder the lines</strong> in your code so they <strong>follow overarching logical steps</strong>, such as <em>data preprocessing</em> or <em>model fitting</em>. For example, if you define a variable at the top of the script, then execute some unrelated computations, and only later use that variable, move the definition down so it’s closer to where it’s actually used. This alone already makes your script easier to follow because the reader doesn’t have to keep unrelated variables in mind while trying to understand what’s happening. You’ll know you’ve succeeded when your code is organized into separate blocks, each representing a distinct process step. You can even add a brief comment above each block describing, at a high level, what the following lines do.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Before:</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> ...     <span class="co"># data</span></span>
@@ -777,6 +790,7 @@ Similarly, a cohesive class is designed to represent one specific concept comple
 <li>Or a one-liner function might implement a complex formula that users shouldn’t need to understand.</li>
 </ul>
 <p>But if your function is called <code>n_times_x</code>, and the implementation is just a one-liner doing exactly that, the abstraction does not help to reduce cognitive load. 😉 As a general rule, <strong>a unit’s interface should be significantly easier to understand than its implementation.</strong></p>
+<p>Think of calling a function like <strong>handing off a task to a colleague</strong>: if it takes ten minutes to explain the relevant context (= many input arguments) so they can complete a task that would have taken you one minute, the handoff isn’t effective. But if the task requires specialized expertise (= a complex implementation), you’re happy to delegate it to a properly trained colleague and just get the result back.</p>
 </div>
 </div>
 <section id="class-interfaces" class="level5">
@@ -786,7 +800,7 @@ Similarly, a cohesive class is designed to represent one specific concept comple
 <li><strong>Public attributes &amp; methods</strong> form the external interface—changing them may break code elsewhere.</li>
 <li><strong>Private attributes &amp; methods</strong> are meant for internal use and may be modified anytime.</li>
 </ul>
-<p>It is often useful to <strong>make attributes private</strong> and then <strong>control how they are accessed or modified through methods</strong>. This also implies that any external function that needs to directly access or update an object’s attributes may be better implemented as a method within the corresponding class.</p>
+<p>It is often useful to <strong>make attributes private</strong> and then <strong>control how they are accessed or updated through methods</strong>. This also implies that any external function that needs to modify an object’s attributes may be better implemented as a method within the corresponding class.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Public and private in different languages">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1133,13 +1147,13 @@ Figure&nbsp;4.13: Complicated systems in software design often follow a hierarch
 </section>
 <section id="summary-from-working-to-good-code" class="level3">
 <h3 class="anchored" data-anchor-id="summary-from-working-to-good-code">Summary: From Working to Good Code</h3>
-<p>With these best practices in mind, revisit the steps you outlined when working backward from your desired output (in our case a plot) to the necessary inputs (data):</p>
+<p>With these best practices in mind, revisit the steps you outlined when working backward from your desired output (in our case a plot) to the necessary inputs (data) and transform your <em>working code</em> into <em>good code</em>:</p>
 <ol type="1">
 <li><strong>Group related steps into reusable functions.</strong> Functions like <code>load_data</code>, <code>fit_model</code>, <code>predict_with_model</code>, and <code>compute_r2</code> help structure your code and prevent redundancy (DRY principle).</li>
 <li><strong>Identify explicit and implicit inputs and outputs:</strong>
 <ul>
-<li><strong>Inputs</strong>: Passed as function arguments or read from external sources (files, databases, APIs—but avoid global variables!).</li>
-<li><strong>Outputs</strong>: Return values or data written to an external source (and other side effects, like modifying input arguments).</li>
+<li><strong>Inputs</strong>: Passed as function arguments or read from external sources (files, databases, APIs).</li>
+<li><strong>Outputs</strong>: Return values or data written to an external source (but avoid other side effects, like modifying input arguments or global variables).</li>
 </ul></li>
 <li><strong>Extract pure functions</strong>, which use only explicit inputs (arguments) and outputs (return values), from functions that rely on external resources or have other side effects. For example, if <code>load_data</code> includes both file I/O and preprocessing, separate out <code>preprocess</code> as a pure function to improve testability. Additionally, consider opportunities for <strong>dependency injection</strong>.</li>
 <li><strong>Encapsulate related variables and functions into classes</strong>:
@@ -1271,7 +1285,7 @@ Figure&nbsp;4.15: The full flow of your script, including external resources and
     if (img.getAttribute('style')) {
       const styleWidth = img.getAttribute('style').match(/width:\s*([\d.]+)%/); // Extract percentage
       if (styleWidth) {
-        const percentage = parseFloat(styleWidth[1]) / 100;
+        let percentage = parseFloat(styleWidth[1]) / 100;
         if (percentage < 1) {
           percentage *= 0.87  // had to increase image width for pdf
         }

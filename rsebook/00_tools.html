@@ -678,7 +678,7 @@ Examples include:</p>
     if (img.getAttribute('style')) {
       const styleWidth = img.getAttribute('style').match(/width:\s*([\d.]+)%/); // Extract percentage
       if (styleWidth) {
-        const percentage = parseFloat(styleWidth[1]) / 100;
+        let percentage = parseFloat(styleWidth[1]) / 100;
         if (percentage < 1) {
           percentage *= 0.87  // had to increase image width for pdf
         }

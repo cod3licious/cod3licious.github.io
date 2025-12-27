@@ -616,7 +616,7 @@ Figure&nbsp;6.6: A simplified flow showing what happens when a user orders somet
 </figure>
 </div>
 <p><strong>Begin by visualizing the flow from the user’s perspective</strong>, focusing on how they interact with the client to complete their intended task. Start by brainstorming user stories <span class="citation" data-cites="patton2014user">[<a href="references.html#ref-patton2014user" role="doc-biblioref">8</a>]</span>, i.e., what users would like to do (e.g., finding and purchasing products), and then move on to creating the wireframes and mockups that could support these interactions.</p>
-<p>Once the user experience is clear, <strong>continue with the server and data store layers</strong> and map out how these can support and implement each step:</p>
+<p>Once the user experience is clear, <strong>continue with the server and data store layers</strong> and map out how these can support and implement each step:<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
 <ul>
 <li>What data is needed to render the GUI?</li>
 <li>What data needs to be persisted in the database for later?</li>
@@ -811,6 +811,7 @@ Figure&nbsp;6.7: Wireframes with colored elements to indicate whether the shown 
 <li id="fn1"><p>I recommend choosing a framework that follows a <a href="https://en.wikipedia.org/wiki/Reactive_programming">reactive programming style</a>, as this often leads to simpler implementations compared to manually handling events in imperative, callback-driven frameworks.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>This use case could also be implemented using an event-driven architecture as discussed in the next section. With this setup, both players would publish their next moves to a message queue and subscribe to it to receive updates about the moves of their opponent.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>Check out <a href="https://crontab.guru/">Crontab Guru</a> to configure these schedules.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Have a look at my article <a href="https://franziskahorn.de/articles/interaction_flow_mapping.html"><em>InterAction Flow Mapping</em></a> to learn more about the notation and tips for co-creating these diagrams in collaborative modeling sessions.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
@@ -821,7 +822,7 @@ Figure&nbsp;6.7: Wireframes with colored elements to indicate whether the shown 
     if (img.getAttribute('style')) {
       const styleWidth = img.getAttribute('style').match(/width:\s*([\d.]+)%/); // Extract percentage
       if (styleWidth) {
-        const percentage = parseFloat(styleWidth[1]) / 100;
+        let percentage = parseFloat(styleWidth[1]) / 100;
         if (percentage < 1) {
           percentage *= 0.87  // had to increase image width for pdf
         }

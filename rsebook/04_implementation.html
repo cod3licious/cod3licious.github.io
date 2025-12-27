@@ -339,7 +339,7 @@ window.Quarto = {
 <p>This approach also serves as a <strong>“stupid baseline”</strong>—a simple, easy-to-beat reference point for your final method. It’s a sanity check: if your sophisticated model can’t outperform a baseline that always predicts the mean, something’s off.</p>
 </div>
 </div>
-<p>To organize implementation steps and track progress, consider using a <strong>Kanban board</strong>, a tool commonly used in project management. Software like Trello, Notion, or Linear can help you create Kanban boards, where you can describe tasks in more detail (e.g., adding sketches of the plots you want to generate) compared to a simple to-do list.</p>
+<p>To organize implementation steps and track progress, consider using a <strong>Kanban board</strong>, a tool commonly used in project management. Software like Trello, Notion, or Linear can help you create Kanban boards, where you can describe tasks in more detail compared to a simple to-do list (e.g., adding sketches of the plots you want to generate).</p>
 </section>
 <section id="from-concept-to-code" class="level2">
 <h2 class="anchored" data-anchor-id="from-concept-to-code">From Concept to Code</h2>
@@ -940,7 +940,7 @@ Sometimes, implementing a new feature in your existing code feels like forcing a
     if (img.getAttribute('style')) {
       const styleWidth = img.getAttribute('style').match(/width:\s*([\d.]+)%/); // Extract percentage
       if (styleWidth) {
-        const percentage = parseFloat(styleWidth[1]) / 100;
+        let percentage = parseFloat(styleWidth[1]) / 100;
         if (percentage < 1) {
           percentage *= 0.87  // had to increase image width for pdf
         }

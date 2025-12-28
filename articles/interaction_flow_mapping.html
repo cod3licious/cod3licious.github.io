@@ -108,7 +108,7 @@ ul.task-list li input[type="checkbox"] {
 <li>A user interacting with a mobile app to accomplish a task</li>
 </ul>
 <p>These behaviors can be described as <strong>processes</strong>, which are the focus of this article.</p>
-<p>Processes themselves can be examined at different levels of granularity. Here, we deliberately stay at a higher level of abstraction.<br>
+<p>Processes themselves can be examined at different <strong>levels of granularity</strong>. Here, we deliberately stay at a higher level of abstraction.<br>
 Techniques such as <a href="https://cucumber.io/blog/bdd/example-mapping-introduction/"><em>Example Mapping</em></a> are better suited for zooming in further and uncovering the detailed business rules that govern individual steps.</p>
 <div id="fig-system-perspectives" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -116,7 +116,7 @@ Techniques such as <a href="https://cucumber.io/blog/bdd/example-mapping-introdu
 <img src="images/iafm/system_perspectives.png" class="img-fluid figure-img" style="width:90.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-system-perspectives-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: A system has a structure, defined by how individual elements form subsystems, and exhibits behaviors that can be described as processes. Zooming into a process step reveals business rules and logic, where individual operations, decision points, and loops detail how each step is executed.
+Figure&nbsp;1: A system has a structure, defined by how individual elements interact to form subsystems, and exhibits behaviors that can be described as processes. Zooming into a process step reveals business rules and logic, where individual operations, decision points, and loops detail how each step is executed.
 </figcaption>
 </figure>
 </div>
@@ -135,7 +135,7 @@ Figure&nbsp;1: A system has a structure, defined by how individual elements form
 <li>A clear view of the <strong>process over time</strong>, with explicit separation of the <strong>different actors involved</strong>.</li>
 <li>A notation that supports <strong>direct translation of the modeled process into a software implementation</strong>.</li>
 </ul>
-<p>The technique that comes closest to InterAction Flow Mapping is <a href="https://eventmodeling.org/posts/what-is-event-modeling/"><em>Event Modeling</em></a>. It visualizes wireframes alongside read and write operations that aggregate event-based data from multiple sources. The resulting diagrams are easy for domain experts to follow while still providing a rough implementation blueprint for developers. In practice, however, I found these models map more naturally to event-sourced architectures and often require an extra translation step when implementing a process with a simpler design based on relational databases.</p>
+<p>The technique that comes closest to InterAction Flow Mapping is <a href="https://eventmodeling.org/posts/what-is-event-modeling/"><em>Event Modeling</em></a>. It visualizes wireframes alongside read and write operations that aggregate event-based data from multiple sources. The resulting diagrams are easy for domain experts to follow while still providing a rough implementation blueprint for developers. In practice, however, I found these models map more naturally to event sourcing architectures and often require an extra translation step when implementing a process with a simpler CRUD-based design.</p>
 </section>
 </section>
 <section id="the-interaction-flow-notation" class="level2">
@@ -220,8 +220,18 @@ Figure&nbsp;5: Process excerpt showing a conversation with an AI agent, with the
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>If you feel compelled to add conditionals or loops to your flow, this is a signal to pause and reconsider the level of abstraction. A lot of branching behavior happens <em>inside</em> an action and does not need to be visible at the overview level.<br>
-When branching paths are central to the discussion, <strong>start by modeling the happy path</strong> and add annotations where alternatives exist, or create a separate diagram that starts at the branching point to explore the alternative flow.</p>
+<p>If you feel compelled to add conditionals or loops to your flow, this is often a signal to pause and reconsider the level of abstraction. A lot of branching behavior happens <em>inside</em> an action and does not need to be visible at the overview level.<br>
+When branching paths are central to the discussion, <strong>start by modeling the happy path</strong> and add annotations where alternatives exist, or create a separate diagram that starts at the branching point to explore the alternative flow. In some cases, it is also possible to describe different branches using separate swimlanes (<a href="#fig-branching" class="quarto-xref">Figure&nbsp;6</a>).</p>
+<div id="fig-branching" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-branching-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/iafm/branching.png" class="img-fluid figure-img" style="width:55.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-branching-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Using separate swimlanes (and color coding) to represent branching at a decision point: a smartwatch analyzes collected sensor measurements every five minutes to detect movement patterns, stress, and other conditions. When an internet connection is available, the data is sent to a cloud-based machine learning (ML) model for analysis; otherwise, a less accurate model running on the device is used.
+</figcaption>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -234,14 +244,14 @@ When branching paths are central to the discussion, <strong>start by modeling th
 <li>Swimlanes highlight ownership and boundaries between systems or teams.</li>
 <li>Resource icons encourage early discussion about persistence and data ownership.</li>
 </ul>
-<p>When co-creating an InterAction Flow in a collaborative InterAction Flow Mapping session, it often makes sense to keep the diagram more abstract, as shown in the previous figures. That said, if you want to use an InterAction Flow as a blueprint for implementation, you can easily include additional technical details and wireframes to make the intended software behavior more explicit (<a href="#fig-hotel-software-details" class="quarto-xref">Figure&nbsp;6</a>).</p>
+<p>When co-creating an InterAction Flow in a collaborative InterAction Flow Mapping session, it often makes sense to keep the diagram more abstract, as shown in the previous figures. That said, if you want to use an InterAction Flow as a blueprint for implementation, you can easily include additional technical details and wireframes to make the intended software behavior more explicit (<a href="#fig-hotel-software-details" class="quarto-xref">Figure&nbsp;7</a>).</p>
 <div id="fig-hotel-software-details" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-hotel-software-details-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/iafm/hotel_software_details.png" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hotel-software-details-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6: Software-enabled process to book a hotel room with more details, including wireframes, the API endpoints that are called, and an external API used to process the payment.
+Figure&nbsp;7: Software-enabled process to book a hotel room with more details, including wireframes, the API endpoints that are called, and an external API used to process the payment.
 </figcaption>
 </figure>
 </div>
@@ -255,7 +265,7 @@ Figure&nbsp;6: Software-enabled process to book a hotel room with more details, 
 <li>improving an existing (as-is) process.</li>
 </ol>
 <p>Both workshops can be run in-person or remotely<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Feel free to adapt these workshop formats to your needs!</p>
-<p>For more tips on how to conduct successful Collaborative Modeling sessions, please refer to the excellent book <a href="https://www.manning.com/books/collaborative-software-design"><em>Collaborative Software Design</em></a>.</p>
+<p>For more tips on how to conduct successful collaborative modeling sessions, please refer to the excellent book <a href="https://www.manning.com/books/collaborative-software-design"><em>Collaborative Software Design</em></a>.</p>
 <section id="designing-a-new-to-be-process" class="level3">
 <h3 class="anchored" data-anchor-id="designing-a-new-to-be-process">Designing a New (To-Be) Process</h3>
 <p>This workshop format emphasizes shared design and exploration, like a typical CoMo session.</p>
@@ -282,7 +292,7 @@ Figure&nbsp;6: Software-enabled process to book a hotel room with more details, 
 <li><strong>[Optional] Compare with the as-is process:</strong> When redesigning an existing process, compare the new flow with the current-state diagram (including any identified pain points) to ensure no key steps are missing and major issues are addressed.<br>
 For software-based processes, proceed by defining a <strong>refactoring plan with iterative improvements</strong> that gradually move the current process toward the target state, rather than attempting to implement a new flow from scratch while maintaining the existing one in parallel until a full replacement is possible.</li>
 </ol>
-<p>For software projects, the InterAction Flow can be refined further to aid the implementation (as in <a href="#fig-hotel-software-details" class="quarto-xref">Figure&nbsp;6</a>) by splitting into two groups:</p>
+<p>For software projects, the InterAction Flow can be refined further to aid the implementation (as in <a href="#fig-hotel-software-details" class="quarto-xref">Figure&nbsp;7</a>) by splitting into two groups:</p>
 <ul>
 <li><strong>Group 1 (incl.&nbsp;a UX Designer / Product Owner, Frontend Developer):</strong> Refines user interactions, adds wireframes, and identifies data needed to render the UI.</li>
 <li><strong>Group 2 (incl.&nbsp;a Backend Developer):</strong> Refines API and data store layers, including database schemas or ORMs.</li>
@@ -298,14 +308,14 @@ For software-based processes, proceed by defining a <strong>refactoring plan wit
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>An interesting concept in Event Modeling is the <strong>Data Completeness Check</strong>: Each dynamic element in a wireframe is highlighted in a specific color to indicate whether the data shown there needs to be retrieved from (green) or persisted in (blue) a data store. By then linking these elements to our database schema, we can check whether we are storing all data required to enable the user experience we want (<a href="#fig-data-completeness" class="quarto-xref">Figure&nbsp;7</a>).</p>
+<p>An interesting concept in Event Modeling is the <strong>Data Completeness Check</strong>: Each dynamic element in a wireframe is highlighted in a specific color to indicate whether the data shown there needs to be retrieved from (green) or persisted in (blue) a data store. By then linking these elements to our database schema, we can check whether we are storing all data required to enable the user experience we want (<a href="#fig-data-completeness" class="quarto-xref">Figure&nbsp;8</a>).</p>
 <div id="fig-data-completeness" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-data-completeness-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/iafm/data_completeness.png" class="img-fluid figure-img" style="width:65.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-completeness-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7: Wireframes with colored elements to indicate whether the shown data needs to be retrieved from (<em>green</em>) or persisted in (<em>blue</em>) a data store, as well as the corresponding fields in our database schema that contain these values. This helps us notice in advance whether our data model is incomplete.
+Figure&nbsp;8: Wireframes with colored elements to indicate whether the shown data needs to be retrieved from (<em>green</em>) or persisted in (<em>blue</em>) a data store, as well as the corresponding fields in our database schema that contain these values. This helps us notice in advance whether our data model is incomplete.
 </figcaption>
 </figure>
 </div>
@@ -322,7 +332,7 @@ Figure&nbsp;7: Wireframes with colored elements to indicate whether the shown da
 </section>
 <section id="running-the-workshop-1" class="level4">
 <h4 class="anchored" data-anchor-id="running-the-workshop-1">Running the Workshop</h4>
-<p>Plan for 1–3 hours depending on process complexity. The workshop typically follows six steps (<a href="#fig-fix-flow-workshop" class="quarto-xref">Figure&nbsp;8</a>):</p>
+<p>Plan for 1–3 hours depending on process complexity. The workshop typically follows six steps (<a href="#fig-fix-flow-workshop" class="quarto-xref">Figure&nbsp;9</a>):</p>
 <ol type="1">
 <li><strong>Align on the InterAction Flow:</strong> Walk participants through the diagram and refine it collaboratively.</li>
 <li><strong>Brainstorm pain points:</strong> Participants add pink stickies for any problem they notice, from minor UI issues to tedious manual steps.</li>
@@ -337,7 +347,7 @@ Figure&nbsp;7: Wireframes with colored elements to indicate whether the shown da
 <img src="images/iafm/fix_iaflow_workshop.png" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fix-flow-workshop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8: Overview of the workshop steps.
+Figure&nbsp;9: Overview of the workshop steps.
 </figcaption>
 </figure>
 </div>

@@ -179,10 +179,10 @@ Figure&nbsp;3: Analog process to reserve a hotel room: the guest calls the hotel
 <div id="fig-hotel-software" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-hotel-software-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/iafm/hotel_software.png" class="img-fluid figure-img" style="width:80.0%">
+<img src="images/iafm/hotel_software.png" class="img-fluid figure-img" style="width:90.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hotel-software-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4: Software-enabled process to reserve a hotel room: the user opens the hotel’s website, enters the dates and number of guests, sees which types of rooms are available during this time, and then proceeds to reserve one of them. Some of the actions happen in parallel (user entering data while website is being displayed) and some information exchange is implicit (shown on webpage). Not all arrows include data (e.g., a GET request without parameters), and arrows that do not advance understanding were omitted to avoid clutter (e.g., button clicks).
+Figure&nbsp;4: Software-enabled process to reserve a hotel room: the user opens the hotel’s website, enters the dates and number of guests, sees which types of rooms are available during this time, and then proceeds to reserve one of them. Some actions happen in parallel (for example, the user entering data while the website is being displayed). Not all arrows are annotated with exchanged information: some operations require no additional input (e.g., a GET request without parameters), while other information is transmitted indirectly, such as via the rendered web page.
 </figcaption>
 </figure>
 </div>
@@ -193,7 +193,7 @@ Figure&nbsp;4: Software-enabled process to reserve a hotel room: the user opens 
 <img src="images/iafm/hotel_ai_agent.png" class="img-fluid figure-img" style="width:60.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-hotel-ai-agent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5: Process excerpt showing a conversation with an AI agent, with the goal of finding a hotel room: the user submits a prompt; the Large Language Model (LLM) powering the agent analyzes it, determines which tools to use to gather the required information, calls those tools (in this case, an external API for hotel search), and then synthesizes a response from the results. Since this process step is more complex, it makes sense to spell out the individual subactions explicitly—while avoiding too much detail, so the overall process still remains understandable at a high level.
+Figure&nbsp;5: Process excerpt showing a conversation with an AI agent, with the goal of finding a hotel room: the user submits a prompt; the Large Language Model (LLM) powering the agent analyzes it, determines which tools to use to gather the required information, calls those tools (in this case, an external API for hotel search available via MCP), and then synthesizes a response from the results. Since this process step is more complex, it makes sense to spell out the individual subactions explicitly—while avoiding too much detail, so the overall process still remains understandable at a high level. In addition to the final output, the LLM also provides updates (explaining its “thinking”), which do not result in a user action.
 </figcaption>
 </figure>
 </div>
@@ -272,13 +272,15 @@ Figure&nbsp;6: Software-enabled process to book a hotel room with more details, 
 <li><strong>Braindrawing (together, alone):</strong> Give participants 5–10 minutes to independently sketch the process from their perspective, focusing on actors and their actions.<br>
 
 <ul>
-<li>A useful approach is to start with user interactions and then move on to refining the required data, its sources, and persistence.</li>
 <li>For in-person sessions, provide paper and pencils; for remote sessions, prepare an individual whiteboard frame with example elements for each participant.</li>
+<li>A useful approach is to start with user interactions and then move on to refining the required data, its sources, and persistence.</li>
+<li>When redesigning an existing process, participants should try to ignore current constraints and design an ideal target process from scratch.</li>
 </ul></li>
 <li><strong>Gallery walk:</strong> Allow time for participants to review each other’s diagrams.</li>
 <li><strong>Select a starting point:</strong> Choose one diagram as the basis for the shared InterAction Flow—preferably via dot voting during the gallery walk, or by facilitator choice if time is limited.</li>
 <li><strong>Incremental refinement:</strong> Starting with the author of the selected diagram, participants take turns explaining their view while the group incrementally refines the shared InterAction Flow based on the new perspective.</li>
-<li><strong>[Optional] Compare with the as-is process:</strong> When redesigning an existing process, compare the new flow with the current-state diagram (including any identified pain points) to ensure no key steps are missing and major issues are addressed.</li>
+<li><strong>[Optional] Compare with the as-is process:</strong> When redesigning an existing process, compare the new flow with the current-state diagram (including any identified pain points) to ensure no key steps are missing and major issues are addressed.<br>
+For software-based processes, proceed by defining a <strong>refactoring plan with iterative improvements</strong> that gradually move the current process toward the target state, rather than attempting to implement a new flow from scratch while maintaining the existing one in parallel until a full replacement is possible.</li>
 </ol>
 <p>For software projects, the InterAction Flow can be refined further to aid the implementation (as in <a href="#fig-hotel-software-details" class="quarto-xref">Figure&nbsp;6</a>) by splitting into two groups:</p>
 <ul>

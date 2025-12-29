@@ -94,13 +94,13 @@ ul.task-list li input[type="checkbox"] {
 <section id="modeling-from-different-perspectives" class="level4">
 <h4 class="anchored" data-anchor-id="modeling-from-different-perspectives">Modeling from Different Perspectives</h4>
 <p>Let’s start by acknowledging that <strong>systems can be modeled from different perspectives</strong> (<a href="#fig-system-perspectives" class="quarto-xref">Figure&nbsp;1</a>).</p>
-<p>One perspective focuses on a system’s <strong>structure</strong>: how individual elements are organized and composed into larger subsystems, typically in a bottom-up manner. Examples include:</p>
+<p>One perspective focuses on a system’s <strong>structure</strong>: how individual elements are organized and composed into larger subsystems (often forming bottom-up in natural systems). Examples include:</p>
 <ul>
 <li>Cells → Organs → Human body</li>
 <li>Employees → Teams → Departments → Company</li>
 <li>Lines of code → Functions and classes → Modules (files and folders) → Repository or deployable service</li>
 </ul>
-<p>Tools such as <a href="https://github.com/ddd-crew/context-mapping"><em>Context Mapping</em></a> and the <a href="https://c4model.com/"><em>C4 Model</em></a> are well suited to describing this structural view of (software) systems.</p>
+<p>Tools such as <a href="https://github.com/ddd-crew/context-mapping"><em>Context Mapping</em></a> and the <a href="https://c4model.com/"><em>C4 Model</em></a> help describe the structural perspective of (software) systems.</p>
 <p>Another perspective focuses on <strong>behavior</strong>: what the system does over time. Examples include:</p>
 <ul>
 <li>Digesting food</li>
@@ -125,7 +125,7 @@ Figure&nbsp;1: A system has a structure, defined by how individual elements inte
 <h4 class="anchored" data-anchor-id="process-modeling">Process Modeling</h4>
 <p>Existing tools to model processes all optimize for slightly different goals, for example:</p>
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Unified_Modeling_Language"><em>UML</em></a> and <a href="https://en.wikipedia.org/wiki/Business_Process_Model_and_Notation"><em>BPMN</em></a> are well-established standards for modeling software architectures and business processes. They allow for very detailed and precise diagrams, but their specialized notation often makes the resulting models difficult to grasp for non-experts. They were also primarily intended for documentation rather than collaborative exploration.</li>
+<li><a href="https://en.wikipedia.org/wiki/Unified_Modeling_Language"><em>UML</em></a> and <a href="https://en.wikipedia.org/wiki/Business_Process_Model_and_Notation"><em>BPMN</em></a> are well-established standards for modeling software behavior and business processes. They allow for very detailed and precise diagrams, but their specialized notation often makes the resulting models difficult to grasp for non-experts. They were also primarily intended for documentation rather than collaborative exploration.</li>
 <li><a href="https://www.eventstorming.com/"><em>EventStorming</em></a> is a popular collaborative modeling technique that emphasizes accessibility by using plain-language domain events. It works particularly well for discovering domain concepts and behavior, especially in unfamiliar problem spaces. However, the initial chaotic exploration phase can quickly become visually overwhelming, and as more structure and technical details are added, the resulting model often becomes difficult to follow. Additionally, expressing events in the past tense is unintuitive for many participants.</li>
 <li><a href="https://domainstorytelling.org/"><em>Domain Storytelling</em></a> focuses on interactions between actors and objects and produces diagrams that are easy to understand and discuss. While effective for creating a shared overview, the temporal sequence of a process is represented indirectly through numbered arrows, which can make it harder to perceive the overall flow at a glance in more complex scenarios.</li>
 </ul>
@@ -221,7 +221,7 @@ Figure&nbsp;5: Process excerpt showing a conversation with an AI agent, with the
 </div>
 <div class="callout-body-container callout-body">
 <p>If you feel compelled to add conditionals or loops to your flow, this is often a signal to pause and reconsider the level of abstraction. A lot of branching behavior happens <em>inside</em> an action and does not need to be visible at the overview level.<br>
-When branching paths are central to the discussion, <strong>start by modeling the happy path</strong> and add annotations where alternatives exist, or create a separate diagram that starts at the branching point to explore the alternative flow. In some cases, it is also possible to describe different branches using separate swimlanes (<a href="#fig-branching" class="quarto-xref">Figure&nbsp;6</a>).</p>
+When branching paths are central to the discussion, <strong>start by modeling the happy path</strong> and add annotations where alternatives exist, or create a separate diagram that starts at the branching point to explore the alternative flow. In some cases, it is also possible to describe different paths using separate swimlanes (<a href="#fig-branching" class="quarto-xref">Figure&nbsp;6</a>).</p>
 <div id="fig-branching" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-branching-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -237,7 +237,7 @@ Figure&nbsp;6: Using separate swimlanes (and color coding) to represent branchin
 </section>
 <section id="from-diagram-to-code" class="level4">
 <h4 class="anchored" data-anchor-id="from-diagram-to-code">From Diagram to Code</h4>
-<p>InterAction Flows translate naturally into software design:</p>
+<p>InterAction Flows <strong>translate naturally into software design</strong>:</p>
 <ul>
 <li>Action boxes often map directly to function calls or API endpoints.</li>
 <li>Arrow labels make the required data contracts explicit.</li>

@@ -545,7 +545,7 @@ Data that needs to be persisted can be stored either in the frontend (client) or
 <img src="../images/06_production/game_local.png" class="img-fluid figure-img" style="width:60.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-game-local-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.3: The user interacts only with their device to play chess against a simple bot locally on their phone. The small database icon next to the phone symbolizes the local storage on your phone, where the current game state is saved after each move in case the app is closed so that you can retrieve this saved state the next time you open the app to continue with the game.
+Figure&nbsp;6.3: The user interacts only with their device to play chess against a simple bot running locally on their phone. The small database icon next to the phone symbolizes the phone’s local storage, where the current game state is saved after each move in case the app is closed so that this saved state can be retrieved the next time the user opens the app to continue with the game.
 </figcaption>
 </figure>
 </div>
@@ -577,13 +577,25 @@ Figure&nbsp;6.5: Player 1 interacts with their device and data about the next mo
 <h3 class="anchored" data-anchor-id="asynchronous-communication">Asynchronous Communication</h3>
 <p>When your script calls a library function or API and waits for it to return before continuing with the rest of the code, this is an example of <strong>synchronous communication</strong>. It’s similar to a conversation where one person speaks and then waits and listens while the other person responds.</p>
 <p>In contrast, <strong>asynchronous (async) communication</strong> allows the program to <strong>keep running while waiting for a response</strong>. Once the response arrives, it is processed and integrated into the workflow, but until then the code just continues without it. Just like when you send an email to someone asking for some data and they send you the results a few hours later.<br>
-For example, a website might fetch data from multiple APIs, showing placeholders until the responses arrive. This approach improves the user experience because it keeps the user interface (UI) responsive and enables faster loading by <strong>processing multiple tasks in parallel</strong>.</p>
-<section id="event-driven-architecture" class="level4">
-<h4 class="anchored" data-anchor-id="event-driven-architecture">Event-Driven Architecture</h4>
-<p>For most applications, communicating directly with external services—whether synchronously or async—is the right approach, because eventually the requested data is needed to finish the original task. But there are also use cases where it’s enough that your message was received and you don’t need to wait for a response. For example, when placing an order in an online shop, users only care that the order was submitted successfully. They don’t wait in front of the screen until it was packaged and shipped—which could take days. An email notification can inform them of progress later.</p>
-<p>Such a scenario calls for an <strong>event-driven architecture</strong>, which takes async communication to the extreme. Here, multiple services can operate independently by exchanging information via events using a <strong>message queue (MQ)</strong>, a system that temporarily stores event messages like JSON documents. These messages act as instructions, containing all relevant details about an event, such as a user’s order information. Publishers (senders) create events, and subscribers (receivers) process them based on their type, such as <code>Order Submitted</code>.</p>
-<p>An event-driven architecture offers several <strong>advantages</strong>. By decoupling components, it allows publishers and subscribers to run independently, even in different programming languages or environments. This makes it easier to scale systems and assign teams to own specific components without needing to understand the full system. Additionally, one event can trigger multiple actions. For instance, when an order is packed, one system might update the user database while another generates a shipping label. This approach thereby simplifies the propagation of data to multiple services and can also facilitate replication of live data to testing and staging environments.</p>
-<p>However, this type of architecture also brings with it some <strong>challenges</strong>. Since no single component has a full view of the system, tracking the state of a specific task, such as whether an order is still waiting or in progress, can be difficult. Furthermore, while MQs often guarantee that each message is handled at least once, the system requires careful design in case a message is processed multiple times. For example, if a subscriber crashes after processing a message but before confirming its completion, the MQ might reassign the task to another instance, potentially leading to duplicate processing. For these reasons, event-driven architectures should only be used when direct communication between services is not an option <span class="citation" data-cites="richards2020fundamentals">[<a href="references.html#ref-richards2020fundamentals" role="doc-biblioref">9</a>]</span>.</p>
+For example, a website might fetch data from multiple APIs and show placeholders until the responses arrive. This approach improves the user experience because it keeps the user interface (UI) responsive and enables faster loading by <strong>processing multiple tasks in parallel</strong>.</p>
+<section id="communicating-via-messages" class="level4">
+<h4 class="anchored" data-anchor-id="communicating-via-messages">Communicating via Messages</h4>
+<p>For most applications, communicating with external services directly—whether synchronously or async—is the right approach. In the end, you usually need the requested data to finish the original task anyway. However, there are also cases where processing takes a long time and all you really care about is that your request was accepted and will be handled eventually. In those situations, you do not want to block and wait for a response.</p>
+<p>A typical example is placing an order in an online shop. Users only care that the order was submitted successfully. They do not sit in front of the screen waiting until the order is packaged and shipped—which could take days. Instead, they receive updates later, for example via email.</p>
+<p>Scenarios like this are best handled by <strong>communicating via messages</strong>. A message is usually a JSON document that includes all relevant details about an event, or a reference (such as a URL) where additional information can be retrieved.</p>
+<p>We can distinguish two common messaging patterns:</p>
+<ol type="1">
+<li><p><strong>Point-to-point (1:1) communication using a Message Queue (MQ):</strong> A sender puts a message onto a queue, and exactly one receiver picks it up and processes it. Typical examples include:</p>
+<ul>
+<li>a user uploads a file that needs to be processed</li>
+<li>a user submits an order that needs to be packaged and shipped</li>
+<li>a user sends a text message or email that needs to be delivered</li>
+</ul>
+<p>Here, the message tells the receiver that there is work to do. Multiple workers can consume messages from the same queue, which allows the system to process work in parallel and scale more easily. However, most MQs guarantee that messages are delivered at least once, not exactly once. This means consumers must be prepared to handle the same message more than once. For example, even though a message that was picked up by a worker is blocked for a certain amount of time, if the worker crashes after processing the message but before notifying the MQ of this, the queue may hand the message to another worker, resulting in duplicate processing.</p></li>
+<li><p><strong>Publish/subscribe (1:n) communication using a Message Bus:</strong> This pattern is used to broadcast events to multiple consumers. A publisher sends an event to a topic, and every user or service that subscribed to that topic receives its own copy. For example, a severe weather warning might be sent as a push notification to all app users that enabled notifications for this kind of event.</p>
+<p>Because multiple services can react to the same event, one message can trigger several different actions. For example, when an “order packed” event is published, one subscriber might send an email to the customer, while another notifies the delivery service to pick it up. This approach can also be used to replicate live data into testing or staging environments by letting them subscribe to events created in the production environment.</p></li>
+</ol>
+<p>When services mostly communicate through messages, we usually talk about an <strong>event-driven architecture</strong>. This style helps decouple components, lets services evolve and scale independently, and makes it easier for teams to own individual parts of the system without needing to understand everything else. That said, messaging everywhere also adds real complexity—things like eventual consistency, harder debugging, and more operational overhead. For that reason, event-driven architectures should be used intentionally, and not as a default replacement for direct service-to-service communication <span class="citation" data-cites="richards2020fundamentals">[<a href="references.html#ref-richards2020fundamentals" role="doc-biblioref">9</a>]</span>.</p>
 </section>
 </section>
 <section id="batch-jobs" class="level3">
@@ -611,11 +623,11 @@ This design principle minimizes dependencies and makes the system easier to main
 <img src="../images/00_clarity/production_design.png" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-production-design-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.6: A simplified flow showing what happens when a user orders something online: the user opens a product page, which triggers a request to the server to fetch the corresponding product details from the database (DB). The user then clicks the “add to cart” button, which places the product into the shopping cart (in local storage managed by the client). The user then views the shopping cart and clicks “purchase”, which triggers a POST request to the API, submitting the user’s cart contents. The server creates a new record in the <code>orders</code> table to store the purchase details and submits an <code>Order</code> event to the message queue (MQ), thereby alerting other services that a new order needs to be packed and shipped. The endpoint returns with the status code 201 (“success”) and the client redirects the user to a page that tells them the purchase was successful, at which point the user closes the tab.
+Figure&nbsp;6.6: A simplified flow showing what happens when a user orders something online: the user opens a product page, which triggers a request to the server to fetch the corresponding product details from the database (DB). The user then clicks the “add to cart” button, which places the product into the shopping cart (in local storage managed by the client). The user then views the shopping cart and clicks “purchase”, which triggers a POST request to the API, submitting the user’s cart contents. The server creates a new record in the <code>orders</code> table to store the purchase details and submits an <code>Order</code> event to a message queue (MQ), thereby alerting another service that a new order needs to be packed and shipped. The endpoint returns with the status code 201 (“success”) and the client redirects the user to a page that tells them the purchase was successful, at which point the user closes the tab.
 </figcaption>
 </figure>
 </div>
-<p><strong>Begin by visualizing the flow from the user’s perspective</strong>, focusing on how they interact with the client to complete their intended task. Start by brainstorming user stories <span class="citation" data-cites="patton2014user">[<a href="references.html#ref-patton2014user" role="doc-biblioref">8</a>]</span>, i.e., what users would like to do (e.g., finding and purchasing products), and then move on to creating the wireframes and mockups that could support these interactions.</p>
+<p><strong>Begin by visualizing the flow from the user’s perspective</strong>, focusing on how they interact with the client to complete their intended task. Start by brainstorming user stories <span class="citation" data-cites="patton2014user">[<a href="references.html#ref-patton2014user" role="doc-biblioref">8</a>]</span>, i.e., what users would like to do (e.g., finding and purchasing products), and then move on to creating the wireframes and mockups that could enable these interactions.</p>
 <p>Once the user experience is clear, <strong>continue with the server and data store layers</strong> and map out how these can support and implement each step:<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
 <ul>
 <li>What data is needed to render the GUI?</li>
@@ -659,7 +671,7 @@ Figure&nbsp;6.7: Wireframes with colored elements to indicate whether the shown 
 <section id="cicd-pipelines" class="level3">
 <h3 class="anchored" data-anchor-id="cicd-pipelines">CI/CD Pipelines</h3>
 <p><strong>Continuous Integration (CI)</strong> and <strong>Continuous Delivery/Deployment (CD)</strong> pipelines are the backbone of modern software practices. CI focuses on automating the process of integrating code changes into a shared repository. Every change triggers automated tests to ensure that the new code works harmoniously with the existing codebase. CD extends this by automating the preparation or deployment of changes into production, either ready for manual approval (Continuous Delivery) or fully automated (Continuous Deployment). This drastically reduces manual effort, minimizes human error, and enables faster iteration cycles.</p>
-<p>CI/CD pipelines are either included directly into version control platforms, such as GitHub Actions and GitLab CI/CD, or can be run using external tools like Jenkins or CircleCI.</p>
+<p>CI/CD pipelines are either included directly in version control platforms, such as GitHub Actions and GitLab CI/CD, or can be run using external tools like Jenkins or CircleCI.</p>
 <section id="optimizing-cicd-pipelines" class="level4">
 <h4 class="anchored" data-anchor-id="optimizing-cicd-pipelines">Optimizing CI/CD Pipelines</h4>
 <p>To enhance pipeline efficiency and reliability, consider the following practices:</p>
@@ -695,7 +707,7 @@ Figure&nbsp;6.7: Wireframes with colored elements to indicate whether the shown 
 </ul>
 <section id="using-cloud-platforms" class="level4">
 <h4 class="anchored" data-anchor-id="using-cloud-platforms">Using Cloud Platforms</h4>
-<p>Cloud platforms like <strong>AWS</strong>, <strong>Google Cloud Platform (GCP)</strong>, and <strong>Microsoft Azure</strong> offer robust infrastructures for deploying and scaling applications. For simpler workflows, <strong>managed services</strong> like Render or Heroku abstract away much of the operational complexity.</p>
+<p>Cloud platforms like <strong>Amazon Web Services (AWS)</strong>, <strong>Google Cloud Platform (GCP)</strong>, and <strong>Microsoft Azure</strong> offer robust infrastructures for deploying and scaling applications. For simpler workflows, <strong>managed services</strong> like Render or Heroku abstract away much of the operational complexity.</p>
 <p>Managing costs effectively is critical in cloud deployments. Key strategies include:</p>
 <ul>
 <li><strong>Resource scaling:</strong> Reduce unused resources during off-peak hours.</li>
@@ -734,7 +746,7 @@ Figure&nbsp;6.7: Wireframes with colored elements to indicate whether the shown 
 <li><strong>Synthetic monitoring:</strong> Simulate user behavior to identify bottlenecks and improve responsiveness. Complement this with chaos engineering tools like <strong>Chaos Monkey</strong> to test your system’s resilience by deliberately introducing failures, ensuring your infrastructure can handle unexpected disruptions effectively.</li>
 <li><strong>Distributed tracing:</strong> Debug across microservices using tools like Jaeger or OpenTelemetry.</li>
 </ul>
-<p>When issues arise, having a rollback strategy is crucial. Options include:</p>
+<p>When issues arise, having a <strong>rollback strategy</strong> is crucial. Options include:</p>
 <ul>
 <li>Reverting to a stable container image.</li>
 <li>Rolling back database migrations.</li>
@@ -809,9 +821,9 @@ Figure&nbsp;6.7: Wireframes with colored elements to indicate whether the shown 
 <hr>
 <ol>
 <li id="fn1"><p>I recommend choosing a framework that follows a <a href="https://en.wikipedia.org/wiki/Reactive_programming">reactive programming style</a>, as this often leads to simpler implementations compared to manually handling events in imperative, callback-driven frameworks.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>This use case could also be implemented using an event-driven architecture as discussed in the next section. With this setup, both players would publish their next moves to a message queue and subscribe to it to receive updates about the moves of their opponent.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>This use case could also be implemented more efficiently using message queues as discussed in the next section. With such a setup, each player would submit their next move to a message queue and subscribe to the queue of their opponent to get an update when the other player makes a move.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>Check out <a href="https://crontab.guru/">Crontab Guru</a> to configure these schedules.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>Have a look at my article <a href="https://franziskahorn.de/articles/interaction_flow_mapping.html"><em>InterAction Flow Mapping</em></a> to learn more about the notation and tips for co-creating these diagrams in collaborative modeling sessions.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Have a look at my article <a href="https://franziskahorn.de/articles/interaction_flow_mapping.html"><em>InterAction Flow Mapping</em></a> to learn more about the notation and tips for co-creating such a diagram in a collaborative modeling session.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

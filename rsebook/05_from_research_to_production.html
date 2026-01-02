@@ -519,9 +519,40 @@ Relationships between tables can be <strong>bidirectional</strong> or <strong>un
 </section>
 <section id="implementing-apis" class="level4">
 <h4 class="anchored" data-anchor-id="implementing-apis">Implementing APIs</h4>
-<p>When designing an API, specifically a REST (REpresentational State Transfer) API, it’s important to understand the concept of an <strong>endpoint</strong>. An endpoint is a specific URL in your API where a resource can be accessed or modified. For example, if you’re building a photo-sharing app, an endpoint like <code>/images</code> might allow users to view or upload images. Endpoints should be named using descriptive, plural nouns (e.g., <code>/users</code>, <code>/images</code>) to clearly represent the resources being accessed (possibly corresponding directly to your database tables). It’s also best practice to avoid including verbs in endpoint names (e.g., <code>/get_users</code>), since the HTTP method (like GET or POST) already specifies the action being taken, such as retrieving or creating data.</p>
+<p>When designing an API, it’s important to understand the concept of an <strong>endpoint</strong>. An endpoint is a specific URL in your API where a resource can be accessed or modified. For example, in a photo-sharing app, an endpoint like <code>/images</code> might allow users to view or upload images. When implementing a REST (REpresentational State Transfer) API in particular, endpoints should be named using descriptive, plural nouns (e.g., <code>/users</code>, <code>/images</code>) to clearly represent the resources being accessed, often corresponding directly to database tables. It’s also best practice to avoid including verbs in endpoint names (e.g., <code>/get_users</code>), since the HTTP method (such as GET or POST) already defines the action being performed, like retrieving or creating data—unless the endpoint represents a more complex action beyond simple CRUD functionality.</p>
 <p>Another key design principle is <strong>statelessness</strong>. Similar to the concept of pure functions, this means that each API request should contain all the information needed to complete the action, like user authentication tokens. This way, the server doesn’t need to remember anything about previous requests, making the API easier to scale. This is especially important in cloud-based environments where multiple requests from the same user may be routed to different servers <span class="citation" data-cites="davis2019cloud">[<a href="references.html#ref-davis2019cloud" role="doc-biblioref">1</a>]</span>.<br>
 Data that needs to be persisted can be stored either in the frontend (client) or a central database in the backend (server), depending on its purpose. Temporary data, like a shopping cart, can be maintained on the user’s machine using cookies or local storage. Permanent data, such as a purchase order, is best stored in the backend database to ensure long-term accessibility. This approach supports stateless APIs, as the backend server doesn’t need to keep the session state in memory. Instead, all necessary data is either included in the request or can be fetched from the database, allowing each request to be processed independently.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Levels of abstraction when implementing an API endpoint">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Levels of abstraction when implementing an API endpoint
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As established in <a href="03_state_flow_how.html" class="quarto-xref"><span>Chapter 4</span></a>, your code’s most critical logic should live in a <strong>pure function</strong> (or possibly a class method), meaning it has no awareness of external resources such as databases and produces no side effects. At some point, database access is unavoidable, but it should occur one level up, in an <strong>impure function</strong> that uses dependency injection. This approach keeps the impure layer reasonably easy to test while isolating side effects.</p>
+<p>The <strong>API endpoint</strong> then acts as a thin wrapper around this impure function, exposing the functionality to the outside world (for example, a web frontend or mobile app). With this structure, the impure function can be reused outside the context of an HTTP API and does not need to handle request parsing, response serialization, or other transport-level concerns. The result is a clear <strong>separation of concerns</strong> throughout the call hierarchy.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pure_func(inputs):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># pure logic, unaware of data persistence or HTTP communication</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    outputs <span class="op">=</span> ...</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> outputs</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> impure_func(args, db: DatabaseConnection):</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># aware of data persistence (but not the concrete database implementation),</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># still unaware of HTTP communication</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> db.read(args)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> pure_func(data)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    db.write(result)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="at">@app.post</span>(<span class="st">"/endpoint/"</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> api_endpoint(request_data, db: DatabaseConnection):</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># outermost layer, handles interaction with the outside world</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> impure_func(request_data, db)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Implementing APIs in Python with `FastAPI`">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">

@@ -294,13 +294,13 @@ Ein Modell, das …</p>
 </figure>
 </div>
 <p>Je nachdem, ob ein Modell over- oder underfittet, gibt es verschiedene Möglichkeiten die Performance zu verbessern. Eine perfekte Modellperformance ist jedoch unrealistisch, da manche Aufgaben einfach schwierig sind, zum Beispiel weil die Daten sehr verrauscht sind.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled" title="Fehleranalyse">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tipp
+<span class="screen-reader-only">Tipp</span>Fehleranalyse
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -311,17 +311,17 @@ Tipp
 <section id="sec-pitfall-spurious" class="level2">
 <h2 class="anchored" data-anchor-id="sec-pitfall-spurious">[Fehler #3] Modell missbraucht Scheinkorrelationen</h2>
 <p>Selbst wenn ein Modell in der Lage ist, richtige Vorhersagen für neue Datenpunkte zu generieren, die den Trainingsdaten ähnlich sind, bedeutet dies nicht, dass das Modell tatsächlich den wahren kausalen Zusammenhang zwischen den Inputs und Outputs gelernt hat!</p>
-<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout callout-style-default callout-warning callout-titled" title="ML-Modelle machen es sich oft leicht und schummeln!">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Warnung
+<span class="screen-reader-only">Warnung</span>ML-Modelle machen es sich oft leicht und schummeln!
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>ML-Modelle machen es sich oft leicht und schummeln! Sie nutzen häufig <a href="https://www.tylervigen.com/spurious-correlations">Scheinkorrelationen</a>, statt die wahren kausalen Zusammenhänge zu lernen. Dies macht sie anfällig für Adverserial Attacks und Daten-Drifts, die das Modell zwingen, zu extrapolieren statt zu interpolieren.</p>
+<p>ML-Modelle nutzen häufig <a href="https://www.tylervigen.com/spurious-correlations">Scheinkorrelationen</a>, statt die wahren kausalen Zusammenhänge zu lernen. Dies macht sie anfällig für Adverserial Attacks und Daten-Drifts, die das Modell zwingen, zu extrapolieren statt zu interpolieren.</p>
 </div>
 </div>
 <section id="eine-richtige-vorhersage-wird-nicht-immer-aus-den-richtigen-gründen-gemacht" class="level4 custom-gray-block">
@@ -415,13 +415,13 @@ de Vries, Terrance, et al.&nbsp;“Does object recognition work for everyone?”
 <li>Unverhältnismäßige Produktausfälle aufgrund unterrepräsentierter Stichproben. Beispielsweise funktionieren Spracherkennungsmodelle für Frauen oft weniger zuverlässig, weil sie mit mehr Daten von Männern trainiert wurden (z.B. transkribierte politische Reden).</li>
 <li>Schaden durch Benachteiligung / Verweigerung von Chancen aufgrund von in historischen Daten kodierten Stereotypen. Beispielsweise müssen Frauen höhere Kreditzinsen zahlen als Männer oder im Ausland geborene Personen gelten als weniger qualifiziert für eine Stelle, wenn ihre Lebensläufe von einem automatisierten Screening-Tool bewertet werden.</li>
 </ul>
-<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout callout-style-default callout-caution callout-titled" title="Verstärkung von Vorurteilen durch fehlerhafte Nachtrainingsdaten">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Vorsicht
+<span class="screen-reader-only">Vorsicht</span>Verstärkung von Vorurteilen durch fehlerhafte Nachtrainingsdaten
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -453,17 +453,17 @@ Das Geschlecht oder die Hautfarbe einer Person kann jedoch auch mit anderen Vari
 <section id="sec-pitfall-drifts" class="level2">
 <h2 class="anchored" data-anchor-id="sec-pitfall-drifts">[Fehler #5] Daten &amp; Konzept Drifts</h2>
 <p>Wir dürfen nie vergessen, dass sich die Welt permanent verändert und Modelle regelmäßig mit neuen Daten nachtrainiert werden müssen. Nur so können sie sich an diese geänderten Umstände anpassen.</p>
-<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout callout-style-default callout-caution callout-titled" title="ML versagt leise!">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Vorsicht
+<span class="screen-reader-only">Vorsicht</span>ML versagt leise!
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>ML versagt leise!</strong> D.h. auch wenn alle Vorhersagen falsch sind, stürzt das Programm nicht einfach mit einer Fehlermeldung ab.<br>
+<p>Auch wenn alle Vorhersagen falsch sind, stürzt das Programm nicht einfach mit einer Fehlermeldung ab.<br>
 → Wir brauchen ein konstantes Monitoring, um Veränderungen zu erkennen, die zu einer Verschlechterung der Modellperformance führen!</p>
 </div>
 </div>
@@ -479,13 +479,13 @@ Die Vorhersagegenauigkeit eines Modells lässt schnell nach, wenn die <strong>Da
 <li><em>Daten-Drift:</em> Der Hersteller produzierte früher nur kleine Teile, nun aber auch größere Teile.</li>
 <li><em>Konzept-Drift:</em> Während früher 10% Ausschuss produziert wurden, wird nach einer Reparatur der Maschine bei gleichen Produktionsbedingungen (<span class="math inline">\(X\)</span>) nur noch 5% Ausschuss (<span class="math inline">\(y\)</span>) produziert.</li>
 </ul>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled" title="Covariate Shifts können trotz stabilem Konzept zu Label Shifts führen">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tipp
+<span class="screen-reader-only">Tipp</span>Covariate Shifts können trotz stabilem Konzept zu Label Shifts führen
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -495,13 +495,13 @@ Tipp
 <section id="gründe-für-drifts-vorbeugende-maßnahmen" class="level4">
 <h4 class="anchored" data-anchor-id="gründe-für-drifts-vorbeugende-maßnahmen">Gründe für Drifts &amp; Vorbeugende Maßnahmen</h4>
 <p>Daten- und Konzeptdrifts entstehen sowohl durch die Art wie die Daten gesammelt werden, als auch durch externe Ereignisse außerhalb unserer Kontrolle.</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-note callout-titled" title="Graduelle und plötzliche Veränderungen">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Hinweis
+<span class="screen-reader-only">Hinweis</span>Graduelle und plötzliche Veränderungen
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -543,22 +543,31 @@ Hinweis
 </figure>
 </div>
 <p>⇒ Vor dem Training eines Modells sollten die Daten untersucht werden, um <strong>Fälle zu identifizieren, bei denen identische Inputs unterschiedliche Outputs ergeben</strong>. Wenn möglich, sollten <strong>zusätzliche Input Features aufgenommen werden, um diese Variationen zu berücksichtigen</strong>. Eine schlechte Performance des Modells auf dem Testdatensatz deutet häufig darauf hin, dass relevante Inputs fehlen, was die Anfälligkeit für zukünftige Konzept-Drifts erhöht. Selbst wenn die richtigen Variablen verwendet werden, um einen Konzept-Drift zu erfassen, kann häufiges Nachtrainieren der Modelle dennoch notwendig sein. Zum Beispiel können unterschiedliche Zustände des Konzepts ungleichmäßig in den Trainingsdaten vorhanden sein, was zu Daten-Drifts führen kann (z.B. mehr Daten, die im Winter gesammelt wurden als in den frühen Sommermonaten). Wenn es nicht möglich ist, Variablen einzubeziehen, die den Konzept-Drift abbilden, könnte es notwendig sein, <strong>Datenpunkte aus dem ursprünglichen Trainingsdatensatz zu entfernen, die nicht der neuen Input/Output-Beziehung entsprechen, bevor das Modell erneut trainiert wird</strong>.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled" title="Trainiere Modelle regelmäßig nach">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tipp
+<span class="screen-reader-only">Tipp</span>Trainiere Modelle regelmäßig nach
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Der beste Weg, Daten und Konzept-Drifts entgegenzuwirken, besteht darin, das <strong>Modell häufig mit neuen Daten zu trainieren</strong>. Dies kann entweder nach einem fixen Zeitplan erfolgen (z.B. jedes Wochenende, je nachdem, wie schnell sich die Daten ändern) oder wenn das Monitoringsystem Alarm schlägt, weil es Drifts in den Inputs oder eine verschlechterte Modellperformance festgestellt hat.</p>
 </div>
 </div>
-
-
 </section>
+<section id="risiken-mindern-durch-human-in-the-loop" class="level4 custom-gray-block">
+<h4 class="anchored" data-anchor-id="risiken-mindern-durch-human-in-the-loop">Risiken mindern durch Human-in-the-Loop</h4>
+<p>In den meisten Fällen sind Fehler von ML-Modellen nicht harmlos. Manche Anwendungen, wie Produktempfehlungen, sind relativ risikoarm: Selbst falsche Outputs ärgern Nutzer meist nur leicht. Für die Mehrheit der anderen Use Cases ist es jedoch am besten, einen Menschen im Loop zu behalten. Menschen können den Prozess aktiv steuern – beispielsweise indem sie Modelloutputs als Entscheidungsunterstützung nutzen, wenn sie Lagerbestände auf Basis von Absatzprognosen planen – oder nur selektiv eingreifen, etwa indem sie Ergebnisse überprüfen, wenn etwas verdächtig aussieht, regelmäßig einen Spam-Ordner kontrollieren oder folgenreiche Entscheidungen validieren, wenn das Modell unsicher ist. Dieser Kontrollmechanismus funktioniert jedoch nur, wenn Menschen <strong>die ML-Outputs tatsächlich prüfen und ihnen nicht blind vertrauen!</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_data_issues/human_in_the_loop.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:65.0%"></p>
+</figure>
+</div>
+</section>
+
+
 </section>
 
 </main> <!-- /main -->

@@ -326,13 +326,13 @@ Prediction of discrete values:</p>
 <p>→ Many classification models actually predict probabilities for the different classes, i.e., a score between 0 and 1 for each class. The final class label is then chosen by applying a threshold on this score (typically 0.5 for binary classification problems) or by taking the outcome with the highest score (in multi-class problems).</p>
 <p>⇒ Whether we are dealing with a regression or classification problem is important to know and has implications for our overall workflow, e.g., how we define &amp; measure success. However, the actual models that we use to solve these problems are very similar, e.g., almost all <code>sklearn</code> models exist in either a <code>Regressor</code> or <code>Classifier</code> variant to generate the appropriate output for the respective problem type.</p>
 <div class="custom-gray-block">
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-note callout-titled" title="Choose whether to frame a task as regression or classification">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+<span class="screen-reader-only">Note</span>Choose whether to frame a task as regression or classification
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -377,13 +377,13 @@ This also means that sometimes we can just install an additional sensor to measu
 <figcaption><em>Left:</em> Features-based models are described by a parametrized function that operates on the original input features. For example, in the regression case <em>(top)</em>, the predicted target for a new data point is the value on the line corresponding to its input features, while in the classification case <em>(bottom)</em>, the prediction is made according to on which side of the dividing line the inputs lie. <em>Right:</em> The similarity-based models make the prediction for a new sample based on this data point’s nearest neighbors. Depending on the type of model, this could be as simple as predicting the average target value of the nearest neighbors (regression, <em>top</em>) or their most frequent class (classification, <em>bottom</em>).</figcaption>
 </figure>
 </div>
-<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout callout-style-default callout-important callout-titled" title="Similarity-based models require deliberate feature choices">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Important
+<span class="screen-reader-only">Important</span>Similarity-based models require deliberate feature choices
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -554,13 +554,13 @@ Important
 </figure>
 </div>
 <p>If the original dataset is quite big, say, over 100k samples (depending on the diversity of the data, e.g., the number of classes), then it is usually enough to just split the data into training, validation, and test sets at the start, where the validation and test sets contain about 10% of the data each and should be representative of the diversity of the original dataset. However, when the original dataset is smaller, it might not be possible to get such representative splits, which is when a technique called <em>cross-validation</em> (“x-val”) comes in handy.</p>
-<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout callout-style-default callout-important callout-titled" title="Use stratified sampling to balance class representation in data splits">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Important
+<span class="screen-reader-only">Important</span>Use stratified sampling to balance class representation in data splits
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -577,13 +577,13 @@ Important
 </figure>
 </div>
 </section>
-<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout callout-style-default callout-caution callout-titled" title="Use recent data for testing to account for time correlations">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Caution
+<span class="screen-reader-only">Caution</span>Use recent data for testing to account for time correlations
 </div>
 </div>
 <div class="callout-body-container callout-body">

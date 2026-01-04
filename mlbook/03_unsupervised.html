@@ -325,13 +325,13 @@ window.Quarto = {
 </div>
 <p>There is no right or wrong way to represent the data in 2D – it’s an unsupervised learning problem, which by definition has no ground truth answer. The algorithms arrive at two very different solutions, since they follow different strategies and have a different definition of what it means to preserve the relevant information. While PCA created a plot that preserves the global relationship between the samples, t-SNE arranged the samples in localized clusters.</p>
 <p>The remarkable thing here is that these methods did not know about the fact that the images displayed different, distinct digits (i.e., they did not use the label information), yet t-SNE grouped images showing the same number closer together. From such a plot we can already see that if we were to solve the corresponding classification problem (i.e., predict which digit is shown in an image), this task should be fairly easy, since even an unsupervised learning algorithm that did not use the label information showed that images displaying the same number are very similar to each other and can easily be distinguished from images showing different numbers. Or conversely, if our classification model performed poorly on this task, we would know that we have a bug somewhere, since apparently the relevant information is present in the features to solve this task.</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-note callout-titled" title="Don't confuse visualizations that show clusters with actual clustering">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+<span class="screen-reader-only">Note</span>Don’t confuse visualizations that show clusters with actual clustering
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -366,13 +366,13 @@ Have a look at <a href="https://www.youtube.com/watch?v=5HNr_j6LmPc">this video<
 <li><p>Know how much information is retained in the low dimensional representation; stored in the attributes <code>explained_variance_ratio_</code> or <code>singular_values_</code> / <code>eigenvalues_</code> (= eigenvalues of the respective PCs):<br>
 The principle components are always ordered by the magnitude of their corresponding eigenvalues (largest first);<br>
 When using the first <em>k</em> components with eigenvalues <span class="math inline">\(\lambda_i\)</span>, the amount of variance that is preserved is: <span class="math inline">\(\frac{\sum_{i=1}^k \lambda_i}{\sum_{i=1}^d \lambda_i}\)</span>.</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-note callout-titled" title="Use eigenvalues to identify the dataset's intrinsic dimensionality">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+<span class="screen-reader-only">Note</span>Use eigenvalues to identify the dataset’s intrinsic dimensionality
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -383,13 +383,13 @@ Note
 <p><strong>Careful:</strong></p>
 <ul>
 <li><p>Computationally expensive for many (&gt; 10k) features.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled" title="Use Kernel PCA when data points are fewer than features">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip
+<span class="screen-reader-only">Tip</span>Use Kernel PCA when data points are fewer than features
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -451,26 +451,26 @@ Randomly initialize the points in 2D and move them around until their distances 
 <li>Are you expecting a few <strong>individual outliers</strong> or <strong>clusters of outliers</strong>? The latter is especially common in time series data, where, e.g., a machine might experience an issue for several minutes or even hours before the signals look normal again. Clusters of outliers are more tricky to detect, especially if the data also contains other ‘legitimate’ clusters of normal points. Subject matter expertise is key here!</li>
 <li>Do you have any <strong>labels</strong> available? While we might not know what the different kinds of (future) anomalies look like, maybe we <em>do</em> know what normal data points look like, which is important information that we can use to check how far new points deviate from these normal points, also called novelty detection.</li>
 </ul>
-<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout callout-style-default callout-caution callout-titled" title="NaN encoding">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Caution
+<span class="screen-reader-only">Caution</span>NaN encoding
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Know your data – are missing values marked as NaNs (“Not a Number”) or set to some ‘unreasonable’ high or low value?</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout callout-style-default callout-important callout-titled" title="Remove outliers carefully and document your reasoning">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Important
+<span class="screen-reader-only">Important</span>Remove outliers carefully and document your reasoning
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -478,13 +478,13 @@ Important
 Try to remove as many outliers as possible with manually crafted rules (e.g., “when this sensor is 0, the machine is off and the points can be disregarded”), especially when the dataset contains clusters of outliers, which are harder to detect with data-driven methods.</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout callout-style-default callout-warning callout-titled" title="Remove outliers during inference too">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Warning
+<span class="screen-reader-only">Warning</span>Remove outliers during inference too
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -577,13 +577,13 @@ Compute the average distance of a point to its <em>k</em> nearest neighbors:<br>
 <li>Normalize heterogeneous datasets before computing distances!</li>
 <li>Know your data: does the dataset contain larger clusters of outliers? → <em>k</em> needs to be large enough such that a tight cluster of outliers is not mistaken as prototypical data points.</li>
 </ul>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled" title="Identifying _k_ nearest neighbors in time series data">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip
+<span class="screen-reader-only">Tip</span>Identifying <em>k</em> nearest neighbors in time series data
 </div>
 </div>
 <div class="callout-body-container callout-body">

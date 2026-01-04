@@ -283,13 +283,13 @@ The reason why oil is considered valuable is because we have important use cases
 </figure>
 </div>
 <p>More specifically, <strong>machine learning</strong> is an <strong>umbrella term for algorithms that recognize patterns and learn rules from data</strong>.</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-note callout-titled" title="Algorithms as problem-solving recipes">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+<span class="screen-reader-only">Note</span>Algorithms as problem-solving recipes
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -360,13 +360,13 @@ Note
 <u>But:</u> success depends on data quality &amp; quantity!<br>
 → Humans are much better at generalizing from a few examples. For example, a doctor can still easily recognize the disease even if the pictures were taken with a slightly different setup that might result, for example, in noisier images. The ML model, on the other hand, needs to be specifically trained for these cases, which means that in the worst case we might need to collect a lot of additional data for this new setup.</li>
 </ul>
-<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout callout-style-default callout-caution callout-titled" title="ML models will make mistakes">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Caution
+<span class="screen-reader-only">Caution</span>ML models will make mistakes
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -462,13 +462,13 @@ Caution
 ⇒ <span class="math inline">\(f(x) = -2.7 + 5.2x\)</span></p></li>
 </ol>
 </section>
-<div class="callout callout-style-default callout-tip callout-titled" title="Video Recommendation">
+<div class="callout callout-style-default callout-tip callout-titled" title="Video recommendation: linear regression">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Video Recommendation
+<span class="screen-reader-only">Tip</span>Video recommendation: linear regression
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -476,13 +476,13 @@ Caution
 </div>
 </div>
 <p>The available supervised learning algorithms differ in the <strong>type of <span class="math inline">\(x \to y\)</span> relationship</strong> they can describe (e.g., linear or nonlinear) and what kind of <strong>objective</strong> they minimize (also called loss function; an error computed on the training data, quantifying the mismatch between true and predicted labels). The task of a data scientist is to select a type of model that can optimally fit the given data. The rest is then taken care of by an <strong>optimization method, which finds the parameters of the model that minimize the model’s objective</strong>, i.e., such that the model’s prediction error on the given data is as small as possible.</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-note callout-titled" title="ML algorithm vs. ML model">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+<span class="screen-reader-only">Note</span>ML algorithm vs.&nbsp;ML model
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -613,13 +613,13 @@ Finally, <em>Reinforcement Learning</em> algorithms are used to <strong>plan and
 <figcaption>To apply unsupervised learning algorithms, we only need a feature matrix <span class="math inline">\(X\)</span>, while learning a prediction model with supervised learning algorithms additionally requires the corresponding labels <span class="math inline">\(\mathbf{y}\)</span>.</figcaption>
 </figure>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled" title="Using unsupervised learning to understand data before prediction">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip
+<span class="screen-reader-only">Tip</span>Using unsupervised learning to understand data before prediction
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -881,6 +881,26 @@ Tip
 <li>computational resources (don’t train a neural network without a GPU!)</li>
 <li>data quality and quantity: need a lot of <em>consistently</em> labeled data, i.e., many training instances labeled by human annotators who have to follow the same guidelines (but can be mitigated in some cases by pre-training the network using self-supervised learning)</li>
 </ul>
+<section id="ai-agents-gen-ai-tools-external-functionality" class="level4 custom-gray-block">
+<h4 class="anchored" data-anchor-id="ai-agents-gen-ai-tools-external-functionality">AI Agents: Gen AI + “tools” (external functionality)</h4>
+<p>Generative AI—or more specifically <strong>Large Language Models (LLMs)</strong>—are typically used in a simple loop: you send a prompt, and the model responds based on patterns learned during training.</p>
+<p><strong>AI agents build on top of LLMs</strong> by extending this basic setup with access to <strong>tools</strong>, meaning external functionality provided to the model. In the simplest case, a tool could enable the AI agent to search the web; more advanced tools might access databases, run code, or manipulate files.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_intro_ml/gen_ai_agent.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption><strong>AI agent workflow:</strong> The LLM analyzes the user’s prompt to determine what they want and whether calling tools would help to complete the task. Tools are external functions—the LLM sends requests and receives responses, but execution happens in separate processes. After receiving results, the LLM checks if the task is complete or if more work is needed. This loop continues until the task is accomplished, then the agent generates a final response to the user.</figcaption>
+</figure>
+</div>
+<p>The agent must be <strong>explicitly told which tools are available</strong>—essentially by giving it a list of tool names with descriptions and usage instructions (e.g., that search terms are required when searching the web). You can <strong>implement custom tools</strong>, such as giving the LLM access to your company’s database to search inventory. While a lot can already be accomplished with tools that only have <strong>read access</strong>, even more is possible (both in good and bad ways) when giving the agent <strong>write access</strong>, like the option to manipulate files on your computer. This is necessary, for example, for coding agents that create and modify code files to program new functionality.</p>
+<p>A key feature of AI agents is their ability to <strong>act autonomously</strong> through an internal loop that keeps working and calling tools until the LLM decides the task is complete. This enables <strong>multi-step workflows</strong> like searching different information sources, making intermediate decisions, and iterating based on results. For example, a coding agent edits scripts, runs tests, fixes errors if tests fail, and repeats until everything works.</p>
+<p>However, AI agents also come with important <strong>limitations</strong> that need to be considered:</p>
+<ul>
+<li><strong>Chat is not always the right interface.</strong> Some tasks need rich UIs (e.g., seat selection when booking tickets). Encoding such interactions in text can be awkward and error-prone.</li>
+<li><strong>LLM outputs can still be wrong.</strong> Even when using external, supposedly reliable sources, human verification is still necessary.</li>
+<li><strong>Write access increases risk.</strong> Mistakes are more serious when agents can modify files or systems. Guardrails are needed to prevent destructive actions (e.g., deleting important data).</li>
+<li><strong>Cost and abuse considerations:</strong> LLMs are usually accessed via paid APIs (e.g., OpenAI) and each agent step incurs costs. If exposed to external users, rate limiting is often necessary to prevent abuse.</li>
+</ul>
+</section>
 </section>
 <section id="information-retrieval" class="level3">
 <h3 class="anchored" data-anchor-id="information-retrieval">Information Retrieval</h3>
@@ -933,13 +953,13 @@ Tip
 </section>
 <section id="other" class="level3">
 <h3 class="anchored" data-anchor-id="other">Other</h3>
-<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout callout-style-default callout-important callout-titled" title="Choose an ML model that matches your output">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Important
+<span class="screen-reader-only">Important</span>Choose an ML model that matches your output
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -967,13 +987,13 @@ text → audio</li>
 <p>First, the smart speaker needs to know whether it was activated with a specific trigger word (e.g., “Hey Siri”). This is a simple binary classification task (trigger word: yes/no), which is usually performed on the device itself, since we don’t want that everything we say is continuously streamed into the cloud. Next, the spoken words that follow the trigger word are transcribed into text. Text is easier to handle, because, for example, variations due to different accents are removed. Based on this text, the intent is recognized, i.e., which of the different functionalities of the virtual assistant should be used (e.g., tell a joke, play music, set an alarm, etc.). This is a multi-class classification problem. The next step is to execute the request, which is not done with ML, but instead some task-specific program is run, e.g., to select a joke from a database or set a timer, etc., based on the apps installed on the device. Finally, the output of the program needs to be converted back into an audio signal. For this again an ML model can help to get smoothly spoken text – and in the near future maybe with the voice of Morgan Freeman or some other famous person like in “Deep Fake” applications.</p>
 </div>
 <p>⇒ It is generally advisable to first think about how a problem could be decomposed into easier-to-solve subproblems, especially since there might already be a large dataset or pre-trained ML model available for one of these subtasks. For example, speech recognition models can be trained on audio books and transcribed political speeches in addition to the data collected from the smart speaker users.</p>
-<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout callout-style-default callout-caution callout-titled" title="Retrain downstream models when upstream outputs change">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Caution
+<span class="screen-reader-only">Caution</span>Retrain downstream models when upstream outputs change
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -994,6 +1014,12 @@ Caution
 <section id="identify-a-suitable-problem" class="level3">
 <h3 class="anchored" data-anchor-id="identify-a-suitable-problem">1. Identify a suitable problem</h3>
 <p>The first (and arguably most important) step is to <strong>identify where machine learning can (and should) be used</strong> in the first place.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01a_intro/good_opportunity.png" class="img-fluid figure-img" style="width:35.0%"></p>
+<figcaption>We want to build something that <strong>users</strong> (internal or external) actually want by addressing a real pain point, such as automating a tedious, repetitive task. At the same time, solving this problem should make <strong>business</strong> sense by increasing revenue or reducing costs and align with the organization’s broader strategic goals, for example by providing a competitive advantage. Finally, the solution must be <strong>technically feasible</strong>, meaning it can realistically be solved with existing ML methods and available data.</figcaption>
+</figure>
+</div>
 <section id="steps-to-identify-a-potential-ml-project" class="level4">
 <h4 class="anchored" data-anchor-id="steps-to-identify-a-potential-ml-project">Steps to identify a potential ML project</h4>
 <ol type="1">
@@ -1012,6 +1038,13 @@ Caution
 </div></li>
 <li><p>Prioritize: which project will have a high impact, but at the same time also a good chance of success, i.e., should yield a high return on investment (ROI)? For example, using ML to automate a simple task is a comparatively low risk investment, but might cause some assembly-line workers to loose their jobs. In contrast, identifying the root causes of why a production process results in 10% scrap could save millions, but it is not clear from the start that such an analysis will yield useful results, since the collected data on the process conditions might not contain all the needed information.</p></li>
 </ol>
+<p>Project ideas are best identified in a <strong>collaborative workshop</strong> with data scientists, domain experts, and developers:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/01b_intro_ml/use_case_workshop.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>Start by understanding the process you want to improve and visualizing it in a simple, informal way, for example using post-it notes. Next, have everyone identify potential pain points, such as manual steps or error-prone tasks. Then list available data sources and the types of data collected to uncover unused potential. Finally, map possible ML solutions to the identified pain points and data sources. Select two to three promising ideas—each combining a pain point, a data source, and an ML approach—to assess more thoroughly and potentially implement as proofs of concept.</figcaption>
+</figure>
+</div>
 </section>
 <section id="ml-project-checklist" class="level4 custom-gray-block">
 <h4 class="anchored" data-anchor-id="ml-project-checklist">ML project checklist</h4>
@@ -1189,7 +1222,8 @@ For example, extracting the relevant information from scanned invoices to automa
 <li><strong>The ML model runs on an “edge” device</strong>, i.e., on each individual machine (e.g., mobile phone) where the respective data is generated and the output of the model is used in subsequent process steps. This is often the best strategy when results need to be computed in real time and / or a continuous Internet connection can not be guaranteed, e.g., in self-driving cars. However, the downside of this is that, depending on the type of ML model, comparatively expensive computing equipment needs to be installed in each machine, e.g., GPUs for neural network models.</li>
 <li><strong>The ML model runs in the “cloud”</strong>, i.e., on a central server (either on-premise or provisioned from a cloud provider such as AWS), e.g., in the form of a web application that receives data from individual users, processes it, and sends back the results. This is often the more efficient solution, if a response within a few seconds is sufficient for the use case. However, processing personal information in the cloud also raises privacy concerns. One of the major benefits of this solution is that it is easier to update the ML model, for example, when more historical data becomes available or if the process changes and the model now has to deal with slightly different inputs (we’ll discuss this further in later chapters).</li>
 </ol>
-<p>→ As these decisions heavily depend on your specific use case, they go beyond the scope of this book. Search online for “MLOps” or read the book <a href="https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/">Designing Machine Learning Systems</a> to find out more about these topics and hire a machine learning or data engineer to set up the required infrastructure in your company.</p>
+<p>Deploying a model once is not enough though. You need continuous <strong>monitoring</strong> of both the input data (e.g., completeness, correctness, outliers, drift) and the model’s predictions and performance on new samples to catch problems early, before they impact users. Models also need to be <strong>retrained regularly</strong> on fresh data, which in turn requires a solid <strong>data infrastructure</strong> to continuously collect new data and labels. This becomes much easier with mature <strong>DevOps</strong> practices in place, such as CI/CD pipelines and automated deployments, as well as mechanisms for <strong>gradual rollouts</strong> of new model versions—for example, canary deployments or A/B tests to verify that a new model actually improves performance.</p>
+<p>If you’re curious, read the book <a href="https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/">Designing Machine Learning Systems</a> to learn more about these topics.</p>
 
 
 </section>

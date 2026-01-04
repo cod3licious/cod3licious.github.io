@@ -364,13 +364,13 @@ A model that …</p>
 </figure>
 </div>
 <p>However, it is unrealistic to expect a model to have a perfect performance, as some tasks are just hard, for example, because the data is very noisy.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled" title="Analyze errors carefully">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip
+<span class="screen-reader-only">Tip</span>Analyze errors carefully
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -396,13 +396,13 @@ Tip
 </figure>
 </div>
 <p>Instead of <em>more</em>, it might also be helpful to get <em>cleaner</em> data, i.e., with less ambiguous labels! (See <a href="https://youtu.be/06-AZXmwHjo">talk by Andrew Ng</a>.)</p>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled" title="Use data augmentation to expand training data and improve model robustness">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip
+<span class="screen-reader-only">Tip</span>Use data augmentation to expand training data and improve model robustness
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -443,13 +443,13 @@ greedy algorithm that iteratively includes/removes one feature at a time:</p>
 </ul>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.feature_selection <span class="im">import</span> SequentialFeatureSelector</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><u>General rule</u>: Always remove truly redundant (i.e., 100% correlated) features, but otherwise if in doubt: keep all features.</p>
-<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout callout-style-default callout-caution callout-titled" title="Automatic feature selection picks predictive features, not necessarily causal ones">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Caution
+<span class="screen-reader-only">Caution</span>Automatic feature selection picks predictive features, not necessarily causal ones
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -461,17 +461,17 @@ Caution
 <section id="sec-pitfall-spurious" class="level2">
 <h2 class="anchored" data-anchor-id="sec-pitfall-spurious">Model abuses spurious correlations</h2>
 <p>By following the strategies outlined in the previous section, we can find a model that is good at interpolating, i.e., generating reliable predictions for new data points from the same distribution as the training set. However, this does not mean that the model actually picked up on the true causal relationship between the inputs and outputs!</p>
-<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout callout-style-default callout-warning callout-titled" title="ML models love to cheat &amp; take shortcuts!">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Warning
+<span class="screen-reader-only">Warning</span>ML models love to cheat &amp; take shortcuts!
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>ML models love to cheat &amp; take shortcuts! They will often pick up on <a href="https://www.tylervigen.com/spurious-correlations">spurious correlations</a> instead of learning the true causal relationships. This makes them vulnerable to adversarial attacks and data/domain shifts, which force the model to extrapolate instead of interpolate.</p>
+<p>ML models will often pick up on <a href="https://www.tylervigen.com/spurious-correlations">spurious correlations</a> instead of learning the true causal relationships. This makes them vulnerable to adversarial attacks and data/domain shifts, which force the model to extrapolate instead of interpolate.</p>
 </div>
 </div>
 <p>Specifically, models that neither over- nor underfit, i.e., that perfectly capture the relation between inputs and outputs in the given samples, often still fail to extrapolate:</p>
@@ -491,13 +491,13 @@ Warning
 </div>
 <p>If the two features and their effect on the target are independent of each other (e.g., <span class="math inline">\(y = ax_1 + bx_2\)</span>), this is not too dramatic, however, if these variables interact in some complicated nonlinear way, this might not be modeled correctly when relevant combinations of feature values weren’t sampled.</p>
 </section>
-<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout callout-style-default callout-caution callout-titled" title="Replicate training data preprocessing in production to handle anomalies consistently">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Caution
+<span class="screen-reader-only">Caution</span>Replicate training data preprocessing in production to handle anomalies consistently
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -647,13 +647,13 @@ y = b + w_1x_1 + w_2x_2 + ... + w_dx_d + \epsilon
 <p><img src="../images/06_causality/residuals_independent.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:85.0%"></p>
 </figure>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled" title="Check residuals for autocorrelation in time series data">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip
+<span class="screen-reader-only">Tip</span>Check residuals for autocorrelation in time series data
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -723,13 +723,13 @@ de Vries, Terrance, et al.&nbsp;“Does object recognition work for everyone?”
 <li>Disproportionate product failures, due to skewed sampling. For example, speech recognition models are often less accurate for women, because they were trained on more data collected from men (e.g., transcribed political speeches).</li>
 <li>Harm by disadvantage / opportunity denial, due to stereotypes encoded in historical data. For example, women are assigned higher credit interest rates than men or people born in foreign countries are deemed less qualified for a job when their resumes are assessed by an automated screening tool.</li>
 </ul>
-<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout callout-style-default callout-caution callout-titled" title="Retraining on biased model outputs can amplify existing biases">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Caution
+<span class="screen-reader-only">Caution</span>Retraining on biased model outputs can amplify existing biases
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -812,13 +812,13 @@ Caution
 → Which features are most important over all?</li>
 </ul>
 <p>→ Some models are <em>intrinsically interpretable</em> (e.g., linear models, decision trees), others require <em>model-agnostic methods</em> to make them explainable, i.e., for these models the interpretability does not come for free.</p>
-<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout callout-style-default callout-important callout-titled" title="Explanations are meaningful only for accurate, causally reliable models">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Important
+<span class="screen-reader-only">Important</span>Explanations are meaningful only for accurate, causally reliable models
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -890,13 +890,13 @@ Important
 <p><img src="../images/06_explainability/expl_pdp.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
 </figure>
 </div>
-<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout callout-style-default callout-caution callout-titled" title="ICE plots assume feature independence">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Caution
+<span class="screen-reader-only">Caution</span>ICE plots assume feature independence
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -904,13 +904,13 @@ Caution
 However, by examining the ICE plot for possibly erratic changes for individual samples, this can usually be spotted. And in general – this goes for all explainability methods – the results should not be over-interpreted, i.e., they are good for showing rough trends, but remember that the plots might also look completely different for a different type of model trained on the same dataset, i.e., be careful before concluding anything about the root causes of a problem based on these results.</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled" title="Smooth model responses reduce sensitivity to noise and adversarial attacks">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip
+<span class="screen-reader-only">Tip</span>Smooth model responses reduce sensitivity to noise and adversarial attacks
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -929,13 +929,13 @@ Tip
 ⇒ The decision surface of the original model is very complex, but we assume that it can be approximated locally with a linear function.</li>
 <li>Interpret the local surrogate model’s prediction for the sample of interest.</li>
 </ol>
-<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout callout-style-default callout-caution callout-titled" title="What have you really gained?">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Caution
+<span class="screen-reader-only">Caution</span>What have you really gained?
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -964,17 +964,17 @@ Caution
 <section id="sec-pitfall-drifts" class="level2">
 <h2 class="anchored" data-anchor-id="sec-pitfall-drifts">Data &amp; Concept Drifts</h2>
 <p>We must never forget that the world keeps on changing and that models need to be updated regularly with new data to be able to adapt to these changing circumstances!</p>
-<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout callout-style-default callout-caution callout-titled" title="ML fails silently!">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Caution
+<span class="screen-reader-only">Caution</span>ML fails silently!
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>ML fails silently!</strong> I.e., even if all predictions are wrong, the program does not simply crash with some error message.<br>
+<p>Even if all predictions are wrong, the program does not simply crash with some error message.<br>
 → Need constant monitoring to detect changes that lead to a deteriorating performance!</p>
 </div>
 </div>
@@ -991,13 +991,13 @@ Such a discrepancy can be due to</p>
 <li><em>Data drift:</em> The company used to manufacture only small parts, now they also produce larger parts.</li>
 <li><em>Concept drift:</em> The company used to produce 10% scrap parts, but after some maintenance on the machine, the same production settings (<span class="math inline">\(X\)</span>) now result in only 5% scrap (<span class="math inline">\(y\)</span>).</li>
 </ul>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled" title="Covariate shifts can cause label shifts when inputs causally affect the target">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip
+<span class="screen-reader-only">Tip</span>Covariate shifts can cause label shifts when inputs causally affect the target
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1007,13 +1007,13 @@ Tip
 <section id="drift-origins-mitigation-strategies" class="level4">
 <h4 class="anchored" data-anchor-id="drift-origins-mitigation-strategies">Drift Origins &amp; Mitigation Strategies</h4>
 <p>There are various reasons for data and concepts drifts, both related to how the data is collected as well as external events outside our control.</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout callout-style-default callout-note callout-titled" title="Gradual and sudden drifts">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+<span class="screen-reader-only">Note</span>Gradual and sudden drifts
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1055,13 +1055,13 @@ Note
 </figure>
 </div>
 <p>⇒ Before training a model, examine the data to <strong>identify instances where identical inputs yield different outputs</strong>. If possible, <strong>include additional input features to account for these variations</strong>. Subpar model performance on the test set often indicates missing relevant inputs, heightening vulnerability to future concept drifts. Even when the correct variables are incorporated to capture a concept drift, frequent model retraining may still be necessary. For instance, different states of the concept might be sampled unevenly, leading to data drifts (e.g., more data collected during winter than in the early summer months). If it is not possible to include variables that account for the concept drift, it might be necessary to <strong>remove samples from the original training set that do not conform to the novel input/output relation before retraining the model</strong>.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled" title="Retrain models regularly">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip
+<span class="screen-reader-only">Tip</span>Retrain models regularly
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1094,32 +1094,41 @@ Tip
 <li>Log known external events (!!), e.g., maintenance on a machine.</li>
 </ul>
 </section>
-<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout callout-style-default callout-warning callout-titled" title="Bugs can also cause silent failures">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Warning
+<span class="screen-reader-only">Warning</span>Bugs can also cause silent failures
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>The “ML fails silently” part also applies to bugs in your code: Especially when you just started with ML it often happens that your results seem fine (maybe just a little too good), but you have a subtle bug somewhere that doesn’t cause your program to crash, but just calculates something slightly wrong somewhere. These issues can be very hard to notice, so always triple-check your code and if you can, write <a href="https://realpython.com/python-testing/">unit tests</a> for individual functions to make sure they do what you expect them to do.</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled" title="Google's rules of machine learning">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip
+<span class="screen-reader-only">Tip</span>Google’s rules of machine learning
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>You might also want to have a look at Google’s <a href="https://developers.google.com/machine-learning/guides/rules-of-ml">rules of machine learning</a> (the first one being: <em>“Don’t be afraid to launch a product without machine learning.”</em>)</p>
 </div>
 </div>
+<section id="mitigate-all-kinds-of-risks-by-keeping-a-human-in-the-loop" class="level4 custom-gray-block">
+<h4 class="anchored" data-anchor-id="mitigate-all-kinds-of-risks-by-keeping-a-human-in-the-loop">Mitigate all kinds of risks by keeping a human in the loop</h4>
+<p>In most cases, ML models are not harmless when they make mistakes. Some applications, such as product recommendations, are relatively low risk: even incorrect outputs usually do little more than mildly annoy users. For the majority of other use cases, however, it is best to keep a human in the loop. Humans may actively drive the process—for example, by using model outputs as decision support when planning inventory based on sales forecasts—or intervene only selectively, such as reviewing results when something looks suspicious, periodically checking a spam folder, or validating high-impact decisions when the model is uncertain. However, this control mechanism only works if humans <strong>actually review the ML outputs and do not trust them blindly!</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/06_data_issues/human_in_the_loop.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:65.0%"></p>
+</figure>
+</div>
+</section>
 
 
 </section>

@@ -1022,6 +1022,25 @@ text → audio</li>
 </div>
 </div>
 </section>
+<div class="callout callout-style-default callout-tip callout-titled" title="Leveraging pre-trained models">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Leveraging pre-trained models
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Depending on the type of data, rather than training a model from scratch, you may be able to use existing models out of the box or fine-tune them on your own data. How far this is feasible depends on how generic the data is. Text data is relatively universal, whereas image models often learn general visual patterns but still require adaptation to a specific setup. For other data types—especially tabular and time-series data—you typically need to train custom models from scratch on your own data (but using existing algorithms from open-source libraries), because datasets are rarely comparable across use cases, for example due to different sensors or varying numbers and meanings of features.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/08_ml_in_practice/train_model.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption>While for very generic use cases such as OCR (optical character recognition), machine translation, or speech-to-text applications (e.g.&nbsp;meeting note-taking software) it is usually more cost-effective to use an existing product—unless this is the type of software your company sells—for many applications you build yourself it is often possible to leverage pre-trained models. This includes, for example, LLMs for text data, either accessed via an API or as open-weights models, as well as models that are fine-tuned on your own data. The latter is often the best approach for computer vision tasks, where the data used to train the original model may not be directly comparable to your data (for instance, when adapting a model to images from a specific assembly line).</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="sec-solving-problems" class="level2">
@@ -1206,11 +1225,11 @@ For example, extracting the relevant information from scanned invoices to automa
 </ul></li>
 </ul>
 <p>Unless the ML solution will be an integral part of your business, in the end it will probably come down to comparing costs for developing, implementing, running, and maintaining the system yourself vs.&nbsp;costs for integrating the off-the-shelf solution into your existing workflow (incl.&nbsp;necessary data preprocessing) and on-going licensing fees.</p>
-<p>But even if you decide to build your own ML solution, you rarely start from scratch—you typically <strong>build upon generic components</strong>, such as open source libraries or pretrained models.</p>
+<p>But even if you decide to build your own ML solution, you rarely start from scratch—you typically <strong>build upon generic components</strong>, such as open source libraries or pre-trained models.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../images/08_ml_in_practice/build_or_buy.png" class="img-fluid figure-img" style="width:75.0%"></p>
-<figcaption>The “build or buy” decision is often made on a continuum: You can buy an off-the-shelf tool that works out-of-the-box; the software that you buy might get better if you finetune it on our own data; or you can build your own software, often by reusing generic components such as cloud infrastructure offerings or open source libraries and pretrained models.</figcaption>
+<figcaption>The “build or buy” decision is often made on a continuum: You can buy an off-the-shelf tool that works out-of-the-box; the software that you buy might get better if you fine-tune it on our own data; or you can build your own software, often by reusing generic components such as cloud infrastructure offerings or open source libraries and pre-trained models.</figcaption>
 </figure>
 </div>
 <p>In this context, it is also important to think about which parts of your ML-based product will be the most <strong>difficult for competitors to replicate</strong>: this is usually the <strong>proprietary data</strong> your models were trained on. While datasets can sometimes be scraped from the web (though this is highly controversial when it comes to copyright-protected materials), using your own data ensures a competitive edge—because it reflects the specific context of your business, cannot easily be copied, and often leads to better model performance.</p>

@@ -520,7 +520,7 @@ Figure&nbsp;4.4: Variables (state) created in intermediate steps as a script tra
 <div class="callout-body-container callout-body">
 <p><strong>Some steps depend on others</strong> (e.g., we must fit our model before making predictions), but others can be performed in any order. Optimizing their sequence can <strong>improve performance and efficiency</strong>.</p>
 <p>For example, if you’re baking bread, you wouldn’t preheat the oven hours before the dough has risen—that would waste energy. Similarly, if you’re processing a large dataset, where you need to perform an expensive computation on each item but only a specific subset of these items is included in the final results, then it may be more efficient to filter the items first so you only compute values for the necessary items:</p>
-<div id="fig-step-order" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-pos="H" data-fig-align="center">
+<div id="fig-step-order" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-fig-pos="H">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-step-order-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../images/03_code/order_of_steps.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%" data-fig-pos="H">
@@ -790,12 +790,12 @@ Similarly, a cohesive class is designed to represent one specific concept comple
 <li>Or a one-liner function might implement a complex formula that users shouldn’t need to understand.</li>
 </ul>
 <p>But if your function is called <code>n_times_x</code>, and the implementation is just a one-liner doing exactly that, the abstraction does not help to reduce cognitive load. 😉 As a general rule, <strong>a unit’s interface should be significantly easier to understand than its implementation.</strong></p>
-<p>Think of calling a function like <strong>handing off a task to a colleague</strong>: if it takes ten minutes to explain the relevant context (= many input arguments) so they can complete a task that would have taken you one minute, the handoff isn’t effective. But if the task requires specialized expertise (= a complex implementation), you’re happy to delegate it to a properly trained colleague and just get the result back.</p>
+<p>Think of calling a function like <strong>handing off a task to a colleague</strong>: if it takes an hour to explain the relevant context (= many input arguments) so they can complete a task that would have taken you two minutes, the handoff isn’t effective. But if the task requires specialized expertise (= a complex implementation), you’re happy to delegate it to a properly trained colleague and just get the result back.</p>
 </div>
 </div>
 <section id="class-interfaces" class="level5">
 <h5 class="anchored" data-anchor-id="class-interfaces">Class Interfaces</h5>
-<p><strong>A class groups attributes and methods that belong to a single entity.</strong> For well-structured classes, we should carefully control <strong>what is public and what is private</strong>:</p>
+<p><strong>A class groups attributes and methods that belong to a single entity.</strong> For well-structured classes, we should carefully control what is public and what is private:</p>
 <ul>
 <li><strong>Public attributes &amp; methods</strong> form the external interface—changing them may break code elsewhere.</li>
 <li><strong>Private attributes &amp; methods</strong> are meant for internal use and may be modified anytime.</li>
@@ -938,7 +938,19 @@ Figure&nbsp;4.13: Complicated systems in software design often follow a hierarch
 <span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    mock_ds <span class="op">=</span> MockDataSource()</span>
 <span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    fun_with_di(mock_ds)</span>
 <span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> mock_ds.success</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Dependency injection can also be <strong>combined with pure functions</strong> to make your code testable at different levels of abstraction.</p>
+<p>Dependency injection can also be <strong>combined with pure functions</strong> to make your code testable at different levels of abstraction (<a href="#fig-dependency-injection" class="quarto-xref">Figure&nbsp;<span>4.14</span></a>).</p>
+<div id="fig-dependency-injection" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dependency-injection-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../images/03_code/dependency_injection.png" class="img-fluid figure-img" style="width:75.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dependency-injection-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.14: The main function (<code>do_something</code>) can be invoked through multiple entry points, such as a CLI script, a web API endpoint, or test code. Each entry point constructs a <code>data_source</code> object—either a <code>RealDataSource</code> with database access or, in tests, a <code>MockDataSource</code>—which is then passed to <code>do_something</code>, where <code>data_source.read</code> is called. But <code>do_something</code> does not directly depend on <code>RealDataSource</code> or <code>MockDataSource</code>.
+</figcaption>
+</figure>
+</div>
+<p>This approach also makes it straightforward to <strong>extend your code</strong> by integrating additional data sources through wrappers that share the same interface. For example, if you switch to a different type of database, you only need to implement a new wrapper class and initialize it in the outer calling code; the main function and its dependencies can remain unchanged.</p>
+<p>A key point here is to design your code for <strong>testability</strong> by abstracting access to external resources that should not be touched during tests. While it often makes sense to introduce dedicated wrappers for complex data sources such as databases, simpler cases do not always require this level of abstraction. If your function only reads from a CSV file, it may be sufficient to pass the file path as an argument and use a separate, smaller test file when running tests.</p>
 </section>
 <section id="anti-pattern-global-variables" class="level5">
 <h5 class="anchored" data-anchor-id="anti-pattern-global-variables">Anti-Pattern: Global Variables</h5>
@@ -1057,7 +1069,7 @@ Figure&nbsp;4.13: Complicated systems in software design often follow a hierarch
 <p>That said, if your function ends up with ten arguments, reconsider whether it really has a <strong>single responsibility</strong>. If it’s doing too much, breaking it into multiple functions is likely a better approach.</p>
 <section id="polymorphism" class="level5">
 <h5 class="anchored" data-anchor-id="polymorphism">Polymorphism</h5>
-<p>When working with classes, reuse can be achieved through <strong>polymorphism</strong>, where multiple classes implement the same interface and can be used interchangeably. We’ve already applied this principle when we used <code>MockDataStorage</code> instead of <code>DataStorage</code> for testing. This approach can be useful in research code as well, for example, you could define a <code>Model</code> interface with <code>fit</code> and <code>predict</code> methods so multiple models can share the same experiment logic:</p>
+<p>When working with classes, reuse can be achieved through <strong>polymorphism</strong>, where multiple classes implement the same interface and can be used interchangeably. We’ve already applied this principle when we used <code>MockDataSource</code> instead of <code>DataSource</code> for testing. This approach can be useful in research code as well, for example, you could define a <code>Model</code> interface with <code>fit</code> and <code>predict</code> methods so multiple models can share the same experiment logic:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Model:</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> fit(<span class="va">self</span>, x, y):</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">NotImplementedError</span></span>
@@ -1185,21 +1197,21 @@ Figure&nbsp;4.13: Complicated systems in software design often follow a hierarch
 </ol>
 <section id="structure-your-personal-code-library" class="level4">
 <h4 class="anchored" data-anchor-id="structure-your-personal-code-library">Structure: Your Personal Code Library</h4>
-<p>Our first sketch provides an overview of the <strong>reusable functions and classes</strong> we assembled in the previous section (<a href="#fig-draw-library" class="quarto-xref">Figure&nbsp;<span>4.14</span></a>). This collection forms your <strong>personal code library</strong>, which you can reuse not just for this project but for future ones as well.</p>
+<p>Our first sketch provides an overview of the <strong>reusable functions and classes</strong> we assembled in the previous section (<a href="#fig-draw-library" class="quarto-xref">Figure&nbsp;<span>4.15</span></a>). This collection forms your <strong>personal code library</strong>, which you can reuse not just for this project but for future ones as well.</p>
 <div id="fig-draw-library" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-draw-library-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../images/00_clarity/draw_library.png" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-draw-library-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4.14: The different functions and classes in our personal library, a collection of reusable units that can serve us in multiple projects. They are organized in different files and folders to keep related code close together. Green boxes represent pure functions, purple boxes impure functions with side effects (like reading or writing to external files), and blue boxes class methods. For classes (like <code>MyModel</code>) that extend another class (<code>Model</code>), only the additional attributes and methods are listed for that class. The arrows indicate dependencies.
+Figure&nbsp;4.15: The different functions and classes in our personal library, a collection of reusable units that can serve us in multiple projects. They are organized in different files and folders to keep related code close together. Green boxes represent pure functions, purple boxes impure functions with side effects (like reading or writing to external files), and blue boxes class methods. For classes (like <code>MyModel</code>) that extend another class (<code>Model</code>), only the additional attributes and methods are listed for that class. The arrows indicate dependencies.
 </figcaption>
 </figure>
 </div>
 </section>
 <section id="behavior-mapping-out-your-script" class="level4">
 <h4 class="anchored" data-anchor-id="behavior-mapping-out-your-script">Behavior: Mapping Out Your Script</h4>
-<p>Our second sketch outlines the <strong>script you’ll execute</strong> to create the results you want, which builds upon the components from your personal library (<a href="#fig-draw-script" class="quarto-xref">Figure&nbsp;<span>4.15</span></a>). When designing the flow of your script, consider:</p>
+<p>Our second sketch outlines the <strong>script you’ll execute</strong> to create the results you want, which builds upon the components from your personal library (<a href="#fig-draw-script" class="quarto-xref">Figure&nbsp;<span>4.16</span></a>). When designing the flow of your script, consider:</p>
 <ul>
 <li><strong>How the script is triggered</strong> – Does it take command-line arguments? What inputs does it require?</li>
 <li><strong>What the final output should be</strong> – A results plot? A summary table? Something else?</li>
@@ -1212,7 +1224,7 @@ Figure&nbsp;4.14: The different functions and classes in our personal library, a
 <img src="../images/00_clarity/draw_script.png" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-draw-script-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4.15: The full flow of your script, including external resources and reusable functions. If you want, you can omit the lower level function calls as these are already covered in the library diagram. The code to create a new model should create models of different types depending on the configuration parameters passed when calling the script so you can use the same script for multiple experiments.
+Figure&nbsp;4.16: The full flow of your script, including external resources and reusable functions. If you want, you can omit the lower level function calls as these are already covered in the library diagram. The code to create a new model should create models of different types depending on the configuration parameters passed when calling the script so you can use the same script for multiple experiments.
 </figcaption>
 </figure>
 </div>

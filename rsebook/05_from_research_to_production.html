@@ -404,6 +404,19 @@ Relationships between tables can be <strong>bidirectional</strong> or <strong>un
 </figcaption>
 </figure>
 </div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Try drawDB to create your database schema">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Try drawDB to create your database schema
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can use the open-source web app <a href="https://www.drawdb.app/">drawDB</a> to diagram your database schema and even generate the corresponding SQL.</p>
+</div>
+</div>
 <p><strong>Database migrations</strong>, or schema changes, often require careful coordination between code and database updates. For instance, renaming a field means you have to update your database and modify the code accessing it at the same time. Keeping migration scripts and application code (including ORMs) in the same repository helps ensure consistency during such updates.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Managing databases in Python">
 <div class="callout-header d-flex align-content-center">
@@ -533,7 +546,7 @@ Data that needs to be persisted can be stored either in the frontend (client) or
 </div>
 <div class="callout-body-container callout-body">
 <p>As established in <a href="03_state_flow_how.html" class="quarto-xref"><span>Chapter 4</span></a>, your code’s most critical logic should live in a <strong>pure function</strong> (or possibly a class method), meaning it has no awareness of external resources such as databases and produces no side effects. At some point, database access is unavoidable, but it should occur one level up, in an <strong>impure function</strong> that uses dependency injection. This approach keeps the impure layer reasonably easy to test while isolating side effects.</p>
-<p>The <strong>API endpoint</strong> then acts as a thin wrapper around this impure function, exposing the functionality to the outside world (for example, a web frontend or mobile app). With this structure, the impure function can be reused outside the context of an HTTP API and does not need to handle request parsing, response serialization, or other transport-level concerns. The result is a clear <strong>separation of concerns</strong> throughout the call hierarchy.</p>
+<p>The <strong>API endpoint</strong> then acts as a thin wrapper around this impure function, exposing the functionality to the outside world (for example, a web frontend or mobile app). With this structure, the impure function can be reused outside the context of an HTTP API and does not need to handle request parsing, response serialization, or other transport-level concerns. The result is a clear <strong>separation of concerns</strong> throughout the call hierarchy (see also <a href="03_state_flow_how.html#fig-dependency-injection" class="quarto-xref">Figure&nbsp;<span>4.14</span></a>).</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pure_func(inputs):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># pure logic, unaware of data persistence or HTTP communication</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    outputs <span class="op">=</span> ...</span>

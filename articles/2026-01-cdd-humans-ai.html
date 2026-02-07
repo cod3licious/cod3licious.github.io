@@ -190,7 +190,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">February 5, 2026</p>
+      <p class="date-modified">February 7, 2026</p>
     </div>
   </div>
     
@@ -252,6 +252,7 @@ Figure&nbsp;2: Humans are in the loop in two places: when providing inputs and w
 <div class="callout-body-container callout-body">
 <p>A common concern is that using AI to produce code will prevent junior developers from acquiring the skills needed to become seniors. But I’d argue that those skills were never primarily about coding. The biggest difference I’ve observed between junior and senior developers is that seniors think deeply about the problem and the trade-offs between possible solutions, while juniors tend to jump straight into implementation.</p>
 <p>CDD explicitly pushes you to think before writing code. <strong>It helps you practice core skills</strong>: decomposing complex problems into smaller steps, designing data structures and flows, abstracting details behind clean interfaces, and deciding what <em>the right thing to build</em> actually is.</p>
+<p>When junior developers then implement the resulting designs with AI, they should think of it as their <strong>personal tutor</strong>. Rather than just accepting generated code, they need to stay curious and genuinely interested in how the software works. The AI can then enable them by explaining the solution, clarifying complex parts, and justifying decisions through their trade-offs. This creates a learning experience similar to shadowing a senior developer, and they’ll arguably learn more by being exposed to advanced patterns than by wasting hours struggling with specific tools or libraries. Even when writing code themselves, they should have AI review and critique their approach to see how a more experienced engineer might improve it.</p>
 </div>
 </div>
 </section>
@@ -287,13 +288,13 @@ Figure&nbsp;3: Before writing code—yourself or via an AI—it’s worth gainin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>A related approach that has gained traction recently is <a href="https://github.com/github/spec-kit/blob/main/spec-driven.md">Spec-Driven Development (SDD)</a>, which emphasizes detailed specifications, plans, and task breakdowns, often produced with AI support. However, I’m not convinced we should treat those specs—rather than the working code—as the source of truth, since real-world constraints and edge cases encountered during the implementation will inevitably cause specs and code to diverge over time. As an industry, we have moved away from hundred-page requirement documents towards more lightweight user stories for a reason.</p>
+<p>A related approach that has gained traction recently is <a href="https://github.com/github/spec-kit/blob/main/spec-driven.md">Spec-Driven Development (SDD)</a>, which emphasizes detailed specifications, plans, and task breakdowns, often produced with AI support. However, I’m not convinced we should treat those specs—rather than the working code—as the source of truth. In the end, both describe your system, but the code is naturally more precise. And as an industry, we have moved away from hundred-page requirement documents towards more lightweight user stories for a reason.</p>
 <p>CDD instead emphasizes creating just enough documentation for you and your collaborators—human and AI—to understand the problem and the conceptual solution. It prioritizes thinking over formal specifications, with sketches serving as tools for gaining clarity rather than documents to maintain.</p>
 </div>
 </div>
 <section id="the-why" class="level3">
 <h3 class="anchored" data-anchor-id="the-why">The Why</h3>
-<p>The first question we need to answer is <strong>why our idea is worth implementing</strong> in the first place. This comes down to <strong>why users would be better off with our software</strong> than with the alternatives—whether those alternatives are competing products, spreadsheets, or no software whatsoever. Answering this requires identifying <strong>who our target users are</strong> (e.g., by creating user personas) and <strong>what is important to them</strong>. Their priorities might be related to specific functionality, usability, aesthetics, or anything else that helps them perform their job better and improve the metrics by which their work is evaluated.</p>
+<p>The first question we need to answer is <strong>why our idea is worth implementing</strong> in the first place. This comes down to <strong>why users would be better off with our software</strong> than with the alternatives—whether those alternatives are competing products, spreadsheets, or no software whatsoever. Identifying a gap in the current solution-landscape requires knowing <strong>who our target users are</strong> (e.g., by creating user personas) and <strong>what is important to them</strong>. Their priorities might be related to specific functionality, usability, aesthetics, or anything else that helps them perform their job better and improve the metrics by which their work is evaluated.</p>
 <p>If your team includes a product manager / owner, they should be able to help you with these points.</p>
 <section id="predictive-quality-example" class="level4">
 <h4 class="anchored" data-anchor-id="predictive-quality-example">Predictive Quality Example</h4>
@@ -354,6 +355,7 @@ Figure&nbsp;4: <strong>Process optimization using machine learning (ML) predicti
 </div>
 <div class="callout-body-container callout-body">
 <p>The workflow descriptions below are kept deliberately high-level. Concrete tips tend to become obsolete almost as soon as they’re written, given how fast AI models evolve. If you want detailed, tactical advice, just search for “prompt engineering.” For example, the <a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-4-best-practices">best practices provided by Anthropic</a> are a good starting point.</p>
+<p>For advanced agentic engineering techniques, <a href="https://github.com/steipete">Peter Steinberger</a> (creator of OpenClaw and numerous other AI-built open source tools) is worth following—several tips in this article were inspired by insights he’s shared about his workflow.</p>
 </div>
 </div>
 <section id="up-front-decisions" class="level3">
@@ -396,7 +398,7 @@ Figure&nbsp;5: How Claude helped me pick a frontend framework.
 <ul>
 <li>a project overview derived from the CDD “why” sketches</li>
 <li>which role the AI agent should assume (capable staff engineer)</li>
-<li>a description of the project structure and instructions on how the agent should interact with the codebase (e.g., using the <code>ty</code> type checker instead of the former default <code>mypy</code> for Python)</li>
+<li>a description of the project structure and instructions on how the agent should interact with the codebase (e.g., using the <code>ty</code> type checker instead of the former default <code>mypy</code> for Python—another example where specific hints are necessary when your project setup deviates from the mainstream conventions the AI encountered in its training data)</li>
 <li>style guidelines reflecting <a href="https://franziskahorn.de/rsebook/03_state_flow_how#good-code">what I consider good code</a></li>
 <li>a checklist outlining the desired agent workflow (e.g., ask questions if anything is unclear, write tests before the implementation, make sure type checker, linter, and all tests pass)</li>
 </ul>
@@ -411,18 +413,25 @@ Figure&nbsp;5: How Claude helped me pick a frontend framework.
 </section>
 <section id="coding" class="level3">
 <h3 class="anchored" data-anchor-id="coding">Coding</h3>
-<p>Now for the implementation itself, my AI-assisted coding setup is actually really basic. I’m not running a swarm of sub-agents overnight to parallelize tasks, review pull requests, and hand me a finished app the next morning. Partly that’s because I still have enough trust issues and would rather supervise the development step by step. But if we’re being honest, it’s also because I haven’t yet had the patience to dive this deep into the fast-moving ecosystem of AI agents and tooling (how many VS Code clones with AI integration do we have now?!) and prefer to maintain a reasonably predictable workflow.</p>
+<p>Now for the implementation itself, my AI-assisted coding setup is actually really basic. I’m not (yet ;-)) running a swarm of sub-agents overnight to parallelize tasks, review pull requests, and hand me a finished app the next morning. Partly that’s because I still have enough trust issues and would rather supervise the development step by step. But if we’re being honest, it’s also because I haven’t yet had the patience to dive this deep into the fast-moving ecosystem of AI agents and tooling (how many VS Code clones with AI integration do we have now?!) and prefer to maintain a reasonably predictable workflow.</p>
 <p>So what I actually use is the <a href="https://zed.dev/"><strong>Zed IDE</strong></a>, built from the start with AI-assisted coding in mind and driving recent standards like the agent client protocol, together with <strong>Claude Code</strong>. I have Claude Code running inside the IDE rather than as a CLI, because I really appreciate a thoughtful GUI, for example, to review the agent’s code changes. I selected Claude Code based on some preliminary experiments comparing different AI models and because Anthropic has set the standard for innovation in coding agents, while other companies mainly scrambled to keep up.</p>
 <p><em>TODO: add screenshot of IDE</em></p>
-<p>After all of our preparations to gain clarity on what it is we want to build, implementing the system is now fairly straightforward. Or as Bent Flyvbjerg argues in <em>How Big Things Get Done</em>: a solid, well-thought-out plan gets you halfway to smooth execution and delivery.</p>
-<p>Basically, I’m now just feeding the individual task prompts to the AI one by one (each in a new thread), along with the general guidelines captured in the AGENTS.md file, while making sure the results match my expectations.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> But of course, <strong>the process is still iterative</strong>. The sketches are bound to contain gaps that only surface during implementation. In principle, you could then go back, update the sketch documents, and generate a new prompt from the diff. In practice, I usually find it faster to ask the AI to fix the issue directly and archive the sketches once they’ve been implemented.</p>
+<p>After all the preparations to gain clarity on what we want to build, implementing the system is now fairly straightforward. Or as Bent Flyvbjerg argues in <em>How Big Things Get Done</em>: a solid, well-thought-out plan gets you halfway to smooth execution and delivery.</p>
+<p>Essentially, I feed individual task prompts to the AI one by one, along with the general guidelines captured in AGENTS.md, while verifying after each step that the results match my expectations. Additionally, I follow some best practices:</p>
+<ul>
+<li><strong>Ask for a plan first.</strong> Before implementation, ask “You need to implement X—how would you do that?” Ideally, the agent provides several options with trade-offs and step-by-step approaches. If one resonates, simply say “now implement option Y.”</li>
+<li><strong>Switch threads regularly.</strong> To avoid “context rot”—where results deteriorate as the context window fills and earlier instructions get compressed or forgotten—I start a fresh thread for each new task.</li>
+<li><strong>Close the feedback loop.</strong> Like human developers, agents often don’t produce perfect code on the first try. Enable the agent to use build tools, linters, and a thorough test suite (by asking it to write tests first when implementing new tasks) so it can identify failures and self-correct before declaring a task done.</li>
+<li><strong>Maintain modular architecture.</strong> As the codebase grows, good modularity ensures the agent knows where to find relevant files without polluting its context window with irrelevant code.</li>
+</ul>
+<p>Even with solid instructions, the implementation process remains <strong>iterative</strong>. Sketches inevitably contain gaps that only surface during implementation and you only <em>really</em> know what you actually wanted once you see the working software and can interact with its features—agile is not dead. In principle, you could then go back, update the sketch documents, and generate a new prompt from the diff. In practice, I usually find it faster to ask the AI to fix the issue directly and archive the sketches once they’ve been implemented.</p>
 </section>
 </section>
 <section id="the-result" class="level2">
 <h2 class="anchored" data-anchor-id="the-result">The Result</h2>
-<p>The sketches have now served their purpose: they helped me think through a coherent solution before writing code. Moving forward, the working software will be my source of truth. You can check out the code on GitHub and interact with the live application on Render. <em>TODO: The implementation took roughly X hours and consumed $X in Claude Code tokens.</em></p>
+<p>The sketches have now served their purpose: they helped me think through a coherent solution before writing code. Moving forward, the working software will be my source of truth. <em>TODO: The implementation took roughly X hours and consumed $X in Claude Code tokens.</em> You can check out the code on GitHub and interact with the live application on Render.</p>
 <p><em>TODO: add screenshot of application</em></p>
-<p>Keep in mind this is still a toy project: achieving the first 80% was relatively straightforward, but—as always—the remaining 20% (or likely more in this case) is where the real challenges lie. From my experience at alcemy, just a few of the <strong>critical components missing for a production-ready system</strong> include:</p>
+<p>Keep in mind this is still a toy project: achieving the first 80% was relatively straightforward, but—as always—the remaining 20% (or likely a lot more in this case) is where the real challenges lie. From my experience at alcemy, just a few of the <strong>critical components missing for a production-ready system</strong> include:</p>
 <ul>
 <li>User management, authentication, and other security considerations</li>
 <li>Integrating data with automated exports from last-century data management systems</li>
@@ -449,7 +458,6 @@ Figure&nbsp;5: How Claude helped me pick a frontend framework.
 <ol>
 <li id="fn1"><p>A system prompt is a set of instructions automatically included in all conversations. Depending on how you use an AI, this can live in personal preferences (for web interfaces) or in a configuration file such as an <code>AGENTS.md</code>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>At the time of writing, <code>AGENTS.md</code> is unfortunately not yet a universally accepted standard across IDEs and coding agents, which is problematic when collaborating with people using different setups. In my case, I work around this by referencing <code>@AGENTS.md</code> from my <code>CLAUDE.md</code> file so Claude Code reliably picks up the instructions. Ideally, this won’t be necessary in the future.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>When implementing anything, I find it helps to first ask the agent to create a plan. For example, ask “You need to implement X—how would you do that?” Ideally, it will provide several options with their trade-offs and step-by-step approaches. If one resonates, you can simply say “now implement option Y.”<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script type="text/javascript"> // go once over all images and transform the percentage width into pixels relative to original body size

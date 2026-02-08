@@ -190,7 +190,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">February 7, 2026</p>
+      <p class="date-modified">February 8, 2026</p>
     </div>
   </div>
     
@@ -205,7 +205,7 @@ ul.task-list li input[type="checkbox"] {
 <p>When I attended my first computer science class in 2009, programming—writing text that makes a computer do something—felt like a magical superpower. But over the years, as I shifted towards designing larger systems, typing out the necessary code to materialize these systems started to feel more and more like a chore. That’s why I’ve been really excited when, around Nov/Dec 2025, AI coding agents finally reached a point where they produced code I didn’t feel I had to refactor from top to bottom—and suddenly software development became fun again.</p>
 <p>In this article, I want to give a glimpse into how I personally use AI to develop software (as of February 2026). But more importantly, I want to explain what I <em>don’t</em> let AI do: the conceptual work that happens before I start coding—with or without AI—and which gives me the confidence that the software is actually worth building in the first place. I call this approach <strong>Clarity-Driven Development (CDD)</strong>, which you can also read more about in my latest book, <a href="https://leanpub.com/cddsci"><em>Clarity-Driven Development of Scientific Software</em></a>.</p>
 <div class="custom-gray-block">
-<p><strong>CDD is a thinking tool for gaining clarity on the problem and designing technology-agnostic solutions</strong>, creating a solid foundation whether you’re implementing software yourself or directing AI.</p>
+<p><strong>CDD is a thinking framework for gaining clarity on the problem and designing technology-agnostic solutions</strong>, creating a solid foundation whether you’re implementing software yourself or directing AI.</p>
 </div>
 <section id="where-humans-are-still-in-the-loop" class="level2">
 <h2 class="anchored" data-anchor-id="where-humans-are-still-in-the-loop">Where Humans Are Still in the Loop</h2>
@@ -288,17 +288,21 @@ Figure&nbsp;3: Before writing code—yourself or via an AI—it’s worth gainin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>A related approach that has gained traction recently is <a href="https://github.com/github/spec-kit/blob/main/spec-driven.md">Spec-Driven Development (SDD)</a>, which emphasizes detailed specifications, plans, and task breakdowns, often produced with AI support. However, I’m not convinced we should treat those specs—rather than the working code—as the source of truth. In the end, both describe your system, but the code is naturally more precise. And as an industry, we have moved away from hundred-page requirement documents towards more lightweight user stories for a reason.</p>
-<p>CDD instead emphasizes creating just enough documentation for you and your collaborators—human and AI—to understand the problem and the conceptual solution. It prioritizes thinking over formal specifications, with sketches serving as tools for gaining clarity rather than documents to maintain.</p>
+<p>A related approach that has gained traction recently is <a href="https://github.com/github/spec-kit/blob/main/spec-driven.md">Spec-Driven Development (SDD)</a>, which emphasizes detailed specifications, plans, and task breakdowns, often produced with AI support. However, I’m not convinced we should <strong>treat those specs—rather than the working code—as the source of truth</strong>. In the end, both describe your system, but the <strong>code is naturally more precise</strong>. And as an industry, we have moved away from hundred-page requirement documents towards more lightweight user stories for a reason.</p>
+<p>CDD instead encourages you to create just enough documentation for you and your collaborators—human and AI—to understand the problem and the conceptual solution. It prioritizes thinking over formal specifications, with <strong>sketches serving as tools for gaining clarity rather than documents to maintain</strong>.</p>
 </div>
 </div>
 <section id="the-why" class="level3">
 <h3 class="anchored" data-anchor-id="the-why">The Why</h3>
 <p>The first question we need to answer is <strong>why our idea is worth implementing</strong> in the first place. This comes down to <strong>why users would be better off with our software</strong> than with the alternatives—whether those alternatives are competing products, spreadsheets, or no software whatsoever. Identifying a gap in the current solution-landscape requires knowing <strong>who our target users are</strong> (e.g., by creating user personas) and <strong>what is important to them</strong>. Their priorities might be related to specific functionality, usability, aesthetics, or anything else that helps them perform their job better and improve the metrics by which their work is evaluated.</p>
 <p>If your team includes a product manager / owner, they should be able to help you with these points.</p>
-<section id="predictive-quality-example" class="level4">
-<h4 class="anchored" data-anchor-id="predictive-quality-example">Predictive Quality Example</h4>
-<p><em>TODO</em></p>
+<details>
+<summary>
+<span class="summary-heading">Predictive Quality Example</span>
+</summary>
+<p>A common challenge in process industries like chemical or cement production is maintaining product quality despite changing conditions like fluctuating raw material quality, process degradation (e.g., catalyst depletion), and other latent factors. This requires the <strong>production lead</strong> <em>(= our target user)</em> to constantly adjust setpoints using heuristics to keep <strong>quality</strong> on target while maintaining <strong>throughput</strong> and managing energy <strong>costs</strong> and other resources <em>(= their key priorities)</em>.</p>
+<p>What makes determining the right setpoints especially difficult is that actual product quality often isn’t known until hours or days later, since quality tests can be very time-intensive. For example, for cement, compressive strength can only be measured after a block hardens for 28 days. This means despite the production lead’s efforts to adjust setpoints, they may discover days later that their entire production run fell below quality standards—when it’s too late to correct.</p>
+<p>By using a machine learning (ML) model to predict final product quality from readily available lab measurements, near-real-time process control becomes possible (<a href="#fig-predictive-quality" class="quarto-xref">Figure&nbsp;4</a>). Setpoints can then be automatically determined to maintain stable quality while additionally optimizing secondary metrics like throughput and resource consumption. This frees the production lead to focus on creative, less monotonous work like tweaking recipes, developing improved product variations, or optimizing the overall production process.</p>
 <div id="fig-predictive-quality" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-predictive-quality-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -309,16 +313,25 @@ Figure&nbsp;4: <strong>Process optimization using machine learning (ML) predicti
 </figcaption>
 </figure>
 </div>
-</section>
+</details>
 </section>
 <section id="the-what" class="level3">
 <h3 class="anchored" data-anchor-id="the-what">The What</h3>
 <p>In the next step, we need to examine <strong>what our implementation should look like to users</strong>. This typically means creating wireframes and <strong>user interface mockups</strong>, and—ideally—<strong>testing them with potential users</strong> to see where they struggle. These mockups make assumptions about user workflows explicit and often expose misunderstandings about the problem itself.</p>
 <p>I often start with simple pencil-and-paper sketches, but tools like <a href="https://stitch.withgoogle.com/">Google’s Stitch</a> can generate polished mockups in seconds using AI. That said, input from a UX designer is invaluable here. And when designs already exist, it’s worth understanding why they make sense and how exactly they address user needs.</p>
-<section id="predictive-quality-example-1" class="level4">
-<h4 class="anchored" data-anchor-id="predictive-quality-example-1">Predictive Quality Example</h4>
-<p><em>TODO</em></p>
-</section>
+<details>
+<summary>
+<span class="summary-heading">Predictive Quality Example</span>
+</summary>
+<p>The software we’re building is primarily a data product. At its core is an ML model acting as a soft sensor for product quality. However, reliable predictions alone aren’t sufficient—they must be presented to the production lead in actionable ways through effective data visualizations. This requires understanding what questions production leads need to answer and what decisions they must make. Key use cases our software must support include:</p>
+<ul>
+<li>Monitoring quality (actual when available, otherwise predicted), throughput, and costs over time</li>
+<li>Identifying possible root causes for quality degradation</li>
+<li>Inspecting ML model accuracy and learned patterns to build trust in its predictions</li>
+</ul>
+<p>Additionally, the application requires inputs from the production lead, such as configuring recipes for all product variants they produce.</p>
+Each of these user needs translates into one or more screens. For each screen, I created a wireframe and a brief description of the screen, including which backend endpoints it should communicate with to read or write the required data (finalized in the next step). For example, the resulting sketches for the quality monitoring view are shown in Figure <em>TODO</em>, while sketches for other screens can be found in the project’s GitHub repo (<em>TODO: link</em>).
+</details>
 </section>
 <section id="the-how" class="level3">
 <h3 class="anchored" data-anchor-id="the-how">The How</h3>
@@ -331,14 +344,17 @@ Figure&nbsp;4: <strong>Process optimization using machine learning (ML) predicti
 - implementation notes, especially key domain logic, invariants, and edge cases</code></pre>
 <p>In larger projects, these interface sketches can be <strong>organized into files and folders that mirror the intended module structure</strong>. I usually limit these sketches to interfaces that define the system’s external behavior. For core functionality, however, it may be useful to additionally outline key functions or classes in this way as well. All other details, such as how the internals are decomposed, are up to our colleague and left to be handled during implementation.</p>
 <p>To define <strong>database schemas</strong>, I like using <a href="https://www.drawdb.app/">drawDB</a>. It lets you model the schema visually and export the corresponding SQL, which is excellent input for an AI when generating ORMs or other database-related code.</p>
-<section id="predictive-quality-example-2" class="level4">
-<h4 class="anchored" data-anchor-id="predictive-quality-example-2">Predictive Quality Example</h4>
-<p><em>TODO</em></p>
+<details>
+<summary>
+<span class="summary-heading">Predictive Quality Example</span>
+</summary>
+<p>Based on the screens and their data needs identified in the previous step, most required endpoints are already clear. Additionally, we need some batch jobs: regular scripts that handle data cleaning and retrain prediction models weekly on newly collected data. Detailed descriptions of these endpoints and scripts can be found on GitHub <em>(TODO: link)</em>.</p>
+Finally, we need to determine how data for our application, including trained models, should be structured and stored. Here, I aim to balance normalization (avoiding redundant entries through related tables with foreign keys) against query simplicity (avoiding excessive joins across multiple tables and complicated subqueries). The database schema I came up with for this software is shown in Figure <em>TODO</em>.
+</details>
 <div class="custom-gray-block">
 <p>At this stage, our results are independent of any specific programming language or technology choices. That makes them cheap in the sense that <strong>no hard-to-reverse decisions have been made yet</strong>. Which also means now is a good opportunity—if you haven’t already—to share your idea and sketches with others (human and/or AI) and <strong>gather feedback</strong> before committing to an implementation built on a potentially flawed design.</p>
 </div>
 <p>Thinking through a problem and solution in this way has always been the fun part for me. In the past, I’d often stop here—once the application “worked in my head,” the challenge was essentially over, and turning my sketches into code just felt like a chore. Fortunately, that tedious work can now be offloaded to an AI that won’t get bored so easily.</p>
-</section>
 </section>
 </section>
 <section id="implementing-with-ai" class="level2">
@@ -394,11 +410,11 @@ Figure&nbsp;5: How Claude helped me pick a frontend framework.
 <section id="encode-decisions-in-agent-context" class="level4">
 <h4 class="anchored" data-anchor-id="encode-decisions-in-agent-context">Encode Decisions in Agent Context</h4>
 <p><strong>The choices you’ve made up to now are crucial context</strong> for everyone working on this project. If you’re lucky, your team is already in the habit of tracking them in architectural decision records (ADRs). But often this knowledge exists only in people’s heads. When collaborating with an AI agent, it is critical that you document this information in writing—and do so concisely to reduce token consumption. An <a href="https://agents.md/"><strong>AGENTS.md file</strong></a><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> is perfect for this to ensure the instructions are passed to the LLM as a system prompt.</p>
-<p>For example, my AGENTS.md file for this project <em>(TODO: add link)</em> includes</p>
+<p>For example, my <code>AGENTS.md</code> file for this project <em>(TODO: add link)</em> includes</p>
 <ul>
 <li>a project overview derived from the CDD “why” sketches</li>
 <li>which role the AI agent should assume (capable staff engineer)</li>
-<li>a description of the project structure and instructions on how the agent should interact with the codebase (e.g., using the <code>ty</code> type checker instead of the former default <code>mypy</code> for Python—another example where specific hints are necessary when your project setup deviates from the mainstream conventions the AI encountered in its training data)</li>
+<li>a description of the project structure and instructions on how the agent should interact with the codebase (e.g., using the <code>ty</code> type checker instead of the former default <code>mypy</code> for Python—another example where <strong>specific hints are necessary when your project setup deviates from the mainstream conventions the AI encountered in its training data</strong>)</li>
 <li>style guidelines reflecting <a href="https://franziskahorn.de/rsebook/03_state_flow_how#good-code">what I consider good code</a></li>
 <li>a checklist outlining the desired agent workflow (e.g., ask questions if anything is unclear, write tests before the implementation, make sure type checker, linter, and all tests pass)</li>
 </ul>
@@ -417,14 +433,14 @@ Figure&nbsp;5: How Claude helped me pick a frontend framework.
 <p>So what I actually use is the <a href="https://zed.dev/"><strong>Zed IDE</strong></a>, built from the start with AI-assisted coding in mind and driving recent standards like the agent client protocol, together with <strong>Claude Code</strong>. I have Claude Code running inside the IDE rather than as a CLI, because I really appreciate a thoughtful GUI, for example, to review the agent’s code changes. I selected Claude Code based on some preliminary experiments comparing different AI models and because Anthropic has set the standard for innovation in coding agents, while other companies mainly scrambled to keep up.</p>
 <p><em>TODO: add screenshot of IDE</em></p>
 <p>After all the preparations to gain clarity on what we want to build, implementing the system is now fairly straightforward. Or as Bent Flyvbjerg argues in <em>How Big Things Get Done</em>: a solid, well-thought-out plan gets you halfway to smooth execution and delivery.</p>
-<p>Essentially, I feed individual task prompts to the AI one by one, along with the general guidelines captured in AGENTS.md, while verifying after each step that the results match my expectations. Additionally, I follow some best practices:</p>
+<p>Essentially, I feed the individual task prompts to the AI one by one, together with the general guidelines captured in <code>AGENTS.md</code>, while verifying after each step that the results match my expectations. Along the way, I follow some best practices:</p>
 <ul>
-<li><strong>Ask for a plan first.</strong> Before implementation, ask “You need to implement X—how would you do that?” Ideally, the agent provides several options with trade-offs and step-by-step approaches. If one resonates, simply say “now implement option Y.”</li>
+<li><strong>Ask for a plan first.</strong> At the start of every new task, I ask the AI “You need to implement X—how would you do that?” Ideally, the agent then provides several options with trade-offs and step-by-step approaches. If one resonates, I continue with “now implement option Y.”</li>
 <li><strong>Switch threads regularly.</strong> To avoid “context rot”—where results deteriorate as the context window fills and earlier instructions get compressed or forgotten—I start a fresh thread for each new task.</li>
-<li><strong>Close the feedback loop.</strong> Like human developers, agents often don’t produce perfect code on the first try. Enable the agent to use build tools, linters, and a thorough test suite (by asking it to write tests first when implementing new tasks) so it can identify failures and self-correct before declaring a task done.</li>
+<li><strong>Close the feedback loop.</strong> Like human developers, agents often don’t produce perfect code on the first try. I enable the agent to use build tools, linters, and a thorough test suite (by asking it to write tests first when implementing new tasks) so it can identify failures and self-correct before declaring a task done.</li>
 <li><strong>Maintain modular architecture.</strong> As the codebase grows, good modularity ensures the agent knows where to find relevant files without polluting its context window with irrelevant code.</li>
 </ul>
-<p>Even with solid instructions, the implementation process remains <strong>iterative</strong>. Sketches inevitably contain gaps that only surface during implementation and you only <em>really</em> know what you actually wanted once you see the working software and can interact with its features—agile is not dead. In principle, you could then go back, update the sketch documents, and generate a new prompt from the diff. In practice, I usually find it faster to ask the AI to fix the issue directly and archive the sketches once they’ve been implemented.</p>
+<p>Even with solid instructions, the implementation process remains <strong>iterative</strong>. Sketches inevitably contain gaps that only surface during implementation and <strong>you only <em>really</em> know what you actually wanted once you see the working software and can interact with its features</strong>—agile is not dead. In principle, you could then go back, update the sketch documents, and generate a new prompt from the diff. In practice, I usually find it faster to ask the AI to fix the issue directly and archive the sketches once they’ve been implemented.</p>
 </section>
 </section>
 <section id="the-result" class="level2">
@@ -439,7 +455,7 @@ Figure&nbsp;5: How Claude helped me pick a frontend framework.
 <li>Running the system in production, including provisioning infrastructure, handling ongoing data issues, retraining models regularly, and adapting to new edge cases</li>
 <li>Change management: ensuring users adopt and ideally enjoy using your product</li>
 </ul>
-<p>All of these require substantial human creativity, domain expertise, and empathy for users.</p>
+<p>Most of these points require substantial human creativity, domain expertise, and empathy for users.</p>
 <section id="where-to-go-from-here" class="level3">
 <h3 class="anchored" data-anchor-id="where-to-go-from-here">Where to Go From Here</h3>
 <p>The most important advice that I can give you for AI-assisted coding—beyond thinking through and clearly defining what you want to build—is to <strong>keep experimenting</strong>. It takes practice to discover which prompts work and when the AI goes off the rails. And then you’ll need to relearn this again every few months as new models and tools appear. But it’s also fun to keep being positively surprised by your new AI colleague and see how it can amplify your creativity and handle the tedious tasks, letting you focus on the ideas that matter.</p>

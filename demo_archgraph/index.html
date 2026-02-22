@@ -164,10 +164,23 @@ body {
 }
 
 #detail-placeholder {
-  color: #bbb;
-  font-style: italic;
+  color: #888;
   font-size: 12px;
-  margin-top: 8px;
+  line-height: 1.7;
+  margin-top: 4px;
+}
+
+#detail-placeholder .hint-heading {
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 8px;
+}
+
+#detail-placeholder .hint-item {
+  margin-bottom: 6px;
+  padding-left: 10px;
+  border-left: 2px solid #e0e0e0;
 }
 
 /* ── Highlight states ── */
@@ -197,7 +210,12 @@ path.arrow.dimmed  { opacity: 0; }
   </div>
   <div id="resizer"></div>
   <div id="detail-pane">
-    <div id="detail-placeholder">Click a submodule or unit to see its description.</div>
+    <div id="detail-placeholder">
+      <div class="hint-heading">Click anything to explore.</div>
+      <div class="hint-item"><strong>Submodules</strong> are the colored boxes — logical groupings of related functionality within a module.</div>
+      <div class="hint-item"><strong>Units</strong> are the individual functions or classes listed inside each box.</div>
+      <div class="hint-item">Clicking reveals the description, dependencies, and highlights which other submodules are connected — including the actual dependency lines.</div>
+    </div>
     <div id="detail-content" style="display:none"></div>
   </div>
 </div>

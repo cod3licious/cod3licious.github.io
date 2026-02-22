@@ -1,0 +1,1354 @@
+{
+  "layers": {
+    "root_layers": [
+      [
+        "api"
+      ],
+      [
+        "orders"
+      ],
+      [
+        "payments"
+      ],
+      [
+        "catalog"
+      ],
+      [
+        "core"
+      ]
+    ],
+    "submodule_layers": {
+      "api": [
+        [
+          "api.products",
+          "api.orders",
+          "api.payments"
+        ],
+        [
+          "api.auth"
+        ]
+      ],
+      "orders": [
+        [
+          "orders.order_mgmt"
+        ],
+        [
+          "orders.checkout"
+        ],
+        [
+          "orders.cart"
+        ],
+        [
+          "orders.order_repo"
+        ]
+      ],
+      "payments": [
+        [
+          "payments.refunds",
+          "payments.invoicing"
+        ],
+        [
+          "payments.gateway"
+        ]
+      ],
+      "catalog": [
+        [
+          "catalog.search"
+        ],
+        [
+          "catalog.pricing"
+        ],
+        [
+          "catalog.products"
+        ],
+        [
+          "catalog.inventory"
+        ]
+      ],
+      "core": [
+        [
+          "core.email",
+          "core.events"
+        ],
+        [
+          "core.db",
+          "core.cache"
+        ]
+      ]
+    }
+  },
+  "submodules": {
+    "api.products": {
+      "module": "api",
+      "color": "#e0b7b7",
+      "units": [
+        "list_products",
+        "get_product",
+        "create_product",
+        "update_product",
+        "delete_product",
+        "get_stock",
+        "update_stock"
+      ],
+      "dependencies": {
+        "catalog.search": true,
+        "catalog.products": true,
+        "catalog.pricing": true,
+        "catalog.inventory": true,
+        "api.auth": true
+      }
+    },
+    "api.orders": {
+      "module": "api",
+      "color": "#e0b7b7",
+      "units": [
+        "get_cart",
+        "add_to_cart",
+        "remove_from_cart",
+        "checkout",
+        "get_order",
+        "list_orders",
+        "cancel_order"
+      ],
+      "dependencies": {
+        "orders.cart": true,
+        "api.auth": true,
+        "catalog.inventory": true,
+        "orders.checkout": true,
+        "payments.gateway": true,
+        "orders.order_mgmt": true,
+        "payments.refunds": true
+      }
+    },
+    "api.payments": {
+      "module": "api",
+      "color": "#e0b7b7",
+      "units": [
+        "get_invoice",
+        "list_invoices",
+        "download_invoice_pdf",
+        "request_refund",
+        "get_payment_status"
+      ],
+      "dependencies": {
+        "payments.invoicing": true,
+        "api.auth": true,
+        "payments.refunds": true,
+        "payments.gateway": true
+      }
+    },
+    "api.auth": {
+      "module": "api",
+      "color": "#e0b7b7",
+      "units": [
+        "authenticate_request",
+        "get_current_user",
+        "issue_token",
+        "revoke_token",
+        "require_scope",
+        "refresh_token"
+      ],
+      "dependencies": {
+        "core.cache": true,
+        "core.db": true
+      }
+    },
+    "orders.order_mgmt": {
+      "module": "orders",
+      "color": "#dfe0b7",
+      "units": [
+        "get_order",
+        "list_orders_for_user",
+        "cancel_order",
+        "update_order_address",
+        "mark_order_shipped",
+        "get_order_timeline"
+      ],
+      "dependencies": {
+        "orders.order_repo": true,
+        "catalog.products": true,
+        "catalog.inventory": true,
+        "core.events": true,
+        "core.email": true
+      }
+    },
+    "orders.checkout": {
+      "module": "orders",
+      "color": "#dfe0b7",
+      "units": [
+        "initiate_checkout",
+        "validate_checkout",
+        "apply_checkout_discount",
+        "confirm_checkout",
+        "fail_checkout",
+        "get_checkout_summary"
+      ],
+      "dependencies": {
+        "orders.cart": true,
+        "catalog.inventory": true,
+        "catalog.pricing": true,
+        "orders.order_repo": true,
+        "core.events": true
+      }
+    },
+    "orders.cart": {
+      "module": "orders",
+      "color": "#dfe0b7",
+      "units": [
+        "get_cart",
+        "get_active_carts",
+        "add_item",
+        "remove_item",
+        "update_item_quantity",
+        "apply_discount_code",
+        "clear_cart",
+        "get_cart_total"
+      ],
+      "dependencies": {
+        "core.db": true,
+        "catalog.pricing": true
+      }
+    },
+    "orders.order_repo": {
+      "module": "orders",
+      "color": "#dfe0b7",
+      "units": [
+        "create_order",
+        "find_by_id",
+        "find_by_user",
+        "update_order_status",
+        "delete_order",
+        "find_orders_by_status"
+      ],
+      "dependencies": {
+        "core.db": true
+      }
+    },
+    "payments.refunds": {
+      "module": "payments",
+      "color": "#b7e0b9",
+      "units": [
+        "issue_refund",
+        "get_refund_status",
+        "list_refunds_for_order",
+        "partial_refund",
+        "void_pending_refunds"
+      ],
+      "dependencies": {
+        "payments.gateway": true,
+        "core.db": true,
+        "core.events": true
+      }
+    },
+    "payments.invoicing": {
+      "module": "payments",
+      "color": "#b7e0b9",
+      "units": [
+        "generate_invoice",
+        "get_invoice",
+        "list_invoices_for_user",
+        "render_invoice_pdf",
+        "send_invoice_email",
+        "void_invoice"
+      ],
+      "dependencies": {
+        "core.db": true,
+        "catalog.pricing": true,
+        "api.auth": false,
+        "core.email": true,
+        "core.events": true
+      }
+    },
+    "payments.gateway": {
+      "module": "payments",
+      "color": "#b7e0b9",
+      "units": [
+        "charge",
+        "capture_charge",
+        "void_charge",
+        "get_charge_status",
+        "handle_webhook",
+        "list_charges_for_order"
+      ],
+      "dependencies": {
+        "core.db": true,
+        "core.events": true
+      }
+    },
+    "catalog.search": {
+      "module": "catalog",
+      "color": "#b7dde0",
+      "units": [
+        "search_products",
+        "suggest_products",
+        "get_similar_products",
+        "trending_products",
+        "full_text_search",
+        "invalidate_search_cache"
+      ],
+      "dependencies": {
+        "core.cache": true,
+        "catalog.products": true,
+        "orders.cart": false
+      }
+    },
+    "catalog.pricing": {
+      "module": "catalog",
+      "color": "#b7dde0",
+      "units": [
+        "get_effective_price",
+        "get_promotions",
+        "apply_discount_code",
+        "calculate_cart_total",
+        "get_tax_rate",
+        "set_base_price"
+      ],
+      "dependencies": {
+        "catalog.inventory": true,
+        "core.db": true,
+        "core.cache": true
+      }
+    },
+    "catalog.products": {
+      "module": "catalog",
+      "color": "#b7dde0",
+      "units": [
+        "get_product_by_id",
+        "list_products",
+        "create_product",
+        "update_product",
+        "delete_product",
+        "get_products_by_ids",
+        "rebuild_product_index"
+      ],
+      "dependencies": {
+        "core.db": true,
+        "core.events": true,
+        "core.cache": true
+      }
+    },
+    "catalog.inventory": {
+      "module": "catalog",
+      "color": "#b7dde0",
+      "units": [
+        "get_stock_level",
+        "set_stock_level",
+        "reserve_stock",
+        "release_reservation",
+        "commit_reservation",
+        "remove_product",
+        "low_stock_products"
+      ],
+      "dependencies": {
+        "core.db": true,
+        "core.events": true
+      }
+    },
+    "core.email": {
+      "module": "core",
+      "color": "#bab7e0",
+      "units": [
+        "send",
+        "send_bulk",
+        "render_template",
+        "validate_address"
+      ],
+      "dependencies": {}
+    },
+    "core.events": {
+      "module": "core",
+      "color": "#bab7e0",
+      "units": [
+        "publish",
+        "subscribe",
+        "get_event_history",
+        "replay_events"
+      ],
+      "dependencies": {
+        "orders.order_repo": false,
+        "core.db": true
+      }
+    },
+    "core.db": {
+      "module": "core",
+      "color": "#bab7e0",
+      "units": [
+        "fetch_one",
+        "fetch_many",
+        "execute",
+        "execute_in_transaction",
+        "get_connection",
+        "health_check"
+      ],
+      "dependencies": {}
+    },
+    "core.cache": {
+      "module": "core",
+      "color": "#bab7e0",
+      "units": [
+        "get",
+        "set",
+        "delete",
+        "delete_pattern",
+        "exists",
+        "increment",
+        "flush_namespace"
+      ],
+      "dependencies": {}
+    }
+  },
+  "units": {
+    "api.auth.authenticate_request": {
+      "submodule": "api.auth",
+      "name": "authenticate_request",
+      "description": "Validates the incoming JWT token from the Authorization header. Calls `@core.cache.get` to check the token blacklist, then verifies the signature and expiry. Raises `AuthError` on failure.",
+      "dependencies": {
+        "core.cache.get": true
+      }
+    },
+    "api.auth.get_current_user": {
+      "submodule": "api.auth",
+      "name": "get_current_user",
+      "description": "Decodes the JWT payload and loads the full user record. Calls `@core.db.fetch_one` with the user id extracted from the token. Returns a `UserContext` object used downstream by all handlers.",
+      "dependencies": {
+        "core.db.fetch_one": true
+      }
+    },
+    "api.auth.issue_token": {
+      "submodule": "api.auth",
+      "name": "issue_token",
+      "description": "Issues a signed JWT for an authenticated user. Accepts a user id and scopes list, sets expiry to 24 hours, signs with the application secret. Calls `@core.cache.set` to register the token for blacklist tracking.",
+      "dependencies": {
+        "core.cache.set": true
+      }
+    },
+    "api.auth.revoke_token": {
+      "submodule": "api.auth",
+      "name": "revoke_token",
+      "description": "Adds the given token's jti claim to the blacklist. Calls `@core.cache.set` with a TTL matching the token's remaining lifetime so the cache entry expires automatically.",
+      "dependencies": {
+        "core.cache.set": true
+      }
+    },
+    "api.auth.require_scope": {
+      "submodule": "api.auth",
+      "name": "require_scope",
+      "description": "Decorator factory that wraps a route handler and checks that the current user's token includes the required scope string. Calls `@api.auth.get_current_user` internally.",
+      "dependencies": {
+        "api.auth.get_current_user": true
+      }
+    },
+    "api.auth.refresh_token": {
+      "submodule": "api.auth",
+      "name": "refresh_token",
+      "description": "Accepts a valid (non-expired) refresh token, validates it via `@core.cache.get`, issues a new access token via `@api.auth.issue_token`, and revokes the old one via `@api.auth.revoke_token`.",
+      "dependencies": {
+        "core.cache.get": true,
+        "api.auth.issue_token": true,
+        "api.auth.revoke_token": true
+      }
+    },
+    "api.products.list_products": {
+      "submodule": "api.products",
+      "name": "list_products",
+      "description": "HTTP GET handler for `/products`. Parses query parameters (page, page_size, category, sort). Calls `@catalog.search.search_products` and returns a paginated JSON response.",
+      "dependencies": {
+        "catalog.search.search_products": true
+      }
+    },
+    "api.products.get_product": {
+      "submodule": "api.products",
+      "name": "get_product",
+      "description": "HTTP GET handler for `/products/{id}`. Calls `@catalog.products.get_product_by_id` and `@catalog.pricing.get_effective_price`. Returns combined product detail with current price.",
+      "dependencies": {
+        "catalog.products.get_product_by_id": true,
+        "catalog.pricing.get_effective_price": true
+      }
+    },
+    "api.products.create_product": {
+      "submodule": "api.products",
+      "name": "create_product",
+      "description": "HTTP POST handler for `/products`. Validates the request body against the product schema. Calls `@catalog.products.create_product` and `@catalog.inventory.set_stock_level`. Requires `catalog:write` scope via `@api.auth.require_scope`.",
+      "dependencies": {
+        "catalog.products.create_product": true,
+        "catalog.inventory.set_stock_level": true,
+        "api.auth.require_scope": true
+      }
+    },
+    "api.products.update_product": {
+      "submodule": "api.products",
+      "name": "update_product",
+      "description": "HTTP PATCH handler for `/products/{id}`. Applies partial updates by calling `@catalog.products.update_product`. Requires `catalog:write` scope.",
+      "dependencies": {
+        "catalog.products.update_product": true
+      }
+    },
+    "api.products.delete_product": {
+      "submodule": "api.products",
+      "name": "delete_product",
+      "description": "HTTP DELETE handler for `/products/{id}`. Calls `@catalog.products.delete_product` and `@catalog.inventory.remove_product`. Requires `catalog:admin` scope via `@api.auth.require_scope`.",
+      "dependencies": {
+        "catalog.products.delete_product": true,
+        "catalog.inventory.remove_product": true,
+        "api.auth.require_scope": true
+      }
+    },
+    "api.products.get_stock": {
+      "submodule": "api.products",
+      "name": "get_stock",
+      "description": "HTTP GET handler for `/products/{id}/stock`. Calls `@catalog.inventory.get_stock_level` and returns available quantity and reservation status.",
+      "dependencies": {
+        "catalog.inventory.get_stock_level": true
+      }
+    },
+    "api.products.update_stock": {
+      "submodule": "api.products",
+      "name": "update_stock",
+      "description": "HTTP PATCH handler for `/products/{id}/stock`. Calls `@catalog.inventory.set_stock_level`. Requires `catalog:write` scope via `@api.auth.require_scope`.",
+      "dependencies": {
+        "catalog.inventory.set_stock_level": true,
+        "api.auth.require_scope": true
+      }
+    },
+    "api.orders.get_cart": {
+      "submodule": "api.orders",
+      "name": "get_cart",
+      "description": "HTTP GET handler for `/cart`. Retrieves the current user's cart via `@orders.cart.get_cart`. Calls `@api.auth.get_current_user` to identify the user.",
+      "dependencies": {
+        "orders.cart.get_cart": true,
+        "api.auth.get_current_user": true
+      }
+    },
+    "api.orders.add_to_cart": {
+      "submodule": "api.orders",
+      "name": "add_to_cart",
+      "description": "HTTP POST handler for `/cart/items`. Validates the item payload and calls `@orders.cart.add_item`. Calls `@catalog.inventory.reserve_stock` to place a soft reservation.",
+      "dependencies": {
+        "orders.cart.add_item": true,
+        "catalog.inventory.reserve_stock": true
+      }
+    },
+    "api.orders.remove_from_cart": {
+      "submodule": "api.orders",
+      "name": "remove_from_cart",
+      "description": "HTTP DELETE handler for `/cart/items/{item_id}`. Calls `@orders.cart.remove_item` and `@catalog.inventory.release_reservation`.",
+      "dependencies": {
+        "orders.cart.remove_item": true,
+        "catalog.inventory.release_reservation": true
+      }
+    },
+    "api.orders.checkout": {
+      "submodule": "api.orders",
+      "name": "checkout",
+      "description": "HTTP POST handler for `/orders`. Calls `@orders.checkout.initiate_checkout` and `@payments.gateway.charge`. Returns the created order id on success.",
+      "dependencies": {
+        "orders.checkout.initiate_checkout": true,
+        "payments.gateway.charge": true
+      }
+    },
+    "api.orders.get_order": {
+      "submodule": "api.orders",
+      "name": "get_order",
+      "description": "HTTP GET handler for `/orders/{id}`. Calls `@orders.order_mgmt.get_order` and checks ownership via `@api.auth.get_current_user`.",
+      "dependencies": {
+        "orders.order_mgmt.get_order": true,
+        "api.auth.get_current_user": true
+      }
+    },
+    "api.orders.list_orders": {
+      "submodule": "api.orders",
+      "name": "list_orders",
+      "description": "HTTP GET handler for `/orders`. Calls `@orders.order_mgmt.list_orders_for_user` with the user id from `@api.auth.get_current_user`. Supports pagination.",
+      "dependencies": {
+        "orders.order_mgmt.list_orders_for_user": true,
+        "api.auth.get_current_user": true
+      }
+    },
+    "api.orders.cancel_order": {
+      "submodule": "api.orders",
+      "name": "cancel_order",
+      "description": "HTTP POST handler for `/orders/{id}/cancel`. Calls `@orders.order_mgmt.cancel_order` and `@payments.refunds.issue_refund` if a charge was already captured.",
+      "dependencies": {
+        "orders.order_mgmt.cancel_order": true,
+        "payments.refunds.issue_refund": true
+      }
+    },
+    "api.payments.get_invoice": {
+      "submodule": "api.payments",
+      "name": "get_invoice",
+      "description": "HTTP GET handler for `/invoices/{id}`. Calls `@payments.invoicing.get_invoice` and checks ownership via `@api.auth.get_current_user`.",
+      "dependencies": {
+        "payments.invoicing.get_invoice": true,
+        "api.auth.get_current_user": true
+      }
+    },
+    "api.payments.list_invoices": {
+      "submodule": "api.payments",
+      "name": "list_invoices",
+      "description": "HTTP GET handler for `/invoices`. Returns all invoices for the current user. Calls `@payments.invoicing.list_invoices_for_user` and `@api.auth.get_current_user`.",
+      "dependencies": {
+        "payments.invoicing.list_invoices_for_user": true,
+        "api.auth.get_current_user": true
+      }
+    },
+    "api.payments.download_invoice_pdf": {
+      "submodule": "api.payments",
+      "name": "download_invoice_pdf",
+      "description": "HTTP GET handler for `/invoices/{id}/pdf`. Calls `@payments.invoicing.render_invoice_pdf` and streams the result as a binary response.",
+      "dependencies": {
+        "payments.invoicing.render_invoice_pdf": true
+      }
+    },
+    "api.payments.request_refund": {
+      "submodule": "api.payments",
+      "name": "request_refund",
+      "description": "HTTP POST handler for `/orders/{id}/refund`. Validates the refund request, then calls `@payments.refunds.issue_refund`. Requires `payments:refund` scope via `@api.auth.require_scope`.",
+      "dependencies": {
+        "payments.refunds.issue_refund": true,
+        "api.auth.require_scope": true
+      }
+    },
+    "api.payments.get_payment_status": {
+      "submodule": "api.payments",
+      "name": "get_payment_status",
+      "description": "HTTP GET handler for `/orders/{id}/payment`. Calls `@payments.gateway.get_charge_status` and returns a normalised status string.",
+      "dependencies": {
+        "payments.gateway.get_charge_status": true
+      }
+    },
+    "catalog.products.get_product_by_id": {
+      "submodule": "catalog.products",
+      "name": "get_product_by_id",
+      "description": "Loads a single product record from persistent storage. Calls `@core.db.fetch_one` with the products table. Returns `None` if not found.",
+      "dependencies": {
+        "core.db.fetch_one": true
+      }
+    },
+    "catalog.products.list_products": {
+      "submodule": "catalog.products",
+      "name": "list_products",
+      "description": "Returns a slice of products matching optional filter criteria. Calls `@core.db.fetch_many` with constructed WHERE clauses for category, status, and price range.",
+      "dependencies": {
+        "core.db.fetch_many": true
+      }
+    },
+    "catalog.products.create_product": {
+      "submodule": "catalog.products",
+      "name": "create_product",
+      "description": "Inserts a new product row. Validates uniqueness of the SKU by calling `@core.db.fetch_one` before insert. Calls `@core.db.execute` and `@core.events.publish` with a `product.created` event.",
+      "dependencies": {
+        "core.db.fetch_one": true,
+        "core.db.execute": true,
+        "core.events.publish": true
+      }
+    },
+    "catalog.products.update_product": {
+      "submodule": "catalog.products",
+      "name": "update_product",
+      "description": "Applies a partial update to an existing product. Calls `@core.db.execute` with an UPDATE statement. Publishes a `product.updated` event via `@core.events.publish`.",
+      "dependencies": {
+        "core.db.execute": true,
+        "core.events.publish": true
+      }
+    },
+    "catalog.products.delete_product": {
+      "submodule": "catalog.products",
+      "name": "delete_product",
+      "description": "Soft-deletes a product by setting `deleted_at`. Calls `@core.db.execute` and publishes `product.deleted` via `@core.events.publish`.",
+      "dependencies": {
+        "core.db.execute": true,
+        "core.events.publish": true
+      }
+    },
+    "catalog.products.get_products_by_ids": {
+      "submodule": "catalog.products",
+      "name": "get_products_by_ids",
+      "description": "Bulk-loads a list of products by id list. Calls `@core.db.fetch_many` with an IN clause. Used by search and recommendation paths.",
+      "dependencies": {
+        "core.db.fetch_many": true
+      }
+    },
+    "catalog.products.rebuild_product_index": {
+      "submodule": "catalog.products",
+      "name": "rebuild_product_index",
+      "description": "Re-indexes all active products into the search cache. Iterates via `@core.db.fetch_many` and calls `@core.cache.set` for each product document.",
+      "dependencies": {
+        "core.db.fetch_many": true,
+        "core.cache.set": true
+      }
+    },
+    "catalog.search.search_products": {
+      "submodule": "catalog.search",
+      "name": "search_products",
+      "description": "Full-text search over the product catalog. Checks `@core.cache.get` for a cached result keyed by query hash. On miss, calls `@catalog.products.list_products` with keyword filters and stores the result via `@core.cache.set`.",
+      "dependencies": {
+        "core.cache.get": true,
+        "catalog.products.list_products": true,
+        "core.cache.set": true
+      }
+    },
+    "catalog.search.suggest_products": {
+      "submodule": "catalog.search",
+      "name": "suggest_products",
+      "description": "Returns autocomplete suggestions for a partial query string. Calls `@core.cache.get` keyed on the prefix. Falls back to `@catalog.products.list_products` with a prefix filter.",
+      "dependencies": {
+        "core.cache.get": true,
+        "catalog.products.list_products": true
+      }
+    },
+    "catalog.search.get_similar_products": {
+      "submodule": "catalog.search",
+      "name": "get_similar_products",
+      "description": "Returns products similar to a given product id. Calls `@catalog.products.get_product_by_id` to load the source product, then `@catalog.products.list_products` filtered by matching category and tags.",
+      "dependencies": {
+        "catalog.products.get_product_by_id": true,
+        "catalog.products.list_products": true
+      }
+    },
+    "catalog.search.trending_products": {
+      "submodule": "catalog.search",
+      "name": "trending_products",
+      "description": "Returns the current trending product list. Reads a pre-computed list from `@core.cache.get`. The list is refreshed by a background job outside this module.",
+      "dependencies": {
+        "core.cache.get": true
+      }
+    },
+    "catalog.search.full_text_search": {
+      "submodule": "catalog.search",
+      "name": "full_text_search",
+      "description": "Low-level full-text search implementation. Tokenises the query and scores products. Also reads cart affinity data from `@orders.cart.get_active_carts` to boost frequently carted items.",
+      "dependencies": {
+        "orders.cart.get_active_carts": false
+      }
+    },
+    "catalog.search.invalidate_search_cache": {
+      "submodule": "catalog.search",
+      "name": "invalidate_search_cache",
+      "description": "Clears all search-related cache keys when product data changes. Calls `@core.cache.delete_pattern`.",
+      "dependencies": {
+        "core.cache.delete_pattern": true
+      }
+    },
+    "catalog.pricing.get_effective_price": {
+      "submodule": "catalog.pricing",
+      "name": "get_effective_price",
+      "description": "Returns the effective sale price for a product, applying any active promotions. Calls `@catalog.pricing.get_promotions` and `@catalog.inventory.get_stock_level` (to apply low-stock surcharge rules).",
+      "dependencies": {
+        "catalog.pricing.get_promotions": true,
+        "catalog.inventory.get_stock_level": true
+      }
+    },
+    "catalog.pricing.get_promotions": {
+      "submodule": "catalog.pricing",
+      "name": "get_promotions",
+      "description": "Loads active promotions from `@core.db.fetch_many`. Filters to those overlapping the current timestamp.",
+      "dependencies": {
+        "core.db.fetch_many": true
+      }
+    },
+    "catalog.pricing.apply_discount_code": {
+      "submodule": "catalog.pricing",
+      "name": "apply_discount_code",
+      "description": "Validates and applies a discount code to a price. Looks up the code via `@core.db.fetch_one` and checks usage limits.",
+      "dependencies": {
+        "core.db.fetch_one": true
+      }
+    },
+    "catalog.pricing.calculate_cart_total": {
+      "submodule": "catalog.pricing",
+      "name": "calculate_cart_total",
+      "description": "Computes the total for a list of cart line items. Calls `@catalog.pricing.get_effective_price` for each item and sums results including tax.",
+      "dependencies": {
+        "catalog.pricing.get_effective_price": true
+      }
+    },
+    "catalog.pricing.get_tax_rate": {
+      "submodule": "catalog.pricing",
+      "name": "get_tax_rate",
+      "description": "Returns the applicable tax rate for a given country code. Calls `@core.db.fetch_one` against the tax_rates table. Results are cached via `@core.cache.get` and `@core.cache.set`.",
+      "dependencies": {
+        "core.db.fetch_one": true,
+        "core.cache.get": true,
+        "core.cache.set": true
+      }
+    },
+    "catalog.pricing.set_base_price": {
+      "submodule": "catalog.pricing",
+      "name": "set_base_price",
+      "description": "Updates the base price for a product. Calls `@core.db.execute` and invalidates the pricing cache for that product via `@core.cache.delete_pattern`.",
+      "dependencies": {
+        "core.db.execute": true,
+        "core.cache.delete_pattern": true
+      }
+    },
+    "catalog.inventory.get_stock_level": {
+      "submodule": "catalog.inventory",
+      "name": "get_stock_level",
+      "description": "Returns the current on-hand quantity and reservation count for a product. Calls `@core.db.fetch_one` against the inventory table.",
+      "dependencies": {
+        "core.db.fetch_one": true
+      }
+    },
+    "catalog.inventory.set_stock_level": {
+      "submodule": "catalog.inventory",
+      "name": "set_stock_level",
+      "description": "Sets the absolute on-hand stock for a product. Calls `@core.db.execute`. Publishes a `stock.updated` event via `@core.events.publish`.",
+      "dependencies": {
+        "core.db.execute": true,
+        "core.events.publish": true
+      }
+    },
+    "catalog.inventory.reserve_stock": {
+      "submodule": "catalog.inventory",
+      "name": "reserve_stock",
+      "description": "Places a soft reservation on a given quantity for a product. Calls `@core.db.execute` to increment the reservation counter. Raises `InsufficientStockError` if not enough available.",
+      "dependencies": {
+        "core.db.execute": true
+      }
+    },
+    "catalog.inventory.release_reservation": {
+      "submodule": "catalog.inventory",
+      "name": "release_reservation",
+      "description": "Decrements the reservation counter for a product. Called when a cart item is removed or a checkout fails. Calls `@core.db.execute`.",
+      "dependencies": {
+        "core.db.execute": true
+      }
+    },
+    "catalog.inventory.commit_reservation": {
+      "submodule": "catalog.inventory",
+      "name": "commit_reservation",
+      "description": "Converts a soft reservation to a confirmed deduction on checkout. Calls `@core.db.execute` in a transaction. Publishes `stock.committed` via `@core.events.publish`.",
+      "dependencies": {
+        "core.db.execute": true,
+        "core.events.publish": true
+      }
+    },
+    "catalog.inventory.remove_product": {
+      "submodule": "catalog.inventory",
+      "name": "remove_product",
+      "description": "Removes the inventory record for a deleted product. Calls `@core.db.execute` to delete the inventory row.",
+      "dependencies": {
+        "core.db.execute": true
+      }
+    },
+    "catalog.inventory.low_stock_products": {
+      "submodule": "catalog.inventory",
+      "name": "low_stock_products",
+      "description": "Returns products whose on-hand quantity is below their reorder threshold. Calls `@core.db.fetch_many` with a WHERE clause comparing quantity to threshold.",
+      "dependencies": {
+        "core.db.fetch_many": true
+      }
+    },
+    "orders.cart.get_cart": {
+      "submodule": "orders.cart",
+      "name": "get_cart",
+      "description": "Loads the active cart for a user. Calls `@core.db.fetch_one` for the cart header and `@core.db.fetch_many` for line items. Returns an assembled `Cart` object.",
+      "dependencies": {
+        "core.db.fetch_one": true,
+        "core.db.fetch_many": true
+      }
+    },
+    "orders.cart.get_active_carts": {
+      "submodule": "orders.cart",
+      "name": "get_active_carts",
+      "description": "Returns all carts that have been modified in the last 24 hours. Calls `@core.db.fetch_many` filtered by `updated_at`. Used for analytics and affinity scoring.",
+      "dependencies": {
+        "core.db.fetch_many": true
+      }
+    },
+    "orders.cart.add_item": {
+      "submodule": "orders.cart",
+      "name": "add_item",
+      "description": "Adds a product to the user's cart or increments quantity if already present. Calls `@core.db.execute` for upsert logic. Calls `@catalog.pricing.get_effective_price` to snapshot the price at add time.",
+      "dependencies": {
+        "core.db.execute": true,
+        "catalog.pricing.get_effective_price": true
+      }
+    },
+    "orders.cart.remove_item": {
+      "submodule": "orders.cart",
+      "name": "remove_item",
+      "description": "Removes a line item from the cart. Calls `@core.db.execute` to delete the cart_item row.",
+      "dependencies": {
+        "core.db.execute": true
+      }
+    },
+    "orders.cart.update_item_quantity": {
+      "submodule": "orders.cart",
+      "name": "update_item_quantity",
+      "description": "Updates the quantity of a cart line item. Calls `@core.db.execute` and re-snapshots the price via `@catalog.pricing.get_effective_price`.",
+      "dependencies": {
+        "core.db.execute": true,
+        "catalog.pricing.get_effective_price": true
+      }
+    },
+    "orders.cart.apply_discount_code": {
+      "submodule": "orders.cart",
+      "name": "apply_discount_code",
+      "description": "Applies a discount code to the cart. Calls `@catalog.pricing.apply_discount_code` to validate, then stores the code on the cart header via `@core.db.execute`.",
+      "dependencies": {
+        "catalog.pricing.apply_discount_code": true,
+        "core.db.execute": true
+      }
+    },
+    "orders.cart.clear_cart": {
+      "submodule": "orders.cart",
+      "name": "clear_cart",
+      "description": "Deletes all line items and resets the cart header. Calls `@core.db.execute`. Called after a successful checkout.",
+      "dependencies": {
+        "core.db.execute": true
+      }
+    },
+    "orders.cart.get_cart_total": {
+      "submodule": "orders.cart",
+      "name": "get_cart_total",
+      "description": "Calculates and returns the cart total. Calls `@catalog.pricing.calculate_cart_total` with the cart's line items.",
+      "dependencies": {
+        "catalog.pricing.calculate_cart_total": true
+      }
+    },
+    "orders.checkout.initiate_checkout": {
+      "submodule": "orders.checkout",
+      "name": "initiate_checkout",
+      "description": "Orchestrates the checkout flow. Calls `@orders.cart.get_cart`, `@catalog.inventory.commit_reservation`, `@catalog.pricing.calculate_cart_total`, and `@orders.order_repo.create_order`. Returns a pending order id.",
+      "dependencies": {
+        "orders.cart.get_cart": true,
+        "catalog.inventory.commit_reservation": true,
+        "catalog.pricing.calculate_cart_total": true,
+        "orders.order_repo.create_order": true
+      }
+    },
+    "orders.checkout.validate_checkout": {
+      "submodule": "orders.checkout",
+      "name": "validate_checkout",
+      "description": "Pre-flight validation before payment. Checks that all cart items are still in stock via `@catalog.inventory.get_stock_level` and that prices haven't changed significantly via `@catalog.pricing.get_effective_price`.",
+      "dependencies": {
+        "catalog.inventory.get_stock_level": true,
+        "catalog.pricing.get_effective_price": true
+      }
+    },
+    "orders.checkout.apply_checkout_discount": {
+      "submodule": "orders.checkout",
+      "name": "apply_checkout_discount",
+      "description": "Applies a last-minute discount to the checkout session. Calls `@orders.cart.apply_discount_code` and recalculates the total.",
+      "dependencies": {
+        "orders.cart.apply_discount_code": true
+      }
+    },
+    "orders.checkout.confirm_checkout": {
+      "submodule": "orders.checkout",
+      "name": "confirm_checkout",
+      "description": "Finalises the order after payment capture. Calls `@orders.order_repo.update_order_status` to set status to `confirmed`, then `@orders.cart.clear_cart` and `@core.events.publish` with `order.confirmed`.",
+      "dependencies": {
+        "orders.order_repo.update_order_status": true,
+        "orders.cart.clear_cart": true,
+        "core.events.publish": true
+      }
+    },
+    "orders.checkout.fail_checkout": {
+      "submodule": "orders.checkout",
+      "name": "fail_checkout",
+      "description": "Handles a failed payment during checkout. Calls `@catalog.inventory.release_reservation` to return reserved stock, then `@orders.order_repo.update_order_status` to set status to `failed`.",
+      "dependencies": {
+        "catalog.inventory.release_reservation": true,
+        "orders.order_repo.update_order_status": true
+      }
+    },
+    "orders.checkout.get_checkout_summary": {
+      "submodule": "orders.checkout",
+      "name": "get_checkout_summary",
+      "description": "Returns a summary of the pending checkout for display. Calls `@orders.order_repo.find_by_id` and `@catalog.pricing.calculate_cart_total`.",
+      "dependencies": {
+        "orders.order_repo.find_by_id": true,
+        "catalog.pricing.calculate_cart_total": true
+      }
+    },
+    "orders.order_mgmt.get_order": {
+      "submodule": "orders.order_mgmt",
+      "name": "get_order",
+      "description": "Loads a full order with line items. Calls `@orders.order_repo.find_by_id` and enriches with product details from `@catalog.products.get_products_by_ids`.",
+      "dependencies": {
+        "orders.order_repo.find_by_id": true,
+        "catalog.products.get_products_by_ids": true
+      }
+    },
+    "orders.order_mgmt.list_orders_for_user": {
+      "submodule": "orders.order_mgmt",
+      "name": "list_orders_for_user",
+      "description": "Returns paginated orders for a user. Calls `@orders.order_repo.find_by_user` with limit/offset. Enriches each order with a status label.",
+      "dependencies": {
+        "orders.order_repo.find_by_user": true
+      }
+    },
+    "orders.order_mgmt.cancel_order": {
+      "submodule": "orders.order_mgmt",
+      "name": "cancel_order",
+      "description": "Cancels an order if it is still in a cancellable state. Calls `@orders.order_repo.find_by_id` to check status, then `@orders.order_repo.update_order_status` and `@catalog.inventory.release_reservation`.",
+      "dependencies": {
+        "orders.order_repo.find_by_id": true,
+        "orders.order_repo.update_order_status": true,
+        "catalog.inventory.release_reservation": true
+      }
+    },
+    "orders.order_mgmt.update_order_address": {
+      "submodule": "orders.order_mgmt",
+      "name": "update_order_address",
+      "description": "Updates the shipping address on an unshipped order. Calls `@orders.order_repo.update_order_status` (reuses the general update path) and `@core.events.publish` with `order.address_updated`.",
+      "dependencies": {
+        "orders.order_repo.update_order_status": true,
+        "core.events.publish": true
+      }
+    },
+    "orders.order_mgmt.mark_order_shipped": {
+      "submodule": "orders.order_mgmt",
+      "name": "mark_order_shipped",
+      "description": "Marks the order as shipped and records the tracking number. Calls `@orders.order_repo.update_order_status` and publishes `order.shipped` via `@core.events.publish`. Also triggers `@core.email.send` with a shipment notification.",
+      "dependencies": {
+        "orders.order_repo.update_order_status": true,
+        "core.events.publish": true,
+        "core.email.send": true
+      }
+    },
+    "orders.order_mgmt.get_order_timeline": {
+      "submodule": "orders.order_mgmt",
+      "name": "get_order_timeline",
+      "description": "Returns a chronological list of status changes for an order. Calls `@orders.order_repo.find_by_id` and reads the `status_history` JSON column.",
+      "dependencies": {
+        "orders.order_repo.find_by_id": true
+      }
+    },
+    "orders.order_repo.create_order": {
+      "submodule": "orders.order_repo",
+      "name": "create_order",
+      "description": "Inserts a new order header and its line items in a single transaction. Calls `@core.db.execute` repeatedly within a db transaction.",
+      "dependencies": {
+        "core.db.execute": true
+      }
+    },
+    "orders.order_repo.find_by_id": {
+      "submodule": "orders.order_repo",
+      "name": "find_by_id",
+      "description": "Fetches an order header and line items by order id. Calls `@core.db.fetch_one` for the header and `@core.db.fetch_many` for items.",
+      "dependencies": {
+        "core.db.fetch_one": true,
+        "core.db.fetch_many": true
+      }
+    },
+    "orders.order_repo.find_by_user": {
+      "submodule": "orders.order_repo",
+      "name": "find_by_user",
+      "description": "Fetches all orders for a user id with pagination. Calls `@core.db.fetch_many` with a user_id filter and ORDER BY created_at DESC.",
+      "dependencies": {
+        "core.db.fetch_many": true
+      }
+    },
+    "orders.order_repo.update_order_status": {
+      "submodule": "orders.order_repo",
+      "name": "update_order_status",
+      "description": "Updates the `status` field and appends an entry to the `status_history` JSON column. Calls `@core.db.execute`.",
+      "dependencies": {
+        "core.db.execute": true
+      }
+    },
+    "orders.order_repo.delete_order": {
+      "submodule": "orders.order_repo",
+      "name": "delete_order",
+      "description": "Hard-deletes an order and its line items. Only used in test teardown and admin tooling. Calls `@core.db.execute`.",
+      "dependencies": {
+        "core.db.execute": true
+      }
+    },
+    "orders.order_repo.find_orders_by_status": {
+      "submodule": "orders.order_repo",
+      "name": "find_orders_by_status",
+      "description": "Fetches all orders with a given status, used for background processing queues. Calls `@core.db.fetch_many` with a status filter.",
+      "dependencies": {
+        "core.db.fetch_many": true
+      }
+    },
+    "payments.gateway.charge": {
+      "submodule": "payments.gateway",
+      "name": "charge",
+      "description": "Initiates a payment charge for a given amount and payment method token. Calls the external payment provider API and stores the result via `@core.db.execute`. Publishes `payment.charged` via `@core.events.publish`.",
+      "dependencies": {
+        "core.db.execute": true,
+        "core.events.publish": true
+      }
+    },
+    "payments.gateway.capture_charge": {
+      "submodule": "payments.gateway",
+      "name": "capture_charge",
+      "description": "Captures a previously authorised charge. Calls the provider API and updates the charge record via `@core.db.execute`.",
+      "dependencies": {
+        "core.db.execute": true
+      }
+    },
+    "payments.gateway.void_charge": {
+      "submodule": "payments.gateway",
+      "name": "void_charge",
+      "description": "Voids an uncaptured authorisation. Calls the provider API and marks the charge as voided via `@core.db.execute`.",
+      "dependencies": {
+        "core.db.execute": true
+      }
+    },
+    "payments.gateway.get_charge_status": {
+      "submodule": "payments.gateway",
+      "name": "get_charge_status",
+      "description": "Loads the stored charge record for an order. Calls `@core.db.fetch_one` against the charges table.",
+      "dependencies": {
+        "core.db.fetch_one": true
+      }
+    },
+    "payments.gateway.handle_webhook": {
+      "submodule": "payments.gateway",
+      "name": "handle_webhook",
+      "description": "Processes inbound payment provider webhook events. Validates the signature, then routes to `@payments.gateway.capture_charge` or `@payments.gateway.void_charge` depending on event type. Publishes the result via `@core.events.publish`.",
+      "dependencies": {
+        "payments.gateway.capture_charge": true,
+        "payments.gateway.void_charge": true,
+        "core.events.publish": true
+      }
+    },
+    "payments.gateway.list_charges_for_order": {
+      "submodule": "payments.gateway",
+      "name": "list_charges_for_order",
+      "description": "Returns all charge attempts for a given order id. Calls `@core.db.fetch_many` against the charges table.",
+      "dependencies": {
+        "core.db.fetch_many": true
+      }
+    },
+    "payments.refunds.issue_refund": {
+      "submodule": "payments.refunds",
+      "name": "issue_refund",
+      "description": "Initiates a refund for a given charge. Calls `@payments.gateway.get_charge_status` to verify the charge is capturable, then calls the provider API and records the result via `@core.db.execute`. Publishes `payment.refunded` via `@core.events.publish`.",
+      "dependencies": {
+        "payments.gateway.get_charge_status": true,
+        "core.db.execute": true,
+        "core.events.publish": true
+      }
+    },
+    "payments.refunds.get_refund_status": {
+      "submodule": "payments.refunds",
+      "name": "get_refund_status",
+      "description": "Loads the refund record for an order. Calls `@core.db.fetch_one` against the refunds table.",
+      "dependencies": {
+        "core.db.fetch_one": true
+      }
+    },
+    "payments.refunds.list_refunds_for_order": {
+      "submodule": "payments.refunds",
+      "name": "list_refunds_for_order",
+      "description": "Returns all refund records for a given order id. Calls `@core.db.fetch_many`.",
+      "dependencies": {
+        "core.db.fetch_many": true
+      }
+    },
+    "payments.refunds.partial_refund": {
+      "submodule": "payments.refunds",
+      "name": "partial_refund",
+      "description": "Issues a partial refund for a specific line item amount. Calls `@payments.gateway.get_charge_status` and the provider API, then records via `@core.db.execute`.",
+      "dependencies": {
+        "payments.gateway.get_charge_status": true,
+        "core.db.execute": true
+      }
+    },
+    "payments.refunds.void_pending_refunds": {
+      "submodule": "payments.refunds",
+      "name": "void_pending_refunds",
+      "description": "Cancels any pending refund records when an order is hard-deleted. Calls `@core.db.execute` to update status to `voided`.",
+      "dependencies": {
+        "core.db.execute": true
+      }
+    },
+    "payments.invoicing.generate_invoice": {
+      "submodule": "payments.invoicing",
+      "name": "generate_invoice",
+      "description": "Creates an invoice record for a completed order. Calls `@core.db.fetch_one` to load the order, `@catalog.pricing.get_tax_rate` for the applicable rate, and `@core.db.execute` to insert the invoice. Also reads the billing user from `@api.auth.get_current_user` to populate the invoice header.",
+      "dependencies": {
+        "core.db.fetch_one": true,
+        "catalog.pricing.get_tax_rate": true,
+        "core.db.execute": true,
+        "api.auth.get_current_user": false
+      }
+    },
+    "payments.invoicing.get_invoice": {
+      "submodule": "payments.invoicing",
+      "name": "get_invoice",
+      "description": "Loads an invoice by id. Calls `@core.db.fetch_one` against the invoices table.",
+      "dependencies": {
+        "core.db.fetch_one": true
+      }
+    },
+    "payments.invoicing.list_invoices_for_user": {
+      "submodule": "payments.invoicing",
+      "name": "list_invoices_for_user",
+      "description": "Returns all invoices for a user, paginated. Calls `@core.db.fetch_many` filtered by user_id.",
+      "dependencies": {
+        "core.db.fetch_many": true
+      }
+    },
+    "payments.invoicing.render_invoice_pdf": {
+      "submodule": "payments.invoicing",
+      "name": "render_invoice_pdf",
+      "description": "Renders an invoice to PDF using a template engine. Calls `@payments.invoicing.get_invoice` to load data, then renders and returns raw bytes.",
+      "dependencies": {
+        "payments.invoicing.get_invoice": true
+      }
+    },
+    "payments.invoicing.send_invoice_email": {
+      "submodule": "payments.invoicing",
+      "name": "send_invoice_email",
+      "description": "Sends the invoice PDF to the customer by email. Calls `@payments.invoicing.render_invoice_pdf` and `@core.email.send`.",
+      "dependencies": {
+        "payments.invoicing.render_invoice_pdf": true,
+        "core.email.send": true
+      }
+    },
+    "payments.invoicing.void_invoice": {
+      "submodule": "payments.invoicing",
+      "name": "void_invoice",
+      "description": "Marks an invoice as void. Calls `@core.db.execute` to update the status field and publishes `invoice.voided` via `@core.events.publish`.",
+      "dependencies": {
+        "core.db.execute": true,
+        "core.events.publish": true
+      }
+    },
+    "core.db.fetch_one": {
+      "submodule": "core.db",
+      "name": "fetch_one",
+      "description": "Executes a SELECT query expected to return zero or one row. Manages connection acquisition from the pool and row mapping to a dict. Returns `None` on empty result.",
+      "dependencies": {}
+    },
+    "core.db.fetch_many": {
+      "submodule": "core.db",
+      "name": "fetch_many",
+      "description": "Executes a SELECT query and returns all matching rows as a list of dicts. Applies limit/offset for pagination support.",
+      "dependencies": {}
+    },
+    "core.db.execute": {
+      "submodule": "core.db",
+      "name": "execute",
+      "description": "Executes an INSERT, UPDATE, or DELETE statement. Returns the number of affected rows. Manages auto-commit for single-statement operations.",
+      "dependencies": {}
+    },
+    "core.db.execute_in_transaction": {
+      "submodule": "core.db",
+      "name": "execute_in_transaction",
+      "description": "Executes a list of SQL statements atomically within a single transaction. Rolls back on any exception and re-raises.",
+      "dependencies": {}
+    },
+    "core.db.get_connection": {
+      "submodule": "core.db",
+      "name": "get_connection",
+      "description": "Acquires a raw connection from the pool for advanced use cases. Callers are responsible for commit/rollback and return.",
+      "dependencies": {}
+    },
+    "core.db.health_check": {
+      "submodule": "core.db",
+      "name": "health_check",
+      "description": "Runs a lightweight `SELECT 1` to verify database connectivity. Used by the health endpoint and startup probes.",
+      "dependencies": {}
+    },
+    "core.cache.get": {
+      "submodule": "core.cache",
+      "name": "get",
+      "description": "Retrieves a value from the cache by key. Returns `None` on miss. Deserialises the stored JSON blob.",
+      "dependencies": {}
+    },
+    "core.cache.set": {
+      "submodule": "core.cache",
+      "name": "set",
+      "description": "Stores a value in the cache under the given key with an optional TTL in seconds. Serialises to JSON before storage.",
+      "dependencies": {}
+    },
+    "core.cache.delete": {
+      "submodule": "core.cache",
+      "name": "delete",
+      "description": "Deletes a single cache key. No-op if the key does not exist.",
+      "dependencies": {}
+    },
+    "core.cache.delete_pattern": {
+      "submodule": "core.cache",
+      "name": "delete_pattern",
+      "description": "Deletes all keys matching a glob pattern. Used for bulk invalidation of related entries (e.g. all pricing keys for a product).",
+      "dependencies": {}
+    },
+    "core.cache.exists": {
+      "submodule": "core.cache",
+      "name": "exists",
+      "description": "Checks whether a key exists in the cache without loading its value. Returns a boolean.",
+      "dependencies": {}
+    },
+    "core.cache.increment": {
+      "submodule": "core.cache",
+      "name": "increment",
+      "description": "Atomically increments an integer counter stored at a key. Used for rate limiting and usage tracking.",
+      "dependencies": {}
+    },
+    "core.cache.flush_namespace": {
+      "submodule": "core.cache",
+      "name": "flush_namespace",
+      "description": "Deletes all keys under a given namespace prefix. Used during integration test teardown.",
+      "dependencies": {}
+    },
+    "core.email.send": {
+      "submodule": "core.email",
+      "name": "send",
+      "description": "Sends a transactional email. Accepts `to`, `subject`, `html_body`, and optional `attachments`. Queues the message via the configured provider SDK.",
+      "dependencies": {}
+    },
+    "core.email.send_bulk": {
+      "submodule": "core.email",
+      "name": "send_bulk",
+      "description": "Sends the same email to multiple recipients. Batches calls to `@core.email.send` respecting provider rate limits.",
+      "dependencies": {
+        "core.email.send": true
+      }
+    },
+    "core.email.render_template": {
+      "submodule": "core.email",
+      "name": "render_template",
+      "description": "Renders an email HTML body from a named Jinja2 template and a context dict. Returns the rendered string for use with `@core.email.send`.",
+      "dependencies": {
+        "core.email.send": true
+      }
+    },
+    "core.email.validate_address": {
+      "submodule": "core.email",
+      "name": "validate_address",
+      "description": "Validates an email address format and optionally checks the domain's MX record. Returns a boolean.",
+      "dependencies": {}
+    },
+    "core.events.publish": {
+      "submodule": "core.events",
+      "name": "publish",
+      "description": "Publishes a domain event to the event bus. Accepts an event name and a payload dict. Serialises to JSON and writes to the configured broker topic. Also calls `@orders.order_repo.find_by_id` to enrich order-related events with order metadata before publishing.",
+      "dependencies": {
+        "orders.order_repo.find_by_id": false
+      }
+    },
+    "core.events.subscribe": {
+      "submodule": "core.events",
+      "name": "subscribe",
+      "description": "Registers a handler function for a given event pattern. Used at application startup to wire up async consumers.",
+      "dependencies": {}
+    },
+    "core.events.get_event_history": {
+      "submodule": "core.events",
+      "name": "get_event_history",
+      "description": "Returns recent published events for a given topic, loaded from `@core.db.fetch_many` against the events log table.",
+      "dependencies": {
+        "core.db.fetch_many": true
+      }
+    },
+    "core.events.replay_events": {
+      "submodule": "core.events",
+      "name": "replay_events",
+      "description": "Replays events from the log for a given topic and time range. Calls `@core.events.get_event_history` and re-publishes each via `@core.events.publish`.",
+      "dependencies": {
+        "core.events.get_event_history": true,
+        "core.events.publish": true
+      }
+    }
+  }
+}

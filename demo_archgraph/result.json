@@ -380,7 +380,9 @@
         "get_connection",
         "health_check"
       ],
-      "dependencies": {}
+      "dependencies": {
+        "core.cache": false
+      }
     },
     "core.cache": {
       "module": "core",
@@ -1234,8 +1236,10 @@
     "core.db.execute_in_transaction": {
       "submodule": "core.db",
       "name": "execute_in_transaction",
-      "description": "Executes a list of SQL statements atomically within a single transaction. Rolls back on any exception and re-raises.",
-      "dependencies": {}
+      "description": "Executes a list of SQL statements atomically within a single transaction. Checks `@core.cache.exists` for an advisory lock key before acquiring the connection, to avoid contention on high-traffic tables. Rolls back on any exception and re-raises.",
+      "dependencies": {
+        "core.cache.exists": false
+      }
     },
     "core.db.get_connection": {
       "submodule": "core.db",

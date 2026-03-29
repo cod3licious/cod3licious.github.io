@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Dr.&nbsp;Franziska Horn">
+<meta name="dcterms.date" content="2026-03-29">
 
-<title>Articles</title>
+<title>Death of the Toolbar – Articles</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -84,7 +85,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Home</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./2026-02-ai-agents-software.html">Death of the Toolbar</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -113,7 +114,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
@@ -131,7 +132,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2026-02-ai-agents-software.html" class="sidebar-item-text sidebar-link">
+  <a href="./2026-02-ai-agents-software.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Death of the Toolbar</span></a>
   </div>
 </li>
@@ -140,14 +141,24 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#software-purpose" id="toc-software-purpose" class="nav-link active" data-scroll-target="#software-purpose">Software Purpose</a></li>
+  <li><a href="#impact-of-hallucinations" id="toc-impact-of-hallucinations" class="nav-link" data-scroll-target="#impact-of-hallucinations">Impact of Hallucinations</a></li>
+  <li><a href="#your-data-as-a-moat" id="toc-your-data-as-a-moat" class="nav-link" data-scroll-target="#your-data-as-a-moat">Your Data as a Moat</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
+<h1 class="title">Death of the Toolbar</h1>
+<p class="subtitle lead">How AI Agents Change What Software Is Worth Building</p>
 </div>
 
 
@@ -161,7 +172,19 @@ ul.task-list li input[type="checkbox"] {
           </div>
   </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 29, 2026</p>
+    </div>
+  </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">March 29, 2026</p>
+    </div>
+  </div>
     
   </div>
   
@@ -170,15 +193,70 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Thanks for reading!</p>
-<p>I’m always looking for <strong>feedback or suggestions</strong> – don’t hesitate to contact me at <code>hey@franziskahorn.de</code>. 😊</p>
-<p>You might also be interested in my books:</p>
+<p>The other day I tried Claude Cowork to create a PowerPoint presentation. I absolutely hate PowerPoint (among other Microsoft products), so I was pretty happy when Claude was able to generate a decent slide deck from my original LaTeX presentation. But what really amazed me was <em>how</em> the AI agent created the PPT document: by using a Python script!</p>
+<p>This got me thinking about what our software tools will look like in a future where agents increasingly take over the tasks that graphical user interfaces (GUIs) were originally designed for. Here’s my attempt at a framework for reasoning about which kind of software will survive — and thrive — in the age of AI agents.</p>
+<p><strong>Disclaimer:</strong> This article is meant to spark ideas, not be exhaustive. It won’t cover every type of software and your specific product might not fit neatly into the categories below. Furthermore, adjacent questions (pricing models, security frameworks, liability when agents act on user’s behalf) are important but deserve their own treatment.</p>
+<section id="software-purpose" class="level2">
+<h2 class="anchored" data-anchor-id="software-purpose">Software Purpose</h2>
+<p>The first thing to consider when evaluating to which degree a software product will be affected by the advent of AI agents is the <strong>purpose of the software</strong>:</p>
 <ul>
-<li><a href="https://franziskahorn.de/rsebook/"><em>Clarity-Driven Development of Scientific Software</em></a> (2025) — also available for purchase on <a href="https://leanpub.com/cddsci">Leanpub</a></li>
-<li><a href="https://franziskahorn.de/mlbook/"><em>A Practitioner’s Guide to Machine Learning</em></a> (2021)</li>
+<li><strong>Experience:</strong> This is software where the whole point is the human experience when using the software, for example, playing a game, interacting with other humans (social media), or consuming content (Netflix, Spotify, news pages). The main use case of this software (the actual watching, playing, scrolling) will be largely unaffected by AI agents: if you’re using the software for fun, why let an agent do it for you? That said, AI is already reshaping the discovery and curation layer around these experiences (through personalized feeds and playlists or summarized news), so even experience-focused products should not completely ignore these new trends.</li>
+<li><strong>Production:</strong> This is software you use to create something, but where you care more about the final result than the process of creation, like PowerPoint, Photoshop, audio production tools, and code editors. While their UIs were optimized over the years to make creation smoother, you mostly use these tools because you need to produce a result and this is the way to get it. This is the kind of software most at risk of being replaced by agentic workflows. Note: if you’re an artist who genuinely enjoys the creation process with these tools and you’re not just interested in the final result, for you the software falls under the “experience” category. But I doubt anyone genuinely enjoys dragging text boxes around in PowerPoint.</li>
+<li><strong>Decision-Making:</strong> This is software that displays results for humans to make a decision. A pure example is a dashboard with data visualizations. But decision-making is often embedded in production tools too: you need to look at the created artifact and judge whether it’s done or needs more work. This will still be necessary when agents generate the results, as users need to understand whether the agent changed the right things or introduced mistakes. IDEs already do this well with features to examine diffs of version controlled files, but for non-text artifacts like images, music, slides, or 3D models, any automated edit currently risks destroying your progress in subtle ways you might miss when checking only at the final result.</li>
 </ul>
+<p>Most software products serve multiple purposes, for example, based on the number of features for each category, PowerPoint could be considered 70% production (all the tools used to build slides), 10% decision-making (ability to view and comment on slides), and 20% experience (features to present a slideshow to an audience). And some software doesn’t fit neatly into any of these buckets (e.g., coordination tools like Jira or Slack, which are also heavily affected by agents). We’ll focus on production and decision-making in the following, but the general ideas should apply to the rest too.</p>
+<section id="semantic-diff-and-comparison-tools" class="level5">
+<h5 class="anchored" data-anchor-id="semantic-diff-and-comparison-tools">Semantic Diff and Comparison Tools</h5>
+<p>The comparative lack of tools to support decision-making for AI-generated changes demonstrates a huge opportunity for a new class of software features: <strong>semantic diff and comparison tools</strong>. These address a real need right now: users need to be able to verify not just the final output of an agent’s creation, but also the individual steps to trust subsequent edits. IDEs with AI-integration can serve as inspiration here: they’ve shown diffs of text files for a long time and now also allow users to select individual lines of code to point the agent to the parts it should change. For other file types, creative solutions are needed that offer similar capabilities:</p>
+<ul>
+<li><strong>Visual diffs</strong> that highlight what changed between versions of an image, slide deck, or 3D model</li>
+<li><strong>Partial reverts</strong> so users can accept some of the agent’s changes while rejecting others</li>
+<li><strong>Targeted instructions</strong> to point the agent to specific parts that should be changed, instead of it touching everything</li>
+</ul>
+<p>And there’s a subtler problem here: if users stop creating artifacts by hand entirely, they gradually lose the expertise to judge whether the AI output is any good, which makes good decision-making tooling even more critical.</p>
+</section>
+<section id="agent-accessible-file-formats" class="level5">
+<h5 class="anchored" data-anchor-id="agent-accessible-file-formats">Agent-Accessible File Formats</h5>
+<p>The next important change for production tools to stay relevant: <strong>agent-accessible file formats</strong>. If the format is text-based and readable (like XML, HTML, JSON, or markdown), an agent can edit it directly, the same way it edits source code. For more complex operations, it can write a script and possibly use targeted libraries to produce or manipulate the file, as my PowerPoint example illustrates. Either way, text-based formats like the XML behind Word and PowerPoint documents allow <strong>targeted, surgical edits</strong>: change one part without risking corruption of unrelated elements.</p>
+<p>Optimized binary representations with internal cross-references and offsets, common in software that requires fast rendering of complex graphics, are a different story. Modifying one thing can invalidate the whole file. These formats work great when users manipulate artifacts through the software’s GUI, but an agent can’t read or edit them directly, and programmatic access through libraries is brittle at best.</p>
+<p>The key question for your product is: <strong>can an agent reliably read, produce, and manipulate your file format?</strong> If not, your competitors who make their formats agent-accessible (through readable file formats, well-documented libraries, CLIs, or APIs) will leave you behind and your only hope for staying relevant would be to make your software so fun to use that users will stay for the experience.</p>
+</section>
+</section>
+<section id="impact-of-hallucinations" class="level2">
+<h2 class="anchored" data-anchor-id="impact-of-hallucinations">Impact of Hallucinations</h2>
+<p>When we let an AI generate our outputs, we need to address an important limitation of LLMs: the tendency to make stuff up, also referred to as “hallucinations”. How problematic this is depends on the use case. <strong>Hallucinations can be …</strong></p>
+<ul>
+<li><strong>A feature</strong>: If you want the LLM to get creative, e.g., generate a fictional short story, a new song, a cool image. A result that deviates from what you originally had in mind often sparks new ideas and can result in a better outcome than if the LLM followed your instructions to the letter.</li>
+<li><strong>Partially tolerable</strong>: For most creation tasks we don’t want the LLM to go too far off script. For example, when drafting an email to your colleague, the AI agent should keep your tone of voice and not make up incorrect progress updates. Or when coding, we need the resulting script to be syntactically correct, to compute the right stuff, and follow our coding style guidelines. But we don’t care about small details like exactly which variable names the agent used. So while the final output might have looked a bit different if we had created it by hand, the time saving from letting an AI do the work is big enough that we’re fine with small annoyances as long as the result overall gets the job done.</li>
+<li><strong>A bug</strong>: For some tasks there is only and exactly one correct result and deviations are not acceptable. For example, calculating your tax returns, computing the hash value of an object, running a physics simulation for some initial conditions, or maybe just counting the number of “R”s in the word “strawberry”. In these cases you absolutely do not want an LLM to just make up an answer, but use a deterministic algorithm that is guaranteed to give you the correct result and produces the same output every time you call it with the same inputs.</li>
+</ul>
+<section id="tools-that-implement-complex-algorithms" class="level5">
+<h5 class="anchored" data-anchor-id="tools-that-implement-complex-algorithms">Tools That Implement Complex Algorithms</h5>
+<p>This means tools that do complex calculations will stay relevant, provided they are <strong>easier for the AI to use than the next best alternative</strong>, whether that’s reimplementing the functionality from scratch or using a competing tool. As <a href="https://steve-yegge.medium.com/software-survival-3-0-97a2a6255f7b">Steve Yegge describes in his blog article</a>, making your tool agent-friendly requires attention to three things:</p>
+<ul>
+<li><strong>Discoverability:</strong> If your tool was created after the LLM’s training data cut-off, the agent won’t get the idea to use it on its own. Make it easy to discover, e.g., by distributing a skill that describes how to use it and making the documentation accessible in an agent-friendly format (e.g., as markdown files).</li>
+<li><strong>Intuitive interface:</strong> Since, like human users, agents sometimes just skim the documentation, the tool should be as intuitive to use as possible. If you watch an agent interact with the tool and it consistently provides incorrect parameters, implement these arguments additionally as an alias for your original parameters. This can also help prevent <a href="https://en.wikipedia.org/wiki/Slopsquatting">“slopsquatting”</a>, where malicious actors register malware under frequently hallucinated names to trick agents into installing it.</li>
+<li><strong>Token-conscious output:</strong> Avoid noise in the output and return only the results the agent really needs. CLI tools are often better than MCP servers here, since they come with fewer instructions that pollute the agent’s context window and can be chained more easily with other command line operations to filter and transform the output further.</li>
+</ul>
+</section>
+<section id="validators-and-verifiers" class="level5">
+<h5 class="anchored" data-anchor-id="validators-and-verifiers">Validators and Verifiers</h5>
+<p>Another class of tools that become even more critical with AI agents are <strong>validators and verifiers</strong>. Software development is far ahead here: compilers, type checkers, linters, and automated tests all catch non-tolerable violations like syntax errors or unexpected results, and what remains in terms of deviations from human-ideal output is mostly tolerable, so manual rework is limited.</p>
+<p>But for other data formats such automated checks are still missing. When I opened my AI-generated slide deck in PowerPoint, it told me the file needed to be “repaired”. This wasn’t a big deal, but I wish this kind of feedback and the provided fix were available to the agent as a command line tool so it could address these trivial mistakes before I looked at the output. This means when you design your programmatic interfaces for creating and editing your new agent-accessible file formats, also think about <strong>how the output can be validated</strong> and what meaningful error messages you could provide to an agent to help it fix any mistakes without additional user input.</p>
+<p>Some mistakes, however, are not structural and may come down to personal preferences. For these I expect <strong>LLMs-as-a-judge</strong> to become more prevalent: a second agent that criticizes the work of the first. Products could support this by asking users about their style guidelines when setting up a project and <strong>providing custom skills</strong> for agents to simplify such a review workflow.</p>
+</section>
+</section>
+<section id="your-data-as-a-moat" class="level2">
+<h2 class="anchored" data-anchor-id="your-data-as-a-moat">Your Data as a Moat</h2>
+<p>Finally, to accomplish tasks, agents often need <strong>access to up-to-date information</strong>. Since they were trained on data that is usually at least a few months behind, they can’t (reliably) answer questions such as “what’s the weather forecast for tomorrow?” without consulting external data sources. This data will be valuable context when the agent does its work: the files on your computer when editing a function in an existing codebase, a CRM or ERP database when compiling a report, or sensor logs when diagnosing a problem with a machine.</p>
+<p>If the data you can provide is <em>fresh</em> and <em>exclusive</em>, charging for access will remain a legitimate business model. However, just like with computation tools, you need to provide this access in an agent-friendly format: make it easy to discover, intuitive to use, and token-conscious in its output.</p>
+<hr>
+<p>My AI-generated PowerPoint presentation was not perfect: I had to fix some alignment issues, there were text boxes I didn’t ask for, and it didn’t fully conform to our corporate design. But I’d still choose Claude over wrestling with PowerPoint’s toolbar any day.</p>
+<p>I believe the shift from <em>using tools</em> to <em>describing intent and reviewing results</em> is coming for a lot more software than just presentation apps. And the products that will thrive are the ones that make themselves useful to agents — through accessible file formats, validation tools, and exclusive data — rather than clinging to a clunky GUI that is no fun to use.</p>
+<p>I’m really looking forward to a future where I waste less time dragging around text boxes!</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script type="text/javascript"> // go once over all images and transform the percentage width into pixels relative to original body size

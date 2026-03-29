@@ -130,6 +130,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">CDD for Humans &amp; AI</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2026-02-ai-agents-software.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Death of the Toolbar</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -190,7 +196,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">February 26, 2026</p>
+      <p class="date-modified">March 28, 2026</p>
     </div>
   </div>
     
@@ -203,7 +209,7 @@ ul.task-list li input[type="checkbox"] {
 
 <p><strong><em>This article is still very much work in progress; more details on the practical example will be added over time.</em></strong></p>
 <p>When I attended my first computer science class in 2009, programming—writing text that makes a computer do something—felt like a magical superpower. But over the years, as I shifted towards designing larger systems, typing out the necessary code to materialize these systems started to feel more and more like a chore. That’s why I’ve been really excited when, around Nov/Dec 2025, AI coding agents finally reached a point where they produced code I didn’t feel I had to refactor from top to bottom—and suddenly software development became fun again.</p>
-<p>In this article, I want to give a glimpse into how I personally use AI to develop software (as of February 2026). But more importantly, I want to explain what I <em>don’t</em> let AI do: the conceptual work that happens before I start coding—with or without AI—and which gives me the confidence that the software is actually worth building in the first place. I call this approach <strong>Clarity-Driven Development (CDD)</strong>, which you can also read more about in my latest book, <a href="https://leanpub.com/cddsci"><em>Clarity-Driven Development of Scientific Software</em></a>.</p>
+<p>In this article, I want to give a glimpse into how I personally use AI to develop software (as of early 2026). But more importantly, I want to explain what I <em>don’t</em> let AI do: the conceptual work that happens before I start coding—with or without AI—and which gives me the confidence that the software is actually worth building in the first place. I call this approach <strong>Clarity-Driven Development (CDD)</strong>, which you can also read more about in my latest book, <a href="https://leanpub.com/cddsci"><em>Clarity-Driven Development of Scientific Software</em></a>.</p>
 <div class="custom-gray-block">
 <p><strong>CDD is a thinking framework for gaining clarity on the problem and designing technology-agnostic solutions</strong>, creating a solid foundation whether you’re implementing software yourself or directing AI.</p>
 </div>
@@ -259,7 +265,7 @@ Figure&nbsp;2: Humans are in the loop in two places: when providing inputs and w
 </section>
 <section id="gaining-clarity" class="level2">
 <h2 class="anchored" data-anchor-id="gaining-clarity">Gaining Clarity</h2>
-<p>I didn’t create Clarity-Driven Development (CDD) as a method for coding with AI. After more than a decade of professional software development, I simply noticed that <strong>I kept going through the same steps at the start of every major project</strong>. Over time, I refined those steps into a more explicit approach. And since the resulting artifacts are genuinely useful to me as a human developer, it’s no surprise they also turned out to be effective at guiding AI agents—a win on both sides.</p>
+<p>I didn’t create Clarity-Driven Development (CDD) as a method for coding with AI. After more than a decade of professional software development, I simply noticed that <strong>I kept going through the same steps at the start of every major project</strong>. Over time, I refined those steps into a more explicit framework. And since the resulting artifacts are genuinely useful to me as a human developer, it’s no surprise they also turned out to be effective at guiding AI agents—a win on both sides.</p>
 <p>At its core, <strong>CDD structures your thinking by asking three questions before you start coding</strong> (<a href="#fig-code-questions" class="quarto-xref">Figure&nbsp;3</a>):</p>
 <ul>
 <li><em><strong>Why</strong> is your idea worth implementing?</em></li>
@@ -276,8 +282,8 @@ Figure&nbsp;3: Before writing code—yourself or via an AI—it’s worth gainin
 </figcaption>
 </figure>
 </div>
-<p>Working through these questions forces you to confront gaps in your understanding. I refer to the documents that capture the corresponding answers as <strong>sketches</strong>, since they provide a rough but intentional outline of the system to be built. However, the main goal is gaining clarity through the thinking process, not producing detailed documentation—so these sketches are far lighter than full requirements or formal specifications and still require a generous dose of sound judgment from a capable engineer to turn them into working software.</p>
-<p>In the following sections, I’ll walk through what answering these questions looks like in practice. I’ll use an example from the domain of <em>predictive quality</em>—more complex than some toy To-Do app, but familiar enough for me to confidently evaluate the results. The example draws on my prior work at <a href="https://www.basf.com/">BASF</a> (the chemical company) and at <a href="https://alcemy.tech/">alcemy</a>, a climate tech startup applying machine learning to optimize cement recipes and reduce CO₂ emissions. Since this example is illustrative rather than commercial, I’ll deliberately skip some details, which I’ll return to at the end of the article.</p>
+<p>Working through these questions forces you to confront gaps in your understanding. I refer to the resulting documents that capture your answers as <strong>sketches</strong>, since they provide a rough but intentional outline of the system to be built. However, the main goal is gaining clarity through the thinking process, not producing detailed documentation—so these sketches are far lighter than full requirements or formal specifications and still require a generous dose of sound judgment from a capable engineer to turn them into working software.</p>
+<p>In the following sections, I’ll walk through what answering these questions looks like in practice. I’ll use an example from the domain of <em>predictive quality</em>—more complex than some toy To-Do app, but familiar enough for me to confidently evaluate the results. The example draws on my prior work at BASF (the chemical company) and at <a href="https://alcemy.tech/">alcemy</a>, a climate tech startup applying machine learning to optimize cement recipes and reduce CO₂ emissions. Since this example is illustrative rather than commercial, I’ll deliberately skip some details, which I’ll return to at the end of the article.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Clarity- vs. Spec-Driven Development">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -332,20 +338,20 @@ Figure&nbsp;4: <strong>Process optimization using machine learning (ML) predicti
 <li>Inspecting ML model accuracy and learned patterns to build trust in its predictions</li>
 </ul>
 <p>Additionally, the application requires inputs from the production lead, such as configuring recipes for all product variants they produce.</p>
-Each of these user needs translates into one or more screens. For each screen, I created a wireframe and a brief description of the screen, including which backend endpoints it should communicate with to read or write the required data (finalized in the next step). For example, the resulting sketches for the quality monitoring view are shown in Figure <em>TODO</em>, while sketches for other screens can be found in the project’s GitHub repo (<em>TODO: link</em>).
+Each of these use cases translates into one or more screens. For each screen, I created a wireframe and a brief description of the screen, including which backend endpoints it should communicate with to read or write the required data (finalized in the next step). For example, the resulting sketches for the quality monitoring view are shown in Figure <em>TODO</em>, while sketches for other screens can be found in the project’s GitHub repo (<em>TODO: link</em>).
 </details>
 </section>
 <section id="the-how" class="level3">
 <h3 class="anchored" data-anchor-id="the-how">The How</h3>
 <p>Finally, we need to ponder <strong>how we could best implement this solution</strong>. This includes designing interfaces, data structures, and flows. Specifically, this means defining the <strong>inputs and outputs of major endpoints or scripts</strong> and outlining the <strong>database schema</strong>. If possible, these sketches should then be discussed with a more experienced software engineer or architect.</p>
-<p>I usually begin by identifying the endpoints required to support the user experience, based on the data needs revealed by each screen’s mockup (i.e., any functionality triggered through a user action). Next, I determine any additional processes needed to support them, such as batch jobs for data processing (often functionality triggered through time-based events, e.g., if a new measurement comes in every 10 minutes). For each relevant <strong>interface</strong>, I note down:</p>
+<p>I usually begin by identifying the endpoints required to support the user experience, based on the data needs revealed by each screen’s mockup (i.e., any functionality triggered through a user action). Next, I determine which additional processes are needed to support them, such as batch jobs for data processing (often functionality triggered through time-based events, e.g., when a new measurement comes in every 10 minutes). For each relevant <strong>interface</strong>, I note down:</p>
 <pre><code>- module or file path
 - function or class name and possibly endpoint route
 - purpose (high-level description of the provided functionality, if not obvious from the name)
 - input arguments &amp; return values (name, type, brief description)
 - pseudocode of the implementation (for more complex control flows, e.g., edge case handling, invariants, and side effects)</code></pre>
 <p>To get a better idea of what the resulting software design would look like, I use my custom-built tool <a href="https://franziskahorn.de/demo_archgraph/">ArchGraph</a> to turn the plain-text description of my code-to-be into an interactive visualization of the submodules and their dependencies.</p>
-<p>To define <strong>database schemas</strong>, I like using <a href="https://www.drawdb.app/">drawDB</a>. It lets you model the schema visually and export the corresponding SQL, which is excellent input for an AI when generating ORMs or other database-related code.</p>
+<p>To define <strong>database schemas</strong>, you can use <a href="https://www.drawdb.app/">drawDB</a>. It lets you model the schema visually and export the corresponding SQL, which is excellent input for an AI when generating ORMs or other database-related code.</p>
 <details>
 <summary>
 <span class="summary-heading">Predictive Quality Example</span>
@@ -405,19 +411,19 @@ Figure&nbsp;5: How Claude helped me pick a frontend framework.
 </div>
 </div>
 <p>Of course, <strong>knowing which trade-offs matter</strong>, and identifying the system’s constraints in the first place, is a skill that comes with experience. If you’re not sure which factors might be relevant for your use case, you can also tell the AI to first ask you some questions before making a recommendation. In any case, using an AI to help with architectural decisions is almost certainly better than simply adopting whatever technology happens to be the latest shiny thing.</p>
-<p>But please note: since LLMs are probabilistic models, your results may vary. I’ve found the following system prompt<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> very helpful to improve answer quality:</p>
+<p>But please note: since LLMs are probabilistic models, your results may vary. I’ve found the following general instructions<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> very helpful to improve answer quality:</p>
 <blockquote class="blockquote">
 <p><em>Tell it like it is; don’t sugar-coat responses. Take a forward-thinking view. Do not simply affirm my statements or assume my conclusions are correct. Your goal is to be an intellectual sparring partner, not just an agreeable assistant. Where necessary, question my assumptions and provide counterpoints / alternative perspectives to make sure my reasoning holds up under scrutiny and there are now gaps or flaws in my argument. Correct me where I’m wrong.</em></p>
 </blockquote>
 <section id="encode-decisions-in-agent-context" class="level4">
 <h4 class="anchored" data-anchor-id="encode-decisions-in-agent-context">Encode Decisions in Agent Context</h4>
-<p><strong>The choices you’ve made up to now are crucial context</strong> for everyone working on this project. If you’re lucky, your team is already in the habit of tracking them in architectural decision records (ADRs). But often this knowledge exists only in people’s heads. When collaborating with an AI agent, it is critical that you document this information in writing—and do so concisely to reduce token consumption. An <a href="https://agents.md/"><strong>AGENTS.md file</strong></a><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> is perfect for this to ensure the instructions are passed to the LLM as a system prompt.</p>
+<p><strong>The choices you’ve made up to now are crucial context</strong> for everyone working on this project. If you’re lucky, your team is already in the habit of tracking them in architectural decision records (ADRs). But often this knowledge exists only in people’s heads. When collaborating with an AI agent, it is critical that you document this information in writing—and do so concisely to reduce token consumption. An <a href="https://agents.md/"><strong>AGENTS.md file</strong></a><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> is perfect for this to ensure the instructions are passed to the LLM in every conversation.</p>
 <p>For example, my <code>AGENTS.md</code> file for this project <em>(TODO: add link)</em> includes</p>
 <ul>
 <li>a project overview derived from the CDD “why” sketches</li>
-<li>which role the AI agent should assume (capable staff engineer)</li>
-<li>a description of the project structure and instructions on how the agent should interact with the codebase (e.g., using the <code>ty</code> type checker instead of the former default <code>mypy</code> for Python—another example where <strong>specific hints are necessary when your project setup deviates from the mainstream conventions the AI encountered in its training data</strong>)</li>
+<li>a description of the project structure (software architecture and how it’s reflected in the directory organization) and used technologies and frameworks (incl.&nbsp;specific versions where necessary)</li>
 <li>style guidelines reflecting <a href="https://franziskahorn.de/rsebook/03_state_flow_how#good-code">what I consider good code</a></li>
+<li>instructions how the agent should interact with the codebase (e.g., using the <code>ty</code> type checker instead of the former default <code>mypy</code> for Python—another example where <strong>specific hints are necessary when your project setup deviates from the mainstream conventions the AI encountered in its training data</strong>)</li>
 <li>a checklist outlining the desired agent workflow (e.g., ask questions if anything is unclear, write tests before the implementation, make sure type checker, linter, and all tests pass)</li>
 </ul>
 <p>However, this is very much a living document—whenever the AI does something stupid, I’ll revise the instructions to improve the likelihood of better results in future runs.</p>
@@ -439,7 +445,7 @@ Figure&nbsp;5: How Claude helped me pick a frontend framework.
 <ul>
 <li><strong>Ask for a plan first.</strong> At the start of every new task, I ask the AI “You need to implement X—how would you do that?” Ideally, the agent then provides several options with trade-offs and step-by-step approaches. If one resonates, I continue with “now implement option Y.”</li>
 <li><strong>Switch threads regularly.</strong> To avoid “context rot”—where results deteriorate as the context window fills and earlier instructions get compressed or forgotten—I start a fresh thread for each new task.</li>
-<li><strong>Close the feedback loop.</strong> Like human developers, agents often don’t produce perfect code on the first try. I enable the agent to use build tools, linters, and a thorough test suite (by asking it to write tests first when implementing new tasks) so it can identify failures and self-correct before declaring a task done. Additionally, you should instruct the agent at the end of every task to critique its own work (“What’s missing so a senior developer could be truly proud of this implementation?”) to squeeze out further improvements.</li>
+<li><strong>Close the feedback loop.</strong> Like human developers, agents often don’t produce perfect code on the first try. I enable the agent to use build tools, linters, and a thorough test suite (by asking it to write tests first when implementing new tasks) so it can identify failures and self-correct before declaring a task done. Additionally, you should instruct the agent at the end of every task to critique its own work (“What’s missing so a senior developer could be truly proud of this implementation?” or “Based on everything you know now, how could this implementation be simplified?”) to squeeze out further improvements.</li>
 <li><strong>Maintain modular architecture.</strong> As the codebase grows, good modularity ensures the agent knows where to find relevant files without polluting its context window with irrelevant code.</li>
 </ul>
 <p>Even with solid instructions, the implementation process remains <strong>iterative</strong>. Sketches inevitably contain gaps that only surface during implementation and <strong>you only <em>really</em> know what you actually wanted once you see the working software and can interact with its features</strong>—agile is not dead. In principle, you could then go back, update the sketch documents, and generate a new prompt from the diff. In practice, I usually find it faster to ask the AI to fix the issue directly and archive the sketches once they’ve been implemented.</p>
@@ -447,26 +453,22 @@ Figure&nbsp;5: How Claude helped me pick a frontend framework.
 </section>
 <section id="the-result" class="level2">
 <h2 class="anchored" data-anchor-id="the-result">The Result</h2>
-<p>The sketches have now served their purpose: they helped me think through a coherent solution before writing code. Moving forward, the working software will be my source of truth. <em>TODO: The implementation took roughly X hours and consumed $X in Claude Code tokens.</em> You can check out the code on GitHub and interact with the live application on Render.</p>
+<p>The sketches have now served their purpose: they helped me think through a coherent solution before writing code. Moving forward, the working software will be my source of truth. <em>TODO: The actual implementation took roughly X hours and consumed $X in Claude Code tokens.</em> You can check out the code on GitHub and interact with the live application on Render.</p>
 <p><em>TODO: add screenshot of application</em></p>
 <p>Keep in mind this is still a toy project: achieving the first 80% was relatively straightforward, but—as always—the remaining 20% (or likely a lot more in this case) is where the real challenges lie. From my experience at alcemy, just a few of the <strong>critical components missing for a production-ready system</strong> include:</p>
 <ul>
-<li>User management, authentication, and other security considerations</li>
-<li>Integrating data with automated exports from last-century data management systems</li>
-<li>Building an ML model that delivers reliable predictions despite measurement errors, which usually requires integrating deep domain knowledge through feature engineering and hybrid models that combine data-driven approaches with a mechanistic understanding of the underlying processes</li>
-<li>Running the system in production, including provisioning infrastructure, handling ongoing data issues, retraining models regularly, and adapting to new edge cases</li>
-<li>Change management: ensuring users adopt and ideally enjoy using your product</li>
+<li>User management, authentication, and other security considerations.</li>
+<li>Integrating data with automated exports from last-century data management systems.</li>
+<li>Building an ML model that delivers reliable predictions despite measurement errors, which usually requires integrating deep domain knowledge through feature engineering and hybrid models that combine data-driven approaches with a mechanistic understanding of the underlying processes.</li>
+<li>Running the system in production, including provisioning infrastructure, observability, handling ongoing data issues, retraining models regularly, and adapting to new edge cases.</li>
+<li>Change management: ensuring users adopt and ideally enjoy using your product.</li>
 </ul>
 <p>Most of these points require substantial human creativity, domain expertise, and empathy for users.</p>
 <section id="where-to-go-from-here" class="level3">
 <h3 class="anchored" data-anchor-id="where-to-go-from-here">Where to Go From Here</h3>
 <p>The most important advice that I can give you for AI-assisted coding—beyond thinking through and clearly defining what you want to build—is to <strong>keep experimenting</strong>. It takes practice to discover which prompts work and when the AI goes off the rails. And then you’ll need to relearn this again every few months as new models and tools appear. But it’s also fun to keep being positively surprised by your new AI colleague and see how it can amplify your creativity and handle the tedious tasks, letting you focus on the ideas that matter.</p>
-<section id="acknowledgements" class="level4">
-<h4 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h4>
-<p>The creation of this article was inspired by some great conversations with my wonderful colleagues at <a href="https://www.wps.de/">WPS</a> (but any potentially controversial opinions expressed here are my own 😉).</p>
 
 
-</section>
 </section>
 </section>
 
@@ -474,7 +476,7 @@ Figure&nbsp;5: How Claude helped me pick a frontend framework.
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>A system prompt is a set of instructions automatically included in all conversations. Depending on how you use an AI, this can live in personal preferences (for web interfaces) or in a configuration file such as an <code>AGENTS.md</code>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>This an additional prompt that is automatically injected at the start of every conversation, before the actual user prompt. Depending on how you use an AI, this can be set in personal preferences (for web interfaces) or in a conventions file such as an <code>AGENTS.md</code>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>At the time of writing, <code>AGENTS.md</code> is unfortunately not yet a universally accepted standard across IDEs and coding agents, which is problematic when collaborating with people using different setups. In my case, I work around this by referencing <code>@AGENTS.md</code> from my <code>CLAUDE.md</code> file so Claude Code reliably picks up the instructions. Ideally, this won’t be necessary in the future.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->

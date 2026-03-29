@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nutri-SCode</title>
+<style>
+  :root {
+    --bg: #f5f5f5;
+    --surface: #fff;
+    --border: #e0e0e0;
+    --text: #1a1a1a;
+    --text-muted: #777;
+    --accent: #4a7cff;
+    --radius: 6px;
+    --sidebar-w: 220px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Layout */
+  .app {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    width: var(--sidebar-w);
+    flex-shrink: 0;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 20px 16px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .sidebar h1 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .sidebar h4 {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .sidebar p {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+
+  .cta { font-size: 0.78rem; }
+
+  .sidebar-section { display: flex; flex-direction: column; gap: 8px; }
+
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+  }
+
+  select {
+    font-family: inherit;
+    font-size: 0.82rem;
+    padding: 6px 8px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg);
+    color: var(--text);
+    outline: none;
+    width: 100%;
+  }
+  select:focus { border-color: var(--accent); }
+
+  /* Coefficient rows */
+  .coeff-list { display: flex; flex-direction: column; gap: 5px; }
+  .coeff-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .coeff-row label {
+    font-size: 0.8rem;
+    color: var(--text);
+    cursor: default;
+  }
+
+  input[type="number"] {
+    font-family: inherit;
+    font-size: 0.8rem;
+    padding: 4px 6px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg);
+    color: var(--text);
+    outline: none;
+    width: 52px;
+    text-align: center;
+  }
+  input[type="number"]:focus { border-color: var(--accent); }
+
+  /* Legend */
+  .legend { display: flex; flex-direction: column; gap: 5px; }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.79rem;
+    color: var(--text);
+  }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Main chart area */
+  .main {
+    flex: 1;
+    min-width: 0;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .chart-wrap {
+    flex: 1;
+    min-height: 0;
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 8px;
+  }
+
+  canvas { display: block; }
+
+  /* Tooltip */
+  .tooltip {
+    display: none;
+    position: absolute;
+    pointer-events: none;
+    background: rgba(15, 15, 20, 0.92);
+    color: #f0f0f0;
+    font-size: 0.76rem;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    padding: 9px 11px;
+    border-radius: var(--radius);
+    line-height: 1.55;
+    z-index: 10;
+    white-space: pre;
+  }
+  .tooltip .tt-name {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #fff;
+    max-width: 280px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+  }
+  .tooltip .tt-sep {
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    margin: 5px 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div>
+      <h1>Nutri-SCode</h1>
+      <h4>Nutri-Score for Your Code</h4>
+    </div>
+
+    <p id="description"></p>
+
+    <div class="cta"><a href="https://github.com/cod3licious/nutriscode" target="_blank" style="color:#666;display:inline-flex;align-items:center;gap:5px;text-decoration:none"><svg height="14" width="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/></svg>Score your own codebase</a></div>
+
+    <div class="sidebar-section">
+      <div class="section-label">Dataset</div>
+      <select id="file-select"><option value="">Loading…</option></select>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="section-label">Coefficients</div>
+      <div class="coeff-list" id="coeff-list"></div>
+    </div>
+
+    <div class="sidebar-section" id="legend-section" style="display:none">
+      <div class="section-label">Modules</div>
+      <div class="legend" id="legend"></div>
+    </div>
+  </aside>
+
+  <!-- Chart -->
+  <main class="main">
+    <div class="chart-wrap" id="chart-wrap">
+      <canvas id="chart"></canvas>
+      <div class="tooltip" id="tooltip"></div>
+    </div>
+  </main>
+</div>
+
+<script>
+const RESULTS_DIR = "results";
+
+const COEFFICIENTS = [
+  { key: "math_ops",           label: "Math ops",        default: 1.0 },
+  { key: "bitwise_ops",        label: "Bitwise ops",     default: 0.9 },
+  { key: "logical_ops",        label: "Logical ops",     default: 0.6 },
+  { key: "comparisons",        label: "Comparisons",     default: 0.5 },
+  { key: "conditionals",       label: "Conditionals",    default: 0.4 },
+  { key: "calls",              label: "Calls (n−1)",     default: 0.3 },
+  { key: "assertions",         label: "Assertions",      default: 0.2 },
+  { key: "exception_handlers", label: "Exc. handlers",   default: 0.1 },
+];
+
+const DESCRIPTION_FUNCTIONS = "Each dot is a function. The x-axis shows its statement count; the y-axis shows the weighted sum of its operations \u2014 a measure of computational richness. The dashed diagonal marks a score of\u00a00.5: functions above it pack more operations relative to their size.";
+const DESCRIPTION_ALL = "Each dot is a whole codebase, sized by function count. The axes show the summed statement count and weighted operations across all functions. The dashed diagonal marks a score of\u00a00.5: codebases above it are computationally denser on average.";
+
+const PADDING = { top: 24, right: 28, bottom: 46 };
+const AXIS_LABEL_W = 18;
+const DOT_RADIUS = 3.5;
+
+// ---------------------------------------------------------------------------
+// Cached DOM elements
+// ---------------------------------------------------------------------------
+
+const canvas = document.getElementById("chart");
+const ctx = canvas.getContext("2d");
+const tooltipEl = document.getElementById("tooltip");
+const fileSelect = document.getElementById("file-select");
+const chartWrap = document.getElementById("chart-wrap");
+const legendSection = document.getElementById("legend-section");
+const legendEl = document.getElementById("legend");
+const descriptionEl = document.getElementById("description");
+
+// ---------------------------------------------------------------------------
+// State
+// ---------------------------------------------------------------------------
+
+let rawData = null;       // [{ name, metrics }]
+let points = null;        // [{ name, x, y, metrics, module, color, colorFaded, radius }]
+let isAllView = false;
+let moduleColorMap = {};  // module -> { solid, faded }
+let plotState = null;     // { toCanvasX, toCanvasY } — set by draw(), used by hover
+const coeffs = {};
+let hoveredIdx = -1;
+
+// ---------------------------------------------------------------------------
+// Module color assignment
+// Golden-angle hue distribution with pastel-earthy saturation/lightness.
+// Works for any number of modules — no palette cap, no repeats.
+// ---------------------------------------------------------------------------
+
+function buildModuleColors(modules) {
+  const GOLDEN_ANGLE = 137.508;
+  const START_HUE = 18;
+  const map = {};
+  modules.forEach((mod, i) => {
+    const hue = (START_HUE + i * GOLDEN_ANGLE) % 360;
+    const base = `${hue.toFixed(1)}, 40%, 62%`;
+    map[mod] = { solid: `hsl(${base})`, faded: `hsla(${base}, 0.55)` };
+  });
+  moduleColorMap = map;
+}
+
+// ---------------------------------------------------------------------------
+// Coefficient controls
+// ---------------------------------------------------------------------------
+
+const coeffList = document.getElementById("coeff-list");
+for (const c of COEFFICIENTS) {
+  coeffs[c.key] = c.default;
+  const row = document.createElement("div");
+  row.className = "coeff-row";
+  const id = `coeff-${c.key}`;
+  row.innerHTML = `
+    <label for="${id}">${c.label}</label>
+    <input id="${id}" name="${id}" type="number" value="${c.default}" min="0" max="1" step="0.1">`;
+  coeffList.appendChild(row);
+  row.querySelector("input").addEventListener("input", (e) => {
+    const v = parseFloat(e.target.value);
+    if (!isNaN(v) && v >= 0 && v <= 1) {
+      coeffs[c.key] = v;
+      recompute();
+      draw();
+    }
+  });
+}
+
+// ---------------------------------------------------------------------------
+// Weighted sum computation
+// ---------------------------------------------------------------------------
+
+function weightedSum(m) {
+  let sum = 0;
+  for (const c of COEFFICIENTS) {
+    const count = m[c.key] || 0;
+    sum += coeffs[c.key] * (c.key === "calls" ? Math.max(0, count - 1) : count);
+  }
+  return sum;
+}
+
+function recompute() {
+  if (!rawData) return;
+
+  const modules = [...new Set(rawData.map(d => d.name.split(".")[0]))].sort();
+  buildModuleColors(modules);
+
+  points = rawData.map((d) => {
+    const mod = d.name.split(".")[0];
+    const colors = moduleColorMap[mod];
+    return {
+      name: d.name,
+      x: d.metrics.statement_count,
+      y: weightedSum(d.metrics),
+      metrics: d.metrics,
+      module: mod,
+      color: colors.solid,
+      colorFaded: colors.faded,
+      radius: DOT_RADIUS,
+    };
+  });
+
+  if (isAllView) {
+    const maxCount = Math.max(...points.map(p => p.metrics.function_count || 1));
+    for (const p of points) {
+      p.radius = 5 + 18 * Math.sqrt((p.metrics.function_count || 1) / maxCount);
+    }
+  }
+
+  points.sort((a, b) => a.module.localeCompare(b.module));
+  updateLegend();
+}
+
+// ---------------------------------------------------------------------------
+// Legend
+// ---------------------------------------------------------------------------
+
+function updateLegend() {
+  if (!points) { legendSection.style.display = "none"; return; }
+
+  const modules = [...new Set(points.map(p => p.module))].sort();
+  if (modules.length <= 1) { legendSection.style.display = "none"; return; }
+
+  legendSection.style.display = "";
+  legendEl.innerHTML = modules.map(mod => {
+    const color = (moduleColorMap[mod] || {}).solid || "#ccc";
+    return `<div class="legend-item">
+      <div class="legend-dot" style="background:${color}"></div>
+      <span>${mod}</span>
+    </div>`;
+  }).join("");
+}
+
+// ---------------------------------------------------------------------------
+// Data loading
+// ---------------------------------------------------------------------------
+
+async function loadIndex() {
+  try {
+    const resp = await fetch(`${RESULTS_DIR}/_index.json`);
+    if (!resp.ok) throw new Error();
+    const files = await resp.json();
+    fileSelect.innerHTML = files.map((f) =>
+      `<option value="${f}">${f.replace(/\.json$/, "")}</option>`
+    ).join("");
+    if (files.length > 0) loadFile(files[0]);
+  } catch {
+    fileSelect.innerHTML = '<option value="">No results \u2014 run analyze_repo.py first</option>';
+  }
+}
+
+fileSelect.addEventListener("change", () => {
+  if (fileSelect.value) loadFile(fileSelect.value);
+});
+
+async function loadFile(filename) {
+  isAllView = filename === "_all.json";
+  descriptionEl.textContent = isAllView ? DESCRIPTION_ALL : DESCRIPTION_FUNCTIONS;
+  try {
+    const resp = await fetch(`${RESULTS_DIR}/${filename}`);
+    const data = await resp.json();
+    rawData = Object.entries(data).map(([name, metrics]) => ({ name, metrics }));
+    recompute();
+    draw();
+  } catch {
+    rawData = null;
+    points = null;
+    updateLegend();
+    draw();
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Canvas drawing
+// ---------------------------------------------------------------------------
+
+function resize() {
+  const rect = chartWrap.getBoundingClientRect();
+  const w = rect.width - 16;
+  const h = rect.height - 16;
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = w * dpr;
+  canvas.height = h * dpr;
+  canvas.style.width = w + "px";
+  canvas.style.height = h + "px";
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  return { w, h };
+}
+
+function niceTicks(max) {
+  const rough = max / 5;
+  const magnitude = Math.pow(10, Math.floor(Math.log10(rough)));
+  const normalized = rough / magnitude;
+  const step = normalized < 1.5 ? 1 : normalized < 3.5 ? 2 : normalized < 7.5 ? 5 : 10;
+  return step * magnitude;
+}
+
+function draw() {
+  const { w, h } = resize();
+  ctx.clearRect(0, 0, w, h);
+
+  if (!points || points.length === 0) {
+    ctx.fillStyle = "#aaa";
+    ctx.font = "13px sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("No data loaded", w / 2, h / 2);
+    return;
+  }
+
+  // Axis ranges
+  let maxX = 0, maxY = 0;
+  for (const p of points) {
+    if (p.x > maxX) maxX = p.x;
+    if (p.y > maxY) maxY = p.y;
+  }
+  maxX = Math.max(1, maxX * 1.12);
+  maxY = Math.max(1, maxY * 1.12);
+
+  const xStep = niceTicks(maxX);
+  const yStep = niceTicks(maxY);
+
+  // Dynamic left padding based on widest y-tick label
+  ctx.font = "11px sans-serif";
+  let maxTickW = 0;
+  for (let v = 0; v <= maxY + yStep * 0.01; v += yStep) {
+    maxTickW = Math.max(maxTickW, ctx.measureText(+v.toFixed(1)).width);
+  }
+  const leftPad = AXIS_LABEL_W + maxTickW + 12;
+
+  const plotW = w - leftPad - PADDING.right;
+  const plotH = h - PADDING.top - PADDING.bottom;
+  const toCanvasX = (v) => leftPad + (v / maxX) * plotW;
+  const toCanvasY = (v) => PADDING.top + plotH - (v / maxY) * plotH;
+
+  // Grid + tick labels
+  ctx.strokeStyle = "#efefef";
+  ctx.lineWidth = 1;
+  ctx.fillStyle = "#aaa";
+
+  ctx.textAlign = "center";
+  ctx.textBaseline = "top";
+  for (let v = 0; v <= maxX + xStep * 0.01; v += xStep) {
+    const cx = toCanvasX(v);
+    if (cx > leftPad + plotW + 1) break;
+    ctx.beginPath(); ctx.moveTo(cx, PADDING.top); ctx.lineTo(cx, PADDING.top + plotH); ctx.stroke();
+    ctx.fillText(Math.round(v), cx, PADDING.top + plotH + 6);
+  }
+
+  ctx.textAlign = "right";
+  ctx.textBaseline = "middle";
+  for (let v = 0; v <= maxY + yStep * 0.01; v += yStep) {
+    const cy = toCanvasY(v);
+    if (cy < PADDING.top - 1) break;
+    ctx.beginPath(); ctx.moveTo(leftPad, cy); ctx.lineTo(leftPad + plotW, cy); ctx.stroke();
+    ctx.fillText(+v.toFixed(1), leftPad - 8, cy);
+  }
+
+  // Axis labels
+  ctx.fillStyle = "#666";
+  ctx.font = "bold 11px sans-serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "bottom";
+  ctx.fillText("Statements", leftPad + plotW / 2, h - 4);
+
+  ctx.save();
+  ctx.translate(13, PADDING.top + plotH / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.textBaseline = "top";
+  ctx.fillText("Computational Weight", 0, 0);
+  ctx.restore();
+
+  // Score = 0.5 diagonal: y = 0.5 * x
+  ctx.save();
+  ctx.setLineDash([5, 4]);
+  ctx.strokeStyle = "#d8d8d8";
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  const diagonalEndX = Math.min(maxX, maxY / 0.5);
+  ctx.moveTo(toCanvasX(0), toCanvasY(0));
+  ctx.lineTo(toCanvasX(diagonalEndX), toCanvasY(0.5 * diagonalEndX));
+  ctx.stroke();
+  ctx.restore();
+
+  // Plot border
+  ctx.strokeStyle = "#e0e0e0";
+  ctx.lineWidth = 1;
+  ctx.strokeRect(leftPad, PADDING.top, plotW, plotH);
+
+  // Dots — draw all non-hovered, then hovered on top
+  for (let i = 0; i < points.length; i++) {
+    if (i === hoveredIdx) continue;
+    const p = points[i];
+    const cx = toCanvasX(p.x);
+    const cy = toCanvasY(p.y);
+    if (cx < leftPad - 1 || cx > leftPad + plotW + 1 ||
+        cy < PADDING.top - 1 || cy > PADDING.top + plotH + 1) continue;
+    ctx.beginPath();
+    ctx.arc(cx, cy, p.radius, 0, Math.PI * 2);
+    ctx.fillStyle = p.colorFaded;
+    ctx.fill();
+  }
+  if (hoveredIdx >= 0 && hoveredIdx < points.length) {
+    const p = points[hoveredIdx];
+    const cx = toCanvasX(p.x);
+    const cy = toCanvasY(p.y);
+    ctx.beginPath();
+    ctx.arc(cx, cy, p.radius + 2.5, 0, Math.PI * 2);
+    ctx.fillStyle = p.color;
+    ctx.fill();
+    ctx.strokeStyle = "#fff";
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+  }
+
+  // Labels for _all view (repo names next to dots)
+  if (isAllView) {
+    ctx.font = "bold 11px sans-serif";
+    ctx.textBaseline = "middle";
+    ctx.textAlign = "left";
+    for (const p of points) {
+      ctx.fillStyle = p.color;
+      ctx.fillText(p.name, toCanvasX(p.x) + p.radius + 5, toCanvasY(p.y));
+    }
+  }
+
+  plotState = { toCanvasX, toCanvasY };
+}
+
+// ---------------------------------------------------------------------------
+// Tooltip
+// ---------------------------------------------------------------------------
+
+function fmt(label, value, width = 18) {
+  return label.padEnd(width) + value;
+}
+
+canvas.addEventListener("mousemove", (e) => {
+  if (!points || !plotState) return;
+  const rect = canvas.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+
+  const BASE_THRESHOLD = 22;
+  let bestDist = BASE_THRESHOLD * BASE_THRESHOLD;
+  let bestIdx = -1;
+  for (let i = 0; i < points.length; i++) {
+    const p = points[i];
+    const cx = plotState.toCanvasX(p.x);
+    const cy = plotState.toCanvasY(p.y);
+    const d2 = (mx - cx) ** 2 + (my - cy) ** 2;
+    const threshold = Math.max(BASE_THRESHOLD, p.radius + 4);
+    if (d2 < threshold * threshold && d2 < bestDist) { bestDist = d2; bestIdx = i; }
+  }
+
+  if (bestIdx !== hoveredIdx) { hoveredIdx = bestIdx; draw(); }
+
+  if (bestIdx >= 0) {
+    const p = points[bestIdx];
+    const m = p.metrics;
+    const score = p.x > 0 ? (p.y / p.x).toFixed(3) : "\u2014";
+
+    const lines = [
+      ...(isAllView ? [fmt("Functions", m.function_count)] : []),
+      fmt("Score", score),
+      fmt("Statements", m.statement_count),
+      fmt("Comp. weight", p.y.toFixed(2)),
+      "\u2500".repeat(24),
+      fmt("Math ops",        m.math_ops),
+      fmt("Bitwise ops",     m.bitwise_ops),
+      fmt("Logical ops",     m.logical_ops),
+      fmt("Comparisons",     m.comparisons),
+      fmt("Conditionals",    m.conditionals),
+      fmt("Calls",           m.calls),
+      fmt("Assertions",      m.assertions),
+      fmt("Exc. handlers",   m.exception_handlers),
+    ];
+
+    tooltipEl.innerHTML =
+      `<span class="tt-name">${p.name}</span>` +
+      `<hr class="tt-sep">` +
+      lines.join("\n");
+    tooltipEl.style.display = "block";
+
+    const container = chartWrap.getBoundingClientRect();
+    const ttW = tooltipEl.offsetWidth;
+    const ttH = tooltipEl.offsetHeight;
+    const cx = e.clientX - container.left;
+    const cy = e.clientY - container.top;
+    const GAP = 12;
+    let tx = cx + GAP;
+    if (tx + ttW > container.width - 4) tx = cx - ttW - GAP;
+    let ty = cy - ttH - GAP;
+    if (ty < 4) ty = cy + GAP;
+    tx = Math.max(4, Math.min(tx, container.width  - ttW - 4));
+    ty = Math.max(4, Math.min(ty, container.height - ttH - 4));
+    tooltipEl.style.left = tx + "px";
+    tooltipEl.style.top  = ty + "px";
+  } else {
+    tooltipEl.style.display = "none";
+  }
+});
+
+canvas.addEventListener("mouseleave", () => {
+  if (hoveredIdx >= 0) { hoveredIdx = -1; draw(); }
+  tooltipEl.style.display = "none";
+});
+
+// ---------------------------------------------------------------------------
+// Init
+// ---------------------------------------------------------------------------
+
+window.addEventListener("resize", draw);
+descriptionEl.textContent = DESCRIPTION_FUNCTIONS;
+loadIndex();
+</script>
+</body>
+</html>

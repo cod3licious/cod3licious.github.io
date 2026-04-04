@@ -316,7 +316,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">January 18, 2026</p>
+      <p class="date-modified">April 4, 2026</p>
     </div>
   </div>
     
@@ -413,7 +413,7 @@ Think about the data each experiment run will generate and how you’ll process 
 </section>
 <section id="state-flow" class="level3">
 <h3 class="anchored" data-anchor-id="state-flow">State &amp; Flow</h3>
-<p>Code, at its core, is about <strong>transforming inputs into outputs</strong> <span class="citation" data-cites="thomas2019pragmatic">[<a href="references.html#ref-thomas2019pragmatic" role="doc-biblioref">10</a>]</span>. For example, a script could contain the steps needed to turn the data read from a spreadsheet (input) into a result plot shown to the user (output).</p>
+<p>Programming, at its core, is about <strong>transforming inputs into outputs</strong> <span class="citation" data-cites="thomas2019pragmatic">[<a href="references.html#ref-thomas2019pragmatic" role="doc-biblioref">10</a>]</span>. For example, a script could contain the steps needed to turn the data read from a spreadsheet (input) into a result plot shown to the user (output).</p>
 <p>To drive this transformation process, the code defines a sequence of operations (e.g., adding or multiplying values), conditional statements (e.g., <code>if/else</code>), and loops (e.g., <code>for</code> and <code>while</code>)—collectively known as an algorithm or <strong>control flow</strong>.<br>
 As these instructions are executed, both the inputs and the intermediate results are stored in variables, which represent the current <strong>state</strong> of the program.</p>
 <section id="data-structures" class="level4">
@@ -462,6 +462,7 @@ As these instructions are executed, both the inputs and the intermediate results
 <span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
 <span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>   new_person <span class="op">=</span> Person(<span class="st">"Jane"</span>, <span class="st">"Doe"</span>, date(<span class="dv">1988</span>, <span class="dv">5</span>, <span class="dv">20</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This level of control also makes classes a natural choice when an object has <strong>distinct states with transitions that must be enforced</strong>—in other words, when it acts as a <strong>state machine</strong>. For example, a machine learning model transitions from <em>untrained</em> to <em>trained</em> when its parameters are fitted on a dataset, and only a trained model should be allowed to make predictions for new data points. A class can enforce this by tracking the current state internally and raising an error on illegal transitions, something a plain dictionary or a collection of loose functions cannot do.</p>
 </section>
 <section id="step-by-step-from-output-to-input" class="level4">
 <h4 class="anchored" data-anchor-id="step-by-step-from-output-to-input">Step by Step: From Output to Input</h4>
@@ -526,7 +527,7 @@ Figure&nbsp;4.4: Variables (state) created in intermediate steps as a script tra
 <div class="callout-body-container callout-body">
 <p><strong>Some steps depend on others</strong> (e.g., we must fit our model before making predictions), but others can be performed in any order. Optimizing their sequence can <strong>improve performance and efficiency</strong>.</p>
 <p>For example, if you’re baking bread, you wouldn’t preheat the oven hours before the dough has risen—that would waste energy. Similarly, if you’re processing a large dataset, where you need to perform an expensive computation on each item but only a specific subset of these items is included in the final results, then it may be more efficient to filter the items first so you only compute values for the necessary items:</p>
-<div id="fig-step-order" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-pos="H" data-fig-align="center">
+<div id="fig-step-order" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" data-fig-pos="H">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-step-order-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../images/03_code/order_of_steps.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%" data-fig-pos="H">
@@ -721,7 +722,7 @@ Figure&nbsp;4.12: In accordance with the <a href="https://en.wikipedia.org/wiki/
 <li>A system with <strong>two massive 500-line functions</strong> has low global complexity (only two things to keep track of) but high local complexity (each function is overwhelming to understand).</li>
 <li>A system with <strong>500 tiny 2-line functions</strong> has low local complexity (each function is simple) but high global complexity (understanding how they interact becomes difficult).</li>
 </ul>
-<p>What constitutes a <strong>“right-sized” unit</strong>—small enough to be understandable, yet large enough to avoid excessive fragmentation—will depend on the context and your personal preferences (I usually aim for around 5-15 lines of code, but more complicated algorithms may also justify longer functions).</p>
+<p>What constitutes a <strong>“right-sized” unit</strong>—small enough to be understandable, yet large enough to avoid excessive fragmentation—will depend on the context and your personal preferences (I usually aim for around 5-15 lines of code, but more complicated algorithms may also justify longer functions). More important than the number of lines, however, is that each unit has a <strong>clear, self-contained responsibility</strong>.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Cohesive units have a single responsibility">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -904,6 +905,19 @@ Figure&nbsp;4.13: Complicated systems in software design often follow a hierarch
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> <span class="st">"some test data"</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> pure_function(data)</span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> result <span class="op">==</span> <span class="st">"some test result"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-note callout-titled" title="Command-query separation">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Command-query separation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A related design heuristic is <strong>command-query separation</strong>: functions that <em>return information</em> (queries) should not <em>change state</em>, and functions that <em>change state</em> (commands) should do minimal computation. Pure functions are natural queries—they observe data and return a result without side effects. Impure functions that write to files, databases, or external services are commands. Keeping these roles strictly separate makes code easier to reason about: you can call a query as often as you like without worrying about side effects, and commands become simpler when they don’t also contain complex logic.</p>
+</div>
+</div>
 <section id="dependency-injection-for-flexibility" class="level5">
 <h5 class="anchored" data-anchor-id="dependency-injection-for-flexibility">Dependency Injection for Flexibility</h5>
 <p>To further decouple your code, use <strong>dependency injection</strong> <span class="citation" data-cites="percival2020architecture">[<a href="references.html#ref-percival2020architecture" role="doc-biblioref">8</a>]</span>: instead of hardcoding dependencies (e.g., file operations, database access), pass them as arguments. This allows functions to remain independent of specific implementations.</p>
@@ -1002,7 +1016,7 @@ Figure&nbsp;4.14: The main function (<code>do_something</code>) can be invoked t
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>If multiple functions need to update the same set of variables, consider <strong>grouping them into a class</strong> instead of passing the same arguments repeatedly or relying on globals. A class can store shared state in attributes, accessed via <code>self</code>.</p>
+<p>If multiple functions need to update the same set of variables, consider <strong>grouping them into a class</strong> instead of relying on globals. A class can store shared state in attributes, accessed via <code>self</code>, which is especially important if this <strong>shared state should change over time through a defined set of operations</strong> (like a state machine), where the class can enforce valid transitions and keep the state consistent.</p>
 </div>
 </div>
 </section>

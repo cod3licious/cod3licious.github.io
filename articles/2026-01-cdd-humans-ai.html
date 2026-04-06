@@ -156,7 +156,6 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#implementing-with-ai" id="toc-implementing-with-ai" class="nav-link" data-scroll-target="#implementing-with-ai">Implementing with AI</a>
   <ul class="collapse">
   <li><a href="#up-front-decisions" id="toc-up-front-decisions" class="nav-link" data-scroll-target="#up-front-decisions">Up-front Decisions</a></li>
-  <li><a href="#partitioning-the-work" id="toc-partitioning-the-work" class="nav-link" data-scroll-target="#partitioning-the-work">Partitioning the Work</a></li>
   <li><a href="#coding" id="toc-coding" class="nav-link" data-scroll-target="#coding">Coding</a></li>
   </ul></li>
   <li><a href="#the-result" id="toc-the-result" class="nav-link" data-scroll-target="#the-result">The Result</a>
@@ -196,7 +195,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">March 28, 2026</p>
+      <p class="date-modified">April 6, 2026</p>
     </div>
   </div>
     
@@ -324,12 +323,12 @@ Figure&nbsp;4: <strong>Process optimization using machine learning (ML) predicti
 <section id="the-what" class="level3">
 <h3 class="anchored" data-anchor-id="the-what">The What</h3>
 <p>In the next step, we need to examine <strong>what our implementation should look like to users</strong>. This typically means creating wireframes and <strong>user interface mockups</strong>, and—ideally—<strong>testing them with potential users</strong> to see where they struggle. These mockups make assumptions about user workflows explicit and often expose misunderstandings about the problem itself.</p>
-<p>I often start with simple pencil-and-paper sketches, but tools like <a href="https://stitch.withgoogle.com/">Google’s Stitch</a> can generate polished mockups in seconds using AI. That said, input from a UX designer is invaluable here. And when designs already exist, it’s worth understanding why they make sense and how exactly they address user needs.</p>
+<p>While tools like <a href="https://stitch.withgoogle.com/">Google’s Stitch</a> can generate polished mockups in seconds using AI, personally I prefer simple pencil-and-paper sketches (which, it turns out, AI coding assistants can also interpret surprisingly well). That said, input from a UX designer is invaluable here. And when designs already exist, it’s worth understanding why they make sense and how exactly they address user needs.</p>
 <details>
 <summary>
 <span class="summary-heading">Predictive Quality Example</span>
 </summary>
-<p>The software we’re building is primarily a data product. At its core is an ML model acting as a soft sensor for product quality. However, reliable predictions alone aren’t sufficient—they must be presented to the production lead in actionable ways through effective data visualizations. This requires understanding what questions production leads need to answer and what decisions they must make. Key use cases our software must support include:</p>
+<p>The envisioned predictive quality software is primarily a data product. At its core is an ML model acting as a soft sensor for product quality. However, reliable predictions alone aren’t sufficient—they must be presented to the production lead in actionable ways through effective data visualizations. This requires understanding what questions production leads need to answer and what decisions they must make. Key use case scenarios our software should support include:</p>
 <ul>
 <li>Monitoring quality (actual when available, otherwise predicted), throughput, and costs over time</li>
 <li>Reviewing recommended setpoints for maintaining target quality and tracking adherence</li>
@@ -343,21 +342,21 @@ Each of these use cases translates into one or more screens. For each screen, I 
 </section>
 <section id="the-how" class="level3">
 <h3 class="anchored" data-anchor-id="the-how">The How</h3>
-<p>Finally, we need to ponder <strong>how we could best implement this solution</strong>. This includes designing interfaces, data structures, and flows. Specifically, this means defining the <strong>inputs and outputs of major endpoints or scripts</strong> and outlining the <strong>database schema</strong>. If possible, these sketches should then be discussed with a more experienced software engineer or architect.</p>
-<p>I usually begin by identifying the endpoints required to support the user experience, based on the data needs revealed by each screen’s mockup (i.e., any functionality triggered through a user action). Next, I determine which additional processes are needed to support them, such as batch jobs for data processing (often functionality triggered through time-based events, e.g., when a new measurement comes in every 10 minutes). For each relevant <strong>interface</strong>, I note down:</p>
+<p>Finally, we need to ponder <strong>how we could best implement this solution</strong>. This includes designing interfaces, data structures, and flows. Specifically, this means defining the <strong>inputs and outputs of major endpoints or scripts</strong> and outlining the <strong>database schema</strong>. If possible, these sketches should then be discussed with a more experienced software engineer or architect to identify potential issues before they are implemented.</p>
+<p>I usually begin by identifying the API endpoints required to support the user experience (outlined in the previous step), based on the data needs revealed by each screen’s mockup (i.e., any functionality triggered through a user action, like navigating to a page). Next, I determine which additional processes are needed to support them, such as batch jobs for data processing (often functionality triggered through time-based events, e.g., when a new measurement comes in every 10 minutes). For each relevant <strong>interface</strong>, I note down:</p>
 <pre><code>- module or file path
 - function or class name and possibly endpoint route
 - purpose (high-level description of the provided functionality, if not obvious from the name)
 - input arguments &amp; return values (name, type, brief description)
 - pseudocode of the implementation (for more complex control flows, e.g., edge case handling, invariants, and side effects)</code></pre>
 <p>To get a better idea of what the resulting software design would look like, I use my custom-built tool <a href="https://franziskahorn.de/demo_archgraph/">ArchGraph</a> to turn the plain-text description of my code-to-be into an interactive visualization of the submodules and their dependencies.</p>
-<p>To define <strong>database schemas</strong>, you can use <a href="https://www.drawdb.app/">drawDB</a>. It lets you model the schema visually and export the corresponding SQL, which is excellent input for an AI when generating ORMs or other database-related code.</p>
+<p>From the inputs and outputs of the main endpoints and scripts, I then derive <strong>what data needs to be persisted</strong>. When defining the <strong>database schema</strong>, I aim to balance normalization (avoiding redundant entries through related tables with foreign keys) against query simplicity (avoiding excessive joins and complicated subqueries). A nice tool for this is <a href="https://www.drawdb.app/">drawDB</a>, which lets you model the schema visually and export the corresponding SQL, which is excellent input for an AI when generating ORMs or other database-related code.</p>
 <details>
 <summary>
 <span class="summary-heading">Predictive Quality Example</span>
 </summary>
 <p>Based on the screens and their data needs identified in the previous step, most required endpoints are already clear. Additionally, we need some batch jobs: regular scripts that handle data cleaning and retrain prediction models weekly on newly collected data. Detailed descriptions of these endpoints and scripts can be found on GitHub <em>(TODO: link)</em>.</p>
-Finally, we need to determine how data for our application, including trained models, should be structured and stored. Here, I aim to balance normalization (avoiding redundant entries through related tables with foreign keys) against query simplicity (avoiding excessive joins across multiple tables and complicated subqueries). The database schema I came up with for this software is shown in Figure <em>TODO</em>.
+Finally, we need to determine how data for our application, including trained models, should be structured and stored. The database schema I came up with for this software is shown in Figure <em>TODO</em>.
 </details>
 <div class="custom-gray-block">
 <p>At this stage, our results are independent of any specific programming language or technology choices. That makes them cheap in the sense that <strong>no hard-to-reverse decisions have been made yet</strong>. Which also means now is a good opportunity—if you haven’t already—to share your idea and sketches with others (human and/or AI) and <strong>gather feedback</strong> before committing to an implementation built on a potentially flawed design.</p>
@@ -421,7 +420,7 @@ Figure&nbsp;5: How Claude helped me pick a frontend framework.
 <p>For example, my <code>AGENTS.md</code> file for this project <em>(TODO: add link)</em> includes</p>
 <ul>
 <li>a project overview derived from the CDD “why” sketches</li>
-<li>a description of the project structure (software architecture and how it’s reflected in the directory organization) and used technologies and frameworks (incl.&nbsp;specific versions where necessary)</li>
+<li>a description of the project structure (software architecture and how it’s reflected in the directory organization) and which technologies and frameworks are used (incl.&nbsp;specific versions where necessary)</li>
 <li>style guidelines reflecting <a href="https://franziskahorn.de/rsebook/03_state_flow_how#good-code">what I consider good code</a></li>
 <li>instructions how the agent should interact with the codebase (e.g., using the <code>ty</code> type checker instead of the former default <code>mypy</code> for Python—another example where <strong>specific hints are necessary when your project setup deviates from the mainstream conventions the AI encountered in its training data</strong>)</li>
 <li>a checklist outlining the desired agent workflow (e.g., ask questions if anything is unclear, write tests before the implementation, make sure type checker, linter, and all tests pass)</li>
@@ -429,23 +428,16 @@ Figure&nbsp;5: How Claude helped me pick a frontend framework.
 <p>However, this is very much a living document—whenever the AI does something stupid, I’ll revise the instructions to improve the likelihood of better results in future runs.</p>
 </section>
 </section>
-<section id="partitioning-the-work" class="level3">
-<h3 class="anchored" data-anchor-id="partitioning-the-work">Partitioning the Work</h3>
-<p>AI context windows are still limited, so dumping all sketches into a single chat at once won’t get you a working system. But AI can help you break down the work into individual tasks and generate prompts for each step.</p>
-<p>To ensure your sketches and instructions are complete, first ask the AI whether anything about your project vision is ambiguous or unclear, or whether the information provided would be sufficient for an experienced engineer to begin implementation. After any potential revisions, I then ask the AI to decompose the work into tasks screen by screen, starting with the database schema and an initial set of endpoints, then adding the corresponding frontend components, and continuing this pattern until all features are covered.</p>
-<p><em>TODO: add task decomposition from AI</em></p>
-</section>
 <section id="coding" class="level3">
 <h3 class="anchored" data-anchor-id="coding">Coding</h3>
 <p>Now for the implementation itself, my AI-assisted coding setup is actually really basic. I’m not (yet 😉) running a swarm of sub-agents overnight to parallelize tasks, review pull requests, and hand me a finished app the next morning. Partly that’s because I still have enough trust issues and would rather supervise the development step by step. But if we’re being honest, it’s also because I haven’t yet had the patience to dive this deep into the fast-moving ecosystem of AI agents and tooling (how many VS Code clones with AI integration do we have now?!) and prefer to maintain a reasonably predictable workflow.</p>
 <p>So what I actually use is the <a href="https://zed.dev/"><strong>Zed IDE</strong></a>, built from the start with AI-assisted coding in mind and driving recent standards like the agent client protocol, together with <strong>Claude Agent</strong>. I use Claude models from an IDE rather than as a CLI tool, because I really appreciate a thoughtful GUI, for example, to review the agent’s code changes. I selected Claude based on some preliminary experiments comparing different AI models and because Anthropic has set the standard for innovation in coding agents, while other companies mainly scrambled to keep up.</p>
 <p><em>TODO: add screenshot of IDE</em></p>
 <p>After all the preparations to gain clarity on what we want to build, implementing the system is now fairly straightforward. Or as Bent Flyvbjerg argues in <em>How Big Things Get Done</em>: a solid, well-thought-out plan gets you halfway to smooth execution and delivery.</p>
-<p>Essentially, I feed the individual task prompts to the AI one by one, together with the general guidelines captured in <code>AGENTS.md</code>, while verifying after each step that the results match my expectations. Along the way, I follow some best practices:</p>
+<p>Essentially, I just point the AI at my sketch documents and ask it to <strong>draft an implementation plan</strong>, presenting trade-offs for different options and asking clarifying questions. After potentially revising this plan together, I let it execute the steps to implement the project. Along the way, I follow some best practices:</p>
 <ul>
-<li><strong>Ask for a plan first.</strong> At the start of every new task, I ask the AI “You need to implement X—how would you do that?” Ideally, the agent then provides several options with trade-offs and step-by-step approaches. If one resonates, I continue with “now implement option Y.”</li>
-<li><strong>Switch threads regularly.</strong> To avoid “context rot”—where results deteriorate as the context window fills and earlier instructions get compressed or forgotten—I start a fresh thread for each new task.</li>
-<li><strong>Close the feedback loop.</strong> Like human developers, agents often don’t produce perfect code on the first try. I enable the agent to use build tools, linters, and a thorough test suite (by asking it to write tests first when implementing new tasks) so it can identify failures and self-correct before declaring a task done. Additionally, you should instruct the agent at the end of every task to critique its own work (“What’s missing so a senior developer could be truly proud of this implementation?” or “Based on everything you know now, how could this implementation be simplified?”) to squeeze out further improvements.</li>
+<li><strong>Switch threads regularly.</strong> To avoid “context rot”, where results deteriorate as the context window fills and earlier instructions get compressed or forgotten, I start a fresh thread for each new task. This also helps conserve tokens, since longer threads mean more context is resent with every prompt, which can quickly eat through your usage limit.</li>
+<li><strong>Close the feedback loop.</strong> Like human developers, agents often don’t produce perfect code on the first try. I enable the agent to use build tools, linters, and a thorough test suite (by asking it to write tests first when implementing new features) so it can identify failures and self-correct before declaring a task done. Additionally, you should instruct the agent at the end of every task to critique its own work (“What’s missing so a senior developer could be truly proud of this implementation?” or “Based on everything you know now, how could this implementation be simplified?”) to squeeze out further improvements.</li>
 <li><strong>Maintain modular architecture.</strong> As the codebase grows, good modularity ensures the agent knows where to find relevant files without polluting its context window with irrelevant code.</li>
 </ul>
 <p>Even with solid instructions, the implementation process remains <strong>iterative</strong>. Sketches inevitably contain gaps that only surface during implementation and <strong>you only <em>really</em> know what you actually wanted once you see the working software and can interact with its features</strong>—agile is not dead. In principle, you could then go back, update the sketch documents, and generate a new prompt from the diff. In practice, I usually find it faster to ask the AI to fix the issue directly and archive the sketches once they’ve been implemented.</p>
@@ -476,7 +468,7 @@ Figure&nbsp;5: How Claude helped me pick a frontend framework.
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>This an additional prompt that is automatically injected at the start of every conversation, before the actual user prompt. Depending on how you use an AI, this can be set in personal preferences (for web interfaces) or in a conventions file such as an <code>AGENTS.md</code>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>This is an additional prompt that is automatically injected at the start of every conversation, before the actual user prompt. Depending on how you use the AI, this can be set in personal preferences (for web interfaces) or in a conventions file such as an <code>AGENTS.md</code>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>At the time of writing, <code>AGENTS.md</code> is unfortunately not yet a universally accepted standard across IDEs and coding agents, which is problematic when collaborating with people using different setups. In my case, I work around this by referencing <code>@AGENTS.md</code> from my <code>CLAUDE.md</code> file so Claude Code reliably picks up the instructions. Ideally, this won’t be necessary in the future.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->

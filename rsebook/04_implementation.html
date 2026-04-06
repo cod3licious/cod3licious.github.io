@@ -309,7 +309,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">December 23, 2025</p>
+      <p class="date-modified">April 6, 2026</p>
     </div>
   </div>
     
@@ -568,19 +568,6 @@ Go through your code line by line and consider <strong>what is true at each step
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> add(<span class="dv">5</span>, <span class="op">-</span><span class="dv">6</span>) <span class="op">==</span> <span class="op">-</span><span class="dv">1</span>, <span class="st">"5 - 6 should equal -1"</span></span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> add(<span class="op">-</span><span class="dv">2</span>, <span class="fl">10.6</span>) <span class="op">==</span> <span class="fl">8.6</span>, <span class="st">"-2 + 10.6 should equal 8.6"</span></span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> add(<span class="dv">0</span>, <span class="dv">0</span>) <span class="op">==</span> <span class="dv">0</span>, <span class="st">"0 + 0 should equal 0"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Testing in Python with `pytest`">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Testing in Python with <code>pytest</code>
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Consider using the <a href="https://docs.pytest.org/en/stable/"><code>pytest</code></a> framework for your Python tests. Organize all your test scripts in a dedicated <code>tests/</code> folder to keep them separate from the main source code.</p>
-</div>
-</div>
 <p>As discussed in <a href="03_state_flow_how.html" class="quarto-xref"><span>Chapter 4</span></a>, <strong>pure functions</strong>—those without side effects like reading or writing external files—are especially <strong>easy to test</strong> because you can directly supply the necessary inputs. Placing your main logic into pure functions therefore simplifies testing the critical parts of your code. For impure functions, such as those interacting with databases or APIs, you can use techniques like <strong>mocking</strong> to simulate external resources, ideally combined with <strong>dependency injection</strong>.</p>
 <p>When designing your tests, focus on <strong>edge cases</strong>—unusual or extreme scenarios like values outside the normal range or invalid inputs (e.g., dividing by zero or passing an empty list). The more thorough your tests, the more confident you can be in your code. Each time you make significant changes, run all your tests to ensure the code still behaves as expected.</p>
 <p>Some developers even adopt <strong>Test-Driven Development (TDD)</strong>, where they write tests before the actual code. The process begins with writing tests that fail (or don’t even compile), then creating the code to make them pass. TDD can be highly motivating as it provides clear goals, but it requires discipline and may not always be practical in the early stages of development when function definitions are still evolving.</p>
@@ -602,6 +589,19 @@ Go through your code line by line and consider <strong>what is true at each step
 <li><strong>Manual testing:</strong> Identify unexpected behavior or overlooked edge cases. <strong><em>Whenever a bug is found, create an automated test to reproduce it and prevent regression.</em></strong></li>
 <li><strong>User testing:</strong> Evaluate the user interface (UI) with real users to ensure clarity and usability. UX designers often perform these tests using design mockups before coding begins.</li>
 </ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Testing in Python with `pytest`">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Testing in Python with <code>pytest</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Consider using the <a href="https://docs.pytest.org/en/stable/"><code>pytest</code></a> framework for your Python tests. <code>pytest</code> automatically discovers test files based on naming patterns (e.g., <code>test_*.py</code>), so you’re free to organize them however you like. Many projects collect all tests in a dedicated <code>tests/</code> folder, which works well. Another option is to place unit tests right next to the code they test, so that things that change together stay close together. Integration tests, which span multiple modules, typically still live in a separate <code>tests/</code> folder.</p>
 </div>
 </div>
 </section>

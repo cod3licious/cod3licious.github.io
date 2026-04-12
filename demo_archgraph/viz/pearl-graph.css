@@ -1,0 +1,127 @@
+/* ── Pearl graph layout ── */
+.pearl-graph {
+  display: flex;
+  min-height: 100%;
+  position: relative;
+}
+
+.pearl-tree {
+  flex-shrink: 0;
+  padding: 20px 0 20px 16px;
+  user-select: none;
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  background: linear-gradient(to right, rgba(245,245,245,0.7) 60%, transparent);
+  padding-right: 24px;
+}
+
+.pearl-canvas {
+  flex: 1;
+  position: relative;
+  min-width: 200px;
+  z-index: 1;
+}
+
+.pearl-canvas svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* ── Tree rows ── */
+.pearl-row {
+  display: flex;
+  align-items: center;
+  height: 28px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.pearl-row:hover .pearl-label { text-decoration: underline; }
+
+.pearl-row.dimmed { opacity: 0.2; }
+.pearl-row.focused { opacity: 1; }
+
+.pearl-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  font-size: 10px;
+  color: #666;
+  flex-shrink: 0;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.pearl-toggle:hover { background: rgba(0,0,0,0.08); }
+
+.pearl-toggle.placeholder {
+  visibility: hidden;
+}
+
+.pearl-label {
+  font-size: 12px;
+  color: #333;
+  margin-left: 4px;
+  transition: opacity 0.2s, color 0.2s, font-weight 0.1s;
+}
+
+.pearl-label.level-module {
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.pearl-label.level-submodule {
+  font-weight: 600;
+}
+
+.pearl-label.level-unit {
+  font-weight: 400;
+  font-size: 11px;
+  color: #555;
+}
+
+.pearl-label.is-selected { font-weight: 700; font-style: italic; text-decoration: underline; }
+.pearl-label.is-callee   { font-weight: 700; }
+.pearl-label.is-caller   { font-style: italic; }
+
+/* ── Module band backgrounds ── */
+.pearl-band-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.pearl-band {
+  position: absolute;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+}
+
+.pearl-band:nth-child(odd)  { background: rgba(0,0,0,0.03); }
+.pearl-band:nth-child(even) { background: rgba(0,0,0,0.06); }
+
+/* ── SVG arcs ── */
+.pearl-arc {
+  transition: opacity 0.2s;
+  opacity: 0.5;
+}
+
+.pearl-arc.violation { opacity: 0.8; }
+.pearl-arc.dimmed { opacity: 0.03; }
+.pearl-arc.highlighted { opacity: 0.85; }
+
+/* ── Pearl circles ── */
+.pearl-circle {
+  transition: opacity 0.2s;
+}
+
+.pearl-circle.dimmed { opacity: 0.2; }

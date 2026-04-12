@@ -1,0 +1,96 @@
+/* Layer bands */
+.layer-band {
+  position: absolute;
+  border-radius: 4px;
+}
+
+.layer-band:nth-child(odd)  { background: #f0f0f0; }
+.layer-band:nth-child(even) { background: #e6e6e6; }
+
+.layer-label {
+  position: absolute;
+  left: 8px;
+  top: 6px;
+  font-size: 10px;
+  color: #aaa;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Arrows behind symbols, symbols behind boxes */
+#arrow-svg {
+  position: absolute;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+#symbol-svg {
+  position: absolute;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.submodule-box {
+  position: absolute;
+  border-radius: 8px;
+  border: 2px solid rgba(0,0,0,0.18);
+  background: white;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  min-width: 120px;
+  z-index: 3;
+}
+
+.submodule-box:hover { border-color: rgba(0,0,0,0.4); }
+
+.box-title {
+  font-size: 10px;
+  font-weight: 600;
+  color: #444;
+  padding: 3px 7px 2px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 6px 6px 0 0;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
+.box-units {
+  padding: 5px 7px 6px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px 8px;
+}
+
+.unit-name {
+  font-size: 11px;
+  color: #333;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s, font-weight 0.1s, color 0.2s;
+  line-height: 1.6;
+}
+
+.unit-name:hover { text-decoration: underline; }
+
+/* Highlight states */
+.submodule-box.dimmed  { opacity: 0.25; }
+.submodule-box.focused { opacity: 1; }
+.unit-name.dimmed  { opacity: 0.3; color: #999; }
+.submodule-box.is-unit-selected .unit-name.dimmed { opacity: 0.6; color: #999; }
+.unit-name.is-selected { font-weight: 700; font-style: italic; text-decoration: underline; }
+.unit-name.is-callee   { font-weight: 700; }
+.unit-name.is-caller   { font-style: italic; }
+
+path.arrow { transition: opacity 0.2s; opacity: 0; }
+path.arrow.visible       { opacity: 0.55; }
+path.arrow.visible.violation { opacity: 1; }
+path.arrow.dimmed  { opacity: 0; }
+
+.port-symbol { transition: opacity 0.2s; }
+.port-symbol.dimmed { opacity: 0.15; }

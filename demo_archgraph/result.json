@@ -736,7 +736,7 @@
       "name": "get_effective_price",
       "description": "Returns the effective sale price for a product, applying any active promotions. Calls `@catalog.pricing.get_promotions` and `@catalog.inventory.get_stock_level` (to apply low-stock surcharge rules).",
       "dependencies": {
-        "catalog.pricing.get_promotions": true,
+        "catalog.pricing.get_promotions": false,
         "catalog.inventory.get_stock_level": true
       }
     },
@@ -1354,5 +1354,6 @@
         "core.events.publish": true
       }
     }
-  }
+  },
+  "high_level_units_first": false
 }

@@ -35,86 +35,6 @@ body {
   margin: 0 auto;
 }
 
-/* Layer bands */
-.layer-band {
-  position: absolute;
-  left: 0;
-  right: 0;
-}
-
-.layer-band:nth-child(odd)  { background: #f0f0f0; }
-.layer-band:nth-child(even) { background: #e6e6e6; }
-
-.layer-label {
-  position: absolute;
-  left: 8px;
-  top: 6px;
-  font-size: 10px;
-  color: #aaa;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-/* Arrows behind symbols, symbols behind boxes */
-#arrow-svg {
-  position: absolute;
-  top: 0; left: 0;
-  pointer-events: none;
-  z-index: 1;
-}
-
-#symbol-svg {
-  position: absolute;
-  top: 0; left: 0;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.submodule-box {
-  position: absolute;
-  border-radius: 8px;
-  border: 2px solid rgba(0,0,0,0.18);
-  background: white;
-  cursor: pointer;
-  transition: opacity 0.2s;
-  min-width: 120px;
-  z-index: 3;
-}
-
-.submodule-box:hover { border-color: rgba(0,0,0,0.4); }
-
-.box-title {
-  font-size: 10px;
-  font-weight: 600;
-  color: #444;
-  padding: 3px 7px 2px;
-  background: rgba(255,255,255,0.6);
-  border-radius: 6px 6px 0 0;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.box-units {
-  padding: 5px 7px 6px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px 8px;
-}
-
-.unit-name {
-  font-size: 11px;
-  color: #333;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: opacity 0.2s, font-weight 0.1s, color 0.2s;
-  line-height: 1.6;
-}
-
-.unit-name:hover { text-decoration: underline; }
-
 /* ── Resizer ── */
 #resizer {
   width: 5px;
@@ -201,741 +121,113 @@ body {
   border-top: 1px solid #eee;
 }
 
-/* ── Highlight states ── */
-.submodule-box.dimmed  { opacity: 0.25; }
-.submodule-box.focused { opacity: 1; }
-.unit-name.dimmed  { opacity: 0.3; color: #999; }
-.submodule-box.is-unit-selected .unit-name.dimmed { opacity: 0.6; color: #999; }
-.unit-name.is-selected { font-weight: 700; font-style: italic; text-decoration: underline; }
-.unit-name.is-callee   { font-weight: 700; }
-.unit-name.is-caller   { font-style: italic; }
+/* ── View toggle ── */
+.view-toggle {
+  display: flex;
+  gap: 0;
+  margin: 10px 0 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow: hidden;
+}
 
-path.arrow { transition: opacity 0.2s; opacity: 0; }
-path.arrow.visible       { opacity: 0.55; }
-path.arrow.visible.violation { opacity: 1; }
-path.arrow.dimmed  { opacity: 0; }
+.view-toggle button {
+  flex: 1;
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  border: none;
+  background: #f5f5f5;
+  color: #666;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
 
-.port-symbol { transition: opacity 0.2s; }
-.port-symbol.dimmed { opacity: 0.15; }
+.view-toggle button:not(:last-child) {
+  border-right: 1px solid #ccc;
+}
+
+.view-toggle button.active {
+  background: #444;
+  color: #fff;
+}
+
+.view-toggle button:hover:not(.active) {
+  background: #e8e8e8;
+}
 </style>
 </head>
 <body>
 <div id="app">
   <div id="graph-pane">
-    <div id="graph-container">
-      <svg id="arrow-svg"></svg>
-      <svg id="symbol-svg"></svg>
-    </div>
+    <div id="graph-container"></div>
   </div>
   <div id="resizer"></div>
   <div id="detail-pane">
-    <div id="detail-placeholder">
-      <div style="font-size:15px;font-weight:700;color:#333;margin-bottom:6px">ArchGraph</div>
-      <div>This graph shows the layered architecture of a codebase. Layers run top to bottom — higher layers should call into lower ones. Each grey band is a <strong>module</strong>, subdivided into <strong>submodules</strong> (the boxes). Each box lists its <strong>units</strong>: the individual functions or classes.</div>
-
-      <h4>Visual encoding</h4>
-      <div class="legend">
-        <svg width="10" height="10" viewBox="0 0 10 10"><polygon points="5,10 0,0 10,0" fill="#555"/></svg>
-        <span>Outgoing dependency — this submodule calls another</span>
-        <svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" fill="#555"/></svg>
-        <span>Incoming dependency — another submodule calls this one</span>
-        <svg width="18" height="4" viewBox="0 0 18 4"><rect x="2" width="14" height="4" rx="1" fill="#b03a2e"/></svg>
-        <span style="color:#b03a2e">Layer violation — dependency points upward in the hierarchy</span>
-      </div>
-
-      <h4>On click</h4>
-      <div>Click any submodule box or unit name to focus it. Unrelated submodules fade out, and the dependency lines to connected submodules appear. The detail panel on the right shows the description.</div>
-      <div style="margin-top:6px">Within the highlighted submodules, units are styled to show their role:</div>
-      <div class="legend" style="margin-top:6px">
-        <span></span><span><span class="unit-name is-selected">unit_name</span> — the selected unit(s)</span>
-        <span></span><span><span class="unit-name is-callee">unit_name</span> — a dependency (callee)</span>
-        <span></span><span><span class="unit-name is-caller">unit_name</span> — a dependent (caller)</span>
-      </div>
-
-      <div class="cta"><a href="https://github.com/cod3licious/archgraph" target="_blank" style="color:#666;display:inline-flex;align-items:center;gap:5px;text-decoration:none"><svg height="14" width="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/></svg>Create a visualization of your own codebase</a></div>
+    <div style="font-size:18px;font-weight:700;color:#333;margin-bottom:6px">ArchGraph</div>
+    <div style="font-size:11px;color:#888;margin-bottom:4px">Choose a visualization mode:</div>
+    <div class="view-toggle">
+      <button data-view="box" class="active">Boxes</button>
+      <button data-view="pearl">Pearls</button>
     </div>
+    <div id="detail-placeholder"></div>
     <div id="detail-content" style="display:none"></div>
   </div>
 </div>
 
-<script>
-// ─── Constants ───────────────────────────────────────────────────────────────
-const PAD_X = 48, PAD_Y = 40;
-const BOX_GAP_X = 32, BOX_GAP_Y = 28;
-const BOX_MIN_W = 130;
-const UNIT_ROW_H = 20;
-const TITLE_H = 26;
-const BOX_PAD_Y = 10; // top+bottom padding inside box units area
-const COLS_THRESHOLD = 4; // use 2 columns when unit count > this
+<script type="module">
+import { initResizer } from './viz/resizer.js';
+import { placeholderHTML as boxPlaceholder, render as renderBox } from './viz/box-graph.js';
+import { placeholderHTML as pearlPlaceholder, render as renderPearl } from './viz/pearl-graph.js';
 
-const VALID_COLOR     = '#333'; // arrow stroke for valid dependencies
-const VALID_SYM_COLOR = '#555'; // port symbol fill for valid dependencies (slightly lighter)
-const VIOLATION_COLOR = '#b03a2e'; // brick red for dependency violations
+const views = {
+  box:   { placeholder: boxPlaceholder,   render: renderBox },
+  pearl: { placeholder: pearlPlaceholder, render: renderPearl },
+};
 
-const BEZIER_CP_MIN    = 20;   // minimum bezier control-point offset
-const BEZIER_CP_FACTOR = 0.25; // control-point length as fraction of arc distance
-const BEZIER_CP_MAX    = 120;  // maximum bezier control-point offset
+const githubLink = `<div class="cta"><a href="https://github.com/cod3licious/archgraph" target="_blank" style="color:#666;display:inline-flex;align-items:center;gap:5px;text-decoration:none"><svg height="14" width="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/></svg>Create a visualization of your own codebase</a></div>`;
 
-// ─── Fetch & bootstrap ───────────────────────────────────────────────────────
+let currentView = 'box';
+let resultData = null;
+
+function switchView(view) {
+  if (view === currentView && resultData) return;
+  currentView = view;
+
+  // Update toggle buttons
+  for (const btn of document.querySelectorAll('.view-toggle button'))
+    btn.classList.toggle('active', btn.dataset.view === view);
+
+  // Update placeholder
+  document.getElementById('detail-placeholder').innerHTML =
+    views[view].placeholder + githubLink;
+  document.getElementById('detail-content').style.display = 'none';
+  document.getElementById('detail-placeholder').style.display = '';
+
+  // Clean up previous view's event listeners
+  const graphPane = document.getElementById('graph-pane');
+  if (graphPane._viewCleanup) { graphPane._viewCleanup(); graphPane._viewCleanup = null; }
+
+  // Re-render graph
+  document.getElementById('graph-container').innerHTML = '';
+  if (resultData) views[view].render(resultData);
+}
+
+initResizer();
+
+// Wire toggle buttons
+for (const btn of document.querySelectorAll('.view-toggle button'))
+  btn.addEventListener('click', () => switchView(btn.dataset.view));
+
+switchView('box');
+
 fetch('result.json')
   .then(r => { if (!r.ok) throw new Error(r.statusText); return r.json(); })
-  .then(render)
+  .then(data => { resultData = data; views[currentView].render(data); })
   .catch(err => {
     document.getElementById('graph-container').innerHTML =
-      `<p style="padding:24px;color:${VIOLATION_COLOR}">Failed to load result.json: ${err.message}</p>`;
+      `<p style="padding:24px;color:#b03a2e">Failed to load result.json: ${err.message}</p>`;
   });
-
-// ─── Main render ─────────────────────────────────────────────────────────────
-function render(data) {
-  const { layers, submodules, units } = data;
-
-  // 1. Determine ordered list of submodules & layer bands
-  const { allSubmodules, rootBands } = flattenLayers(layers);
-
-  // 2. Compute box sizes
-  const boxSizes = computeBoxSizes(allSubmodules, submodules);
-
-  // 3. Layout: assign (x, y) to each box
-  const layout = computeLayout(layers, allSubmodules, submodules, boxSizes);
-
-  // 4. Total canvas size
-  const totalW = Math.max(...Object.values(layout).map(p => p.x + boxSizes[p.submodule].w)) + PAD_X;
-  const totalH = Math.max(...Object.values(layout).map(p => p.y + boxSizes[p.submodule].h)) + PAD_Y;
-
-  const container = document.getElementById('graph-container');
-  container.style.width  = totalW + 'px';
-  container.style.height = totalH + 'px';
-
-  // 5. Draw layer bands
-  drawBands(container, rootBands, layout, layers, allSubmodules, boxSizes);
-
-  // 6. Draw boxes
-  const boxEls = {};
-  for (const sm of allSubmodules) {
-    const pos = layout[sm];
-    const sz  = boxSizes[sm];
-    const box = drawBox(container, sm, submodules[sm], pos, sz);
-    boxEls[sm] = box;
-  }
-
-  // 7. Draw arrows + port symbols
-  const { arrowEls, portSymbolEls } = drawArrows(submodules, layout, boxSizes, totalW, totalH);
-
-  // 8. Wire interactions
-  wireInteractions(boxEls, arrowEls, portSymbolEls, submodules, units, layout, boxSizes);
-}
-
-// ─── Layer flattening ─────────────────────────────────────────────────────────
-function flattenLayers(layers) {
-  const allSubmodules = [];
-  const rootBands = []; // {modules: string[], submodules: string[]}
-
-  for (const rowModules of layers.root_layers) {
-    const bandSubs = [];
-    for (const mod of rowModules) {
-      if (layers.submodule_layers && layers.submodule_layers[mod]) {
-        const subRows = layers.submodule_layers[mod];
-        for (const subRow of subRows)
-          for (const sm of subRow) { allSubmodules.push(sm); bandSubs.push(sm); }
-      } else {
-        allSubmodules.push(mod);
-        bandSubs.push(mod);
-      }
-    }
-    rootBands.push({ modules: rowModules, submodules: bandSubs });
-  }
-  return { allSubmodules, rootBands };
-}
-
-// ─── Box sizing ───────────────────────────────────────────────────────────────
-function computeBoxSizes(allSubmodules, submodules) {
-  const CHAR_W = 7, COL_GAP = 12, SIDE_PAD = 28;
-  const sizes = {};
-  for (const sm of allSubmodules) {
-    const data  = submodules[sm] || { units: [] };
-    const units = data.units || [];
-    const cols  = units.length > COLS_THRESHOLD ? 2 : 1;
-    const rows  = Math.ceil(units.length / cols);
-    const h = TITLE_H + BOX_PAD_Y + rows * UNIT_ROW_H;
-
-    // Width: sum of max unit-name width per column + gaps + side padding
-    const colWidths = Array.from({ length: cols }, (_, c) => {
-      const colUnits = units.filter((_, i) => i % cols === c);
-      return colUnits.length ? Math.max(...colUnits.map(u => u.length * CHAR_W)) : 0;
-    });
-    const titleW = sm.length * CHAR_W + SIDE_PAD;
-    const colsW  = colWidths.reduce((s, w) => s + w, 0) + (cols - 1) * COL_GAP + SIDE_PAD;
-    const w = Math.max(BOX_MIN_W, titleW, colsW);
-    sizes[sm] = { w, h };
-  }
-  return sizes;
-}
-
-// ─── Layout ───────────────────────────────────────────────────────────────────
-// Returns layout: { [sm]: { x, y, submodule, rowIdx } }
-// rowIdx is a global vertical-row index used to detect same-row pairs for arrows.
-function computeLayout(layers, allSubmodules, submodules, boxSizes) {
-  const layout = {};
-  // bandSms[i] = list of submodule names placed in band i (for centering pass)
-  const bandSms = [];
-  let bandY = PAD_Y;
-  let globalRowIdx = 0;
-
-  for (const rootRow of layers.root_layers) {
-    const moduleCols = rootRow.map(mod =>
-      (layers.submodule_layers && layers.submodule_layers[mod])
-        ? layers.submodule_layers[mod]
-        : [[mod]]
-    );
-
-    const maxSubRows = Math.max(...moduleCols.map(c => c.length));
-
-    const rowHeights = [];
-    for (let r = 0; r < maxSubRows; r++) {
-      let maxH = 0;
-      for (const col of moduleCols) {
-        const subRow = col[r] || [];
-        for (const sm of subRow) maxH = Math.max(maxH, (boxSizes[sm] || {}).h || 0);
-      }
-      rowHeights.push(maxH);
-    }
-
-    const thisBandSms = [];
-    let colX = PAD_X;
-    for (const col of moduleCols) {
-      let colW = 0;
-      for (const subRow of col) {
-        let rowW = subRow.reduce((s, sm) => s + ((boxSizes[sm] || {}).w || 0), 0)
-                 + (subRow.length - 1) * BOX_GAP_X;
-        colW = Math.max(colW, rowW);
-      }
-
-      let subRowY = bandY;
-      for (let r = 0; r < col.length; r++) {
-        const subRow = col[r];
-        const rowW = subRow.reduce((s, sm) => s + ((boxSizes[sm] || {}).w || 0), 0)
-                   + (subRow.length - 1) * BOX_GAP_X;
-        let smX = colX + Math.round((colW - rowW) / 2);
-        for (const sm of subRow) {
-          layout[sm] = { x: smX, y: subRowY, submodule: sm, rowIdx: globalRowIdx + r };
-          thisBandSms.push(sm);
-          smX += (boxSizes[sm] || {}).w + BOX_GAP_X;
-        }
-        subRowY += rowHeights[r] + BOX_GAP_Y;
-      }
-      colX += colW + BOX_GAP_X * 2;
-    }
-
-    bandSms.push(thisBandSms);
-    globalRowIdx += maxSubRows;
-    const bandH = rowHeights.reduce((s, h) => s + h, 0)
-                + (maxSubRows - 1) * BOX_GAP_Y
-                + BOX_PAD_Y * 2;
-    bandY += bandH + BOX_GAP_Y;
-  }
-
-  // Second pass: center each band horizontally around the widest band
-  const totalContentW = Math.max(...Object.values(layout).map(p => p.x + boxSizes[p.submodule].w)) - PAD_X;
-  for (const sms of bandSms) {
-    if (!sms.length) continue;
-    const bandMinX = Math.min(...sms.map(sm => layout[sm].x));
-    const bandMaxX = Math.max(...sms.map(sm => layout[sm].x + boxSizes[sm].w));
-    const bandContentW = bandMaxX - bandMinX;
-    const shift = Math.round((totalContentW - bandContentW) / 2);
-    if (shift > 0) for (const sm of sms) layout[sm].x += shift;
-  }
-
-  return layout;
-}
-
-// ─── Draw layer bands ─────────────────────────────────────────────────────────
-function drawBands(container, rootBands, layout, layers, allSubmodules, boxSizes) {
-  // Compute vertical extents for each band from actual box positions
-  const rootLayerRows = layers.root_layers;
-
-  // Collect ordered submodules per root row
-  for (let ri = 0; ri < rootLayerRows.length; ri++) {
-    const rowModules = rootLayerRows[ri];
-    const bandSubs = [];
-    for (const mod of rowModules) {
-      if (layers.submodule_layers && layers.submodule_layers[mod]) {
-        for (const subRow of layers.submodule_layers[mod])
-          for (const sm of subRow) bandSubs.push(sm);
-      } else {
-        bandSubs.push(mod);
-      }
-    }
-    if (!bandSubs.length) continue;
-
-    const ys = bandSubs.map(sm => layout[sm] ? layout[sm].y : 0);
-    const yBots = bandSubs.map(sm => layout[sm] ? layout[sm].y + (boxSizes[sm] || {h:0}).h : 0);
-    const top    = Math.min(...ys) - BOX_PAD_Y;
-    const bottom = Math.max(...yBots) + BOX_PAD_Y;
-
-    const band = document.createElement('div');
-    band.className = 'layer-band';
-    band.style.top    = top + 'px';
-    band.style.height = (bottom - top) + 'px';
-
-    const label = document.createElement('div');
-    label.className = 'layer-label';
-    label.textContent = rowModules.join(', ');
-    band.appendChild(label);
-
-    container.appendChild(band);
-  }
-}
-
-// ─── Draw a submodule box ─────────────────────────────────────────────────────
-function drawBox(container, sm, data, pos, sz) {
-  const box = document.createElement('div');
-  box.className = 'submodule-box';
-  box.dataset.sm = sm;
-  box.style.left   = pos.x + 'px';
-  box.style.top    = pos.y + 'px';
-  box.style.width  = sz.w + 'px';
-  box.style.height = sz.h + 'px';
-  box.style.backgroundColor = data.color || '#ddd';
-
-  const title = document.createElement('div');
-  title.className = 'box-title';
-  title.textContent = sm;
-  box.appendChild(title);
-
-  const unitsDiv = document.createElement('div');
-  unitsDiv.className = 'box-units';
-  const units = data.units || [];
-  const cols  = units.length > COLS_THRESHOLD ? 2 : 1;
-  unitsDiv.style.gridTemplateColumns = cols === 2 ? '1fr 1fr' : '1fr';
-
-  for (const u of units) {
-    const span = document.createElement('span');
-    span.className = 'unit-name';
-    span.textContent = u;
-    span.dataset.unit = sm + '.' + u;
-    span.dataset.sm   = sm;
-    unitsDiv.appendChild(span);
-  }
-
-  box.appendChild(unitsDiv);
-  container.appendChild(box);
-  return box;
-}
-
-// ─── Arrow drawing ────────────────────────────────────────────────────────────
-function drawArrows(submodules, layout, boxSizes, totalW, totalH) {
-  const svg = document.getElementById('arrow-svg');
-  svg.setAttribute('width',  totalW);
-  svg.setAttribute('height', totalH);
-  const symSvg = document.getElementById('symbol-svg');
-  symSvg.setAttribute('width',  totalW);
-  symSvg.setAttribute('height', totalH);
-
-
-  // Build edge list (only cross-submodule)
-  const edges = []; // { from, to, valid }
-  for (const [from, smData] of Object.entries(submodules)) {
-    for (const [to, valid] of Object.entries(smData.dependencies || {})) {
-      if (from !== to && layout[from] && layout[to])
-        edges.push({ from, to, valid });
-    }
-  }
-
-  // ── Unified port + symbol assignment ────────────────────────────────────────
-  // For each (box, side), collect all connections (outgoing + incoming), sort
-  // them valid-first then by partner center to minimize crossings, space them
-  // evenly centered on the edge. The same positions serve as both the visual
-  // symbols and the arrow endpoints.
-
-  const SYM_R   = 4;  // circle radius / triangle half-size
-  const SYM_GAP = 14; // center-to-center spacing between symbols on same edge
-  const SYM_MARGIN = SYM_R + 4;
-
-  // Returns which box sides a directed edge exits/enters, based on relative row/position.
-  function connectionSides(from, to) {
-    const rf = layout[from].rowIdx, rt = layout[to].rowIdx;
-    if (rf < rt) return { fromSide: 'bottom', toSide: 'top' };
-    if (rf > rt) return { fromSide: 'top',    toSide: 'bottom' };
-    // Same row: route left↔right based on horizontal center positions
-    const cf = layout[from].x + boxSizes[from].w / 2;
-    const ct = layout[to].x   + boxSizes[to].w   / 2;
-    return cf <= ct
-      ? { fromSide: 'right', toSide: 'left' }
-      : { fromSide: 'left',  toSide: 'right' };
-  }
-
-  // Determine which side each connection uses
-  // connSide[sm][side] = [{partner, isOut, valid}, ...]
-  const connSide = {};
-  for (const sm of Object.keys(layout))
-    connSide[sm] = { top: [], bottom: [], left: [], right: [] };
-
-  for (const { from, to, valid } of edges) {
-    const { fromSide, toSide } = connectionSides(from, to);
-    connSide[from][fromSide].push({ partner: to,   isOut: true,  valid });
-    connSide[to][toSide].push(    { partner: from, isOut: false, valid });
-  }
-
-  // portOut[from][to] and portIn[to][from] store {x, y, side} — set below
-  const portOut = {}, portIn = {};
-  for (const sm of Object.keys(layout)) { portOut[sm] = {}; portIn[sm] = {}; }
-
-  // portSymbolEls[sm] = array of SVG elements (symbols drawn at port positions)
-  const portSymbolEls = {};
-
-  for (const sm of Object.keys(layout)) {
-    const syms = [];
-    const pos = layout[sm], sz = boxSizes[sm];
-
-    for (const side of ['top', 'bottom', 'left', 'right']) {
-      // Sort: valid first, then violations; within each group by partner center
-      // to preserve left-right order and minimize crossings.
-      const isHoriz = side === 'top' || side === 'bottom';
-      const partnerCenter = p => isHoriz
-        ? layout[p].x + boxSizes[p].w / 2
-        : layout[p].y + boxSizes[p].h / 2;
-
-      const items = [...connSide[sm][side]].sort((a, b) => {
-        if (a.valid !== b.valid) return a.valid ? -1 : 1;
-        return partnerCenter(a.partner) - partnerCenter(b.partner);
-      });
-      if (!items.length) continue;
-
-      const n = items.length;
-      const totalSpan = (n - 1) * SYM_GAP;
-      const edgeLen = isHoriz ? sz.w : sz.h;
-      const start = Math.max(SYM_MARGIN, (edgeLen - totalSpan) / 2);
-
-      items.forEach(({ partner, isOut, valid }, i) => {
-        const color = valid ? VALID_SYM_COLOR : VIOLATION_COLOR;
-        const t = start + i * SYM_GAP;
-        // Port position: on the box edge (used as arrow endpoint)
-        let x, y;
-        if      (side === 'top')    { x = pos.x + t;    y = pos.y; }
-        else if (side === 'bottom') { x = pos.x + t;    y = pos.y + sz.h; }
-        else if (side === 'left')   { x = pos.x;        y = pos.y + t; }
-        else                        { x = pos.x + sz.w; y = pos.y + t; }
-
-        // Register as port for arrow drawing
-        if (isOut) portOut[sm][partner] = { x, y, side };
-        else       portIn[sm][partner]  = { x, y, side };
-
-        // Draw symbol
-        let el;
-        if (isOut) {
-          let pts;
-          if      (side === 'bottom') pts = `${x},${y+SYM_R*2} ${x-SYM_R},${y} ${x+SYM_R},${y}`;
-          else if (side === 'top')    pts = `${x},${y-SYM_R*2} ${x-SYM_R},${y} ${x+SYM_R},${y}`;
-          else if (side === 'right')  pts = `${x+SYM_R*2},${y} ${x},${y-SYM_R} ${x},${y+SYM_R}`;
-          else                        pts = `${x-SYM_R*2},${y} ${x},${y-SYM_R} ${x},${y+SYM_R}`;
-          el = svgEl('polygon');
-          el.setAttribute('points', pts);
-        } else {
-          el = svgEl('circle');
-          el.setAttribute('cx', x);
-          el.setAttribute('cy', y);
-          el.setAttribute('r', SYM_R);
-        }
-        el.setAttribute('fill', color);
-        el.classList.add('port-symbol');
-        el.dataset.sm = sm;
-        el.dataset.partner = partner;
-        symSvg.appendChild(el);
-        syms.push(el);
-      });
-    }
-    portSymbolEls[sm] = syms;
-  }
-
-  // Draw edges (hidden by default, shown on selection) ───────────────────────
-  // Lines only — the symbols at each end already convey direction.
-  const arrowEls = {};
-  for (const { from, to, valid } of edges) {
-    const p1 = portOut[from][to];
-    const p2 = portIn[to][from];
-    if (!p1 || !p2) continue;
-
-    const path = svgEl('path');
-    path.setAttribute('d', bezierPath(p1, p2));
-    path.setAttribute('fill', 'none');
-    path.setAttribute('stroke', valid ? VALID_COLOR : VIOLATION_COLOR);
-    path.setAttribute('stroke-width', '2');
-    path.classList.add('arrow');
-    if (!valid) path.classList.add('violation');
-    path.dataset.from = from;
-    path.dataset.to   = to;
-    svg.appendChild(path);
-    arrowEls[`${from}->${to}`] = path;
-  }
-
-  return { arrowEls, portSymbolEls };
-}
-
-function svgEl(tag) {
-  return document.createElementNS('http://www.w3.org/2000/svg', tag);
-}
-
-// Cubic bezier between two ports; control-point direction follows the port's side.
-// Both outgoing (p1) and incoming (p2) control points extend outward from the box face.
-function bezierPath(p1, p2) {
-  const dist = Math.sqrt((p2.x - p1.x) ** 2 + (p2.y - p1.y) ** 2);
-  const cp   = Math.min(Math.max(BEZIER_CP_MIN, dist * BEZIER_CP_FACTOR), BEZIER_CP_MAX);
-
-  // Outward tangent vector for a given side
-  const tangent = side => {
-    if (side === 'bottom') return [0,  cp];
-    if (side === 'top')    return [0, -cp];
-    if (side === 'right')  return [ cp, 0];
-    /* left */             return [-cp, 0];
-  };
-
-  const [dx1, dy1] = tangent(p1.side);
-  const [dx2, dy2] = tangent(p2.side); // also outward: cp2 sits outside p2's face
-
-  return `M${p1.x},${p1.y} C${p1.x+dx1},${p1.y+dy1} ${p2.x+dx2},${p2.y+dy2} ${p2.x},${p2.y}`;
-}
-
-// ─── Interactions ─────────────────────────────────────────────────────────────
-function wireInteractions(boxEls, arrowEls, portSymbolEls, submodules, units, layout, boxSizes) {
-  const graphPane = document.getElementById('graph-pane');
-  let selection = null; // { type: 'submodule'|'unit', id }
-
-  const UNIT_CLASSES = ['dimmed', 'is-selected', 'is-callee', 'is-caller'];
-
-  function clearSelection() {
-    selection = null;
-    for (const el of Object.values(boxEls)) {
-      el.classList.remove('dimmed', 'focused', 'is-unit-selected');
-      for (const u of el.querySelectorAll('.unit-name'))
-        u.classList.remove(...UNIT_CLASSES);
-    }
-    for (const el of Object.values(arrowEls))
-      el.classList.remove('dimmed', 'visible');
-    for (const syms of Object.values(portSymbolEls))
-      for (const el of syms) el.classList.remove('dimmed');
-    document.getElementById('detail-placeholder').style.display = '';
-    document.getElementById('detail-content').style.display = 'none';
-  }
-
-  function applyUnitClass(el, cls) {
-    // Priority: is-selected > is-callee > is-caller > dimmed
-    // Once a higher-priority class is set, don't downgrade it.
-    const priority = { 'is-selected': 3, 'is-callee': 2, 'is-caller': 1, 'dimmed': 0 };
-    const current = UNIT_CLASSES.find(c => el.classList.contains(c));
-    if (!current || priority[cls] > priority[current]) {
-      el.classList.remove(...UNIT_CLASSES);
-      el.classList.add(cls);
-    }
-  }
-
-  // Apply dimming/highlighting to all boxes, arrows, and port symbols.
-  // unitClassifier(sm, unitPath) → class to assign to each unit in a focused box.
-  function applyHighlighting(relevant, relevantArrows, unitClassifier) {
-    for (const [sm, el] of Object.entries(boxEls)) {
-      if (relevant.has(sm)) {
-        el.classList.remove('dimmed', 'is-unit-selected');
-        el.classList.add('focused');
-        for (const u of el.querySelectorAll('.unit-name')) {
-          u.classList.remove(...UNIT_CLASSES);
-          applyUnitClass(u, unitClassifier(sm, u.dataset.unit));
-        }
-      } else {
-        el.classList.add('dimmed');
-        el.classList.remove('focused', 'is-unit-selected');
-        for (const u of el.querySelectorAll('.unit-name')) {
-          u.classList.remove(...UNIT_CLASSES);
-          u.classList.add('dimmed');
-        }
-      }
-    }
-    for (const [key, el] of Object.entries(arrowEls)) {
-      if (relevantArrows.has(key)) { el.classList.add('visible'); el.classList.remove('dimmed'); }
-      else { el.classList.remove('visible'); el.classList.add('dimmed'); }
-    }
-    for (const [sm, syms] of Object.entries(portSymbolEls))
-      for (const el of syms) {
-        const p = el.dataset.partner;
-        if (relevantArrows.has(`${sm}->${p}`) || relevantArrows.has(`${p}->${sm}`))
-          el.classList.remove('dimmed');
-        else el.classList.add('dimmed');
-      }
-  }
-
-  function selectSubmodule(sm) {
-    selection = { type: 'submodule', id: sm };
-
-    // Outgoing: submodules this sm depends on, and the exact units referenced
-    const outDeps = Object.keys(submodules[sm]?.dependencies || {});
-    const referencedUnits = new Set(
-      (submodules[sm]?.units || []).flatMap(name =>
-        Object.keys(units[`${sm}.${name}`]?.dependencies || {})
-      )
-    );
-
-    // Incoming: submodules that depend on this sm, and the exact units that reference sm's units
-    const inDeps = Object.keys(submodules).filter(s =>
-      s !== sm && submodules[s].dependencies?.[sm] !== undefined
-    );
-    const referencingUnits = new Set(
-      Object.values(units)
-        .filter(u => u.submodule !== sm && Object.keys(u.dependencies || {}).some(d => units[d]?.submodule === sm))
-        .map(u => `${u.submodule}.${u.name}`)
-    );
-
-    const relevant = new Set([sm, ...outDeps, ...inDeps]);
-    const relevantArrows = new Set([
-      ...outDeps.map(d => `${sm}->${d}`),
-      ...inDeps.map(s => `${s}->${sm}`),
-    ]);
-
-    applyHighlighting(relevant, relevantArrows, (s, uPath) => {
-      if (s === sm)                        return 'is-selected';
-      if (referencedUnits.has(uPath))      return 'is-callee';
-      if (referencingUnits.has(uPath))     return 'is-caller';
-      return 'dimmed';
-    });
-    showSubmoduleDetail(sm, submodules[sm], units);
-  }
-
-  function selectUnit(unitPath) {
-    selection = { type: 'unit', id: unitPath };
-    const unitData = units[unitPath];
-    if (!unitData) return;
-    const sm = unitData.submodule;
-
-    // Outgoing: units this unit depends on (may be in same or other submodules)
-    const calleeUnits = new Set(Object.keys(unitData.dependencies || {}));
-    const calleeSubs  = new Set([...calleeUnits].map(u => units[u]?.submodule).filter(s => s && s !== sm));
-
-    // Incoming: units that depend on this unit
-    const callerUnits = new Set(
-      Object.entries(units)
-        .filter(([p, u]) => p !== unitPath && u.dependencies?.[unitPath] !== undefined)
-        .map(([p]) => p)
-    );
-    const callerSubs = new Set([...callerUnits].map(u => units[u]?.submodule).filter(s => s && s !== sm));
-
-    const relevant = new Set([sm, ...calleeSubs, ...callerSubs]);
-    const relevantArrows = new Set([
-      ...[...calleeSubs].map(s => `${sm}->${s}`),
-      ...[...callerSubs].map(s => `${s}->${sm}`),
-    ]);
-
-    applyHighlighting(relevant, relevantArrows, (_s, uPath) => {
-      if (uPath === unitPath)          return 'is-selected';
-      if (calleeUnits.has(uPath))      return 'is-callee';
-      if (callerUnits.has(uPath))      return 'is-caller';
-      return 'dimmed';
-    });
-    boxEls[sm].classList.add('is-unit-selected');
-    showUnitDetail(unitPath, unitData);
-  }
-
-  // Click on submodule box (not on a unit name)
-  for (const [sm, el] of Object.entries(boxEls)) {
-    el.addEventListener('click', e => {
-      e.stopPropagation();
-      // If click was on a unit name, handle separately
-      const unitEl = e.target.closest('.unit-name');
-      if (unitEl) {
-        selectUnit(unitEl.dataset.unit);
-      } else {
-        if (selection?.type === 'submodule' && selection.id === sm) {
-          clearSelection();
-        } else {
-          selectSubmodule(sm);
-        }
-      }
-    });
-  }
-
-  // Click background to clear
-  graphPane.addEventListener('click', e => {
-    if (e.target === graphPane || e.target === document.getElementById('graph-container')
-        || e.target.classList.contains('layer-band')
-        || e.target.classList.contains('layer-label')) {
-      clearSelection();
-    }
-  });
-}
-
-// ─── Detail panel rendering ───────────────────────────────────────────────────
-function showSubmoduleDetail(sm, smData, units) {
-  const unitNames = smData?.units || [];
-  const parts = [`<div class="detail-title">${sm}</div>`];
-  for (const name of unitNames) {
-    const u = units[`${sm}.${name}`];
-    if (u) parts.push(`<h3>${name}</h3>` + renderMarkdown(u.description || ''));
-  }
-  setDetail(parts.join(''));
-}
-
-function showUnitDetail(unitPath, unitData) {
-  const name = unitData.name || unitPath.split('.').pop();
-  setDetail(
-    `<div class="detail-title">${unitData.submodule}</div>` +
-    `<h3>${name}</h3>` + renderMarkdown(unitData.description || '')
-  );
-}
-
-function setDetail(html) {
-  const placeholder = document.getElementById('detail-placeholder');
-  const content     = document.getElementById('detail-content');
-  placeholder.style.display = 'none';
-  content.style.display = '';
-  content.innerHTML = html;
-}
-
-// Very simple inline markdown: handles `code`, **bold**, paragraph breaks
-function renderMarkdown(text) {
-  // Escape HTML
-  let s = text
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
-
-  // `code`
-  s = s.replace(/`([^`]+)`/g, '<code>$1</code>');
-
-  // **bold**
-  s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-
-  // Split into paragraphs on blank lines
-  const paras = s.split(/\n\n+/).map(p => p.trim()).filter(Boolean);
-  return paras.map(p => `<p>${p.replace(/\n/g, ' ')}</p>`).join('');
-}
-
-// ─── Resizer drag ─────────────────────────────────────────────────────────────
-(function() {
-  const resizer = document.getElementById('resizer');
-  const detail  = document.getElementById('detail-pane');
-  const app     = document.getElementById('app');
-  let dragging  = false, startX = 0, startW = 0;
-
-  resizer.addEventListener('mousedown', e => {
-    dragging = true;
-    startX = e.clientX;
-    startW = detail.offsetWidth;
-    resizer.classList.add('dragging');
-    document.body.style.userSelect = 'none';
-    e.preventDefault();
-  });
-
-  document.addEventListener('mousemove', e => {
-    if (!dragging) return;
-    const appW   = app.offsetWidth;
-    const delta  = startX - e.clientX; // moving left = wider detail
-    const newW   = Math.min(appW * 0.4, Math.max(appW * 0.1, startW + delta));
-    detail.style.width = newW + 'px';
-  });
-
-  document.addEventListener('mouseup', () => {
-    if (!dragging) return;
-    dragging = false;
-    resizer.classList.remove('dragging');
-    document.body.style.userSelect = '';
-  });
-})();
 </script>
 </body>
 </html>

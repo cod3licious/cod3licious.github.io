@@ -195,7 +195,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">April 6, 2026</p>
+      <p class="date-modified">April 19, 2026</p>
     </div>
   </div>
     
@@ -328,7 +328,8 @@ Figure&nbsp;4: <strong>Process optimization using machine learning (ML) predicti
 <summary>
 <span class="summary-heading">Predictive Quality Example</span>
 </summary>
-<p>The envisioned predictive quality software is primarily a data product. At its core is an ML model acting as a soft sensor for product quality. However, reliable predictions alone aren’t sufficient—they must be presented to the production lead in actionable ways through effective data visualizations. This requires understanding what questions production leads need to answer and what decisions they must make. Key use case scenarios our software should support include:</p>
+<p>The envisioned predictive quality software is primarily a data product. At its core is an ML model acting as a soft sensor for product quality. However, reliable predictions alone aren’t sufficient—they must be presented to the production lead in actionable ways through effective data visualizations. This requires understanding what questions production leads need to answer and what decisions they must make.</p>
+<p>Key use case scenarios our software should support include:</p>
 <ul>
 <li>Monitoring quality (actual when available, otherwise predicted), throughput, and costs over time</li>
 <li>Reviewing recommended setpoints for maintaining target quality and tracking adherence</li>
@@ -343,14 +344,15 @@ Each of these use cases translates into one or more screens. For each screen, I 
 <section id="the-how" class="level3">
 <h3 class="anchored" data-anchor-id="the-how">The How</h3>
 <p>Finally, we need to ponder <strong>how we could best implement this solution</strong>. This includes designing interfaces, data structures, and flows. Specifically, this means defining the <strong>inputs and outputs of major endpoints or scripts</strong> and outlining the <strong>database schema</strong>. If possible, these sketches should then be discussed with a more experienced software engineer or architect to identify potential issues before they are implemented.</p>
-<p>I usually begin by identifying the API endpoints required to support the user experience (outlined in the previous step), based on the data needs revealed by each screen’s mockup (i.e., any functionality triggered through a user action, like navigating to a page). Next, I determine which additional processes are needed to support them, such as batch jobs for data processing (often functionality triggered through time-based events, e.g., when a new measurement comes in every 10 minutes). For each relevant <strong>interface</strong>, I note down:</p>
+<p>I usually begin by identifying the API endpoints required to support the user experience (outlined in the previous step), based on the data needs revealed by each screen’s mockup (i.e., any functionality triggered through a user action, like navigating to a page or submitting a form). Next, I determine which additional processes are needed to support these endpoints, such as batch jobs for data processing or other functionality triggered through time-based events (e.g., when a new measurement comes in every 10 minutes).</p>
+<p>For each relevant <strong>interface</strong>, I note down:</p>
 <pre><code>- module or file path
 - function or class name and possibly endpoint route
 - purpose (high-level description of the provided functionality, if not obvious from the name)
 - input arguments &amp; return values (name, type, brief description)
 - pseudocode of the implementation (for more complex control flows, e.g., edge case handling, invariants, and side effects)</code></pre>
 <p>To get a better idea of what the resulting software design would look like, I use my custom-built tool <a href="https://franziskahorn.de/demo_archgraph/">ArchGraph</a> to turn the plain-text description of my code-to-be into an interactive visualization of the submodules and their dependencies.</p>
-<p>From the inputs and outputs of the main endpoints and scripts, I then derive <strong>what data needs to be persisted</strong>. When defining the <strong>database schema</strong>, I aim to balance normalization (avoiding redundant entries through related tables with foreign keys) against query simplicity (avoiding excessive joins and complicated subqueries). A nice tool for this is <a href="https://www.drawdb.app/">drawDB</a>, which lets you model the schema visually and export the corresponding SQL, which is excellent input for an AI when generating ORMs or other database-related code.</p>
+<p>From the inputs and outputs of the main endpoints and scripts, I then derive <strong>what data needs to be persisted</strong>. When defining the <strong>database schema</strong>, I aim to balance normalization (avoiding redundant entries through related tables with foreign keys) against query simplicity (avoiding excessive joins and complicated subqueries). You can use <a href="https://www.drawdb.app/">drawDB</a> to model the schema visually and export the corresponding SQL, which is excellent input for an AI generating ORMs or other database-related code.</p>
 <details>
 <summary>
 <span class="summary-heading">Predictive Quality Example</span>
@@ -430,7 +432,7 @@ Figure&nbsp;5: How Claude helped me pick a frontend framework.
 </section>
 <section id="coding" class="level3">
 <h3 class="anchored" data-anchor-id="coding">Coding</h3>
-<p>Now for the implementation itself, my AI-assisted coding setup is actually really basic. I’m not (yet 😉) running a swarm of sub-agents overnight to parallelize tasks, review pull requests, and hand me a finished app the next morning. Partly that’s because I still have enough trust issues and would rather supervise the development step by step. But if we’re being honest, it’s also because I haven’t yet had the patience to dive this deep into the fast-moving ecosystem of AI agents and tooling (how many VS Code clones with AI integration do we have now?!) and prefer to maintain a reasonably predictable workflow.</p>
+<p>Now for the implementation itself, my AI-assisted coding setup is actually really basic. I’m not (yet 😉) running a swarm of sub-agents overnight to parallelize tasks, review pull requests, and hand me a finished app the next morning. Partly that’s because I still have enough trust issues and would rather supervise the development step by step. But if we’re being honest, it’s also because I haven’t yet had the patience to dive this deep into the fast-moving ecosystem of AI agents and tooling (how many VS Code clones with AI integration do we have now?!) and prefer to wait until the approaches that actually prove themselves get absorbed into the mainstream tools.</p>
 <p>So what I actually use is the <a href="https://zed.dev/"><strong>Zed IDE</strong></a>, built from the start with AI-assisted coding in mind and driving recent standards like the agent client protocol, together with <strong>Claude Agent</strong>. I use Claude models from an IDE rather than as a CLI tool, because I really appreciate a thoughtful GUI, for example, to review the agent’s code changes. I selected Claude based on some preliminary experiments comparing different AI models and because Anthropic has set the standard for innovation in coding agents, while other companies mainly scrambled to keep up.</p>
 <p><em>TODO: add screenshot of IDE</em></p>
 <p>After all the preparations to gain clarity on what we want to build, implementing the system is now fairly straightforward. Or as Bent Flyvbjerg argues in <em>How Big Things Get Done</em>: a solid, well-thought-out plan gets you halfway to smooth execution and delivery.</p>
@@ -445,14 +447,14 @@ Figure&nbsp;5: How Claude helped me pick a frontend framework.
 </section>
 <section id="the-result" class="level2">
 <h2 class="anchored" data-anchor-id="the-result">The Result</h2>
-<p>The sketches have now served their purpose: they helped me think through a coherent solution before writing code. Moving forward, the working software will be my source of truth. <em>TODO: The actual implementation took roughly X hours and consumed $X in Claude Code tokens.</em> You can check out the code on GitHub and interact with the live application on Render.</p>
+<p>The sketches have now served their purpose: they helped me think through a coherent solution before writing code. Moving forward, the working software will be my source of truth. You can check out the code on GitHub and interact with the live application on Render. <em>TODO: The actual implementation took roughly X hours and consumed $X in Claude Code tokens.</em></p>
 <p><em>TODO: add screenshot of application</em></p>
 <p>Keep in mind this is still a toy project: achieving the first 80% was relatively straightforward, but—as always—the remaining 20% (or likely a lot more in this case) is where the real challenges lie. From my experience at alcemy, just a few of the <strong>critical components missing for a production-ready system</strong> include:</p>
 <ul>
-<li>User management, authentication, and other security considerations.</li>
-<li>Integrating data with automated exports from last-century data management systems.</li>
-<li>Building an ML model that delivers reliable predictions despite measurement errors, which usually requires integrating deep domain knowledge through feature engineering and hybrid models that combine data-driven approaches with a mechanistic understanding of the underlying processes.</li>
-<li>Running the system in production, including provisioning infrastructure, observability, handling ongoing data issues, retraining models regularly, and adapting to new edge cases.</li>
+<li>User management, roles &amp; permissions, authentication, and other security considerations.</li>
+<li>Automated, continuous ingestion of new data from last-century data management systems.</li>
+<li>An ML model that delivers reliable predictions despite measurement errors and changing latent conditions—a challenge that usually requires integrating deep domain knowledge through feature engineering and hybrid models that combine data-driven approaches with a mechanistic understanding of the underlying processes.</li>
+<li>Production operations: provisioning infrastructure, observability, handling ongoing data issues, regular model retraining, and adapting to new edge cases.</li>
 <li>Change management: ensuring users adopt and ideally enjoy using your product.</li>
 </ul>
 <p>Most of these points require substantial human creativity, domain expertise, and empathy for users.</p>
